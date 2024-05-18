@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>newkayak12.github.io</title>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://localhost:4000/</link>
+    <description>A website with blog posts and pages</description>
+    <pubDate>Sat, 18 May 2024 22:00:01 +0900</pubDate>
+    
+      <item>
+        <title>[javaseries] 01 Version</title>
+        <link>/2024/05/18/javaSeries-01-Version.html</link>
+        <guid isPermaLink="true">/2024/05/18/javaSeries-01-Version.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/java/01.version_info.md&quot;&gt;Dictionary - 자바 버전별 정보&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;jdk-10&quot;&gt;JDK 1.0&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;안정화 작업&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;jdk-11&quot;&gt;JDK 1.1&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;이너 클래스, JavaBeans, RMI, Reflection, Calendar 유니코드 지원&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Javabeans : 자바로 작성된 소프트웨어 컴포넌트
+	&amp;gt; 1. 기본 생성자가 반드시 존재해야한다.
+ 	&amp;gt; 2. 모든 속성은 비공개
+	&amp;gt; 3. 속성에 접근하고 꺼내올 수 있는 getter, setter 구성
+	&amp;gt; 4. Serializable 구현
+
+RMI : Remote Method Invocation의 약자로 분산 애플리케이션을 구축하는 데 사용, 한 시스템(JVM)에 상주하는 객체가 다른 JVM에서 실행 중인 객체에 액세스, 호출할 수 있도록 도와주는 메커니즘
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;jdk-12&quot;&gt;JDK 1.2&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JIT(HotSpot), Collection Framework 등 추가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;j2se-13&quot;&gt;J2SE 1.3&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HotSpot JVM, JNDI, JPDA, JavaSound 등이 추가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;j2se-14&quot;&gt;J2SE 1.4&lt;/h1&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;assert, 정규표현식, IPv6, XML API, JCE, JSSE, JAAS, Java Web Start 등이 추가
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;j2se-5&quot;&gt;J2SE 5&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generics 추가&lt;/li&gt;
+  &lt;li&gt;Annotation 추가&lt;/li&gt;
+  &lt;li&gt;동시성 제어 API (Concurrency API) 추가&lt;/li&gt;
+  &lt;li&gt;Enumeration 추가&lt;/li&gt;
+  &lt;li&gt;Auto Boxing/ Unboxing 추가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-7&quot;&gt;Java SE 7&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Diamond Operator ( ‘&amp;lt;&amp;gt;’ ) 추가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-8-오라클-인수-이후&quot;&gt;Java SE 8 (오라클 인수 이후)&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lambda Expression 지원&lt;/li&gt;
+  &lt;li&gt;Method Reference 지원&lt;/li&gt;
+  &lt;li&gt;인터페이스에 default method가 추가&lt;/li&gt;
+  &lt;li&gt;Optional 추가&lt;/li&gt;
+  &lt;li&gt;날짜와 시간 API 추가
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;c1&quot;&gt;//javax.time.Clock&lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;Clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;systemUTC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;//current time of your system in UTC. &lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;Clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;millis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;//time in milliseconds from 1/1/1970.&lt;/span&gt;
+     
+   &lt;span class=&quot;c1&quot;&gt;//javax.tme.ZoneId&lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;ZoneId&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ZoneId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Europe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;London&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;//zoneId from a timezone. &lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;Clock&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;//set the zone of a Clock.&lt;/span&gt;
+     
+   &lt;span class=&quot;c1&quot;&gt;//javax.time.LocalDate&lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;LocalDate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LocalDate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;//current date &lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;day&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDayOfMonth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;//day of the month &lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;month&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMonthValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;//month &lt;/span&gt;
+   &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;year&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getYear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;//year&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stream API 추가&lt;/li&gt;
+  &lt;li&gt;PermGenArea 제거 : java8이전에는 초기 설정시 PermSize, MaxPerSize를 성정해야 했는데 이후 MetaSpace로 변경됐다. MetaSpace는 런타임 시 메모리 요규 사항에 따라 자체 크기를 조정하며, 필요하다면 MaxMetaspaceSize 매개변수를 조정하여 양을 조정할 수 있다.
+&lt;img src=&quot;./images/pergen_area.png&quot; /&gt;
+```
+    &lt;h2 id=&quot;permanent-generation&quot;&gt;Permanent Generation&lt;/h2&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Permanent Generation은 Class 혹은 Method Code가 저장되는 영역&lt;/li&gt;
+  &lt;li&gt;PermGen은 Heap에 속함&lt;/li&gt;
+  &lt;li&gt;Default로 제한된 크기를 가짐&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;metaspace&quot;&gt;Metaspace&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Metaspace는 Java 클래스 로더가 현재까지 로드한 class들의 메타 데이터가 저장되는 공간&lt;/li&gt;
+  &lt;li&gt;JVM에 의해 관리되는 Heap이 아닌 OS 레벨에서 관리되는 Native 메모리 영역에 위치&lt;/li&gt;
+  &lt;li&gt;Default로 제한된 크기를 가지고 있지 않고, 필요한 만큼 늘어남&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+
+# Java SE 9
+
+
+- 모듈 시스템 jigsaw 등장 (https://www.baeldung.com/project-jigsaw-java-modularity)
+- A New HTTP Client : 8까지 사용하던 HttpURLConnection을 대체할 새로운 java.net.http 패키지 추가
+- JsShell : main 메소드 없이 코드를 테스트할 수 있는 대화식 REPL(Read-Eval-Print-Loop) 도구를 제공
+- Process API 개선 : OS 프로세스 관리 및 컨트롤을 위해 (java.lang.ProcessHandle, java.lang.ProcessHandle.Info)가 추가 됐다.
+- Try-With-Resource 개선
+- 다이아몬트 연산자를 익명클래스에서도 사용할 수 있도록 개선됨
+- Interface Private Method 인터페이스 내에서 private 메소드 사용이 가능해짐
+- Optional To Stream :  Optional로 Stream을 생성할 수 있게 됐다. 
+        &amp;gt; Stream&amp;lt;Integer&amp;gt; steram = Optional.of(1).stream();
+
+
+# Java SE 10
+
+- Local-Variable Type Interface : 로컬 변수 타입 추론 기능이다. 로컬 변수 타입을 var로 선언할 수 있다.
+```java
+var list - new ArrayList&amp;lt;String&amp;gt;();	//ArrayList&amp;lt;String&amp;gt; 으로 추론
+var stream = list.stream();		//Stream&amp;lt;String&amp;gt; 으로 추론
+
+var numbers = List.of(1, 2, 3, 4, 5);	//List&amp;lt;Integer&amp;gt; 으로 추론
+
+for (var number : numbers){		//Integer 추론
+	System.out.println(number);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Garbage Collector Interface : 다양한 GC의 코드 고립도를 향상하는 인터페이스 도입&lt;/li&gt;
+  &lt;li&gt;Thread-Local Handshakes : VM safepoint를 수행할 필요 없이 개별 쓰레드를 stop하고 콜백을 수행할 수 있도록 추가
+```
+VM safePoint :: “Stop The World”로 모든 쓰레드를 일시 정지시키는 작업
+  safepoint를 발생시키는 경우
+    &lt;ul&gt;
+      &lt;li&gt;Garbage collection pauses&lt;/li&gt;
+      &lt;li&gt;Code deoptimization&lt;/li&gt;
+      &lt;li&gt;Flusing code cache&lt;/li&gt;
+      &lt;li&gt;Class redefinition&lt;/li&gt;
+      &lt;li&gt;Biased lock revocation&lt;/li&gt;
+      &lt;li&gt;Various debug operation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- Root Certificates : HTTPS 통신에 쓰이는 root CA 목록을 OracleJdk에서도 가지게 됐다.
+
+# Java SE 11
+- HTTP 클라이언트(JEP 321) : java 9에 포함됐던 HTTP 클라이언트 API를 정식 채택, URLConnection 기반의 HTTP 개발보다 개선된 기능, 명명 규칙을 제공한다. 특히 HTTP 2.0을 지원하여 웹소켓도 포함되어있다.
+- 새로운 String 메소드 추가
+
+|     Method      |                          Description                           |
+|:---------------:|:--------------------------------------------------------------:|
+|     strip()     |                         문자열 앞, 뒤 공백 제거                         |
+| stripLeading()  |                          문자열 앞의 공백 제거                          |
+| stripTrailing() |                          문자열 뒤의 공백 제거                          |
+|    isBlank()    | 문자열이 비어있거나 공백만 포함되어있을 경우 true (String.trim().isEmpty()와 결과 같음) |
+|     lines()     |                     문자열을 라인 단위로 쪼개는 스트림 반환                     |
+|    repeat(n)    |                   지정된 수 만큼 문자열을 반복하여 붙여서 반환                    |
+
+```java
+ trim()은 U+0020이하의 값만 공백으로 인식(tab, CR, LF, 공백) 하지만 유니코드에는 외에 다른 공백을 제공하는데 이를 제거하려면 Character.isWhitespace(int)를 사용해야만 했다.
+Java SE 11 부터는 strip()을 사용하면 된다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lambda 파라미터로 var 사용
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-12&quot;&gt;Java SE 12&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;문법적으로 Switch 문을 확장
+```java
+//기존 방식&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;switch (day) {
+    case MONDAY:
+    case FRIDAY:
+    case SUNDAY:
+        System.out.println(6);
+        break;
+    case TUESDAY:
+        System.out.println(7);
+        break;
+    case THURSDAY:
+    case SATURDAY:
+        System.out.println(8);
+        break;
+    case WEDNESDAY:
+        System.out.println(9);
+        break;
+}&lt;/p&gt;
+
+&lt;p&gt;//Java SE 12 부터의 방식&lt;/p&gt;
+
+&lt;p&gt;switch (day) {
+    case MONDAY, FRIDAY, SUNDAY -&amp;gt; System.out.println(6);
+    case TUESDAY                -&amp;gt; System.out.println(7);
+    case THURSDAY, SATURDAY     -&amp;gt; System.out.println(8);
+    case WEDNESDAY              -&amp;gt; System.out.println(9);
+}&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- 가비지 컬렉터 개선, 마이크로 벤치마크 툴 추가, 성능 개선
+
+# Java SE 13
+- Switch 문 개선을 위한 'yield' 예약어 추가
+```java
+var a = switch (day) {
+    case MONDAY, FRIDAY, SUNDAY:
+        yield 6;
+    case TUESDAY:
+        yield 7;
+    case THURSDAY, SATURDAY:
+        yield 8;
+    case WEDNESDAY:
+        yield 9;
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;textBlock 추가
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+ This
+ is
+ text block
+&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-14&quot;&gt;Java SE 14&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;12, 13에서의 Switch 문이 표준화되었다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;record( preview ) : java로 많은 상용구를 작성하는 수고를 덜어주는 record 클래스 도입
+```java
+final class Point {
+  public final int x;
+  public final int y;&lt;/p&gt;
+
+    &lt;p&gt;public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+  }
+}
+&lt;em&gt;// state-based implementations of equals, hashCode, toString// nothing else&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;//레코드 사용
+record Point(int x, int y) { }
+```&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;NullPointerException track: 어떤 부분에서 NPE가 발생헀는지 설명해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-15&quot;&gt;Java SE 15&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;textBlock / Multiline Strings가 공식 채택 준비됐습니다.&lt;/li&gt;
+  &lt;li&gt;Sealed Classes ( preview ) 상속 가능한 클래스를 지정할 수 있는 봉인 클래스가 추가된다. 상속 가능한 대상은 상위 클래스 또는 인터페이스 패키지 내에 속해있어야 한다.&lt;/li&gt;
+  &lt;li&gt;EdDSA 암호화 알고리즘 추가&lt;/li&gt;
+  &lt;li&gt;스케일링 가능한 낮은 지연의 가비지 컬렉터 추가(ZGC)&lt;sup&gt;&lt;a href=&quot;#zgc&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-16&quot;&gt;Java SE 16&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;jdk1.8부터 시작된 PermGen 대신 Metaspace를 지원하기 시작&lt;/li&gt;
+  &lt;li&gt;OpenJdk의 버전관리가 &lt;a href=&quot;https://github.com/openjdk/&quot;&gt;git&lt;/a&gt;으로 변경되었습니다.&lt;/li&gt;
+  &lt;li&gt;Unix-Domain Socket Channels : Unix 도메인 소켓에 연결할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-17&quot;&gt;Java SE 17&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;RandomGenerator : 의사 난수 생성기를 통해서 예측하기 어려운 난수를 생성하는 API가 출시됐다.&lt;/li&gt;
+  &lt;li&gt;M1 정식 지원&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-18&quot;&gt;Java SE 18&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;UTF-8이 기본 인코딩셋이 되었다.&lt;/li&gt;
+  &lt;li&gt;Simple Web Server: 간편설정, 최소한의 기능으로 바로 사용 가능한 HTTP 파일 서버를 제공한다.&lt;/li&gt;
+  &lt;li&gt;Relection 기능 리팩토링( &lt;a href=&quot;#method-handle&quot;&gt;메소드 핸들&lt;/a&gt;을 이용해서 다시 구현 )&lt;/li&gt;
+  &lt;li&gt;switch-case 패턴 매칭 preview&lt;/li&gt;
+  &lt;li&gt;try-catch-finally deprecated  ( try-with-resources 권장)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-19&quot;&gt;Java SE 19&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;VirtualThread, Foreign Function &amp;amp; Memory API, Structured Concurrency, Vector API 등이 preview로 추가&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-20&quot;&gt;Java SE 20&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;VirtualThread(second preview), ScopedValue(incubated), StructuredConcurrency(SecondIncubate)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-21&quot;&gt;Java SE 21&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;StringTemplate(preview)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/431&quot;&gt;Sequenced Collections&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/439&quot;&gt;Generational ZGC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Switch Pattern Matching 정식 출시&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/443&quot;&gt;Unnamed Patterns and Variables (Preview)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/444&quot;&gt;Virtual Thread 정식 출시&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Windows 32-bit x86 제거 예정&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-22&quot;&gt;Java SE 22&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/423&quot;&gt;G1 GC에 Region Pinning 기술을 구현해 지연 시간(latency) 단축&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/447&quot;&gt;super() 호출 전에 다른 statement 실행을 가능하게함 (프리뷰 기능).&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/456&quot;&gt;이름없는 변수 및 패턴. 안쓰는 변수 이름을 언더스코어(_)로 표기하는 것을 허용&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;StructuredConcurrency(secondPreview) : 쓰레드 캔슬, 셧다운에 의한 리스크를 줄이고 Observability 향상, 여러 쓰레드에서 실행되는 관련있는 작업들을 그룹핑하는 기능&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openjdk.org/jeps/464&quot;&gt;ScopedValues(secondPreview)&lt;/a&gt; : 같은 쓰레드 내에서의 공유 데이터를 관리하기 위한 컨테이너 오브젝트. ThreadLocal과 비슷하지만 ThreadLocal의 단점을 보완해 더 적은 리소스를 사용하고 더 안전하다고 한다. (특히 VirtualThreads, StructuredConcurrency랑 같이 활용될 때)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;java-se-23&quot;&gt;Java SE 23&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;2024/06/08 Preview&lt;/li&gt;
+  &lt;li&gt;2024/09 GA&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;a name=&quot;#zgc&quot; href=&quot;https://d2.naver.com/helloworld/0128759&quot;&gt;[1] ZGC&lt;a&gt;&lt;/a&gt;
+&lt;a name=&quot;#method-handle&quot; href=&quot;https://wiki.yowu.dev/ko/Knowledge-base/Java/leveraging-java-s-method-handles-for-dynamic-method-invocation&quot;&gt; 메소드 핸들 &lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 18 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+  </channel>
+</rss>
