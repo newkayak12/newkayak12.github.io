@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[java Series] 14 Dynamicproxy | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - 다이나믹 프록시">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/18/java-series-14-DynamicProxy.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[java Series] 14 Dynamicproxy</h1>
+    
+    <p class="meta">
+      May 18, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/14.DynamicProxy.md">Dictionary - 다이나믹 프록시</a></p>
+
+<h1 id="dynamic-proxy">Dynamic Proxy</h1>
+
+<p>자바 프로그래밍의 디자인 패터중 하나인 프록시 패턴Visit Website은 초기화 지연, 접근 제어, 로깅, 캐싱 등,
+기존 대상 원본 객체를 수정 없이 추가 동작 기능들을 가미하고 싶을 때 사용하는 코드 패턴이다.
+이 디자인 패턴을 적용하면 개방 폐쇄 원칙(OCP)Visit Website의 효과를 얻을 수 있어 코드 수정없이 유연하게 확장이 가능하여 유지보수 측면에서 플러스 효과를 얻을 수 있다는 장점이 있다.
+하지만 프록시 디자인 패턴은 대상 원본 클래스 수만큼 일일히 프록시 클래스를 하나하나 만들어 줘야하는 치명적인 단점이 존재한다. 
+즉, 프록시 적용 대상 객체가 100개면 프록시 객체도 100개 만들어줘야 한다는 말이다. 따라서 코드량이 많아지게 되고 중복이 발생하여 코드의 복잡도가 증가한다는 한계점이 존재한다.
+바로 이러한 단점들을 보완하여 컴파일 시점이 아닌 런타임 시점에 프록시 클래스를 만들어주는 방식이 자바 가상 머신(JVM)에서 공식적으로 지원하는 동적 프록시(Dynamic Proxy) 기능이다.</p>
+
+<p>동적 프록시는 개발자가 직접 일일히 프록시 객체를 생성하는 것이 아닌, 애플리케이션 실행 도중 java.lang.reflect.Proxy 
+패키지에서 제공해주는 API를 이용하여 동적으로 프록시 인스턴스를 만들어 등록하는 방법으로서, 자바의 Reflection APIVisit Website 기법을 응용한 연장선의 개념이다. 
+프록시 패턴의 기본 흐름은 거의 같고, 프록시를 클래스로 직접만들어서 등록하냐 이미 지원하는 api를 이용하여 동적으로 등록하느냐에 따른 차이만 있을 뿐이다.</p>
+
+<h1 id="dynamic-proxy-구성-요소">Dynamic Proxy 구성 요소</h1>
+<h2 id="newproxyinstance-method">newProxyInstance() Method</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Proxy</span> <span class="kd">implements</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{</span>
+
+	<span class="c1">// ...</span>
+    
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Object</span> <span class="nf">newProxyInstance</span><span class="o">(</span>
+        <span class="nc">ClassLoader</span> <span class="n">loader</span><span class="o">,</span>  <span class="c1">//클래스 로더 </span>
+        <span class="nc">Class</span><span class="o">&lt;?&gt;[]</span> <span class="n">interfaces</span><span class="o">,</span>  <span class="c1">// 타깃의 인터페이스</span>
+        <span class="nc">InvocationHandler</span> <span class="n">h</span>  <span class="c1">// 타깃 정보가 포함된 Handler</span>
+    <span class="o">)</span> <span class="kd">throws</span> <span class="nc">IllegalArgumentException</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>ClassLoader loader
+프록시 클래스를 만들 클래스 로더(Class Loader)
+Proxy 객체가 구현할 Interface에 Class Loader를 얻어오는 것이 일반적</p>
+  </li>
+  <li>
+    <p>Class&lt;?&gt;[] interfaces
+프록시 클래스가 구현하고자 하는 인터페이스 목록 (배열)
+메서드를 통해 생성 될 Proxy 객체가 구현할 Interface를 정의한다.</p>
+  </li>
+  <li>
+    <p>InvocationHandler h
+프록시의 메서드(invoke)가 호출되었을때 실행되는 핸들러 메서드</p>
+  </li>
+</ul>
+
+<h2 id="invocationhandler">InvocationHandler</h2>
+<p>InvocationHandler 인터페이스는 위에서 본 newProxyInstance() 메서드의 3번째 매개변수에 들어갈 핸들러 메서드를 정의하는 함수형 인터페이스이다.
+이 인터페이스 코드 구성을 보면 내부에 invoke() 라는 추상메서드 하나만 정의되어있는 걸 볼 수 있다.
+invoke() 메서드는 동적 프록시의 메서드가 호출되었을때, 이를 낚아채어 대신 실행되는 메서드이다. 
+메서드의 파라미터를 통해 어떤 메서드가 실행되었는지 메서드 정보와 메서드에 전달된 인자까지 알수있다.
+디자인 패턴으로 프록시를 구성하면 단점이 중복된 메서드 코드 로직이 발생한다는 점인데, 이 invoke() 메서드에 동적으로 등록함으로써 반복된 코드를 줄이게 되는 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">InvocationHandler</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="nc">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="nc">Method</span> <span class="n">method</span><span class="o">,</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li>Object proxy : 프록시 객체</li>
+  <li>Method method : 호출한 메서드 정보</li>
+  <li>Object[] args : 메서드에 전달된 매개변수 (배열)</li>
+</ul>
+
+<h1 id="예시">예시</h1>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">AInterface</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">call</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">print</span><span class="o">();</span>
+    <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">AImpl</span> <span class="kd">implements</span> <span class="nc">AInterface</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A 호출"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"a"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A print @@@@@@@"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"A Running !!!!!!!!!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arguments</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">AInterface</span> <span class="n">proxyA</span> <span class="o">=</span> <span class="o">(</span><span class="nc">AInterface</span><span class="o">)</span> <span class="nc">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span>
+                <span class="nc">AInterface</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span>
+                <span class="k">new</span> <span class="nc">Class</span><span class="o">[]{</span><span class="nc">AInterface</span><span class="o">.</span><span class="na">class</span><span class="o">},</span>
+                <span class="o">(</span><span class="n">proxy</span><span class="o">,</span> <span class="n">method</span><span class="o">,</span> <span class="n">args</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="c1">// 람다 함수</span>
+                    <span class="nc">Object</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AImpl</span><span class="o">();</span>
+
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 실행"</span><span class="o">);</span>
+                    <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+
+                    <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span> <span class="c1">// 파라미터로 전달받은 메서드를 invoke로 실행</span>
+
+                    <span class="kt">long</span> <span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+                    <span class="kt">long</span> <span class="n">resultTime</span> <span class="o">=</span> <span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">;</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 종료 resultTime = "</span> <span class="o">+</span> <span class="n">resultTime</span><span class="o">);</span>
+
+                    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+                <span class="o">}</span>
+        <span class="o">);</span>
+
+        <span class="n">proxyA</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+        <span class="n">proxyA</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+        <span class="n">proxyA</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="dynamic-proxy-제약-사항">Dynamic Proxy 제약 사항</h1>
+<p>지금까지 동적 프록시 구현 및 응용을 다뤄보았다. 아주 약간의 퍼포먼스를 희생하고 자유롭게 프록시를 다이나믹하게 등록할 수 있지만,
+여기에 추가로 한가지 제약사항이 존재한다. 동적 프록시에 타켓을 등록할때 타입을 클래스가 아닌 무조건 인터페이스를 파라미터로 넣어야 된다는 점이다.
+인터페이스를 기반으로 프록시를 동적으로 만들어주기 때문에, 인터페이스가 필수이기 때문이다.</p>
+
+<p>즉, 자바에서 newProxyInstance()를 이용해 동적 프록시 객체를 만들때 Class 기반으로는 Proxy 객체를 생성할 수 없다는 말이다. 
+하지만 클래스의 확장성을 고려할 필요가 없거나 한가지 책임만 분명하게 하는 경우 굳이 인터페이스를 등록해 사용하지 않는 겨우도 있다. 
+프록시 때문에 굳이 일일히 인터페이스를 구현해야 하는 것도 결국은 디자인 패턴의 한계점의 회귀이다.</p>
+
+<h1 id="cglibcode-generator-library">CGLIB(Code Generator Library)</h1>
+<p>인터페이스가 아닌 클래스를 대상으로 바이트 코드를 조작해서 프록시 생성할 수 있는 라이브러리다.
+효용성을 입증 받아 스프링에 기본으로 내장돼있다.</p>
+
+<blockquote>
+
+  <p>스프링 프레임워크에서 Bean을 등록할 때 Spring AOP를 이용하여 등록을 하는데, 
+Bean으로 등록하려는 기본적으로 객체가 Interface를 하나라도 구현하고 있으면 Dynamic Proxy를 이용하고 Interface를 구현하고 있지 않으면 CGLIB 라이브러리를 이용한다.</p>
+
+</blockquote>
+
+<h2 id="cglib-프록시">CGLIB 프록시</h2>
+<p>CGLIB 에서는 Enhancer 객체로 프록시 객체를 만들며 MethodInterceptor 인터페이스로 프록시 핸들러를 등록한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 프록시 핸들러</span>
+<span class="kd">class</span> <span class="nc">MyProxyInterceptor</span> <span class="kd">implements</span> <span class="nc">MethodInterceptor</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">target</span><span class="o">;</span>
+
+    <span class="nc">MyProxyInterceptor</span><span class="o">(</span><span class="nc">Object</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">intercept</span><span class="o">(</span>
+            <span class="nc">Object</span> <span class="n">o</span><span class="o">,</span>
+            <span class="nc">Method</span> <span class="n">method</span><span class="o">,</span>
+            <span class="nc">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">,</span>
+            <span class="nc">MethodProxy</span> <span class="n">methodProxy</span>
+    <span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 실행"</span><span class="o">);</span>
+        <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+
+        <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span> <span class="c1">// 파라미터로 전달받은 메서드를 invoke로 실행</span>
+
+        <span class="kt">long</span> <span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+        <span class="kt">long</span> <span class="n">resultTime</span> <span class="o">=</span> <span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 종료 resultTime = "</span> <span class="o">+</span> <span class="n">resultTime</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// 프록시를 적용할 대상 타켓</span>
+<span class="kd">class</span> <span class="nc">Subject</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"서비스 호출"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arguments</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// 1. 프록시 등록 (CGLIB는 Enhancer를 사용해서 프록시를 등록한다)</span>
+        <span class="nc">Enhancer</span> <span class="n">enhancer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Enhancer</span><span class="o">();</span>
+        <span class="n">enhancer</span><span class="o">.</span><span class="na">setSuperclass</span><span class="o">(</span><span class="nc">Subject</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// CGLIB는 구체 클래스를 상속 받아서 프록시를 생성하기 때문에 상혹할 구체 클래스를 지정</span>
+        <span class="n">enhancer</span><span class="o">.</span><span class="na">setCallback</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyProxyInterceptor</span><span class="o">(</span><span class="k">new</span> <span class="nc">Subject</span><span class="o">()));</span> <span class="c1">// 프록시 핸들러 할당</span>
+
+        <span class="c1">// 2. 프록시 생성</span>
+        <span class="nc">Subject</span> <span class="n">proxy</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Subject</span><span class="o">)</span> <span class="n">enhancer</span><span class="o">.</span><span class="na">create</span><span class="o">();</span> <span class="c1">// setSuperclass() 에서 지정한 클래스를 상속 받아서 프록시가 만들어진다.</span>
+
+        <span class="c1">// 3. 프록시 호출</span>
+        <span class="n">proxy</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="람다로">람다로?</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arguments</span><span class="o">)</span> <span class="o">{</span>
+        
+        <span class="nc">Subject</span> <span class="n">proxy</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Subject</span><span class="o">)</span> <span class="nc">Enhancer</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="nc">Subject</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="o">(</span><span class="nc">MethodInterceptor</span><span class="o">)</span> <span class="o">(</span><span class="n">o</span><span class="o">,</span> <span class="n">method</span><span class="o">,</span> <span class="n">args</span><span class="o">,</span> <span class="n">methodProxy</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+
+            <span class="nc">Subject</span> <span class="n">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Subject</span><span class="o">();</span>
+
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 실행"</span><span class="o">);</span>
+            <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+
+            <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span> <span class="c1">// 파라미터로 전달받은 메서드를 invoke로 실행</span>
+
+            <span class="kt">long</span> <span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+            <span class="kt">long</span> <span class="n">resultTime</span> <span class="o">=</span> <span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">;</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TimeProxy 종료 resultTime = "</span> <span class="o">+</span> <span class="n">resultTime</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+        <span class="o">});</span>
+        
+        <span class="n">proxy</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="주의사항">주의사항</h2>
+<p>이렇게 보면 인터페이스 기반일 때는 Dynamic Proxy를 사용하고, 클래스 기반일 때는 CGLIB를 사용하면 되겠지만, 이 라이브러리도 제약사항이 존재한다.
+우선 CGLIB는 기본적으로 클래스 상속(extends)을 통해 프록시 구현이 되기 때문에, 타겟 클래스가 상속이 불가능할때는 당연히 프록시 등록이 불가능하다. 
+또한 메서드에 final 키워드가 붙게되면 그 메서드를 오버라이딩하여 사용 할수 없게되어 결과적으로 프록시 메서드 로직이 작동되지 않는다.</p>
+
+<p>정리하자면 프록시 대상 객체는 상속에 있어 제한이 있으면 안된다는 것이다.</p>
+
+<ul>
+  <li>클래스와 메소드에 final 키워드 적용</li>
+  <li>추상 클래스(abstract class)</li>
+  <li>클래스의 생성자를 private화 하여 생성자를 제한할 경우</li>
+</ul>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/18/java-series-13-Serialize_Deserialize.html">
+        [java Series] 13 Serialize_deserialize
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/18/java-series-15.-Reflection.html">
+        [java Series] 15. Reflection
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

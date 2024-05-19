@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[java Series] 07 Tuning | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Tuning">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/18/java-series-07-Tuning.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[java Series] 07 Tuning</h1>
+    
+    <p class="meta">
+      May 18, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/07.Tuning.md">Dictionary - Tuning</a></p>
+
+<h1 id="gc-tuning">GC Tuning</h1>
+
+<h2 id="주의점">주의점</h2>
+<ol>
+  <li>GC 옵션은 서비스 특징마다 적정 값이 다르다.</li>
+  <li>GC 튜닝은 최후의 수단이다. (코드 최적화가 우선이다.)</li>
+</ol>
+
+<h2 id="목표">목표</h2>
+<ol>
+  <li>Old로 넘어가는 객체의 수 최소화 하기
+Old는 Young에서 GC보다 시간이 오래 소요된다. 따라서 Old로 넘어가는 수를 줄이면 Full GC가 줄어든다.
+이는 Young size를 잘 조절하는 것만으로 Old로 넘어가는 것을 줄이고 이 자체로 튜닝이 된다는 것이다.</li>
+  <li>Full GC 시간 줄이기
+Full GC 실행 시간은 Minor GC에 비해 길다. 그러므로 Old 사이즈를 조정하는 것도 방법이다. 그렇다고 너무 줄이면 OutOfMemoryError가 발생하거나 FUll GC가 
+자주 발생할 수 있다. 반대로 너무 Old를 늘리면 FullGC는 줄지만 실행 시간이 늘어날 수 있다.</li>
+</ol>
+
+<h2 id="튜닝-진행">튜닝 진행</h2>
+<h3 id="1-gc-상황-모니터링">1. GC 상황 모니터링</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># jstat gcutil  명령어로 현재 실행중인 8884번 프로세스에 대해 1초에 한번 씩 총 10번 GC와 관련된 정보를 출력하도록 모니터링</span>
+jstat <span class="nt">-gcutil</span> <span class="nt">-t</span> 8844 1000 0
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">컬럼</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">S0</td>
+      <td style="text-align: left">Survivor 영역 0의 사용율(현재 용량에 대한 비율)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">S1</td>
+      <td style="text-align: left">Survivor 영역 1의 사용율(현재 용량에 대한 비율)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">E</td>
+      <td style="text-align: left">Eden 영역의 사용율 (현재 용량에 대한 비율)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">O</td>
+      <td style="text-align: left">Old 영역의 사용율 (현재 용량에 대한 비율)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">P</td>
+      <td style="text-align: left">Permanent 영역의 사용율 (현재 용량에 대한 비율)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">YGC</td>
+      <td style="text-align: left">Young 세대의 GC 이벤트 수</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">YGCT</td>
+      <td style="text-align: left">Young 세대의 GC 시간</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FGC</td>
+      <td style="text-align: left">Full GC 이벤트 수</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FGCT</td>
+      <td style="text-align: left">Full GC 시간</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">GCT</td>
+      <td style="text-align: left">GC 총 시간</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-모니터링-결과-분석-후-gc-튜닝-여부-결정">2. 모니터링 결과 분석 후 GC 튜닝 여부 결정</h3>
+<blockquote>
+
+  <p>Minor GC 수행시간: YGCT / YGC (0.314 / 19) = 0.016초</p>
+
+  <p>Major GC 수행 시간: FGCT / FGC (0.291 / 3) = 0.097초</p>
+
+</blockquote>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Minor GC의 처리 시간이 빠르다 (50ms 내외)</span>
+<span class="c"># Minor GC의 주기가 빈번하지 않다 (10초 내외)</span>
+<span class="c"># Full GC의 처리 시간이 빠르다 (1초 내외)</span>
+<span class="c"># Full GC의 주기가 빈번하지 않다 (10분에 1회)</span>
+</code></pre></div></div>
+
+<h3 id="3-gc-알고리즘-방식-지정">3. GC 알고리즘 방식 지정</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">GC 알고리즘</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Parallel GC</td>
+      <td style="text-align: left">- ‘처리량’이 중요한 시스템에서 주로 사용<br /> - Full GC 수행 시 compaction 작업이 수행되기 때문에 GC 시간 자체는 많이 소요되나 일정한 멈춤 시간을 제공함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">CMS GC</td>
+      <td style="text-align: left">- 응답시간이 중용한 시스템에사 주로 사용 <br /> - compaction 미수행으로 Stop-The-World 시간은 짧으나 자주 Compaction이 발생하는 시스템의 경우 오히려 Full GC 보다 Compation 시간이 오래 걸릴 수 있음 <br /> - 자원 사용량이 증가하는 점도 고려해야 함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">G1 GC</td>
+      <td style="text-align: left">- 성능적으로 가장 우수한 GC 방식이나, JDK 7 버전부터 정식 제공되었으며, Java 9 에서 Default GC 방식으로 채택</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="4-heap-크기-지정">4. Heap 크기 지정</h3>
+<p>JVM의 힙 크기는 GC 발생 횟수와 수행 시간에 영향을 끼치기 떄문에 옵션을 통해 조절하면 애플리케이션의 성능 향상을 가져올 수 있다. 
+메모리 크기는 JVM의 시작 크기 <code class="language-plaintext highlighter-rouge">-Xms</code> 최대 크기 <code class="language-plaintext highlighter-rouge">-Xmx</code>를 말한다.
+메모리 크기와 GC 발생 횟수, GC 수행 시간 관계는 아래와 같다.</p>
+
+<ol>
+  <li>메모리 크기가 크면
+    <ul>
+      <li>GC 발생 횟수가 감소</li>
+      <li>GC 수행 시간은 길어진다.</li>
+    </ul>
+  </li>
+  <li>메모리 크기가 작으면
+    <ul>
+      <li>GC 발생 횟수는 증가한다.</li>
+      <li>GC 수행 시간은 짧아진다.</li>
+    </ul>
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">구분</th>
+      <th style="text-align: center">옵션</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">힙(heap) 영역 크기</td>
+      <td style="text-align: center">-Xms</td>
+      <td style="text-align: left">JVM 시작 시 힙 영역 크기</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">힙(heap) 영역 크기</td>
+      <td style="text-align: center">-Xmx</td>
+      <td style="text-align: left">최대 힙 영역 크기</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">New 영역의 크기</td>
+      <td style="text-align: center">-XX:NewRatio</td>
+      <td style="text-align: left">New 영역과 Old 영역의 비율</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">New 영역의 크기</td>
+      <td style="text-align: center">-XX:NewSize</td>
+      <td style="text-align: left">New 영역의 크기</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">New 영역의 크기</td>
+      <td style="text-align: center">-XX:SurvivorRatio</td>
+      <td style="text-align: left">Eden 영역과 Survivor 영역의 비율</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="images/GCTuning.png" alt="" /></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 이 중에서 중요한 옵션은 -Xms 옵션, -Xmx 옵션, -XX:NewRatio 옵션이다.</span>
+<span class="c"># 특히 -Xms 옵션과 -Xmx 옵션은 왠만하면 필수로 지정하길 권장되며, 그리고 NewRatio 옵션을 어떻게 설정하느냐에 따라서 GC 성능에 많은 차이가 발생한다.</span>
+<span class="c"># </span>
+<span class="c"># NewRatio는 New 영역과 Old 영역의 비율이다. </span>
+<span class="c"># -XX:+NewRatio=1로 지정하면 (New 영역):(Old 영역)의 비율은 1:1이 된다. </span>
+<span class="c"># 만약 1GB라면 (New 영역):(Old 영역)은 500MB:500MB가 된다. </span>
+<span class="c"># NewRatio가 2이면 (New 영역):(Old 영역)이 1:2가 된다. </span>
+<span class="c"># 즉, 값이 커지면 커질수록 Old 영역의 크기가 커지고 New 영역의 크기가 작아진다.</span>
+
+
+<span class="c"># 힙 시작 크기 256mb, 힙 최대 크기 2gb</span>
+<span class="c"># young 영역과 old 영역 비율 1:2 로 설정 (New 영역:Old 영역 = 1:2)</span>
+<span class="c"># Parallel GC 로 실행</span>
+java <span class="nt">-Xms256m</span> <span class="nt">-Xmx2048m</span> <span class="nt">-XX</span>:+NewRatio<span class="o">=</span>2 <span class="nt">-XX</span>:+UseParallelGC
+</code></pre></div></div>
+
+<h3 id="5-결과-분석">5. 결과 분석</h3>
+<p>분석할 때는 다음의 사항을 중심으로 살펴보는 것이 좋다. 이는 우선 순위 별로 나열되어 있다.</p>
+
+<ol>
+  <li>FullGC 수행 시간</li>
+  <li>MinorGC 수행 시간</li>
+  <li>Full GC 수행 간격</li>
+  <li>MinorGC 수행 간격</li>
+  <li>전체 Full GC 수행 시간</li>
+  <li>전체 Minor GC 수행 시간</li>
+  <li>전체 GC 수행 시간</li>
+  <li>Full GC 수행 횟수</li>
+  <li>Minor GC 수행 횟수</li>
+</ol>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/18/java-series-06-GC_Algorithm.html">
+        [java Series] 06 Gc_algorithm
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/18/java-series-08-CallBy.html">
+        [java Series] 08 Callby
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

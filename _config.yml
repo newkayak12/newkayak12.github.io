@@ -13,7 +13,7 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-     <p></p>
+     <a href="https://github.com/newkayak12/Dictionary/tree/master"> 이미 공부해서 git에 올렸던 내용 </a>을 재구성해서 기록하는 공간
   header_text_feature_image:
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
