@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[deisgn Pattern] 12 Factorymethod | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - FactoryMethod">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/19/deisgn-pattern-12-FactoryMethod.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[deisgn Pattern] 12 Factorymethod</h1>
+    
+    <p class="meta">
+      May 19, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="">Dictionary - FactoryMethod</a></p>
+
+<h1 id="factorymethod">FactoryMethod</h1>
+<p>팩토리 메소드 패턴은 객체 생성을 공장(Factory) 클래스로 캡슐화 처리하여 대신 생성하게 하는 생성 디자인 패턴이다.</p>
+
+<p>즉, 클라이언트에서 직접 new 연산자를 통해 제품 객체를 생성하는 것이 아닌, 제품 객체들을 도맡아 생성하는 공장 클래스를 만들고, 
+이를 상속하는 서브 공장 클래스의 메서드에서 여러가지 제품 객체 생성을 각각 책임 지는 것이다.</p>
+
+<p>또한 객체 생성에 필요한 과정을 템플릿 처럼 미리 구성해놓고, 객체 생성에 관한 전처리나 후처리를 통해 생성 과정을 다양하게 처리하여 객체를 유연하게 정할 수 있는 특징도 있다.</p>
+
+<p><img src="img/factoryMethod.png" alt="" /></p>
+
+<ul>
+  <li>Creator : 최상위 공장 클래스로서, 팩토리 메서드를 추상화하여 서브 클래스로 하여금 구현하도로 함
+    <ul>
+      <li>객체 생성 처리 메서드(someOperartion) : 객체 생성에 관한 전처리, 후처리를 템플릿화한 메소드</li>
+      <li>팩토리 메서드(createProduct) : 서브 공장 클래스에서 재정의할 객체 생성 추상 메서드</li>
+    </ul>
+  </li>
+  <li>ConcreteCreator : 각 서브 공장 클래스들은 이에 맞는 제품 객체를 반환하도록 생성 추상 메소드를 재정의한다. 즉, 제품 객체 하나당 그에 걸맞는 생산 공장 객체가 위치된다.</li>
+  <li>Product : 제품 구현체를 추상화</li>
+  <li>ConcreteProduct : 제품 구현체</li>
+</ul>
+
+<p>정리하자면, 팩토리 메소드 패턴은 객체를 만들어내는 공장(Factory 객체)을 만드는 패턴이라고 보면 된다. 그리고 어떤 클래스의 인스턴스를 만들지는 미리 정의한 공장 서브 클래스에서 결정한다.
+이렇게하면 객체 간 결합도가 낮아진다.</p>
+
+<blockquote>
+
+  <h4 id="-template-method-패턴과-factory-method-패턴과의-관계-">[ Template Method 패턴과 Factory Method 패턴과의 관계 ]</h4>
+  <p>뭔가 이름 구성이 비슷해서 둘이 어떠한 관계가 있어 보이는데, 템플릿 메서드는 행동 패턴이고 팩토리 메서드는 생성 패턴이라 둘은 전혀 다른 패턴이다.
+다만 클래스 구조의 결은 둘이 같다고 보면 되는데, 인스턴스를 생성하는 공장을 Template Method 패턴으로 구성한 것이 Factory Method 패턴이 되기 때문이다.
+Template Method 패턴에서는 하위 클래스에서 구체적인 처리 알고리즘의 내용을 만들도록 추상 메소드를 상속 시켰었다. 이 로직을 알고리즘 내용이 아닌 인스턴스 생성에 적용한 것이 Factory Method 패턴 인 것이다.</p>
+
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 제품 객체 추상화 (인터페이스)</span>
+<span class="kd">interface</span> <span class="nc">IProduct</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">setting</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// 제품 구현체</span>
+<span class="kd">class</span> <span class="nc">ConcreteProductA</span> <span class="kd">implements</span> <span class="nc">IProduct</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setting</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ConcreteProductB</span> <span class="kd">implements</span> <span class="nc">IProduct</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setting</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// 공장 객체 추상화 (추상 클래스)</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractFactory</span> <span class="o">{</span>
+
+    <span class="c1">// 객체 생성 전처리 후처리 메소드 (final로 오버라이딩 방지, 템플릿화)</span>
+    <span class="kd">final</span> <span class="nc">IProduct</span> <span class="nf">createOperation</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">IProduct</span> <span class="n">product</span> <span class="o">=</span> <span class="n">createProduct</span><span class="o">();</span> <span class="c1">// 서브 클래스에서 구체화한 팩토리 메서드 실행</span>
+        <span class="n">product</span><span class="o">.</span><span class="na">setting</span><span class="o">();</span> <span class="c1">// .. 이밖의 객체 생성에 가미할 로직 실행</span>
+        <span class="k">return</span> <span class="n">product</span><span class="o">;</span> <span class="c1">// 제품 객체를 생성하고 추가 설정하고 완성된 제품을 반환</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 팩토리 메소드 : 구체적인 객체 생성 종류는 각 서브 클래스에 위임</span>
+    <span class="c1">// protected 이기 때문에 외부에 노출이 안됨</span>
+    <span class="kd">abstract</span> <span class="kd">protected</span> <span class="nc">IProduct</span> <span class="nf">createProduct</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// 공장 객체 A (ProductA를 생성하여 반환)</span>
+<span class="kd">class</span> <span class="nc">ConcreteFactoryA</span> <span class="kd">extends</span> <span class="nc">AbstractFactory</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">IProduct</span> <span class="nf">createProduct</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ConcreteProductA</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// 공장 객체 B (ProductB를 생성하여 반환)</span>
+<span class="kd">class</span> <span class="nc">ConcreteFactoryB</span> <span class="kd">extends</span> <span class="nc">AbstractFactory</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">IProduct</span> <span class="nf">createProduct</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ConcreteProductB</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="특징">특징</h1>
+<h2 id="사용-시기">사용 시기</h2>
+<ul>
+  <li>클래스 생성과 사용의 처리 로직을 분리하여 결합도를 낮추고자 할 때</li>
+  <li>코드가 동작해야 하는 객체의 유형과 종속성을 캡슐화를 통해 정보 은닉 처리 할 경우</li>
+  <li>라이브러리 혹은 프레임워크 사용자에게 구성 요소를 확장하는 방법을 제공하려는 경우</li>
+  <li>기존 객체를 재구성하는 대신 기존 객체를 재사용하여 리소스를 절약하고자 하는 경우
+    <ul>
+      <li>상황에 따라 적절한 객체를 생성하는 코드는 자주 중복될 수 있다. 그리고 객체 생성 방식의 변화는 해당되는 모든 코드 부분을 변경해야 하는 문제가 발생한다.</li>
+      <li>따라서 객체의 생성 코드를 별도의 클래스 / 메서드로 분리 함으로써 객체 생성의 변화에 대해 대비를 하기 위해 팩토리 메서드 패턴을 이용한다고 보면 된다.</li>
+      <li>특정 기능의 구현은 별개의 클래스로 제공되는 것이 바람직한 설계이기 때문이다</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="장점">장점</h2>
+<ul>
+  <li>생성자(Creator)와 구현 객체(concrete product)의 강한 결합을 피할 수 있다.</li>
+  <li>팩토리 메서드를 통해 객체의 생성 후 공통으로 할 일을 수행하도록 지정해줄 수 있다.</li>
+  <li>캡슐화, 추상화를 통해 생성되는 객체의 구체적인 타입을 감출 수 있다.</li>
+  <li>단일 책임 원칙 준수 : 객체 생성 코드를 한 곳 (패키지, 클래스 등)으로 이동하여 코드를 유지보수하기 쉽게 할수 있으므로 원칙을 만족</li>
+  <li>개방/폐쇄 원칙 준수 : 기존 코드를 수정하지 않고 새로운 유형의 제품 인스턴스를 프로그램에 도입할 수 있어 원칙을 만족 (확장성 있는 전체 프로젝트 구성이 가능)</li>
+  <li>생성에 대한 인터페이스 부분과 생성에 대한 구현 부분을 따로 나뉘었기 때문에 패키지 분리하여 개별로 여러 개발자가 협업을 통해 개발</li>
+</ul>
+
+<h2 id="단점">단점</h2>
+<ul>
+  <li>각 제품 구현체마다 팩토리 객체들을 모두 구현해주어야 하기 때문에, 구현체가 늘어날때 마다 팩토리 클래스가 증가하여 서브 클래스 수가 폭발한다.</li>
+  <li>코드의 복잡성이 증가한다.</li>
+</ul>
+
+<h1 id="실사용-예시">실사용 예시</h1>
+<ul>
+  <li>java.util.Calendar 의 getInstance()</li>
+  <li>java.util.ResourceBundle 의 getBundle()</li>
+  <li>java.text.NumberFormat 의 getInstance()</li>
+  <li>java.nio.charset.Charset 의 forName()</li>
+  <li>java.net.URLStreamHandlerFactory 의 createURLStreamHandler(String)</li>
+  <li>java.util.EnumSet 의 of()</li>
+  <li>jakarta.xml.bind.JAXBContext 의 createMarshaller() and other similar methods</li>
+</ul>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/19/deisgn-pattern-11-AbstractFactory.html">
+        [deisgn Pattern] 11 Abstractfactory
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/19/deisgn-pattern-13-State.html">
+        [deisgn Pattern] 13 State
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
