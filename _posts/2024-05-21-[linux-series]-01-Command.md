@@ -1,3 +1,5 @@
+from [Dictionary - Command](https://github.com/newkayak12/Dictionary/blob/master/linux/Command.md)
+
 ## history
 이전에 사용했던 명령어들의 내역이 출력됨
 

@@ -1,4 +1,6 @@
-## tar/ Compress/ gizip/ bzip2/ xz/ zip
+from [Dictionary - Compress](https://github.com/newkayak12/Dictionary/blob/master/linux/Compress.md)
+
+## tar/ Compress/ gzip/ bzip2/ xz/ zip
 
 ### 리눅스와 윈도우 파일 압축 방식
 리눅스는 윈도우와 다르게 압축과 대상 파일을 묶는 것을 따로 한다. 윈도우는 묶으면서 동시에 압축하는 반면 리눅스는

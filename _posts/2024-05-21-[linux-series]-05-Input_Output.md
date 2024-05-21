@@ -1,3 +1,5 @@
+from [Dictionary - Input/ Output](https://github.com/newkayak12/Dictionary/blob/master/linux/Input_Output.md)
+
 # Input/ Output
 명령을 재지정해서 파일로부터 입력받거나 파일로 출력하는 등 출력, 입력 방향을 변경할수 있다.
 

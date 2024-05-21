@@ -1,4 +1,6 @@
-# 환경변수
+from [Dictionary - Environment](https://github.com/newkayak12/Dictionary/blob/master/linux/Environment.md)
+
+# Environment
 ## 0. 환경 변수 확인
 ```shell
 printenv [변수명]

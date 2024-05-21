@@ -1,3 +1,8 @@
+from [Dictionary - Journalctl](https://github.com/newkayak12/Dictionary/blob/master/linux/Journalctl.md)
+
+> 당시 프로젝트 중 oom이 잦아서 아마존 리눅스에서 로그를 보려하는데
+> amazonlinux가 /var/log/messages에 로그를 저장을 안해서 찾아본 문서
+
 # AmazonLinux /var/log/messages 에 로그가 없어서
 
 journalctl 이란?

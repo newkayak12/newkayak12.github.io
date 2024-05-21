@@ -1,3 +1,7 @@
+from [Dictionary - status](https://github.com/newkayak12/Dictionary/blob/master/linux/Status.md)
+> 프로젝트 중 OOM 으로 모니터링할 필요가 있어서 찾은 
+
+
 ## vmstat(Virtual Memory STAT)
 리눅스의 프로세스, 메모리, 페이징, I/O 블록, CPU 활동 사항 출력
 ```dockerfile

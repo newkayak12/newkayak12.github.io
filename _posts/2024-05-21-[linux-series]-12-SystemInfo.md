@@ -1,3 +1,7 @@
+from [Dictionary - SystemInfo](https://github.com/newkayak12/Dictionary/blob/master/linux/SystemInfo.md)
+
+
+
 ## `cat /proc/cpuinfo`
 CPU 정보를 열람할 수 있다.
 

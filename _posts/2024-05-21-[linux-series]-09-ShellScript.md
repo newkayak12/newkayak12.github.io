@@ -1,3 +1,7 @@
+from [Dictionary - ShellScript](https://github.com/newkayak12/Dictionary/blob/master/linux/ShellScript.md)
+> CICD 등 작업 중 찾은 문서
+
+
 # ShellScript
 
 [Shell 문법 검사기](https://www.shellcheck.net/)

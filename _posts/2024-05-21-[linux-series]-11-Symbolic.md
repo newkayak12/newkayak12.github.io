@@ -1,3 +1,6 @@
+from [Dictionary - Symbolic link](https://github.com/newkayak12/Dictionary/blob/master/linux/Symbolic.md)
+
+
 ## HardLink vs. Symbolic Link(softLink)
 
 먼저 리눅스에는 `inode`라는 개념이 있다. `inode`는 유닉스 계통의 파일 시스템에서 사용하는 자료구ㄷ조이다. 

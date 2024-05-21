@@ -1,3 +1,7 @@
+from [Dictionary - Volume](https://github.com/newkayak12/Dictionary/blob/master/linux/Volume.md)
+
+> aws 재시작으로 볼륨 마운트 해제되어서 해결하면서 찾은 
+
 # Volume
 
 - lsblk : 블록 장치를 나열하는 유틸리티 추가 정보를 보려면 `lsblk -f`

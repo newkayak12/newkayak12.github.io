@@ -1,3 +1,5 @@
+from [Dictionary - VI](https://github.com/newkayak12/Dictionary/blob/master/linux/ViEditor.md)
+
 ## VI/ VIM
 ## vi --version
 어떤 vi가 설치됐는지 확인할 수 있다.

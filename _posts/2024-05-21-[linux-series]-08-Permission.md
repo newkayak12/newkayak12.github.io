@@ -1,4 +1,7 @@
-## 권한
+from [Dictionary - Permission](https://github.com/newkayak12/Dictionary/blob/master/linux/Permission.md)
+> 서버 반영/CICD 작업 중 권한 문제로 고생해서 정리
+
+## Permission
 ![](/assets/img/permission.png)
 user : 파일 소유주
 group : 파일을 만든 소유주가 속한 그룹의 사용자

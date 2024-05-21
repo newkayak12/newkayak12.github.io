@@ -1,3 +1,5 @@
+from [Dictionary - Linux fileTree](https://github.com/newkayak12/Dictionary/blob/master/linux/Tree.md)
+
 # Linux
 ![](/assets/img/fileTree.png)
 
