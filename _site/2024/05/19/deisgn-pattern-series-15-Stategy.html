@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[deisgn Pattern Series] 15 Stategy | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Strategy">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/19/deisgn-pattern-series-15-Stategy.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[deisgn Pattern Series] 15 Stategy</h1>
+    
+    <p class="meta">
+      May 19, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/15.Stategy.md">Dictionary - Strategy</a></p>
+
+<h1 id="strategy">Strategy</h1>
+<p>전략 패턴은 실행(런타임) 중에 알고리즘 전략을 선택하여 객체 동작을 실시간으로 바뀌도록 할 수 있게 하는 행위 디자인 패턴 이다.
+여기서 ‘전략’이란 일종의 알고리즘이 될 수 도 있으며, 기능이나 동작이 될 수도 있는 특정한 목표를 수행하기 위한 행동 계획을 말한다.
+즉, 어떤 일을 수행하는 알고리즘이 여러가지 일때, 동작들을 미리 전략으로 정의함으로써 손쉽게 전략을 교체할 수 있는, 알고리즘 변형이 빈번하게 필요한 경우에 적합한 패턴이다.</p>
+
+<p><img src="img/strategy.png" alt="" /></p>
+
+<ul>
+  <li>전략 알고리즘 객체들 : 알고리즘, 행위, 동작을 객체로 정의한 구현체</li>
+  <li>전략 인터페이스 : 모든 전략 구현제에 대한 공용 인터페이스</li>
+  <li>컨텍스트(Context) : 알고리즘을 실행해야 할 때마다 해당 알고리즘과 연결된 전략 객체의 메소드를 호출.</li>
+  <li>클라이언트 : 특정 전략 객체를 컨텍스트에 전달 함으로써 전략을 등록하거나 변경하여 전략 알고리즘을 실행한 결과를 누린다.</li>
+</ul>
+
+<h1 id="특징">특징</h1>
+<h2 id="정의">정의</h2>
+<ul>
+  <li>동일 계열의 알고리즘군을 정의하고</li>
+  <li>각각의 알고리즘을 캡슐화하여</li>
+  <li>이들을 상호 교환이 가능하도록 만든다.</li>
+  <li>알고리즘을 사용하는 클라이언트와 상관없이 독립적으로</li>
+  <li>알고리즘을 다양하게 변경할 수 있게 한다.</li>
+</ul>
+
+<h2 id="흐름">흐름</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 전략(추상화된 알고리즘)</span>
+<span class="kd">interface</span> <span class="nc">IStrategy</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// 전략 알고리즘 A</span>
+<span class="kd">class</span> <span class="nc">ConcreteStrateyA</span> <span class="kd">implements</span> <span class="nc">IStrategy</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+
+<span class="c1">// 전략 알고리즘 B</span>
+<span class="kd">class</span> <span class="nc">ConcreteStrateyB</span> <span class="kd">implements</span> <span class="nc">IStrategy</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+
+
+<span class="c1">// 컨텍스트(전략 등록/실행)</span>
+<span class="kd">class</span> <span class="nc">Context</span> <span class="o">{</span>
+    <span class="nc">IStrategy</span> <span class="nc">Strategy</span><span class="o">;</span> <span class="c1">// 전략 인터페이스를 합성(composition)</span>
+
+    <span class="c1">// 전략 교체 메소드</span>
+    <span class="kt">void</span> <span class="nf">setStrategy</span><span class="o">(</span><span class="nc">IStrategy</span> <span class="nc">Strategy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">Strategy</span> <span class="o">=</span> <span class="nc">Strategy</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 전략 실행 메소드</span>
+    <span class="kt">void</span> <span class="nf">doSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">Strategy</span><span class="o">.</span><span class="na">doSomething</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="사용-시기">사용 시기</h2>
+<ul>
+  <li>전략 알고리즘의 여러 버전 또는 변형이 필요할 때 클래스화를 통해 관리</li>
+  <li>알고리즘 코드가 노출되어서는 안 되는 데이터에 액세스 하거나 데이터를 활용할 때 (캡슐화)</li>
+  <li>알고리즘의 동작이 런타임에 실시간으로 교체 되어야 할 때</li>
+</ul>
+
+<h2 id="주의점">주의점</h2>
+<ul>
+  <li>알고리즘이 많아질수록 관리해야할 객체의 수가 늘어난다는 단점이 있다.</li>
+  <li>만일 어플리케이션 특성이 알고리즘이 많지 않고 자주 변경되지 않는다면, 새로운 클래스와 인터페이스를 만들어 프로그램을 복잡하게 만들 이유가 없다.</li>
+  <li>개발자는 적절한 전략을 선택하기 위해 전략 간의 차이점을 명확이 알고 있어야 한다.</li>
+</ul>
+
+<h1 id="실사용-예제">실사용 예제</h1>
+<ul>
+  <li>Collections의 sort() 메서드에 의해 구현되는 compare() 메서드에 이용</li>
+  <li>javax.servlet.http.HttpServlet에서 service() 메서드와 모든 doXXX() 메서드에 이용</li>
+  <li>javax.servlet.Filter의 doFilter() 메서드에 이용</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/19/deisgn-pattern-series-14-TemplateMethod.html">
+        [deisgn Pattern Series] 14 Templatemethod
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/19/deisgn-pattern-series-16-Singleton.html">
+        [deisgn Pattern Series] 16 Singleton
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

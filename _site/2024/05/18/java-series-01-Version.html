@@ -89,6 +89,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -244,68 +246,62 @@ RMI : Remote Method Invocation의 약자로 분산 애플리케이션을 구축�
 </code></pre></div>    </div>
   </li>
   <li>Stream API 추가</li>
-  <li>PermGenArea 제거 : java8이전에는 초기 설정시 PermSize, MaxPerSize를 성정해야 했는데 이후 MetaSpace로 변경됐다. MetaSpace는 런타임 시 메모리 요규 사항에 따라 자체 크기를 조정하며, 필요하다면 MaxMetaspaceSize 매개변수를 조정하여 양을 조정할 수 있다.
-<img src="./images/pergen_area.png" />
-```
-    <h2 id="permanent-generation">Permanent Generation</h2>
-  </li>
-  <li>Permanent Generation은 Class 혹은 Method Code가 저장되는 영역</li>
-  <li>PermGen은 Heap에 속함</li>
-  <li>Default로 제한된 크기를 가짐</li>
+  <li>PermGenArea 제거 : java8이전에는 초기 설정시 PermSize, MaxPerSize를 성정해야 했는데 이후 MetaSpace로 변경됐다. MetaSpace는 런타임 시 메모리 요규 사항에 따라 자체 크기를 조정하며, 필요하다면 MaxMetaspaceSize 매개변수를 조정하여 양을 조정할 수 있다.</li>
 </ul>
 
-<h2 id="metaspace">Metaspace</h2>
-<ul>
-  <li>Metaspace는 Java 클래스 로더가 현재까지 로드한 class들의 메타 데이터가 저장되는 공간</li>
-  <li>JVM에 의해 관리되는 Heap이 아닌 OS 레벨에서 관리되는 Native 메모리 영역에 위치</li>
-  <li>Default로 제한된 크기를 가지고 있지 않고, 필요한 만큼 늘어남</li>
-</ul>
+<p><img src="/assets/img/pergen_area.png" alt="" /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Permanent Generation
+- Permanent Generation은 Class 혹은 Method Code가 저장되는 영역
+- PermGen은 Heap에 속함
+- Default로 제한된 크기를 가짐
 
-# Java SE 9
+## Metaspace
+- Metaspace는 Java 클래스 로더가 현재까지 로드한 class들의 메타 데이터가 저장되는 공간
+- JVM에 의해 관리되는 Heap이 아닌 OS 레벨에서 관리되는 Native 메모리 영역에 위치
+- Default로 제한된 크기를 가지고 있지 않고, 필요한 만큼 늘어남
 
-
-- 모듈 시스템 jigsaw 등장 (https://www.baeldung.com/project-jigsaw-java-modularity)
-- A New HTTP Client : 8까지 사용하던 HttpURLConnection을 대체할 새로운 java.net.http 패키지 추가
-- JsShell : main 메소드 없이 코드를 테스트할 수 있는 대화식 REPL(Read-Eval-Print-Loop) 도구를 제공
-- Process API 개선 : OS 프로세스 관리 및 컨트롤을 위해 (java.lang.ProcessHandle, java.lang.ProcessHandle.Info)가 추가 됐다.
-- Try-With-Resource 개선
-- 다이아몬트 연산자를 익명클래스에서도 사용할 수 있도록 개선됨
-- Interface Private Method 인터페이스 내에서 private 메소드 사용이 가능해짐
-- Optional To Stream :  Optional로 Stream을 생성할 수 있게 됐다. 
-        &gt; Stream&lt;Integer&gt; steram = Optional.of(1).stream();
-
-
-# Java SE 10
-
-- Local-Variable Type Interface : 로컬 변수 타입 추론 기능이다. 로컬 변수 타입을 var로 선언할 수 있다.
-```java
-var list - new ArrayList&lt;String&gt;();	//ArrayList&lt;String&gt; 으로 추론
-var stream = list.stream();		//Stream&lt;String&gt; 으로 추론
-
-var numbers = List.of(1, 2, 3, 4, 5);	//List&lt;Integer&gt; 으로 추론
-
-for (var number : numbers){		//Integer 추론
-	System.out.println(number);
-}
 </code></pre></div></div>
+
+<h1 id="java-se-9">Java SE 9</h1>
+
 <ul>
-  <li>Garbage Collector Interface : 다양한 GC의 코드 고립도를 향상하는 인터페이스 도입</li>
-  <li>Thread-Local Handshakes : VM safepoint를 수행할 필요 없이 개별 쓰레드를 stop하고 콜백을 수행할 수 있도록 추가
-```
-VM safePoint :: “Stop The World”로 모든 쓰레드를 일시 정지시키는 작업
-  safepoint를 발생시키는 경우
-    <ul>
-      <li>Garbage collection pauses</li>
-      <li>Code deoptimization</li>
-      <li>Flusing code cache</li>
-      <li>Class redefinition</li>
-      <li>Biased lock revocation</li>
-      <li>Various debug operation</li>
-    </ul>
-  </li>
+  <li>모듈 시스템 jigsaw 등장 (https://www.baeldung.com/project-jigsaw-java-modularity)</li>
+  <li>A New HTTP Client : 8까지 사용하던 HttpURLConnection을 대체할 새로운 java.net.http 패키지 추가</li>
+  <li>JsShell : main 메소드 없이 코드를 테스트할 수 있는 대화식 REPL(Read-Eval-Print-Loop) 도구를 제공</li>
+  <li>Process API 개선 : OS 프로세스 관리 및 컨트롤을 위해 (java.lang.ProcessHandle, java.lang.ProcessHandle.Info)가 추가 됐다.</li>
+  <li>Try-With-Resource 개선</li>
+  <li>다이아몬트 연산자를 익명클래스에서도 사용할 수 있도록 개선됨</li>
+  <li>Interface Private Method 인터페이스 내에서 private 메소드 사용이 가능해짐</li>
+  <li>Optional To Stream :  Optional로 Stream을 생성할 수 있게 됐다. 
+      &gt; Stream<Integer> steram = Optional.of(1).stream();</Integer></li>
 </ul>
+
+<h1 id="java-se-10">Java SE 10</h1>
+
+<ul>
+  <li>Local-Variable Type Interface : 로컬 변수 타입 추론 기능이다. 로컬 변수 타입을 var로 선언할 수 있다.
+```java
+var list - new ArrayList<String>();	//ArrayList<String> 으로 추론
+var stream = list.stream();		//Stream<String> 으로 추론</String></String></String></li>
+</ul>
+
+<p>var numbers = List.of(1, 2, 3, 4, 5);	//List<Integer> 으로 추론</Integer></p>
+
+<p>for (var number : numbers){		//Integer 추론
+	System.out.println(number);
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Garbage Collector Interface : 다양한 GC의 코드 고립도를 향상하는 인터페이스 도입
+- Thread-Local Handshakes : VM safepoint를 수행할 필요 없이 개별 쓰레드를 stop하고 콜백을 수행할 수 있도록 추가
+</code></pre></div></div>
+<p>VM safePoint :: “Stop The World”로 모든 쓰레드를 일시 정지시키는 작업
+    safepoint를 발생시키는 경우
+    - Garbage collection pauses
+    - Code deoptimization
+    - Flusing code cache
+    - Class redefinition
+    - Biased lock revocation
+    - Various debug operation</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Root Certificates : HTTPS 통신에 쓰이는 root CA 목록을 OracleJdk에서도 가지게 됐다.
 

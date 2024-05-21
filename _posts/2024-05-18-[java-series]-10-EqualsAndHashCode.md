@@ -22,7 +22,7 @@ ex) set
 
 ## Equals and Hashcode 동작 순서?
 
-![](images/eqAndHsh.png)
+![](/assets/imgeqAndHsh.png)
 <cite>https://inpa.tistory.com/entry/JAVA-☕-equals-hashCode-메서드-개념-활용-파헤치기</cite>
 
 

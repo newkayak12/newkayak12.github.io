@@ -5,7 +5,7 @@ from [Dictionary - memory](https://github.com/newkayak12/Dictionary/blob/master/
 - Stack 영역
 - Heap 영역
 
-![](images/jvm2.png)
+![](/assets/img/jvm2.png)
 
 ## 1. 자바 변수 종류
 
@@ -49,9 +49,11 @@ static 영역에 존재하는 별도 관리 영역 상수 자료형을 저장하
 5. stack은 쓰레드 개수마다 생성되지만 Heap은 몇 개의 쓰레드가 존재하든 상관 없이 하나의 Heap만 존재한다.
 
 
-![](images/heap.png)
+![](/assets/img/heap.png)
 <cite> https://inpa.tistory.com/entry/JAVA-☕-그림으로-보는-자바-코드의-메모리-영역스택-힙# </cite>
-![](images/heap_detail.png)
+
+![](/assets/imgheap_detail.png)
+
 <cite> https://1-7171771.tistory.com/140 </cite>
 
 <p style="color: palevioletred"> method(static) area? permenent generation?</p>
@@ -71,7 +73,7 @@ static 영역에 존재하는 별도 관리 영역 상수 자료형을 저장하
    - Survivor 1, 2를 왔다 갔다하는 동안 살아남은 객체들은 Old로 간다. Old는 Young 보다 크게 할당한다. 이러한 이유로 Old의 GC는 Young보다 드물다.
    - 간혹 Eden -> Old로 넘어가는 경우가 있는데 Survivor에 담을 수 없을 만큼 큰 경우 발생한다. 
 
-![](images/heapGc.png)
+![](/assets/imgheapGc.png)
 
 ### 오랫동안 살아남은 객체?
 
@@ -98,7 +100,7 @@ static 영역에 존재하는 별도 관리 영역 상수 자료형을 저장하
 5. G1 GC (Garbage First GC)
 기존 CG 알고리즘으로 큰 메모리에서 효율이 좋지 못해서 개선하기 위해서 등장했다. 기존의 Heap과는 다르게 `Region`으로 나눠서 관리한다.
 
-![](images/G1.png)
+![](/assets/imgG1.png)
 <cite> https://1-7171771.tistory.com/140 </cite>
 
 Region이라는 논리적인 단위로 메모리를 관히하며, CMS와ㅏ 달리 Compaction을 진행하고 메모리 단편화 문제를 없앰. STW 시간을 예측할 수 있다.

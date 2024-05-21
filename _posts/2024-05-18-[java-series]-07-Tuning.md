@@ -76,7 +76,7 @@ JVM의 힙 크기는 GC 발생 횟수와 수행 시간에 영향을 끼치기 �
 | New 영역의 크기 |    -XX:NewSize    | New 영역의 크기 |
 | New 영역의 크기 | -XX:SurvivorRatio | Eden 영역과 Survivor 영역의 비율 |
 
-![](images/GCTuning.png)
+![](/assets/imgGCTuning.png)
 
 ```shell
 # 이 중에서 중요한 옵션은 -Xms 옵션, -Xmx 옵션, -XX:NewRatio 옵션이다.

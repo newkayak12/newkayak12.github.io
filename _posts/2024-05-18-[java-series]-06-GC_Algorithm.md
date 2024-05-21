@@ -50,7 +50,7 @@ java -XX:+UseConcMarkSweepGC -jar Application.java
 4. 기존의 GC에서는 HEAP 영역을 물리적으로 고정된 Young/ Old로 나눴지만 G1은 `Region`을 도입. Eden, Survivor, Old를 고정이 아닌 동적으로 부여 
 5. Garbage로 가득찬 영역을 빠르게 회수하여 빈 공간을 확보하므로, 결국 GC 빈도가 줄어드는 효과를 얻게 되는 식
 
-![](images/g1Detail.png)
+![](/assets/imgg1Detail.png)
 
 ```shell
 java -XX:+UseG1GC -jar Application.java

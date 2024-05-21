@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[deisgn Pattern Series] 17 Staticfactorymethod | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Static Factory Method">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/19/deisgn-pattern-series-17-StaticFactoryMethod.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[deisgn Pattern Series] 17 Staticfactorymethod</h1>
+    
+    <p class="meta">
+      May 19, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/17.StaticFactoryMethod.md">Dictionary - Static Factory Method</a></p>
+
+<h1 id="static-factory-method">Static Factory Method</h1>
+
+<p>정적 팩토리 메서드(Static Factory Method) 패턴은 개발자가 구성한 Static Method를 통해 간접적으로 생성자를 호출하는 객체를 생성하는 디자인 패턴이다. 
+우리는 지금까지 객체를 인스턴스화 할때 직접적으로 생성자(Constructor)를 호출하여 생성하였는데, 
+별도의 객체 생성의 역할을 하는 클래스 메서드를 통해 간접적으로 객체 생성을 유도하는 것이다. 그리고 이 정적 메서드를 통칭적으로 정적 팩토리 메서드 패턴이라고 부르는 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Book</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    
+    <span class="c1">// 생성자를 private화 하여 외부에서 생성자 호출 차단</span>
+    <span class="kd">private</span> <span class="nf">Book</span><span class="o">(</span><span class="nc">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span> <span class="o">}</span>
+    
+    <span class="c1">// 정적 팩토리 메서드</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Book</span> <span class="nf">titleOf</span><span class="o">(</span><span class="nc">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Book</span><span class="o">(</span><span class="n">title</span><span class="o">);</span> <span class="c1">// 메서드에서 생성자를 호출하고 리턴함</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h1 id="특징">특징</h1>
+<h2 id="1-생성-목적에-대한-이름-표현이-가능하다">1. 생성 목적에 대한 이름 표현이 가능하다.</h2>
+<p>지금까지 클래스를 설계할때 다양한 타입의 객체를 생성하기 위해, 생성 목적에 따라 생성자를 오버로딩하여 구분하여 사용해왔다.
+하지만 문제는 이러한 객체를 new 키워드를 통해 생성자로 생성하려면, 개발자는 해당 생성자의 인자 순서와 내부 구조를 알고 있어야 목적에 맞게 객체를 생성할수가 있다는 번거로움이 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
+
+    <span class="c1">// private 생성자</span>
+    <span class="kd">private</span> <span class="nf">Car</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 정적 팩토리 메서드 (매개변수 하나는 from 네이밍)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Car</span> <span class="nf">brandBlackFrom</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Car</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="s">"black"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 정적 팩토리 메서드 (매개변수 여러개는 of 네이밍)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Car</span> <span class="nf">brandColorOf</span><span class="o">(</span><span class="nc">String</span> <span class="n">brand</span><span class="o">,</span> <span class="nc">String</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Car</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="n">color</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="2-인스턴스에-대해-통제-및-관리가-가능하다">2. 인스턴스에 대해 통제 및 관리가 가능하다.</h2>
+<p>메서드를 통해 한단계 거쳐 간접적으로 객체를 생성하기 때문에, 기본적으로 전반적인 객체 생성 및 통제 관리를 할 수 있게 된다.
+즉, 필요에 따라 항상 새로운 객체를 생성해서 반환할 수도 있고, 아니면 객체 하나만 만들어두고 이를 공유하여 재사용하게 하여 불필요한 객체를 생성하는 것을 방지 할 수 있는 것이다.</p>
+
+<p>대표적인 예시가 Singleton이다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Singleton</span> <span class="n">instance</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{}</span>
+
+    <span class="c1">// 정적 팩토리 메서드</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">synchronized</span> <span class="nc">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Singleton</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>다른 예로는 인스턴스에 대한 캐싱(Caching) 절차 구조를 정적 팩토리 메서드로 구현할 수 있다. 인스턴스에 대해 캐싱을 한다면 필요한 인스턴스만 뽑아 재사용하여 메모리를 절약할 수 있게 된다.
+이렇게 인스턴스를 통제하는 것은 인스턴스가 단 하나뿐임을 보장하는 것이고, Flyweight 디자인 패턴의 근간이 되게 된다.</p>
+
+<h2 id="3-하위-자료형-객체를-반환할-수-있다">3. 하위 자료형 객체를 반환할 수 있다.</h2>
+<p>클래스의 다형성의 특징을 응용한 정적 팩토리 메서드 특징이다. 메서드 호출을 통해 얻을 객체의 인스턴스를 자유롭게 선택할수 있는 유연성을 갖는 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">SmarPhone</span> <span class="o">{}</span>
+
+<span class="kd">class</span> <span class="nc">Galaxy</span> <span class="kd">implements</span> <span class="nc">SmarPhone</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">IPhone</span> <span class="kd">implements</span> <span class="nc">SmarPhone</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">Huawei</span> <span class="kd">implements</span> <span class="nc">SmarPhone</span> <span class="o">{}</span>
+
+<span class="kd">class</span> <span class="nc">SmartPhones</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SmarPhone</span> <span class="nf">getSamsungPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Galaxy</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SmarPhone</span> <span class="nf">getApplePhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">IPhone</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SmarPhone</span> <span class="nf">getChinesePhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Huawei</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="4-인자에-따라-다른-객체를-반환하도록-분기할-수-있다">4. 인자에 따라 다른 객체를 반환하도록 분기할 수 있다.</h2>
+<p>메서드이니 매개변수를 받을수 있을테고, 메서드 블록 내에서 분기문을 통해 여러 자식 타입의 인스턴스를 반환하도록 응용 구성이 가능하다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">SmarPhone</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SmarPhone</span> <span class="nf">getPhone</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="mi">100000</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">IPhone</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span><span class="o">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="mi">50000</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Galaxy</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Huawei</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="5-객체-생성을-캡슐화-할-수-있다">5. 객체 생성을 캡슐화 할 수 있다.</h2>
+<p>생성자를 사용하는 경우 외부에 내부 구현을 드러내야 하는데, 정적 팩토리 메서드는 구현부를 외부로 부터 숨길 수 있어 캡슐화(encapsulation) 및 정보 은닉(information hiding)을 할수 있다는 특징이 있다.
+또한 노출하지 않는다는 특징은 정보 은닉성을 가지기도 하지만 동시에 사용하고 있는 구현체를 숨겨 의존성을 제거해주는 장점도 지니고 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="nf">toText</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">A</span> <span class="kd">implements</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toText</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="s">"A"</span><span class="o">;}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">B</span> <span class="kd">implements</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toText</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="s">"B"</span><span class="o">;}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">C</span> <span class="kd">implements</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toText</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="s">"C"</span><span class="o">;}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">D</span> <span class="kd">implements</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toText</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="s">"D"</span><span class="o">;}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">F</span> <span class="kd">implements</span> <span class="nc">Grade</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toText</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="s">"F"</span><span class="o">;}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">GradeCalculator</span> <span class="o">{</span>
+    <span class="c1">// 정적 팩토리 메서드</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Grade</span> <span class="nf">of</span><span class="o">(</span><span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">A</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">B</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">C</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">D</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">F</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="static-factory-method-네이밍-규칙">Static Factory Method 네이밍 규칙</h2>
+<ul>
+  <li>from : 하나의 매개 변수를 받아서 객체를 생성</li>
+  <li>of : 여러개의 매개 변수를 받아서 객체를 생성</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>getInstance</td>
+          <td>instance : 인스턴스를 생성. 이전에 반환했던 것과 같을 수 있음</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>newInstance</td>
+          <td>create : 항상 새로운 인스턴스를 생성</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>get[OrderType] : 다른 타입의 인스턴스를 생성. 이전에 반환했던 것과 같을 수 있음</li>
+  <li>new[OrderType] : 항상 다른 타입의 새로운 인스턴스를 생성</li>
+</ul>
+
+<h2 id="실제-사용-예시">실제 사용 예시</h2>
+<ul>
+  <li>Optional.of()</li>
+  <li>List.of()</li>
+  <li>Integer.valueOf()</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/19/deisgn-pattern-series-16-Singleton.html">
+        [deisgn Pattern Series] 16 Singleton
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/19/deisgn-pattern-series-18-TemplateCallback.html">
+        [deisgn Pattern Series] 18 Templatecallback
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

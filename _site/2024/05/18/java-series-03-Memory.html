@@ -89,6 +89,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -173,7 +175,7 @@
   <li>Heap 영역</li>
 </ul>
 
-<p><img src="images/jvm2.png" alt="" /></p>
+<p><img src="/assets/img/jvm2.png" alt="" /></p>
 
 <h2 id="1-자바-변수-종류">1. 자바 변수 종류</h2>
 
@@ -224,10 +226,12 @@
   <li>stack은 쓰레드 개수마다 생성되지만 Heap은 몇 개의 쓰레드가 존재하든 상관 없이 하나의 Heap만 존재한다.</li>
 </ol>
 
-<p><img src="images/heap.png" alt="" />
-<cite> https://inpa.tistory.com/entry/JAVA-☕-그림으로-보는-자바-코드의-메모리-영역스택-힙# </cite>
-<img src="images/heap_detail.png" alt="" />
-<cite> https://1-7171771.tistory.com/140 </cite></p>
+<p><img src="/assets/img/heap.png" alt="" />
+<cite> https://inpa.tistory.com/entry/JAVA-☕-그림으로-보는-자바-코드의-메모리-영역스택-힙# </cite></p>
+
+<p><img src="/assets/imgheap_detail.png" alt="" /></p>
+
+<p><cite> https://1-7171771.tistory.com/140 </cite></p>
 
 <p style="color: palevioletred"> method(static) area? permenent generation?</p>
 <strike>1. Permanent Generation : 생성된 객체들의 정보의 주소 값이 저장된 공간이다. 클래스 로더에 의해 load되는 Class, Method 드엥 대한 Meta 정보가 저장되는 영역 (Reflection을 사용하여 동적으로 클래스가 로딩되는 경우에 사용)</strike>
@@ -255,7 +259,7 @@
   </li>
 </ol>
 
-<p><img src="images/heapGc.png" alt="" /></p>
+<p><img src="/assets/imgheapGc.png" alt="" /></p>
 
 <h3 id="오랫동안-살아남은-객체">오랫동안 살아남은 객체?</h3>
 
@@ -293,7 +297,7 @@ Stop-The-World가 길다.</p>
 기존 CG 알고리즘으로 큰 메모리에서 효율이 좋지 못해서 개선하기 위해서 등장했다. 기존의 Heap과는 다르게 <code class="language-plaintext highlighter-rouge">Region</code>으로 나눠서 관리한다.</li>
 </ol>
 
-<p><img src="images/G1.png" alt="" />
+<p><img src="/assets/imgG1.png" alt="" />
 <cite> https://1-7171771.tistory.com/140 </cite></p>
 
 <p>Region이라는 논리적인 단위로 메모리를 관히하며, CMS와ㅏ 달리 Compaction을 진행하고 메모리 단편화 문제를 없앰. STW 시간을 예측할 수 있다.</p>

@@ -10,7 +10,7 @@ Java는 JVM이라는 가상머신을 거쳐서 OS에 도달한다. 이때 인식
 
 
 JVM은 크게 아래와 같이 이뤄져 있다.
-![](images/jvm.png)
+![](/assets/imgjvm.png)
 
 - 클래스 로더(Class Loader)
 - 실행 엔진(Execution Engine)

@@ -19,18 +19,18 @@ GC 대상이 될 객체를 식별(Mark), 제거(Sweep)하며 객체가 제거되
 3. Compact : Heap의 시작 주소를 모아 메모리가 할당된 부분과 아닌 부분으로 압축한다. (GC 종류에 따라 하지 않는 경우도 있음 )
 
 
-![](images/rootSpace.png)
+![](/assets/imgrootSpace.png)
 
 
 ## GC 동작 과정
-![](images/gc.png)
+![](/assets/imggc.png)
 
 Heap은 동적으로 레퍼런스 데이터가 저장되는 공간으로 GC 대상이 되는 공간이다. Heap은 아래 2가지를 전제(Weak Generational Hypothesis)로 설계됐다.
 1. 대부분 객체는 금방 접근 불가능한 상태(Unreachable)가 된다.
 2. 오래된 객체에서 새로운 객체로의 참조는 아주 적게 존재한다.
 
 즉, 객체는 대부분 일회성, 메모리에 오랫동안 남을 경우는 드물다는 것이다. 
-![](images/basicHeap.png)
+![](/assets/imgbasicHeap.png)
 
 1. Young
    - 새롭게 객체가 할당되는 영역
@@ -41,7 +41,7 @@ Heap은 동적으로 레퍼런스 데이터가 저장되는 공간으로 GC 대�
    - Young보다 크게 할당됨. 크기가 큰 만큼 가비지는 적게 발생
    - Old에 대한 GC를 Full GC라고 부름
 
- ![](images/detailHeap.png)
+ ![](/assets/imgdetailHeap.png)
 
 1. Eden
    - new를 통해 생성된 위치
@@ -50,7 +50,7 @@ Heap은 동적으로 레퍼런스 데이터가 저장되는 공간으로 GC 대�
    - 최소 1 번 이상의 GC에서 살아남은 객체가 존재하는 영역
    - Survivor 0, 1 중 하나는 꼭 비어 있다.
 
-![](images/permanent.png)
+![](/assets/imgpermanent.png)
 
 
 ## MinorGC

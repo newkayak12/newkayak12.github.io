@@ -73,7 +73,9 @@ assert, 정규표현식, IPv6, XML API, JCE, JSSE, JAAS, Java Web Start 등이 �
 
 - Stream API 추가
 - PermGenArea 제거 : java8이전에는 초기 설정시 PermSize, MaxPerSize를 성정해야 했는데 이후 MetaSpace로 변경됐다. MetaSpace는 런타임 시 메모리 요규 사항에 따라 자체 크기를 조정하며, 필요하다면 MaxMetaspaceSize 매개변수를 조정하여 양을 조정할 수 있다.
-<img src="./images/pergen_area.png">
+
+![](/assets/img/pergen_area.png)
+
 ```
 ## Permanent Generation
 - Permanent Generation은 Class 혹은 Method Code가 저장되는 영역
