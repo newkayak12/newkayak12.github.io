@@ -6,7 +6,7 @@ from [Dictionary - Iterator](https://github.com/newkayak12/Dictionary/blob/maste
 반복자(Iterator) 패턴은 일련의 데이터 집합에 대하여 순차적인 접근(순회)을 지원하는 패턴이다.
 데이터 집합이란 객체들을 그룹으로 묶어 자료의 구조를 취하는 컬렉션을 말한다. 대표적인 컬렉션으로 한번쯤은 들어본 리스트나 트리, 그래프, 테이블 등이 있다.
 
-![](img/iterator.png)
+![](/assets/img/iterator.png)
 
 - Aggregate (인터페이스) : ConcreateIterator 객체를 반환하는 인터페이스를 제공한다.
   - iterator() : ConcreateIterator 객체를 만드는 팩토리 메서드

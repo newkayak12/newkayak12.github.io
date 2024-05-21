@@ -19,7 +19,7 @@ from [Dictionary - Proxy](https://github.com/newkayak12/Dictionary/blob/master/j
 - 원격 객체(Remote objects) : 프록시는 원격 위치에 있는 객체를 가져와서 로컬처럼 보이게 할 수 있다.
 
 # 패턴 구조
-![](img/proxy.png)
+![](/assets/img/proxy.png)
 
 - Subject : Proxy와 RealSubject를 하나로 묶는 인터페이스 (다형성)
   - 대상 객체와 프록시 역할을 동일하게 하는 추상 메소드 operation() 를 정의한다.

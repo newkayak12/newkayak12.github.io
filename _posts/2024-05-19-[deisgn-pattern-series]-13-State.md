@@ -16,7 +16,7 @@ from [Dictionary - State](https://github.com/newkayak12/Dictionary/blob/master/j
 # 구조
 
 
-![](img/state.png)
+![](/assets/img/state.png)
 
 - State 인터페이스 : 상태를 추상화한 고수준 모듈.
 - ConcreteState : 구체적인 각각의 상태를 클래스로 표현. State 역할로 결정되는 인터페이스(API)를 구체적으로 구현한다. 다음 상태가 결정되면 Context에 상태 변경을 요청하는 역할도 한다.

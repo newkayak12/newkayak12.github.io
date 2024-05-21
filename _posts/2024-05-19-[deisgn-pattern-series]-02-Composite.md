@@ -10,7 +10,7 @@ from [Dictionary - Composite](https://github.com/newkayak12/Dictionary/blob/mast
 폴더(디렉토리) 안에는 파일이 들어 있을수도 있고 파일을 담은 또 다른 폴더도 들어있을 수 있다.
 이를 복합적으로 담을수 있다 해서 Composite 객체라고 불리운다. 반면 파일은 단일 객체 이기 때문에 이를 Leaf 객체라고 불리운다. 즉 Leaf는 자식이 없다.
 
-![](img/composite.png)
+![](/assets/img/composite.png)
 
 복합체 패턴은 바로 이 폴더와 파일을 동일한 타입으로 취급하여 구현을 단순화 시키는 것이 목적이다.
 폴더 안에는 파일 뿐만 아니라 서브 폴더가 올수 있고 또 서브 폴더안에 서브 폴더가 오고.. 
@@ -20,7 +20,7 @@ from [Dictionary - Composite](https://github.com/newkayak12/Dictionary/blob/mast
 
 # 패턴
 
-![](img/compositePattern.png)
+![](/assets/img/compositePattern.png)
 
 - Component : Leaf와 Compsite 를 묶는 공통적인 상위 인터페이스
 - Composite : 복합 객체로서, Leaf 역할이나 Composite 역할을 넣어 관리하는 역할을 한다.

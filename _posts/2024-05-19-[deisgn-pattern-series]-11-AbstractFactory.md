@@ -7,7 +7,7 @@ from [Dictionary - AbstractFactory](https://github.com/newkayak12/Dictionary/blo
 클라이언트에서 특정 객체을 사용할때 팩토리 클래스만을 참조하여 특정 객체에 대한 구현부를 감추어 역할과 구현을 분리시킬 수 있다.
 즉, 추상 팩토리의 핵심은 제품 '군' 집합을 타입 별로 찍어낼수 있다는 점이 포인트 이다.
 
-![](img/abstractFactory.png)
+![](/assets/img/abstractFactory.png)
 
 - AbstractFactory : 최상위 공장 클래스. 여러개의 제품들을 생성하는 여러 메소드들을 추상화 한다.
 - ConcreteFactory : 서브 공장 클래스들은 타입에 맞는 제품 객체를 반환하도록 메소드들을 재정의한다.

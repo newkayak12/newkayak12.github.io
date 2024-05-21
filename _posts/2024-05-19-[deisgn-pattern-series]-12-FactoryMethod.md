@@ -9,7 +9,7 @@ from [Dictionary - FactoryMethod](https://github.com/newkayak12/Dictionary/blob/
 
 또한 객체 생성에 필요한 과정을 템플릿 처럼 미리 구성해놓고, 객체 생성에 관한 전처리나 후처리를 통해 생성 과정을 다양하게 처리하여 객체를 유연하게 정할 수 있는 특징도 있다.
 
-![](img/factoryMethod.png)
+![](/assets/img/factoryMethod.png)
 
 - Creator : 최상위 공장 클래스로서, 팩토리 메서드를 추상화하여 서브 클래스로 하여금 구현하도로 함
   - 객체 생성 처리 메서드(someOperartion) : 객체 생성에 관한 전처리, 후처리를 템플릿화한 메소드

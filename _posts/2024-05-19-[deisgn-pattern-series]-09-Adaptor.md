@@ -18,7 +18,7 @@ Adapter 패턴에는 기존 시스템의 클래스를 상속(Inheritance) 해서
 - 합성을 활용했기 때문에 런타임 중에 Adaptee(Service)가 결정되어 유연하다.
 - Adaptee(Service) 객체를 필드 변수로 저장해야 되기 때문에 공간 차지 비용이 든다.
 
-![](img/objAdaptor.png)
+![](/assets/img/objAdaptor.png)
 
 - Adaptee(Service) : 어댑터 대상 객체. 기존 시스템 / 외부 시스템 / 써드파티 라이브러리
 - Target(Client Interface) : Adapter 가 구현하는 인터페이스.
@@ -61,7 +61,7 @@ class Adapter implements Target {
 - Adaptee(Service)를 상속했기 때문에 따로 객체 구현없이 바로 코드 재사용이 가능하다.
 - 상속은 대표적으로 기존에 구현된 코드를 재사용하는 방식이지만, 자바에서는 다중 상속 불가 문제 때문에 전반적으로 권장하지는 않는 방법이다.
 
-![](img/classAdaptor.png)
+![](/assets/img/classAdaptor.png)
 
 - Adaptee(Service) : 어댑터 대상 객체. 기존 시스템 / 외부 시스템 / 써드파티 라이브러리
 - Target(Cient Interface) : Adapter 가 구현하는 인터페이스.

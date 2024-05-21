@@ -5,7 +5,7 @@ from [Dictionary - Observer](https://github.com/newkayak12/Dictionary/blob/maste
 옵저버 패턴(Observer Pattern)은 옵저버(관찰자)들이 관찰하고 있는 대상자의 상태가 변화가 있을 때마다 대상자는 직접 목록의 각 관찰자들에게 통지하고, 관찰자들은 알림을 받아 조치를 취하는 행동 패턴이다.
 옵저버 패턴은 여타 다른 디자인 패턴들과 다르게 일대다(one-to-many) 의존성을 가지는데, 주로 분산 이벤트 핸들링 시스템을 구현하는 데 사용된다. Pub/Sub(발행/구독) 모델로도 알려져 있다.
 
-![](img/observer.png)
+![](/assets/img/observer.png)
 
 - ISubject : 관찰 대상자를 정의하는 인터페이스
 - ConcreteSubject : 관찰 당하는 대상자 / 발행자 / 게시자
@@ -18,7 +18,7 @@ from [Dictionary - Observer](https://github.com/newkayak12/Dictionary/blob/maste
   - Subject의 업데이트에 대해 전후 정보를 처리한다.
 
 # 흐름
-![](img/observer2.png)
+![](/assets/img/observer2.png)
 
 ```java
 // 관찰 대상자 / 발행자

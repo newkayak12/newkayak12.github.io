@@ -7,7 +7,7 @@ from [Dictionary - FlyWeight](https://github.com/newkayak12/Dictionary/blob/mast
 간단히 말하면 캐시(Cache) 개념을 코드로 패턴화 한것으로 보면 되는데, 자주 변화는 속성(extrinsit)과 변하지 않는 속성(intrinsit)을 분리하고 변하지 않는 속성을 캐시하여 재사용해 메모리 사용을 줄이는 방식이다. 
 그래서 동일하거나 유사한 객체들 사이에 가능한 많은 데이터를 서로 공유하여 사용하도록 하여 최적화를 노리는 경량 패턴이라고도 불린다.
 
-![](img/flyWeight.png)
+![](/assets/img/flyWeight.png)
 
 - Flyweight : 경량 객체를 묶는 인터페이스.
 - ConcreteFlyweight : 공유 가능하여 재사용되는 객체 (intrinsic state)

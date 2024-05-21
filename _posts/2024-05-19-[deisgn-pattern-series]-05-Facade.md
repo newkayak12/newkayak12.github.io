@@ -11,7 +11,7 @@ from [Dictionary - Facade](https://github.com/newkayak12/Dictionary/blob/master/
 > 이처럼 건축물 정면만 봐도 이 건물이 어떤 목적을 하는지 단번에 알수 있다는 특징을 차용하여 명명 지은 것이다.
 > 
 
-![](img/facade.png)
+![](/assets/img/facade.png)
 
 - Facade : 서브시스템 기능을 편리하게 사용할 수 있도록 하기 위해 여러 시스템과 상호 작용하는 복잡한 로직을 재정리해서 높은 레벨의 인터페이스를 구성한다. Facade 역할은 서브 시스템의 많은 역할에 대해 ‘단순한 창구’가 된다. 클라이언트와 서브시스템이 서로 긴밀하게 연결되지 않도록 한다.
 - Additional Facade : 퍼사드 클래스는 반드시 한개만 존재해야 한다는 규칙같은 건 없다. 연관 되지 않은 기능이 있다면 얼마든지 퍼사드 2세로 분리한다. 이 퍼사드 2세는 다른 퍼사드에서 사용할 수도 있고 클라이언트에서 직접 접근할 수도 있다.
@@ -21,7 +21,7 @@ from [Dictionary - Facade](https://github.com/newkayak12/Dictionary/blob/master/
 퍼사드 패턴은 전략 패턴이나 팩토리 패턴과 같은 여타 다른 디자인 패턴과는 다르게 클래스 구조가 정형화 되지 않은 패턴이다.
 반드시 클래스 위치는 어떻고 어떤 형식으로 위임을 해야되고 이런것이 없다. 그냥 퍼사드 클래스를 만들어 적절히 기능 집약해주는 논리라고 생각하면 된다.
 
-![](img/flyWeight2.png)
+![](/assets/img/flyWeight2.png)
 
 ## 재귀적 Facade 패턴의 적용
 재귀적 퍼사드란 Additional Facade 를 말하는 것이다. 예를 들어 다수의 클래스, 다수의 패키지를 포함하고 있는 큰 시스템에 요소 마다 Facade 패턴을 여기 저기 적용하고 다시 그 Facade를 합친 Facade를 만드는 식으로,
