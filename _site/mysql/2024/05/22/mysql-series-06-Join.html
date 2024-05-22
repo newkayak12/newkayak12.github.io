@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mysql Series] 06 Join | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Join">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mysql/2024/05/22/mysql-series-06-Join.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mysql Series] 06 Join</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/sql/06.Join.md">Dictionary - Join</a></p>
+
+<h1 id="join">Join</h1>
+<h2 id="종류">종류</h2>
+<ul>
+  <li>조인 연산자에 따른 분류 : 동등 조인, 안티 조인</li>
+  <li>조인 대상에 따른 구분 : 셀프 조인</li>
+  <li>조인 조건에 따른 분류 : 내부 조인, 외부 조인, 세미 조인, 카타시안 조인</li>
+  <li>기타 : ANSI 조인</li>
+</ul>
+
+<h2 id="외부-조인--내부-조인">외부 조인 / 내부 조인</h2>
+<ol>
+  <li>동등 조인
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="n">A_TABLE</span> <span class="n">a</span><span class="p">,</span> <span class="n">B_TABLE</span> <span class="n">b</span> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>세미 조인 : 서브 쿼리를 사용해서 서브 쿼리에 존재하는 데이터만 메인쿼리에서 추출하는 조인 (Join 없이 서브쿼리 + 조건으로 )
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- EXISTS 사용</span>
+<span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="n">A_TABLE</span> <span class="n">a</span> <span class="k">WHERE</span> <span class="k">EXISTS</span> <span class="p">(</span>
+ <span class="k">SELECT</span> <span class="o">*</span> 
+ <span class="k">FROM</span> <span class="n">B_TABLE</span> <span class="n">b</span>
+ <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span>
+ <span class="k">AND</span> <span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+<span class="p">);</span>
+<span class="c1">-- IN 사용</span>
+<span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span> <span class="k">FROM</span> <span class="n">A_TABLE</span> <span class="n">a</span> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="k">IN</span> <span class="p">(</span>
+ <span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span>
+ <span class="k">FROM</span> <span class="n">B_TABLE</span> <span class="n">b</span>
+ <span class="k">WHERE</span> <span class="p">[</span><span class="n">condition</span><span class="p">]</span>
+<span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>안티 조인 : A에서 B에 없는 요소만 추출</li>
+  <li>셀프 조인 : 동일한 테이블끼리 조인하는 방법</li>
+  <li>외부 조인 : 한 테이블을 기준으로 다른 테이블 값이 NULL이라도 추출하는 것</li>
+  <li>카티시안 조인 WHERE에 조건이 없는 조인 (모든 경우의 수, 카티시안 곱)</li>
+  <li>ANSI : join … on</li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mysql/2024/05/22/mysql-series-05-Function.html">
+        [mysql Series] 05 Function
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mysql/2024/05/22/mysql-series-07-SubQuery.html">
+        [mysql Series] 07 Subquery
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

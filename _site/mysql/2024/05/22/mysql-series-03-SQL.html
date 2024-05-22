@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mysql Series] 03 Sql | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - SQL">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mysql/2024/05/22/mysql-series-03-SQL.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mysql Series] 03 Sql</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/sql/03.SQL.md">Dictionary - SQL</a></p>
+
+<h1 id="sql">SQL</h1>
+
+<ol>
+  <li>SELECT</li>
+  <li>INSERT</li>
+  <li>UPDATE</li>
+  <li>MERGE : 조건을 비교해서 테이블에 해당 조건에 맞는 데이터가 없으면 INSERT / 있으면 UPDATE
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MERGE</span> <span class="k">INTO</span> <span class="p">[</span><span class="k">SCHEMA</span><span class="p">.]</span><span class="n">tableName</span>
+ <span class="k">USING</span> <span class="p">(</span><span class="k">update</span> <span class="k">or</span> <span class="k">insert</span> <span class="n">target</span><span class="p">)</span>
+ <span class="k">ON</span> <span class="p">(</span><span class="k">update</span> <span class="n">condition</span><span class="p">)</span>
+<span class="k">WHEN</span> <span class="n">MATCHED</span> <span class="k">THEN</span>
+ <span class="k">SET</span> <span class="p">(</span><span class="n">col1</span> <span class="o">=</span> <span class="n">val1</span><span class="p">,</span> <span class="n">col2</span> <span class="o">=</span> <span class="n">val2</span><span class="p">,</span> <span class="p">...)</span>
+<span class="k">WHERE</span> <span class="p">(</span><span class="k">update</span> <span class="n">condition</span><span class="p">)</span>
+ <span class="k">DELETE</span> <span class="k">WHERE</span> <span class="p">(</span><span class="n">update_delete</span> <span class="n">condition</span><span class="p">)</span>
+<span class="k">WHEN</span> <span class="k">NOT</span> <span class="n">MATCHED</span> <span class="k">THEN</span>
+ <span class="k">INSERT</span> <span class="p">(</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span> <span class="p">...</span> <span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="p">...</span> <span class="p">)</span>
+ <span class="k">WHERE</span> <span class="p">(</span> <span class="k">insert</span> <span class="n">conditoin</span> <span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>DELETE</li>
+  <li>COMMIT / ROLLBACK : COMMIT은 변경한 데이터를 데이터베이스에 마지막으로 반영하는 역할을, ROLLBACK은 그 반대로 변경한 데이터를 변경하기 이전 상태로 되돌리는 역할
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COMMIT</span> <span class="p">[</span><span class="k">WORK</span><span class="p">]</span> <span class="p">[</span><span class="k">TO</span> <span class="n">SAVEPOINT</span> <span class="n">savePointName</span><span class="p">];</span>
+<span class="k">ROLLBACK</span> <span class="p">[</span><span class="k">WORK</span><span class="p">]</span> <span class="p">[</span><span class="k">TO</span> <span class="n">SAVEPOINT</span> <span class="n">savePointName</span><span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+  <li>TRUNCATE : DELETE와 같은 기능을 수행하지만 삭제한 후 COMMIT을 해야 데이터가 완전히 삭제되고, 반대로 ROLLBACK을 실행하면 데이터가 삭제되기 전으로 복귀한다.
+단, DDL에 속하는 TRUNCATE는 실행하면 데이터가 바로 삭제되고, ROLLBACK을 실행하더라도 삭제 전 상태로 복귀되지 않는다.
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">TRUNCATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="k">SCHEMA</span><span class="p">.]</span><span class="n">tableName</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mysql/2024/05/22/mysql-series-02-Objects.html">
+        [mysql Series] 02 Objects
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mysql/2024/05/22/mysql-series-04-OperatorAndExpression.html">
+        [mysql Series] 04 Operatorandexpression
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mysql Series] 10 Cursor_record_collection | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Cursor/ Record/ Collection">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mysql/2024/05/22/mysql-series-10-Cursor_Record_Collection.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mysql Series] 10 Cursor_record_collection</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/sql/10.Cursor_Record_Collection.md">Dictionary - Cursor/ Record/ Collection</a></p>
+
+<h1 id="cursor-record-collection">Cursor/ Record/ Collection</h1>
+
+<h2 id="커서">커서</h2>
+
+<h3 id="1-커서란">1. 커서란</h3>
+<p>특정 SQL 문장을 처리하 결과를 담고 있는 영역(PRIVATE SQL이라는 메모리)을 가리키고 일종의 포인터
+종류는 묵시/ 명시적 커서가 있다. 묵시적 커서는 오라클 내부에서 자동으로 생성되어 사용하는 커서이다. 반대로 사용자가 직접 정의해서 사용하는 커서를 명시적 커서라고 한다.</p>
+
+<p>a. 명시적 커서</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DECLARE</span>
+ <span class="n">vn_department_id</span> <span class="n">emplyees</span><span class="p">.</span><span class="n">departmnet_id</span><span class="o">%</span><span class="k">TYPE</span> <span class="p">:</span><span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+<span class="k">BEGIN</span> 
+ <span class="k">UPDATE</span> <span class="n">emplyess</span>
+ <span class="k">SET</span> <span class="n">emp_name</span> <span class="o">=</span> <span class="n">emp_name</span>
+ <span class="k">where</span> <span class="n">department_id</span> <span class="o">=</span> <span class="n">vn_department_id</span><span class="p">;</span>
+
+ <span class="n">DBMS_OUTPUT</span><span class="p">.</span><span class="n">PUT_LINE</span><span class="p">(</span><span class="k">SQL</span><span class="o">%</span><span class="n">ROWCOUNT</span><span class="p">);</span> <span class="c1">-- oracle</span>
+ <span class="k">COMMIT</span><span class="p">;</span>
+<span class="k">END</span>
+</code></pre></div></div>
+<p>묵시적 커서 속성</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">속성명</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">SQL%FOUND</td>
+      <td style="text-align: center">결과 집합의 패치 로우 수가 1 이상이면 TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SQL%NOTFOUND</td>
+      <td style="text-align: center">결과 집합의 패치 로우 수가 0이면 TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SQL%ROWCOUNT</td>
+      <td style="text-align: center">영향 받은 결과 집합의 로우 수 반환, 없으면 0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SQL%ISOPEN</td>
+      <td style="text-align: center">묵시적 커서는 항상 FALSE 반환( 이 속성으로 참조할 때는 이미 묵시적 커서는 닫힌 상태 )</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>b.명시적 커서
+커서 선언 - 커서 열기 - 패치 단게에서 커서 사용 - 커서 닫기</p>
+
+<ol>
+  <li>
+    <p>커서 선언</p>
+
+    <p>묵시적 커서와 달리 명시적 커서는 선언해야 한다. 명시적 커서는 결과 데이터 집합을 로우별로 참조하는 용도이므로 SELECT 문을 사용할 것이다.</p>
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">CURSOR</span> <span class="err">커서명</span> <span class="p">[(</span><span class="err">매개변수</span><span class="mi">1</span><span class="p">,</span> <span class="p">...</span><span class="mi">2</span><span class="p">)]</span> 
+     <span class="k">IS</span>
+ <span class="k">SELECT</span> <span class="p">...;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>커서 열기
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">OPEN</span> <span class="err">커서명</span> <span class="p">[(</span><span class="err">매개변수</span><span class="mi">1</span><span class="p">,</span> <span class="p">...</span><span class="mi">2</span><span class="p">)];</span>
+</code></pre></div>    </div>
+  </li>
+  <li>패치에서 커서 사용
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">LOOP</span>
+  <span class="k">FETCH</span> <span class="err">커서명</span> <span class="k">INTO</span> <span class="err">변수</span> <span class="mi">1</span><span class="p">,</span> <span class="p">...;</span>
+  <span class="n">EXIT</span> <span class="n">WEHN</span> <span class="err">커서명</span><span class="o">%</span><span class="n">NOTFOUND</span><span class="p">;</span>
+ <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>커서 닫기
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">CLOSE</span> <span class="err">커서명</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>ex)</p>
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">FOR</span> <span class="n">record</span> <span class="k">IN</span> <span class="n">cursorName</span> <span class="p">(</span><span class="err">매개변수</span><span class="p">)</span>
+     <span class="n">LOOP</span>
+         <span class="n">executtion</span><span class="p">;</span>
+     <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="2-커서-변수">2. 커서 변수</h3>
+<p>명시적 커서의 이름은 상수이다. 한 번 할당하면 다른 값으로 바꿀 수 없다. 대신 커서 변수라는 것이 있다.</p>
+<ul>
+  <li>한 개 이상의 쿼리를 연결해서 사용할 수 있다.</li>
+  <li>변수처럼 커서 변수를 함수나 프로시저의 매개변수로 전달할 수 있다.</li>
+  <li>커서 속성을 사용할 수 있다.</li>
+</ul>
+
+<ol>
+  <li>커셔 변수 선언
+    <ol>
+      <li>참조용 커서 타입을 생성하고 선언
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">TYPE</span> <span class="err">커서</span> <span class="err">타입명</span> <span class="k">IS</span> <span class="k">REF</span> <span class="n">CUSOR</span> <span class="p">[</span><span class="k">RETURN</span> <span class="err">반환타입</span><span class="p">];</span>
+<span class="err">커서</span> <span class="err">변수명</span> <span class="err">커서</span> <span class="err">타입명</span><span class="p">;</span>
+</code></pre></div>        </div>
+        <ul>
+          <li>RETURN을 생략하면 약한 커서 타입/ 반대는 강한 커서 타입이라고 한다.
+            <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">TYPE</span> <span class="n">dep_curtype</span> <span class="k">IS</span> <span class="k">REF</span> <span class="k">CURSOR</span> <span class="k">RETURN</span> <span class="n">departments</span><span class="o">%</span><span class="n">ROWTYPE</span><span class="p">;</span>
+<span class="k">TYPE</span> <span class="n">dep_curtype</span> <span class="k">IS</span> <span class="k">REF</span> <span class="k">CURSOR</span><span class="p">;</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+      <li>커서 변수 사용 (커서 변수와 쿼리문 연결)
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">OPEN</span> <span class="err">커서변수명</span> <span class="k">FOR</span> <span class="k">select</span> <span class="err">문</span><span class="p">;</span> <span class="p">(</span><span class="err">강한</span> <span class="err">타입은</span> <span class="k">RETURN</span> <span class="err">타입과</span> <span class="err">맞춰야한다</span><span class="p">.</span> <span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>커서 변수에서 결과 집합 가져오기
+        <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FETCH</span> <span class="err">커서</span> <span class="err">변수명</span> <span class="k">INTO</span> <span class="err">변수</span><span class="mi">1</span><span class="p">,</span> <span class="err">변수</span><span class="mi">2</span><span class="p">...;</span>
+<span class="k">FETCH</span> <span class="err">커서</span> <span class="err">변수명</span> <span class="k">INTO</span> <span class="err">레코드명</span><span class="p">;</span> <span class="p">(</span><span class="err">한</span> <span class="k">row</span><span class="err">만</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>커서 변수를 매개변수로 전달 : 커서도 변수이므로 함수/ 프로시저의 매개변수로 전달할 수 있다.</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="커서-표현식">커서 표현식</h3>
+<p>SELECT 문에 컬럼 형태로 커서를 사용하는 것이다.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="p">(</span>
+        <span class="k">SELECT</span> <span class="n">department_name</span> 
+        <span class="k">FROM</span> <span class="n">departments</span> <span class="n">d</span> 
+        <span class="k">WHERE</span> <span class="n">e</span><span class="p">.</span><span class="n">department_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">department_id</span> 
+       <span class="p">)</span> <span class="k">AS</span> <span class="n">dep_name</span><span class="p">,</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">emp_name</span>
+<span class="k">FROM</span> <span class="n">employees</span> <span class="n">e</span>
+<span class="k">WHERE</span> <span class="n">e</span><span class="p">.</span><span class="n">department_id</span> <span class="o">=</span> <span class="mi">90</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="레코드">레코드</h2>
+<p>PL/SQL에서 제공하는 데이터 타입 중 하나로, 문자형, 숫자형 같은 기본 빌트인 타입과 달리 복합형 구조이다. 일반 빌트인 타입으로 변수를 선언하면
+해당 변수는 한 번에 하나의 값만 가질 수 있지만, 레코드는 여러 개의 값을 가질 수 있다.</p>
+
+<p>레코드는 선언 방식에 따라 커서형, 사용자 정의형, 테이블형 레코드로 나눌 수 있다.</p>
+<ol>
+  <li>사용자 정의형 : 테이블과 비슷한 구조인데 테이블의 컬럼에 해당하는 것을 필드라고 한다.</li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">TYPE</span> <span class="err">레코드명</span> <span class="k">IS</span> <span class="n">RECORD</span> <span class="p">(</span>
+     <span class="n">field1_Name</span> <span class="n">field1_Type</span> <span class="p">[[</span><span class="k">NOT</span> <span class="k">NULL</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">defaultValue</span><span class="p">],</span>
+     <span class="n">field2_Name</span> <span class="n">field2_Type</span> <span class="p">[[</span><span class="k">NOT</span> <span class="k">NULL</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">defaultValue</span><span class="p">],</span>
+ <span class="p">);</span>
+     
+  <span class="n">recordVariable</span> <span class="n">recordName</span><span class="p">;</span>
+      
+   <span class="k">DECLARE</span>
+   
+      <span class="k">TYPE</span> <span class="n">depart_rect</span> <span class="k">IS</span> <span class="n">RECORD</span> <span class="p">(</span>
+          <span class="n">department_id</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+          <span class="n">department_name</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+      <span class="p">)</span>
+       
+      <span class="n">vr_dep</span> <span class="n">departRect</span><span class="p">;</span>
+   <span class="k">BEGIN</span> 
+   <span class="p">...</span>
+   <span class="k">END</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>테이블형 레코드 : 특정 테이블의 컬럼 값을 받아오는 변수를 선언할 때 사용할 수 있다.</li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- 컬럼 값을 받아오는 변수 선언</span>
+    <span class="err">변수명</span> <span class="err">테이블명</span><span class="p">.</span><span class="err">컬럼명</span><span class="o">%</span><span class="k">TYPE</span><span class="p">;</span>
+        
+<span class="c1">-- 테이블의 모든 컬럼을 받아 사용하는 레코드</span>
+    <span class="err">레코드</span> <span class="err">변수명</span> <span class="err">테이블명</span><span class="p">.</span><span class="o">%</span><span class="n">ROWTYPE</span><span class="p">;</span>
+        
+  <span class="k">DECLARE</span>
+    <span class="n">vr_dep</span> <span class="n">departments</span><span class="o">%</span><span class="n">ROWTYPE</span><span class="p">;</span>
+  <span class="k">BEGIN</span> 
+    <span class="k">SELECT</span> <span class="o">*</span> <span class="k">INTO</span> <span class="n">vr_dep</span> 
+    <span class="k">FROM</span> <span class="n">departments</span>
+    <span class="k">WHERE</span> <span class="n">department_id</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ch11_dep2</span> <span class="k">values</span> <span class="n">v_dep</span><span class="p">;</span>
+
+    <span class="k">COMMIT</span><span class="p">;</span>
+  <span class="k">END</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>커서형 레코드 : 커서를 레코드 변수르 받는 것을 커서형 레코드라고 한다.</li>
+</ol>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">DECLARE</span>
+   <span class="k">CURSOR</span> <span class="n">c1</span> <span class="k">IS</span>
+   <span class="k">SELECT</span> <span class="n">department_id</span><span class="p">,</span> <span class="n">department_name</span><span class="p">,</span> <span class="n">parent_id</span><span class="p">,</span> <span class="n">manager_id</span>
+   <span class="k">FROM</span> <span class="n">departments</span><span class="p">;</span>
+
+   <span class="n">vr_dep</span> <span class="n">c1</span><span class="o">%</span><span class="n">ROWTYPE</span><span class="p">;</span>
+       
+   <span class="k">BEGIN</span> 
+        <span class="k">DELETE</span> <span class="n">ch11_dep</span><span class="p">;</span>
+        
+        <span class="k">OPEN</span> <span class="n">c1</span><span class="p">;</span>
+        
+        <span class="n">LOOP</span>
+            <span class="k">FETCH</span> <span class="n">c1</span> <span class="k">INTO</span> <span class="n">vr_dep</span><span class="p">;</span>
+            <span class="n">EXIT</span> <span class="k">WHEN</span> <span class="n">c1</span><span class="o">%</span><span class="n">NOTFOUND</span><span class="p">;</span>
+            <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ch11_dep</span> <span class="k">VALUES</span> <span class="n">vr_dep</span><span class="p">;</span>
+        <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+            
+        <span class="k">COMMIT</span><span class="p">;</span>
+   <span class="k">END</span><span class="p">;</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/22/mysql-series-09-Exception_Transaction.html">
+        [mysql Series] 09 Exception_transaction
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mysql/2024/05/22/mysql-series-11-TemporaryTable.html">
+        [mysql Series] 11 Temporarytable
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

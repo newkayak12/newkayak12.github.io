@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mysql Series] 04 Operatorandexpression | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Operator and Expressions">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mysql/2024/05/22/mysql-series-04-OperatorAndExpression.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mysql Series] 04 Operatorandexpression</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/sql/04.OperatorAndExpression.md">Dictionary - Operator and Expressions</a></p>
+
+<h1 id="연산자">연산자</h1>
+<ol>
+  <li>수식 연산자 : +, -, *, /</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>문자 연산자 :</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>논리 연산자 : &gt;, &lt;, &gt;=, &lt;=, =, &lt;&gt;, !=, ^=</li>
+  <li>집한 연산자 : UNION, UNION ALL, INTERSECT, MINUS</li>
+</ol>
+
+<h1 id="표현식">표현식</h1>
+<p>한 개 이상의 값과 연산자, SQL 함수 등이 결합된 식</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">condition1</span> <span class="k">THEN</span> <span class="n">value1</span>
+     <span class="k">WHEN</span> <span class="n">condition2</span> <span class="k">THEN</span> <span class="n">value2</span>
+    
+    <span class="p">...</span>
+    
+    <span class="k">ELSE</span> <span class="n">otherValue</span>
+<span class="k">END</span>
+</code></pre></div></div>
+
+<h1 id="조건식">조건식</h1>
+<p>한 개 이상의 표현식과 논리 연산자가 결합된 식 TRUE/ FALSE/ UNKNOWN 세 가지 타입을 반환한다.</p>
+
+<h2 id="비교-조건식">비교 조건식</h2>
+<p>논리 연산자나 ANY, SOME, ALL 키워드로 비교하는 조건식</p>
+
+<h2 id="null-조건식">NULL 조건식</h2>
+
+<h2 id="between-and-조건식">BETWEEN AND 조건식</h2>
+
+<h2 id="in-조건식">IN 조건식</h2>
+
+<h2 id="exist-조건식">EXIST 조건식</h2>
+
+<h2 id="like-조건식">LIKE 조건식</h2>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mysql/2024/05/22/mysql-series-03-SQL.html">
+        [mysql Series] 03 Sql
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mysql/2024/05/22/mysql-series-05-Function.html">
+        [mysql Series] 05 Function
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

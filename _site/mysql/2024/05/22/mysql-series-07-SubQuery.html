@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mysql Series] 07 Subquery | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Subquery">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mysql/2024/05/22/mysql-series-07-SubQuery.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mysql Series] 07 Subquery</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/sql/07.SubQuery.md">Dictionary - Subquery</a></p>
+
+<h1 id="subquery">SubQuery</h1>
+<p>SQL 문장 안에서 보조로 사용되는 또 다른 SELECT문을 의미한다.</p>
+<ol>
+  <li>메인 쿼리와의 연관성에 따라
+    <ol>
+      <li>연관성 없는 (Noncorrelated) 서브쿼리 : 메인 테이블과 조인 조건이 걸리지 않는 경우</li>
+      <li>연관성이 있는 서브 쿼리  : 메인 테이블과 연관성이 있는 서브 쿼리 ( 세미 조인 )</li>
+    </ol>
+  </li>
+  <li>형태에 따라
+    <ol>
+      <li>일반 서브 쿼리( SELECT )</li>
+      <li>인라인뷰 ( FROM )</li>
+      <li>중첩 쿼리 ( WHERE )</li>
+    </ol>
+  </li>
+</ol>
+
+<p>서브쿼리가 너무 복잡해진다면 WITH 절로 가상테이블을 만들어서 처리할 수도 있다.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span> <span class="p">(</span>
+        <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">kor_loan_status</span>
+     <span class="p">)</span> <span class="n">b</span><span class="p">;</span>
+
+<span class="c1">-- WITH 사용</span>
+<span class="k">WITH</span> <span class="n">b</span> <span class="k">AS</span> <span class="p">(</span>   <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">kor_loan_status</span>  <span class="p">);</span>
+<span class="k">SELECT</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">b</span><span class="p">;</span>
+     
+     
+     
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mysql/2024/05/22/mysql-series-06-Join.html">
+        [mysql Series] 06 Join
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mysql/2024/05/22/mysql-series-08-PL_SQL.html">
+        [mysql Series] 08 Pl_sql
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
