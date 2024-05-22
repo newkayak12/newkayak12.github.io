@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 13 Tree | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Linux fileTree">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-13-Tree.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 13 Tree</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/Tree.md">Dictionary - Linux fileTree</a></p>
+
+<h1 id="linux">Linux</h1>
+<p><img src="/assets/img/fileTree.png" alt="" /></p>
+
+<h2 id="bin-sbin">bin, sbin</h2>
+<ul>
+  <li>bin : user command binaries -&gt; 커맨드 라인 인터페이스 관련된 명령어 실행 파일을 포함 ( ex. <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">cd</code>, <code class="language-plaintext highlighter-rouge">ls</code> … )</li>
+  <li>sbin : system command binaries -&gt; 시스템을 컨트롤하기 위한 파일들 ( ex. <code class="language-plaintext highlighter-rouge">systemctl</code>, <code class="language-plaintext highlighter-rouge">reboot</code>)</li>
+</ul>
+
+<p>연관된 디렉토리 종류는 usr/bin, usr/sbin, usr/local/bin, usr/local/sbin</p>
+
+<ul>
+  <li>bin: cd, ls 등의 사용자 커맨드 파일이 위치한 디렉토리 (필수적인 파일만 관리)</li>
+  <li>sbin: systemctl 등의 시스템 커맨드 파일이 위치한 디렉토리 (필수적인 파일만 관리)</li>
+  <li>usr/bin: 필요에 의해 설치된 사용자 커맨드 파일이 위치한 디렉토리 (yum 등 패키지 관리자가 관리)</li>
+  <li>usr/sbin: 필요에 의해 설치된 시스템 커맨드 파일이 위치한 디렉토리 (yum 등 패키지 관리자가 관리)</li>
+  <li>usr/local/bin: 기타 사용자 커맨드 파일이 위치한 디렉토리 (사용자 또는 설치 파일이 해당 디렉토리에 파일 설치)</li>
+  <li>usr/local/sbin: 기타 시스템 커맨드 파일이 위치한 디렉토리 (사용자 또는 설치 파일이 해당 디렉토리에 파일 설치)</li>
+</ul>
+
+<h2 id="path">PATH</h2>
+<p>OS 어디서든 해당 위치에 접근할 수 있게 만드는 환경변수이다. 위의 6개 디렉토리는 모두 환경 변수에 등록되어 있어서 해당 폴더들 내부에 있다면
+바로 명령어로 실행할 수 있다.</p>
+
+<h2 id="lib-lib64">lib, lib64</h2>
+<p>lib, lib64는 시스템 부팅이나 bin, sbin 디렉토리에 있는 바이너리 파일들 실행에 필요한 공유 라이브러리 디렉토리다.</p>
+
+<h2 id="etc">etc</h2>
+<p>etc는 설정 파일을 관리한다. <code class="language-plaintext highlighter-rouge">.d</code>를 붙여서 디렉토리인 것을 구별하기도 하는 경우가 있다. 설정 파일은 <code class="language-plaintext highlighter-rouge">.conf</code>라는 이름의 형식으로 많이 관리 되어 있다.</p>
+
+<h2 id="var">var</h2>
+<p>variable data를 뜻한다. 시스템 로그나 웹 로그 파일들을 포함한다.</p>
+
+<h2 id="usr">usr</h2>
+<p>universal system resource 혹은 user의 약자라고 하기도 한다. 리눅스의 여러 사용자들이 공유하는 파일들을 관리한다.</p>
+
+<h2 id="opt">opt</h2>
+<p>optional을 의미한다.</p>
+
+<h2 id="home-root">home, root</h2>
+<p>home은 개별 사용자의 디렉토리를 관리하는 디렉토리다. 만약 ec2-user라는 이름의 사용자를 만들면 <code class="language-plaintext highlighter-rouge">/home/ec2-user</code>라는 디렉토리가 생성된다.</p>
+
+<h2 id="fhs-filesystem-hierarchy-standard----기타-디렉토리">FHS( Filesystem Hierarchy Standard ) - 기타 디렉토리</h2>
+
+<h3 id="media-mnt">media, mnt</h3>
+<p>시스템이 마운팅되는 디렉토리 <code class="language-plaintext highlighter-rouge">media</code>는 os가 관리하는 디렉토리 <code class="language-plaintext highlighter-rouge">mnt</code>는 커맨드라인으로 마운트하는 디렉토리</p>
+
+<h3 id="boot">boot</h3>
+<p>부팅에 필요한 파일들을 포함하는 디렉토리</p>
+
+<h3 id="dev">dev</h3>
+<p>마우스 등 디바이스 관련 파일이 존재하는 디렉토리</p>
+
+<h3 id="sys">sys</h3>
+<p>디바이스를 관리하기 위한 가상 파일 시스템 디렉토리</p>
+
+<h3 id="proc">proc</h3>
+<p>현재 실행 중인 프로세스에 대한 정보를 관리하는 디렉토리</p>
+
+<h3 id="run">run</h3>
+<p>Run-time variable data를 관리한다. 부팅 후 시스템 정보를 관리하는 디렉토리</p>
+
+<h3 id="srv">srv</h3>
+<p>FTP, WWW 또는 CVS(???) 같은 특정 서비스의 데이터 파일 위치를 포함한 디렉토리</p>
+
+<h3 id="tmp">tmp</h3>
+<p>임시 파일을 저장하기 위한 디렉토리 재부팅 시 삭제, 정기적으로 10일 정도 간격으로 삭제된다.</p>
+
+<h3 id="lostfound">lost+found</h3>
+<p>파일 시스템의 복구에 사용되는 데이터 조각들을 포함하고 있다. 재부팅이나 파일 시스템 체크 커맨드 등을 이용할 때 참조</p>
+
+<hr />
+<p>https://inpa.tistory.com/entry/LINUX-📚-리눅스-디렉토리-구조#</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/21/linux-series-12-SystemInfo.html">
+        [linux Series] 12 Systeminfo
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/linux/2024/05/21/linux-series-14-ViEditor.html">
+        [linux Series] 14 Vieditor
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

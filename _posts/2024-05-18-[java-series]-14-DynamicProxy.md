@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 다이나믹 프록시](https://github.com/newkayak12/Dictionary/blob/master/java/14.DynamicProxy.md)
 
 # Dynamic Proxy

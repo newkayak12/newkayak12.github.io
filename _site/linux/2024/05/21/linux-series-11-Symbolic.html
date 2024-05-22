@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 11 Symbolic | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Symbolic link">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-11-Symbolic.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 11 Symbolic</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/Symbolic.md">Dictionary - Symbolic link</a></p>
+
+<h2 id="hardlink-vs-symbolic-linksoftlink">HardLink vs. Symbolic Link(softLink)</h2>
+
+<p>먼저 리눅스에는 <code class="language-plaintext highlighter-rouge">inode</code>라는 개념이 있다. <code class="language-plaintext highlighter-rouge">inode</code>는 유닉스 계통의 파일 시스템에서 사용하는 자료구ㄷ조이다. 
+모든 파일과 디렉토리는 <code class="language-plaintext highlighter-rouge">inode</code>를 가지고 있다. 그리고 여기에는 파일의 허가권, 소유권, 파일의 실제 위치 등 중요한 정보들이 있다.
+<img src="/assets/img/inode.png" alt="" />
+<code class="language-plaintext highlighter-rouge">inode</code>는 실제 파일 내용을 갖고 있는 것이 아니라 파일의 내용을 갖고 있는 주소를 포함한다.</p>
+
+<pre><code class="language-ubuntu">776844 app  388947 config  259817 cronLog  389047 file  260194 homebridge  128107 pi  260893 projects
+pi@ubuntu:/home$
+</code></pre>
+
+<h3 id="hardlink">HardLink</h3>
+<p>하드 링크는 원본 파일과 동일한 inode를 직접적으로 가리킨다. 따라서 원본 파일이 사라지더라도 데이터만 살아 있다면 
+원본 파일에 접근 가능하다.</p>
+
+<ul>
+  <li>동일한 파일 시스템 내에서만 하드 링크 생성 가능</li>
+  <li>디렉터리 링크 불가능</li>
+  <li>대상파일과 동일한 inode 번호와 허가권을 가짐</li>
+  <li>대상 파일을 옮기거나 삭제해도 대상 파일을 참조한다.</li>
+  <li>소프트링크는 원본의 존폐에 따라 사용할 수 있지만 하드링크는 원본이 삭제되더라도 원본과 동일한 내용의 파일을 가지므로 자원을 공유하면서도 데이터를 안전하게 관리하고자
+할 때 사용한다.</li>
+</ul>
+
+<div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 하드링크 생성</span>
+$ ln [대상파일] [하드링크파일]
+</code></pre></div></div>
+
+<h3 id="symbolicsoft-link">Symbolic(soft) link</h3>
+<p>심볼릭 링크는 생성하면 또 다른 inode를 생성해서 이를 바라본다.</p>
+<ul>
+  <li>심볼릭 링크는 하드 링크의 단점을 보완하려고 탄생</li>
+  <li>파일 시스템과 대상 파일이 존재하는 파일 시스템이 달라도 생성 가능하다.</li>
+  <li>하드 링크는 파일만 참조 가능하고 디렉토리는 참조 불가하지만 심볼릭 링크는 가능하다.</li>
+  <li>대상 파일과 심볼릭 링크 파일은 서로 inode 번호와 파일 허가권이 다르다.</li>
+  <li>대상 파일의 inode가 아닌 이상 파일의 데이터 경로만을 참조</li>
+  <li>원본이 존폐 여부에 영향을 받는다.</li>
+  <li>파일 종류 l로 시작한다.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 심볼릭 링크 생성
+$ ln -s [대상파일] [심볼릭링크파일]
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/linux/2024/05/21/linux-series-10-Status.html">
+        [linux Series] 10 Status
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/21/linux-series-12-SystemInfo.html">
+        [linux Series] 12 Systeminfo
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

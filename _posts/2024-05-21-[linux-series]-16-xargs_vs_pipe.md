@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - xars vs. pipe](https://github.com/newkayak12/Dictionary/blob/master/linux/xargs_vs_pipe.md)
 
 # xars vs. pipe

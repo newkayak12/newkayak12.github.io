@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Compress](https://github.com/newkayak12/Dictionary/blob/master/linux/Compress.md)
 
 ## tar/ Compress/ gzip/ bzip2/ xz/ zip

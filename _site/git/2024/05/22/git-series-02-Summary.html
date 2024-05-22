@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[git Series] 02 Summary | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Summary">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/git/2024/05/22/git-series-02-Summary.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[git Series] 02 Summary</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/git/02.Summary.md">Dictionary - Summary</a></p>
+
+<h1 id="config">config</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># 현재 위치에서 지역 저장소를 생성</span>
+<span class="nv">$ </span>git init
+
+ <span class="c"># 깃 환경에서 사용자 이름을 [사용자명]으로 지정</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"[사용자명]"</span>
+
+ <span class="c"># 깃 환경에서 사용자 이메일을 [사용자이메일명]으로 지정</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"[사용자이메일명]"</span>
+
+</code></pre></div></div>
+
+<h1 id="stage">stage</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># [파일명.확장자명]을 스테이지에 올림</span>
+<span class="nv">$ </span>git add <span class="o">[</span>파일명.확장자명]
+
+  <span class="c"># 상태를 확인</span>
+<span class="nv">$ </span>git status
+
+  <span class="c"># 파일 add 취소</span>
+<span class="nv">$ </span>git restore <span class="nt">--staged</span> 파일명
+
+  <span class="c"># 전체 add 취소</span>
+<span class="nv">$ </span>git reset HEAD
+</code></pre></div></div>
+<h1 id="commit">commit</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 커밋 메시지 [메시지명]을 붙여 커밋</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"[메시지명]"</span>
+<span class="nv">$ </span>git commit <span class="nt">-am</span> <span class="s2">"[메시지명]"</span> <span class="c"># 스테이징과 커밋을 동시에 진행</span>
+
+
+  <span class="c"># 최근 순서대로 커밋을 취소</span>
+<span class="nv">$ </span>git reset HEAD^ <span class="c"># 현재 HEAD의 이전 커밋으로 되돌리기</span>
+<span class="nv">$ </span>git reset HEAD~n <span class="c"># 현재로 부터 n 번째 이전 커밋으로 되돌리기</span>
+
+
+  <span class="c"># 롤백할 커밋을 지정</span>
+<span class="nv">$ </span>git reset <span class="o">[</span>커밋 해시]
+
+<span class="c"># - reset의 3가지 옵션</span>
+<span class="nv">$ </span>git reset <span class="nt">--soft</span> <span class="o">[</span>커밋ID]  <span class="c"># head 만 바뀜</span>
+<span class="nv">$ </span>git reset <span class="nt">--mixed</span> <span class="o">[</span>커밋ID] <span class="c"># staging 도 그 때로 바뀜</span>
+<span class="nv">$ </span>git reset <span class="nt">--hard</span> <span class="o">[</span>커밋ID] <span class="c"># working디렉토리/staging 모두 그 때로 바꿈 </span>
+
+
+  <span class="c"># 커밋을 삭제하지않고 이전 커밋을 새로 복사 추가하는 식으로 롤백</span>
+<span class="nv">$ </span>git revert <span class="o">[</span>커밋 해시] <span class="c"># 해당 커밋 이전상태로 되돌린다라는 명령</span>
+
+
+  <span class="c"># 커밋 수정하는 법</span>
+<span class="c"># ... 파일 수정 한 뒤</span>
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">--amend</span> <span class="c"># 최신 커밋 수정</span>
+</code></pre></div></div>
+
+<h1 id="log">log</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 커밋 내역 확인</span>
+<span class="nv">$ </span>git log           <span class="c"># 전체 이력을 보여준다.</span>
+<span class="nv">$ </span>git shortlog     
+<span class="nv">$ </span>git log <span class="nt">--oneline</span> <span class="c"># 커밋과 커밋 메시지를 조회</span>
+
+<span class="nv">$ </span>git log <span class="nt">-p</span>        <span class="c"># 이력을 보여줄 때, 변경된 데이터도 보여준다.</span>
+<span class="nv">$ </span>git log <span class="o">[</span>filename] <span class="c"># 특정 파일에 대한 이력을 보여준다.</span>
+<span class="nv">$ </span>git log <span class="nt">-p</span> <span class="o">[</span>filename] <span class="c"># 특정 파일의 이력과 변경된 데이터를 보여준다.</span>
+
+<span class="nv">$ </span>git log <span class="nt">--stat</span>    <span class="c"># 커밋마다 파일의 추가/삭제된 통계데이터를 보여줌</span>
+<span class="nv">$ </span>git log <span class="nt">--graph</span>   <span class="c"># 브랜치 분기 및 병합내용을 아스키 그래프로 보여줌</span>
+
+
+  <span class="c"># 특정 커밋 내역 확인</span>
+<span class="nv">$ </span>git show <span class="o">[</span>커밋 <span class="nb">id</span><span class="o">]</span>
+
+
+  <span class="c"># 최근 버전과 작업 폴더의 수정 파일 사이의 차이를 출력</span>
+<span class="nv">$ </span>git diff               <span class="c"># modified 상태의 file과 마지막 commit 비교</span>
+<span class="nv">$ </span>git diff <span class="nt">--staged</span>      <span class="c"># staged 상태의 file과 마지막 commit 비교</span>
+<span class="nv">$ </span>git diff <span class="nt">--color-words</span> <span class="c"># 변경사항을 color 풀하게 비교</span>
+<span class="nv">$ </span>git diff <span class="o">[</span>브랜치이름]    <span class="c"># 현재브랜치와 선택된 브랜치와 차이점 비교</span>
+<span class="nv">$ </span>git diff <span class="o">[</span>이전커밋 <span class="nb">id</span><span class="o">]</span> <span class="o">[</span>이후커밋 <span class="nb">id</span><span class="o">]</span> <span class="c"># 커밋 비교</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">( Alias git config --global alias.graph 'log --oneline --graph --all --decorate' )</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">git log 명령어 예시</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git log</td>
+      <td style="text-align: center">HEAD와 관련된 commit들이 자세하게 나옴</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git log –oneline</td>
+      <td style="text-align: center">간단히 commit 해시와 제목만 보고 싶을 때</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git log –oneline –graph –decorate</td>
+      <td style="text-align: center">HEAD와 관련된 commit들을 조금 더 자세히 보고 싶을 때</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git log –oneline –graph –all –decorate</td>
+      <td style="text-align: center">모든 branch들을 보고 싶을 때 사용하는 명령어</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git log –oneline -n7</td>
+      <td style="text-align: center">내 branch의 최신 commit을 7개만 보고 싶을 때 사용</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="remote">remote</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 원격 저장소에 연결</span>
+<span class="nv">$ </span>git remote add origin <span class="o">[</span>github 레포지 주소]
+
+  <span class="c"># 옵션 종류 보기</span>
+<span class="nv">$ </span>git remote <span class="nt">--help</span>
+
+  <span class="c"># 추가한 원격저장소의 목록 확인 </span>
+<span class="nv">$ </span>git remote
+<span class="nv">$ </span>git remote <span class="nt">-v</span> <span class="c"># 상세히</span>
+
+  <span class="c"># 특정 원격 저장소의 정보를 확인할 수 있다.</span>
+<span class="nv">$ </span>git remote show 이름
+
+  <span class="c"># 원격저장소 이름 변경</span>
+<span class="nv">$ </span>git remote rename 기존이름 변경할이름
+
+  <span class="c"># 원격저장소를 제거</span>
+<span class="nv">$ </span>git remote <span class="nb">rm </span>이름
+
+  <span class="c"># 지역 저장소의 커밋을 맨 처음 원격 저장소에 올리는 경우</span>
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin master
+
+  <span class="c"># -u로 등록한 후에 지역 저장소의 커밋을 원격 저장소에 올리는 경우(업로드)</span>
+<span class="nv">$ </span>git push
+<span class="nv">$ </span>git push origin master
+
+
+  <span class="c"># 원격 저장소의 커밋을 지역 저장소로 가져옴</span>
+<span class="nv">$ </span>git pull origin master
+
+  <span class="c"># 원격 저장소 복제하기</span>
+<span class="nv">$ </span>git clone <span class="o">[</span>원격 저장소 주소]
+
+  <span class="c"># 원격 저장소의 커밋을 가져오기만 하고 merge하지 않는다</span>
+<span class="nv">$ </span>git fetch
+<span class="c"># 이후엔 diff 로 비교</span>
+<span class="nv">$ </span>git diff <span class="nb">test </span>origin/test <span class="c"># 브랜치 이름이 test일 경우 예시</span>
+
+
+  <span class="c"># 원격저장소 삭제(끊기)</span>
+<span class="nv">$ </span>git remote remove origin
+</code></pre></div></div>
+
+<h1 id="remove">remove</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 로컬저장소 원격저장소 둘다 파일 삭제</span>
+<span class="nv">$ </span>git <span class="nb">rm</span> <span class="o">[</span>filename]    
+
+  <span class="c"># 원격저장소 파일만 삭제. 로컬저장소 파일은 냅둠</span>
+<span class="nv">$ </span>git <span class="nb">rm</span> <span class="nt">--cached</span> <span class="o">[</span>filename]
+
+<span class="c"># -rf (recursive, force)</span>
+</code></pre></div></div>
+
+<h1 id="branch">branch</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 브랜치 확인</span>
+<span class="nv">$ </span>git branch               
+
+  <span class="c"># 브랜치 추가 / 삭제</span>
+<span class="nv">$ </span>git branch <span class="o">[</span>branch name]  
+<span class="nv">$ </span>git branch <span class="nt">-d</span> <span class="o">[</span>branch name] <span class="c"># -delete</span>
+
+  <span class="c"># 브랜치로 이동</span>
+<span class="nv">$ </span>git switch <span class="o">[</span>branch name]
+<span class="nv">$ </span>git checkout <span class="o">[</span>branch name]
+
+  <span class="c"># 브랜치 추가하고 바로 이동</span>
+<span class="nv">$ </span>git switch <span class="nt">-c</span> <span class="o">[</span>branch name]
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> <span class="o">[</span>branch name]
+
+
+  <span class="c"># 현재 브랜치에서 다른 브랜치를 merge</span>
+<span class="nv">$ </span>git merge <span class="o">[</span>branch name]
+</code></pre></div></div>
+
+<h1 id="cherry-pick">cherry-pick</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 만일 내가 X 브랜치에 있고</span>
+   <span class="c"># 브랜치 Y의 커밋 중 76ae30ef와 13af32cc만 골라 현재 브랜치인 X에 적용하고 싶을때</span>
+<span class="nv">$ </span>git cherry-pick 76ae30ef 13af32cc
+</code></pre></div></div>
+
+<h1 id="stash">stash</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># staged, modified 상태의 파일을 저장</span>
+<span class="nv">$ </span>git stash     
+
+  <span class="c"># stash로 저장한 리스트를 출력</span>
+<span class="nv">$ </span>git stash list         
+
+  <span class="c"># 가장 최근에 저장한 stash를 반영</span>
+<span class="nv">$ </span>git stash apply      
+<span class="nv">$ </span>git stash apply stash@<span class="o">{</span>1<span class="o">}</span>  <span class="c"># 지정한 stash를 반영</span>
+
+  <span class="c"># 지정한 stash를 삭제</span>
+<span class="nv">$ </span>git stash drop stash@<span class="o">{</span>1<span class="o">}</span>
+
+  <span class="c"># stash를 반영하고 자동 삭제</span>
+<span class="nv">$ </span>git stash pop
+</code></pre></div></div>
+
+<h1 id="tag">tag</h1>
+<ul>
+  <li>light weight 태그 : 단순 커밋 태그용. 커밋을 바로 가리킴</li>
+  <li>annotated 태그 : 태그 메세지도 첨부할수 있어 자체 해시값을 가짐. ^{}이 커밋을 가리킴</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c"># 태그 추가</span>
+<span class="nv">$ </span>git tag <span class="o">[</span>태그이름]           
+<span class="nv">$ </span>git tag <span class="o">[</span>태그이름] <span class="o">[</span>커밋번호]  <span class="c"># 특정 해쉬에 태그 추가</span>
+<span class="nv">$ </span>git tag <span class="nt">-a</span> <span class="o">[</span>태그이름] <span class="o">[</span>커밋번호] <span class="c"># 특정 해쉬에 annotated 태그 추가</span>
+
+
+  <span class="c"># 태그 조회</span>
+<span class="nv">$ </span>git tag
+<span class="nv">$ </span>git tag <span class="nt">-l</span> <span class="s1">'v1.*'</span>  <span class="c"># 와일드카드 패턴으로 검색조회</span>
+<span class="nv">$ </span>git show <span class="o">[</span>태그이름]  <span class="c"># 특정 태그 조회</span>
+<span class="nv">$ </span>git show-ref <span class="nt">--tags</span>  <span class="c"># 해쉬값과 태그 조회</span>
+</code></pre></div></div>
+
+<h1 id="blame">blame</h1>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># git 프로젝트에서 어떤 코드를 누가 수정했는지, 어떤 commit으로 수정이 되었는지 궁금할 때</span>
+
+<span class="c">#  해당 파일에 대한 모든 수정 내역</span>
+<span class="nv">$ </span>git blame &lt;파일명&gt;
+
+<span class="c">#  author name과 timestamp는 출력하지 않음.</span>
+<span class="nv">$ </span>git blame <span class="nt">-s</span> &lt;파일명&gt;
+
+<span class="c">#  description과 수정사항을 보여줌</span>
+<span class="nv">$ </span>git show &lt;커밋번호&gt;
+
+<span class="c">#  파일내용을 start부터 end 라인까지의 수정 내역만 보여줌</span>
+<span class="nv">$ </span>git blame <span class="nt">-L</span> &lt;start,end&gt; &lt;파일명&gt;
+</code></pre></div></div>
+
+<p><cite> https://inpa.tistory.com/entry/GIT-⚡%EF%B8%8F-핵심-명령어-요약-🚩-총정리 </cite></p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/git/2024/05/22/git-series-01-command.html">
+        [git Series] 01 Command
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/git/2024/05/22/git-series-03-Convention.html">
+        [git Series] 03 Convention
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

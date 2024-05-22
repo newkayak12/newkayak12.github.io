@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - memory](https://github.com/newkayak12/Dictionary/blob/master/java/03.Memory.md)
 # Memory (Runtime Data Area)
 

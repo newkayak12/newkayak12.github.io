@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Grep](https://github.com/newkayak12/Dictionary/blob/master/linux/Grep.md)
 # Grep
 

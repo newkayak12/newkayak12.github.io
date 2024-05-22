@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [JAVA_OTHERS]
+---
 from [Dictionary - SOLID](https://github.com/newkayak12/Dictionary/blob/master/java/oop/01.SOLID.md)
 
 # SOLID

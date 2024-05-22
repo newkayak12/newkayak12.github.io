@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Input/ Output](https://github.com/newkayak12/Dictionary/blob/master/linux/Input_Output.md)
 
 # Input/ Output

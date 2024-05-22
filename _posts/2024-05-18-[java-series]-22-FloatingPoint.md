@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Floating point issue](https://github.com/newkayak12/Dictionary/blob/master/issue/FloatingPoint.md)
 
 ## 부동 소수점 관련 문제

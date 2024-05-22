@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Environment](https://github.com/newkayak12/Dictionary/blob/master/linux/Environment.md)
 
 # Environment

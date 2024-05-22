@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - JVM](https://github.com/newkayak12/Dictionary/blob/master/java/02.jvm.md)
 # JVM
 

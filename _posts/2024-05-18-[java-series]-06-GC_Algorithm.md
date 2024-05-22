@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - GC Algorithm](https://github.com/newkayak12/Dictionary/blob/master/java/06.GC_Algorithm.md)
 
 # 가비지 컬렉션 알고리즘

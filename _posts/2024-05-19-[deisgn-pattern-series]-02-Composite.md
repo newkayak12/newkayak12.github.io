@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
 from [Dictionary - Composite](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/02.Composite.md)
 
 # Composite

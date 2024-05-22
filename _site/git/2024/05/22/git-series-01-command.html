@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[git Series] 01 Command | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Command">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/git/2024/05/22/git-series-01-command.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[git Series] 01 Command</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/git/01.command.md">Dictionary - Command</a></p>
+
+<h1 id="log">log</h1>
+<p>git log –all –oneline –graph : 그래프 확인</p>
+
+<h1 id="remote">Remote</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git remote -v</td>
+      <td style="text-align: center">워킹 트리에 등록돼 있는 원격 저장소 목록 노출</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git remote add [remoteName] [remoteUrl]</td>
+      <td style="text-align: center">원격 저장소를 지정한 이름으로 등록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git remote rename [prevName] [newName]</td>
+      <td style="text-align: center">원격 저장소의 이름을 새로운 이름으로 변경</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git remote remove [remoteName]</td>
+      <td style="text-align: center">지정한 원격저장소를 삭제</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="fetch-pull-push">fetch/ pull/ push</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git fetch [remoteName] [branchName]</td>
+      <td style="text-align: center">원격 저장소의 커밋과 브랜치, 태그들의 로컬 저장소를 가져온다.<br /> 워킹 트리의 내용이 변하지 않는다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git pull [remoteName] [branchName]</td>
+      <td style="text-align: center">fetch + merge</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git push [-u remoteName, branchName]</td>
+      <td style="text-align: center">해당 브랜치의 커밋을 원격 저장소로 업로드한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git push [remoteName] –all</td>
+      <td style="text-align: center">로컬 저장소의 모든 브랜치와 커밋들을 한꺼번에 원격저장소로 업로드한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">git push [remoteName] –tags</td>
+      <td style="text-align: center">로컬 저장소의 모든 태그들을 원격 저장소로 업로드한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="clean-working-tree">clean working tree</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git clean  -f -d [file or folderName]</td>
+      <td style="text-align: center">untracked 상태 파일을 삭제한다. 파일 또는 경로 명시하지 않으면 모든 untracked를 정리</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="reset">reset</h1>
+<p>|           command            |                             description                             |
+|:—————————-:|:——————————————————————-:|
+| git reset –hard [checksum]  |         hard reset이라고 부른다. 해당 커밋으로 돌리고 싶을 때 사용, 워킹 트리도 초기화          |
+| git reset –mixed [checksum] |               옵션이 없으면 mixed가 기본, 워킹 트리는 남고 스테이지만 초기화                |
+| git reset –soft [checksum]  | soft reset이라고 부르고 HEAD만 이동한다.  커밋은 돌아가지만 스테이지와 워킹 트리의 내용은 변경되지 않는다. |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">구분</th>
+      <th style="text-align: center">soft</th>
+      <th style="text-align: center">mixed(기본)</th>
+      <th style="text-align: center">hard</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">현재 브랜치 (HEAD)</td>
+      <td style="text-align: center">초기화</td>
+      <td style="text-align: center">초기화</td>
+      <td style="text-align: center">초기화</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">스테이지</td>
+      <td style="text-align: center">남아있음</td>
+      <td style="text-align: center">초기화</td>
+      <td style="text-align: center">초기화</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">워킹트리 변경사항</td>
+      <td style="text-align: center">남아있음</td>
+      <td style="text-align: center">남아있음</td>
+      <td style="text-align: center">초기화</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="reflog">reflog</h1>
+
+<p>reflog는 로컬 저장소의 커밋 또는 브랜치의 변경 사항을 기록해 놓은 로그를 의미한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git reflog [-n 숫자]</td>
+      <td style="text-align: center">relog를 보여주는 명령 -n 숫자로 갯수를 제한해서 볼 수 있다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="amend">amend</h1>
+<p>이건 커밋을 고칠 때는 –amend를 사용하면 된다. 이를 사용하는 경우는</p>
+
+<ul>
+  <li>HEAD가 가리키는 커밋, 즉 현재 커밋을 수정하고 싶을 때</li>
+  <li>커밋 메시지를 바꾸고자 할 때</li>
+  <li>이전 커밋의 파일 내용을 수정하고 싶을 때</li>
+  <li>이전 커밋에 중요 파일을 추가하지 않은 경우</li>
+</ul>
+
+<h1 id="diff">diff</h1>
+
+<p>변경 사항을 비교할 때 사용한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">git diff [a] [b]</td>
+      <td style="text-align: center">a를 토대로 b에 추가된 차이를 보여준다. 옵션을 생략하면 <br />아직 스테이지에 추가되지 않은 변경 사항을 보여주는데, 신규 파일(untracked)는 보여주지 않는다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="git-diff-check">git diff –check</h1>
+<p>공백 문자를 체크하는데 유용하게 사용할 수 있는 명령어다.</p>
+
+<h1 id="-x">-X</h1>
+<p>merge나 rebase에 -X [ours|theirs]를 사용하면 어떤 것을 기준으로 작업할지 정할 수 있다.</p>
+
+<h1 id="rebase--iinteractive">rebase -i[–interactive]</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">command</th>
+      <th style="text-align: left">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">git rebase -i <수정 하려는="" 커밋들의="" 부모="" 커밋=""></수정></td>
+      <td style="text-align: left">HEAD와 지정한 커밋 사이의 커밋들의 히스토리를 수정한다. 옵션으로 지정한 커밋은 수정에서 제외되고 후손들만 편집이 가능하다.<br /> <br /> p( pick ) : 해당 커밋을 그대로 변경 없이 사용 <br /> r( reword ) : 해당 커밋을 사용. 단 커밋 메시지를 편집 <br /> e( edit ) : 해당 커밋을 사용 단 커밋을 수정할 수 있도록 된다. <br /> s( squash ) : 커밋을 사용. 단 내용은 부모 커밋에 합쳐지고 커밋은 사라진 것처럼 보임 <br /> d ( drop ) : 해당 커밋을 제거</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="cherry-pick">cherry-pick</h1>
+<p>git cherry-pick은 다른 브랜치에 있는 특정 커밋을 골라 현재 브랜치에 합칠 때 사용한다.</p>
+
+<h1 id="stash">stash</h1>
+<p>작업 폴더의 변경 내용을 넣어두는 명령어 <code class="language-plaintext highlighter-rouge">git stash</code>를 사용하면 stash 스택(.git/refs/stash)에 저장한다.
+stash는 변경사항을 커밋하기도, 삭제하기도 애매한 상황에서 사용한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">command</th>
+      <th style="text-align: left">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">git stash [-u]</td>
+      <td style="text-align: left">변경 사항을 스택에 저장하고 현재 작업 폴더를 clean 상태로 만든다. -u를 사용하면 untracked도 저장한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash list</td>
+      <td style="text-align: left">stash 리스트를 확인하다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash pop [stash 객체]</td>
+      <td style="text-align: left">stash 스택에 있는 변경사항을 현재 작업 폴더에 반영한다. 반영된 stash는 제거한다. 옵션을 붙이면 해당 객체를 아니면 마지막의 객체를 꺼내온다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash apply [stash 객체]</td>
+      <td style="text-align: left">pop과 유사하지만 스택에서 제거하지는 않는다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash drop [stash 객체]</td>
+      <td style="text-align: left">지정한 stash를 제거한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash clear</td>
+      <td style="text-align: left">스택의 모든 stash를 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">git stash branch [stash 객체]</td>
+      <td style="text-align: left">마지막 체크아웃된 커밋에 stash 내용 반영해서 새로운 브랜치 생성 (테스트 할 떄 유용)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>다른 브랜치에서 작업했을 때?
+git status -u
+git checkout -b temporaryBranch
+git stash pop</p>
+
+</blockquote>
+
+<h1 id="add">add</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">command</th>
+      <th style="text-align: left">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">git add –patch [fileName]</td>
+      <td style="text-align: left">변경 사항의 일부만 커밋하고 싶을 때 사용할 수 있다.<br /><br /> ? : 도움말 <br />y: 현재 변경사항(hunk)를 스테이징 <br />n: 현재 변경 사항을 스테이징 하지 않는다. <br />e: 직접 스테이지에 올릴 내용을 편집<br /> q: 변경 사항을 무시하고 종료</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="untracked-파일-일부-변경-사항-커밋">untracked 파일 일부 변경 사항 커밋</h2>
+<p>| command                | description                                      |
+|:———————–|:————————————————-|
+| git add –N [fileName] | untracked 상태의 파일을 스테이지에 올린다. 단 내용은 올리지 않고 상태만 변경 |</p>
+
+<h2 id="add-interactive--i">add –interactive [-i]</h2>
+<p>add에 인터렉티브한 작업을 선택할 수 있다.</p>
+
+<h1 id="git-blame으로-히스토리-조회">git blame으로 히스토리 조회</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">command</th>
+      <th style="text-align: left">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">git blame [-L &lt;시작줄, 끝줄&gt;] <fileName></fileName></td>
+      <td style="text-align: left">해당 파일을 변경했던 커밋 히스토리를 보여준다. -L로 시작 - 끝 줄을 지정하고 특정 범위만 조회할 수도 있다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="filter-branch로-히스토리-파일-삭제">filter-branch로 히스토리 파일 삭제</h1>
+<p>| command                                                 | description                 |
+|:——————————————————–|:—————————-|
+| git filter-branch –tree-filter ‘rm -f <fileName>' HEAD | HEAD로부터 모든 히스토리에 지정한 파일을 삭제 |</fileName></p>
+
+<h1 id="git-alias">git alias</h1>
+<p>단축 명령어 생성</p>
+
+<p>git config –global alias.st status 
+-&gt; git st (==git status)</p>
+
+<p>git config –global alias.graph “ log –oneline –graph –all “
+-&gt; git graph -n5</p>
+
+<h1 id="global-ignore">global ignore</h1>
+<ol>
+  <li>ignore 생성</li>
+  <li>git conifg –global core.excludesfiles ~/path</li>
+  <li></li>
+</ol>
+
+<h1 id="git-reflog">git reflog</h1>
+<p>checkout, commit들에 대한 내역을 볼 수 있다.
+만일 local에 commit만 하고 reset –hard를 했다면 reflog로 찾아서 git reset –hard [revisionNumber]로 되돌려 놓을 수 있다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/ci/cd/2024/05/22/ci-cd-series-02-Deploy.html">
+        [ci:cd Series] 02 Deploy
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/git/2024/05/22/git-series-02-Summary.html">
+        [git Series] 02 Summary
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 자바 버전별 정보](https://github.com/newkayak12/Dictionary/blob/master/java/01.version_info.md) 
 
 # JDK 1.0 

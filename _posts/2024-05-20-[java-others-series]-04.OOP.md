@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [JAVA_OTHERS]
+---
 from [Dictionary - OOPD](https://github.com/newkayak12/Dictionary/blob/master/java/oop/04.OOP.md)
 
 # OOP ( Object-Oriented Programming )

@@ -1,3 +1,8 @@
+
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Volume](https://github.com/newkayak12/Dictionary/blob/master/linux/Volume.md)
 
 > aws 재시작으로 볼륨 마운트 해제되어서 해결하면서 찾은 

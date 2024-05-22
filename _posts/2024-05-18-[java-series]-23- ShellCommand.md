@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - shellCommand](https://github.com/newkayak12/Dictionary/blob/master/java/23.%20ShellCommand.md)
 
 당시 OOM이 나서 여러 옵션을 건들였었는데 이에 대해서 찾아보고 이를 기록한 문서입니다.

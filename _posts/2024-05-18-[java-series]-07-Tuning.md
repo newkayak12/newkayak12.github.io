@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Tuning](https://github.com/newkayak12/Dictionary/blob/master/java/07.Tuning.md)
 
 # GC Tuning

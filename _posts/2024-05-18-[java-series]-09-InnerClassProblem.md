@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Inner class에서의 문제점](https://github.com/newkayak12/Dictionary/blob/master/java/09.InnerClassProblem.md)
 
 # Inner Class Problem

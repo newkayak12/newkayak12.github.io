@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[git Series] 03 Convention | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Convention">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/git/2024/05/22/git-series-03-Convention.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[git Series] 03 Convention</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/git/03.Convention.md">Dictionary - Convention</a></p>
+
+<h1 id="convention">Convention</h1>
+
+<h2 id="메시지-컨베션">메시지 컨베션</h2>
+<ol>
+  <li>제목과 본문을 한 줄 띄워서 분리하기</li>
+  <li>제목은 영문 기준 50자 이내</li>
+  <li>제목 첫 글자는 대문자</li>
+  <li>제목 끝 <code class="language-plaintext highlighter-rouge">.</code> 금지</li>
+  <li>본문은 무엇, 왜에 맞춰 작성</li>
+</ol>
+
+<blockquote>
+  <p>태그: 제목
+(한 줄 띄우기)
+본문
+(한 줄 띄우기)
+꼬리말</p>
+</blockquote>
+
+<h2 id="태그">태그</h2>
+<p>|     TagName      |                          Description                          |
+|:—————-:|:————————————————————-:|
+|       Feat       |                           새로운 기능 추가                           |
+|       Fix        |                             버그 수정                             |
+|      Design      |                        CSS, UI 디자인 변경                         |
+| !BREAKING CHANGE |                           큰 API 변경                            |
+|     !HOTFIX      |                            HOTFIX                             |
+|      Style       |               코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우                |
+|     Refactor     |                         프로덕션 코드 리팩토링                          |
+|     Comment      |                        필요한 주석 추가 및 변경                         |
+|       Docs       |                             문서 수정                             |
+|       Test       |         테스트 코드, 리펙토링 테스트 코드 추가 (ProductionCode 변경 X)          |
+|      Chore       | 빌드 업무 수정, 패키지 매니저 수정, 패키지 관리자 구성 등 업데이트 (ProductionCode 변경 X) |
+|      Rename      |                          파일/ 폴더명 수정                           |
+|      Remove      |                             파일 삭제                             |</p>
+
+<h2 id="깃-모지">깃 모지</h2>
+<p>| Git moji |  코드   | 설명|
+|:——–:|:—–:|:—-:|
+|    🎨    | :art: |코드의 구조/형태 개선|
+|    ⚡     |:zap:|성능 개선|
+|    🔥    |:fire:|코드/파일 삭제|
+|    🐛    |:bug:|버그 수정|
+|    ✨     |:sparkles:|새 기능|
+|    📝    |:memo:|문서 추가/수정|
+|    💄    |:lipstick:|UI/스타일 파일 추가/수정|
+|    🎉    |:tada:|프로젝트 시작|
+|    ✅     |:white_check_mark:|테스트 추가/수정|
+|    🔒    |:lock:|보안 이슈 수정|
+|    🔖    |:bookmark:|릴리즈/버전 태그|
+|    💚    |:green_heart:|CI 빌드 수정|
+|    📌    |:pushpin:|특정 버전 의존성 고정|
+|    👷    |:construction_worker:|CI 빌드 시스템 추가/수정|
+|    📈    |:chart_with_upwards_trend:|분석, 추적 코드 추가/수정|
+|    ♻     |:recycle:|코드 리팩토링|
+|    ➕     |:heavy_plus_sign:|의존성 추가|
+|    ➖     |:heavy_minus_sign:|의존성 제거|
+|    🔧    |:wrench:|구성 파일 추가/삭제|
+|    🔨    |:hammer:|개발 스크립트 추가/수정|
+|    🌐    |:globe_with_meridians:|국제화/현지화|
+|    💩    |:poop:|똥싼 코드|
+|    ⏪     |:rewind:|변경 내용 되돌리기|
+|    🔀    |:twisted_rightwards_arrows:|브랜치 합병|
+|    📦    |:package:|컴파일된 파일 추가/수정|
+|    👽    |:alien:|외부 API 변화로 인한 수정|
+|    🚚    |:truck:|리소스 이동, 이름 변경|
+|    📄    |:page_facing_up:|라이센스 추가/수정|
+|    💡    |:bulb:|주석 추가/수정|
+|    🍻    |:beers:|술 취해서 쓴 코드|
+|    🗃    |:card_file_box:|데이버베이스 관련 수정|
+|    🔊    |:loud_sound:|로그 추가/수정|
+|    🙈    |:see_no_evil:| .gitignore 추가/수정|</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/git/2024/05/22/git-series-02-Summary.html">
+        [git Series] 02 Summary
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/gradle/2024/05/22/gradle-series-Summary.html">
+        [gradle Series] Summary
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

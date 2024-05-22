@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 자잘한 기록물](https://github.com/newkayak12/Dictionary/blob/master/java/27.Little.md)
 
 # charType -> integer number

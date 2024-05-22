@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
+
 from [Dictionary - Chain Of Responsibility](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/01.ChainOfResponsibility.md)
 # Chain Of Responsibility
 책임 연쇄 패턴(Chain Of Responsibility Pattern, COR)은 클라이어트의 요청에 대한 세세한 처리를 하나의 객체가 몽땅 하는 것이 아닌,

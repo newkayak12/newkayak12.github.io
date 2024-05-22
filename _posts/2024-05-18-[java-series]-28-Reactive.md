@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Reactive](https://github.com/newkayak12/Dictionary/blob/master/java/28.Reactive.md)
 
 # Reactive

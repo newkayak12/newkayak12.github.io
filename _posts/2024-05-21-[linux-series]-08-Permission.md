@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Permission](https://github.com/newkayak12/Dictionary/blob/master/linux/Permission.md)
 > 서버 반영/CICD 작업 중 권한 문제로 고생해서 정리
 

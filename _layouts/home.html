@@ -4,12 +4,16 @@ layout: default
 
 <div class="home">
   {% if site.theme_settings.header_text %}
+
   <div class="call-out"
   style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
     {{ site.theme_settings.header_text }}
   </div>
   {% endif %}
-
+  <div class="fluid-container">
+<!--  <nav>-->
+<!--    {% include categories.html %}-->
+<!--  </nav>-->
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
@@ -31,6 +35,7 @@ layout: default
       </div>
     </div>
     {% endfor %}
+  </div>
   </div>
 
   {% if paginator.total_pages > 1 %}

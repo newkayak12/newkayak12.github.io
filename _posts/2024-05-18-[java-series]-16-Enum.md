@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Enumeration](https://github.com/newkayak12/Dictionary/blob/master/java/16.Enum.md)
 
 # Enumeration

@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Singleton과 훼손](https://github.com/newkayak12/Dictionary/blob/master/java/12.BrokenSingleton.md)
 
 # Singleton

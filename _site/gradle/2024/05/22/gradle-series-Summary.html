@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[gradle Series] Summary | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Gradle Summary">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/gradle/2024/05/22/gradle-series-Summary.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[gradle Series] Summary</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/gradle/Summary.md">Dictionary - Gradle Summary</a></p>
+
+<h1 id="gradle-기본-정리">Gradle 기본 정리</h1>
+
+<h2 id="gradle">Gradle?</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Groovy</code>라는 도메인 언어를 사용하는 빌드 스크립트(태스크로 정의되는)로 정의된 빌드 도구이다. 추가적으로 종속성 관리를 지원한다.</p>
+
+<h2 id="특징">특징</h2>
+<ol>
+  <li>유연성: Java, Kotlin, Android 등 다양한 프로그래밍 언어와 플랫폼을 지원한다.</li>
+  <li>성능 : Maven보다 효율적이며, 증분 빌드를 지원한다.</li>
+  <li>종속성 관리</li>
+  <li>빌드 라이프 사이클 관리 : 컴파일, 테스트, 배포를 위한 패키징까지 빌드 라이프사이클의 모든 단계를 지원</li>
+</ol>
+
+<h2 id="구성">구성</h2>
+<ol>
+  <li>빌드: 소스컴파일, 테스트 실행, 실행 파일 빌드, 배포를 위한 바이너리 패키징 등 소프트웨어 개발의 다양한 단계를 자동화하는 작업 또는 일련의 작업,
+이는 빌드 스크립트에 정의되며, Gradle DSL로 작성되며 보통 <code class="language-plaintext highlighter-rouge">build.gradle</code>로 명명된다.</li>
+  <li>태스크: Gradle의 기본 작업 단위, 고유한 이름을 가질 수 있다.</li>
+  <li>플러그인: 빌드 스크립트에 추가하여 추가 기능을 제공할 수 있게 하는 재사용 가능한 기능
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugins {
+ id 'java'
+}
+</code></pre></div>    </div>
+  </li>
+  <li>구성: 프로젝트를 위한 종속성이 명명된 집합, <code class="language-plaintext highlighter-rouge">compile</code>, <code class="language-plaintext highlighter-rouge">testCompile</code>, <code class="language-plaintext highlighter-rouge">runtime</code>, <code class="language-plaintext highlighter-rouge">testRuntime</code> 등 여러 유형을 지원한다.
+``` groovy
+dependencies {
+ compile ‘junit:junit:5.0.1’ ## 컴파일 단계에서 사용 , deprecated된 구성
+ runtime .. ## 애플리케이션 실행에서 사용, 컴파일에는 중요하지 않지만 애플리케이션 실행에는 필요한 경우
+ implementation … ## 소스코드를 구현하는 데 필요한 종속성에 사용, 컴파일, 런타임에 모두 종속성 사요 가능
+ testImplementation … ## 소스코드를 테스트에 사용</li>
+</ol>
+
+<p>}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5. 레포지토리: 의존성을 다운로드할 수 있는 위치를 명명한다. `mavenCenter()`, `jcenter()`등이 있다.
+6. 프로젝트: 소프트웨어 애플리케이션 또는 구성 요소를 나타내는 엔티
+
+## 빌드 스크립트 구조
+- 태스크: gradle이 실행해야하는 작업을 정의한다. 
+```groovy
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task build(type: Jar) {
+    from sourceSets.main.output
+    archiveBaseName.set(appName)
+    archiveVersion.set(version)
+}
+</code></pre></div></div>
+<ul>
+  <li>소스셋: 소스코드가 포함된 디렉토리를 정의한다.
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sourceSets</span> <span class="o">{</span>
+  <span class="n">main</span> <span class="o">{</span>
+      <span class="n">java</span> <span class="o">{</span>
+          <span class="n">srcDir</span><span class="s1">'src/main/java'</span>
+      <span class="o">}</span>
+      <span class="n">resources</span> <span class="o">{</span>
+          <span class="n">srcDir</span><span class="s1">'src/main/resources'</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="n">test</span> <span class="o">{</span>
+      <span class="n">java</span> <span class="o">{</span>
+          <span class="n">srcDir</span><span class="s1">'src/test/java'</span>
+      <span class="o">}</span>
+      <span class="n">resources</span> <span class="o">{</span>
+          <span class="n">srcDir</span><span class="s1">'src/test/resources'</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="태스크">태스크</h3>
+<ul>
+  <li>javaCompile: 자바 소스 코드를 클래스로 컴파일한다. 소스 및 대상 호환성, 클래스 경로, 종속성 등과 같은 옵션을 지원
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="nf">compileJava</span><span class="o">(</span><span class="nl">type:</span> <span class="n">JavaCompile</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="mf">1.8</span>
+  <span class="n">targetCompatibility</span> <span class="o">=</span> <span class="mf">1.8</span>
+    
+  <span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">srcDirs</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span>
+      <span class="kt">def</span> <span class="n">file</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span>
+      <span class="n">options</span><span class="o">.</span><span class="na">compilerArgs</span> <span class="o">+=</span> <span class="o">[</span><span class="s2">"-classpath"</span><span class="o">,</span> <span class="n">file</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>test: 테스트를 실행한다.
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="nf">test</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Test</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">testClassesDirs</span> <span class="o">=</span> <span class="n">sourceSets</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">output</span><span class="o">.</span><span class="na">classesDirs</span>
+  <span class="n">classpath</span> <span class="o">=</span> <span class="n">sourceSets</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">runtimeClasspath</span>
+  <span class="n">reports</span><span class="o">.</span><span class="na">html</span><span class="o">.</span><span class="na">destination</span> <span class="nf">file</span><span class="o">(</span><span class="s2">"${buildDir}/test-results"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>jar: JAR를 생성한다.
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="nf">buildJar</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Jar</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">'myproject'</span>
+  <span class="n">version</span> <span class="o">=</span> <span class="s1">'1.0'</span>
+  <span class="n">from</span> <span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">output</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>JavaExec: 자파 프로그램 실행
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="nf">runMain</span><span class="o">(</span><span class="nl">type:</span> <span class="n">JavaExec</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">classpath</span> <span class="o">=</span> <span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span><span class="o">.</span><span class="na">runtimeClasspath</span>
+  <span class="n">main</span> <span class="o">=</span> <span class="s1">'com.example.Main'</span>
+  <span class="n">args</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'arg1'</span><span class="o">,</span> <span class="s1">'arg2'</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Copy: 소스 디렉토리에서 대상 디렉토리로 파일 및 디렉토리를 복사한다.
+    <div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="nf">copyFiles</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">from</span> <span class="s1">'src/main/resources'</span>
+  <span class="n">into</span> <span class="s1">'build/resources/main'</span>
+  <span class="n">include</span> <span class="s1">'**/*.properties'</span>
+  <span class="n">filter</span> <span class="o">{</span> <span class="n">line</span> <span class="o">-&gt;</span> <span class="n">line</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s1">'FOO'</span><span class="o">,</span> <span class="s1">'BAR'</span><span class="o">)</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="태스크의-순서">태스크의 순서</h2>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">task</span> <span class="n">myTask</span> <span class="o">{</span>
+    <span class="n">doFirst</span> <span class="o">{</span>
+    <span class="c1">// runs before any other actions</span>
+    <span class="o">}</span>
+    <span class="n">doLast</span> <span class="o">{</span>
+    <span class="c1">// runs after all actions are complete</span>
+    <span class="o">}</span>
+    <span class="n">finalizedBy</span> <span class="n">anotherTask</span>
+    <span class="n">dependsOn</span> <span class="n">someTask</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>someTask -&gt; doFirst -&gt; task -&gt; doLast -&gt; anotherTask 순으로 실행된다.</p>
+
+<h3 id="태스크-옵션">태스크 옵션</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-D</code> : 작업 구성 또는 종료에서 액세스할 수 있는 시스템 속성을 정의</li>
+  <li><code class="language-plaintext highlighter-rouge">-P</code> : 프로젝트 객체 또는 작업의 클로저에서 액세스할 수 있는 프로젝트 속성을 정의</li>
+  <li><code class="language-plaintext highlighter-rouge">-x</code> : 작업을 제외한다.</li>
+</ul>
+
+<h2 id="gradle-properties">Gradle Properties</h2>
+<p>빌드 프로세스의 다양한 측면을 구성하는 데 사용하는 Key:Value 쌍 빌드스크립트 전체에서 액세스할 수 있다.</p>
+
+<p>gradle.properties</p>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">appName</span><span class="o">=</span><span class="n">my</span><span class="o">-</span><span class="n">app</span>
+<span class="n">version</span><span class="o">=</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">java</span><span class="o">.</span><span class="na">home</span><span class="o">=</span><span class="s">/usr/</span><span class="n">share</span><span class="s">/java/</span><span class="n">bin</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/git/2024/05/22/git-series-03-Convention.html">
+        [git Series] 03 Convention
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/apache/2024/05/22/httpd-series-01-ReverseProxy.html">
+        [httpd Series] 01 Reverseproxy
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

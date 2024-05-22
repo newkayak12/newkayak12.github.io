@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Netstat](https://github.com/newkayak12/Dictionary/blob/master/linux/Network.md)
 
 ## Netstat

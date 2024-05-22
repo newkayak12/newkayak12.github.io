@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[java Series] 20 Stringandtokenizer | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Split vs StringTokenizer">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/java/2024/05/18/java-series-20-StringAndTokenizer.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[java Series] 20 Stringandtokenizer</h1>
+    
+    <p class="meta">
+      May 18, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/20.StringAndTokenizer.md">Dictionary - Split vs StringTokenizer</a></p>
+
+<h1 id="split-vs-stringtokenizer">Split vs. StringTokenizer</h1>
+<h2 id="1-split">1. Split</h2>
+<p>정규식을 받는 메소드와, 정규식 + 인덱스를 받는 메소드 두 개가 오버로딩되어 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">String</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">split</span><span class="o">(</span><span class="nc">String</span> <span class="n">regex</span><span class="o">);</span>
+<span class="c1">// 반환을 String 배열로 받는다.</span>
+<span class="c1">// 구분 기호를 문자열이 아닌 정규표현식으로 받는다. (중요)</span>
+
+    <span class="kd">public</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">split</span><span class="o">(</span><span class="nc">String</span> <span class="n">regex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="o">);</span>
+<span class="c1">// 문자열을 정규식에 맞춰서 분리하는데 limit만큼 문자열을 자른다.</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<h2 id="2-stringtokenizer">2. StringTokenizer</h2>
+<p>구분자를 기준으로 토큰이라는 여러 개의 문자열로 잘라내는데 사용한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 문자열을 공백 문자를 구분자로 자르기</span>
+<span class="k">new</span> <span class="nf">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">)</span>
+
+
+<span class="c1">// 문자열을 매개변수로 지정된 구분자(delim)로 자르기</span>
+<span class="c1">// 이때 구분자는 토큰으로 간주되지 않음</span>
+<span class="k">new</span> <span class="nf">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">st</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">)</span>
+
+
+<span class="c1">// 문자열을 매개변수로 지정된 구분자(delim)로 자르기</span>
+<span class="c1">// returnDelims 의 값을 true로하면 구분자도 토큰으로 간주</span>
+<span class="k">new</span> <span class="nf">StringTokenizer</span><span class="o">(</span><span class="nc">String</span> <span class="n">str</span><span class="o">,</span> <span class="nc">String</span> <span class="n">delim</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">returnDelims</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="결론적으로-split-vs-stringtokenizer">결론적으로 split vs. StringTokenizer</h2>
+
+<ul>
+  <li>split 메소드는 String클래스에 속해있는 메소드이고, StringTokenizer는 java.util에 포함되어 있는 클래스이다.</li>
+  <li>구분자를 split는 정규 표현식으로 구분하고, StringTokenizer는 문자로 받는다.</li>
+  <li>split는 결과 값이 문자열 배열이지만, stringtokenizer는 객체이다.</li>
+  <li>split는 빈문자열을 토큰으로 인식하는 반면, StringTokenizer는 빈 문자열을 토큰으로 인식하지 않는다.</li>
+  <li>성능은 split 보다 StringTokenizer 가 좋다.</li>
+  <li>split은 데이터를 토큰으로 잘라낸 결과를 배열에 담아서 반환하기 때문에 StringTokenizer 보다 성능이 떨어진다.</li>
+  <li>그러나 데이터의 양이 많은 경우가 아니라면 별 문제가 되지 않는다.</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/java/2024/05/18/java-series-19-Clone.html">
+        [java Series] 19 Clone
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/java/2024/05/18/java-series-21-YAML.html">
+        [java Series] 21 Yaml
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

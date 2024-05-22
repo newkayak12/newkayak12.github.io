@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 01 Command | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Command">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-01-Command.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 01 Command</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/Command.md">Dictionary - Command</a></p>
+
+<h2 id="history">history</h2>
+<p>이전에 사용했던 명령어들의 내역이 출력됨</p>
+
+<h2 id="ctrl--s-ctrl--q">ctrl + s/ ctrl + q</h2>
+<p><code class="language-plaintext highlighter-rouge">ctrl + s</code> : 터미널의 문자 출력을 중단하는 터미널 제어 키
+<code class="language-plaintext highlighter-rouge">ctrl + q</code> : 제어 해제</p>
+
+<h2 id="tail--f--grep">tail -f | grep</h2>
+<p>grep과 함께 사용하면 의미 있는 행만 표시할 수도 있다.</p>
+
+<h2 id="z-">z-</h2>
+<p>z를 사용하면 tar, gzip으로 압축된 파일을 그대로 읽을 수 있다.
+<code class="language-plaintext highlighter-rouge">zcat</code>, <code class="language-plaintext highlighter-rouge">zmore</code>, <code class="language-plaintext highlighter-rouge">zgrep</code>, <code class="language-plaintext highlighter-rouge">zdiff</code></p>
+
+<h2 id="less">less</h2>
+<p><code class="language-plaintext highlighter-rouge">less</code>는 파일 크기가 클수록 효과를 발휘한다. <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">vi</code>보다 좋은 선택이 될 수 있다. 내부에서 검색어 검색, 페이지 이동, 줄 번호 표시 등을 할 수 있다.</p>
+
+<h2 id="yes-">yes |</h2>
+<p><code class="language-plaintext highlighter-rouge">yes | 명령어</code> 를 사용하면 뒤 명령어에 yes로 자동으로 인식하게 해준다.</p>
+
+<h2 id="grep--pri">grep -Pri</h2>
+<p>특정 텍스트가 포함된 파일이 있는지 한번에 확인하려는 경우</p>
+
+<h2 id="man">man</h2>
+<p><code class="language-plaintext highlighter-rouge">man [명령어]</code>로 메뉴얼 출력 가능하다.</p>
+
+<h2 id="touch">touch</h2>
+<p>파일의 날짜와 시간을 수정하는 명령어
+간혹 0바이트 파일을 만들기 위해서 사용하기도 한다.
+<code class="language-plaintext highlighter-rouge">-t</code> 옵션으로 서버 시간이 아닌 시간을 지정해서 날짜를 변경할 수도 있다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/java_others/2024/05/20/java-others-series-04.OOP.html">
+        [java Others Series] 04.oop
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/linux/2024/05/21/linux-series-02-Compress.html">
+        [linux Series] 02 Compress
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

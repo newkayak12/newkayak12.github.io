@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Linux fileTree](https://github.com/newkayak12/Dictionary/blob/master/linux/Tree.md)
 
 # Linux

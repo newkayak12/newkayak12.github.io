@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[network Series] 02 Tls | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - TLS">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/network/2024/05/22/network-series-02-TLS.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[network Series] 02 Tls</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/network/TLS.md">Dictionary - TLS</a></p>
+
+<h1 id="tlstransport-layer-security">TLS(Transport Layer Security)</h1>
+<h2 id="tls-란">TLS 란</h2>
+<p>전송 계층 보안(TLS)은 인터넷 상의 커뮤니케이션을 위한 개인 정보와 데이터 보안을 용이하게 하기 위해 설계되어 널리 채택된 보안 프로토콜입니다.
+TLS의 주요 사용 사례는 웹 사이트를 로드하는 웹 브라우저와 같이 웹 응용 프로그램과 서버 간의 커뮤니케이션을 암호화하는 것입니다.</p>
+
+<h2 id="어떤-일을-하는가">어떤 일을 하는가?</h2>
+<ul>
+  <li>암호화 : 제3자로부터 전송되는 데이터를 숨깁니다.</li>
+  <li>인증 : 정보를 교환하는 당사자가 요청된 당사자임을 보장합니다.</li>
+  <li>무결성 : 데이터가 위조되거나 변조되지 않았는지 확인합니다.</li>
+</ul>
+
+<h2 id="tls-vs-ssl">TLS vs. SSL</h2>
+<p>TLS는 Netscape가 개발한 SSL(Secure Sockets Layer)이라고 불리는 이전의 암호화 프로토콜에서 발전한 것입니다. 
+TLS 버전 1.0은 SSL 버전 3.1로서 개발을 시작했지만 Netscape와 더 이상 연관이 없음을 명시하기 위해서 발표 전에 프로토콜의 이름이 변경되었습니다.
+이러한 역사 때문에 용어 TLS와 SSL은 가끔 서로 바꿔서 사용됩니다.</p>
+
+<h2 id="tls-vs-https">TLS vs. HTTPS</h2>
+<p>HTTPS는 HTTP 프로토콜 상위에서 TLS 암호화를 구현한 것으로 모든 웹 사이트와 다른 웹 서비스에서 사용됩니다. 
+따라서 HTTPS를 사용하는 웹 사이트는 TLS 암호화를 이용합니다.</p>
+
+<h2 id="tls-인증서란">TLS 인증서란</h2>
+<p>웹 사이트나 응용 프로그램이 TLS를 사용하기 위해서는 원본 서버에 TLS 인증서가 설치되어 있어야 합니다(위에서 설명한 이름 혼동 때문에 이 인증서는 “SSL 인증서”라고도 알려져 있습니다).
+인증 기관이 도메인을 소유한 사람 혹은 비즈니스에게 TLS 인증서를 발행합니다.
+인증서는 서버의 공개 키와 더불어 누가 도메인 소유자인지에 대한 중요한 정보를 포함하며, 이 두 가지는 모두 서버의 신원을 확인하는 데 중요합니다.</p>
+
+<h2 id="어떤-과정으로-작동하는가">어떤 과정으로 작동하는가?</h2>
+<p>TLS 연결은 TLS Handshake로 알려진 일련의 순서를 사용하여 초기화됩니다.
+사용자가 TLS를 사용하는 웹 사이트를 돌아다니면 사용자 장치(클라이언트 장치로도 알려짐)와 웹 서버 간에 TLS Handshake가 시작됩니다.</p>
+
+<p>TLS Handshake 동안 사용자 장치와 웹 서버는 다음과 같은 일을 수행합니다.</p>
+
+<ul>
+  <li>사용할 TLS 버전(TLS 1.0, 1.2, 1.3 등)을 지정합니다</li>
+  <li>사용할 암호 제품군(아래 참고)을 결정합니다</li>
+  <li>서버의 TLS 인증서를 사용하여 서버의 신원을 인증합니다.</li>
+  <li>Handshake가 완료된 후 키 간의 메시지를 암호화하기 위한 세션 키를 생성합니다.</li>
+</ul>
+
+<p>TLS Handshake는 각 커뮤니케이션 세션을 위한 암호 제품군을 구축합니다.
+암호 제품군은 공유된 암호화 키 또는 세션 키와 같은 세부 정보를 명시하는 알고리즘 집합으로 해당 특정 세션에 사용됩니다. 
+공개 키 암호화로 알려진 기술 덕분에 TLS는 암호화되지 않은 채널을 통해 일치하는 세션 키를 설정할 수 있습니다.</p>
+
+<p>Handshake는 또한 인증을 처리하며, 이는 대개 클라이언트에게 신원을 증명하는 서버로 구성됩니다.
+이는 공개 키를 사용하여 수행됩니다. 공개 키는 단방향 암호화를 사용하는 암호화 키로,
+공개 키를 가진 누구나 신뢰성을 보장하기 위해 서버의 개인 키로 암호화된 데이터를 해독할 수 있음을 의미하지만 원래 발신자만 개인 키를 사용해 데이터를 암호화할 수 있습니다.
+서버의 공개 키는 TLS 인증서의 일부입니다.</p>
+
+<p>데이터카 암호화되고 인증되고 나면, 메시지 인증 코드(MAC)와 함께 서명됩니다. 수신자는 데이터의 무결성을 보장하기 위해 MAC를 확인할 수 있습니다. 
+이는 아스피린 병에서 발견할 수 있는 일종의 부정 조작 방지 포장과 같은 것입니다. 
+소비자는 구매할 때 포장이 손상되지 않았으면 아무도 약에 손대지 않았다는 것을 알 수 있습니다.</p>
+
+<p><img src="/assets/img/tls-ssl-handshake.png" alt="" /></p>
+
+<h2 id="tls가-미치는-영향">TLS가 미치는 영향</h2>
+<p>TLS의 최신 버전은 웹 응용 프로그램 성능에 거의 영향을 미치지 않습니다.</p>
+
+<p>TLS 연결을 설정하는 데 수반되는 복잡한 프로세스 때문에 로드 시간과 계산 능력이 소모되어야 합니다. 
+데이터가 전송되기 전에 클라이언트와 서버는 왔다 갔다 몇 번 커뮤니케이션해야 하며, 
+이는 클라이언트와 서버 모두를 위한 메모리뿐만 아니라 웹 응용 프로그램을 위한 귀중한 밀리세컨드의 로딩 시간을 소모합니다.</p>
+
+<p>그러나 대신에 TLS Handshake가 생성한 잠재적인 지연을 완화하는 것을 돕는 기술이 있습니다. 
+하나는 TLS Handshake가 완료되기 전에 서버와 클라이언트가 데이터 전송을 시작하도록 하는 TLS False Start입니다.
+TLS를 빠르게 하기 위한 또 다른 기술은 이전에 커뮤니케이션한 적이 있는 서버와 클라이언트가 간략화된 Handshake를 사용하도록 허용하는 TLS Session Resumption입니다.</p>
+
+<p>이러한 개선 사항은 TLS를 로딩 시간에 현저하게 영향을 미쳐서는 안 되는 매우 빠른 프로토콜로 만드는 데 도움을 주었습니다. TLS와 연관된 계산 비용은 오늘날 표준에 따르면 거의 무시해도 좋은 정도입니다.</p>
+
+<p>2018년에 발표된 TLS 1.3은 TLS를 더 빠르게 만들었습니다. TLS 1.3의 TLS Handshake는 몇 밀리세컨드로 프로세스를 단축하며 2회 왕복 대신 1회 왕복(또는 왔다 갔다하는 커뮤니케이션)만을 요구합니다.
+사용자가 전에 웹 사이트에 연결한 적이 있으면, TLS Handshake는 0회 왕복을 할 수 있으며, 이는 속도를 더 빠르게 할 수 있습니다.</p>
+
+<p><cite>https://www.cloudflare.com/ko-kr/learning/ssl/transport-layer-security-tls/</cite>
+<cite>https://en.wikipedia.org/wiki/Transport_Layer_Security</cite></p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/network/2024/05/22/network-series-01-Subnet.html">
+        [network Series] 01 Subnet
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/network/2024/05/22/nginx-series-01-ReverseProxy.html">
+        [nginx Series] 01 Reverseproxy
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

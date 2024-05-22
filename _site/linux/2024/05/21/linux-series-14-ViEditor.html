@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 14 Vieditor | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - VI">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-14-ViEditor.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 14 Vieditor</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/ViEditor.md">Dictionary - VI</a></p>
+
+<h2 id="vi-vim">VI/ VIM</h2>
+<h2 id="vi-version">vi –version</h2>
+<p>어떤 vi가 설치됐는지 확인할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VIM - Vi IMproved 9.0 <span class="o">(</span>2022 Jun 28, compiled Dec 20 2023 18:58:31<span class="o">)</span>
+macOS version - arm64
+Included patches: 1-2136
+Compiled by root@apple.com
+Normal version without GUI.  Features included <span class="o">(</span>+<span class="o">)</span> or not <span class="o">(</span>-<span class="o">)</span>:
++acl               +file_in_path      +mouse_urxvt       <span class="nt">-tag_any_white</span>
+<span class="nt">-arabic</span>            +find_in_path      +mouse_xterm       <span class="nt">-tcl</span>
++autocmd           +float             +multi_byte        +termguicolors
++autochdir         +folding           +multi_lang        +terminal
+<span class="nt">-autoservername</span>    <span class="nt">-footer</span>            <span class="nt">-mzscheme</span>          +terminfo
+<span class="nt">-balloon_eval</span>      +fork<span class="o">()</span>            +netbeans_intg     +termresponse
+<span class="nt">-balloon_eval_term</span> <span class="nt">-gettext</span>           +num64             +textobjects
+<span class="nt">-browse</span>            <span class="nt">-hangul_input</span>      +packages          +textprop
+++builtin_terms    +iconv             +path_extra        +timers
++byte_offset       +insert_expand     <span class="nt">-perl</span>              +title
++channel           +ipv6              +persistent_undo   <span class="nt">-toolbar</span>
++cindent           +job               +popupwin          +user_commands
+<span class="nt">-clientserver</span>      +jumplist          +postscript        <span class="nt">-vartabs</span>
++clipboard         <span class="nt">-keymap</span>            +printer           +vertsplit
++cmdline_compl     +lambda            <span class="nt">-profile</span>           +vim9script
++cmdline_hist      <span class="nt">-langmap</span>           <span class="nt">-python</span>            +viminfo
++cmdline_info      +libcall           <span class="nt">-python3</span>           +virtualedit
++comments          +linebreak         +quickfix          +visual
++conceal           +lispindent        +reltime           +visualextra
++cryptv            +listcmds          <span class="nt">-rightleft</span>         +vreplace
++cscope            +localmap          <span class="nt">-ruby</span>              +wildignore
++cursorbind        <span class="nt">-lua</span>               +scrollbind        +wildmenu
++cursorshape       +menu              +signs             +windows
++dialog_con        +mksession         +smartindent       +writebackup
++diff              +modify_fname      <span class="nt">-sodium</span>            <span class="nt">-X11</span>
++digraphs          +mouse             <span class="nt">-sound</span>             <span class="nt">-xattr</span>
+<span class="nt">-dnd</span>               <span class="nt">-mouseshape</span>        +spell             <span class="nt">-xfontset</span>
+<span class="nt">-ebcdic</span>            +mouse_dec         +startuptime       <span class="nt">-xim</span>
+<span class="nt">-emacs_tags</span>        <span class="nt">-mouse_gpm</span>         +statusline        <span class="nt">-xpm</span>
++eval              <span class="nt">-mouse_jsbterm</span>     <span class="nt">-sun_workshop</span>      <span class="nt">-xsmp</span>
++ex_extra          +mouse_netterm     +syntax            <span class="nt">-xterm_clipboard</span>
++extra_search      +mouse_sgr         +tag_binary        <span class="nt">-xterm_save</span>
+<span class="nt">-farsi</span>             <span class="nt">-mouse_sysmouse</span>    <span class="nt">-tag_old_static</span>    
+   system vimrc file: <span class="s2">"</span><span class="nv">$VIM</span><span class="s2">/vimrc"</span>
+     user vimrc file: <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.vimrc"</span>
+ 2nd user vimrc file: <span class="s2">"~/.vim/vimrc"</span>
+      user exrc file: <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.exrc"</span>
+       defaults file: <span class="s2">"</span><span class="nv">$VIMRUNTIME</span><span class="s2">/defaults.vim"</span>
+  fall-back <span class="k">for</span> <span class="nv">$VIM</span>: <span class="s2">"/usr/share/vim"</span>
+Compilation: gcc <span class="nt">-c</span> <span class="nt">-I</span><span class="nb">.</span> <span class="nt">-Iproto</span> <span class="nt">-DHAVE_CONFIG_H</span>   <span class="nt">-DMACOS_X_UNIX</span>  <span class="nt">-g</span> <span class="nt">-O2</span> <span class="nt">-U_FORTIFY_SOURCE</span> <span class="nt">-D_FORTIFY_SOURCE</span><span class="o">=</span>1      
+Linking: gcc   <span class="nt">-L</span>/usr/local/lib <span class="nt">-o</span> vim        <span class="nt">-lm</span> <span class="nt">-lncurses</span>  <span class="nt">-liconv</span> <span class="nt">-framework</span> Cocoa           
+</code></pre></div></div>
+<p>예시로 +clipboard 여부에 따라 vi에서 클립보드 사용이 불가할 수도 있다.
+이래서 그냥 대고 복사가 안됐던 것이기도 하다.</p>
+
+<h2 id="vi-내용-삭제-명령어">vi 내용 삭제 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">x</td>
+      <td style="text-align: center">커서가 있는 문자 한글자 삭제 (반대인 del은 윈도우와 똑같다)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">nx</td>
+      <td style="text-align: center">커서가 있는 위치부터 n개의 문자를 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">dw</td>
+      <td style="text-align: center">현재 커서에 있는 한 단어 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">dd</td>
+      <td style="text-align: center">커서가 있는 라인(행) 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ndd</td>
+      <td style="text-align: center">커서가 있는 라인부터 n개의 라인 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">db</td>
+      <td style="text-align: center">커서의 위치에서 거꾸로 한 단어 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">D</td>
+      <td style="text-align: center">커서 오른쪽 행 삭제</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:5,10d</td>
+      <td style="text-align: center">5~10번째 행 삭제</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-되돌리기-명령어">vi 되돌리기 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">u</td>
+      <td style="text-align: center">이전 명령 취소 (되돌리기)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">U</td>
+      <td style="text-align: center">행 변경 사항 취소, 이전의 최종 행 취소</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.</td>
+      <td style="text-align: center">이전 최종 명령 반복</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-복붙-및-이동-명령어">vi 복붙 및 이동 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">yy</td>
+      <td style="text-align: center">커서가 위치한 줄 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Y</td>
+      <td style="text-align: center">행 yank 또는 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yh</td>
+      <td style="text-align: center">커서의 왼쪽 문자 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yl</td>
+      <td style="text-align: center">커서에 위치한 문자 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yi</td>
+      <td style="text-align: center">커서가 위치한 줄과 그 아랫줄 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">yk</td>
+      <td style="text-align: center">커서가 위치한 줄과 그 윗줄 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">p</td>
+      <td style="text-align: center">붙여넣기 (행 위로 삽입)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">P</td>
+      <td style="text-align: center">붙여넣기 (행 아래에 삽입)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:1,2 co 3</td>
+      <td style="text-align: center">1~2행을 3행 다음으로 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:4,5 m 6</td>
+      <td style="text-align: center">4~5행을 6행 위로 이동</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 한줄 복사
+해당 라인에서 'yy' 누르면 캐시에 저장이 된다.
+붙여넣기를 원하는 곳으로 이동하여 'p'를 누르면 커서 다음 라인에 붙여넣기가 된다.
+
+# 블럭 복사
+'v'키를 누른 후 커서를 이동하여 블력을 설정한다.
+(putty의 경우 블럭이 설정되는 모습이 보이나, ssh의 경우 블럭 모습이 나타나지 않으나 실제로는 설정되고 있다.)
+원하는 부분을 블럭으로 설정한 뒤(설정 완료키는 없다) 'y'키를 누르면 캐시에 복사가 된다.
+같은 방법으로 원하는 곳으로 이동하여 'p'를 누르면 커서 다음 라인에 붙여넣기가 된다.
+</code></pre></div></div>
+
+<h2 id="vi-행-번호-표시">vi 행 번호 표시</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:set nu 또는 :set number</td>
+      <td style="text-align: center">에디터의 각 행의 좌측에 행 번호 표시.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:set nonu</td>
+      <td style="text-align: center">에디터의 각 행의 좌측 행 번호 숨기기</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-검색-명령어">vi 검색 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">/{검색할 문자열}</td>
+      <td style="text-align: center">오른쪽 아래 방향으로 문자열 검색</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">?{검색할 문자열}</td>
+      <td style="text-align: center">왼쪽 위 방향으로 문자열 검색</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">n</td>
+      <td style="text-align: center">문자열의 다음으로 계속 검색</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">N</td>
+      <td style="text-align: center">문자열의 이전으로 계속 검색</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-저장-및-종료">vi 저장 및 종료</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:w</td>
+      <td style="text-align: center">변경사항 저장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:w</td>
+      <td style="text-align: center">{파일명}	변경사항 입력한 파일명으로 저장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:wq</td>
+      <td style="text-align: center">변경사항 보관 후 vi 종료.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ZZ</td>
+      <td style="text-align: center">명령과 같음. :w(기록)과 :q(종료) 를 연속적으로 수행.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ZZ</td>
+      <td style="text-align: center">변경사항 보관 후 vi 종료.임시 버퍼의 내용을 vi로 호출할때 사용되었던 파일에 기록한 후 vi를 빠져나옴.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:q!</td>
+      <td style="text-align: center">변경 내용을 저장하지 않고 종료</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:q</td>
+      <td style="text-align: center">작업한게 없으면 그대로 종료</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:e!</td>
+      <td style="text-align: center">마지막으로 저장했던 내용 이후의 수정한 것들을 취소하고 다시 편집상태로</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-내용-바꾸기-명령어">vi 내용 바꾸기 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:s/[대상문자열]/[바꿀문자열]</td>
+      <td style="text-align: center">커서가 위치한 행에서 첫번째로 나오는 대상문자열을 바꿀문자열로 치환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:%s[대상문자열]/[바꿀문자열]</td>
+      <td style="text-align: center">파일 전체에서 모든 대상문자열을 바꿀문자열로 치환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:[범위]s[대상문자열]/[바꿀문자열]</td>
+      <td style="text-align: center">범위 내 모든 각 행에서 첫번쨰로 나오는 대상문자열을 바꿀문자열로 치환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:[범위]s[대상문자열]/[바꿀문자열]g</td>
+      <td style="text-align: center">범위 내 모든 행에서 대상문자열을 바꿀문자열로 치환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:[범위]s[대상문자열]/[바꿀문자열]gc</td>
+      <td style="text-align: center">범위 내 모든 행에서 대상문자열을 바꿀문자열로 바꾸되 수정할 지 여부를 묻는다</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-화면-정리">vi 화면 정리</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Ctrl + l</td>
+      <td style="text-align: center">불필요한 화면정리 후 다시 표시</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi-파일-명령어">vi 파일 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">명령어</th>
+      <th style="text-align: center">설명</th>
+      <th style="text-align: center">ex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:r {파일명}</td>
+      <td style="text-align: center">커서 다음에 파일 삽입</td>
+      <td style="text-align: center">:r test.txt</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:{행번호} r {파일명}</td>
+      <td style="text-align: center">입력한 파일을 입력한 행번호 다음에 삽입</td>
+      <td style="text-align: center">:10 r test.txt</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vi--기타-명령어">vi  기타 명령어</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">문자</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">.</td>
+      <td style="text-align: center">현재 line</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">%</td>
+      <td style="text-align: center">전체 line</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">$</td>
+      <td style="text-align: center">파일 맨끝 line</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1,$</td>
+      <td style="text-align: center">%</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2,3</td>
+      <td style="text-align: center">2 ~ 3 line</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>https://inpa.tistory.com/entry/LINUX-📚-Vi-Vim-에디터-다루기-명령어-💯-정리#vi_내용_삭제_명령어</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/linux/2024/05/21/linux-series-13-Tree.html">
+        [linux Series] 13 Tree
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/21/linux-series-15-Volume.html">
+        [linux Series] 15 Volume
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

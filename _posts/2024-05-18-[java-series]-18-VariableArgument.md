@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 가변인자](https://github.com/newkayak12/Dictionary/blob/master/java/18.VariableArgument.md)
 
 # Variable Argument

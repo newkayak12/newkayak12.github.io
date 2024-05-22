@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 16 Xargs_vs_pipe | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - xars vs. pipe">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-16-xargs_vs_pipe.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 16 Xargs_vs_pipe</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/xargs_vs_pipe.md">Dictionary - xars vs. pipe</a></p>
+
+<h1 id="xars-vs-pipe">xars vs. pipe</h1>
+
+<h2 id="xars">xars</h2>
+<ul>
+  <li>기본적인 명령어 뒤에 파이프로 추가하여 사용</li>
+  <li>파이프 이전에 명령을 인자로 받아 명령어를 실행하는 구조</li>
+</ul>
+
+<p>xargs를 사용하는 가장 기본적인 예는 pipe to xargs를 사용하여 공백으로 구분된 여러 문자열을 전달하고 
+해당 문자열을 인수로 사용할 명령을 실행하는 것이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># file1 file2 file3 이라는 문자열을 touch 의 인수로 넘겨주어,</span>
+<span class="c"># touch file1 file2 file3 명령을 수행한것과 같은 결과를 준다. (빈파일 3개 생성)</span>
+<span class="nb">echo</span> <span class="s2">"file1 file2 file3"</span> | xargs <span class="nb">touch</span>
+</code></pre></div></div>
+
+<h3 id="options">options</h3>
+<p>|    option     |                                         description                                         |
+|:————-:|:——————————————————————————————-:|
+|      -a       |                                   표준 입력 대신 파일에서 항목을 읽는다.                                    |
+|      -O       |                                      공백이나 특수문자 찾을 때 사용                                      |
+|    -printO    |                                   파일 사이의 공백을 \O로 분리자로 출력                                    |
+|      -d       |                                  입력된 문자를 그대로 사용(따옴표, 백슬래시)                                  |
+|      -n       |                                       지정된 숫자만큼 행을 출력                                        |
+|      -p       |                         각 명령 행 실행 여부, 터미널에서 행을 읽어들이는 것에 대한 여부를 묻는다.                         |
+|      -P       |                                하나의 명령에 프로세스를 지정 (-n과 같이 사용)                                 |
+|      -t       |                                xargs를 통해 구성된 명령어를 표준 에러로 출력                                 |
+|      -s       | 한 라인에 들어갈 수 있는 문자열 수를 지정(기본적으로 128k 안으로 문자열을 만들어 하나의 명령으로 실행하나 해당 옵션으로 1024k까지 사용 가능하게 한다.) |
+|      -x       |                                   -s로 지정한 크기가 초과되면 종료시킨다.                                   |
+| –show-limits |                            xargs의 버퍼 크기 선택 및 -s 옵션에 대한 길이 제한 출력                             |
+|      -E       |                                     문자열 끝을 eof-str로 설정                                      |
+|      -I       |                    xargs에 전달된 라인 전체를 뒤에 나오는 명령어의 인자로 사용 (라인 전체는 {}로 표기)                     |
+|      -l       |                         명령어 뒤 공백을 다음 행이 아닌 논리적으로 이어진 명령으로 인식하게 한다.                          |</p>
+
+<h3 id="예제">예제</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /tmp 디랙토리 아래 core라는 파일을 찾아 삭제</span>
+<span class="nv">$ </span>find /tmp <span class="nt">-name</span> core <span class="nt">-type</span> f <span class="nt">-print</span> | xargs <span class="nb">rm</span> <span class="nt">-f</span>
+
+<span class="c"># ls를 이용하여 text파일을 모두 읽어와 하나의 파일로 병합</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="k">*</span>.txt | xargs <span class="nb">cat</span> <span class="o">&gt;&gt;</span> abc.txt
+
+<span class="c"># 디렉토리에서 txt파일을 우선 찾은 다음 이름에 abcd를 포함하는 파일을 또 찾음</span>
+<span class="nv">$ </span>find ~/ <span class="nt">-type</span> f | <span class="nb">grep</span> <span class="nt">-H</span> “<span class="k">*</span>.txt<span class="nv">$”</span> | xargs <span class="nb">grep</span> <span class="nt">-H</span> “abcd”
+
+<span class="c"># 파일안에 url이 있을 경우 해당 인자들을 모두 wget으로 넘겨 다운받는다</span>
+<span class="nv">$ </span><span class="nb">cat </span>url-list.txt | xargs wget <span class="nt">-c</span>
+
+<span class="c"># 모든 jpg파일을 찾아 images.tar.gz로 압축</span>
+<span class="nv">$ </span>find / <span class="nt">-name</span> “<span class="k">*</span>.jpg” <span class="nt">-type</span> <span class="nt">-f</span> <span class="nt">-print</span> | xargs <span class="nb">tar</span> <span class="nt">-cvzf</span> images.tar.gz
+
+<span class="c"># ls 로 출력된 모든 이미지를 하나씩 인자로 받아 외장하드로 복사</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="k">*</span>.jpg | xargs <span class="nt">-n1</span> <span class="nt">-I</span><span class="o">{}</span> <span class="nb">cp</span> <span class="o">{}</span> /external-hard-drive/tmp
+</code></pre></div></div>
+<h2 id="xargs-vs-pipe">xargs vs. pipe</h2>
+<blockquote>
+  <p>파이프 ‘|’ 는 앞의 결과를 인자로 받는게 아니다.
+파이프 ‘|’ 는 앞의 표준출력을 다음 프로그램의 표준입력으로 연결하는 것이다.
+파이프 ‘|’ 와의 조합으로 표준출력을 다음 프로그램의 ‘인자’로 넘길려면 xargs 를 사용한다.
+xargs 프로그램은 실행할 대상프로그램을 인자로 받고, xargs 프로그램의 표준입력을 실행 대상프로그램의 인자로 전달하여 실행한다.</p>
+</blockquote>
+
+<h3 id="예시">예시</h3>
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> 뒤에는 문자열이나 변수가 바로 붙는다
+<code class="language-plaintext highlighter-rouge">&lt;</code> 는 표준입력 리다이렉션이다.</p>
+</blockquote>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi err.txt
+err
+:wq
+
+
+<span class="nb">echo </span>err.txt | <span class="nb">cat</span> <span class="c">## err.txt</span>
+<span class="c">## 파일명 자체를 </span>
+<span class="nb">echo </span>err.txt | xargs <span class="nb">cat</span> <span class="c">## err</span>
+<span class="c">## 파일을</span>
+
+</code></pre></div></div>
+
+<p>출처: https://inpa.tistory.com/entry/LINUX-📚-xargs-명령-파이프-와-차이점-완벽-정리-표준입력-인자-차이 [Inpa Dev 👨‍💻:티스토리]</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/21/linux-series-15-Volume.html">
+        [linux Series] 15 Volume
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/aws/2024/05/22/aws-series-01-Model.html">
+        [aws Series] 01 Model
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

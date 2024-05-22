@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [JAVA_OTHERS]
+---
 from [Dictionary - Coupling & Cohesion](https://github.com/newkayak12/Dictionary/blob/master/java/oop/03.Coupling%26Cohesion.md)
 
 # Coupling & Cohesion

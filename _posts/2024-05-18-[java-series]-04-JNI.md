@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - JNI](https://github.com/newkayak12/Dictionary/blob/master/java/04.JNI.md)
 # JNI(Java Native Interface)
 

@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [JAVA_OTHERS]
+---
 from [Dictionary - Composition](https://github.com/newkayak12/Dictionary/blob/master/java/oop/02.Composition.md)
 
 # Composition

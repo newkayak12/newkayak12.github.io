@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[linux Series] 09 Shellscript | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - ShellScript  CICD 등 작업 중 찾은 문서">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/linux/2024/05/21/linux-series-09-ShellScript.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[linux Series] 09 Shellscript</h1>
+    
+    <p class="meta">
+      May 21, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/linux/ShellScript.md">Dictionary - ShellScript</a></p>
+<blockquote>
+  <p>CICD 등 작업 중 찾은 문서</p>
+</blockquote>
+
+<h1 id="shellscript">ShellScript</h1>
+
+<p><a href="https://www.shellcheck.net/">Shell 문법 검사기</a></p>
+
+<h2 id="쉘-종류">쉘 종류</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/bash </span>
+<span class="c">## 어떤 쉘로 스크립트를 실행할지 정의</span>
+
+<span class="nb">echo</span> <span class="si">$(</span>which bash<span class="si">)</span>
+</code></pre></div></div>
+
+<h2 id="실행-방법">실행 방법</h2>
+<ol>
+  <li>권한 주고 실행
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi script.sh
+<span class="c"># ... 작성후 종료</span>
+<span class="nv">$ </span><span class="nb">chmod</span> +x script.sh or <span class="nb">chmod </span>755 script.sh
+<span class="nv">$ </span>./script.sh <span class="c"># 쉘 스크립트 실행</span>
+</code></pre></div>    </div>
+  </li>
+  <li>bash로 실행
+```shell
+$ vi script.sh
+    <h1 id="-작성후-종료">… 작성후 종료</h1>
+  </li>
+</ol>
+
+<p>bash script.sh</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Declare variables
+변수의 타입에는 로컬변수와 전역변수, 환경변수, 예약변수, 매개변수 등 다양히이 존재한다.
+
+- 변수는 대, 소문자를 구별한다.
+- 변수의 이름은 숫자를 포함할 수 있지만, 숫자로 시작할 수 없다.
+- 변수에는 모든 값을 문자열로 저장된다.
+- 변수에는 자료형을 기입하지 않는다. (int number, char names[10]), 즉 아무런 값을 다 넣을 수 있다.
+- 값을 사용할 때는 변수명 앞에 특수문자 "$"를 사용한다. (Ex. echo ${data})
+- 값을 대입(삽입)할 때는 특수문자 "$"를 사용하지 않는다. (Ex. data=mac)
+- 변수를 생성할 때는 "=" 대입문자 앞뒤로 공백이 없어야 한다. (Ex. data="abcd")
+
+## Local/ Global variables
+기본적으로 변수 선언하면 전역이다. 함수 내부에서만 지역변수다. 
+```shell
+# 기본적으로 전역 변수로 지정
+string="hello world"
+
+function string_test() {
+    # local을 붙여야 지역변수로 인식. 만일 local을 빼면 전역변수 덮어쓰기가 되버림
+    local string="hello local @@"
+    echo ${string}
+}
+
+# 함수 호출
+string_test # &gt; hello local @@
+echo ${string} # &gt; hello world
+
+# 변수 초기화
+unset string
+</code></pre></div></div>
+
+<h2 id="type">Type</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -r 읽기 전용 타입 (상수 const라고 보면 된다)</span>
+<span class="nb">declare</span> <span class="nt">-r</span> var1
+<span class="nb">readonly </span>var1
+
+<span class="c"># -i 정수형 타입</span>
+<span class="nb">declare</span> <span class="nt">-i</span> number
+<span class="nv">number</span><span class="o">=</span>3
+<span class="nb">echo</span> <span class="s2">"number = </span><span class="nv">$number</span><span class="s2">"</span>     <span class="c"># number = 3</span>
+
+<span class="c"># -a 배열 타입</span>
+<span class="nb">declare</span> <span class="nt">-a</span> indices
+
+<span class="c"># -A 연관배열(MAP) 타입</span>
+<span class="nb">declare</span> <span class="nt">-A</span> map
+
+<span class="c"># -f 함수 타입</span>
+<span class="nb">declare</span> <span class="nt">-f</span>
+
+<span class="c"># -x 환경변수(export) 지정</span>
+<span class="nb">declare</span> <span class="nt">-x</span> var3 <span class="c"># 스크립트 외부 환경에서도 이 변수를 쓸 수 있게 해준다.</span>
+</code></pre></div></div>
+
+<h2 id="environment-variables">Environment variables</h2>
+<p>쉘 스크립트에서 변수 명 앞에 export을 붙여주면 환경 변수(environment variable)로 설정되어 자식 스크립트에서 사용 가능하다.
+다만 환경 변수 사용시 시스템에 미리 정의된 <a href="#reserved-variables">예약 변수(reserved variable)</a>와 변수명이 겹치지 않게 주의하자.</p>
+
+<h2 id="parameter">Parameter</h2>
+<p>./test($0) a($1) b($2) …
+shell 실행 시 매개변수를 받을 수 있다. <code class="language-plaintext highlighter-rouge">$</code>와 숫자 조합으로 표현한다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$0</code>은 scriptName으로 고정 <code class="language-plaintext highlighter-rouge">$숫자</code>로 변수를 받을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">$#</code>는 변수 개수</li>
+  <li><code class="language-plaintext highlighter-rouge">$*</code>는 전체 인자</li>
+  <li><code class="language-plaintext highlighter-rouge">$!</code>는 실행을 백그라운드로 보내진 마지막 프로그램 프로세스 번호</li>
+  <li><code class="language-plaintext highlighter-rouge">$$</code>는 PID</li>
+  <li><code class="language-plaintext highlighter-rouge">$?</code>는 리턴 값</li>
+</ul>
+
+<h2 id="reserved-variables">Reserved variables</h2>
+<p>변수| 설명
+:—:|:—:
+HOME| 사용자 홈 디렉토리
+PATH| 실행 파일의 경로여러분이 chmod, mkdir 등의 명령어들은 /bin이나 /usr/bin, /sbin에 위치하는데, 이 경로들을 PATH 지정하면 여러분들은 굳이 /bin/chmod를 입력하지 않고, chmod 입력만 해주면 된다.
+LANG| 프로그램 실행 시 지원되는 언어
+UID| 사용자의 UID
+SHELL| 사용자가 로그인시 실행되는 쉘
+USER| 사용자의 계정 이름
+FUNCNAME| 현재 실행되고 있는 함수 이름
+TERM| 로그인 터미널</p>
+
+<h2 id="command">command</h2>
+<ul>
+  <li>set : 셸 변수를 출력하는 명령어</li>
+  <li>env : 환경 변수를 출력하는 명령어</li>
+  <li>export : 특정 변수의 범위를 환경 변수의 데이터 공간으로 전송하여 자식 프로세스에서도 특정 변수를 사용 가능하게 한다. 전역 변수의 개념</li>
+  <li>unset : 선언된 변수를 제거한다.</li>
+</ul>
+
+<h2 id="operation">operation</h2>
+<ul>
+  <li>expr</li>
+  <li>let</li>
+  <li>$(())</li>
+</ul>
+
+<h3 id="expr">expr</h3>
+<ul>
+  <li>expr는 역따옴표를 반드시 감싸준다. 역따옴표 대신 $(( )) 해줘도 동작은 한다.</li>
+  <li>expr을 사용할 때 피연산자와 연산자 사이에 공백이 필요하다.</li>
+  <li>산술 연산할때 우선순위를 지정하기위해 괄호를 사용하려면 \처리를 해줘야 한다.</li>
+  <li>곱셈 문자 *는 \처리를 해주어야 한다.
+```shell
+#!/bin/bash</li>
+</ul>
+
+<p>number1=10
+number2=20</p>
+
+<p>plus=<code class="language-plaintext highlighter-rouge">expr $number1 + $number2</code> 
+minus=<code class="language-plaintext highlighter-rouge">expr $number1 - $number2</code>
+mul=<code class="language-plaintext highlighter-rouge">expr $number1 \* $number2</code> # 곱셈에는 * 를 이용한다.
+div=<code class="language-plaintext highlighter-rouge">expr $number1 / $number2</code>
+rem=<code class="language-plaintext highlighter-rouge">expr $number1 % $number2</code></p>
+
+<p>echo “plus:     ${plus}”
+echo “minus:    ${minus}”
+echo “mul:      ${mul}”
+echo “div:      ${div}”
+echo “rem:      ${rem}”</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### let
+```shell
+num1=42
+num2=9
+ 
+let re=num1+num2 #Add
+echo "add:$re"
+
+let re=num1-num2 #Sub
+echo "sub:$re"
+
+let re=num1*num2 #Mul
+echo "mul:$re"
+
+let re=num1/num2 #Div
+echo "div:$re"
+
+let re=num1%num2 #Mod
+echo "mod:$re"
+</code></pre></div></div>
+<h3>$(())</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">num1</span><span class="o">=</span>42
+<span class="nv">num2</span><span class="o">=</span>9
+ 
+<span class="nb">echo </span>add:<span class="k">$((</span>num1+num2<span class="k">))</span>
+<span class="nb">echo </span>sub:<span class="k">$((</span>num1-num2<span class="k">))</span>
+<span class="nb">echo </span>mul:<span class="k">$((</span>num1<span class="o">*</span>num2<span class="k">))</span>
+<span class="nb">echo </span>div:<span class="k">$((</span>num1/num2<span class="k">))</span>
+<span class="nb">echo </span>mod:<span class="k">$((</span>num1%num2<span class="k">))</span>
+</code></pre></div></div>
+
+<h2 id="block-annotation">block annotation</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;코드라인&gt;
+: <span class="o">&lt;&lt;</span> <span class="sh">"</span><span class="no">END</span><span class="sh">"              #주석 시작
+echo "여기서부터 "
+echo "test_01"
+echo "test_02"
+echo "test_03"
+echo "test_04"
+echo "test_05"
+echo "test_06"
+echo "test_07"
+echo "여기까지 주석처리 됨"
+END                    #주석 끝
+
+echo "여기는 주석이 안되어 있어 출력 "
+</span></code></pre></div></div>
+<h3 id="vi-에디터로-여러줄-주석-방법">vi 에디터로 여러줄 주석 방법</h3>
+<p>기본 여러줄 주석 문법이 별로라면, vi 단축키를 이용한 주석 처리 방법이 있다.</p>
+
+<ol>
+  <li>vi 편집기를 열고  ctrl + v를 눌러 비주얼 모드로 진입한다. (비주얼 모드는 vim 이 설치 되어 있어야 한다.)</li>
+  <li>주석을 처리하고자 하는 라인까지 방향키 또는  vi방향키를 이용하여 이동한다.</li>
+  <li>shift + i 누르고 #을 입력한다.</li>
+  <li>esc 키를 여러번 누른다.</li>
+  <li>주석 처리 됨을 확인한다.</li>
+</ol>
+
+<h2 id="if">if</h2>
+<p>배쉬의 if문의 특이한 점은 fi 와 대괄호[ ] 이다.
+여타 언어와 달리 중괄호를 안쓰기 떄문에 fi로 if문의 끝을 알려주어야 하며,
+주의해야 할 점은 if문 뒤에 나오는 대괄호 [ ] 와 조건식 사이에는 반드시 공백이 존재해야 한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> 값1 조건식 값2 <span class="o">]</span>
+<span class="k">then
+    </span>수행1
+<span class="k">else
+    </span>수행2
+<span class="k">fi</span>
+
+
+<span class="c"># 가독성 좋기 위해 then을 if [] 와 붙여쓰려면 반드시 세미콜론 ; 을 써야한다.</span>
+<span class="k">if</span> <span class="o">[</span> 값1 조건식 값2 <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span>수행1
+<span class="k">else
+    </span>수행2
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="비교-연산">비교 연산</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>문자1 <span class="o">=</span> 문자2             <span class="c"># 문자1 과 문자2가 일치 (sql같이 = 하나만 써도 일치로 인식)</span>
+문자1 <span class="o">==</span> 문자2            <span class="c"># 문자1 과 문자2가 일치</span>
+문자1 <span class="o">!=</span> 문자2            <span class="c"># 문자1 과 문자2가 일치하지 않음</span>
+<span class="nt">-z</span> 문자                   <span class="c"># 문자가 null 이면 참</span>
+<span class="nt">-n</span> 문자                   <span class="c"># 문자가 null 이 아니면 참</span>
+문자 <span class="o">==</span> 패턴              <span class="c"># 문자열이 패턴과 일치</span>
+문자 <span class="o">!=</span> 패턴              <span class="c"># 문자열이 패턴과 일치하지 않음</span>
+
+값1 <span class="nt">-eq</span> 값2             <span class="c"># 값이 같음(equal)</span>
+값1 <span class="nt">-ne</span> 값2             <span class="c"># 값이 같지 않음(not equal)</span>
+값1 <span class="nt">-lt</span> 값2             <span class="c"># 값1이 값2보다 작음(less than)</span>
+값1 <span class="nt">-le</span> 값2             <span class="c"># 값1이 값2보다 작거나 같음(less or equal)</span>
+값1 <span class="nt">-gt</span> 값2             <span class="c"># 값1이 값2보다 큼(greater than)</span>
+값1 <span class="nt">-ge</span> 값2             <span class="c"># 값1이 값2보다 크거나 같음(greater or equal)</span>
+
+
+</code></pre></div></div>
+<blockquote>
+  <h3 id="이중-괄호">이중 괄호</h3>
+  <p>(( expression ))expression 에는 수식이나 비교 표현식이 들어갈 수 있다.</p>
+</blockquote>
+
+<p>수식| 설명
+:—:|:—:
+<code class="language-plaintext highlighter-rouge">!</code>|논리 부정
+<code class="language-plaintext highlighter-rouge">~</code>|비트 부정
+<code class="language-plaintext highlighter-rouge">**</code>|지수화
+<code class="language-plaintext highlighter-rouge">&lt;&lt;</code>|비트 왼쪽 쉬프트
+<code class="language-plaintext highlighter-rouge">&gt;&gt;</code>|비트 오른쪽 쉬프트
+<code class="language-plaintext highlighter-rouge">&amp;</code>|비트 단위AND
+<code class="language-plaintext highlighter-rouge">|</code>|비트 단위 OR
+<code class="language-plaintext highlighter-rouge">&amp;&amp;</code> |논리 AND
+<code class="language-plaintext highlighter-rouge">||</code> |논리 OR
+<code class="language-plaintext highlighter-rouge">num++</code> |후위증가
+<code class="language-plaintext highlighter-rouge">num--</code> |후위감소
+<code class="language-plaintext highlighter-rouge">++num</code> |전위증가
+<code class="language-plaintext highlighter-rouge">--num</code> |전위감소</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">num1</span><span class="o">=</span>35
+<span class="nv">num2</span><span class="o">=</span>48
+
+<span class="c"># 이중 소괄호를 쓰면 조건문을 문자 대신 기호로 표현 가능하다. 단, 소괄호 안에 따옴표 쓰면 안된다.</span>
+<span class="k">if</span> <span class="o">((</span> <span class="k">${</span><span class="nv">num1</span><span class="k">}</span> &lt; <span class="k">${</span><span class="nv">num2</span><span class="k">}</span> <span class="o">))</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"yes"</span>
+<span class="k">fi
+
+if</span> <span class="o">((</span> <span class="o">(</span><span class="nv">$num1</span> <span class="k">*</span> <span class="nv">$num2</span><span class="o">)</span> - <span class="nv">$num2</span> <span class="o">&gt;</span> 200 <span class="o">))</span><span class="p">;</span> <span class="k">then
+	</span><span class="nb">echo</span> <span class="s2">"&gt;200"</span>
+<span class="k">else
+	</span><span class="nb">echo</span> <span class="s2">"&lt;200"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="파일-검사-연산">파일 검사 연산</h3>
+<p><img src="img%2Fimg.png" alt="img.png" /></p>
+
+<blockquote>
+  <h3 id="이중-대괄호">이중 대괄호</h3>
+  <p>[[ “1.8.3” == 1.7.* ]]&amp;&amp;, ||, = ~ * (정규식 매칭) 과 같은 확장 expression test 기능을 대괄호 내에 사용할 수 있게 한다.그냥 대괄호의 개선버젼 정도로 생각하면 된다.</p>
+</blockquote>
+
+<h2 id="switch-case">switch-case</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">${</span><span class="nv">var</span><span class="k">}</span> <span class="k">in</span>
+    <span class="s2">"linux"</span><span class="p">)</span> <span class="nb">echo</span> <span class="s2">"리눅스"</span> <span class="p">;;</span> <span class="c"># 변수var값이 linux라면 실행 </span>
+    <span class="s2">"unix"</span><span class="p">)</span> <span class="nb">echo</span> <span class="s2">"유닉스"</span> <span class="p">;;</span>    
+    <span class="s2">"windows"</span><span class="p">)</span> <span class="nb">echo</span> <span class="s2">"윈도우즈"</span> <span class="p">;;</span>    
+    <span class="s2">"MacOS"</span><span class="p">)</span> <span class="nb">echo</span> <span class="s2">"맥OS"</span> <span class="p">;;</span>    
+    <span class="k">*</span><span class="p">)</span> <span class="nb">echo</span> <span class="s2">"머야"</span> <span class="p">;;</span> <span class="c"># default 부분</span>
+<span class="k">esac</span>
+
+
+<span class="nv">COUNTRY</span><span class="o">=</span>korea
+
+<span class="k">case</span> <span class="nv">$COUNTRY</span> <span class="k">in</span>
+  <span class="s2">"korea"</span><span class="p">|</span><span class="s2">"japan"</span><span class="p">|</span><span class="s2">"china"</span><span class="p">)</span> <span class="c"># or 연산도 가능하다</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$COUNTRY</span><span class="s2"> is Asia"</span>
+    <span class="p">;;</span>
+  <span class="s2">"USA"</span><span class="p">|</span><span class="s2">"Canada"</span><span class="p">|</span><span class="s2">"Mexico"</span><span class="p">)</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$COUNTRY</span><span class="s2"> is Ameria"</span>
+    <span class="p">;;</span>
+  <span class="k">*</span> <span class="p">)</span>
+    <span class="nb">echo</span> <span class="s2">"I don't know where is </span><span class="nv">$COUNTRY</span><span class="s2">"</span>
+    <span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div></div>
+
+<h2 id="for-statement">for statement</h2>
+<h3 id="for">for</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">## FOR</span>
+
+<span class="c"># 초기값; 조건값; 증가값을 사용한 정통적인 for문</span>
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>1<span class="p">;</span> i&lt;<span class="o">=</span>4<span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do
+    </span><span class="nb">echo</span> <span class="nv">$i</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<h3 id="for-in">for-in</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># 루프 돌 데이터에 띄어쓰기가 있으면 각각 돌음</span>
+<span class="k">for </span>x <span class="k">in </span>1 2 3 4 5
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">x</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">done</span>
+
+
+<span class="c"># 변수를 사용한 반복문</span>
+<span class="nv">data</span><span class="o">=</span><span class="s2">"1 2 3 4 5"</span>
+<span class="k">for </span>x <span class="k">in</span> <span class="nv">$data</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">x</span><span class="k">}</span>
+<span class="k">done</span>
+
+
+<span class="c"># !/bin/bash</span>
+
+<span class="c"># 루프 돌 데이터에 띄어쓰기가 있으면 각각 돌음</span>
+<span class="k">for </span>x <span class="k">in </span>1 2 3 4 5
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">x</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">done</span>
+
+
+<span class="c"># 변수를 사용한 반복문</span>
+<span class="nv">data</span><span class="o">=</span><span class="s2">"1 2 3 4 5"</span>
+<span class="k">for </span>x <span class="k">in</span> <span class="nv">$data</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">x</span><span class="k">}</span>
+<span class="k">done</span>
+
+
+<span class="c"># 배열을 사용한 반복문</span>
+<span class="nv">arr</span><span class="o">=(</span>1 2 3 4 5<span class="o">)</span>
+<span class="k">for </span>i <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span> <span class="c"># arr[@] : 배열 전체 출력</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">i</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">done</span>
+
+
+<span class="c"># sequence를 통한 for문. seq라는 프로세스가 순서대로 숫자를 출력해 주는 역할을 bash에 사용한 것이다.</span>
+<span class="k">for </span>num <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 5<span class="sb">`</span>
+<span class="k">do
+  </span><span class="nb">echo</span> <span class="nv">$num</span>
+<span class="k">done</span>
+
+
+<span class="c"># range를 사용한 반복문. {..} 중괄호와 점 두개를 쓰면 range처리가 된다.</span>
+<span class="k">for </span>x <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">x</span><span class="k">}</span>
+<span class="k">done</span>
+<span class="c"># 배열을 사용한 반복문</span>
+<span class="nv">arr</span><span class="o">=(</span>1 2 3 4 5<span class="o">)</span>
+<span class="k">for </span>i <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span> <span class="c"># arr[@] : 배열 전체 출력</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">i</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">done</span>
+
+<span class="c">##FOR-IN</span>
+<span class="c"># sequence를 통한 for문. seq라는 프로세스가 순서대로 숫자를 출력해 주는 역할을 bash에 사용한 것이다.</span>
+<span class="k">for </span>num <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 5<span class="sb">`</span>
+<span class="k">do
+  </span><span class="nb">echo</span> <span class="nv">$num</span>
+<span class="k">done</span>
+
+
+<span class="c"># range를 사용한 반복문. {..} 중괄호와 점 두개를 쓰면 range처리가 된다.</span>
+<span class="k">for </span>x <span class="k">in</span> <span class="o">{</span>1..5<span class="o">}</span>
+<span class="k">do
+	</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">x</span><span class="k">}</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<h3 id="example">example</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 파일 리스트 출력</span>
+<span class="k">for </span>line <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span><span class="sb">`</span> <span class="c"># 역따옴표 써서 ls를 문자가 아닌 하나의 명령어로 실행</span>
+<span class="k">do
+ </span><span class="nb">echo</span> <span class="nv">$line</span> <span class="c"># 해당 위치에 파일이나 디렉토리들이 출력</span>
+<span class="k">done</span>
+
+<span class="c"># 한줄 문법 (한줄로 쓰면 터미널에서 직접 스크립트를 실행 할 수 있다)</span>
+<span class="k">for </span>line <span class="k">in</span> <span class="sb">`</span><span class="nb">ls</span><span class="sb">`</span><span class="p">;</span> <span class="k">do </span><span class="nb">echo</span> <span class="nv">$line</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div></div>
+
+<h2 id="while">while</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">count</span><span class="o">=</span>0
+<span class="k">while</span> <span class="o">[</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span> <span class="nt">-le</span> 5 <span class="o">]</span><span class="p">;</span> 
+<span class="k">do
+    </span><span class="nb">echo</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span>
+    <span class="nv">count</span><span class="o">=</span><span class="k">$((</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span><span class="o">+</span><span class="m">1</span> <span class="k">))</span>
+<span class="k">done
+
+</span><span class="nv">count</span><span class="o">=</span>0
+<span class="k">while</span> <span class="o">((</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span> &lt;<span class="o">=</span> 5 <span class="o">))</span><span class="p">;</span>  <span class="c"># 이중괄호 사용하면 논리기호 사용 가능</span>
+<span class="k">do
+    </span><span class="nb">echo</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span>
+    <span class="nv">count</span><span class="o">=</span><span class="k">$((</span> <span class="k">${</span><span class="nv">count</span><span class="k">}</span><span class="o">+</span><span class="m">1</span> <span class="k">))</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
+<h2 id="array">Array</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># 배열의 크기 지정없이 배열 변수 선언</span>
+<span class="c"># 굳이 'declare -a' 명령으로 선언하지 않아도 바로 배열 변수 사용 가능함</span>
+<span class="nb">declare</span> <span class="nt">-a</span> array
+
+<span class="nv">arr</span><span class="o">=(</span><span class="s2">"test1"</span> <span class="s2">"test2"</span> <span class="s2">"test3"</span><span class="o">)</span> <span class="c"># 배열 선언 및 지정</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">arr</span><span class="p">[0]</span><span class="k">}</span>  <span class="c"># test1</span>
+
+
+<span class="c"># 기존 배열에 1개의 배열 값 추가 3가지 방법</span>
+arr[3]<span class="o">=</span><span class="s2">"test4"</span> 
+arr+<span class="o">=(</span><span class="s2">"test5"</span><span class="o">)</span>
+arr[<span class="k">${#</span><span class="nv">arr</span><span class="p">[@]</span><span class="k">}</span><span class="o">]=</span><span class="s2">"test6"</span> <span class="c"># 배열 길이를 인덱스로 사용해 push</span>
+
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="k">}</span>  <span class="c"># arr의 모든 데이터 출력</span>
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">arr</span><span class="p">[*]</span><span class="k">}</span>  <span class="c"># arr의 모든 데이터 출력</span>
+<span class="nb">echo</span> <span class="k">${#</span><span class="nv">arr</span><span class="p">[@]</span><span class="k">}</span> <span class="c"># arr 배열 길이 출력</span>
+
+<span class="nb">echo</span> <span class="k">${</span><span class="nv">arr</span><span class="p">[@]</span>:2:3<span class="k">}</span> <span class="c"># 2부터 3개의 요소</span>
+</code></pre></div></div>
+
+<h2 id="map">Map</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 연관배열 생성</span>
+<span class="nb">declare</span> <span class="nt">-A</span> <span class="nv">map</span><span class="o">=([</span>hello]<span class="o">=</span><span class="s1">'world'</span> <span class="o">[</span>long]<span class="o">=</span><span class="s1">'long long long string'</span> <span class="o">[</span>what is it]<span class="o">=</span>123<span class="o">)</span>
+
+<span class="nb">declare</span> <span class="nt">-p</span> map <span class="c"># 연관배열 정보 출력</span>
+<span class="c"># &gt; declare -A map=([long]="long long long string" ["what is it"]="123" [hello]="world" )</span>
+
+<span class="nb">echo</span> <span class="s2">"map[hello]=</span><span class="k">${</span><span class="nv">map</span><span class="p">[hello]</span><span class="k">}</span><span class="s2">"</span> 
+<span class="c"># &gt; map[hello]=world</span>
+
+<span class="nv">key</span><span class="o">=</span>hello <span class="c"># 변수를 인덱스로 넣어줘도 된다. (MAP의 특성)</span>
+<span class="nb">echo</span> <span class="s2">"map[key]=</span><span class="k">${</span><span class="nv">map</span><span class="p">[</span><span class="k">${</span><span class="nv">key</span><span class="k">}</span><span class="p">]</span><span class="k">}</span><span class="s2">"</span> 
+<span class="c"># &gt; map[key]=world</span>
+</code></pre></div></div>
+
+<h2 id="scanner">Scanner</h2>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"String input : "</span>
+<span class="nb">read</span> <span class="o">[</span>변수명] <span class="c"># &lt;- 터미널에서 입력된 인풋값이 변수에 저장되게 된다.</span>
+<span class="nb">echo</span> <span class="s2">"user input : </span><span class="nv">$변</span><span class="s2">수명 # 입력된 값 출력
+</span></code></pre></div></div>
+
+<h2 id="function">function</h2>
+<p>다른 프로그래밍 언어와 달리 쉘 스크립트에서는 함수명 앞 function은 써주지 않아도 알아서 인식된다. 
+또한, 함수를 호출할때는 괄호를 써주지 않고 호출해야한다는 점이 다르다.
+그리고 함수 호출 코드는 함수 코드보다 반드시 뒤에 있어야 된다. 함수 코드 보다 앞에서 호출 시 오류가 발생하기 때문이다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+func<span class="o">(){</span>
+	<span class="nb">echo</span> <span class="s2">"func()"</span>
+<span class="o">}</span>
+
+<span class="k">function </span>string_test<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"string test"</span>
+    <span class="nb">echo</span> <span class="s2">"인자값: </span><span class="k">${</span><span class="p">@</span><span class="k">}</span><span class="s2">"</span>
+<span class="o">}</span>
+
+<span class="c">#함수 호출</span>
+func
+
+<span class="c"># 함수에 인자값 전달하기(공백의로 뛰어서 2개의 인자값을 넘김)</span>
+string_test <span class="s2">"hello"</span> <span class="s2">"world"</span>
+</code></pre></div></div>
+
+<p>인자는 공백으로 구분하여 하나씩 넣으면 된다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>test3<span class="o">()</span>
+<span class="o">{</span>
+    <span class="nv">param1</span><span class="o">=</span><span class="nv">$1</span>
+    <span class="nv">param2</span><span class="o">=</span><span class="nv">$2</span>
+    <span class="nb">echo</span> <span class="nv">$param1</span> <span class="c"># a</span>
+    <span class="nb">echo</span> <span class="nv">$param2</span> <span class="c"># b</span>
+    <span class="nb">echo</span> <span class="nv">$@</span> <span class="c"># 파라미터 전체 출력</span>
+<span class="o">}</span>
+
+test3 <span class="s2">"a"</span> <span class="s2">"b"</span>
+</code></pre></div></div>
+
+<h2 id="종료-상태">종료 상태</h2>
+<p>종료 코드란, exit 명령으로 프로그램을 종료시키면서 사용자에게 프로그램 종료의 이유를 알리기 위하여 반환하는 값이다.
+쉘 스크립트 내에서 exit 명령어가 실행되면 스크립트가 종료되며 부모 프로세스에 종료 상태를 전달할 수 있는데 
+이 값은 프로그램 내에서 임의로 지정할 수도 있다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nb">exit </span>16 <span class="c"># 강제 종료</span>
+<span class="nb">echo</span> <span class="s2">"wtf"</span> <span class="c"># 실행안됨</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">0</code> 은 성공 이외는 모두 오류다.</p>
+
+<h2 id="shell-commandcommand-substitution">Shell command(command substitution)</h2>
+<p><code class="language-plaintext highlighter-rouge">$()</code> 안의 실행문을 실행하고 그 결과를 <code class="language-plaintext highlighter-rouge">$()</code>으로 리턴한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># 그냥 date 문자열 출력</span>
+<span class="nb">echo date</span>
+
+<span class="c"># 백틱으로 감싸주면 date 명령어가 실행되게 된다.</span>
+<span class="nb">echo</span> <span class="sb">`</span><span class="nb">date</span><span class="sb">`</span>
+
+<span class="c"># $()도 마찬가지</span>
+<span class="nb">echo</span> <span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+
+<span class="c"># shell execution</span>
+<span class="nb">echo</span> <span class="s2">"I'm in </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"I'm in </span><span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>출처: https://inpa.tistory.com/entry/LINUX-쉘-프로그래밍-핵심-문법-총정리 [Inpa Dev 👨‍💻:티스토리]</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/linux/2024/05/21/linux-series-08-Permission.html">
+        [linux Series] 08 Permission
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/linux/2024/05/21/linux-series-10-Status.html">
+        [linux Series] 10 Status
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - GC](https://github.com/newkayak12/Dictionary/blob/master/java/05.GC.md)
 
 # GC

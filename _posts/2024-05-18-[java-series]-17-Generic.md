@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Generic](https://github.com/newkayak12/Dictionary/blob/master/java/17.Generic.md)
 
 # Generic

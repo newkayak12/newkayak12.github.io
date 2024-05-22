@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - CallBy](https://github.com/newkayak12/Dictionary/blob/master/java/08.CallBy.md)
 
 # Call By Value vs. Call By Reference

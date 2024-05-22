@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - VirtualThread](https://github.com/newkayak12/Dictionary/blob/master/java/29.VirtualThread.md)
 
 # VirtualThread

@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
 from [Dictionary - FlyWeight](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/03.FlyWeight.md)
 
 

@@ -1,3 +1,8 @@
+
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - SystemInfo](https://github.com/newkayak12/Dictionary/blob/master/linux/SystemInfo.md)
 
 

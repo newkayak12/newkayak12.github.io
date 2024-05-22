@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
 from [Dictionary - Decorator](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/08.Decorator.md)
 
 

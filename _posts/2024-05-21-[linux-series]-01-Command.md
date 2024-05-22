@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Command](https://github.com/newkayak12/Dictionary/blob/master/linux/Command.md)
 
 ## history

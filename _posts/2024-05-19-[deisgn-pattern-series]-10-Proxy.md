@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
 from [Dictionary - Proxy](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/10.Proxy.md)
 
 

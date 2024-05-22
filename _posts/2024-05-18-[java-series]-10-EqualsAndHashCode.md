@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Equals And Hash Code](https://github.com/newkayak12/Dictionary/blob/master/java/10.EqualsAndHashCode.md)
 
 # EqualsAndHashCode

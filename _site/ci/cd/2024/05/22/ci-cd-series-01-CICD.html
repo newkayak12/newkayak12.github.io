@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[ci:cd Series] 01 Cicd | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - CI/CD">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/ci/cd/2024/05/22/ci-cd-series-01-CICD.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[ci:cd Series] 01 Cicd</h1>
+    
+    <p class="meta">
+      May 22, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/cicd/00.CICD.md">Dictionary - CI/CD</a></p>
+
+<h1 id="cicd">CI/CD</h1>
+<h2 id="junit"><a href="https://newkayak12.github.io/java/2024/05/18/java-series-24-Junit.html">Junit</a></h2>
+
+<h2 id="기본-개념">기본 개념</h2>
+<h3 id="pipeline">pipeline</h3>
+<p>일련의 Job으로 구성된 단위이다.</p>
+
+<h3 id="job">Job</h3>
+<p>파이프 라인을 구성하는 최소 작업 단위다.</p>
+
+<h3 id="variables">Variables</h3>
+<p>Job에서 사용하거나 다른 곳에 재사용 할 때 지정할 수 있는 환경 변수의 한 유형이다.</p>
+
+<h3 id="runner">Runner</h3>
+<p>pipeline을 따라 Job을 실행시키는 주체다. 러너의 종류로는 1. 공유 러너, 2. 그룹 러너, 3. 지정 러너가 있다.</p>
+
+<h3 id="artifacts">Artifacts</h3>
+<p>일련의 단계에서 나온 산출물이다.</p>
+
+<h3 id="예시">예시</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## 파이프라인의 단계</span>
+<span class="na">stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">test</span>
+  <span class="pi">-</span> <span class="s">build</span>
+  <span class="pi">-</span> <span class="s">packing</span>
+  <span class="pi">-</span> <span class="s">deploy</span>
+
+
+<span class="c1">## 해당 파이프라인에서 사용할 로컬 변수</span>
+<span class="na">variables</span><span class="pi">:</span>
+  <span class="na">STAGE_TARGET_PATH</span><span class="pi">:</span> <span class="s">/home/service</span>
+  <span class="na">STAGE_NAME</span><span class="pi">:</span> <span class="s">$STAGE_NAME</span>
+  <span class="na">STAGE_TARGET_SERVER</span><span class="pi">:</span> <span class="s">$STAGE_TARGET_SERVER</span>
+
+
+  <span class="c1">##Job</span>
+<span class="na">test</span><span class="pi">:</span>
+  <span class="c1">## 단계</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">test</span>
+  <span class="c1">##어떤 이미지를 사용 할 것이며</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">gradle-8.6.0-jdk17</span>
+  <span class="c1">##어떤 상황에서 실행되는가</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="c1">##트리거가 되는 브랜치</span>
+  <span class="na">only</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">stage</span>
+    <span class="pi">-</span> <span class="s">master</span>
+  <span class="c1">##태그</span>
+  <span class="na">tags</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">test_work</span>
+  <span class="na">before_script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">pwd</span>
+    <span class="pi">-</span> <span class="s">chmod +x gradlew</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] TEST PROJECT $CI_PROJECT_NAME</span>
+    <span class="pi">-</span> <span class="s">./gradlew test</span>
+
+
+
+
+<span class="na">build</span><span class="pi">:</span> <span class="c1">##Job</span>
+  <span class="c1">## 단계</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">build</span>
+  <span class="c1">##어떤 이미지를 사용 할 것이며</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">gradle:7.6-jdk11-alpine</span>
+  <span class="c1">##어떤 상황에서 실행되는가</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">on_success</span> 
+  <span class="c1">## 선행되어야만 하는 작업</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">test</span>
+  <span class="c1">##트리거가 되는 브랜치</span>
+  <span class="na">only</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">stage</span>
+    <span class="pi">-</span> <span class="s">master</span>
+  <span class="c1">##job에 대한 태그</span>
+  <span class="na">tags</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">build_work</span>
+  <span class="c1"># 스크립트 이전 실행</span>
+  <span class="na">before_script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">pwd</span>
+    <span class="c1">## 자바HOME을 유동적으로 변경(Gradle -&gt; 2024-05-22-[gradle-series]-Summary.md)</span>
+    <span class="pi">-</span> <span class="s">cp $JAVA_HOME_11 gradle.properties</span>
+    <span class="pi">-</span> <span class="s">chmod +x gradlew</span>
+    <span class="pi">-</span> <span class="s">./gradlew clean</span>
+  <span class="c1">#스크립트</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] BUILD PROJECT $CI_PROJECT_NAME</span>
+    <span class="pi">-</span> <span class="s">./gradlew generateDbJooqSchemaSource"</span>
+    <span class="pi">-</span> <span class="s">./gradlew -x generateDbJooqSchemaSource bootjar  --continue"</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] RENAME FILE</span>
+    <span class="pi">-</span> <span class="s">cp build/libs/*.jar $CI_PROJECT_NAME.jar</span>
+  <span class="c1">## 빌드 결과물을 저장할 아티팩트</span>
+  <span class="na">artifacts</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">build/libs/*.jar</span>
+    <span class="na">expire_in</span><span class="pi">:</span> <span class="s">1 days</span>
+
+<span class="na">stage</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">deploy</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">build</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">on_success</span>
+  <span class="na">only</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">stage</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] DEPLOY STAGE_MODE $CI_PROJECT_NAME</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] move to ${STAGE_TARGET_SERVER}</span>
+    <span class="pi">-</span> <span class="s">cp build/libs/*.jar $CI_PROJECT_NAME.jar</span>
+     <span class="s">## 파일로 된 전역 변수 가져와서</span>
+    <span class="pi">-</span> <span class="s">cat $STAGE_TARGET_SERVER_KEY</span> 
+    <span class="c1">##권한 하향</span>
+    <span class="pi">-</span> <span class="s">chmod 400 $STAGE_TARGET_SERVER_KEY</span>
+      
+      <span class="s">## 파일 만들고 전송하고 하는 일련의 과정</span>
+    <span class="pi">-</span> <span class="s">echo ssh -i $STAGE_TARGET_SERVER_KEY ${STAGE_NAME}@${STAGE_TARGET_SERVER} mkdir -p ${STAGE_TARGET_PATH}</span>
+    <span class="pi">-</span> <span class="s">ssh -i  $STAGE_TARGET_SERVER_KEY ${STAGE_NAME}@${STAGE_TARGET_SERVER} mkdir -p ${STAGE_TARGET_PATH}</span>
+    <span class="pi">-</span> <span class="s">ssh -i  $STAGE_TARGET_SERVER_KEY ${STAGE_NAME}@${STAGE_TARGET_SERVER} &lt;&lt; EOT</span>
+    <span class="pi">-</span> <span class="s">cd ${STAGE_TARGET_PATH}</span>
+    <span class="pi">-</span> <span class="pi">|</span>
+      <span class="s">exist=`ls | grep $CI_PROJECT_NAME.jar | wc -l`</span>
+      <span class="s">if [ $exist &gt; 0 ]</span>
+        <span class="s">then</span>
+          <span class="s">echo create backupFile as $CI_PROJECT_NAME.jar_{CI_COMMIT_TIMESTAMP}</span>
+          <span class="s">mv ${STAGE_TARGET_PATH}/$CI_PROJECT_NAME.jar ${STAGE_TARGET_PATH}/$CI_PROJECT_NAME.jar_${CI_COMMIT_TIMESTAMP}</span>
+      <span class="s">fi</span>
+    <span class="pi">-</span> <span class="s">scp -i  $STAGE_TARGET_SERVER_KEY $CI_PROJECT_NAME.jar ${STAGE_NAME}@${STAGE_TARGET_SERVER}:${STAGE_TARGET_PATH}</span>
+    <span class="pi">-</span> <span class="s">cat $START</span>
+    <span class="pi">-</span> <span class="s">scp -i  $STAGE_TARGET_SERVER_KEY $START ${STAGE_NAME}@${STAGE_TARGET_SERVER}:${STAGE_TARGET_PATH}/start.sh</span>
+    <span class="pi">-</span> <span class="s">cat $STAGE_TARGET_SERVER_KEY</span>
+    <span class="pi">-</span> <span class="s">ssh -i  $STAGE_TARGET_SERVER_KEY ${STAGE_NAME}@${STAGE_TARGET_SERVER} chmod 755 ${STAGE_TARGET_PATH}/start.sh</span>
+    <span class="pi">-</span> <span class="s">ssh -i  $STAGE_TARGET_SERVER_KEY ${STAGE_NAME}@${STAGE_TARGET_SERVER} &lt;&lt; EOT</span>
+    <span class="pi">-</span> <span class="s">cd ${STAGE_TARGET_PATH}</span>
+    <span class="pi">-</span> <span class="s">./start.sh</span>
+    <span class="pi">-</span> <span class="s">EOT</span>
+    <span class="pi">-</span> <span class="s">echo Congratulation. All done!</span>
+
+<span class="na">deploy_as_production</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">deploy</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">build</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">on_success</span>
+  <span class="na">only</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">master</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">echo [INFO] DEPLOY PRODUCTION_MODE $CI_PROJECT_NAME</span>
+
+
+
+
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/aws/2024/05/22/aws-series-01-Model.html">
+        [aws Series] 01 Model
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/ci/cd/2024/05/22/ci-cd-series-02-Deploy.html">
+        [ci:cd Series] 02 Deploy
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

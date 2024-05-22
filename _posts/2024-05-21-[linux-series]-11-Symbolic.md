@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - Symbolic link](https://github.com/newkayak12/Dictionary/blob/master/linux/Symbolic.md)
 
 

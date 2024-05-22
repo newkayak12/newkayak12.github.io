@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - YAML](https://github.com/newkayak12/Dictionary/blob/master/java/21.YAML.md)
 
 # YAML(Yet Another Markup Language)

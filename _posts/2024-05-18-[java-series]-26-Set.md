@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Set](https://github.com/newkayak12/Dictionary/blob/master/java/26.Set.md)
 
 ## intersect

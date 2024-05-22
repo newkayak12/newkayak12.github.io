@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - Split vs StringTokenizer](https://github.com/newkayak12/Dictionary/blob/master/java/20.StringAndTokenizer.md)
 
 # Split vs. StringTokenizer

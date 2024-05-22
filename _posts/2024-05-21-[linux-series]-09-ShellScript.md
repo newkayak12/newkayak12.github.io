@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - ShellScript](https://github.com/newkayak12/Dictionary/blob/master/linux/ShellScript.md)
 > CICD 등 작업 중 찾은 문서
 

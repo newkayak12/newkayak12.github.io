@@ -1,0 +1,7 @@
+.fluid-container {
+  display: flex;
+
+  & .nav{
+    width: 20%;
+  }
+}

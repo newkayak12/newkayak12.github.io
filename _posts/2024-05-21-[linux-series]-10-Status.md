@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - status](https://github.com/newkayak12/Dictionary/blob/master/linux/Status.md)
 > 프로젝트 중 OOM 으로 모니터링할 필요가 있어서 찾은 
 

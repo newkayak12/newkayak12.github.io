@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 직렬화 역직렬화](https://github.com/newkayak12/Dictionary/blob/master/java/13.Serialize_Deserialize.md)
 
 # Serialize & Deserialize

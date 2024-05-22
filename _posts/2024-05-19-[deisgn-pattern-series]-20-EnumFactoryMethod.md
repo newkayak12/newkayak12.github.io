@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [DESIGN_PATTERN]
+---
 from [Dictionary - Enum Factory Method](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/20.EnumFactoryMethod.md)
 
 

@@ -1,3 +1,7 @@
+---
+layout: post
+categories: [LINUX]
+---
 from [Dictionary - VI](https://github.com/newkayak12/Dictionary/blob/master/linux/ViEditor.md)
 
 ## VI/ VIM

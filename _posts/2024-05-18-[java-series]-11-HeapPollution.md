@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - 힙 오염](https://github.com/newkayak12/Dictionary/blob/master/java/11.HeapPollution.md)
 
 # Heap Pollution

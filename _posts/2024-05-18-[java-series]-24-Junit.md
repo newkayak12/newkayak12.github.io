@@ -1,8 +1,14 @@
+---
+layout: post
+categories: [JAVA]
+---
+
 from [Dictionary - JUnit](https://github.com/newkayak12/Dictionary/blob/master/java/24.Junit.md)
 
 # Junit
 
 ## Annotation
+
 |       Annotation       |                                                            Description                                                             |
 |:----------------------:|:----------------------------------------------------------------------------------------------------------------------------------:|
 |         @Test          |                                                        메소드가 테스트 메소드임을 나타낸다.                                                        |
