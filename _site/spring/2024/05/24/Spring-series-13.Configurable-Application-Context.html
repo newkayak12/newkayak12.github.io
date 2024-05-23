@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 13.configurable Application Context | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - ConfigurableApplicationContext">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/24/Spring-series-13.Configurable-Application-Context.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 13.configurable Application Context</h1>
+    
+    <p class="meta">
+      May 24, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/13.ConfigurableApplicationContext.md">Dictionary - ConfigurableApplicationContext</a></p>
+
+<h1 id="configurableapplicationcontext">ConfigurableApplicationContext</h1>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">SpringApplication</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">SpringApplication</span><span class="o">(</span><span class="nc">ResourceLoader</span> <span class="n">resourceLoader</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;?&gt;...</span> <span class="n">primarySources</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">resourceLoader</span> <span class="o">=</span> <span class="n">resourceLoader</span><span class="o">;</span>
+        <span class="nc">Assert</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">primarySources</span><span class="o">,</span> <span class="s">"PrimarySources must not be null"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">primarySources</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">primarySources</span><span class="o">));</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">webApplicationType</span> <span class="o">=</span> <span class="nc">WebApplicationType</span><span class="o">.</span><span class="na">deduceFromClasspath</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">bootstrapRegistryInitializers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">getSpringFactoriesInstances</span><span class="o">(</span><span class="nc">BootstrapRegistryInitializer</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="n">setInitializers</span><span class="o">((</span><span class="nc">Collection</span><span class="o">)</span> <span class="n">getSpringFactoriesInstances</span><span class="o">(</span><span class="nc">ApplicationContextInitializer</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="n">setListeners</span><span class="o">((</span><span class="nc">Collection</span><span class="o">)</span> <span class="n">getSpringFactoriesInstances</span><span class="o">(</span><span class="nc">ApplicationListener</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">mainApplicationClass</span> <span class="o">=</span> <span class="n">deduceMainApplicationClass</span><span class="o">();</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">ConfigurableApplicationContext</span> <span class="nf">run</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">();</span>
+
+        <span class="c1">// #1. BootStrapContext 생성</span>
+        <span class="nc">DefaultBootstrapContext</span> <span class="n">bootstrapContext</span> <span class="o">=</span> <span class="n">createBootstrapContext</span><span class="o">();</span>
+        <span class="nc">ConfigurableApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="c1">// #2. SYSTEM_PROPERTY_JAVA_AWT_HEADLESS 생성 {</span>
+        <span class="c1">//</span>
+        <span class="c1">//      -&gt; SpringApplication.java</span>
+        <span class="c1">//      private void configureHeadlessProperty() {</span>
+        <span class="c1">//          System.setProperty(SYSTEM_PROPERTY_JAVA_AWT_HEADLESS,</span>
+        <span class="c1">//                  System.getProperty(SYSTEM_PROPERTY_JAVA_AWT_HEADLESS, Boolean.toString(this.headless)));</span>
+        <span class="c1">//      }   </span>
+        <span class="c1">// </span>
+        <span class="c1">// }</span>
+        <span class="n">configureHeadlessProperty</span><span class="o">();</span>
+        
+        <span class="c1">// #3. SpringApplicationListener 조회 및 start</span>
+        <span class="nc">SpringApplicationRunListeners</span> <span class="n">listeners</span> <span class="o">=</span> <span class="n">getRunListeners</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+        <span class="c1">//</span>
+        <span class="c1">// -&gt; SpringApplication.java</span>
+        <span class="c1">// private SpringApplicationRunListeners getRunListeners(String[] args) {</span>
+        <span class="c1">//     Class&lt;?&gt;[] types = new Class&lt;?&gt;[] { SpringApplication.class, String[].class };</span>
+        <span class="c1">//     return new SpringApplicationRunListeners(logger,</span>
+        <span class="c1">//             getSpringFactoriesInstances(SpringApplicationRunListener.class, types, this, args),</span>
+        <span class="c1">//             this.applicationStartup);</span>
+        <span class="c1">// }</span>
+        <span class="c1">//</span>
+        <span class="n">listeners</span><span class="o">.</span><span class="na">starting</span><span class="o">(</span><span class="n">bootstrapContext</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">mainApplicationClass</span><span class="o">);</span>
+        <span class="c1">//</span>
+        <span class="c1">// -&gt; SpringApplicationRunListeners.java</span>
+        <span class="c1">// void starting(ConfigurableBootstrapContext bootstrapContext, Class&lt;?&gt; mainApplicationClass) {</span>
+        <span class="c1">//    doWithListeners("spring.boot.application.starting", (listener) -&gt; listener.starting(bootstrapContext),</span>
+        <span class="c1">//            (step) -&gt; {</span>
+        <span class="c1">//                if (mainApplicationClass != null) {</span>
+        <span class="c1">//                    step.tag("mainApplicationClass", mainApplicationClass.getName());</span>
+        <span class="c1">//                }</span>
+        <span class="c1">//            });</span>
+        <span class="c1">//</span>
+        <span class="c1">// }</span>
+        
+        
+        
+        <span class="k">try</span> <span class="o">{</span>
+            
+            <span class="c1">// #4. Arguments 래핑 및 Environment 준비</span>
+            <span class="nc">ApplicationArguments</span> <span class="n">applicationArguments</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DefaultApplicationArguments</span><span class="o">(</span><span class="n">args</span><span class="o">);</span>
+            <span class="nc">ConfigurableEnvironment</span> <span class="n">environment</span> <span class="o">=</span> <span class="n">prepareEnvironment</span><span class="o">(</span><span class="n">listeners</span><span class="o">,</span> <span class="n">bootstrapContext</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span>
+            
+            <span class="c1">// #5. IgnoreBeanInfo 설정 {</span>
+            <span class="c1">//</span>
+            <span class="c1">//      -&gt; SpringApplication.java</span>
+            <span class="c1">//</span>
+            <span class="c1">//      private void configureIgnoreBeanInfo(ConfigurableEnvironment environment) {</span>
+            <span class="c1">//          if (System.getProperty(CachedIntrospectionResults.IGNORE_BEANINFO_PROPERTY_NAME) == null) {</span>
+            <span class="c1">//              Boolean ignore = environment.getProperty(CachedIntrospectionResults.IGNORE_BEANINFO_PROPERTY_NAME,</span>
+            <span class="c1">//                      Boolean.class, Boolean.TRUE);</span>
+            <span class="c1">//              System.setProperty(CachedIntrospectionResults.IGNORE_BEANINFO_PROPERTY_NAME, ignore.toString());</span>
+            <span class="c1">//          }</span>
+            <span class="c1">//      }</span>
+            <span class="c1">// }</span>
+            <span class="n">configureIgnoreBeanInfo</span><span class="o">(</span><span class="n">environment</span><span class="o">);</span>
+            <span class="nc">Banner</span> <span class="n">printedBanner</span> <span class="o">=</span> <span class="n">printBanner</span><span class="o">(</span><span class="n">environment</span><span class="o">);</span>
+            
+            <span class="c1">// #6. ApplicationContext 생성</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="n">createApplicationContext</span><span class="o">();</span>
+            <span class="n">context</span><span class="o">.</span><span class="na">setApplicationStartup</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">applicationStartup</span><span class="o">);</span>
+            
+            <span class="c1">// #7. Context 준비</span>
+            <span class="n">prepareContext</span><span class="o">(</span><span class="n">bootstrapContext</span><span class="o">,</span> <span class="n">context</span><span class="o">,</span> <span class="n">environment</span><span class="o">,</span> <span class="n">listeners</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">,</span> <span class="n">printedBanner</span><span class="o">);</span>
+            
+            <span class="c1">// #8. Context Refresh</span>
+            <span class="n">refreshContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+            
+            <span class="c1">// #9. Context Refresh 후처리 </span>
+            <span class="n">afterRefresh</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span>
+            
+            <span class="nc">Duration</span> <span class="n">timeTakenToStartup</span> <span class="o">=</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">ofNanos</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">logStartupInfo</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">new</span> <span class="nf">StartupInfoLogger</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">mainApplicationClass</span><span class="o">).</span><span class="na">logStarted</span><span class="o">(</span><span class="n">getApplicationLog</span><span class="o">(),</span> <span class="n">timeTakenToStartup</span><span class="o">);</span>
+            <span class="o">}</span>
+            
+            <span class="c1">// #10. Listener 시작</span>
+            <span class="n">listeners</span><span class="o">.</span><span class="na">started</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">timeTakenToStartup</span><span class="o">);</span>
+            
+            <span class="c1">// #11. Runners 실행</span>
+            <span class="n">callRunners</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">handleRunFailure</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">ex</span><span class="o">,</span> <span class="n">listeners</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">Duration</span> <span class="n">timeTakenToReady</span> <span class="o">=</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">ofNanos</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">nanoTime</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">);</span>
+            <span class="n">listeners</span><span class="o">.</span><span class="na">ready</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">timeTakenToReady</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="nc">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">handleRunFailure</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">ex</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">context</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="1-bootstrapcontext-생성">1. BootStrapContext 생성</h2>
+<p>BootStrapContext 란 애플리케이션 컨텍스트 준비 전까지 Spring의 Environment 객체를 후처리하기 위한 임시 컨텍스트 생성</p>
+
+<h2 id="2-system_property_java_awt_headless-생성">2. SYSTEM_PROPERTY_JAVA_AWT_HEADLESS 생성</h2>
+<p>Java AWT로 UI를 생성할 경우 UI 없이도 작동할 수 있게 해주는 설정</p>
+
+<h2 id="3-springapplicationlistener-조회-및-start">3. SpringApplicationListener 조회 및 start</h2>
+<p>컨텍스트 준비 시 필요한 리스너를 찾아서 BootStrapContext를 사용해서 실행한다. 
+생성 시간이 길 경우 Listener로 등록해서 Notify해서 애플리케이션 컨텍스트를 준비함과 동시에 객체를 생성할 수 있게 해준다.</p>
+
+<h2 id="4-arguments-래핑-및-environment-준비">4. Arguments 래핑 및 Environment 준비</h2>
+<p><code class="language-plaintext highlighter-rouge">String[]</code> 인자를 <code class="language-plaintext highlighter-rouge">ApplicationArgument</code>로 래핑한다. 이를 Environment를 준비하는 <code class="language-plaintext highlighter-rouge">prepareEnvironment</code>에 넘겨준다. 
+애플리케이션 타입에 따라 Environment 구현체를 생성한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="nc">ConfigurableEnvironment</span> <span class="nf">getOrCreateEnvironment</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">environment</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">environment</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">webApplicationType</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nl">SERVLET:</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ApplicationServletEnvironment</span><span class="o">();</span>
+    <span class="k">case</span> <span class="nl">REACTIVE:</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ApplicationReactiveWebEnvironment</span><span class="o">();</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ApplicationEnvironment</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="5-ignorebeaninfo-설정">5. IgnoreBeanInfo 설정</h2>
+<p>JSP의 JavaBeans를 Ingore</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">configureIgnoreBeanInfo</span><span class="o">(</span><span class="nc">ConfigurableEnvironment</span> <span class="n">environment</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="nc">CachedIntrospectionResults</span><span class="o">.</span><span class="na">IGNORE_BEANINFO_PROPERTY_NAME</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Boolean</span> <span class="n">ignore</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"spring.beaninfo.ignore"</span><span class="o">,</span> <span class="nc">Boolean</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">Boolean</span><span class="o">.</span><span class="na">TRUE</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="nc">CachedIntrospectionResults</span><span class="o">.</span><span class="na">IGNORE_BEANINFO_PROPERTY_NAME</span><span class="o">,</span> <span class="n">ignore</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="6-applicationcontext-생성">6. ApplicationContext 생성</h2>
+<p>팩토리 클래스에 위임한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FunctionalInterface</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApplicationContextFactory</span> <span class="o">{</span>
+
+    <span class="nc">ApplicationContextFactory</span> <span class="no">DEFAULT</span> <span class="o">=</span> <span class="o">(</span><span class="n">webApplicationType</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">switch</span> <span class="o">(</span><span class="n">webApplicationType</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">SERVLET:</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">AnnotationConfigServletWebServerApplicationContext</span><span class="o">();</span>
+            <span class="k">case</span> <span class="nl">REACTIVE:</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">AnnotationConfigReactiveWebServerApplicationContext</span><span class="o">();</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="k">return</span> <span class="k">new</span> <span class="nf">AnnotationConfigApplicationContext</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">"Unable create a default ApplicationContext instance, "</span>
+                <span class="o">+</span> <span class="s">"you may need a custom ApplicationContextFactory"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nc">ConfigurableApplicationContext</span> <span class="nf">create</span><span class="o">(</span><span class="nc">WebApplicationType</span> <span class="n">webApplicationType</span><span class="o">);</span>
+
+    <span class="kd">static</span> <span class="nc">ApplicationContextFactory</span> <span class="nf">ofContextClass</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">ConfigurableApplicationContext</span><span class="o">&gt;</span> <span class="n">contextClass</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">of</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="nc">BeanUtils</span><span class="o">.</span><span class="na">instantiateClass</span><span class="o">(</span><span class="n">contextClass</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="nc">ApplicationContextFactory</span> <span class="nf">of</span><span class="o">(</span><span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">ConfigurableApplicationContext</span><span class="o">&gt;</span> <span class="n">supplier</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">webApplicationType</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">supplier</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="7-context-준비">7. Context 준비</h2>
+<p>Context 준비 후 하는 후처리 작업과 빈을 등록하는 Refresh 단계를 위한 전처리 작업이 수행된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">prepareContext</span><span class="o">(</span><span class="nc">DefaultBootstrapContext</span> <span class="n">bootstrapContext</span><span class="o">,</span> <span class="nc">ConfigurableApplicationContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">ConfigurableEnvironment</span> <span class="n">environment</span><span class="o">,</span> <span class="nc">SpringApplicationRunListeners</span> <span class="n">listeners</span><span class="o">,</span> <span class="nc">ApplicationArguments</span> <span class="n">applicationArguments</span><span class="o">,</span> <span class="nc">Banner</span> <span class="n">printedBanner</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">context</span><span class="o">.</span><span class="na">setEnvironment</span><span class="o">(</span><span class="n">environment</span><span class="o">);</span>
+    <span class="n">postProcessApplicationContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="n">applyInitializers</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="n">listeners</span><span class="o">.</span><span class="na">contextPrepared</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="n">bootstrapContext</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">logStartupInfo</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">logStartupInfo</span><span class="o">(</span><span class="n">context</span><span class="o">.</span><span class="na">getParent</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="n">logStartupProfileInfo</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="c1">// Add boot specific singleton beans</span>
+    <span class="nc">ConfigurableListableBeanFactory</span> <span class="n">beanFactory</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getBeanFactory</span><span class="o">();</span>
+    <span class="n">beanFactory</span><span class="o">.</span><span class="na">registerSingleton</span><span class="o">(</span><span class="s">"springApplicationArguments"</span><span class="o">,</span> <span class="n">applicationArguments</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">printedBanner</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">beanFactory</span><span class="o">.</span><span class="na">registerSingleton</span><span class="o">(</span><span class="s">"springBootBanner"</span><span class="o">,</span> <span class="n">printedBanner</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">beanFactory</span> <span class="k">instanceof</span> <span class="nc">AbstractAutowireCapableBeanFactory</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">((</span><span class="nc">AbstractAutowireCapableBeanFactory</span><span class="o">)</span> <span class="n">beanFactory</span><span class="o">).</span><span class="na">setAllowCircularReferences</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">allowCircularReferences</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">beanFactory</span> <span class="k">instanceof</span> <span class="nc">DefaultListableBeanFactory</span><span class="o">)</span> <span class="o">{</span>
+            <span class="o">((</span><span class="nc">DefaultListableBeanFactory</span><span class="o">)</span> <span class="n">beanFactory</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">setAllowBeanDefinitionOverriding</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">allowBeanDefinitionOverriding</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>beanNameGenerator, resourceLoader, conversionService 등이 생성됐다면 싱글톤 bean으로 등록한다. 
+추가로 BootStrapContext는 필요 없어지므로 종료한다.</p>
+
+<h2 id="8-context-refresh"><a href="14.RefreshContext.md">8. Context Refresh</a></h2>
+<p>빈을 찾아서 등록하고 웹 서버를 만들어 실행하는 등의 핵심 작업들이 진행된다. refresh를 거치면 모든 객체들이 싱글톤으로 인스턴스화 되어 있다. 
+에러가 나면 모든 빈을 제거한다. 그래서 모 아니면 도다.</p>
+
+<h2 id="9-context-refresh-후처리">9. Context Refresh 후처리</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">afterRefresh</span><span class="o">(</span><span class="nc">ConfigurableApplicationContext</span> <span class="n">context</span><span class="o">,</span> <span class="nc">ApplicationArguments</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이전에 callRunners()가 있어서 <code class="language-plaintext highlighter-rouge">ApplicationRunner, CommandLineRunner</code>가 있었다고 한다.</p>
+
+<h2 id="10-listener-시작">10. Listener 시작</h2>
+<h2 id="11-runners-실행">11. Runners 실행</h2>
+<p>어플리케이션이 실행된 이후에 초기화하는 작업을 필요로 하는 경우에 Runner로 등록하는데, 이들을 찾아서 실행한다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/24/Spring-series-12.Initialize.html">
+        [spring Series] 12.initialize
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/24/Spring-series-14.Refresh-Context.html">
+        [spring Series] 14.refresh Context
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

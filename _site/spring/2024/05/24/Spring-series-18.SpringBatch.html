@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 18.springbatch | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - SpringBatch">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/24/Spring-series-18.SpringBatch.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 18.springbatch</h1>
+    
+    <p class="meta">
+      May 24, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/18.SpringBatch.md">Dictionary - SpringBatch</a></p>
+
+<h1 id="springbatch">SpringBatch</h1>
+
+<p><img src="/assets/img/스크린샷%202024-05-24%2007.14.00.png" alt="" /></p>
+
+<ul>
+  <li>JobLauncher : Job을 실행 시키는 컴포넌트</li>
+  <li>JobRepository: Job실행, Job, Step을 저장</li>
+  <li>Job : 하나의 배치 실행 단위, 1개 이상의 Step으로 구성됨</li>
+  <li>JobInstance :논리적인 Job 실행을 의미합니다. 주로 Job 에 파라미터를 부여하여 다른 JobInstance 구분할수 있습니다.</li>
+  <li>Step : 일련의 작업들</li>
+  <li>ItemReader : Step에서 데이터를 읽는 Tasklet</li>
+  <li>ItemProcessor: ItemReader에서 읽은 데이터를 처리하는 Tasklet</li>
+  <li>ItemWriter : ItemProcessor로 처리된 데이터를 쓰는 Tasklet</li>
+</ul>
+
+<p><img src="/assets/img/스크린샷%202024-05-24%2007.14.17.png" alt="" /></p>
+<h2 id="jobscope와-stepscope">@JobScope와 @StepScope</h2>
+
+<blockquote>
+  <h3 id="scope란">Scope란?</h3>
+  <ul>
+    <li>스프링 컨테이너에서 빈이 관리되는 범위</li>
+    <li>singleton, prototype, request, session, application이 있으며 기본은 singleton으로 생성된다.</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>Job과 Step의 빈 생성과 실행에 관여하는 스코프</li>
+  <li>프록시 모드를 기본 값으로 하는 스코프: <code class="language-plaintext highlighter-rouge">@Scope(value = "job", proxyMode = ScopedProxyMode.TARGET_CLASS)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">@JobScope</code>나 <code class="language-plaintext highlighter-rouge">@StepScope</code>가 선언되면 빈의 생성이 애플리케이션 구동 시점이 아닌 빈의 실행 시점에 이루어진다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Values</code>를 주입해서 빈의 실행 시점에 값을 참조할 수 있으며 일종의 Lazy Binding이 가능해진다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Value(”#{jobParameters[파라미터명]}”)</code>, <code class="language-plaintext highlighter-rouge">@Value(”#{jobExecutionContext[파라미터명]”})</code>, <code class="language-plaintext highlighter-rouge">@Value(”#{stepExecutionContext[파라미터명]”})</code></li>
+  <li><code class="language-plaintext highlighter-rouge">@Value</code>를 사용할 경우 빈 선언문에 <code class="language-plaintext highlighter-rouge">@JobScope</code>, <code class="language-plaintext highlighter-rouge">@StepScope</code>를 정의하지 않으면 오류를 발생한다. 때문에 반드시 선언해야 한다.</li>
+  <li>프록시 모드로 빈이 선언되기 때문에 애플리케이션 구동 시점에는 빈의 프록시 객체가 생성되어 실행 시점에 실제 빈을 호출 해준다.</li>
+  <li>병렬 처리 시 각 쓰레드마다 생성된 스코프 빈이 할당 되기 때문에 쓰레드에 안전하게 실행이 가능하다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nd">@Configuration</span>
+<span class="nd">@Slf4j</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BatchExample</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PlatformTransactionManager</span> <span class="n">txManager</span><span class="o">;</span>
+
+
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"exampleJob"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Job</span> <span class="nf">exampleJob</span><span class="o">(</span><span class="nd">@Qualifier</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"exampleStep"</span><span class="o">)</span> <span class="nc">Step</span> <span class="n">step</span><span class="o">,</span> <span class="nc">JobRepository</span> <span class="n">jobRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">JobBuilder</span><span class="o">(</span><span class="s">"exampleJob"</span><span class="o">,</span> <span class="n">jobRepository</span><span class="o">).</span><span class="na">start</span><span class="o">(</span><span class="n">step</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+
+    <span class="nd">@JobScope</span>
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"exampleStep"</span><span class="o">)</span> <span class="c1">//작업으로 STep 명시</span>
+    <span class="kd">public</span> <span class="nc">Step</span> <span class="nf">exampleStep</span><span class="o">(</span><span class="nd">@Qualifier</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"exampleTasklet"</span><span class="o">)</span> <span class="nc">Tasklet</span> <span class="n">tasklet</span><span class="o">,</span> <span class="nc">JobRepository</span> <span class="n">jobRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">StepBuilder</span><span class="o">(</span><span class="s">"exampleStep"</span><span class="o">,</span> <span class="n">jobRepository</span><span class="o">).</span><span class="na">tasklet</span><span class="o">(</span><span class="n">tasklet</span><span class="o">,</span> <span class="n">txManager</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+
+    <span class="nd">@StepScope</span>
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"exampleTasklet"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Tasklet</span> <span class="nf">exampleTasklet</span> <span class="o">(){</span>  <span class="c1">// 간단한 작업 명세</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">contribution</span><span class="o">,</span> <span class="n">chunkContext</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"ExampleTasklet"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">RepeatStatus</span><span class="o">.</span><span class="na">CONTINUABLE</span><span class="o">;</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="spring-batch-5">Spring Batch 5</h2>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">@EnableBatchProcessing</code>로 Batch를 initialize 할 수 없어졌음 -&gt; 5부터 <code class="language-plaintext highlighter-rouge">autoConfigure</code> 날아감</li>
+  <li><code class="language-plaintext highlighter-rouge">JobBuilderFactory</code> / <code class="language-plaintext highlighter-rouge">StepBuilderFactory</code> -&gt; <code class="language-plaintext highlighter-rouge">JobBuilder</code>/ <code class="language-plaintext highlighter-rouge">StepBuilder</code>로 변경됨</li>
+</ol>
+
+<p><a href="https://tonylim.tistory.com/431">참고</a></p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/24/Spring-series-17.JDKDynamicProxy.html">
+        [spring Series] 17.jdkdynamicproxy
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/24/Spring-series-19.SpringQuartz.html">
+        [spring Series] 19.springquartz
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
