@@ -233,22 +233,26 @@
 <ol>
   <li><code class="language-plaintext highlighter-rouge">Observable</code> 대신 <code class="language-plaintext highlighter-rouge">Flowable</code>사용
 ```
-| Observable
-    <ul>
-      <li>1000개 미만 데이터 발행시</li>
-      <li>적은 소스로 OOM 발생이 가능성이 낮을 경우</li>
-      <li>GUI 이벤트 처리</li>
-    </ul>
+    <blockquote>
+      <p>Observable</p>
+      <ul>
+        <li>1000개 미만 데이터 발행시</li>
+        <li>적은 소스로 OOM 발생이 가능성이 낮을 경우</li>
+        <li>GUI 이벤트 처리</li>
+      </ul>
+    </blockquote>
   </li>
 </ol>
 
-<p>| Flowable</p>
-<ul>
-  <li>1000개 이상 데이터 발행 시</li>
-  <li>디스크 I/O</li>
-  <li>JDBC</li>
-  <li>네트워크 I/O</li>
-</ul>
+<blockquote>
+  <p>Flowable</p>
+  <ul>
+    <li>1000개 이상 데이터 발행 시</li>
+    <li>디스크 I/O</li>
+    <li>JDBC</li>
+    <li>네트워크 I/O</li>
+  </ul>
+</blockquote>
 
 <blockquote>
   <p>Backpressure 제어 전략</p>
@@ -257,188 +261,212 @@
     <li>ERROR(BackpressureStrategy.ERROR) -&gt; 발생시 <code class="language-plaintext highlighter-rouge">MissingBackpressureException</code></li>
     <li>BUFFER(BackpressureStrategy.BUFFER) -&gt; 소비할 때까지 Queue, OOM 가능성 이씀</li>
     <li>DROP(BackpressureStrategy.DROP) -&gt; 소비하지 못한 데이터 버림</li>
-    <li>LATEST(BackpressureStrategy.LATEST) -&gt; 받을 준비가 될 때까지 최신만 유지하고 버림</li>
+    <li>LATEST(BackpressureStrategy.LATEST) -&gt; 받을 준비가 될 때까지 최신만 유지하고 버림
+```</li>
   </ol>
 </blockquote>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-## Reactor
-Pivotal에서 만들었다. 
+<h2 id="reactor">Reactor</h2>
+<p>Pivotal에서 만들었다.</p>
 
-### Publisher
-1. 한 건은 `Mono`
-2. 없거나 여러 건은 `Flux`
+<h3 id="publisher-1">Publisher</h3>
+<ol>
+  <li>한 건은 <code class="language-plaintext highlighter-rouge">Mono</code></li>
+  <li>없거나 여러 건은 <code class="language-plaintext highlighter-rouge">Flux</code></li>
+</ol>
 
-### Reactor에서 백프레셔 처리 방법
-1. 버퍼링 -&gt; OOM 가능성 있음
-2. DROP -&gt; `onBackpressureDrop()`으로 그냥 버려서 최악의 상황을 모면함
-3. Latest -&gt; `onBackpressureLatest()`으로 최근 이벤트만 유지
-4. `flatMap()` -&gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)
+<h3 id="reactor에서-백프레셔-처리-방법">Reactor에서 백프레셔 처리 방법</h3>
+<ol>
+  <li>버퍼링 -&gt; OOM 가능성 있음</li>
+  <li>DROP -&gt; <code class="language-plaintext highlighter-rouge">onBackpressureDrop()</code>으로 그냥 버려서 최악의 상황을 모면함</li>
+  <li>Latest -&gt; <code class="language-plaintext highlighter-rouge">onBackpressureLatest()</code>으로 최근 이벤트만 유지</li>
+  <li><code class="language-plaintext highlighter-rouge">flatMap()</code> -&gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)</li>
+</ol>
 
+<h3 id="operator">Operator</h3>
 
-### Operator
+<h4 id="create">Create</h4>
+<ol>
+  <li>just()</li>
+  <li>create()</li>
+  <li>fromStream()</li>
+  <li>fromIterable()</li>
+</ol>
 
-#### Create
-1. just()
-4. create()
-2. fromStream()
-3. fromIterable()
+<h4 id="sequence-control">Sequence Control</h4>
+<ol>
+  <li>flatMap() -&gt; <code class="language-plaintext highlighter-rouge">map()</code> + 새로운 Sequence를 생성해서 내보 냄</li>
+  <li>concat() -&gt; Publisher의 Sequence를 연결해서 emit</li>
+  <li>merge() -&gt; Mono를 합침</li>
+  <li>zip() -&gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합</li>
+</ol>
 
-#### Sequence Control
-1. flatMap() -&gt; `map()` + 새로운 Sequence를 생성해서 내보 냄
-2. concat() -&gt; Publisher의 Sequence를 연결해서 emit
-3. merge() -&gt; Mono를 합침
-4. zip() -&gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합
+<h4 id="peeking">peeking</h4>
+<ol>
+  <li>doOnNext() -&gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서</li>
+  <li>doOnSuccess/doOnComplete -&gt; 성공/완료 시</li>
+  <li>doOnError -&gt; 에러 종료 시</li>
+  <li>doOnCancel -&gt; 취소 시</li>
+  <li>doFirst -&gt; 시작 시</li>
+  <li>doOnSubscribe -&gt; 구독 시</li>
+  <li>doOnRequest/doOnTerminate -&gt; 요청/ 종료 시</li>
+  <li>log() -&gt; Singal 이벤트 로깅</li>
+</ol>
 
-#### peeking
-1. doOnNext() -&gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서 
-2. doOnSuccess/doOnComplete -&gt; 성공/완료 시
-3. doOnError -&gt; 에러 종료 시
-4. doOnCancel -&gt; 취소 시
-5. doFirst -&gt; 시작 시 
-6. doOnSubscribe -&gt; 구독 시
-7. doOnRequest/doOnTerminate -&gt; 요청/ 종료 시
-8. log() -&gt; Singal 이벤트 로깅
+<h4 id="filter">Filter</h4>
+<ol>
+  <li>filter -&gt; Filtering</li>
+  <li>take -&gt; 통과 개수 지정</li>
+</ol>
 
-#### Filter
-1. filter -&gt; Filtering
-2. take -&gt; 통과 개수 지정
+<h4 id="error">error</h4>
+<ol>
+  <li>timeout -&gt; timeOut 이내 emit 없으면 에러</li>
+  <li>retry -&gt; 주어진 숫자만큼 재구독하도록</li>
+</ol>
 
-#### error
-1. timeout -&gt; timeOut 이내 emit 없으면 에러
-2. retry -&gt; 주어진 숫자만큼 재구독하도록
+<h4 id="ignoreelement">ignoreElement</h4>
+<ol>
+  <li>then -&gt; 작업 완료를 기다림</li>
+  <li>thenReturn -&gt; then + return some Mono</li>
+  <li>thenMany -&gt; then return + some Flux</li>
+  <li>distinct -&gt; 중복 제거</li>
+</ol>
 
-#### ignoreElement
-1. then -&gt; 작업 완료를 기다림
-2. thenReturn -&gt; then + return some Mono
-3. thenMany -&gt; then return + some Flux
-4. distinct -&gt; 중복 제거
+<h4 id="split-flux---fluxflux">split (Flux -&gt; Flux&lt;Flux<T>&gt;)</T></h4>
+<ol>
+  <li>window(int)</li>
+  <li>window(Duration)</li>
+  <li>buffer</li>
+</ol>
 
-#### split (Flux -&gt; Flux&lt;Flux&lt;T&gt;&gt;)
-1. window(int)
-2. window(Duration)
-3. buffer
+<h4 id="tosynchronous">toSynchronous</h4>
+<ol>
+  <li>blockFirst/blockLast (flux)</li>
+  <li>toIterable/toStream (flux)</li>
+  <li>block (mono)</li>
+  <li>toFuture (mono)</li>
+</ol>
 
+<h3 id="delay">delay</h3>
+<ol>
+  <li>delay/delayUntil -&gt; 완료 연기</li>
+</ol>
 
-#### toSynchronous
-1. blockFirst/blockLast (flux)
-2. toIterable/toStream (flux)
-3. block (mono)
-4. toFuture (mono)
+<p><a href="https://colevelup.tistory.com/40">참고 자료</a></p>
 
+<hr />
+<h1 id="r2dbc--reactive-relational-database-connectivity-">R2DBC ( Reactive Relational DataBase Connectivity )</h1>
 
-### delay
-1. delay/delayUntil -&gt; 완료 연기
+<p>JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.</p>
+<h2 id="장점">장점</h2>
+<ol>
+  <li>JDBC에서는 불가능한 논 블로킹 API를 제공한다.</li>
+</ol>
 
-[참고 자료](https://colevelup.tistory.com/40)
+<h2 id="단점">단점</h2>
+<ol>
+  <li>JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)</li>
+  <li>아직 성숙하지 않아서 공식적인 driver implementation이 없다.</li>
+  <li>R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)
+<a href="https://nipafx.dev/inside-java-newscast-27/">Java19, Loom</a>
+<a href="http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html">blogSpot</a></li>
+  <li>JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.</li>
+</ol>
 
+<h2 id="querydsl"><a href="https://github.com/infobip/infobip-spring-data-querydsl">QueryDsl</a></h2>
+<p>JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.</p>
 
------------
-# R2DBC ( Reactive Relational DataBase Connectivity )
+<h3 id="에러-사항">에러 사항</h3>
 
-JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.
-## 장점
-1. JDBC에서는 불가능한 논 블로킹 API를 제공한다.
+<ol>
+  <li>네이밍 규칙</li>
+</ol>
 
-## 단점
-1. JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)
-2. 아직 성숙하지 않아서 공식적인 driver implementation이 없다.
-3. R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)
-[Java19, Loom](https://nipafx.dev/inside-java-newscast-27/)
-[blogSpot](http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html)
-4. JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.
+<p>infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslConfig</span> <span class="o">{</span>
 
-## [QueryDsl](https://github.com/infobip/infobip-spring-data-querydsl)
-JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">NamingStrategy</span> <span class="nf">namingStrategy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">NamingStrategy</span><span class="o">(){</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getTableName</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?&gt;</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">type</span><span class="o">.</span><span class="na">getSimpleName</span><span class="o">();</span>
+            <span class="o">}</span>
 
-
-### 에러 사항
-
-1. 네이밍 규칙
-infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.
-```java
-@Configuration
-public class QuerydslConfig {
-
-    @Bean
-    public NamingStrategy namingStrategy() {
-        return new NamingStrategy(){
-            @Override
-            public String getTableName(Class&lt;?&gt; type) {
-                return type.getSimpleName();
-            }
-
-            @Override
-            public String getColumnName(RelationalPersistentProperty property) {
-                return property.getName().substring(0, 1).toUpperCase() + property.getName().substring(1);
-            }
-        };
-    }
-}
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getColumnName</span><span class="o">(</span><span class="nc">RelationalPersistentProperty</span> <span class="n">property</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">property</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">).</span><span class="na">toUpperCase</span><span class="o">()</span> <span class="o">+</span> <span class="n">property</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">substring</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div></div>
 
 <p><a href="https://github.com/infobip/infobip-spring-data-querydsl?tab=readme-ov-file#R2DBCRequirements">infobip querydsl README</a>에서도
 Flyway를 쓰던 SqlTemplate을 <code class="language-plaintext highlighter-rouge">@Bean</code>으로 두던 하라고 한다.</p>
 
 <ol>
-  <li>
-    <p>템플릿 설정
-```java
-@Configuration
-public class SqlTemplatesConfig {
- private final List<String> driver = Arrays.asList("mysql", "maria");
- @Bean
- public SQLTemplates sqlTemplates (R2dbcProperties properties) throws SQLException {
-     Boolean isStorageDB = driver.stream().map(driver -&gt; properties.getUrl().contains(driver)).reduce(false, (p, n) -&gt; p || n);</String></p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> return isStorageDB ?
-         MySQLTemplates.builder().escape('\\').quote().newLineToSingleSpace().build() :
-         H2Templates.builder().quote().escape('\\').newLineToSingleSpace().build();  } }
-</code></pre></div>    </div>
-  </li>
+  <li>템플릿 설정</li>
 </ol>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어
-```java
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SqlTemplatesConfig</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">driver</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"mysql"</span><span class="o">,</span> <span class="s">"maria"</span><span class="o">);</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SQLTemplates</span> <span class="nf">sqlTemplates</span> <span class="o">(</span><span class="nc">R2dbcProperties</span> <span class="n">properties</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+        <span class="nc">Boolean</span> <span class="n">isStorageDB</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="n">driver</span> <span class="o">-&gt;</span> <span class="n">properties</span><span class="o">.</span><span class="na">getUrl</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">driver</span><span class="o">)).</span><span class="na">reduce</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">p</span> <span class="o">||</span> <span class="n">n</span><span class="o">);</span>
 
-interface BoardQueryDslRepository extends QuerydslR2dbcRepository&lt;Board, String&gt; {
+
+        <span class="k">return</span> <span class="n">isStorageDB</span> <span class="o">?</span>
+                <span class="nc">MySQLTemplates</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">escape</span><span class="o">(</span><span class="sc">'\\'</span><span class="o">).</span><span class="na">quote</span><span class="o">().</span><span class="na">newLineToSingleSpace</span><span class="o">().</span><span class="na">build</span><span class="o">()</span> <span class="o">:</span>
+                <span class="nc">H2Templates</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">quote</span><span class="o">().</span><span class="na">escape</span><span class="o">(</span><span class="sc">'\\'</span><span class="o">).</span><span class="na">newLineToSingleSpace</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+</code></pre></div></div>
+<p>이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">interface</span> <span class="nc">BoardQueryDslRepository</span> <span class="kd">extends</span> <span class="nc">QuerydslR2dbcRepository</span><span class="o">&lt;</span><span class="nc">Board</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="o">{</span>
     
-}
+<span class="o">}</span>
 
-@Repository
-@RequiredArgsConstructor
-@Slf4j
-class BoardRepository {
-    private final BoardQueryDslRepository boardQuery;
-
-
-    private BooleanBuilder condition(BoardType type, Language locale) {
-        BooleanBuilder builder = new BooleanBuilder();
-        if(Objects.nonNull(type)) board.type.eq(type);
-        if(Objects.nonNull(locale)) builder.and(board.locale.eq(locale));
-
-        return builder;
-    }
+<span class="nd">@Repository</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">class</span> <span class="nc">BoardRepository</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">BoardQueryDslRepository</span> <span class="n">boardQuery</span><span class="o">;</span>
 
 
-    public Mono&lt;Template&gt; template(BoardType type, Language locale) {
+    <span class="kd">private</span> <span class="nc">BooleanBuilder</span> <span class="nf">condition</span><span class="o">(</span><span class="nc">BoardType</span> <span class="n">type</span><span class="o">,</span> <span class="nc">Language</span> <span class="n">locale</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">BooleanBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BooleanBuilder</span><span class="o">();</span>
+        <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">type</span><span class="o">))</span> <span class="n">board</span><span class="o">.</span><span class="na">type</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">type</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">locale</span><span class="o">))</span> <span class="n">builder</span><span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">board</span><span class="o">.</span><span class="na">locale</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">locale</span><span class="o">));</span>
 
-        return boardQuery.query(query -&gt; {
-            return query.select(
-                                new QBoardeDto(
-                                        board.boardNo,
-                                        board.boardType,
-                                        board.locale,
-                                        board.contents,
-                                        board.lastModifiedDate
-                                )
-                        )
-                        .from(template)
-                        .where(this.condition(templateType, locale));
-        }).one();
-    }
+        <span class="k">return</span> <span class="n">builder</span><span class="o">;</span>
+    <span class="o">}</span>
 
-}
+
+    <span class="kd">public</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">Template</span><span class="o">&gt;</span> <span class="nf">template</span><span class="o">(</span><span class="nc">BoardType</span> <span class="n">type</span><span class="o">,</span> <span class="nc">Language</span> <span class="n">locale</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="k">return</span> <span class="n">boardQuery</span><span class="o">.</span><span class="na">query</span><span class="o">(</span><span class="n">query</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">query</span><span class="o">.</span><span class="na">select</span><span class="o">(</span>
+                                <span class="k">new</span> <span class="nf">QBoardeDto</span><span class="o">(</span>
+                                        <span class="n">board</span><span class="o">.</span><span class="na">boardNo</span><span class="o">,</span>
+                                        <span class="n">board</span><span class="o">.</span><span class="na">boardType</span><span class="o">,</span>
+                                        <span class="n">board</span><span class="o">.</span><span class="na">locale</span><span class="o">,</span>
+                                        <span class="n">board</span><span class="o">.</span><span class="na">contents</span><span class="o">,</span>
+                                        <span class="n">board</span><span class="o">.</span><span class="na">lastModifiedDate</span>
+                                <span class="o">)</span>
+                        <span class="o">)</span>
+                        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">template</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">condition</span><span class="o">(</span><span class="n">templateType</span><span class="o">,</span> <span class="n">locale</span><span class="o">));</span>
+        <span class="o">}).</span><span class="na">one</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
 </code></pre></div></div>
 <p>이렇게 있다면 where 절의 파라미터에 값을 바인딩할 때 <code class="language-plaintext highlighter-rouge">'?'</code>으로 네이밍을 잡아서 바인딩하려다 실패를 한다던가 하는 문제가 발생할 수 있다.
 내부적으로 <code class="language-plaintext highlighter-rouge">MySQLSQLTemplates</code>인지 <code class="language-plaintext highlighter-rouge">instanceOf</code>를 해서 파라미터 바인딩하는 것으로 보인다(Maria_r2dbc-connector). 따라서 기존에는 크게 신경 쓰지 않던 것에도

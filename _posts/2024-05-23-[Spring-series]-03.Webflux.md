@@ -56,12 +56,12 @@ ReactiveX(Netflix)에서 만들었다.
 ### RxJava에서 백프레셔 처리 방법
 1. `Observable` 대신 `Flowable`사용
 ```
-| Observable
+> Observable
 - 1000개 미만 데이터 발행시
 - 적은 소스로 OOM 발생이 가능성이 낮을 경우
 - GUI 이벤트 처리
 
-| Flowable
+> Flowable
 - 1000개 이상 데이터 발행 시
 - 디스크 I/O
 - JDBC
@@ -73,9 +73,8 @@ ReactiveX(Netflix)에서 만들었다.
 3. BUFFER(BackpressureStrategy.BUFFER) -> 소비할 때까지 Queue, OOM 가능성 이씀
 4. DROP(BackpressureStrategy.DROP) -> 소비하지 못한 데이터 버림
 5. LATEST(BackpressureStrategy.LATEST) -> 받을 준비가 될 때까지 최신만 유지하고 버림
-
-
 ```
+
 
 ## Reactor
 Pivotal에서 만들었다. 
@@ -170,6 +169,7 @@ JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지�
 ### 에러 사항
 
 1. 네이밍 규칙
+
 infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.
 ```java
 @Configuration
@@ -197,6 +197,7 @@ Flyway를 쓰던 SqlTemplate을 `@Bean`으로 두던 하라고 한다.
 
 
 2. 템플릿 설정
+
 ```java
 @Configuration
 public class SqlTemplatesConfig {

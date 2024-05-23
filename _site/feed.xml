@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 23 May 2024 22:00:08 +0900</pubDate>
+    <pubDate>Thu, 23 May 2024 22:15:57 +0900</pubDate>
     
       <item>
         <title>[spring Series] 10.required Args Constructor</title>
@@ -28,7 +28,7 @@
         <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/09.ApplicationContext.md&quot;&gt;Dictionary - Application Context&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;applicationcontext&quot;&gt;ApplicationContext&lt;/h1&gt;
-&lt;p&gt;빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 황경)&lt;/p&gt;
+&lt;p&gt;빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 환경)&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ListableBeanFactory&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HierarchicalBeanFactory&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MessageSource&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEventPublisher&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ResourcePatternResolver&lt;/code&gt; 를 상속 받음&lt;/p&gt;
 
@@ -471,22 +471,26 @@ GenericBeanDefinition, RootBeanDefinition, ChildBeanDefinition의 뼈&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Observable&lt;/code&gt; 대신 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Flowable&lt;/code&gt;사용
 ```
-| Observable
-    &lt;ul&gt;
-      &lt;li&gt;1000개 미만 데이터 발행시&lt;/li&gt;
-      &lt;li&gt;적은 소스로 OOM 발생이 가능성이 낮을 경우&lt;/li&gt;
-      &lt;li&gt;GUI 이벤트 처리&lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;Observable&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;1000개 미만 데이터 발행시&lt;/li&gt;
+        &lt;li&gt;적은 소스로 OOM 발생이 가능성이 낮을 경우&lt;/li&gt;
+        &lt;li&gt;GUI 이벤트 처리&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/blockquote&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;| Flowable&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;1000개 이상 데이터 발행 시&lt;/li&gt;
-  &lt;li&gt;디스크 I/O&lt;/li&gt;
-  &lt;li&gt;JDBC&lt;/li&gt;
-  &lt;li&gt;네트워크 I/O&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Flowable&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;1000개 이상 데이터 발행 시&lt;/li&gt;
+    &lt;li&gt;디스크 I/O&lt;/li&gt;
+    &lt;li&gt;JDBC&lt;/li&gt;
+    &lt;li&gt;네트워크 I/O&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Backpressure 제어 전략&lt;/p&gt;
@@ -495,188 +499,212 @@ GenericBeanDefinition, RootBeanDefinition, ChildBeanDefinition의 뼈&lt;/p&gt;
     &lt;li&gt;ERROR(BackpressureStrategy.ERROR) -&amp;gt; 발생시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MissingBackpressureException&lt;/code&gt;&lt;/li&gt;
     &lt;li&gt;BUFFER(BackpressureStrategy.BUFFER) -&amp;gt; 소비할 때까지 Queue, OOM 가능성 이씀&lt;/li&gt;
     &lt;li&gt;DROP(BackpressureStrategy.DROP) -&amp;gt; 소비하지 못한 데이터 버림&lt;/li&gt;
-    &lt;li&gt;LATEST(BackpressureStrategy.LATEST) -&amp;gt; 받을 준비가 될 때까지 최신만 유지하고 버림&lt;/li&gt;
+    &lt;li&gt;LATEST(BackpressureStrategy.LATEST) -&amp;gt; 받을 준비가 될 때까지 최신만 유지하고 버림
+```&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-## Reactor
-Pivotal에서 만들었다. 
+&lt;h2 id=&quot;reactor&quot;&gt;Reactor&lt;/h2&gt;
+&lt;p&gt;Pivotal에서 만들었다.&lt;/p&gt;
 
-### Publisher
-1. 한 건은 `Mono`
-2. 없거나 여러 건은 `Flux`
+&lt;h3 id=&quot;publisher-1&quot;&gt;Publisher&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;한 건은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mono&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;없거나 여러 건은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Flux&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-### Reactor에서 백프레셔 처리 방법
-1. 버퍼링 -&amp;gt; OOM 가능성 있음
-2. DROP -&amp;gt; `onBackpressureDrop()`으로 그냥 버려서 최악의 상황을 모면함
-3. Latest -&amp;gt; `onBackpressureLatest()`으로 최근 이벤트만 유지
-4. `flatMap()` -&amp;gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)
+&lt;h3 id=&quot;reactor에서-백프레셔-처리-방법&quot;&gt;Reactor에서 백프레셔 처리 방법&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;버퍼링 -&amp;gt; OOM 가능성 있음&lt;/li&gt;
+  &lt;li&gt;DROP -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onBackpressureDrop()&lt;/code&gt;으로 그냥 버려서 최악의 상황을 모면함&lt;/li&gt;
+  &lt;li&gt;Latest -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onBackpressureLatest()&lt;/code&gt;으로 최근 이벤트만 유지&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flatMap()&lt;/code&gt; -&amp;gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)&lt;/li&gt;
+&lt;/ol&gt;
 
+&lt;h3 id=&quot;operator&quot;&gt;Operator&lt;/h3&gt;
 
-### Operator
+&lt;h4 id=&quot;create&quot;&gt;Create&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;just()&lt;/li&gt;
+  &lt;li&gt;create()&lt;/li&gt;
+  &lt;li&gt;fromStream()&lt;/li&gt;
+  &lt;li&gt;fromIterable()&lt;/li&gt;
+&lt;/ol&gt;
 
-#### Create
-1. just()
-4. create()
-2. fromStream()
-3. fromIterable()
+&lt;h4 id=&quot;sequence-control&quot;&gt;Sequence Control&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;flatMap() -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map()&lt;/code&gt; + 새로운 Sequence를 생성해서 내보 냄&lt;/li&gt;
+  &lt;li&gt;concat() -&amp;gt; Publisher의 Sequence를 연결해서 emit&lt;/li&gt;
+  &lt;li&gt;merge() -&amp;gt; Mono를 합침&lt;/li&gt;
+  &lt;li&gt;zip() -&amp;gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합&lt;/li&gt;
+&lt;/ol&gt;
 
-#### Sequence Control
-1. flatMap() -&amp;gt; `map()` + 새로운 Sequence를 생성해서 내보 냄
-2. concat() -&amp;gt; Publisher의 Sequence를 연결해서 emit
-3. merge() -&amp;gt; Mono를 합침
-4. zip() -&amp;gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합
+&lt;h4 id=&quot;peeking&quot;&gt;peeking&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;doOnNext() -&amp;gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서&lt;/li&gt;
+  &lt;li&gt;doOnSuccess/doOnComplete -&amp;gt; 성공/완료 시&lt;/li&gt;
+  &lt;li&gt;doOnError -&amp;gt; 에러 종료 시&lt;/li&gt;
+  &lt;li&gt;doOnCancel -&amp;gt; 취소 시&lt;/li&gt;
+  &lt;li&gt;doFirst -&amp;gt; 시작 시&lt;/li&gt;
+  &lt;li&gt;doOnSubscribe -&amp;gt; 구독 시&lt;/li&gt;
+  &lt;li&gt;doOnRequest/doOnTerminate -&amp;gt; 요청/ 종료 시&lt;/li&gt;
+  &lt;li&gt;log() -&amp;gt; Singal 이벤트 로깅&lt;/li&gt;
+&lt;/ol&gt;
 
-#### peeking
-1. doOnNext() -&amp;gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서 
-2. doOnSuccess/doOnComplete -&amp;gt; 성공/완료 시
-3. doOnError -&amp;gt; 에러 종료 시
-4. doOnCancel -&amp;gt; 취소 시
-5. doFirst -&amp;gt; 시작 시 
-6. doOnSubscribe -&amp;gt; 구독 시
-7. doOnRequest/doOnTerminate -&amp;gt; 요청/ 종료 시
-8. log() -&amp;gt; Singal 이벤트 로깅
+&lt;h4 id=&quot;filter&quot;&gt;Filter&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;filter -&amp;gt; Filtering&lt;/li&gt;
+  &lt;li&gt;take -&amp;gt; 통과 개수 지정&lt;/li&gt;
+&lt;/ol&gt;
 
-#### Filter
-1. filter -&amp;gt; Filtering
-2. take -&amp;gt; 통과 개수 지정
+&lt;h4 id=&quot;error&quot;&gt;error&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;timeout -&amp;gt; timeOut 이내 emit 없으면 에러&lt;/li&gt;
+  &lt;li&gt;retry -&amp;gt; 주어진 숫자만큼 재구독하도록&lt;/li&gt;
+&lt;/ol&gt;
 
-#### error
-1. timeout -&amp;gt; timeOut 이내 emit 없으면 에러
-2. retry -&amp;gt; 주어진 숫자만큼 재구독하도록
+&lt;h4 id=&quot;ignoreelement&quot;&gt;ignoreElement&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;then -&amp;gt; 작업 완료를 기다림&lt;/li&gt;
+  &lt;li&gt;thenReturn -&amp;gt; then + return some Mono&lt;/li&gt;
+  &lt;li&gt;thenMany -&amp;gt; then return + some Flux&lt;/li&gt;
+  &lt;li&gt;distinct -&amp;gt; 중복 제거&lt;/li&gt;
+&lt;/ol&gt;
 
-#### ignoreElement
-1. then -&amp;gt; 작업 완료를 기다림
-2. thenReturn -&amp;gt; then + return some Mono
-3. thenMany -&amp;gt; then return + some Flux
-4. distinct -&amp;gt; 중복 제거
+&lt;h4 id=&quot;split-flux---fluxflux&quot;&gt;split (Flux -&amp;gt; Flux&amp;lt;Flux&lt;T&gt;&amp;gt;)&lt;/T&gt;&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;window(int)&lt;/li&gt;
+  &lt;li&gt;window(Duration)&lt;/li&gt;
+  &lt;li&gt;buffer&lt;/li&gt;
+&lt;/ol&gt;
 
-#### split (Flux -&amp;gt; Flux&amp;lt;Flux&amp;lt;T&amp;gt;&amp;gt;)
-1. window(int)
-2. window(Duration)
-3. buffer
+&lt;h4 id=&quot;tosynchronous&quot;&gt;toSynchronous&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;blockFirst/blockLast (flux)&lt;/li&gt;
+  &lt;li&gt;toIterable/toStream (flux)&lt;/li&gt;
+  &lt;li&gt;block (mono)&lt;/li&gt;
+  &lt;li&gt;toFuture (mono)&lt;/li&gt;
+&lt;/ol&gt;
 
+&lt;h3 id=&quot;delay&quot;&gt;delay&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;delay/delayUntil -&amp;gt; 완료 연기&lt;/li&gt;
+&lt;/ol&gt;
 
-#### toSynchronous
-1. blockFirst/blockLast (flux)
-2. toIterable/toStream (flux)
-3. block (mono)
-4. toFuture (mono)
+&lt;p&gt;&lt;a href=&quot;https://colevelup.tistory.com/40&quot;&gt;참고 자료&lt;/a&gt;&lt;/p&gt;
 
+&lt;hr /&gt;
+&lt;h1 id=&quot;r2dbc--reactive-relational-database-connectivity-&quot;&gt;R2DBC ( Reactive Relational DataBase Connectivity )&lt;/h1&gt;
 
-### delay
-1. delay/delayUntil -&amp;gt; 완료 연기
+&lt;p&gt;JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.&lt;/p&gt;
+&lt;h2 id=&quot;장점&quot;&gt;장점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;JDBC에서는 불가능한 논 블로킹 API를 제공한다.&lt;/li&gt;
+&lt;/ol&gt;
 
-[참고 자료](https://colevelup.tistory.com/40)
+&lt;h2 id=&quot;단점&quot;&gt;단점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)&lt;/li&gt;
+  &lt;li&gt;아직 성숙하지 않아서 공식적인 driver implementation이 없다.&lt;/li&gt;
+  &lt;li&gt;R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)
+&lt;a href=&quot;https://nipafx.dev/inside-java-newscast-27/&quot;&gt;Java19, Loom&lt;/a&gt;
+&lt;a href=&quot;http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html&quot;&gt;blogSpot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.&lt;/li&gt;
+&lt;/ol&gt;
 
+&lt;h2 id=&quot;querydsl&quot;&gt;&lt;a href=&quot;https://github.com/infobip/infobip-spring-data-querydsl&quot;&gt;QueryDsl&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.&lt;/p&gt;
 
------------
-# R2DBC ( Reactive Relational DataBase Connectivity )
+&lt;h3 id=&quot;에러-사항&quot;&gt;에러 사항&lt;/h3&gt;
 
-JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.
-## 장점
-1. JDBC에서는 불가능한 논 블로킹 API를 제공한다.
+&lt;ol&gt;
+  &lt;li&gt;네이밍 규칙&lt;/li&gt;
+&lt;/ol&gt;
 
-## 단점
-1. JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)
-2. 아직 성숙하지 않아서 공식적인 driver implementation이 없다.
-3. R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)
-[Java19, Loom](https://nipafx.dev/inside-java-newscast-27/)
-[blogSpot](http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html)
-4. JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.
+&lt;p&gt;infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;QuerydslConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
-## [QueryDsl](https://github.com/infobip/infobip-spring-data-querydsl)
-JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NamingStrategy&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;namingStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NamingStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTableName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSimpleName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-
-### 에러 사항
-
-1. 네이밍 규칙
-infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.
-```java
-@Configuration
-public class QuerydslConfig {
-
-    @Bean
-    public NamingStrategy namingStrategy() {
-        return new NamingStrategy(){
-            @Override
-            public String getTableName(Class&amp;lt;?&amp;gt; type) {
-                return type.getSimpleName();
-            }
-
-            @Override
-            public String getColumnName(RelationalPersistentProperty property) {
-                return property.getName().substring(0, 1).toUpperCase() + property.getName().substring(1);
-            }
-        };
-    }
-}
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getColumnName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RelationalPersistentProperty&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toUpperCase&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/infobip/infobip-spring-data-querydsl?tab=readme-ov-file#R2DBCRequirements&quot;&gt;infobip querydsl README&lt;/a&gt;에서도
 Flyway를 쓰던 SqlTemplate을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Bean&lt;/code&gt;으로 두던 하라고 한다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;템플릿 설정
-```java
-@Configuration
-public class SqlTemplatesConfig {
- private final List&lt;String&gt; driver = Arrays.asList(&quot;mysql&quot;, &quot;maria&quot;);
- @Bean
- public SQLTemplates sqlTemplates (R2dbcProperties properties) throws SQLException {
-     Boolean isStorageDB = driver.stream().map(driver -&amp;gt; properties.getUrl().contains(driver)).reduce(false, (p, n) -&amp;gt; p || n);&lt;/String&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; return isStorageDB ?
-         MySQLTemplates.builder().escape('\\').quote().newLineToSingleSpace().build() :
-         H2Templates.builder().quote().escape('\\').newLineToSingleSpace().build();  } }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;템플릿 설정&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어
-```java
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SqlTemplatesConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mysql&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;maria&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SQLTemplates&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sqlTemplates&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;R2dbcProperties&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SQLException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isStorageDB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 
-interface BoardQueryDslRepository extends QuerydslR2dbcRepository&amp;lt;Board, String&amp;gt; {
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isStorageDB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;MySQLTemplates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'\\'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;quote&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newLineToSingleSpace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;H2Templates&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;quote&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'\\'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newLineToSingleSpace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BoardQueryDslRepository&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;QuerydslR2dbcRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     
-}
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-@Repository
-@RequiredArgsConstructor
-@Slf4j
-class BoardRepository {
-    private final BoardQueryDslRepository boardQuery;
-
-
-    private BooleanBuilder condition(BoardType type, Language locale) {
-        BooleanBuilder builder = new BooleanBuilder();
-        if(Objects.nonNull(type)) board.type.eq(type);
-        if(Objects.nonNull(locale)) builder.and(board.locale.eq(locale));
-
-        return builder;
-    }
+&lt;span class=&quot;nd&quot;&gt;@Repository&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiredArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Slf4j&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BoardRepository&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BoardQueryDslRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boardQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
 
-    public Mono&amp;lt;Template&amp;gt; template(BoardType type, Language locale) {
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BooleanBuilder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BoardType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Language&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;BooleanBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BooleanBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
 
-        return boardQuery.query(query -&amp;gt; {
-            return query.select(
-                                new QBoardeDto(
-                                        board.boardNo,
-                                        board.boardType,
-                                        board.locale,
-                                        board.contents,
-                                        board.lastModifiedDate
-                                )
-                        )
-                        .from(template)
-                        .where(this.condition(templateType, locale));
-        }).one();
-    }
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-}
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mono&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BoardType&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Language&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boardQuery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                                &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;QBoardeDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boardNo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;boardType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                        &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastModifiedDate&lt;/span&gt;
+                                &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;templateType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;one&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;이렇게 있다면 where 절의 파라미터에 값을 바인딩할 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'?'&lt;/code&gt;으로 네이밍을 잡아서 바인딩하려다 실패를 한다던가 하는 문제가 발생할 수 있다.
 내부적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MySQLSQLTemplates&lt;/code&gt;인지 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;instanceOf&lt;/code&gt;를 해서 파라미터 바인딩하는 것으로 보인다(Maria_r2dbc-connector). 따라서 기존에는 크게 신경 쓰지 않던 것에도
