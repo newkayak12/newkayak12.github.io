@@ -2,6 +2,7 @@
 layout: post
 categories: [OTHERS]
 ---
+
 from [Dictionary - Compile vs. Transpile vs. Interpreter](https://github.com/newkayak12/Dictionary/blob/master/cs/CompileTranspileInterpreter.md)
 
 

@@ -2,6 +2,7 @@
 layout: post
 categories: [OTHERS]
 ---
+
 from [Dictionary - Encrypt](https://github.com/newkayak12/Dictionary/blob/master/cs/Encryption.md)
 
 

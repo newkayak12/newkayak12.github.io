@@ -2,6 +2,7 @@
 layout: post
 categories: [OTHERS]
 ---
+
 from [Dictionary - Caching](https://github.com/newkayak12/Dictionary/blob/master/cs/CacheStrategy.md)
 
 > 프로젝트에서 Redis로 캐싱 전 찾아본
