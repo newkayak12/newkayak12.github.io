@@ -5,19 +5,13 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 23 May 2024 21:13:11 +0900</pubDate>
+    <pubDate>Thu, 23 May 2024 21:13:57 +0900</pubDate>
     
       <item>
         <title>[others Series] Transaction</title>
-        <link>/2024/05/23/Others-series-Transaction.html</link>
-        <guid isPermaLink="true">/2024/05/23/Others-series-Transaction.html</guid>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-categories: [OTHERS]
-—&lt;/p&gt;
-
-&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/Transaction.md&quot;&gt;Dictionary - Transaction&lt;/a&gt;&lt;/p&gt;
+        <link>/others/2024/05/23/Others-series-Transaction.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-Transaction.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/Transaction.md&quot;&gt;Dictionary - Transaction&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;트랜잭션&quot;&gt;트랜잭션&lt;/h1&gt;
 
@@ -47,15 +41,9 @@ categories: [OTHERS]
     
       <item>
         <title>[others Series] Semaphoreandmutex</title>
-        <link>/2024/05/23/Others-series-SemaphoreAndMutex.html</link>
-        <guid isPermaLink="true">/2024/05/23/Others-series-SemaphoreAndMutex.html</guid>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-categories: [OTHERS]
-—&lt;/p&gt;
-
-&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/SemaphoreAndMutex.md&quot;&gt;Dictionary - Semaphore vs. Mutex&lt;/a&gt;&lt;/p&gt;
+        <link>/others/2024/05/23/Others-series-SemaphoreAndMutex.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-SemaphoreAndMutex.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/SemaphoreAndMutex.md&quot;&gt;Dictionary - Semaphore vs. Mutex&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;mutex&quot;&gt;Mutex&lt;/h1&gt;
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;한 쓰레드, 프로세스에 의해 소유될 수 있는 Key를 기반으로한 상호배제 기법&lt;/code&gt;
@@ -87,15 +75,9 @@ categories: [OTHERS]
     
       <item>
         <title>[others Series] Processandserviceanddaemon</title>
-        <link>/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</link>
-        <guid isPermaLink="true">/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</guid>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-categories: [OTHERS]
-—&lt;/p&gt;
-
-&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/ProcessAndServiceAndDaemon.md&quot;&gt;Dictionary - Process vs. Service vs. Daemon&lt;/a&gt;&lt;/p&gt;
+        <link>/others/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/ProcessAndServiceAndDaemon.md&quot;&gt;Dictionary - Process vs. Service vs. Daemon&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;process-vs-service-vs-daemon&quot;&gt;Process vs. Service vs. Daemon&lt;/h1&gt;
 
