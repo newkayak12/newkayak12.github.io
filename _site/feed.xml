@@ -5,7 +5,883 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Wed, 22 May 2024 21:58:50 +0900</pubDate>
+    <pubDate>Thu, 23 May 2024 21:11:26 +0900</pubDate>
+    
+      <item>
+        <title>[others Series] Transaction</title>
+        <link>/2024/05/23/Others-series-Transaction.html</link>
+        <guid isPermaLink="true">/2024/05/23/Others-series-Transaction.html</guid>
+        <description>
+&lt;hr /&gt;
+&lt;p&gt;layout: post
+categories: [OTHERS]
+—
+from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/Transaction.md&quot;&gt;Dictionary - Transaction&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;트랜잭션&quot;&gt;트랜잭션&lt;/h1&gt;
+
+&lt;p&gt;격리 수준은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SERIALIZABLE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REPEATABLE_READ&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;READ_COMMITTED&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;READ_UNCOMMITTED&lt;/code&gt;가 있으며, 왼쪽으로 가면 갈수록 격리성이 강해지며, 
+오른쪽으로 가면 갈수록 동시성이 강해진다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REPEATABLE_READ&lt;/code&gt;는 팬텀리드, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;READ_COMMITTED&lt;/code&gt;는 팬텀리드, 반복 가능하지 않은 조회가 발생하며, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;READ_UNCOMMITTED&lt;/code&gt;는 팬텀 리드, 반복 가능하지 않은
+조회, 더티 리드가 발생할 수도 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;격리-수준에-따라-발생하는-현상&quot;&gt;격리 수준에 따라 발생하는 현상&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;팬텀 리드 (Phantom read) : 한 트랜잭션 내에서 동일한 쿼리를 보냈을 때 해당 조회 결과가 다른 경우를 말한다.&lt;/li&gt;
+  &lt;li&gt;반복 가능하지 않은 조회 (Non-repeatable read) : 한 트랜잭션 내의 같은 행이 두 번 이상 조회가 발생했는데, 그 값이 다른 경우를 가리킨다.&lt;/li&gt;
+  &lt;li&gt;더티 리드 (dirty read) : 반복 가능하지 않은 조회와 유사하며, 한 트랜잭션이 실행 중일 때 다른 트랜잭션에 의해 수정되었지만 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;아직 커밋되지 않은&lt;/code&gt; 행의 데이터를 읽을 수 있을 때 발생&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;격리-수준&quot;&gt;격리 수준&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Serializable : 트랜잭션을 순차적으로 진행시키는 것을 의미한다. 여러 트랜잭션이 동시에 같은 행에 접근할 수 없다.&lt;/li&gt;
+  &lt;li&gt;Repeatable_read : 하나의 트랜잭션이 수정한 행을 다른 트랜잭션이 수정할 수 없도록 막아주지만, 새로운 행을 추가하는 것을 막아주지는 않는다.&lt;/li&gt;
+  &lt;li&gt;Read_committed : 기본 값이다. read_uncommitted와 다르게 다른 트랜잭션이 커밋하지 않은 정보는 읽을 수 없다. 즉, 커밋 완료된 데이터에 대해서만 조회를 허용한다. 하지만 어떤 트랜잭션이 접근한 행을 다른 트랜잭션이 수정할 수는 있다.&lt;/li&gt;
+  &lt;li&gt;read_uncommitted : 가장 낮은 격리 수준으로 하나의 트랜잭션이 커밋되기 이전에 다른 트랜잭션에 노출되는 문제가 있지만 가장 빠르다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Semaphoreandmutex</title>
+        <link>/2024/05/23/Others-series-SemaphoreAndMutex.html</link>
+        <guid isPermaLink="true">/2024/05/23/Others-series-SemaphoreAndMutex.html</guid>
+        <description>
+&lt;hr /&gt;
+&lt;p&gt;layout: post
+categories: [OTHERS]
+—
+from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/SemaphoreAndMutex.md&quot;&gt;Dictionary - Semaphore vs. Mutex&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;mutex&quot;&gt;Mutex&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;한 쓰레드, 프로세스에 의해 소유될 수 있는 Key를 기반으로한 상호배제 기법&lt;/code&gt;
+프로세스, 쓰레가 공유 자원을 lock()을 통해 잠금을 설정하고 사용한 뒤 unlock()으로 잠금 해제하는 객체 객체다.&lt;/p&gt;
+
+&lt;h1 id=&quot;semaphore&quot;&gt;Semaphore&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Signaling mechanism. 현재 공유 자원에 접근할 수 있는 쓰레드, 프로세스 수를 나타내는 값을 둬서 상호배제를 이루는 기법&lt;/code&gt;
+일반화된 뮤텍스, 간단한 정수 값과 두 가지 함수 wait 및 signal로 공유 자원에 대한 접근을 처리한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wait()&lt;/code&gt;은 자신의 차례가 올 때까지 기다리는 함수이며,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;signal()&lt;/code&gt;은 다음 프로세스로 순서를 넘겨주는 함수다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;바이너리 세마포어
+0, 1의 두 가지 값만 가질 수 있는 세마포어. 구현의 유사성으로 뮤텍스는 바이너리 세마포어라고 할 수 있지만 엄밀히 말하면 뮤텍스는 잠금 기반으로 상호 배제가 일어나는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;잠금 메커니즘&lt;/code&gt;이고, 세마포어는
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;신호를 기반으로&lt;/code&gt; 상호 배제를 하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;신호 메커니즘이다.&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;카운팅 세마포어
+여러 개의 값을 가질 수 있는 세마포어이며, 여러 자원에 대한 접근을 제어하는 데 사용한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;monitor&quot;&gt;Monitor&lt;/h1&gt;
+&lt;p&gt;모니터는 둘 이상의 쓰레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Processandserviceanddaemon</title>
+        <link>/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</link>
+        <guid isPermaLink="true">/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html</guid>
+        <description>
+&lt;hr /&gt;
+&lt;p&gt;layout: post
+categories: [OTHERS]
+—
+from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/ProcessAndServiceAndDaemon.md&quot;&gt;Dictionary - Process vs. Service vs. Daemon&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;process-vs-service-vs-daemon&quot;&gt;Process vs. Service vs. Daemon&lt;/h1&gt;
+
+&lt;h2 id=&quot;process&quot;&gt;Process&lt;/h2&gt;
+&lt;p&gt;프로세스는 메모리에 적재되어 CPU에 의해 실행되는 컴퓨터 프로그램을 지칭한다. 각 프로세스는 고유한 프로세스 ID(PID)를 가지며, 운영체제는 프로세스 간의 자원 공유를 관리한다.
+예를 들어, 웹 브라우저를 실행하는 경우 브라우저라는 프로그램은 하나의 프로세스로 실행되는 것이다. 그리고 프로세스는 눈에 보이는 프로세스(foreground process)와
+눈에 보이지 않은 프로세스(background process)로 구분된다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;foreground&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;background&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;사용자와 상호작용하는 프로세스&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;프로세스는 사용자와 상호작용하지 않고 시스템에서 실행되는 프로세스&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;최소화를 하더라도 눈에 보이는 프로세스를 포그라운드 프로세스&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;눈에 보이지 않지만 뒤에서 일을 하고 있는 프로세스를 백그라운드 프로세스&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;인터넷, 카카오톡, 메모장, 그림판 등 눈에 보이는 프로그램&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;백신 프로그램, 그래픽 드라이버, 마이크 드라이버 등 눈에 보이지 않는 프로그램&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;service&quot;&gt;Service&lt;/h2&gt;
+&lt;p&gt;서비스는 백그라운드에서 실행되는 응용 프로그램이다. 윈도우 서비스는 일반적으로 사용자 인터페이스를 필요로 하지 않는 작업(네트워크 서비스, 데이터베이스 서버, 백업 서비스) 등을 수행한다.
+이러한 서비스들은 시스템이 부팅될 때 자동으로 시작되며, 사용자가 로그인하지 않은 상태에서도 계속해서 실행된다.
+이렇게만 보면 데몬과 서비스의 차이가 잘 와닿지 않을 것인데, 윈도우 OS에서는 백그라운드에서 실행되는 응용 프로그램을 service 라 부르고 유닉스(리눅스) OS에서는 daemon 이라고 불린다고 보면 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;daemon&quot;&gt;Daemon&lt;/h2&gt;
+&lt;p&gt;데몬은 백그라운드에서 실행되는 프로그램으로, 사용자가 직접적으로 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 프로그램을 말한다. 사용자의 요청을 기다리고 있다가
+요청이 발생하면 이에 적절히 대응하는 리스너와 같은 역할을 한다. 즉, 메모리에 상주하면서 특정 요청이 오면 즉시 대응 할 수 있도록 대기중인 프로세스를 말한다.&lt;/p&gt;
+
+&lt;p&gt;예시)&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;서비스 명&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;데몬 명&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;정의&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Linux 슈퍼데몬&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;xinetd&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Linux 내 여러 서비스를 한번에 관리&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;File Transfer Protocol&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;vsftpd&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;File을 전송하는 서비스&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Secure Shell Service&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;sshd&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;암호화 원격 작업이 가능한 서비스&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;service-vs-daemon&quot;&gt;Service vs. Daemon&lt;/h2&gt;
+
+&lt;p&gt;Daemon 과 Service는 비슷한 개념이지만, 운영 체제 차이점 있다고 했다. 그외에도 사용처에도 차이가 있는데, 데몬은 일반적으로 서버에서 주로 사용되고, 서비스는 다른 프로그램이나 서비스를 지원하기 위해 실행된다.
+데몬은 시스템에서 독립적으로 실행되고, 서비스는 시스템의 상태를 모니터링하고, 백그라운드에서 실행되는 애플리케이션을 제어하고, 작업을 수행하는 등의 역할 지원하는데 초점이 맞춰져 있다는 뜻이다.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Os</title>
+        <link>/others/2024/05/23/Others-series-OS.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-OS.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/OS.md&quot;&gt;Dictionary - OS&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;os&quot;&gt;OS&lt;/h1&gt;
+&lt;p&gt;운영체제의 역할&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;CPU 스케쥴링 프로세스 관리 : CPU 소유권을 어떤 프로세스에 할당할지, 프로세스의 생성과 삭제, 자원 할당 및 반환을 관리한다.&lt;/li&gt;
+  &lt;li&gt;메모리 관리 : 한정된 메모리를 어떤 프로세스에 얼만큼 할당할지 관리한다.&lt;/li&gt;
+  &lt;li&gt;디스크 파일 관리 : 디스크 파일을 어떤 방법으로 보관할지 관리한다.&lt;/li&gt;
+  &lt;li&gt;I/O 디바이스 관리 : I/O 디바이스들과 컴퓨터 간의 데이터를 주고 받는 것을 관리한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/os.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;시스템 호출(systemCall)이란 운영체제가 커널에 접근한기 위한 인터페이스이며, 유저 프로그램이 운영체제의 서비스를 받기 위해 커널 함수를 호출할 때 쓴다.&lt;/p&gt;
+
+&lt;h1 id=&quot;컴퓨터의-요소&quot;&gt;컴퓨터의 요소&lt;/h1&gt;
+&lt;p&gt;컴퓨터는 CPU, DMA 컨트롤러, 메모리, 타이머, 디바이스 컨트롤러 등으로 이뤄져 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;cpu&quot;&gt;CPU&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;CU(ControlUnit) : 입출력장치 간 통신을 제어하고 명령어들을 읽고 해석하며 데이터 처리를 위한 순서를 결정한다.&lt;/li&gt;
+  &lt;li&gt;레지스터 : 매우 빠른 임시기억 장치&lt;/li&gt;
+  &lt;li&gt;산술논리연산장치 : 덧셈, 뺄셈 같은 두 숫자의 산술연산, 배타적 논리합, 곱 등같은 논리 연산을 계산하는 디지털 회로&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;dma&quot;&gt;DMA&lt;/h2&gt;
+&lt;p&gt;I/O 디바이스가 메모리에 직접 접근할 수 있도록 하는 하드웨어 장치. CPU에만  너무 많은 인터럽트 요청이 들어오기 때문에 CPU 부하를 막아주며, CPU의 일을 부담하는 역할을 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;메모리&quot;&gt;메모리&lt;/h2&gt;
+&lt;p&gt;메모리 계층은 레지스터, 캐시, 메모리, 저장장치로 구성되어 있다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;레지스터 : CPU 안에 있는 작은 메모리, 휘발성, 속도 가장 빠름, 기억 용량이 가장 적음&lt;/li&gt;
+  &lt;li&gt;캐시 : L1, L2 캐시를 지칭, 휘발성, 속도 빠름, 기억 용량이 적음, L3도 있다.&lt;/li&gt;
+  &lt;li&gt;주기억장치 : RAM을 가리킨다. 휘발성, 속도 보통, 기억 용량이 보통&lt;/li&gt;
+  &lt;li&gt;보조기억장치 : HDD, SSD를 일컬으며 비휘발성, 속도 낮음, 기억 용량 많음&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;캐시&quot;&gt;캐시&lt;/h2&gt;
+&lt;p&gt;캐시는 데이터를 미리 복사해 놓는 임시 저장소이자 빠른 장치와 느린 장치에서 속도 차이에 따른 병목을 줄이기 위해서 사용하는 메모리를 말한다. 이를 통해 
+데이터를 접근하는 시간이 오래 걸리는 경우를 해결하고 무언가를 다시 계산하는 시간을 절약할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;지역성의-원리&quot;&gt;지역성의 원리&lt;/h3&gt;
+&lt;p&gt;자주 사용하는 데이터를 기반으로 설정해야 한다. 자주 사용하는 데이터에 대한 근거가 무엇일까? 시간 지역성(temporal locality), 공간 지역성(spatiaal locality)가 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;시간 지역성
+최근 사용한 데이터에 다시 접근하려는 특성을 말한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;공간 지역성
+최근 접근한 데이터를 이루고 있는 공간이나 그 가까운 공간에 접근하는 특성을 말한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;캐시-미스-히트&quot;&gt;캐시 미스, 히트&lt;/h3&gt;
+&lt;p&gt;원하는 데이터를 찾는 것을 캐시 히트 반대를 캐시 미스라고 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;메모리-관리&quot;&gt;메모리 관리&lt;/h3&gt;
+&lt;p&gt;가상 메모리는 메모리 관리 기법의 하나로 실제로 이용 가능한 메모리 자원을 추상화하여 이를 사용하는 사용자들에게 매우 큰 메모리로 보이게 만드는 것을 의미한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;스와핑&quot;&gt;스와핑&lt;/h3&gt;
+&lt;p&gt;가상 메모리에 존재하지만 실제 메모리인 RAM에는 없는 데이터나 코드에 접근할 경우 페이지 폴트가 발생한다. 이때 메모리에서 당장 사용하지 않는 영역을 HDD로 옮기고 
+HDD의 일부분을 마치 메모리처럼 불러와 쓰는 것을 스와핑이라고 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;페이지-폴트&quot;&gt;페이지 폴트&lt;/h3&gt;
+&lt;p&gt;프로세스의 주소 공간에는 존재하지만 RAM에는 없는 데이터에 접근했을 경우 발생한다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;명령어가 유효한 가상 주소에 접근했으나 해당 페이지가 없다면 트랩이 발생해서 운영체제에 알리게 된다.&lt;/li&gt;
+  &lt;li&gt;OS는 실제 디스크로부터 사용하지 않은 프레임을 찾는다.&lt;/li&gt;
+  &lt;li&gt;해당 프레임을 실제 메모리에 가져와 페이지 교체 알고리즘을 기반으로 특정 페이지와 교체(스와핑)&lt;/li&gt;
+  &lt;li&gt;페이지 테이블을 갱신시킨 후 해당 명령을 다시 시&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;쓰레싱&quot;&gt;쓰레싱&lt;/h3&gt;
+&lt;p&gt;Thrashing은 메모리의 페이지 폴트율이 높은 것을 의미하며, 컴퓨터의 성능 저하를 초래한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;메모리-할당&quot;&gt;메모리 할당&lt;/h3&gt;
+&lt;p&gt;시작 메모리 위치, 메모리 할당 크기를 기반으로 할당하는데, 연속 할당과 불연속 할당으로 나뉜다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;연속 할당 : 메모리에 ‘연속적으로’ 공간을 할당하는 것을 의미
+    &lt;ul&gt;
+      &lt;li&gt;고정 분할 방식(fixed partition allocation) : 메모리를 미리 나누어 관리하는 방식이며, 메모리가 미리 나뉘어 있기 때문에 융통성이 없다. 또한 내부 단편화가 발생한다.&lt;/li&gt;
+      &lt;li&gt;가변 불할 방식(variable partition allocation) : 매 시점 프로그램의 크기에 맞게 동적으로 메모리를 나눠 사용한다. 내부 단편화는 없지만 외부 단편화가 있을 수 있다. (최초 적합, 최적 적합, 최악 적합이 있다.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;이름&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;First Fit&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;위쪽이나 아래쪽부터 시작해서 홀을 찾으면 바로 할당&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Best Fit&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;프로세스의 크기 이상인 공간 중 가장 작은 홀부터 할당&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Worst Fit&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;프로세스의 크기와 가장 많이 차이가 나는 홀에 할당&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;내부 단편화(Internal Fragmentation) : 메모리를 나눈 크기보다 프로그램이 작아서 들어가지 못하는 공간이 많이 발생하는 현상
+외부 단편화(External Fragmentation) : 메모리를 나눈 크기보다 프로그램이 커서 들어가지 못하는 공간이 많이 발생하는 경우 
+홀 (hole) : 할당할 수 있는 비어 있는 메모리 공간&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;불연속 할당
+현대 OS가 쓰는 방법, 메모리를 동일한 크기의 페이지로 나누고 프로그램마다 페이지 테이블을 두어 이를 통해 메모리에 프로그램을 할당하는 것, 페이징 말고 세그맨테이션, 페이지드 세그멘테이션이 있다.
+    &lt;ul&gt;
+      &lt;li&gt;Paging : 동일한 크기의 페이지 단위로 나누어 메모리의 서로 다른 위치에 프로세스를 할당한다. 홀의 크긱가 균일하지 않은 문제가 없어지지만 주소 변환이 복잡해진다.&lt;/li&gt;
+      &lt;li&gt;Segmentation : 페이지가 아닌 의미 단위인 세그먼트로 나누는 방식이다. 프로세스를 이루는 메모리는 코드 영역, 데이터 영역, 스택 영역, 힙 영역으로 이뤄지는데, 코드 내의 작은 함수를 세그먼트로 놓고 나눌 수도 있다. 이는 공유와 보안 측면에서 장점을 가지지만 홀 크기가 균일하지 않는 단점이 있다.&lt;/li&gt;
+      &lt;li&gt;Paged Segmentation : 세그먼트로 나누는데, 임의의 길이가 아닌 동일한 크기의 페이지 단위로 나누는 것을 의미한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;페이지 교체 알고리즘
+offline : 먼 미래에 참조되는 페이지와 현재 할당하는 페이지를 바꾸는 알고리즘이다. 
+FIFO(First In First Out) : 가장 먼저 온 페이지를 교체 영역에 가장 먼저 놓는 방법을 의미한다. 
+LRU(Least Recently Used) : 참조가 가장 오래된 페이지를 바꾼다. 
+NUR(Not Used Recently) : LRU에서 발, clock 알고리즘, 시계 방향으로 돌며 참조하면 1, 아니면 0. 0을 찾은 순간 해당 프로세스를 교체하고 해당 부분을 1로 바꾸는 알고리즘
+LFU(Least Frequently Used) : 가장 참조 횟수가 적은 페이지를 교체한다.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;프로세스-상태&quot;&gt;프로세스 상태&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/process.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;New : 프로세스 생성 상태, fork(), exec() 함수로 생성&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;fork() : 부모 프로세스의 주소 공간을 그대로 복사하며, 새로운 자식 프로세스를 생성하는 함수 (주소 공간만 복사)&lt;/li&gt;
+  &lt;li&gt;exec() : 새롭게 프로세스를 생성하는 함수&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ready : 메모리 공간이 충분하면 메모리를 할당받고 아니면 아닌 상태로 대기, CPU 소유권이 넘어오기를 기다림
+Ready Suspend : 메모리 부족으로 일시 중단된 상태&lt;/p&gt;
+
+&lt;p&gt;Blocked : 어떤 이벤크가 발생한 이후 기다리며 프로세스가 차단된 상태. I/O 디바이스에 의한 인터럽트로 이런 현상이 많이 발생하기도 한다. 
+Blocked Suspend : 대기 중단과 유사. 중단된 상태에서 프로세스가 실행되려고 했지만 메모리 부족으로 일시 중단된 상태&lt;/p&gt;
+
+&lt;p&gt;Terminated : 메모리와 CPU 소유권을 모두 놓고 가는 상태부모가 자식 프로세스를 강제로 비자발적 종료로 종료되는 것도 있다. 자식 프로세스가 할당된 자원의 한계치를 넘어서거나 부모 프로세스가 종료되거나 사용자가 process kill로 프로세스를 종료할 때 발&lt;/p&gt;
+
+&lt;h2 id=&quot;컨텍스트-스위칭&quot;&gt;컨텍스트 스위칭&lt;/h2&gt;
+&lt;p&gt;PCB를 기반으로 프로세스 상태를 저장하고 로드시키는 과정, 한 프로세스에 할당된 시간이 끝나거나 인터럽트에 의해 발생한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;PCB ( Process Control Block ) : 운영체제에서 프로세스에 대한 메타데이터를 저장한 데이터를 말한다. 프로세스 제어 블록이라고도 한다.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;쓰레드-멀티-쓰레딩&quot;&gt;쓰레드, 멀티 쓰레딩&lt;/h2&gt;
+&lt;p&gt;쓰레드 : 프로셋의 실행 가능한 가장 작은 단위
+멀티쓰레드 : 프로세스 내 여러 개의 쓰레드, 멀티 쓰레드로 처리하는 기법 쓰레드끼리 자원을 공유하기 때문에 효율성이 높음&lt;/p&gt;
+
+&lt;h2 id=&quot;공유-자원&quot;&gt;공유 자원&lt;/h2&gt;
+&lt;p&gt;shared resource는  시스템 안에서 각 프로세스, 쓰레드가 함께 접근할 수 있는 모니터, 프린터, 메모리, 파일 등의 자원이나 변수를 의미한다. 이 공유 자원을 두 개 이상의 프로세스가 동시에 읽거나 쓰는 상황을
+경쟁 상태(race condition)이라고 한다.  동시 접근 시 타이밍, 순서 등이 결과에 영향을 준다.&lt;/p&gt;
+
+&lt;h2 id=&quot;임계-영역&quot;&gt;임계 영역&lt;/h2&gt;
+&lt;p&gt;둘 이상의 프로세스, 쓰레드가 공유 자원에 접근할 때 순서 등의 이유로 결과가 달라지는 영역을 말한다. 임계영역을 해결하는 방법은 뮤텍스, 세마포어, 모니터 세 가지가 있다. 
+모두 상호 배제, 한정 대기, 융통성이라는 조건을 만족한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;상호 배제(mutual exclusion)
+한 프로세스가 임계 영역에 들어갔을 때 다른 프로세스는 들어갈 수 없다.&lt;/p&gt;
+
+  &lt;p&gt;한정 대기(bounded waiting)
+특정 프로세스가 영원히 임계 영역에 들어가지 못하게 하면 안 된다.&lt;/p&gt;
+
+  &lt;p&gt;융통성(progress)
+만약 어떠한 프로세스도 임계 영역을 사용하지 않으면 임계 영역 외부의 어떠한 프로세스도 들어갈 수 있으며, 이 때 프로세스끼리 서로 방해하지 않는다.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;SemaphoreAndMutex.md&quot;&gt;세마포어, 뮤텍스, 모니터&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;교착-상태deadlock의-원인&quot;&gt;교착 상태(Deadlock)의 원인&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;상호 배제 : 한 프로세스가 자원을 독점하고 있으며 다른 프로세스들은 접근이 불가&lt;/li&gt;
+  &lt;li&gt;점유 대기 : 특정 프로세스가 점유한 자원을 다른 프로세스가 요청하는 상태&lt;/li&gt;
+  &lt;li&gt;비선점 : 다른 프로세스의 자원을 강제적으로 가져올 수 없다.&lt;/li&gt;
+  &lt;li&gt;환형 대기 : 프로세스A는 프로세스B의 자원을 요구하고, 프로세스B는 A의 자원을 요고하는 상황&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;해결-방법&quot;&gt;해결 방법&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;자원 할당 시 조건이 설림하지 않도록 설계&lt;/li&gt;
+  &lt;li&gt;교착 상태 가능성이 없을 때만 자원을 할당하며, 프로세스 당 요청할 자원들의 최대치를 통해 자원 할당 가능 여부를 파악하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;은행원 알고리즘&lt;/code&gt;을 쓴다.&lt;/li&gt;
+  &lt;li&gt;교착 상태가 발생하면 사이클이 있는지 찾아보고 이에 관련된 프로세스를 한 개씩 지운다.&lt;/li&gt;
+  &lt;li&gt;거의 일어나지 않지만 처리하는데 비용이 크다. 그래서 사용자에게 판단을 위임한다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Network</title>
+        <link>/others/2024/05/23/Others-series-Network.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-Network.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/Network.md&quot;&gt;Dictionary - Network&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;network&quot;&gt;Network&lt;/h1&gt;
+
+&lt;h2 id=&quot;basic&quot;&gt;Basic&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;LAN : Local Area Network&lt;/li&gt;
+  &lt;li&gt;MAN : Metropolitan Area Network&lt;/li&gt;
+  &lt;li&gt;WAN : Wide Area Network&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;tcpip-4계층---osi-7계층&quot;&gt;TCP/IP 4계층 - OSI 7계층&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/layer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tcpip-4계층&quot;&gt;TCP/IP 4계층&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;L4 (애플리케이션 계층) : FTP/ HTTP/ SSH/ SMTP/ DNS -&amp;gt; 프로토콜 계층&lt;/li&gt;
+  &lt;li&gt;L3 (전송 계층): TCP/ UDP/ QUIC -&amp;gt; 송,수신자를 연결하는 계층&lt;/li&gt;
+  &lt;li&gt;L2 (인터넷 계층) : IP/ ARP/ ICMP -&amp;gt; 네트워크 패킷을 IP주소로 지정된 목적지로 전송하기 위해서 사용하는 계층&lt;/li&gt;
+  &lt;li&gt;L1 (링크 계층) : ethernet -&amp;gt; 전선, 광섬유, 무선 등으로 실질적으로 데이터를 전달하며 장치 간의 신호를 주고 받는 규칙을 정하는 계층&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;osi-7&quot;&gt;OSI 7&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;L7 (응용 계층) : HTTP/ FTP/ SMTP/ POP3/ IMAP/ Telnet과 같은 프로토콜이 있다. -&amp;gt; 응용 서비스를 수행 (L7 스위치)&lt;/li&gt;
+  &lt;li&gt;L6 (표현 계층) : 코드 간의 번역을 담당하며, 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 덜어준다. -&amp;gt; MIME 인코딩, 암호화 같은 동작을 수행 (압축, 포장, 암호화)&lt;/li&gt;
+  &lt;li&gt;L5 (세션 계층) : 데이터가 통신하기 위한 노리적 연결을 한다. -&amp;gt; 양 끝단의 응용 프로세스가 통신을 관리하기 위한 방법을 제공 (duplex, half-duplex, full-duplex), TCP/IP 세션을 만들고 없애는 책임을 가진다.&lt;/li&gt;
+  &lt;li&gt;L4 (전송 계층) : 통신을 활성화 하기 위한 계층 단대단 오류제어 및 흐름 제어(UDP/TCP) -&amp;gt; 특정 연결의 유효성을 제어하고, 일부 프로토콜은 상태 개념이 있으며 연결 기반이다. (이는 전송계층이 패킷들의 전송이 유효한지 확인하고 실패한 패킷들을 다시 전송한다는 것이다.)&lt;/li&gt;
+  &lt;li&gt;L3 (네트워크 계층) : 라우팅이 가장 중요한 기능이다. -&amp;gt; IP주소 부여, 라우팅 (라우터, L3 스위치)&lt;/li&gt;
+  &lt;li&gt;L2 (데이터 링크 계층) : 물리 계층을 통해 송수신되는 정보의 오류와 흐름을 관리하여 안전한 정보 전달을 수행할 수 있도록 도와주는 역할을 한다. -&amp;gt; mac을 가지고 통신한다. 이 계층에서 전송되는 단위를 프레임이라고 한다. (L2 스위치, 브리지)&lt;/li&gt;
+  &lt;li&gt;L1 (물리 계층) : 전기적, 기계적 기능적인 특성을 이용해서 통신 케이블로 데이터를 전송한다. -&amp;gt; 단순 전기적 신호를 변환해서 주고 받는다. ( NIC, 리피터, AP)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Multiprocessandmultithread</title>
+        <link>/others/2024/05/23/Others-series-MultiProcessAndMultiThread.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-MultiProcessAndMultiThread.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/MultiProcessAndMultiThread.md&quot;&gt;Dictionary - MultiProcess vs. MultiThread&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;multiprocess-vs-multithread&quot;&gt;MultiProcess vs. MultiThread&lt;/h1&gt;
+
+&lt;h2 id=&quot;multiprocess&quot;&gt;MultiProcess&lt;/h2&gt;
+&lt;p&gt;멀티 프로세스는 운영체제에서 하나의 응용 프로그램에 대해 동시에 여러 개의 프로세스를 실행할 수 있게 하는 기술을 말한다. 보통 하나의 프로그램 실행에 대해 하나의 프로세스가 메모리에 생성되지만, 부가적인 기능을 위해 여러개의 프로세스를 생성하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/multiProcess.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;멀티 프로세스 내부를 보면, 하나의 부모 프로세스가 여러 개의 자식 프로세스를 생성함으로서 다중 프로세스를 구성하는 구조이다.
+한 프로세스는 실행되는 도중 프로세스 생성 시스템 콜을 통해 새로운 프로세스들을 생성할 수 있는데, 다른 프로세스를 생성하는 프로세스를 부모 프로세스(Parent Process)라 하고,
+다른 프로세스에 의해 생성된 프로세스를 자식 프로세스(Child Process)라 한다.&lt;/p&gt;
+
+&lt;p&gt;부모 프로세스와 자식 프로세스는 각각 고유한 PID(Process ID)를 가지고 있다. 부모 프로세스는 자식 프로세스의 PID를 알고 있으며, 이를 통해 자식 프로세스를 제어할 수 있다. 또한, 자식 프로세스는 부모 프로세스의 PID와 PPID(Parent Process ID)를 알고 있어, 이를 통해 부모 프로세스와의 통신이 가능하다.
+ex) 브라우저 탭&lt;/p&gt;
+
+&lt;h3 id=&quot;장점&quot;&gt;장점&lt;/h3&gt;
+&lt;h4 id=&quot;1-프로그램-안정성&quot;&gt;1. 프로그램 안정성&lt;/h4&gt;
+&lt;p&gt;독립적 메모리 공간을 가져서 한 프로세스가 비정상 종료되도 다른 프로세스에 영향을 주지 않는다.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-병렬성&quot;&gt;2. 병렬성&lt;/h4&gt;
+&lt;h4 id=&quot;3-시스템-확장성&quot;&gt;3. 시스템 확장성&lt;/h4&gt;
+&lt;p&gt;멀티 프로세스는 각 프로세스가 독립적이므로, 새로운 기능이나 모듈을 추가하거나 수정할때 다른 프로세스에 영향을 주지 않는다. 그래서 시스템의 규모를 쉽게 확장할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;단점&quot;&gt;단점&lt;/h3&gt;
+&lt;h4 id=&quot;1-context-switching-overhead&quot;&gt;1. Context Switching OverHead&lt;/h4&gt;
+&lt;p&gt;멀티태스킹을 구성하는데 핵심 기술인 컨텍스트 스위칭(context switching) 과정에서 성능 저하가 올 수 있다&lt;/p&gt;
+&lt;h4 id=&quot;2-자원-공유-비효율성&quot;&gt;2. 자원 공유 비효율성&lt;/h4&gt;
+&lt;p&gt;멀티 프로세스는 각 프로세스가 독립적인 메모리 공간을 가지므로, 결과적으로 메모리 사용량이 증가하게 된다.
+만일 각 프로세스간에 자원 공유가 필요할 경우 프로세스 사이의 어렵고 복잡한 통신 기법인 IPC(Inter-Process Commnuication)을 사용하여야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;multithread&quot;&gt;MultiThread&lt;/h2&gt;
+&lt;p&gt;스레드는 하나의 프로세스 내에 있는 실행 흐름이다. 그리고 멀티 스레드는 하나의 프로세스 안에 여러개의 스레드가 있는 것을 말한다. 따라서 하나의 프로그램에서 두가지 이상의 동작을 동시에 처리하도록 하는 행위가 가능해진다.
+멀티 프로세스는 웹 브라우저에서의 여러 탭이나 여러 창이라고 말했었다. 대신 멀티 스레드는 웹 브라우저의 단일 탭 또는 창 내에서 브라우저 이벤트 루프, 네트워크 처리, I/O 및 기타 작업을 관리하고 처리하는데 사용된다고 보면된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;장점-1&quot;&gt;장점&lt;/h3&gt;
+&lt;h4 id=&quot;1-쓰레드가-프로세스보다-저렴함&quot;&gt;1. 쓰레드가 프로세스보다 저렴함&lt;/h4&gt;
+&lt;h4 id=&quot;2-공유-메모리에-따른-자원-효율성&quot;&gt;2. 공유 메모리에 따른 자원 효율성&lt;/h4&gt;
+&lt;h4 id=&quot;3-context-switching-비용-감소-비용이-상대적으로-낮다&quot;&gt;3. Context Switching 비용 감소 (비용이 상대적으로 낮다.)&lt;/h4&gt;
+&lt;h4 id=&quot;4-응답-시간-단축&quot;&gt;4. 응답 시간 단축&lt;/h4&gt;
+
+&lt;h3 id=&quot;단점-1&quot;&gt;단점&lt;/h3&gt;
+&lt;h4 id=&quot;1-안정성&quot;&gt;1. 안정성&lt;/h4&gt;
+&lt;h4 id=&quot;2-공유-메모리-동기화로-인한-성능-저하&quot;&gt;2. 공유 메모리 동기화로 인한 성능 저하&lt;/h4&gt;
+&lt;h4 id=&quot;3-데드락&quot;&gt;3. 데드락&lt;/h4&gt;
+&lt;h4 id=&quot;4-context-switch-overhead-1&quot;&gt;4. Context Switch Overhead &lt;sup&gt;&lt;a href=&quot;#contextSwitchOverhead&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;5-디버깅이-어려움&quot;&gt;5. 디버깅이 어려움&lt;/h4&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;a href=&quot;contextSwitchOverhead&quot;&gt;[1]&lt;/a&gt; : 
+running상태가 끝난 프로세스는 PC, SP, 레지스터, Base Register, limit Register 등 많은 내용들을 PCB에 저장을 해야하는 것이고, 이후 Dispatcher는 ready queue에서 running상태로 올릴 프로세스의 PCB에서 또다시 많은 내용을 복원해야 하는 것이다. 즉, context switching을 위해 context를 저장하고 context를 restore하는 것인데 이러한 일을 하는 데에는 부담이 발생할 수밖에 없을 것이다.
+이렇게 Context Switch(문맥 교환)에 의해 Dispatcher에 발생하게 되는 부담을 “Context Switching Overhead(문맥교환 오버헤드)”라고 한다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Encryption</title>
+        <link>/others/2024/05/23/Others-series-Encryption.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-Encryption.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/Encryption.md&quot;&gt;Dictionary - Encrypt&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;암호화&quot;&gt;암호화&lt;/h1&gt;
+
+&lt;h2 id=&quot;단방향-hash&quot;&gt;단방향 (Hash)&lt;/h2&gt;
+&lt;h3 id=&quot;1-종류&quot;&gt;1. 종류&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;MD5 (Message-Digest algorithm 5)&lt;/li&gt;
+  &lt;li&gt;SHA-1&lt;/li&gt;
+  &lt;li&gt;SHA-2(SHA-256)
+    &lt;h3 id=&quot;2-장점&quot;&gt;2. 장점&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;빠른 속도
+    &lt;h3 id=&quot;3-단점&quot;&gt;3. 단점&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RainbowTable : 동일한 메시지는 동일한 다이제스트를 갖는다. (BruteForce)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;양방향&quot;&gt;양방향&lt;/h2&gt;
+&lt;h3 id=&quot;대칭키비공개키&quot;&gt;대칭키(비공개키)&lt;/h3&gt;
+&lt;h4 id=&quot;1-종류-1&quot;&gt;1. 종류&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;DES&lt;/li&gt;
+  &lt;li&gt;3DES&lt;/li&gt;
+  &lt;li&gt;AES&lt;/li&gt;
+  &lt;li&gt;SEED&lt;/li&gt;
+  &lt;li&gt;ARIA&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;2-특징&quot;&gt;2. 특징&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;암/복호화에 서로 동일한 키가 상용되는 암호화 방식 (그래서 비공개)
+    &lt;h4 id=&quot;3-장점&quot;&gt;3. 장점&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;속도가 빠름
+    &lt;h4 id=&quot;4-단점&quot;&gt;4. 단점&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;키가 탈취되면 문제가 생김&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;비대칭키공개키&quot;&gt;비대칭키(공개키)&lt;/h3&gt;
+&lt;h4 id=&quot;1-종류-2&quot;&gt;1. 종류&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;RSA&lt;/li&gt;
+  &lt;li&gt;DSA&lt;/li&gt;
+  &lt;li&gt;ECC
+    &lt;h4 id=&quot;2-특징-1&quot;&gt;2. 특징&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;암/복호화에 서로 다른 키가 사용된다.
+    &lt;h4 id=&quot;3-장점-1&quot;&gt;3. 장점&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;키가 탈취되도 문제가 적다.
+    &lt;h4 id=&quot;4-단점-1&quot;&gt;4. 단점&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;느리다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Cpuschedule</title>
+        <link>/others/2024/05/23/Others-series-CpuSchedule.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-CpuSchedule.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/CpuSchedule.md&quot;&gt;Dictionary - CPU scheduling&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;cpu-스케쥴링-알고리즘&quot;&gt;CPU 스케쥴링 알고리즘&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/cpuSchedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-비선점non-preemptive&quot;&gt;1. 비선점(non-preemptive)&lt;/h2&gt;
+&lt;p&gt;프로세스가 스스로 CPU 소유권을 포기하는 방식. 강제로 프로세스를 중지하지 않는다. 따라서 컨텍스트 스위칭으로 인한 부하가 적다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;FCFS(First Come, First Served) : 가장 먼저 온 것을 가장 먼저 처리하는 알고리즘 -&amp;gt; ready Queue에서 오래 기다리는 현상(Convoy effect)가 발생하는 단점이 있다.&lt;/li&gt;
+  &lt;li&gt;SJF(Shortest Job First) : 실행 시간이 가장 짧은 프로세스를 먼저 실행하는 알고리즘 -&amp;gt; 긴 시간을 가진 프로세스가 실행되지 않는 현상(Starvation)이 일어나며, 평균 대기 시간이 가장 짧다.&lt;/li&gt;
+  &lt;li&gt;우선 순위 : SJF는 긴 시간 프로세스가 무한정 밀릴 수 있다. 우선 순위는 ‘우선 순위를 높이는 방법(aging)’을 사용해서 이를 보완했다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-선점preemptive&quot;&gt;2. 선점(preemptive)&lt;/h2&gt;
+&lt;p&gt;현대 OS 작동 방식으로 사용하고 있는 프로세스를 알고리즘에 의해 중단시키고 다른 프로세스에 CPU 소유권을 할당하는 방식&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;라운드 로빈(Round Robin) : 각 프로세스는 동일한 할당 시간을 주고, 그 시간 안에 끝나지 않으면 다시 ready Queue의 뒤로 가는 알고리즘&lt;/li&gt;
+  &lt;li&gt;SRF(Shortest Remaining Time First) : SJF는 중간 실행 시간이 더 짧은 작업이 들어오면 기존 작업을 수행하고 넘어가는데, SRF는 더 짧은 작업이 생기면 중간에 종료하고 더 짧은 것을 먼저 수행하는 알고리즘이다.&lt;/li&gt;
+  &lt;li&gt;다단계 큐 : 우선순위에 따른 준비 큐를 여러 개 사용하고, 큐마다 라운드 로빈이나 FCFS 등 다른 스케쥴링 알고리즘을 적용한 것을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Compiletranspileinterpreter</title>
+        <link>/others/2024/05/23/Others-series-CompileTranspileInterpreter.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-CompileTranspileInterpreter.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/CompileTranspileInterpreter.md&quot;&gt;Dictionary - Compile vs. Transpile vs. Interpreter&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;compile-vs-transpile-vs-interpreter&quot;&gt;Compile vs. Transpile vs. Interpreter&lt;/h1&gt;
+&lt;h2 id=&quot;compile&quot;&gt;Compile&lt;/h2&gt;
+&lt;p&gt;한 언어로 작성된 소스 코드를 다른 언어로 변환하는 것이 컴파일이다
+ex) JAVA -&amp;gt; bytecode&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;전체 파일을 스캔하여 한꺼번에 번역&lt;/li&gt;
+  &lt;li&gt;초기 스캔시간이 오래 걸리지만, 한번 실행 파일이 만들어지고 나면 빠르다.&lt;/li&gt;
+  &lt;li&gt;기계어 번역과정에서 많은 메모리를 사용한다.&lt;/li&gt;
+  &lt;li&gt;전체 코드를 스캔하는 과정에서 모든 오류를 한꺼번에 출력해주기 때문에 실행 전에 오류를 알 수 있다&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;interpreter&quot;&gt;Interpreter&lt;/h2&gt;
+&lt;p&gt;인터프리터(Interpreter)는 사람이 알아보기 쉬운 프로그래밍 언어로 작성한 코드를 한 줄 씩 즉시 기계어로 번역하는 번역기라고 생각하면 된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;프로그램 실행 시 한 번에 한 문장씩 번역한다.&lt;/li&gt;
+  &lt;li&gt;한번에 한문장씩 번역후 실행 시키기 때문에 실행 시간이 느리다.&lt;/li&gt;
+  &lt;li&gt;컴파일러와 같은 오브젝트 코드 생성과정이 없기 때문에 메모리 효율이 좋다.&lt;/li&gt;
+  &lt;li&gt;프로그램을 실행시키고 나서 오류를 발견하면 바로 실행을 중지 시킨다. 실행 후에 오류를 알 수 있기 때문에 사용성이 문제가 될수 있다&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;transpile&quot;&gt;Transpile&lt;/h2&gt;
+&lt;p&gt;한 언어로 작성된 소스 코드를 비슷한 수준의 추상화를 가진 다른 언어로 변환하는 것이 트랜스파일이다.
+ex) typeScript -&amp;gt; javaScript&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Cachestrategy</title>
+        <link>/others/2024/05/23/Others-series-CacheStrategy.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-CacheStrategy.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/CacheStrategy.md&quot;&gt;Dictionary - Caching&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;프로젝트에서 Redis로 캐싱 전 찾아본&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;캐싱-전략&quot;&gt;캐싱 전략&lt;/h1&gt;
+&lt;p&gt;캐싱 전략은 웹 서비스에서 시스템 향상을 기대할 수 있는 중요 기술이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;기본-지식&quot;&gt;기본 지식&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;cache hit : 캐시 스토어에 데이터가 있는 경우&lt;/li&gt;
+  &lt;li&gt;cache miss : 캐시 스토어에 데이터가 없을 경우&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;주요-고려-사항&quot;&gt;주요 고려 사항&lt;/h1&gt;
+&lt;p&gt;캐시를 사용하면 데이터 정합성 문제가 발생한다. 따라서 적절한 캐시 읽기 전략(Read Cache Strategy)과 캐시 쓰기 전략(Write Cache Strategy)으로 
+데이터 불일치 문제를 극복하면서 성능 또한 잡아야 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;캐시-읽기-전략-read-cache-strategy-&quot;&gt;캐시 읽기 전략( Read Cache Strategy )&lt;/h1&gt;
+&lt;h2 id=&quot;1-look-aside&quot;&gt;1. Look Aside&lt;/h2&gt;
+&lt;h3 id=&quot;특징&quot;&gt;특징&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cache Aside 패턴&lt;/li&gt;
+  &lt;li&gt;데이터를 찾을 때 우선 캐시에 저장된 데이터가 있는지 우선적으로 확인 없으면 DB에서 조회&lt;/li&gt;
+  &lt;li&gt;반복적 읽기가 많은 호출에 적합&lt;/li&gt;
+  &lt;li&gt;캐시, DB가 분리되어 가용. 원하는 데이터만 별도로 구성하여 캐시에 저장&lt;/li&gt;
+  &lt;li&gt;캐시, DB가 분리되어 있어 캐시 장애에 대응 가능&lt;/li&gt;
+  &lt;li&gt;Cache Store, Data Store 간의 정합성 유지 문지가 발생할 수 있다.&lt;/li&gt;
+  &lt;li&gt;초기 조회시 DB를 무조건 조회해야 하므로 단건 호출 빈도가 높은 서비스에서는 적합하지 않다. 대신 반복적으로 동일 쿼리를 호출하는 경우 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;[Cache Warming]
+미리 Cache로 DB 데이터를 밀어 넣는 작업. 이 작업을 하지 않으면 초기 트래픽 증가 시 cache miss가 발생해서 부하가 급장할 수 있다.
+expire되면 Thundering Herd가 발생할 수 있으므로 TTL 조정이 필요하다.&lt;/p&gt;
+
+  &lt;p&gt;[Thundering Herd]
+캐시 데이터가 휘발됐을 때 다수의 프로세스가 하나의 이벤트를 기다리며 Waiting에 있다 해당 이벤트가 발생했을 때 모든 프로세스들이 동시에
+wake-up하며 자원을 낭비할 때 발생&lt;/p&gt;
+
+  &lt;p&gt;-&amp;gt; 동일한 많은 요청이 들어왔을 때 하나의 Cache miss만 원본 서버에 요청하고 나머지 요청은 잠시 대기 시킨 후, 응답이 오면 그 응답을 반환하게 하는 방법으로 해결 가능&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/readLookAside.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-read-through-패턴&quot;&gt;2. Read through 패턴&lt;/h2&gt;
+&lt;h3 id=&quot;특징-1&quot;&gt;특징&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;캐시에서만 데이터를 읽어오는 전략 (inline cache)&lt;/li&gt;
+  &lt;li&gt;Look Aside와 비슷하지만 데이터 동기화를 라이브러리 또는 캐시 제공자에게 위임하는 방식&lt;/li&gt;
+  &lt;li&gt;데이터 조회 속도가 전체적으로 느림&lt;/li&gt;
+  &lt;li&gt;데이터 조회를 전적으로 캐시에만 의지하므로 캐시 서버가 다운되면 서비스 이용에 문제가 생길 수 있음&lt;/li&gt;
+  &lt;li&gt;위 문제는 Redis를 replication 또는 Cluster 구성으로 극복할 수 있다.&lt;/li&gt;
+  &lt;li&gt;캐시, DB 간 데이터 동기화가 항상 이뤄져서 정합성 문제에서 자유로움&lt;/li&gt;
+  &lt;li&gt;읽기가 많은 워크로드에 적합&lt;/li&gt;
+  &lt;li&gt;Cache Aside와 비슷하지만 CacheStore 저장 주체가 Server냐, DataStore이냐 차이&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/readThrough.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;캐시-쓰기-전략-write-cache-strategy&quot;&gt;캐시 쓰기 전략 (Write Cache Strategy)&lt;/h1&gt;
+&lt;h2 id=&quot;1-write-back&quot;&gt;1, Write Back&lt;/h2&gt;
+&lt;h3 id=&quot;특정&quot;&gt;특정&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Write Behind 패턴이라고도 불린다.&lt;/li&gt;
+  &lt;li&gt;캐시오 DB 동기화를 비동기하기 떄문에 동기화 전략이 생략&lt;/li&gt;
+  &lt;li&gt;데이터를 저장할 떄 DB에 바로 쿼리하지 않고 캐시에 모아서 일정 주기 배치 작업을 통해서 진행&lt;/li&gt;
+  &lt;li&gt;캐시에 모아놨다 한 번에 쓰므로 쓰기 쿼리 비용을 줄일 수 있음&lt;/li&gt;
+  &lt;li&gt;Write가 빈번하면서 Read하는데 많은 양의 Resource가 소모되는 서비스에 적합&lt;/li&gt;
+  &lt;li&gt;데이터 정합성 확보&lt;/li&gt;
+  &lt;li&gt;자주 사용되지 않은 불필요한 리소스 저장&lt;/li&gt;
+  &lt;li&gt;캐시에서 오류가 생기면 데이터를 영구 소실&lt;/li&gt;
+  &lt;li&gt;Write back 방식은 DB가 아니라 캐시에 먼저 저장하여 Queue로 사용하고, 특정 시점마다 DB로 flush 하는 방식이다.&lt;/li&gt;
+  &lt;li&gt;DB에 장애가 생겨도 캐시가 살아있으면 서비스를 계속할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/writeBack.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-write-through-패턴&quot;&gt;2. Write Through 패턴&lt;/h2&gt;
+&lt;h3 id=&quot;특징-2&quot;&gt;특징&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;DB와 Cache에 동시에 데이터를 저장&lt;/li&gt;
+  &lt;li&gt;데이터를 저장할 때 캐시에 먼저 저장하고 DB로 바로 저장&lt;/li&gt;
+  &lt;li&gt;Read Through와 마찬가지로 DB 동기화를 캐시에 위임&lt;/li&gt;
+  &lt;li&gt;DB와 캐시가 항상 동기화 되어 있어, 캐시 상테는 항상 최신&lt;/li&gt;
+  &lt;li&gt;캐시와 백업 저장소 업데이트를 같이 해서 데이터 일관성을 유지할 수 있으서 안정적이다.&lt;/li&gt;
+  &lt;li&gt;데이터 유실이 발생하면 안되는 곳에 사용&lt;/li&gt;
+  &lt;li&gt;자주 사용하지 않는 불필요한 리소스를 저장할 수 있음&lt;/li&gt;
+  &lt;li&gt;빈번한 Write가 생길 수 있음&lt;/li&gt;
+  &lt;li&gt;기억 장치 속도가 느리면 CPU 유휴 시간 증가&lt;/li&gt;
+  &lt;li&gt;캐시에 넣은 데이터를 저장만 하고 사용하지 않을 수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/writeThrough.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;WriteThrough, WriteBack 모두 쓰지 않은 데이터를 저장하며, 리소스 낭비를 줄이기 위해서 TTL을 설정해야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;3-write-around&quot;&gt;3. Write Around&lt;/h2&gt;
+&lt;h3 id=&quot;특징-3&quot;&gt;특징&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Write Through보다 빠름&lt;/li&gt;
+  &lt;li&gt;모든 데이터는 DB에 저장&lt;/li&gt;
+  &lt;li&gt;Cache miss가 발생하면 DB와 캐시에도 데이터를 저장&lt;/li&gt;
+  &lt;li&gt;DB, Cache 간 데이터 정합성에 문제가 있을 수 있&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/writeAround.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;캐시-읽기--쓰기-조합&quot;&gt;캐시 읽기 + 쓰기 조합&lt;/h1&gt;
+&lt;h2 id=&quot;1-look-aside--write-around&quot;&gt;1. Look Aside + Write Around&lt;/h2&gt;
+&lt;p&gt;Read는 (Cache || DB) -&amp;gt; ( hit - cache / miss - DB ) + Write는 DB로&lt;/p&gt;
+
+&lt;h2 id=&quot;2-read-through--write-around&quot;&gt;2. Read Through + Write Around&lt;/h2&gt;
+&lt;p&gt;Read는 Cache (hit -&amp;gt; cache / miss -&amp;gt; 캐시가 DB에서 당겨옴 ) + Write는 DB에&lt;/p&gt;
+
+&lt;p&gt;(항상 DB에 쓰고 읽을 때 DB에서 읽어오므로)&lt;/p&gt;
+
+&lt;h2 id=&quot;3-read-through--write-through&quot;&gt;3. Read Through + Write Through&lt;/h2&gt;
+&lt;p&gt;Read는 Cache (hit -&amp;gt; cache / miss -&amp;gt; 캐시가 DB에서 당겨옴 ) + Write(Cache -&amp;gt; DB)&lt;/p&gt;
+
+&lt;h1 id=&quot;저장-방식-지침&quot;&gt;저장 방식 지침&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;자주 사용되면서 자주 변경되지 않는 데이터를 캐싱한다.&lt;/li&gt;
+  &lt;li&gt;캐시는 휘발성을 가져야 한다. ( 어느 정도 데이터 수집과 저장 주기를 가지도록 설계 해야 한다. )&lt;/li&gt;
+  &lt;li&gt;데이터 유실, 정합성이 꺠질 수 있으므로 중요한 정보, 민감한 정보는 캐싱하지 않는 방향으로 한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;파레토의 법칙 ( 8 : 2 법칙 )
+전체 결과의 80%가 전체 원인의 20%에서 일어나는 현상&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;삭제-방식-지침&quot;&gt;삭제 방식 지침&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;영구 저장소 복사본으로 동작하므로 데이터 동기화가 필요하다.&lt;/li&gt;
+  &lt;li&gt;캐시 구성에 만료 정책을 정해야 한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;cache-stampede-현상&quot;&gt;Cache Stampede 현상&lt;/h2&gt;
+&lt;p&gt;대규모 트래픽에서 TTL을 너무 작게 하면 Key Expire 순간, 여러 프로세스가 Key를 조회하면 DB로 Duplicated read를 한다.
+또 읽어온 값을 Redis에 Duplciate Write하는 경우도 발생할 수 있다. 따라서 쓸데 없는 작업을 수반하는 현상을 의미한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;캐시-가용성&quot;&gt;캐시 가용성&lt;/h1&gt;
+&lt;p&gt;캐시 구성하는 목적은 빠른 성능 확보와 데이터 전달에 있다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Cicd</title>
+        <link>/others/2024/05/23/Others-series-CICD.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-CICD.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/CICD.md&quot;&gt;Dictionary - CI/CD&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;cicd&quot;&gt;CI/CD&lt;/h1&gt;
+
+&lt;h2 id=&quot;cicontinuous-integration&quot;&gt;CI(Continuous Integration)&lt;/h2&gt;
+&lt;p&gt;CI/CD의 “CI”는 개발자를 위한 자동화 프로세스인 지속적인 통합(Continuous Integration)을 의미한다.
+CI를 성공적으로 구현할 경우 애플리케이션에 대한 새로운 코드 변경 사항이 정기적으로 빌드 및 테스트되어 공유 리포지토리에 통합되므로,
+여러 명의 개발자가 동시에 애플리케이션 개발과 관련된 코드 작업을 할 경우 서로 충돌할 수 있는 문제를 해결할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;cd-continuous-delivery--deployment&quot;&gt;CD (Continuous Delivery / Deployment)&lt;/h2&gt;
+&lt;p&gt;CI/CD의 “CD”는 지속적인 서비스 제공(Continuous Delivery) 및/또는 지속적인 배포(Continuous Deployment)를 의미하며 이 두 용어는 상호 교환적으로 사용된다.
+두 가지 의미 모두 파이프라인의 추가 단계에 대한 자동화를 뜻하지만 때로는 얼마나 많은 자동화가 이루어지고 있는지를 설명하기 위해 별도로 사용되기도 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;continuous-delivery&quot;&gt;Continuous Delivery&lt;/h3&gt;
+&lt;p&gt;이란 개발자들이 애플리케이션에 적용한 변경 사항이 버그 테스트를 거쳐 리포지토리(예: GitHub 또는 컨테이너 레지스트리)에 자동으로 업로드되는 것을 뜻하며, 운영팀은 이 리포지토리에서 애플리케이션을 실시간 프로덕션 환경으로 배포할 수 있다.
+이는 개발팀과 비즈니스팀 간의 가시성과 커뮤니케이션 부족 문제를 해결해 준다.
+지속적인 제공은 귀찮은 push 작업없이 최소한의 노력으로 새로운 코드를 배포하는 것을 목표로 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;continuous-deployment&quot;&gt;Continuous Deployment&lt;/h3&gt;
+&lt;p&gt;란 개발자의 변경 사항을 리포지토리에서 고객이 사용 가능한 프로덕션 환경까지 자동으로 릴리스하는 것을 의미한다.
+이는 애플리케이션 제공 속도를 저해하는 수동 프로세스로 인한 운영팀의 프로세스 과부하 문제를 해결한다.
+지속적인 배포는 파이프라인의 다음 단계를 자동화함으로써 지속적인 제공이 가진 장점을 활용한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;장점&quot;&gt;장점&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;변경 사항을 자주 푸시하고자 하는 개발자와 안정적인 애플리케이션을 원하는 운영 담당자 사이의 마찰을 해결한다.&lt;/li&gt;
+  &lt;li&gt;코드 변경을 사용자에게 푸시하기 전에 검증하기 위해 개발 팀은 지속적인 테스트를 실행해야 한다.&lt;/li&gt;
+  &lt;li&gt;큰 변경보다 안정적으로 통합 및 테스트가 가능한 더 작은 규모의 증분적 코드 변경을 수행하도록 개발자를 독려한다.&lt;/li&gt;
+  &lt;li&gt;새로운 기능을 위한 더 넓은 범위의 개발 작업을 수행하는 동시에 신속한 수정 요청까지 받는 팀에 작업의 유연성을 부여한다.&lt;/li&gt;
+  &lt;li&gt;기능, 성능 및 데이터 중심 테스트를 더 많이 실행해서 더 높은 품질의 애플리케이션을 제공하고 프로덕션 결함을 줄일 수 있게 해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;파이프라인&quot;&gt;파이프라인&lt;/h2&gt;
+&lt;p&gt;컴퓨터 과학에서 데이터 파이프 라인 (일반적으로 파이프 라인이라고 함)은 제공된 데이터 또는 코드에 대해 사전 정의 된 작업을 수행하는 일련의 처리 단계다.
+파이프 라인 사용의 목적은 반복적 인 프로세스를 자동화하여 시간을 절약하고 정밀도를 높이는 것이다.
+파이프 라인의 이러한 장점은 CI / CD 인프라와의 호환성과 효율성을 높여준다. 특히 CI / CD 파이프 라인은 최신 버전의 소프트웨어 애플리케이션을 업데이트하고 제공하려는 일련의 처리 단계를 수행할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;구성-요소&quot;&gt;구성 요소&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;빌드 (소프트웨어 컴파일),&lt;/li&gt;
+  &lt;li&gt;테스트 (호환성 및 오류 검사)&lt;/li&gt;
+  &lt;li&gt;릴리스 (버전 제어 저장소의 애플리케이션 업데이트)&lt;/li&gt;
+  &lt;li&gt;배포 (개발에서 프로덕션 환경으로의 변환)&lt;/li&gt;
+  &lt;li&gt;규정 준수 및 유효성 검사&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series] Authenticationandauthorization</title>
+        <link>/others/2024/05/23/Others-series-AuthenticationAndAuthorization.html</link>
+        <guid isPermaLink="true">/others/2024/05/23/Others-series-AuthenticationAndAuthorization.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/cs/AuthenticationAndAuthorization.md&quot;&gt;Dictionary - Authentication vs. Authorization&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;authentication-vs-authorization&quot;&gt;Authentication vs. Authorization&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;인증(Authentication) : 본인이 누구인지 확인 (로그인)&lt;/li&gt;
+  &lt;li&gt;승인(Authorization) : 특정 리소스에 권한이 있는지 확인 (등급 권한)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;인증 (Authentication)&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;인가 (Authorization)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;기능&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;자격 증명 확인&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;권한 허가/거부&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;진행 방식&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;비밀번호, 생체인식, 일회용 핀 또는 앱&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;보안 팀에서 관리하는 설정 사용&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;사용자가 볼 수 있는가?&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;예&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;아니오&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;사용자가 직접 변경할 수 있는가?&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;부분적으로 가능&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;불가능&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;데이터 전송&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ID 토큰 사용&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;액세스 토큰 사용&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[test Series] 02 Mockito</title>
@@ -108,1071 +984,6 @@
 
 &lt;h2 id=&quot;syntax&quot;&gt;Syntax&lt;/h2&gt;
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nginx -t&lt;/code&gt; 로 syntax 점검을 받을 수도 있다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[network Series] 02 Tls</title>
-        <link>/network/2024/05/22/network-series-02-TLS.html</link>
-        <guid isPermaLink="true">/network/2024/05/22/network-series-02-TLS.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/network/TLS.md&quot;&gt;Dictionary - TLS&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;tlstransport-layer-security&quot;&gt;TLS(Transport Layer Security)&lt;/h1&gt;
-&lt;h2 id=&quot;tls-란&quot;&gt;TLS 란&lt;/h2&gt;
-&lt;p&gt;전송 계층 보안(TLS)은 인터넷 상의 커뮤니케이션을 위한 개인 정보와 데이터 보안을 용이하게 하기 위해 설계되어 널리 채택된 보안 프로토콜입니다.
-TLS의 주요 사용 사례는 웹 사이트를 로드하는 웹 브라우저와 같이 웹 응용 프로그램과 서버 간의 커뮤니케이션을 암호화하는 것입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;어떤-일을-하는가&quot;&gt;어떤 일을 하는가?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;암호화 : 제3자로부터 전송되는 데이터를 숨깁니다.&lt;/li&gt;
-  &lt;li&gt;인증 : 정보를 교환하는 당사자가 요청된 당사자임을 보장합니다.&lt;/li&gt;
-  &lt;li&gt;무결성 : 데이터가 위조되거나 변조되지 않았는지 확인합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;tls-vs-ssl&quot;&gt;TLS vs. SSL&lt;/h2&gt;
-&lt;p&gt;TLS는 Netscape가 개발한 SSL(Secure Sockets Layer)이라고 불리는 이전의 암호화 프로토콜에서 발전한 것입니다. 
-TLS 버전 1.0은 SSL 버전 3.1로서 개발을 시작했지만 Netscape와 더 이상 연관이 없음을 명시하기 위해서 발표 전에 프로토콜의 이름이 변경되었습니다.
-이러한 역사 때문에 용어 TLS와 SSL은 가끔 서로 바꿔서 사용됩니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;tls-vs-https&quot;&gt;TLS vs. HTTPS&lt;/h2&gt;
-&lt;p&gt;HTTPS는 HTTP 프로토콜 상위에서 TLS 암호화를 구현한 것으로 모든 웹 사이트와 다른 웹 서비스에서 사용됩니다. 
-따라서 HTTPS를 사용하는 웹 사이트는 TLS 암호화를 이용합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;tls-인증서란&quot;&gt;TLS 인증서란&lt;/h2&gt;
-&lt;p&gt;웹 사이트나 응용 프로그램이 TLS를 사용하기 위해서는 원본 서버에 TLS 인증서가 설치되어 있어야 합니다(위에서 설명한 이름 혼동 때문에 이 인증서는 “SSL 인증서”라고도 알려져 있습니다).
-인증 기관이 도메인을 소유한 사람 혹은 비즈니스에게 TLS 인증서를 발행합니다.
-인증서는 서버의 공개 키와 더불어 누가 도메인 소유자인지에 대한 중요한 정보를 포함하며, 이 두 가지는 모두 서버의 신원을 확인하는 데 중요합니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;어떤-과정으로-작동하는가&quot;&gt;어떤 과정으로 작동하는가?&lt;/h2&gt;
-&lt;p&gt;TLS 연결은 TLS Handshake로 알려진 일련의 순서를 사용하여 초기화됩니다.
-사용자가 TLS를 사용하는 웹 사이트를 돌아다니면 사용자 장치(클라이언트 장치로도 알려짐)와 웹 서버 간에 TLS Handshake가 시작됩니다.&lt;/p&gt;
-
-&lt;p&gt;TLS Handshake 동안 사용자 장치와 웹 서버는 다음과 같은 일을 수행합니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;사용할 TLS 버전(TLS 1.0, 1.2, 1.3 등)을 지정합니다&lt;/li&gt;
-  &lt;li&gt;사용할 암호 제품군(아래 참고)을 결정합니다&lt;/li&gt;
-  &lt;li&gt;서버의 TLS 인증서를 사용하여 서버의 신원을 인증합니다.&lt;/li&gt;
-  &lt;li&gt;Handshake가 완료된 후 키 간의 메시지를 암호화하기 위한 세션 키를 생성합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;TLS Handshake는 각 커뮤니케이션 세션을 위한 암호 제품군을 구축합니다.
-암호 제품군은 공유된 암호화 키 또는 세션 키와 같은 세부 정보를 명시하는 알고리즘 집합으로 해당 특정 세션에 사용됩니다. 
-공개 키 암호화로 알려진 기술 덕분에 TLS는 암호화되지 않은 채널을 통해 일치하는 세션 키를 설정할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;Handshake는 또한 인증을 처리하며, 이는 대개 클라이언트에게 신원을 증명하는 서버로 구성됩니다.
-이는 공개 키를 사용하여 수행됩니다. 공개 키는 단방향 암호화를 사용하는 암호화 키로,
-공개 키를 가진 누구나 신뢰성을 보장하기 위해 서버의 개인 키로 암호화된 데이터를 해독할 수 있음을 의미하지만 원래 발신자만 개인 키를 사용해 데이터를 암호화할 수 있습니다.
-서버의 공개 키는 TLS 인증서의 일부입니다.&lt;/p&gt;
-
-&lt;p&gt;데이터카 암호화되고 인증되고 나면, 메시지 인증 코드(MAC)와 함께 서명됩니다. 수신자는 데이터의 무결성을 보장하기 위해 MAC를 확인할 수 있습니다. 
-이는 아스피린 병에서 발견할 수 있는 일종의 부정 조작 방지 포장과 같은 것입니다. 
-소비자는 구매할 때 포장이 손상되지 않았으면 아무도 약에 손대지 않았다는 것을 알 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/tls-ssl-handshake.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tls가-미치는-영향&quot;&gt;TLS가 미치는 영향&lt;/h2&gt;
-&lt;p&gt;TLS의 최신 버전은 웹 응용 프로그램 성능에 거의 영향을 미치지 않습니다.&lt;/p&gt;
-
-&lt;p&gt;TLS 연결을 설정하는 데 수반되는 복잡한 프로세스 때문에 로드 시간과 계산 능력이 소모되어야 합니다. 
-데이터가 전송되기 전에 클라이언트와 서버는 왔다 갔다 몇 번 커뮤니케이션해야 하며, 
-이는 클라이언트와 서버 모두를 위한 메모리뿐만 아니라 웹 응용 프로그램을 위한 귀중한 밀리세컨드의 로딩 시간을 소모합니다.&lt;/p&gt;
-
-&lt;p&gt;그러나 대신에 TLS Handshake가 생성한 잠재적인 지연을 완화하는 것을 돕는 기술이 있습니다. 
-하나는 TLS Handshake가 완료되기 전에 서버와 클라이언트가 데이터 전송을 시작하도록 하는 TLS False Start입니다.
-TLS를 빠르게 하기 위한 또 다른 기술은 이전에 커뮤니케이션한 적이 있는 서버와 클라이언트가 간략화된 Handshake를 사용하도록 허용하는 TLS Session Resumption입니다.&lt;/p&gt;
-
-&lt;p&gt;이러한 개선 사항은 TLS를 로딩 시간에 현저하게 영향을 미쳐서는 안 되는 매우 빠른 프로토콜로 만드는 데 도움을 주었습니다. TLS와 연관된 계산 비용은 오늘날 표준에 따르면 거의 무시해도 좋은 정도입니다.&lt;/p&gt;
-
-&lt;p&gt;2018년에 발표된 TLS 1.3은 TLS를 더 빠르게 만들었습니다. TLS 1.3의 TLS Handshake는 몇 밀리세컨드로 프로세스를 단축하며 2회 왕복 대신 1회 왕복(또는 왔다 갔다하는 커뮤니케이션)만을 요구합니다.
-사용자가 전에 웹 사이트에 연결한 적이 있으면, TLS Handshake는 0회 왕복을 할 수 있으며, 이는 속도를 더 빠르게 할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;cite&gt;https://www.cloudflare.com/ko-kr/learning/ssl/transport-layer-security-tls/&lt;/cite&gt;
-&lt;cite&gt;https://en.wikipedia.org/wiki/Transport_Layer_Security&lt;/cite&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[network Series] 01 Subnet</title>
-        <link>/network/2024/05/22/network-series-01-Subnet.html</link>
-        <guid isPermaLink="true">/network/2024/05/22/network-series-01-Subnet.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/network/Subnet.md&quot;&gt;Dictionary - IP&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;ipv4-ipv6&quot;&gt;IPv4, IPv6&lt;/h1&gt;
-
-&lt;h2 id=&quot;ipv4&quot;&gt;IPv4&lt;/h2&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;####.####.####.###
-0 ~ 255 (2^8)으로 구성되며
-4옥텟으로 구분되는 형식을 `IPv4`라고 한다.
-총 32비트의 주소 공간을 제공한다.
-
-    192   .    168   .     0    .    1
- 11000000 . 10101000 . 00000000 . 00000001
-|--------|                       |--------|
-8비트(=1바이트)                     옥텟(Octet)
-|-----------------------------------------|
-      IPv4 주소 : 8비트 * 4 = 32비트(4바이트)
-      
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;ipv6&quot;&gt;IPv6&lt;/h2&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IPv6의 128비트 주소공간은 다음과 같이 16비트(2옥텟)를 16진수로 표현하여
-8자리로 나타낸다.(8옥텟)
-2001:0db8:85a3:08d3:1319:8a2e:0370:7334
-
-러나 대부분의 자리가 0의 숫자를 갖게 되므로, 0000을 하나의 0으로 축약하거나,
-혹은 아예 연속되는 0의 그룹을 없애고 ':' 만을 남길 수 있다.
-따라서 아래의 IPv6 주소들은 모두 같은 주소를 나타낸다.
-
-2001:0DB8:0000:0000:0000:0000:1428:57ab
-2001:0DB8:0000:0000:0000::1428:57ab
-2001:0DB8:0:0:0:0:1428:57ab
-2001:0DB8:0::0:1428:57ab
-2001:0DB8::1428:57ab
-
-특수 주소 공간
-::/128 - 이 주소는 모든 값을 0으로 설정한 특수한 주소이다. 가상적으로만 사용된다. IP 미설정 상태의 발신 주소이다..
-::1/128 - 자기 자신의 주소를 가리키는 루프백 주소이다. 프로그램에서 이 주소로 패킷을 전송하면 네트워크는 전송자에게로 패킷을 반송한다. IPv4의 127.0.0.1 주소와 동일하다.
-::/96 - IPv4 호환 주소를 위해 사용되는 주소공간이다.
-::ffff:0:0/96 - IPv4 매핑 주소를 위해 사용되는 주소공간이다.
-fc00::/7 - IPv6 유니캐스트를 위한 주소공간이다.
-fe80::/10 - link-local address를 위한 주소공간이다. IPv4의 자동 설정 IP 주소인 169.254.x.x 에 해당한다.
-fec0::/10 - site-local address를 위한 주소공간이다. 네트워크 내부에서만 유효한 주소이며, 2004년 10월 RFC3879에서 폐기되어 더 이상 사용되지 않는다.
-ff00::/8 - IPv6 멀티캐스트를 위한 주소공간이다. IPv4의 브로드캐스트는 더 이상 지원되지 않으며, IPv6에서는 대신 멀티캐스트를 사용해야 한다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;네트워크주소와-호스트주소&quot;&gt;네트워크주소와 호스트주소&lt;/h2&gt;
-&lt;pre&gt;
-IP 주소는 네트워크 주소와 호스트 주소 두 부분으로 나뉘게 됩니다.
-네트워크 주소는 호스트(단말)들을 모은 네트워크를 지칭하는 주소를 뜻합니다.
-네트워크 주소가 동일한 네트워크를 로컬 네트워크라고 합니다.
-
-호스트 주소는 하나의 네트워크 내에 존재하는 호스트(단말)를 구분하기 위한 주소를 뜻합니다.
-그런데 IP 주소에서 네트워크 주소와 호스트 주소를 구분하는 경계점이 고정되어있지 않습니다.
-그렇다보니 필요한 호스트 IP 개수에 따라 네트워크의 크기를 다르게 할당할 수 있도록 클래스 라는 개념을 도입했는데요.
-클래스는 A, B, C, D, E 클래스가 존재하며 각각의 클래스에 할당되는 IP 주소 갯수와 역할이 다릅니다.
-
-A 클래스 -&amp;gt; 네트워크.호스트.호스트.호스트
-B 클래스 -&amp;gt; 네트워크.네트워크.호스트.호스트
-C 클래스 -&amp;gt; 네트워크.네트워크.네트워크.호스트
-
-A 클래스 -&amp;gt; 1~127.0.0.0 (로컬호스트)
-B 클래스 -&amp;gt; 128~191.0.0.0
-C 클래스 -&amp;gt; 192~223.0.0.0
-D 클래스 -&amp;gt; 224~239.0.0.0
-
-&lt;strong&gt;중요한 점은 클래스 기반으로는 사용하지 않는다는 점이다.&lt;/strong&gt;
-
-
-클래스 기반보다 네트워크 주소를 세밀하게 분할하고 할당하기
-위해서 네트워크 크기에 맞춰 1비트 단위로 네트워크를 상세히 분할하는 방법을 사용하는데요.
-클래스 개념 자체를 버리는 클래스리스(Classless) 기반의 주소 체계를 사용합니다.
-&lt;/pre&gt;
-
-&lt;h2 id=&quot;클래스-리스&quot;&gt;클래스 리스&lt;/h2&gt;
-&lt;p&gt;클래스리스에서는 구분자가 필요한데 이를 서브넷 마스크(Subnet Mask)라고 합니다.
-넷 마스크는 IP주소를 네트워크 포션 / 호스트 포션으로 나누는데 사용되는 숫자 조합입니다. 서브넷 마스크는 IP 주소와 같은 길이의 비트로 구성되며,
-이진수(Binary)로 표현했을 때 네트워크 포션은 1로, 호스트 포션은 0으로 설정됩니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;즉, 가령 210.100.100.1의 서브넷 마스크가 255.255.255.0이라면,
-255.255.255.0은 1111 1111. 1111 1111. 1111 1111. 0000 0000과 같습니다.
-
-여기서 1인 부분은 네트워크를, 0인 부분은 해당 네트워크 내에 속해있는 호스트를 나타내므로 IP주소와 서브넷 마스크를 논리적 AND 연산 결과 값이 바로 서브넷이 됩니다. 하나의 주소를 서브넷 마스크를 씌워서 작은 네트워크로 만드는 것을 서브넷팅(Subnetting)이라고 합니다.
-
-210.100.100.1	=	1101 0010. 0110 0100. 0110 0100. 0000 0001	=	IP주소
-255.255.255.0	=	1111 1111. 1111 1111. 1111 1111. 0000 0000	=	서브넷 마스크
-210.100.100.0	=	1101 0010. 0110 0100. 0110 0100. 0000 0000	=	서브넷 (AND 연산 결과)
-
-이러면 호스트와 네트워크의 경계를 알 수 있다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://medium.com/@su_bak/%EC%84%9C%EB%B8%8C%EB%84%B7-%EB%A7%88%EC%8A%A4%ED%81%AC-subnet-mask-%EB%9E%80-398ecdfd5c0d&quot;&gt;출처: medium.com&lt;/a&gt;
-&lt;a href=&quot;https://yonlog.tistory.com/95#:~:text=%EC%84%9C%EB%B8%8C%EB%84%B7%20%EB%A7%88%EC%8A%A4%ED%81%AC%EB%8A%94%20IP%EC%A3%BC%EC%86%8C,%EC%9D%80%200%EC%9C%BC%EB%A1%9C%20%EC%84%A4%EC%A0%95%EB%90%A9%EB%8B%88%EB%8B%A4.&quot;&gt;출처: tistory.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;표기법&quot;&gt;표기법&lt;/h2&gt;
-&lt;p&gt;일반적인 표기법으로는 CIDR 표기법이 사용되며, IP 주소 뒤에 슬래시와 비트 수를 숫자로 표기합니다. 
-예를 들어, 192.168.0.0/24와 같이 나타낼 수 있으며,
-이 표기법에서 192.168.0.0은 네트워크 ID를 의미하고,
-/24는 서브넷 마스크의 길이를 나타냅니다. 24비트 서브넷 마스크는 첫 24비트가 네트워크 ID이고 나머지 8비트가 호스트 ID임을 의미합니다.&lt;/p&gt;
-
-&lt;p&gt;따라서 192.168.0.0/24는 192.168.0.0부터 192.168.0.255 까지의 
-IP 주소 범위를 나타냅니다. 여기서 네트워크 ID와 브로드캐스트 주소를 제외하고
-실제로 호스트에 할당할 수 있는 IP 주소의 범위는 192.168.0.1 ~ 192.168.0.254가 됩니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;본론&quot;&gt;본론&lt;/h2&gt;
-&lt;p&gt;그래서 ip/32, ip/24는 무엇인가?
-IP 주소의 범위를 표현하기 위한 방식이다. 이진수 몇 자리까지 고정값으로 두는지에 대한 정의다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Subnet&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Subnet Mask (Dec)&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Host 수&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/8&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.0.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;16,777,216&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/9&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.128.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;8,388,608&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/10&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.192.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4,194,304&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/11&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.224.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2,097,152&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/12&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.240.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1,048,576&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/13&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.248.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;524,288&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/14&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.252.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;262,144&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/15&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.254.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;131,072&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/16&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.0.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;65,536&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/17&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.128.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;32,768&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/18&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.192.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;16,384&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/19&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.224.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;8,192&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/20&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.240.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4,096&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/21&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.248.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2,048&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/22&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.252.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1,024&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/23&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.254.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;512&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/24&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.0&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;256&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/25&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.128&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;128&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/26&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.192&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/27&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.224&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;32&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/28&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.240&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;16&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/29&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.248&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;8&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/30&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.252&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/31&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.254&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;/32&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;255.255.255.255&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 12 Date</title>
-        <link>/mysql/2024/05/22/mysql-series-12-Date.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-12-Date.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/12.Date.md&quot;&gt;Dictionary - Date&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;날짜-관련&quot;&gt;날짜 관련&lt;/h1&gt;
-&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;set @now := current_timestamp();
-set @now := '2024-02-01 17:15:34';
-select @now from dual;
-
-select week(@now) - week(date_add(@now, interval - day(@now) + 1 day)) + 1 from dual; -- 달의 몇 째주인지
-select DAYOFWEEK(@now) from dual; -- 주의 무슨 요일인지 (1 = SUN ~ 7 = SAT )
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 11 Temporarytable</title>
-        <link>/mysql/2024/05/22/mysql-series-11-TemporaryTable.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-11-TemporaryTable.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/11.TemporaryTable.md&quot;&gt;Dictionary - Temporary table&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;temporary-table&quot;&gt;Temporary Table&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;트랜잭션 임시테이블 : 같은 트랜잭션 내에서만 데이터 유지&lt;/li&gt;
-  &lt;li&gt;세션 임시테이블 : 같은 세션 내에서 데이터 유지&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 10 Cursor_record_collection</title>
-        <link>/mysql/2024/05/22/mysql-series-10-Cursor_Record_Collection.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-10-Cursor_Record_Collection.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/10.Cursor_Record_Collection.md&quot;&gt;Dictionary - Cursor/ Record/ Collection&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;cursor-record-collection&quot;&gt;Cursor/ Record/ Collection&lt;/h1&gt;
-
-&lt;h2 id=&quot;커서&quot;&gt;커서&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-커서란&quot;&gt;1. 커서란&lt;/h3&gt;
-&lt;p&gt;특정 SQL 문장을 처리하 결과를 담고 있는 영역(PRIVATE SQL이라는 메모리)을 가리키고 일종의 포인터
-종류는 묵시/ 명시적 커서가 있다. 묵시적 커서는 오라클 내부에서 자동으로 생성되어 사용하는 커서이다. 반대로 사용자가 직접 정의해서 사용하는 커서를 명시적 커서라고 한다.&lt;/p&gt;
-
-&lt;p&gt;a. 명시적 커서&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;DECLARE&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;vn_department_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emplyees&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;departmnet_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emplyess&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;emp_name&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vn_department_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;n&quot;&gt;DBMS_OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PUT_LINE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SQL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROWCOUNT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- oracle&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;COMMIT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;묵시적 커서 속성&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;속성명&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;설명&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;SQL%FOUND&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;결과 집합의 패치 로우 수가 1 이상이면 TRUE&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;SQL%NOTFOUND&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;결과 집합의 패치 로우 수가 0이면 TRUE&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;SQL%ROWCOUNT&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;영향 받은 결과 집합의 로우 수 반환, 없으면 0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;SQL%ISOPEN&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;묵시적 커서는 항상 FALSE 반환( 이 속성으로 참조할 때는 이미 묵시적 커서는 닫힌 상태 )&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;b.명시적 커서
-커서 선언 - 커서 열기 - 패치 단게에서 커서 사용 - 커서 닫기&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;커서 선언&lt;/p&gt;
-
-    &lt;p&gt;묵시적 커서와 달리 명시적 커서는 선언해야 한다. 명시적 커서는 결과 데이터 집합을 로우별로 참조하는 용도이므로 SELECT 문을 사용할 것이다.&lt;/p&gt;
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;CURSOR&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서명&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;매개변수&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; 
-     &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;커서 열기
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;OPEN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서명&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;매개변수&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;패치에서 커서 사용
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;FETCH&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;EXIT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WEHN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서명&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOTFOUND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;커서 닫기
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;CLOSE&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;ex)&lt;/p&gt;
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;FOR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cursorName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;매개변수&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;executtion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;2-커서-변수&quot;&gt;2. 커서 변수&lt;/h3&gt;
-&lt;p&gt;명시적 커서의 이름은 상수이다. 한 번 할당하면 다른 값으로 바꿀 수 없다. 대신 커서 변수라는 것이 있다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;한 개 이상의 쿼리를 연결해서 사용할 수 있다.&lt;/li&gt;
-  &lt;li&gt;변수처럼 커서 변수를 함수나 프로시저의 매개변수로 전달할 수 있다.&lt;/li&gt;
-  &lt;li&gt;커서 속성을 사용할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;커셔 변수 선언
-    &lt;ol&gt;
-      &lt;li&gt;참조용 커서 타입을 생성하고 선언
-        &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REF&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CUSOR&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;반환타입&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-        &lt;ul&gt;
-          &lt;li&gt;RETURN을 생략하면 약한 커서 타입/ 반대는 강한 커서 타입이라고 한다.
-            &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dep_curtype&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CURSOR&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROWTYPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dep_curtype&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CURSOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;커서 변수 사용 (커서 변수와 쿼리문 연결)
-        &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;OPEN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서변수명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FOR&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;문&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;강한&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입은&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입과&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;맞춰야한다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;커서 변수에서 결과 집합 가져오기
-        &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;FETCH&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FETCH&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;레코드명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;한&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;만&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;커서 변수를 매개변수로 전달 : 커서도 변수이므로 함수/ 프로시저의 매개변수로 전달할 수 있다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;커서-표현식&quot;&gt;커서 표현식&lt;/h3&gt;
-&lt;p&gt;SELECT 문에 컬럼 형태로 커서를 사용하는 것이다.&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;department_name&lt;/span&gt; 
-        &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departments&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; 
-        &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; 
-       &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dep_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emp_name&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;employees&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;레코드&quot;&gt;레코드&lt;/h2&gt;
-&lt;p&gt;PL/SQL에서 제공하는 데이터 타입 중 하나로, 문자형, 숫자형 같은 기본 빌트인 타입과 달리 복합형 구조이다. 일반 빌트인 타입으로 변수를 선언하면
-해당 변수는 한 번에 하나의 값만 가질 수 있지만, 레코드는 여러 개의 값을 가질 수 있다.&lt;/p&gt;
-
-&lt;p&gt;레코드는 선언 방식에 따라 커서형, 사용자 정의형, 테이블형 레코드로 나눌 수 있다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;사용자 정의형 : 테이블과 비슷한 구조인데 테이블의 컬럼에 해당하는 것을 필드라고 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;레코드명&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RECORD&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;field1_Name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field1_Type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;field2_Name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field2_Type&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-     
-  &lt;span class=&quot;n&quot;&gt;recordVariable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recordName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      
-   &lt;span class=&quot;k&quot;&gt;DECLARE&lt;/span&gt;
-   
-      &lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;depart_rect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RECORD&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NUMBER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;department_name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VARCHAR2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-       
-      &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt; 
-   &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;테이블형 레코드 : 특정 테이블의 컬럼 값을 받아오는 변수를 선언할 때 사용할 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 컬럼 값을 받아오는 변수 선언&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;테이블명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;컬럼명&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        
-&lt;span class=&quot;c1&quot;&gt;-- 테이블의 모든 컬럼을 받아 사용하는 레코드&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;레코드&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;테이블명&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROWTYPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        
-  &lt;span class=&quot;k&quot;&gt;DECLARE&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROWTYPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departments&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch11_dep2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v_dep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;COMMIT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;커서형 레코드 : 커서를 레코드 변수르 받는 것을 커서형 레코드라고 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   &lt;span class=&quot;k&quot;&gt;DECLARE&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;CURSOR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;department_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;department_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parent_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;manager_id&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-   &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ROWTYPE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       
-   &lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt; 
-        &lt;span class=&quot;k&quot;&gt;DELETE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch11_dep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;OPEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        
-        &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;FETCH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;EXIT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOTFOUND&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch11_dep&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vr_dep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            
-        &lt;span class=&quot;k&quot;&gt;COMMIT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 09 Exception_transaction</title>
-        <link>/2024/05/22/mysql-series-09-Exception_Transaction.html</link>
-        <guid isPermaLink="true">/2024/05/22/mysql-series-09-Exception_Transaction.html</guid>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-categories: [APACHE]
-—
-from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/09.Exception_Transaction.md&quot;&gt;Dictionary - Exception and Transaction&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;exception-transaction&quot;&gt;Exception/ Transaction&lt;/h1&gt;
-
-&lt;h2 id=&quot;예외처리&quot;&gt;예외처리&lt;/h2&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;EXCEPTION&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handling1&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;expeption2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handling2&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;OTHERS&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handling&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;트랜잭션&quot;&gt;트랜잭션&lt;/h2&gt;
-&lt;p&gt;특정 테이블에서 데이터를 읽어 조작 후 다른 테이블에 입력하거나 갱신, 삭제하는데 처리 도중 오류가 발생하면 모든 작업을 원상태로 되돌리고, 처리 과정이 모두 성공했을 때만 최종적으로 
-데이터베이스에 반영하는 것이 트랜잭션 처리이다.&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;COMMIT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- (INSERT, UPDATE, DELETE, MERGE한 결과가 commit 하지 않으면 반영되지 않는다.)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ROLLBACK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- [WORK] [TO [SAVEPOINT] savepointName];&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;SAVEPOINT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;-- 트랜잭션 취소 지점을 지정할 수 있다.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 08 Pl_sql</title>
-        <link>/mysql/2024/05/22/mysql-series-08-PL_SQL.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-08-PL_SQL.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/08.PL_SQL.md&quot;&gt;Dictionary - PL/SQL&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;plsql&quot;&gt;PL/SQL&lt;/h1&gt;
-
-&lt;h2 id=&quot;블록&quot;&gt;블록&lt;/h2&gt;
-&lt;p&gt;PL/SQL 소스 프로그램의 기본 단위, 선언부, 실행부, 예외처리부로 구성된다. 이 블록은 다시 이름이 없는 블록, 이름이 있는 블록으로 구분할 수 있는데 전자는 익명 블록이고 함수, 프로시저, 패키지 등이 후자에 속한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;n&quot;&gt;NAMEING&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;생략하면&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;익명&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;블록&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;DECLARATION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;각종&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;상수&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;커서&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;등을&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;선언한다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;반드시&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;로&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;끝나야한다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수명&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;데이터&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;초깃값&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;상수명&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CONSTANT&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;데이터타입&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;상수값&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;EXECUTION&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;실제&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;로직&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리부&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DML&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;만&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;사용&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;가능&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;EXCEPTION&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;EXCEPTIONS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;로직&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;중&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;문제가&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;발생하면&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;내용을&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;기술하는&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;부분이다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;제어문&quot;&gt;제어문&lt;/h2&gt;
-&lt;h3 id=&quot;if&quot;&gt;IF&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- 
-    &lt;span class=&quot;c1&quot;&gt;--&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt;
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;--&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ELSIF&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; 
-   &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;case&quot;&gt;CASE&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;표현식&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;결과&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-         &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;결과&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
-         &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; 
-        &lt;span class=&quot;err&quot;&gt;기타&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;loop&quot;&gt;LOOP&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;처리&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;EXIT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;종료&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;while&quot;&gt;WHILE&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;WHILE&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;조건&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;처리문&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;for&quot;&gt;FOR&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;FOR&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;인덱스&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;카운트&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;변수&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;REVERSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;초기&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;최종&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;처리문&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOOP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;continue-goto&quot;&gt;CONTINUE, GOTO&lt;/h3&gt;
-&lt;p&gt;CONTINUE WHEN 조건으로 로직을 건너뛸 수 있다.
-GOTO로 흐름을 변경할 수 있다. 
-ex) «third»
-     ….로직
-    GOTO third;&lt;/p&gt;
-
-&lt;h3 id=&quot;null문&quot;&gt;NULL문&lt;/h3&gt;
-&lt;p&gt;ELSE NULL로 아무것도 하지 않고 넘어가도록 할 수도 있다. (if-else/ case-when-then 모두)&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition1&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;LOGIC1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ELSIF&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition2&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;LOGIC2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;함수&quot;&gt;함수&lt;/h2&gt;
-
-&lt;p&gt;사용자가 직접 로직을 구현하는 사용자 정의 함수(내장 함수와 비교해서)&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REPLACE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FUNCTION&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;functionName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;parameter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;variables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;constants&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;executions&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;EXCEPTION&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;failOverLogics&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        
-&lt;span class=&quot;n&quot;&gt;functionName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;프로시저&quot;&gt;프로시저&lt;/h2&gt;
-&lt;p&gt;함수는 특정 연산을 수행한 뒤 결과 값을 반환하지만, 프로시저는 특정한 로직을 처리하기만 하고 결과 값을 반환하지 않는 서브 프로그램이다.&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;REPLACE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PROCEDURE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;procedureName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;parameter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;OUT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INOUT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datatype&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;IS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;variables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;constans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;executions&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;RETURN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;EXCEPTION&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;failOverLogics&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    
-&lt;span class=&quot;k&quot;&gt;EXECUTE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;procedureName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;..)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 07 Subquery</title>
-        <link>/mysql/2024/05/22/mysql-series-07-SubQuery.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-07-SubQuery.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/07.SubQuery.md&quot;&gt;Dictionary - Subquery&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;subquery&quot;&gt;SubQuery&lt;/h1&gt;
-&lt;p&gt;SQL 문장 안에서 보조로 사용되는 또 다른 SELECT문을 의미한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;메인 쿼리와의 연관성에 따라
-    &lt;ol&gt;
-      &lt;li&gt;연관성 없는 (Noncorrelated) 서브쿼리 : 메인 테이블과 조인 조건이 걸리지 않는 경우&lt;/li&gt;
-      &lt;li&gt;연관성이 있는 서브 쿼리  : 메인 테이블과 연관성이 있는 서브 쿼리 ( 세미 조인 )&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;형태에 따라
-    &lt;ol&gt;
-      &lt;li&gt;일반 서브 쿼리( SELECT )&lt;/li&gt;
-      &lt;li&gt;인라인뷰 ( FROM )&lt;/li&gt;
-      &lt;li&gt;중첩 쿼리 ( WHERE )&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;서브쿼리가 너무 복잡해진다면 WITH 절로 가상테이블을 만들어서 처리할 수도 있다.&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kor_loan_status&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;-- WITH 사용&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WITH&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kor_loan_status&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-     
-     
-     
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 06 Join</title>
-        <link>/mysql/2024/05/22/mysql-series-06-Join.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-06-Join.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/06.Join.md&quot;&gt;Dictionary - Join&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;join&quot;&gt;Join&lt;/h1&gt;
-&lt;h2 id=&quot;종류&quot;&gt;종류&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;조인 연산자에 따른 분류 : 동등 조인, 안티 조인&lt;/li&gt;
-  &lt;li&gt;조인 대상에 따른 구분 : 셀프 조인&lt;/li&gt;
-  &lt;li&gt;조인 조건에 따른 분류 : 내부 조인, 외부 조인, 세미 조인, 카타시안 조인&lt;/li&gt;
-  &lt;li&gt;기타 : ANSI 조인&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;외부-조인--내부-조인&quot;&gt;외부 조인 / 내부 조인&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;동등 조인
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;세미 조인 : 서브 쿼리를 사용해서 서브 쿼리에 존재하는 데이터만 메인쿼리에서 추출하는 조인 (Join 없이 서브쿼리 + 조건으로 )
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- EXISTS 사용&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;-- IN 사용&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B_TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;안티 조인 : A에서 B에 없는 요소만 추출&lt;/li&gt;
-  &lt;li&gt;셀프 조인 : 동일한 테이블끼리 조인하는 방법&lt;/li&gt;
-  &lt;li&gt;외부 조인 : 한 테이블을 기준으로 다른 테이블 값이 NULL이라도 추출하는 것&lt;/li&gt;
-  &lt;li&gt;카티시안 조인 WHERE에 조건이 없는 조인 (모든 경우의 수, 카티시안 곱)&lt;/li&gt;
-  &lt;li&gt;ANSI : join … on&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 05 Function</title>
-        <link>/mysql/2024/05/22/mysql-series-05-Function.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-05-Function.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/05.Function.md&quot;&gt;Dictionary - Function&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;함수&quot;&gt;함수&lt;/h1&gt;
-
-&lt;h2 id=&quot;숫자-관련-함수&quot;&gt;숫자 관련 함수&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;ABS&lt;/li&gt;
-  &lt;li&gt;CEIL / FLOOR&lt;/li&gt;
-  &lt;li&gt;ROUND(n, i) / TRUNC(n1, n2) : 반올림 / 잘라냄&lt;/li&gt;
-  &lt;li&gt;POWER / SQRT : 제곱 / 제곱근&lt;/li&gt;
-  &lt;li&gt;MOD(n2, n1) / REMAINDER(n2, n1) : n2를 n1으로 나눈 값 / n2를 n1으로 나눈 나머지&lt;/li&gt;
-  &lt;li&gt;EXP(n) / LN(n) / LOG(n2, n1) : e의 n제곱 / 자연 로그 함수로 밑수가 e인 로그 함수 / n2를 밑수로 하는 n1의 로그&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;문자-함수&quot;&gt;문자 함수&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;INITCAP(char), LOWER(char), UPPER(char) : 첫 글자 대문자 / lowerCase / upperCase&lt;/li&gt;
-  &lt;li&gt;CONCAT(char1, char2), SUBSTR(char, pos, len), SUBSTRB(char, pos, len) : 문자 결합 / char의 pos부터 len 길이만큼 잘라냄 / len이 길이가 아닌 문자열 바이트&lt;/li&gt;
-  &lt;li&gt;LTRIM(char, set), RTRIM(char set) : char 문자열에서 set으로 지정된 문자열을 왼쪽 끝에서 제거한 후 반환 / ~ 오른쪽 끝에서&lt;/li&gt;
-  &lt;li&gt;LPAD(expr1, n, expr2), RPAD(expr1, n, expr2) : exp2을 왼/오른쪽부터 n자리만큼 채워 expr1을 반환&lt;/li&gt;
-  &lt;li&gt;REPLACE(char, search_str, replace_str), TRANSLATE(expr, from_str, to_str) : char에서 search_str문자열을 찾아 replace_str로 대체 / REPLACE와 유사하지만 문자열 자체가 아닌 한 글자씩 매핑해 바꾼 결과를 반환&lt;/li&gt;
-  &lt;li&gt;INSTR(str, substr, pos, occur), LENGTH(chr), LENGTHB(chr) : str에서 substr과 일치하는 위치를 반환하는데 pos는 시작 위치로 기본 값은 1, occur은 몇 번째 일치하는지 / LENGTH는 길이 / LENGTHB는 바이트 수&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;날짜-함수&quot;&gt;날짜 함수&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;SYSDATE, SYSTIMESTAMP : DATE, TIMESTAMP 형으로 반환&lt;/li&gt;
-  &lt;li&gt;ADD_MONTHS(date, integer)&lt;/li&gt;
-  &lt;li&gt;MONTHS_BETWEEN(date1, date2) : 두 날짜 사이 개월 수&lt;/li&gt;
-  &lt;li&gt;LAST_DAY(date) : date날짜를 기준으로 해당 월의 마지막 일자를 반환&lt;/li&gt;
-  &lt;li&gt;ROUND(date, format), TRUNC(date, format) : format에 반올림한 날짜 / 잘라낸 날짜
-```sql
-SELECT SYSDATE, ROUND(SYSDATE, ‘month’), TRUNC(SYSDATE, ‘month’) FROM DUAL;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;2023-10-01 22:09:24 | 2023-11-01 00:00:00 | 2023-09-01 00:00:00 |&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;6. NEXT_DAY( date, char ) : date를 char에 명시한 날짜로 다음 주 주중 날짜를 반환(char =&amp;gt; 요일)
-
-## 변환 함수
-1. TO_CHAR(숫자 혹은 날짜, format) : 형식에 맞게 출력
-2. TO_NUMBER(expr, format) : 문자나 다른 유형의 숫자를 NUMBER형으로 변환
-3. TO_DATE(char, format), TO_TIMESTAMP(char, format)
-
-## NULL 관련 함수
-1. NVL(expr1, expr2), NVL2(expr1, expr2, expr3) : ifnull
-2. COALESCE
-3. NULLIF
-
-## 집계함수
-1. COUNT
-2. SUM
-3. AVG
-4. MIN, MAX, 
-5. VARIANCE, STDDEV : 분산/ 표준편차
-
-### ROLLUP / CUBE
-1. ROLLUP : 집계 정보를 보여준다.
-2. CUBE : ROLLUP과 유사하지만 가능한 모든 조합으로 집계한 결과를 반환
-```sql
- PERIOD GUBUN TOTAL_JAN
-------------------------
-201310  기타대출  676078
-201310  주택담보  1234
-201311  기타대출  4423
-201311  주택담보  1412
-
-SELECT period, gubun, SUM(loan_jan_amt) total_jan FROM ~
-WHERE period LIKE ~
-GROUP BY ROLLUP(period, gubun);
-
-## ROLLUP
-PERIOD GUBUN TOTAL_JAN
-------------------------
-201310  기타대출  1423
-201310  주택담보  1234
-201310          2657
-201311  기타대출  4423
-201311  주택담보  1412
-201311          5835
-
-
-SELECT period, gubun, SUM(loan_jan_amt) total_jan FROM ~
-WHERE period LIKE ~
-GROUP BY CUBE(period, gubun);
-
-## CUBE
-PERIOD GUBUN TOTAL_JAN
-------------------------
-                (전체 합)
-        기타대출  (기타대출 전체 합)
-        주택담보  (주택담보 전체 합)
-201310          2657
-201310  기타대출  1423
-201310  주택담보  1234
-201311          5835
-201311  기타대출  4423
-201311  주택담보  1412
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;집합-연산자&quot;&gt;집합 연산자&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;UNION : 합집합&lt;/li&gt;
-  &lt;li&gt;UNION_ALL : 중복된 항목도 모두 조회 (합집합 + 교집합)&lt;/li&gt;
-  &lt;li&gt;INTERSECT : 교집합&lt;/li&gt;
-  &lt;li&gt;MINUS : 차집합&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;제약 사항
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;집한&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;연산자&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;컬럼&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;개수&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;데이터&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;타입이&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;일치해야&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;한다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;는&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;맨&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;마지막&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;문장에서만&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;사용&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;가능&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;BLOB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CLOB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BFILE&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;은&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;집한&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;연산자&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;사용이&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;불가&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;UNION&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTERSECT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MINUS&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;는&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LONG&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;형&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;컬럼에&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;사용할&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;수&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;없다&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;grouping-set&quot;&gt;GROUPING SET&lt;/h2&gt;
-&lt;p&gt;GROUPING SET ( expr1, expr2, expr3 ) ==
-(
-GROUP BY expr1 
-   UNION ALL
-GROUP BY expr2
-   UNION ALL
-GROUP BY expr3
-)&lt;/p&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 04 Operatorandexpression</title>
-        <link>/mysql/2024/05/22/mysql-series-04-OperatorAndExpression.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-04-OperatorAndExpression.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/04.OperatorAndExpression.md&quot;&gt;Dictionary - Operator and Expressions&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;연산자&quot;&gt;연산자&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;수식 연산자 : +, -, *, /&lt;/li&gt;
-  &lt;li&gt;
-    &lt;table&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;
-          &lt;td&gt;문자 연산자 :&lt;/td&gt;
-          &lt;td&gt; &lt;/td&gt;
-        &lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/li&gt;
-  &lt;li&gt;논리 연산자 : &amp;gt;, &amp;lt;, &amp;gt;=, &amp;lt;=, =, &amp;lt;&amp;gt;, !=, ^=&lt;/li&gt;
-  &lt;li&gt;집한 연산자 : UNION, UNION ALL, INTERSECT, MINUS&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;표현식&quot;&gt;표현식&lt;/h1&gt;
-&lt;p&gt;한 개 이상의 값과 연산자, SQL 함수 등이 결합된 식&lt;/p&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value1&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value2&lt;/span&gt;
-    
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;otherValue&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;조건식&quot;&gt;조건식&lt;/h1&gt;
-&lt;p&gt;한 개 이상의 표현식과 논리 연산자가 결합된 식 TRUE/ FALSE/ UNKNOWN 세 가지 타입을 반환한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;비교-조건식&quot;&gt;비교 조건식&lt;/h2&gt;
-&lt;p&gt;논리 연산자나 ANY, SOME, ALL 키워드로 비교하는 조건식&lt;/p&gt;
-
-&lt;h2 id=&quot;null-조건식&quot;&gt;NULL 조건식&lt;/h2&gt;
-
-&lt;h2 id=&quot;between-and-조건식&quot;&gt;BETWEEN AND 조건식&lt;/h2&gt;
-
-&lt;h2 id=&quot;in-조건식&quot;&gt;IN 조건식&lt;/h2&gt;
-
-&lt;h2 id=&quot;exist-조건식&quot;&gt;EXIST 조건식&lt;/h2&gt;
-
-&lt;h2 id=&quot;like-조건식&quot;&gt;LIKE 조건식&lt;/h2&gt;
-</description>
-        <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Series] 03 Sql</title>
-        <link>/mysql/2024/05/22/mysql-series-03-SQL.html</link>
-        <guid isPermaLink="true">/mysql/2024/05/22/mysql-series-03-SQL.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/sql/03.SQL.md&quot;&gt;Dictionary - SQL&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;sql&quot;&gt;SQL&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;SELECT&lt;/li&gt;
-  &lt;li&gt;INSERT&lt;/li&gt;
-  &lt;li&gt;UPDATE&lt;/li&gt;
-  &lt;li&gt;MERGE : 조건을 비교해서 테이블에 해당 조건에 맞는 데이터가 없으면 INSERT / 있으면 UPDATE
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;MERGE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SCHEMA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.]&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tableName&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;USING&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insert&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MATCHED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;DELETE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update_delete&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MATCHED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;insert&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conditoin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;DELETE&lt;/li&gt;
-  &lt;li&gt;COMMIT / ROLLBACK : COMMIT은 변경한 데이터를 데이터베이스에 마지막으로 반영하는 역할을, ROLLBACK은 그 반대로 변경한 데이터를 변경하기 이전 상태로 되돌리는 역할
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;COMMIT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;WORK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SAVEPOINT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savePointName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ROLLBACK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;WORK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;TO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SAVEPOINT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savePointName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;TRUNCATE : DELETE와 같은 기능을 수행하지만 삭제한 후 COMMIT을 해야 데이터가 완전히 삭제되고, 반대로 ROLLBACK을 실행하면 데이터가 삭제되기 전으로 복귀한다.
-단, DDL에 속하는 TRUNCATE는 실행하면 데이터가 바로 삭제되고, ROLLBACK을 실행하더라도 삭제 전 상태로 복귀되지 않는다.
-    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;TRUNCATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SCHEMA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.]&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tableName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
 </description>
         <pubDate>Wed, 22 May 2024 00:00:00 +0900</pubDate>
       </item>

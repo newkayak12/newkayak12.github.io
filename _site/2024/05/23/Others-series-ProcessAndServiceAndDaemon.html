@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[others Series] Processandserviceanddaemon | newkayak12.github.io</title>
+	<meta name="description"
+		content="layout: postcategories: [OTHERS]—from Dictionary - Process vs. Service vs. Daemon">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[others Series] Processandserviceanddaemon</h1>
+    
+    <p class="meta">
+      May 23, 2024
+      
+    </p>
+  </header>
+  <section class="post-content">
+<hr />
+<p>layout: post
+categories: [OTHERS]
+—
+from <a href="https://github.com/newkayak12/Dictionary/blob/master/cs/ProcessAndServiceAndDaemon.md">Dictionary - Process vs. Service vs. Daemon</a></p>
+
+<h1 id="process-vs-service-vs-daemon">Process vs. Service vs. Daemon</h1>
+
+<h2 id="process">Process</h2>
+<p>프로세스는 메모리에 적재되어 CPU에 의해 실행되는 컴퓨터 프로그램을 지칭한다. 각 프로세스는 고유한 프로세스 ID(PID)를 가지며, 운영체제는 프로세스 간의 자원 공유를 관리한다.
+예를 들어, 웹 브라우저를 실행하는 경우 브라우저라는 프로그램은 하나의 프로세스로 실행되는 것이다. 그리고 프로세스는 눈에 보이는 프로세스(foreground process)와
+눈에 보이지 않은 프로세스(background process)로 구분된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">foreground</th>
+      <th style="text-align: center">background</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">사용자와 상호작용하는 프로세스</td>
+      <td style="text-align: center">프로세스는 사용자와 상호작용하지 않고 시스템에서 실행되는 프로세스</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">최소화를 하더라도 눈에 보이는 프로세스를 포그라운드 프로세스</td>
+      <td style="text-align: center">눈에 보이지 않지만 뒤에서 일을 하고 있는 프로세스를 백그라운드 프로세스</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">인터넷, 카카오톡, 메모장, 그림판 등 눈에 보이는 프로그램</td>
+      <td style="text-align: center">백신 프로그램, 그래픽 드라이버, 마이크 드라이버 등 눈에 보이지 않는 프로그램</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="service">Service</h2>
+<p>서비스는 백그라운드에서 실행되는 응용 프로그램이다. 윈도우 서비스는 일반적으로 사용자 인터페이스를 필요로 하지 않는 작업(네트워크 서비스, 데이터베이스 서버, 백업 서비스) 등을 수행한다.
+이러한 서비스들은 시스템이 부팅될 때 자동으로 시작되며, 사용자가 로그인하지 않은 상태에서도 계속해서 실행된다.
+이렇게만 보면 데몬과 서비스의 차이가 잘 와닿지 않을 것인데, 윈도우 OS에서는 백그라운드에서 실행되는 응용 프로그램을 service 라 부르고 유닉스(리눅스) OS에서는 daemon 이라고 불린다고 보면 된다.</p>
+
+<h2 id="daemon">Daemon</h2>
+<p>데몬은 백그라운드에서 실행되는 프로그램으로, 사용자가 직접적으로 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 프로그램을 말한다. 사용자의 요청을 기다리고 있다가
+요청이 발생하면 이에 적절히 대응하는 리스너와 같은 역할을 한다. 즉, 메모리에 상주하면서 특정 요청이 오면 즉시 대응 할 수 있도록 대기중인 프로세스를 말한다.</p>
+
+<p>예시)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">서비스 명</th>
+      <th style="text-align: center">데몬 명</th>
+      <th style="text-align: center">정의</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Linux 슈퍼데몬</td>
+      <td style="text-align: center">xinetd</td>
+      <td style="text-align: center">Linux 내 여러 서비스를 한번에 관리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">File Transfer Protocol</td>
+      <td style="text-align: center">vsftpd</td>
+      <td style="text-align: center">File을 전송하는 서비스</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Secure Shell Service</td>
+      <td style="text-align: center">sshd</td>
+      <td style="text-align: center">암호화 원격 작업이 가능한 서비스</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="service-vs-daemon">Service vs. Daemon</h2>
+
+<p>Daemon 과 Service는 비슷한 개념이지만, 운영 체제 차이점 있다고 했다. 그외에도 사용처에도 차이가 있는데, 데몬은 일반적으로 서버에서 주로 사용되고, 서비스는 다른 프로그램이나 서비스를 지원하기 위해 실행된다.
+데몬은 시스템에서 독립적으로 실행되고, 서비스는 시스템의 상태를 모니터링하고, 백그라운드에서 실행되는 애플리케이션을 제어하고, 작업을 수행하는 등의 역할 지원하는데 초점이 맞춰져 있다는 뜻이다.</p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/others/2024/05/23/Others-series-OS.html">
+        [others Series] Os
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/23/Others-series-SemaphoreAndMutex.html">
+        [others Series] Semaphoreandmutex
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

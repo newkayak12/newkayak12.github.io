@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[others Series] Semaphoreandmutex | newkayak12.github.io</title>
+	<meta name="description"
+		content="layout: postcategories: [OTHERS]—from Dictionary - Semaphore vs. Mutex">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/05/23/Others-series-SemaphoreAndMutex.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[others Series] Semaphoreandmutex</h1>
+    
+    <p class="meta">
+      May 23, 2024
+      
+    </p>
+  </header>
+  <section class="post-content">
+<hr />
+<p>layout: post
+categories: [OTHERS]
+—
+from <a href="https://github.com/newkayak12/Dictionary/blob/master/cs/SemaphoreAndMutex.md">Dictionary - Semaphore vs. Mutex</a></p>
+
+<h1 id="mutex">Mutex</h1>
+<p><code class="language-plaintext highlighter-rouge">한 쓰레드, 프로세스에 의해 소유될 수 있는 Key를 기반으로한 상호배제 기법</code>
+프로세스, 쓰레가 공유 자원을 lock()을 통해 잠금을 설정하고 사용한 뒤 unlock()으로 잠금 해제하는 객체 객체다.</p>
+
+<h1 id="semaphore">Semaphore</h1>
+<p><code class="language-plaintext highlighter-rouge">Signaling mechanism. 현재 공유 자원에 접근할 수 있는 쓰레드, 프로세스 수를 나타내는 값을 둬서 상호배제를 이루는 기법</code>
+일반화된 뮤텍스, 간단한 정수 값과 두 가지 함수 wait 및 signal로 공유 자원에 대한 접근을 처리한다. <code class="language-plaintext highlighter-rouge">wait()</code>은 자신의 차례가 올 때까지 기다리는 함수이며,
+<code class="language-plaintext highlighter-rouge">signal()</code>은 다음 프로세스로 순서를 넘겨주는 함수다.</p>
+
+<ul>
+  <li>
+    <p>바이너리 세마포어
+0, 1의 두 가지 값만 가질 수 있는 세마포어. 구현의 유사성으로 뮤텍스는 바이너리 세마포어라고 할 수 있지만 엄밀히 말하면 뮤텍스는 잠금 기반으로 상호 배제가 일어나는 <code class="language-plaintext highlighter-rouge">잠금 메커니즘</code>이고, 세마포어는
+<code class="language-plaintext highlighter-rouge">신호를 기반으로</code> 상호 배제를 하는 <code class="language-plaintext highlighter-rouge">신호 메커니즘이다.</code></p>
+  </li>
+  <li>
+    <p>카운팅 세마포어
+여러 개의 값을 가질 수 있는 세마포어이며, 여러 자원에 대한 접근을 제어하는 데 사용한다.</p>
+  </li>
+</ul>
+
+<h1 id="monitor">Monitor</h1>
+<p>모니터는 둘 이상의 쓰레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.</p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html">
+        [others Series] Processandserviceanddaemon
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/23/Others-series-Transaction.html">
+        [others Series] Transaction
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
