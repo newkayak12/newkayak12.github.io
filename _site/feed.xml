@@ -5,12 +5,12 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 23 May 2024 21:57:38 +0900</pubDate>
+    <pubDate>Thu, 23 May 2024 22:00:08 +0900</pubDate>
     
       <item>
-        <title>[spring Series] 10.requiredargsconstructor</title>
-        <link>/spring/2024/05/23/Spring-series-10.RequiredArgsConstructor.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-10.RequiredArgsConstructor.html</guid>
+        <title>[spring Series] 10.required Args Constructor</title>
+        <link>/spring/2024/05/23/Spring-series-10.Required-Args-Constructor.html</link>
+        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-10.Required-Args-Constructor.html</guid>
         <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/10.RequiredArgsConstructor.md&quot;&gt;Dictionary - Spring + Lombok-RequiredArgsConstructor&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;spring--requiredargsconstructor&quot;&gt;Spring + @RequiredArgsConstructor&lt;/h1&gt;
@@ -22,9 +22,9 @@
       </item>
     
       <item>
-        <title>[spring Series] 09.applicationcontext</title>
-        <link>/spring/2024/05/23/Spring-series-09.ApplicationContext.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-09.ApplicationContext.html</guid>
+        <title>[spring Series] 09.application Context</title>
+        <link>/spring/2024/05/23/Spring-series-09.Application-Context.html</link>
+        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-09.Application-Context.html</guid>
         <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/09.ApplicationContext.md&quot;&gt;Dictionary - Application Context&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;applicationcontext&quot;&gt;ApplicationContext&lt;/h1&gt;

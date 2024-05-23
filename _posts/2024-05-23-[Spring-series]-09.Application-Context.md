@@ -11,7 +11,7 @@ from [Dictionary - Application Context](https://github.com/newkayak12/Dictionary
 
 
 # ApplicationContext
-빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 황경)
+빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 환경)
 
 `ListableBeanFactory`, `HierarchicalBeanFactory`, `MessageSource`, `ApplicationEventPublisher`, `ResourcePatternResolver` 를 상속 받음
 
