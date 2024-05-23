@@ -2,9 +2,9 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>[others Series] Semaphoreandmutex | newkayak12.github.io</title>
+	<title>[others Series] Authentication And Authorization | newkayak12.github.io</title>
 	<meta name="description"
-		content="from Dictionary - Semaphore vs. Mutex">
+		content="from Dictionary - Authentication vs. Authorization">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/others/2024/05/23/Others-series-SemaphoreAndMutex.html">
+	<link rel="canonical" href="/others/2024/05/23/Others-series-Authentication-and-Authorization.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
@@ -67,6 +67,8 @@
 					About
 				</a>
 			</li>
+			
+			
 			
 			
 			
@@ -169,39 +171,57 @@
     <div class="content">
       <article >
   <header style="background-image: url('/')">
-    <h1 class="title">[others Series] Semaphoreandmutex</h1>
+    <h1 class="title">[others Series] Authentication And Authorization</h1>
     
     <p class="meta">
       May 23, 2024
       
     </p>
   </header>
-  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/cs/SemaphoreAndMutex.md">Dictionary - Semaphore vs. Mutex</a></p>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/cs/AuthenticationAndAuthorization.md">Dictionary - Authentication vs. Authorization</a></p>
 
-<h1 id="mutex">Mutex</h1>
-<p><code class="language-plaintext highlighter-rouge">한 쓰레드, 프로세스에 의해 소유될 수 있는 Key를 기반으로한 상호배제 기법</code>
-프로세스, 쓰레가 공유 자원을 lock()을 통해 잠금을 설정하고 사용한 뒤 unlock()으로 잠금 해제하는 객체 객체다.</p>
-
-<h1 id="semaphore">Semaphore</h1>
-<p><code class="language-plaintext highlighter-rouge">Signaling mechanism. 현재 공유 자원에 접근할 수 있는 쓰레드, 프로세스 수를 나타내는 값을 둬서 상호배제를 이루는 기법</code>
-일반화된 뮤텍스, 간단한 정수 값과 두 가지 함수 wait 및 signal로 공유 자원에 대한 접근을 처리한다. <code class="language-plaintext highlighter-rouge">wait()</code>은 자신의 차례가 올 때까지 기다리는 함수이며,
-<code class="language-plaintext highlighter-rouge">signal()</code>은 다음 프로세스로 순서를 넘겨주는 함수다.</p>
-
+<h1 id="authentication-vs-authorization">Authentication vs. Authorization</h1>
 <ul>
-  <li>
-    <p>바이너리 세마포어
-0, 1의 두 가지 값만 가질 수 있는 세마포어. 구현의 유사성으로 뮤텍스는 바이너리 세마포어라고 할 수 있지만 엄밀히 말하면 뮤텍스는 잠금 기반으로 상호 배제가 일어나는 <code class="language-plaintext highlighter-rouge">잠금 메커니즘</code>이고, 세마포어는
-<code class="language-plaintext highlighter-rouge">신호를 기반으로</code> 상호 배제를 하는 <code class="language-plaintext highlighter-rouge">신호 메커니즘이다.</code></p>
-  </li>
-  <li>
-    <p>카운팅 세마포어
-여러 개의 값을 가질 수 있는 세마포어이며, 여러 자원에 대한 접근을 제어하는 데 사용한다.</p>
-  </li>
+  <li>인증(Authentication) : 본인이 누구인지 확인 (로그인)</li>
+  <li>승인(Authorization) : 특정 리소스에 권한이 있는지 확인 (등급 권한)</li>
 </ul>
 
-<h1 id="monitor">Monitor</h1>
-<p>모니터는 둘 이상의 쓰레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.</p>
-
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">인증 (Authentication)</th>
+      <th style="text-align: center">인가 (Authorization)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">기능</td>
+      <td style="text-align: center">자격 증명 확인</td>
+      <td style="text-align: center">권한 허가/거부</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">진행 방식</td>
+      <td style="text-align: center">비밀번호, 생체인식, 일회용 핀 또는 앱</td>
+      <td style="text-align: center">보안 팀에서 관리하는 설정 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">사용자가 볼 수 있는가?</td>
+      <td style="text-align: center">예</td>
+      <td style="text-align: center">아니오</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">사용자가 직접 변경할 수 있는가?</td>
+      <td style="text-align: center">부분적으로 가능</td>
+      <td style="text-align: center">불가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">데이터 전송</td>
+      <td style="text-align: center">ID 토큰 사용</td>
+      <td style="text-align: center">액세스 토큰 사용</td>
+    </tr>
+  </tbody>
+</table>
 </section>
   
 
@@ -216,16 +236,16 @@
   
   <div id="previous-post" class="post-nav-post">
       <p>Previous post</p>
-      <a href="/others/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html">
-        [others Series] Processandserviceanddaemon
+      <a href="/test/2024/05/22/test-series-02-Mockito.html">
+        [test Series] 02 Mockito
       </a>
   </div>
   
   
   <div id="next-post" class="post-nav-post">
       <p>Next post</p>
-      <a href="/others/2024/05/23/Others-series-Transaction.html">
-        [others Series] Transaction
+      <a href="/others/2024/05/23/Others-series-CICD.html">
+        [others Series] Cicd
       </a>
   </div>
   

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 07.utils | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Spring Utils">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/23/Spring-series-07.Utils.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 07.utils</h1>
+    
+    <p class="meta">
+      May 23, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/07.Utils.md">Dictionary - Spring Utils</a></p>
+
+<h1 id="beanutils">BeanUtils</h1>
+<p>빈으로 만들 클래스 또는 객체에 대해 처리를 위한 Util을 제공한다.</p>
+<ol>
+  <li>findMethod</li>
+  <li>findDeclaredMethod</li>
+  <li>getParameterNames</li>
+  <li>getResolvableConstructor</li>
+  <li>instantiateClass</li>
+</ol>
+
+<h1 id="reflectionutils">ReflectionUtils</h1>
+<p>리플렉션 API를 편리하게 사용할 수 있도록 해준다.</p>
+<ol>
+  <li>accessibleConstructor</li>
+  <li>declaresException</li>
+  <li>findField</li>
+  <li>findMethod</li>
+  <li>getDeclaredMethods</li>
+  <li>getAllDeclaredMethods</li>
+  <li>getField</li>
+  <li>setField</li>
+  <li>invokeMethod</li>
+  <li>makeAccessible</li>
+</ol>
+
+<h1 id="filecopyutils">FileCopyUtils</h1>
+<p>파일 복사를 위한 유틸, 파일을 바이트 배열로 복사하거나 문자열로 복사한다.</p>
+<ol>
+  <li>copy</li>
+  <li>copyToByteArray</li>
+  <li>copyToString</li>
+</ol>
+
+<h1 id="systempropertyutils">SystemPropertyUtils</h1>
+<p>시스템 property를 처리하기 위한 유틸</p>
+<ol>
+  <li>resolvePlaceholders</li>
+</ol>
+
+<h1 id="inputoutputstreamutils">Input/OutputStreamUtils</h1>
+<ol>
+  <li>copy</li>
+  <li>copyRange</li>
+  <li>copyToByteArray</li>
+  <li>copyToString</li>
+</ol>
+
+<h1 id="annotationutils">AnnotationUtils</h1>
+<p>어노테이션, 메타 어노테이션을 핸들링하게 편하게 해주는 유틸</p>
+<ol>
+  <li>findAnnotation(Class&lt;?&gt; clazz, Class<a> annotationType) : 특정 clazz에서 annotationType으로 찾는다.</a></li>
+  <li>findAnnotation(Method method, Class<a> annotationType) : Method로 순회하면서 annotationType으로 찾는다.</a></li>
+</ol>
+
+<p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/annotation/AnnotationUtils.html">참고</a>
+기본적으로 어노테이션을 찾는데 주력으로 한다.</p>
+
+<h1 id="annotatedelementutils">AnnotatedElementUtils</h1>
+<p>어노테이션 내용을 오버라이딩할 때 사용한다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/23/Spring-series-06.Bean.html">
+        [spring Series] 06.bean
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/23/Spring-series-08.Autowired.html">
+        [spring Series] 08.autowired
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

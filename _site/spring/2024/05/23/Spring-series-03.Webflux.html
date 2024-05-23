@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 03.webflux | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Webflux">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/23/Spring-series-03.Webflux.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 03.webflux</h1>
+    
+    <p class="meta">
+      May 23, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/03.Webflux.md">Dictionary - Webflux</a></p>
+
+<h1 id="webflux">Webflux</h1>
+<p>SpringBoot Webflux는 서블릿을 버리고, 비동기로 진행하여 동시성을 최대화하여 가용성을 높히는 데 중점을 둔 프레임워크이다.
+기본적으로 Java는 blocking code를 사용한다. Java는 <code class="language-plaintext highlighter-rouge">Flow.Publisher</code>을 이용해서 ReactiveStreams를 구현해서 사용할 수 있다.
+이에 대한 실제 구현체는 <code class="language-plaintext highlighter-rouge">RxJava</code>, <code class="language-plaintext highlighter-rouge">Reactor</code>가 있다.</p>
+
+<p>추가로 Tomcat을 버리고 Netty를 채택해서 EventLoop 기반으로 처리하여 가용성을 더 높혔다.</p>
+
+<p>이를 사용하면</p>
+<ol>
+  <li>메모리 가용성이 높아진다.</li>
+  <li>파이프 라인으로 pub/sub 프로세스를 연결하여 처리한다.</li>
+</ol>
+
+<hr />
+<h1 id="reactive"><a href="https://newkayak12.github.io/java/2024/05/18/java-series-28-Reactive.html">Reactive</a></h1>
+
+<h2 id="java에서-비동기-처리">Java에서 비동기 처리?</h2>
+<ol>
+  <li>Callback -&gt; Callback Hell에 빠질 수 있음</li>
+  <li>Future -&gt; CompletableFuture를 지원하긴 하지만 까다로움</li>
+</ol>
+
+<h2 id="백프레셔">백프레셔</h2>
+<p>Pub/Sub의 균형이 무너질 때 생기는 형상이다. 소비보다 생성이 많을 때 발생한다. 이는 결국 메모리가 overflow 되고 <code class="language-plaintext highlighter-rouge">OutOfMemory</code>로 이어진다.</p>
+
+<h3 id="push">push</h3>
+<p>Publisher가 이벤트를 밀어 넣는 형식 -&gt; backpressure 발생할 수 있다.</p>
+
+<h3 id="pull">pull</h3>
+<p>Subscribe가 요청한 만큼만 전달</p>
+
+<h3 id="cold-vs-hot">Cold vs. Hot</h3>
+<ol>
+  <li>Cold -&gt; <code class="language-plaintext highlighter-rouge">Subscribe</code>로 이벤트 발현</li>
+  <li>Hot -&gt; <code class="language-plaintext highlighter-rouge">Subscriber</code>로 부터 시작하지 않는다. <code class="language-plaintext highlighter-rouge">Publisher</code>가 <code class="language-plaintext highlighter-rouge">Emit</code>하는 것을 기본으로 한다.</li>
+</ol>
+
+<hr />
+
+<h2 id="rxjava">RxJava</h2>
+<p>ReactiveX(Netflix)에서 만들었다.</p>
+
+<h3 id="publisher">Publisher</h3>
+<ol>
+  <li>한 건의 경우 <code class="language-plaintext highlighter-rouge">Single</code></li>
+  <li>데이터가 없거나 한 건이면 <code class="language-plaintext highlighter-rouge">Maybe</code></li>
+  <li>한 건 이상일 경우 <code class="language-plaintext highlighter-rouge">Observalbe</code>, <code class="language-plaintext highlighter-rouge">Flow</code></li>
+</ol>
+
+<h3 id="rxjava에서-백프레셔-처리-방법">RxJava에서 백프레셔 처리 방법</h3>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Observable</code> 대신 <code class="language-plaintext highlighter-rouge">Flowable</code>사용
+```
+| Observable
+    <ul>
+      <li>1000개 미만 데이터 발행시</li>
+      <li>적은 소스로 OOM 발생이 가능성이 낮을 경우</li>
+      <li>GUI 이벤트 처리</li>
+    </ul>
+  </li>
+</ol>
+
+<p>| Flowable</p>
+<ul>
+  <li>1000개 이상 데이터 발행 시</li>
+  <li>디스크 I/O</li>
+  <li>JDBC</li>
+  <li>네트워크 I/O</li>
+</ul>
+
+<blockquote>
+  <p>Backpressure 제어 전략</p>
+  <ol>
+    <li>MISSING(BackpressureStrategy.MISSING) -&gt; x</li>
+    <li>ERROR(BackpressureStrategy.ERROR) -&gt; 발생시 <code class="language-plaintext highlighter-rouge">MissingBackpressureException</code></li>
+    <li>BUFFER(BackpressureStrategy.BUFFER) -&gt; 소비할 때까지 Queue, OOM 가능성 이씀</li>
+    <li>DROP(BackpressureStrategy.DROP) -&gt; 소비하지 못한 데이터 버림</li>
+    <li>LATEST(BackpressureStrategy.LATEST) -&gt; 받을 준비가 될 때까지 최신만 유지하고 버림</li>
+  </ol>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+## Reactor
+Pivotal에서 만들었다. 
+
+### Publisher
+1. 한 건은 `Mono`
+2. 없거나 여러 건은 `Flux`
+
+### Reactor에서 백프레셔 처리 방법
+1. 버퍼링 -&gt; OOM 가능성 있음
+2. DROP -&gt; `onBackpressureDrop()`으로 그냥 버려서 최악의 상황을 모면함
+3. Latest -&gt; `onBackpressureLatest()`으로 최근 이벤트만 유지
+4. `flatMap()` -&gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)
+
+
+### Operator
+
+#### Create
+1. just()
+4. create()
+2. fromStream()
+3. fromIterable()
+
+#### Sequence Control
+1. flatMap() -&gt; `map()` + 새로운 Sequence를 생성해서 내보 냄
+2. concat() -&gt; Publisher의 Sequence를 연결해서 emit
+3. merge() -&gt; Mono를 합침
+4. zip() -&gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합
+
+#### peeking
+1. doOnNext() -&gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서 
+2. doOnSuccess/doOnComplete -&gt; 성공/완료 시
+3. doOnError -&gt; 에러 종료 시
+4. doOnCancel -&gt; 취소 시
+5. doFirst -&gt; 시작 시 
+6. doOnSubscribe -&gt; 구독 시
+7. doOnRequest/doOnTerminate -&gt; 요청/ 종료 시
+8. log() -&gt; Singal 이벤트 로깅
+
+#### Filter
+1. filter -&gt; Filtering
+2. take -&gt; 통과 개수 지정
+
+#### error
+1. timeout -&gt; timeOut 이내 emit 없으면 에러
+2. retry -&gt; 주어진 숫자만큼 재구독하도록
+
+#### ignoreElement
+1. then -&gt; 작업 완료를 기다림
+2. thenReturn -&gt; then + return some Mono
+3. thenMany -&gt; then return + some Flux
+4. distinct -&gt; 중복 제거
+
+#### split (Flux -&gt; Flux&lt;Flux&lt;T&gt;&gt;)
+1. window(int)
+2. window(Duration)
+3. buffer
+
+
+#### toSynchronous
+1. blockFirst/blockLast (flux)
+2. toIterable/toStream (flux)
+3. block (mono)
+4. toFuture (mono)
+
+
+### delay
+1. delay/delayUntil -&gt; 완료 연기
+
+[참고 자료](https://colevelup.tistory.com/40)
+
+
+-----------
+# R2DBC ( Reactive Relational DataBase Connectivity )
+
+JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.
+## 장점
+1. JDBC에서는 불가능한 논 블로킹 API를 제공한다.
+
+## 단점
+1. JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)
+2. 아직 성숙하지 않아서 공식적인 driver implementation이 없다.
+3. R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)
+[Java19, Loom](https://nipafx.dev/inside-java-newscast-27/)
+[blogSpot](http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html)
+4. JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.
+
+## [QueryDsl](https://github.com/infobip/infobip-spring-data-querydsl)
+JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.
+
+
+### 에러 사항
+
+1. 네이밍 규칙
+infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.
+```java
+@Configuration
+public class QuerydslConfig {
+
+    @Bean
+    public NamingStrategy namingStrategy() {
+        return new NamingStrategy(){
+            @Override
+            public String getTableName(Class&lt;?&gt; type) {
+                return type.getSimpleName();
+            }
+
+            @Override
+            public String getColumnName(RelationalPersistentProperty property) {
+                return property.getName().substring(0, 1).toUpperCase() + property.getName().substring(1);
+            }
+        };
+    }
+}
+</code></pre></div></div>
+
+<p><a href="https://github.com/infobip/infobip-spring-data-querydsl?tab=readme-ov-file#R2DBCRequirements">infobip querydsl README</a>에서도
+Flyway를 쓰던 SqlTemplate을 <code class="language-plaintext highlighter-rouge">@Bean</code>으로 두던 하라고 한다.</p>
+
+<ol>
+  <li>
+    <p>템플릿 설정
+```java
+@Configuration
+public class SqlTemplatesConfig {
+ private final List<String> driver = Arrays.asList("mysql", "maria");
+ @Bean
+ public SQLTemplates sqlTemplates (R2dbcProperties properties) throws SQLException {
+     Boolean isStorageDB = driver.stream().map(driver -&gt; properties.getUrl().contains(driver)).reduce(false, (p, n) -&gt; p || n);</String></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> return isStorageDB ?
+         MySQLTemplates.builder().escape('\\').quote().newLineToSingleSpace().build() :
+         H2Templates.builder().quote().escape('\\').newLineToSingleSpace().build();  } }
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어
+```java
+
+interface BoardQueryDslRepository extends QuerydslR2dbcRepository&lt;Board, String&gt; {
+    
+}
+
+@Repository
+@RequiredArgsConstructor
+@Slf4j
+class BoardRepository {
+    private final BoardQueryDslRepository boardQuery;
+
+
+    private BooleanBuilder condition(BoardType type, Language locale) {
+        BooleanBuilder builder = new BooleanBuilder();
+        if(Objects.nonNull(type)) board.type.eq(type);
+        if(Objects.nonNull(locale)) builder.and(board.locale.eq(locale));
+
+        return builder;
+    }
+
+
+    public Mono&lt;Template&gt; template(BoardType type, Language locale) {
+
+        return boardQuery.query(query -&gt; {
+            return query.select(
+                                new QBoardeDto(
+                                        board.boardNo,
+                                        board.boardType,
+                                        board.locale,
+                                        board.contents,
+                                        board.lastModifiedDate
+                                )
+                        )
+                        .from(template)
+                        .where(this.condition(templateType, locale));
+        }).one();
+    }
+
+}
+</code></pre></div></div>
+<p>이렇게 있다면 where 절의 파라미터에 값을 바인딩할 때 <code class="language-plaintext highlighter-rouge">'?'</code>으로 네이밍을 잡아서 바인딩하려다 실패를 한다던가 하는 문제가 발생할 수 있다.
+내부적으로 <code class="language-plaintext highlighter-rouge">MySQLSQLTemplates</code>인지 <code class="language-plaintext highlighter-rouge">instanceOf</code>를 해서 파라미터 바인딩하는 것으로 보인다(Maria_r2dbc-connector). 따라서 기존에는 크게 신경 쓰지 않던 것에도
+주의를 기울여야 한다.</p>
+
+<ol>
+  <li>MariaConnector에서 지원하지 않아서 Enum을 parameter로 던지면 codec 문제를 일으킨다(QueryDSL 기준) -&gt; 해결 하지 못했다.</li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/23/Spring-series-02.Actuator.html">
+        [spring Series] 02.actuator
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/23/Spring-series-04.Eureka.html">
+        [spring Series] 04.eureka
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

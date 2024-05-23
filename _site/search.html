@@ -94,6 +94,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -177,6 +179,116 @@
 <script>
   window.store = {
     
+      "spring-2024-05-23-spring-series-10-requiredargsconstructor-html": {
+        "title": "[spring Series] 10.requiredargsconstructor",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - Spring + Lombok-RequiredArgsConstructorSpring + @RequiredArgsConstructorspring 4.3부터 생성자가 하나만 있으면 @Autowire를 기본으로 처리한다. 이 부분이 Lombok의 @RequiredArgsConstructor와 궁합이 맞아 처리되는 것이다.",
+        "url": "//spring/2024/05/23/Spring-series-10.RequiredArgsConstructor.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-09-applicationcontext-html": {
+        "title": "[spring Series] 09.applicationcontext",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - Application ContextApplicationContext빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 황경)ListableBeanFactory, HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver 를 상속 받음StaticApplicationContext빈 설정 메타 정보를 담은 BeanDefinition을 직접 만들고, 코드를 통해 IOC 등록하기 위해 사용되는 구현체이다.GenericApplicationContextXML 등의 외부에 있는 빈 설정 메타 정보를 BeanDefinitionReader로 읽어서 BeanDefinition을 정의하기 위해서 사용한다.BeanDefinitionReader 구현체로는 XmlBeanDefinitionReader, PropertiesBeanDefinitionReader 등이 있다.  AbstractApplicationContext를 상속받고 BeanDefinitionRegistry를 구현했다. 내부에는 DefaultListableBeanFactory를 필드로 갖고 있다.GenericXMLApplicationContextXML 파일로 설정을 만들고 컨텍스트에서 XML 을 읽어서 사용하는 코드를 만들 때 사용한다.WebApplicationContextAnnotationConfigApplicationContext-&gt; 일반 애플리케이션AnnotationConfigServletWebServerApplicationContext-&gt; 서블릿 기반 웹 (Tomcat)AnnotationConfigReactiveWebServerApplicationContext-&gt; 리액터 NettyConfigurableApplicationContext거의 모든 애플리케이션 컨텍스트가 갖는 공통 애플리케이션 컨텍스트 인터페이스다. ApplicationContext, LifeCycle, Closable를 상속받는다.",
+        "url": "//spring/2024/05/23/Spring-series-09.ApplicationContext.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-08-autowired-html": {
+        "title": "[spring Series] 08.autowired",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - BeanAbstractAutowireCapableBeanFactory기본 빈 생성을 구현하는 추상 BeanFactory 상위 클래스. RootBeanDefinition 클래스에서 지정한 모든 기능을 사용할 수 있다.AutowireCapableBeanFactory 인터페이스를 구현하며 빈 생성을 담당하는 createBean 메소드가 있다.Autowire 및 초기화를 제공하는 추상 beanFactory @Autowire 시 의존관계 주입이 필요한 Bean에 @Autowire 처리를 한다.AutowiredAnnotationBeanPostProcessorBeanPostProcessor를 상속 받고 있다. 내부 inject 메소드로 객체를 주입한다. ReflectionUtils를 내부에서 사용하고 있다.",
+        "url": "//spring/2024/05/23/Spring-series-08.Autowired.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-07-utils-html": {
+        "title": "[spring Series] 07.utils",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - Spring UtilsBeanUtils빈으로 만들 클래스 또는 객체에 대해 처리를 위한 Util을 제공한다.  findMethod  findDeclaredMethod  getParameterNames  getResolvableConstructor  instantiateClassReflectionUtils리플렉션 API를 편리하게 사용할 수 있도록 해준다.  accessibleConstructor  declaresException  findField  findMethod  getDeclaredMethods  getAllDeclaredMethods  getField  setField  invokeMethod  makeAccessibleFileCopyUtils파일 복사를 위한 유틸, 파일을 바이트 배열로 복사하거나 문자열로 복사한다.  copy  copyToByteArray  copyToStringSystemPropertyUtils시스템 property를 처리하기 위한 유틸  resolvePlaceholdersInput/OutputStreamUtils  copy  copyRange  copyToByteArray  copyToStringAnnotationUtils어노테이션, 메타 어노테이션을 핸들링하게 편하게 해주는 유틸  findAnnotation(Class&lt;?&gt; clazz, Class annotationType) : 특정 clazz에서 annotationType으로 찾는다.  findAnnotation(Method method, Class annotationType) : Method로 순회하면서 annotationType으로 찾는다.참고기본적으로 어노테이션을 찾는데 주력으로 한다.AnnotatedElementUtils어노테이션 내용을 오버라이딩할 때 사용한다.",
+        "url": "//spring/2024/05/23/Spring-series-07.Utils.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-06-bean-html": {
+        "title": "[spring Series] 06.bean",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - BeanBean~Aware콜백, 리스너, 옵저버 디자인 패넡이 혼합되어 있다.BeanNameAware  객체가 컨테이너에 정의된 빈 이름을 인식하게 한다.  빈을 생성하는 시점에 setBeanName으로 이름을 얻어올 수 있다. (@Bean(name=\"\"))BeanFactoryAware  BeanFactory 객체를 주입하는데 사용된다.  setBeanFactory를 통해서 beanFactory를 주입받을 수 있다.BeanFactory  빈을 생성하고 의존관계를 설정하는 기능을 담당하는 IOC 컨테이너  스프링 빈을 관리하고 조회하는 역할을 담당  getBean()을 제공  Lazy-loading 을 사용BeanDefinition  스프링 컨테이너는 BeanDefinition을 기반으로 Bean을 생성한다.  상세          BeanClassName: 생성할 빈의 클래스 명      factoryBeanName: 팩토리 빈을 사용할 경우      factoryMethodName: 빈을 생성할 때 팩토리 메소드 이름      Scope: 싱글톤이 기본 값이다.      lazyInit: 스프링 컨테이너 생성시 Bean을 주입하는 것이 아니라 Proxy로 지연시켜서 생성할지 여부      initMethodName: 빈을 생성하고 의존 관계를 적용하고, 호출되는 초기화 메소드 명      DestroyMethodName: 빈의 생명 주기가 끝나고 제거되기 직전에 호출되는 메소드 명      Constructor arguments, Properties: 의존 관계 주입에서 사용      AttributeAccessorSupport모든 메소드의 기본 구현을 제공, 서브클래싱으로 확장됨BeanMetadataAttributeAccessorAttributeAccessorSupport 확장. 빈 메타 데이터를 정의로 담고 있다.AbstractBeanDefinitionBeanDefinition의 추상 클래스GenericBeanDefinition, RootBeanDefinition, ChildBeanDefinition의 뼈RootBeanDefinitionSpring Beanfactory의 특정 bean을 뒷받침GenericBeanDefinitionBeanDefinition 기본 형태라고 생각하면 된다. 클래스, Optional한 생성자 파라미터, 프로퍼티 값을 사요앟ㄹ 수 있다.Bean Scope  Singleton : 싱글톤  Proto : 매번 다른 인스턴스 생성  Request : 웹 요청이 들어오고 나갈 때까지 유지  Session : 웹 세션이 생성되고 종료될 때까지  Application : 서블릿 컨텍스트와 같은 범위로 유지Life cycle  BeanNameAware  BeanClassLoaderAware  BeanFactoryAware  EnvironmentAware  EmbeddedValueResolverAware  ResourceLoaderAware  MessageSourceAware  ApplicationContextAware  ServletContextAware  postProcessBeforeInitialization  Initializing Bean(afterPropertiesSet)  initMethod  postProcessAfterInitializationBeanFactoryPostProcessorbeanDefinition을 커스터마이징하게 도와준다. 모든 definition들이 로드 된 후 스프링의 startup 프로세스에 의해서 호출된다. 그러나 아무런 Bean이 초기화된 상태는 아니다.public class ConfigBeanFactory implements BeanFactoryPostProcessor {    @Override    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {        ((DefaultListableBeanFactory)beanFactory).registerBeanDefinition(\"myBeanName\", gbd);    }}BeanPostProcessorBean을 정의하고 컨테이너에 등록하기 전에 후처리 할 수 있도록 지원한다.public interface BeanPostProcessor {  @Nullable  default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {    //생성 후 초기화 작업 이전    return bean;  }  @Nullable  default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {    //생성 후 초기화 작업 이후    return bean;  }}",
+        "url": "//spring/2024/05/23/Spring-series-06.Bean.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-05-bom-html": {
+        "title": "[spring Series] 05.bom",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - BOM?BOM(Bill Of Materials)BOM(Spring-boot-dependencies)는 스프링이 사용하는 여러 의존성 라이브러리 버전이 명시되어 있다.",
+        "url": "//spring/2024/05/23/Spring-series-05.BOM.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-04-eureka-html": {
+        "title": "[spring Series] 04.eureka",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - EurekaSpring Eurekaeureka:  client:     allow-redirect: #true/false ## 서버가 클라이언트 요청을 백업 서버/ 클러스터로 리디렉션 할 수 있는지 나타낸다.## true면 http 리디렉션을 새 서버 위치와 함께 클라인트로 보낼 수 있다.##    availability-zones: ## 리전의 가용 영역 목록을 가져옴     backup-registry-impl: {name}## BackupRegistry를 구현하는 구현의 이름을 가져온다. (레지스트리 정보에 대한 복원력이 필요할 때)         cache-refresh-executor-exponential-back-oof-bound: 10## 시간 초과 발생 시 재시도 지연에 대한 최대 승수 값이다.         cache-refresh-executor-thread-pool-size: 2## 초기화 할 cacheRefreshExecutor 쓰레드 풀 크기         client-data-accept: {name}## 클라이언트 데이터를 받을 유레카 이름         disable-delta: false## 유레카 클라이언트가 변경된 부분만 가져올지 정합니다.             dollar-replacement: _## $대신할 문자열를 지정합니다.             escape-char-replacement: __## _대신할 문자열을 지정합니다.             enabled: true## Eureka 클라이언트 활성화에 대한 설정이다.    eureka-connection-idle-timeout-second: 30## HTTP 연결이 닫히기 전 idle을 유지할 수 있는 시간을 나타낸다.    eureka-server-connect-timeout-seconds: 5## 연결 초과되기 까지 대기하는 시간을 지정한다.   eureka-server-dns-name: {DNS_NAME}## 유레카 서버 목록을 가져 오기 위해 쿼리할 DNS 이름을 가져온다.   eureka-server-port: 8761## Erureka Server port   eureka-server-read-timeout-seconds: 8## read-timeout   eureka-server-total-connections: 200## 유레카 클라이언트에서 모든 유레카 서버로 허용되는 총 연결 수   eureka-server-total-connection-per-host: 50## 유레카 클라이언트 - 서버 호스트 총 연결 수    eureka-service-url-poll-interval-seconds: 0## 서버 정보의 변경을 폴링하는 빈도를 나타낸다.   fetch-registry: true## 이 클라이언트가 유레카 레재스트리 정보를 가져와야하는지 여부를 나타낸다.   g-zip-content: true## eureka 서버에서 가져온 콘텐츠를 서버에서 지원할 때 압축할지 여부를 나타낸다.     initial-instance-info-replication-interval-seconds: 40## 인스턴스 정보를 유레카 서버에 복제하는 초기 시간을 나타낸다.     instance-info-replication-interval-seconds: 30## 유레카 서버에 복제 할 인스턴스 변경 사항을 복제하는 빈도     proxy-host: {host}   proxy-port: {port}   proxy-username: {username}   proxy-password: {password}## 프록시 설정     registry-fetch-interval-seconds: 30## 레지스트리 정보를 가져오는 빈도를 나타낸다.     service-url: url  dashboard:   enable: true   path: /## 대시보드 설정    instance:   app-group-name: 앱 그룹 이름## 애플리케이션 그룹 이름        appname: {name}  ##  유레카에 등록할 이름을 가져온다.   health-check-url: { url }## health check url 설정   health-check-url-path: /health   home-page-url: {url}   home-page-url-path: /     instance-id: {ID}## 인스턴스의 고유 아이디      lease-expiration-duration-in-seconds: 90##  마지막 heartbeat - 인스턴스 제거 전 사이 시간을 지정한다.   lease-renewal-interval-in-seconds: 30##  하트 비트 인터벌을 정한다.( exipration-duration 보다 작아야 한다.)   prefer-ip-address: false##  호스트 이름 추측에 IP 주소를 사용해야 함을 나타내는 플래그",
+        "url": "//spring/2024/05/23/Spring-series-04.Eureka.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-03-webflux-html": {
+        "title": "[spring Series] 03.webflux",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - WebfluxWebfluxSpringBoot Webflux는 서블릿을 버리고, 비동기로 진행하여 동시성을 최대화하여 가용성을 높히는 데 중점을 둔 프레임워크이다.기본적으로 Java는 blocking code를 사용한다. Java는 Flow.Publisher을 이용해서 ReactiveStreams를 구현해서 사용할 수 있다.이에 대한 실제 구현체는 RxJava, Reactor가 있다.추가로 Tomcat을 버리고 Netty를 채택해서 EventLoop 기반으로 처리하여 가용성을 더 높혔다.이를 사용하면  메모리 가용성이 높아진다.  파이프 라인으로 pub/sub 프로세스를 연결하여 처리한다.ReactiveJava에서 비동기 처리?  Callback -&gt; Callback Hell에 빠질 수 있음  Future -&gt; CompletableFuture를 지원하긴 하지만 까다로움백프레셔Pub/Sub의 균형이 무너질 때 생기는 형상이다. 소비보다 생성이 많을 때 발생한다. 이는 결국 메모리가 overflow 되고 OutOfMemory로 이어진다.pushPublisher가 이벤트를 밀어 넣는 형식 -&gt; backpressure 발생할 수 있다.pullSubscribe가 요청한 만큼만 전달Cold vs. Hot  Cold -&gt; Subscribe로 이벤트 발현  Hot -&gt; Subscriber로 부터 시작하지 않는다. Publisher가 Emit하는 것을 기본으로 한다.RxJavaReactiveX(Netflix)에서 만들었다.Publisher  한 건의 경우 Single  데이터가 없거나 한 건이면 Maybe  한 건 이상일 경우 Observalbe, FlowRxJava에서 백프레셔 처리 방법  Observable 대신 Flowable사용```| Observable          1000개 미만 데이터 발행시      적은 소스로 OOM 발생이 가능성이 낮을 경우      GUI 이벤트 처리      | Flowable  1000개 이상 데이터 발행 시  디스크 I/O  JDBC  네트워크 I/O  Backpressure 제어 전략      MISSING(BackpressureStrategy.MISSING) -&gt; x    ERROR(BackpressureStrategy.ERROR) -&gt; 발생시 MissingBackpressureException    BUFFER(BackpressureStrategy.BUFFER) -&gt; 소비할 때까지 Queue, OOM 가능성 이씀    DROP(BackpressureStrategy.DROP) -&gt; 소비하지 못한 데이터 버림    LATEST(BackpressureStrategy.LATEST) -&gt; 받을 준비가 될 때까지 최신만 유지하고 버림  ## ReactorPivotal에서 만들었다. ### Publisher1. 한 건은 `Mono`2. 없거나 여러 건은 `Flux`### Reactor에서 백프레셔 처리 방법1. 버퍼링 -&gt; OOM 가능성 있음2. DROP -&gt; `onBackpressureDrop()`으로 그냥 버려서 최악의 상황을 모면함3. Latest -&gt; `onBackpressureLatest()`으로 최근 이벤트만 유지4. `flatMap()` -&gt; 내부 Publisher로 변환하고 Merge하여 소비 속도 조절, 동시성 수준을 조절할 수 있어서 백프레셔 관리 가능(2번 째 파라미터로 동시성 제어)### Operator#### Create1. just()4. create()2. fromStream()3. fromIterable()#### Sequence Control1. flatMap() -&gt; `map()` + 새로운 Sequence를 생성해서 내보 냄2. concat() -&gt; Publisher의 Sequence를 연결해서 emit3. merge() -&gt; Mono를 합침4. zip() -&gt; 여러 개의 Sequnce에서 emit 된 데이터를 결합#### peeking1. doOnNext() -&gt; 처리되기 전 흐름에 영향 없이 무언가 하기 위해서 2. doOnSuccess/doOnComplete -&gt; 성공/완료 시3. doOnError -&gt; 에러 종료 시4. doOnCancel -&gt; 취소 시5. doFirst -&gt; 시작 시 6. doOnSubscribe -&gt; 구독 시7. doOnRequest/doOnTerminate -&gt; 요청/ 종료 시8. log() -&gt; Singal 이벤트 로깅#### Filter1. filter -&gt; Filtering2. take -&gt; 통과 개수 지정#### error1. timeout -&gt; timeOut 이내 emit 없으면 에러2. retry -&gt; 주어진 숫자만큼 재구독하도록#### ignoreElement1. then -&gt; 작업 완료를 기다림2. thenReturn -&gt; then + return some Mono3. thenMany -&gt; then return + some Flux4. distinct -&gt; 중복 제거#### split (Flux -&gt; Flux&lt;Flux&lt;T&gt;&gt;)1. window(int)2. window(Duration)3. buffer#### toSynchronous1. blockFirst/blockLast (flux)2. toIterable/toStream (flux)3. block (mono)4. toFuture (mono)### delay1. delay/delayUntil -&gt; 완료 연기[참고 자료](https://colevelup.tistory.com/40)-----------# R2DBC ( Reactive Relational DataBase Connectivity )JDBC 논 블로킹 버전이라고 이해하면 그나마 낫다.## 장점1. JDBC에서는 불가능한 논 블로킹 API를 제공한다.## 단점1. JDBC와 다르다. (JDBC에서 당연하게 사용하던 것들을 사용할 수 없다.)(caching, lazyLoading, write-behind 등)2. 아직 성숙하지 않아서 공식적인 driver implementation이 없다.3. R2DBC가 JDBC의 next가 되지 않을 가능성이 있다. (ProjectLoom은 JVM base DB Driver를 만들고 있다.)[Java19, Loom](https://nipafx.dev/inside-java-newscast-27/)[blogSpot](http://gunsdevlog.blogspot.com/2020/09/java-project-loom-reactive-streams.html)4. JPA와 같은 관계성 매핑이 불가능하며, 캐싱, 영속성 컨텍스트 등을 제공하지 않는다.## [QueryDsl](https://github.com/infobip/infobip-spring-data-querydsl)JPA 처럼 queryDsl을 Third party로 지원하지만(QueryDsl도 thirdParty지만) 완벽하지 않다.### 에러 사항1. 네이밍 규칙infobip Querydsl의 기본 네이밍 규칙이 Pascal이다. 이를 덮어 쓰기 위해서 Bean을 지정한다.```java@Configurationpublic class QuerydslConfig {    @Bean    public NamingStrategy namingStrategy() {        return new NamingStrategy(){            @Override            public String getTableName(Class&lt;?&gt; type) {                return type.getSimpleName();            }            @Override            public String getColumnName(RelationalPersistentProperty property) {                return property.getName().substring(0, 1).toUpperCase() + property.getName().substring(1);            }        };    }}infobip querydsl README에서도Flyway를 쓰던 SqlTemplate을 @Bean으로 두던 하라고 한다.      템플릿 설정```java@Configurationpublic class SqlTemplatesConfig { private final List driver = Arrays.asList(\"mysql\", \"maria\"); @Bean public SQLTemplates sqlTemplates (R2dbcProperties properties) throws SQLException {     Boolean isStorageDB = driver.stream().map(driver -&gt; properties.getUrl().contains(driver)).reduce(false, (p, n) -&gt; p || n);     return isStorageDB ?         MySQLTemplates.builder().escape('\\\\').quote().newLineToSingleSpace().build() :         H2Templates.builder().quote().escape('\\\\').newLineToSingleSpace().build();  } }      이 Template에 따라 Querydsl이 쿼리를 파싱하는 결과가 바뀐다. 뭐 예를 들어```javainterface BoardQueryDslRepository extends QuerydslR2dbcRepository&lt;Board, String&gt; {    }@Repository@RequiredArgsConstructor@Slf4jclass BoardRepository {    private final BoardQueryDslRepository boardQuery;    private BooleanBuilder condition(BoardType type, Language locale) {        BooleanBuilder builder = new BooleanBuilder();        if(Objects.nonNull(type)) board.type.eq(type);        if(Objects.nonNull(locale)) builder.and(board.locale.eq(locale));        return builder;    }    public Mono&lt;Template&gt; template(BoardType type, Language locale) {        return boardQuery.query(query -&gt; {            return query.select(                                new QBoardeDto(                                        board.boardNo,                                        board.boardType,                                        board.locale,                                        board.contents,                                        board.lastModifiedDate                                )                        )                        .from(template)                        .where(this.condition(templateType, locale));        }).one();    }}이렇게 있다면 where 절의 파라미터에 값을 바인딩할 때 '?'으로 네이밍을 잡아서 바인딩하려다 실패를 한다던가 하는 문제가 발생할 수 있다.내부적으로 MySQLSQLTemplates인지 instanceOf를 해서 파라미터 바인딩하는 것으로 보인다(Maria_r2dbc-connector). 따라서 기존에는 크게 신경 쓰지 않던 것에도주의를 기울여야 한다.  MariaConnector에서 지원하지 않아서 Enum을 parameter로 던지면 codec 문제를 일으킨다(QueryDSL 기준) -&gt; 해결 하지 못했다.",
+        "url": "//spring/2024/05/23/Spring-series-03.Webflux.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-02-actuator-html": {
+        "title": "[spring Series] 02.actuator",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - ActuatorActuator실행 중인 애플리케이션에 대한 정보를 제공한다.  애플리케이션 환경에서 사용할 수 있는 구성 속성  애플리케이션에 포함된 다양한 패키지의 로깅 레벨  애플리케이션이 사용 중인 메모리  지정된 엔드 포인트가 받은 요청 횟수  애플리케이션의 건강 상태 정보            Method      Endpoint      Description      Default                  GET      /aduitevents      audit 이벤트 리포트를 생성한다.      X              GET      /beans      컨텍스트의 모든 빈을 리스트 업      X              GET      /conditions      성공 또는 실패한 자동 구성 조건의 내역을 생성      X              GET      /configprop      모든 구성 속성들을 현재 값과 같이 알려준다.      X              GET, POST, DELETE      /env      스프링에서 사용할 수 있는 모든 env를 보여준다.      X              GET      /env/{toMatch}      특정 황경 속성 값을 보여준다.      X              GET      /health      건강상태를 보여준다.      O              GET      /heapdump      힙 덤프를 다운로드 한다.      X              GET      /httptrace      최근의 100개 요청을 tracing한다.      X              GET      /info      개발자가 정의한 info를 반환      O              GET      /loggers      패키지 - 로깅 레벨을 반환      X              GET, POST      /loggers/{name}      지정한 로거의 로깅레벨을 반환      X              GET      /mappings      HTTP 매핑과 매핑을 처리하는 핸들러의 메소드들 내역을 제공      X              GET      /metrics      모든 메트릭 리스트 반환      X              GET      /metrics/{name}      지정한 메트릭 값을 반환      X              GET      /scheduledtasks      스케쥴링된 모든 태스크의 내역을 제공      X              GET      /threaddump      모든 애플리케이션 쓰레드의 내역을 반환      X              POST      /shutdown      애플리케이션을 종료한다.                     POST      /refresh      애플리케이션 정보를 갱신한다.               Refresh =&gt; Yaml은 다시 불러온다. 그러나 이미 주입된 Bean은 다시 주입되지 않는다. -&gt; 아직까지 큰 실효성을 모르겠다.",
+        "url": "//spring/2024/05/23/Spring-series-02.Actuator.html"
+      }
+      ,
+    
+      "spring-2024-05-23-spring-series-01-configuration-html": {
+        "title": "[spring Series] 01.configuration",
+        "tags": "",
+        "date": "May 23, 2024",
+        "author": "",
+        "category": "",
+        "content": "from Dictionary - Spring Yaml settingsSpring Configuration1. Shutdown Gracefullyserver:  shutdown: graceful ##[default immediate]spring:  lifecycle:    timeout-per-shutdown-phase: 2m이러면 -9로 끝내는게 아니라 할 일을 다 마치고 종료된다.",
+        "url": "//spring/2024/05/23/Spring-series-01.Configuration.html"
+      }
+      ,
+    
       "others-2024-05-23-others-series-transaction-html": {
         "title": "[others Series] Transaction",
         "tags": "",
@@ -188,25 +300,25 @@
       }
       ,
     
-      "others-2024-05-23-others-series-semaphoreandmutex-html": {
-        "title": "[others Series] Semaphoreandmutex",
+      "others-2024-05-23-others-series-semaphore-and-mutex-html": {
+        "title": "[others Series] Semaphore And Mutex",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - Semaphore vs. MutexMutex한 쓰레드, 프로세스에 의해 소유될 수 있는 Key를 기반으로한 상호배제 기법프로세스, 쓰레가 공유 자원을 lock()을 통해 잠금을 설정하고 사용한 뒤 unlock()으로 잠금 해제하는 객체 객체다.SemaphoreSignaling mechanism. 현재 공유 자원에 접근할 수 있는 쓰레드, 프로세스 수를 나타내는 값을 둬서 상호배제를 이루는 기법일반화된 뮤텍스, 간단한 정수 값과 두 가지 함수 wait 및 signal로 공유 자원에 대한 접근을 처리한다. wait()은 자신의 차례가 올 때까지 기다리는 함수이며,signal()은 다음 프로세스로 순서를 넘겨주는 함수다.      바이너리 세마포어0, 1의 두 가지 값만 가질 수 있는 세마포어. 구현의 유사성으로 뮤텍스는 바이너리 세마포어라고 할 수 있지만 엄밀히 말하면 뮤텍스는 잠금 기반으로 상호 배제가 일어나는 잠금 메커니즘이고, 세마포어는신호를 기반으로 상호 배제를 하는 신호 메커니즘이다.        카운팅 세마포어여러 개의 값을 가질 수 있는 세마포어이며, 여러 자원에 대한 접근을 제어하는 데 사용한다.  Monitor모니터는 둘 이상의 쓰레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.",
-        "url": "//others/2024/05/23/Others-series-SemaphoreAndMutex.html"
+        "url": "//others/2024/05/23/Others-series-Semaphore-and-Mutex.html"
       }
       ,
     
-      "others-2024-05-23-others-series-processandserviceanddaemon-html": {
-        "title": "[others Series] Processandserviceanddaemon",
+      "others-2024-05-23-others-series-process-service-and-daemon-html": {
+        "title": "[others Series] Process, Service And Daemon",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - Process vs. Service vs. DaemonProcess vs. Service vs. DaemonProcess프로세스는 메모리에 적재되어 CPU에 의해 실행되는 컴퓨터 프로그램을 지칭한다. 각 프로세스는 고유한 프로세스 ID(PID)를 가지며, 운영체제는 프로세스 간의 자원 공유를 관리한다.예를 들어, 웹 브라우저를 실행하는 경우 브라우저라는 프로그램은 하나의 프로세스로 실행되는 것이다. 그리고 프로세스는 눈에 보이는 프로세스(foreground process)와눈에 보이지 않은 프로세스(background process)로 구분된다.            foreground      background                  사용자와 상호작용하는 프로세스      프로세스는 사용자와 상호작용하지 않고 시스템에서 실행되는 프로세스              최소화를 하더라도 눈에 보이는 프로세스를 포그라운드 프로세스      눈에 보이지 않지만 뒤에서 일을 하고 있는 프로세스를 백그라운드 프로세스              인터넷, 카카오톡, 메모장, 그림판 등 눈에 보이는 프로그램      백신 프로그램, 그래픽 드라이버, 마이크 드라이버 등 눈에 보이지 않는 프로그램      Service서비스는 백그라운드에서 실행되는 응용 프로그램이다. 윈도우 서비스는 일반적으로 사용자 인터페이스를 필요로 하지 않는 작업(네트워크 서비스, 데이터베이스 서버, 백업 서비스) 등을 수행한다.이러한 서비스들은 시스템이 부팅될 때 자동으로 시작되며, 사용자가 로그인하지 않은 상태에서도 계속해서 실행된다.이렇게만 보면 데몬과 서비스의 차이가 잘 와닿지 않을 것인데, 윈도우 OS에서는 백그라운드에서 실행되는 응용 프로그램을 service 라 부르고 유닉스(리눅스) OS에서는 daemon 이라고 불린다고 보면 된다.Daemon데몬은 백그라운드에서 실행되는 프로그램으로, 사용자가 직접적으로 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 프로그램을 말한다. 사용자의 요청을 기다리고 있다가요청이 발생하면 이에 적절히 대응하는 리스너와 같은 역할을 한다. 즉, 메모리에 상주하면서 특정 요청이 오면 즉시 대응 할 수 있도록 대기중인 프로세스를 말한다.예시)            서비스 명      데몬 명      정의                  Linux 슈퍼데몬      xinetd      Linux 내 여러 서비스를 한번에 관리              File Transfer Protocol      vsftpd      File을 전송하는 서비스              Secure Shell Service      sshd      암호화 원격 작업이 가능한 서비스      Service vs. DaemonDaemon 과 Service는 비슷한 개념이지만, 운영 체제 차이점 있다고 했다. 그외에도 사용처에도 차이가 있는데, 데몬은 일반적으로 서버에서 주로 사용되고, 서비스는 다른 프로그램이나 서비스를 지원하기 위해 실행된다.데몬은 시스템에서 독립적으로 실행되고, 서비스는 시스템의 상태를 모니터링하고, 백그라운드에서 실행되는 애플리케이션을 제어하고, 작업을 수행하는 등의 역할 지원하는데 초점이 맞춰져 있다는 뜻이다.",
-        "url": "//others/2024/05/23/Others-series-ProcessAndServiceAndDaemon.html"
+        "url": "//others/2024/05/23/Others-series-Process,-Service-and-Daemon.html"
       }
       ,
     
@@ -232,14 +344,14 @@
       }
       ,
     
-      "others-2024-05-23-others-series-multiprocessandmultithread-html": {
-        "title": "[others Series] Multiprocessandmultithread",
+      "others-2024-05-23-others-series-multiprocess-and-multithread-html": {
+        "title": "[others Series] Multiprocess And Multithread",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - MultiProcess vs. MultiThreadMultiProcess vs. MultiThreadMultiProcess멀티 프로세스는 운영체제에서 하나의 응용 프로그램에 대해 동시에 여러 개의 프로세스를 실행할 수 있게 하는 기술을 말한다. 보통 하나의 프로그램 실행에 대해 하나의 프로세스가 메모리에 생성되지만, 부가적인 기능을 위해 여러개의 프로세스를 생성하는 것이다.멀티 프로세스 내부를 보면, 하나의 부모 프로세스가 여러 개의 자식 프로세스를 생성함으로서 다중 프로세스를 구성하는 구조이다.한 프로세스는 실행되는 도중 프로세스 생성 시스템 콜을 통해 새로운 프로세스들을 생성할 수 있는데, 다른 프로세스를 생성하는 프로세스를 부모 프로세스(Parent Process)라 하고,다른 프로세스에 의해 생성된 프로세스를 자식 프로세스(Child Process)라 한다.부모 프로세스와 자식 프로세스는 각각 고유한 PID(Process ID)를 가지고 있다. 부모 프로세스는 자식 프로세스의 PID를 알고 있으며, 이를 통해 자식 프로세스를 제어할 수 있다. 또한, 자식 프로세스는 부모 프로세스의 PID와 PPID(Parent Process ID)를 알고 있어, 이를 통해 부모 프로세스와의 통신이 가능하다.ex) 브라우저 탭장점1. 프로그램 안정성독립적 메모리 공간을 가져서 한 프로세스가 비정상 종료되도 다른 프로세스에 영향을 주지 않는다.2. 병렬성3. 시스템 확장성멀티 프로세스는 각 프로세스가 독립적이므로, 새로운 기능이나 모듈을 추가하거나 수정할때 다른 프로세스에 영향을 주지 않는다. 그래서 시스템의 규모를 쉽게 확장할 수 있다.단점1. Context Switching OverHead멀티태스킹을 구성하는데 핵심 기술인 컨텍스트 스위칭(context switching) 과정에서 성능 저하가 올 수 있다2. 자원 공유 비효율성멀티 프로세스는 각 프로세스가 독립적인 메모리 공간을 가지므로, 결과적으로 메모리 사용량이 증가하게 된다.만일 각 프로세스간에 자원 공유가 필요할 경우 프로세스 사이의 어렵고 복잡한 통신 기법인 IPC(Inter-Process Commnuication)을 사용하여야 한다.MultiThread스레드는 하나의 프로세스 내에 있는 실행 흐름이다. 그리고 멀티 스레드는 하나의 프로세스 안에 여러개의 스레드가 있는 것을 말한다. 따라서 하나의 프로그램에서 두가지 이상의 동작을 동시에 처리하도록 하는 행위가 가능해진다.멀티 프로세스는 웹 브라우저에서의 여러 탭이나 여러 창이라고 말했었다. 대신 멀티 스레드는 웹 브라우저의 단일 탭 또는 창 내에서 브라우저 이벤트 루프, 네트워크 처리, I/O 및 기타 작업을 관리하고 처리하는데 사용된다고 보면된다.장점1. 쓰레드가 프로세스보다 저렴함2. 공유 메모리에 따른 자원 효율성3. Context Switching 비용 감소 (비용이 상대적으로 낮다.)4. 응답 시간 단축단점1. 안정성2. 공유 메모리 동기화로 인한 성능 저하3. 데드락4. Context Switch Overhead [1]5. 디버깅이 어려움[1] : running상태가 끝난 프로세스는 PC, SP, 레지스터, Base Register, limit Register 등 많은 내용들을 PCB에 저장을 해야하는 것이고, 이후 Dispatcher는 ready queue에서 running상태로 올릴 프로세스의 PCB에서 또다시 많은 내용을 복원해야 하는 것이다. 즉, context switching을 위해 context를 저장하고 context를 restore하는 것인데 이러한 일을 하는 데에는 부담이 발생할 수밖에 없을 것이다.이렇게 Context Switch(문맥 교환)에 의해 Dispatcher에 발생하게 되는 부담을 “Context Switching Overhead(문맥교환 오버헤드)”라고 한다.",
-        "url": "//others/2024/05/23/Others-series-MultiProcessAndMultiThread.html"
+        "url": "//others/2024/05/23/Others-series-MultiProcess-and-MultiThread.html"
       }
       ,
     
@@ -265,25 +377,25 @@
       }
       ,
     
-      "others-2024-05-23-others-series-compiletranspileinterpreter-html": {
-        "title": "[others Series] Compiletranspileinterpreter",
+      "others-2024-05-23-others-series-compile-vs-transpile-vs-interpreter-html": {
+        "title": "[others Series] Compile Vs Transpile Vs Interpreter",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - Compile vs. Transpile vs. InterpreterCompile vs. Transpile vs. InterpreterCompile한 언어로 작성된 소스 코드를 다른 언어로 변환하는 것이 컴파일이다ex) JAVA -&gt; bytecode  전체 파일을 스캔하여 한꺼번에 번역  초기 스캔시간이 오래 걸리지만, 한번 실행 파일이 만들어지고 나면 빠르다.  기계어 번역과정에서 많은 메모리를 사용한다.  전체 코드를 스캔하는 과정에서 모든 오류를 한꺼번에 출력해주기 때문에 실행 전에 오류를 알 수 있다Interpreter인터프리터(Interpreter)는 사람이 알아보기 쉬운 프로그래밍 언어로 작성한 코드를 한 줄 씩 즉시 기계어로 번역하는 번역기라고 생각하면 된다.  프로그램 실행 시 한 번에 한 문장씩 번역한다.  한번에 한문장씩 번역후 실행 시키기 때문에 실행 시간이 느리다.  컴파일러와 같은 오브젝트 코드 생성과정이 없기 때문에 메모리 효율이 좋다.  프로그램을 실행시키고 나서 오류를 발견하면 바로 실행을 중지 시킨다. 실행 후에 오류를 알 수 있기 때문에 사용성이 문제가 될수 있다Transpile한 언어로 작성된 소스 코드를 비슷한 수준의 추상화를 가진 다른 언어로 변환하는 것이 트랜스파일이다.ex) typeScript -&gt; javaScript",
-        "url": "//others/2024/05/23/Others-series-CompileTranspileInterpreter.html"
+        "url": "//others/2024/05/23/Others-series-Compile-vs-Transpile-vs-interpreter.html"
       }
       ,
     
-      "others-2024-05-23-others-series-cachestrategy-html": {
-        "title": "[others Series] Cachestrategy",
+      "others-2024-05-23-others-series-cache-strategy-html": {
+        "title": "[others Series] Cache Strategy",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - Caching  프로젝트에서 Redis로 캐싱 전 찾아본캐싱 전략캐싱 전략은 웹 서비스에서 시스템 향상을 기대할 수 있는 중요 기술이다.기본 지식  cache hit : 캐시 스토어에 데이터가 있는 경우  cache miss : 캐시 스토어에 데이터가 없을 경우주요 고려 사항캐시를 사용하면 데이터 정합성 문제가 발생한다. 따라서 적절한 캐시 읽기 전략(Read Cache Strategy)과 캐시 쓰기 전략(Write Cache Strategy)으로 데이터 불일치 문제를 극복하면서 성능 또한 잡아야 한다.캐시 읽기 전략( Read Cache Strategy )1. Look Aside특징  Cache Aside 패턴  데이터를 찾을 때 우선 캐시에 저장된 데이터가 있는지 우선적으로 확인 없으면 DB에서 조회  반복적 읽기가 많은 호출에 적합  캐시, DB가 분리되어 가용. 원하는 데이터만 별도로 구성하여 캐시에 저장  캐시, DB가 분리되어 있어 캐시 장애에 대응 가능  Cache Store, Data Store 간의 정합성 유지 문지가 발생할 수 있다.  초기 조회시 DB를 무조건 조회해야 하므로 단건 호출 빈도가 높은 서비스에서는 적합하지 않다. 대신 반복적으로 동일 쿼리를 호출하는 경우 좋다.  [Cache Warming]미리 Cache로 DB 데이터를 밀어 넣는 작업. 이 작업을 하지 않으면 초기 트래픽 증가 시 cache miss가 발생해서 부하가 급장할 수 있다.expire되면 Thundering Herd가 발생할 수 있으므로 TTL 조정이 필요하다.  [Thundering Herd]캐시 데이터가 휘발됐을 때 다수의 프로세스가 하나의 이벤트를 기다리며 Waiting에 있다 해당 이벤트가 발생했을 때 모든 프로세스들이 동시에wake-up하며 자원을 낭비할 때 발생  -&gt; 동일한 많은 요청이 들어왔을 때 하나의 Cache miss만 원본 서버에 요청하고 나머지 요청은 잠시 대기 시킨 후, 응답이 오면 그 응답을 반환하게 하는 방법으로 해결 가능2. Read through 패턴특징  캐시에서만 데이터를 읽어오는 전략 (inline cache)  Look Aside와 비슷하지만 데이터 동기화를 라이브러리 또는 캐시 제공자에게 위임하는 방식  데이터 조회 속도가 전체적으로 느림  데이터 조회를 전적으로 캐시에만 의지하므로 캐시 서버가 다운되면 서비스 이용에 문제가 생길 수 있음  위 문제는 Redis를 replication 또는 Cluster 구성으로 극복할 수 있다.  캐시, DB 간 데이터 동기화가 항상 이뤄져서 정합성 문제에서 자유로움  읽기가 많은 워크로드에 적합  Cache Aside와 비슷하지만 CacheStore 저장 주체가 Server냐, DataStore이냐 차이캐시 쓰기 전략 (Write Cache Strategy)1, Write Back특정  Write Behind 패턴이라고도 불린다.  캐시오 DB 동기화를 비동기하기 떄문에 동기화 전략이 생략  데이터를 저장할 떄 DB에 바로 쿼리하지 않고 캐시에 모아서 일정 주기 배치 작업을 통해서 진행  캐시에 모아놨다 한 번에 쓰므로 쓰기 쿼리 비용을 줄일 수 있음  Write가 빈번하면서 Read하는데 많은 양의 Resource가 소모되는 서비스에 적합  데이터 정합성 확보  자주 사용되지 않은 불필요한 리소스 저장  캐시에서 오류가 생기면 데이터를 영구 소실  Write back 방식은 DB가 아니라 캐시에 먼저 저장하여 Queue로 사용하고, 특정 시점마다 DB로 flush 하는 방식이다.  DB에 장애가 생겨도 캐시가 살아있으면 서비스를 계속할 수 있음2. Write Through 패턴특징  DB와 Cache에 동시에 데이터를 저장  데이터를 저장할 때 캐시에 먼저 저장하고 DB로 바로 저장  Read Through와 마찬가지로 DB 동기화를 캐시에 위임  DB와 캐시가 항상 동기화 되어 있어, 캐시 상테는 항상 최신  캐시와 백업 저장소 업데이트를 같이 해서 데이터 일관성을 유지할 수 있으서 안정적이다.  데이터 유실이 발생하면 안되는 곳에 사용  자주 사용하지 않는 불필요한 리소스를 저장할 수 있음  빈번한 Write가 생길 수 있음  기억 장치 속도가 느리면 CPU 유휴 시간 증가  캐시에 넣은 데이터를 저장만 하고 사용하지 않을 수도 있다.  WriteThrough, WriteBack 모두 쓰지 않은 데이터를 저장하며, 리소스 낭비를 줄이기 위해서 TTL을 설정해야 한다.3. Write Around특징  Write Through보다 빠름  모든 데이터는 DB에 저장  Cache miss가 발생하면 DB와 캐시에도 데이터를 저장  DB, Cache 간 데이터 정합성에 문제가 있을 수 있캐시 읽기 + 쓰기 조합1. Look Aside + Write AroundRead는 (Cache || DB) -&gt; ( hit - cache / miss - DB ) + Write는 DB로2. Read Through + Write AroundRead는 Cache (hit -&gt; cache / miss -&gt; 캐시가 DB에서 당겨옴 ) + Write는 DB에(항상 DB에 쓰고 읽을 때 DB에서 읽어오므로)3. Read Through + Write ThroughRead는 Cache (hit -&gt; cache / miss -&gt; 캐시가 DB에서 당겨옴 ) + Write(Cache -&gt; DB)저장 방식 지침  자주 사용되면서 자주 변경되지 않는 데이터를 캐싱한다.  캐시는 휘발성을 가져야 한다. ( 어느 정도 데이터 수집과 저장 주기를 가지도록 설계 해야 한다. )  데이터 유실, 정합성이 꺠질 수 있으므로 중요한 정보, 민감한 정보는 캐싱하지 않는 방향으로 한다.  파레토의 법칙 ( 8 : 2 법칙 )전체 결과의 80%가 전체 원인의 20%에서 일어나는 현상삭제 방식 지침  영구 저장소 복사본으로 동작하므로 데이터 동기화가 필요하다.  캐시 구성에 만료 정책을 정해야 한다.Cache Stampede 현상대규모 트래픽에서 TTL을 너무 작게 하면 Key Expire 순간, 여러 프로세스가 Key를 조회하면 DB로 Duplicated read를 한다.또 읽어온 값을 Redis에 Duplciate Write하는 경우도 발생할 수 있다. 따라서 쓸데 없는 작업을 수반하는 현상을 의미한다.캐시 가용성캐시 구성하는 목적은 빠른 성능 확보와 데이터 전달에 있다.",
-        "url": "//others/2024/05/23/Others-series-CacheStrategy.html"
+        "url": "//others/2024/05/23/Others-series-Cache-strategy.html"
       }
       ,
     
@@ -298,14 +410,14 @@
       }
       ,
     
-      "others-2024-05-23-others-series-authenticationandauthorization-html": {
-        "title": "[others Series] Authenticationandauthorization",
+      "others-2024-05-23-others-series-authentication-and-authorization-html": {
+        "title": "[others Series] Authentication And Authorization",
         "tags": "",
         "date": "May 23, 2024",
         "author": "",
         "category": "",
         "content": "from Dictionary - Authentication vs. AuthorizationAuthentication vs. Authorization  인증(Authentication) : 본인이 누구인지 확인 (로그인)  승인(Authorization) : 특정 리소스에 권한이 있는지 확인 (등급 권한)                   인증 (Authentication)      인가 (Authorization)                  기능      자격 증명 확인      권한 허가/거부              진행 방식      비밀번호, 생체인식, 일회용 핀 또는 앱      보안 팀에서 관리하는 설정 사용              사용자가 볼 수 있는가?      예      아니오              사용자가 직접 변경할 수 있는가?      부분적으로 가능      불가능              데이터 전송      ID 토큰 사용      액세스 토큰 사용      ",
-        "url": "//others/2024/05/23/Others-series-AuthenticationAndAuthorization.html"
+        "url": "//others/2024/05/23/Others-series-Authentication-and-Authorization.html"
       }
       ,
     
