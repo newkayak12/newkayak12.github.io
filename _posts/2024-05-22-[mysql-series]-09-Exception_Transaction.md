@@ -1,7 +1,6 @@
-
 ---
 layout: post
-categories: [APACHE]
+categories: [MYSQL]
 ---
 from [Dictionary - Exception and Transaction](https://github.com/newkayak12/Dictionary/blob/master/sql/09.Exception_Transaction.md)
 

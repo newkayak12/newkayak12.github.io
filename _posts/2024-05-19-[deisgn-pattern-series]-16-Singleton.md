@@ -1,8 +1,9 @@
-
 ---
 layout: post
 categories: [DESIGN_PATTERN]
 ---
+
+
 from [Dictionary - Singleton](https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/16.Singleton.md)
 
 

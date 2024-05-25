@@ -2,6 +2,7 @@
 layout: post
 categories: [MYSQL]
 ---
+
 from [Dictionary - PL/SQL](https://github.com/newkayak12/Dictionary/blob/master/sql/08.PL_SQL.md)
 
 
