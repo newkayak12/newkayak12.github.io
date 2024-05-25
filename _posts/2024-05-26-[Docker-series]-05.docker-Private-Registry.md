@@ -3,6 +3,7 @@ layout: post
 categories: [DOCKER]
 ---
 
+g
 from [Dictionary - Docker Private Registry](https://github.com/newkayak12/Dictionary/blob/master/docker/05.dockerPrivateRegistry.md)
 
 

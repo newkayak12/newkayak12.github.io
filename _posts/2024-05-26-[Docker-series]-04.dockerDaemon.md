@@ -5,7 +5,6 @@ categories: [DOCKER]
 
 
 
-
 from [Dictionary - Compose](https://github.com/newkayak12/Dictionary/blob/master/docker/04.dockerDaemon.md)
 
 
