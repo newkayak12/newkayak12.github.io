@@ -4,8 +4,6 @@ layout: post
 categories: [SPRING]
 ---
 
-
-
 from [Dictionary - Http Interface Client](https://github.com/newkayak12/Dictionary/blob/master/spring/25.HttpInterface.md)
 
 
