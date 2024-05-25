@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 27.afterspringready | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - WhenAfterSpringReady">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/25/Spring-series-27.AfterSpringReady.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 27.afterspringready</h1>
+    
+    <p class="meta">
+      May 25, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/27.AfterSpringReady.md">Dictionary - WhenAfterSpringReady</a></p>
+
+<h1 id="스프링-초기화-후-작업">스프링 초기화 후 작업</h1>
+
+<h2 id="commandlinerunner">CommandLineRunner</h2>
+<p><code class="language-plaintext highlighter-rouge">CommandLineRunner</code>는 함수형 인터페이스로 애플리케이션 구동 후 실행되어야 하는 빈을 정의하기 위해서 사용한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">CmdRunner</span> <span class="kd">implements</span> <span class="nc">CommandLineRunner</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span> <span class="o">(</span> <span class="nc">String</span><span class="o">...</span> <span class="n">args</span> <span class="o">)</span> <span class="o">{</span>
+        
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//or</span>
+
+<span class="nd">@SpringApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestServiceApplication</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">TestServiceApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">CommandLineRunner</span> <span class="nf">cmdRunner</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">args</span> <span class="o">-&gt;</span> <span class="o">{};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="applicationrunner">ApplicationRunner</h2>
+<p>스프링 애플리케이션이 구동된 후에 실행되어야 하는 빈을 정의하기 위한 인터페이스다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestServiceApplication</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">TestServiceApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">ApplicationRunner</span> <span class="nf">cmdRunner</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">args</span> <span class="o">-&gt;</span> <span class="o">{};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="eventlistener"><a href="24.SpringEvent.md">EventListener</a></h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationStartingEvent</code>
+    <ul>
+      <li>애플리케이션 실행되고 가장 빠른 타이밍에 실행</li>
+      <li><code class="language-plaintext highlighter-rouge">Environmen</code>, <code class="language-plaintext highlighter-rouge">ApplicationContext</code>는 준비가 되어 있지 않음.</li>
+      <li>source로 <code class="language-plaintext highlighter-rouge">ApplicationContext</code>가 넘어오는데 계속 바뀔거라는 걸 인지해야함</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationContextInitializedEvent</code>
+    <ul>
+      <li>initializer가 호출됨</li>
+      <li><code class="language-plaintext highlighter-rouge">ApplicationContext</code>는 준비되어 있음</li>
+      <li>BeanDefinition 등록 전</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationEnvironmentPreparedEvent</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Environment</code> 준비됨</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationPreparedEvent</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ApplicationContext</code> 완전히 준비됐지만 refresh 전에 실행됨</li>
+      <li><code class="language-plaintext highlighter-rouge">BootstrapRegistryInitializer</code>를 가지고 있고 곧 destroy 예정</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationStartedEvent</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">BootstrapRegistryInitializer</code> destroyed</li>
+      <li><code class="language-plaintext highlighter-rouge">ApplicationRunner</code>, <code class="language-plaintext highlighter-rouge">CommandLineRunner</code>가 실행되기 전</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationReadyEvent</code>
+    <ul>
+      <li>애플리케이션이 요청을 받아서 처리할 준비가 됐을 떄 발행</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationFailedEvent</code>
+    <ul>
+      <li>애플리케이션 실패</li>
+    </ul>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/25/Spring-series-26.Webflux-Vs.-WebMvc.html">
+        [spring Series] 26.webflux Vs. Webmvc
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

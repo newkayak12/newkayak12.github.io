@@ -5,7 +5,477 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 24 May 2024 07:28:37 +0900</pubDate>
+    <pubDate>Sat, 25 May 2024 12:40:37 +0900</pubDate>
+    
+      <item>
+        <title>[spring Series] 27.afterspringready</title>
+        <link>/spring/2024/05/25/Spring-series-27.AfterSpringReady.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-27.AfterSpringReady.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/27.AfterSpringReady.md&quot;&gt;Dictionary - WhenAfterSpringReady&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;스프링-초기화-후-작업&quot;&gt;스프링 초기화 후 작업&lt;/h1&gt;
+
+&lt;h2 id=&quot;commandlinerunner&quot;&gt;CommandLineRunner&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CommandLineRunner&lt;/code&gt;는 함수형 인터페이스로 애플리케이션 구동 후 실행되어야 하는 빈을 정의하기 위해서 사용한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CmdRunner&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CommandLineRunner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//or&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@SpringApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestServiceApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;TestServiceApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CommandLineRunner&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cmdRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;applicationrunner&quot;&gt;ApplicationRunner&lt;/h2&gt;
+&lt;p&gt;스프링 애플리케이션이 구동된 후에 실행되어야 하는 빈을 정의하기 위한 인터페이스다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@SpringApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestServiceApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;TestServiceApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationRunner&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cmdRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;eventlistener&quot;&gt;&lt;a href=&quot;24.SpringEvent.md&quot;&gt;EventListener&lt;/a&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationStartingEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;애플리케이션 실행되고 가장 빠른 타이밍에 실행&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Environmen&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt;는 준비가 되어 있지 않음.&lt;/li&gt;
+      &lt;li&gt;source로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt;가 넘어오는데 계속 바뀔거라는 걸 인지해야함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContextInitializedEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;initializer가 호출됨&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt;는 준비되어 있음&lt;/li&gt;
+      &lt;li&gt;BeanDefinition 등록 전&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEnvironmentPreparedEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Environment&lt;/code&gt; 준비됨&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationPreparedEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt; 완전히 준비됐지만 refresh 전에 실행됨&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BootstrapRegistryInitializer&lt;/code&gt;를 가지고 있고 곧 destroy 예정&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationStartedEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BootstrapRegistryInitializer&lt;/code&gt; destroyed&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationRunner&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CommandLineRunner&lt;/code&gt;가 실행되기 전&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationReadyEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;애플리케이션이 요청을 받아서 처리할 준비가 됐을 떄 발행&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationFailedEvent&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;애플리케이션 실패&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 26.webflux Vs. Webmvc</title>
+        <link>/spring/2024/05/25/Spring-series-26.Webflux-Vs.-WebMvc.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-26.Webflux-Vs.-WebMvc.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/26.WebfluxVs.WebMvc.md&quot;&gt;Dictionary - Webflux vs. WebMVC&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;webflux-vs-webmvc&quot;&gt;Webflux vs. WebMVC&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;WebMVC  : 멀티 쓰레드 기반 웹 프레임워크&lt;/li&gt;
+  &lt;li&gt;WebFlux : 리액티브 스택 기반 웹 프레임워크&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;둘-다-있는-경우&quot;&gt;둘 다 있는 경우?&lt;/h2&gt;
+&lt;p&gt;애플리케이션 클래스 패스를 기반으로 애플리케이션 타입을 선택한다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;NONE&lt;/li&gt;
+  &lt;li&gt;SERVLET&lt;/li&gt;
+  &lt;li&gt;REACTIVE&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;12.Initialize.md&quot;&gt;this.webApplicationType = WebApplicationType.deduceFromClasspath();&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deduceFromClasspath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ClassUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;WEBFLUX_INDICATOR_CLASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+            &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ClassUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;WEBMVC_INDICATOR_CLASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ClassUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;JERSEY_INDICATOR_CLASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;REACTIVE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;className&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SERVLET_INDICATOR_CLASSES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ClassUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NONE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SERVLET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;webfluxautoconfiguration이-활성화되는-조건&quot;&gt;WebFluxAutoConfiguration이 활성화되는 조건&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;애플리케이션이 리액티브 타입인 경우&lt;/li&gt;
+  &lt;li&gt;클래스패스에 웹플럭스가 존재하는 경우&lt;/li&gt;
+  &lt;li&gt;WebFluxConfigurationSupport 타입의 빈이 없는 경우&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
+&lt;p&gt;둘 다 존재하면 SERVLET이 되므로 WebFlux는 disabled 된다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EnableWebFlux&lt;/code&gt;를 사용하면 강제로 활성화된다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 25.httpinterface</title>
+        <link>/2024/05/25/Spring-series-25.HttpInterface.html</link>
+        <guid isPermaLink="true">/2024/05/25/Spring-series-25.HttpInterface.html</guid>
+        <description>&lt;h1 id=&quot;httpinterface&quot;&gt;HttpInterface&lt;/h1&gt;
+
+&lt;h2 id=&quot;정리-대기-중&quot;&gt;정리 대기 중&lt;/h2&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 24.springevent</title>
+        <link>/spring/2024/05/25/Spring-series-24.SpringEvent.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-24.SpringEvent.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/24.SpringEvent.md&quot;&gt;Dictionary - Spring Event&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;spring-event&quot;&gt;Spring Event&lt;/h1&gt;
+&lt;h2 id=&quot;이벤트-등록&quot;&gt;이벤트 등록&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEvent&lt;/code&gt;를 상속해야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;이벤트-팔행&quot;&gt;이벤트 팔행&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEventPublisher&lt;/code&gt;를 주입받아 사용해야 함&lt;/p&gt;
+
+&lt;h2 id=&quot;이벤트-구독&quot;&gt;이벤트 구독&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationListener&lt;/code&gt;를 구현하거나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@EventListener&lt;/code&gt;를 사용해야 한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//Publisher&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiredArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EventPublisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationEventPublisher&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;publishEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CustomEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Emitted&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;//Listener&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EventListener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onApplicationEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;E&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ApplicationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;PayloadApplicationEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forPayload&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPayload&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//or &lt;/span&gt;
+
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CustomEventListener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@EventListener&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;CustomEvent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;발행-구독&quot;&gt;발행/ 구독&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;멀티 캐스팅으로 동작 (다수의 수신자가 존재할 수 있다.)&lt;/li&gt;
+  &lt;li&gt;동기 방식으로 동작 (트랜잭션이 하나의 범위로 묶일 수 있다.)&lt;/li&gt;
+  &lt;li&gt;트랜잭션과 결합이 필요하다면 다른 리스너를 사용해야 한다.(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@TransactionEventListener&lt;/code&gt;를 제공하므로 트랜잭션 단계에 관여할 수 있다.)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransactionPhase.BEFORE_COMMIT&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransactionPhase.AFTER_COMPETION&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransactionPhase.AFTER_COMMIT&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransactionPhase.AFTER_ROLLBACK&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;비동기로-이벤트-처리&quot;&gt;비동기로 이벤트 처리&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Async&lt;/code&gt; 메소드로 비동기 구현&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEventMulticaster&lt;/code&gt;로 비동기 구현&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;장단&quot;&gt;장/단&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;장점
+    &lt;ul&gt;
+      &lt;li&gt;의존성을 분리하여 두 클래스를 느슨하게 결합시킬 수 있다.&lt;/li&gt;
+      &lt;li&gt;클래스가 독립적이므로 재사용성을 높일 수 있다.&lt;/li&gt;
+      &lt;li&gt;추후에 별도 서비스로 분리하기 용이함&lt;/li&gt;
+      &lt;li&gt;메세지 구독 모듈을 추가/ 삭제할 때, 다른 모듈에 영향을 주지 않은 채로 수정할 수 있다.&lt;/li&gt;
+      &lt;li&gt;단위 테스트가 용이해짐&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;단점
+    &lt;ul&gt;
+      &lt;li&gt;전반적인 작업량이 많아질 수 있음&lt;/li&gt;
+      &lt;li&gt;코드 흐름 파악이 어려움&lt;/li&gt;
+      &lt;li&gt;메시지 구독 순서를 고려해야 하는 경우 복잡해짐&lt;/li&gt;
+      &lt;li&gt;전체적인 인벤트의 구독/ 발행을 테스트하기 어려움&lt;/li&gt;
+      &lt;li&gt;특정 프레임워크 API에 의존&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 23.transactionpropagation</title>
+        <link>/spring/2024/05/25/Spring-series-23.TransactionPropagation.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-23.TransactionPropagation.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/23.TransactionPropagation.md&quot;&gt;Dictionary - Propagation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;propagation&quot;&gt;Propagation&lt;/h1&gt;
+
+&lt;h2 id=&quot;시작&quot;&gt;시작&lt;/h2&gt;
+&lt;p&gt;트랜잭션은 하나의 Connection을 가져와 사용하다 닫는 사이에 일어난다. 
+그러므로 JDBC에서 트랜잭션을 사용하려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auto-commit&lt;/code&gt;을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;false&lt;/code&gt;로 해야한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;종료&quot;&gt;종료&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rollback()&lt;/code&gt;을 호출할 때까지가 하나의 트랜잭션이 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;전파&quot;&gt;전파&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Transactional&lt;/code&gt;의 장점은 여러 트랜잭션을 묶어서 커다란 하나의 트랜잭션 경계를 만들 수 있다. 이미 진행 중일 때 추가 트랜잭션을 어떻게 할지 결정하는 것이
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;전파 속성(Propagation)&lt;/code&gt;이라고 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;물리-논리-트랜잭션&quot;&gt;물리/ 논리 트랜잭션&lt;/h2&gt;
+&lt;p&gt;트랜잭션은 DB에서 제공하므로 커넥션 객체를 통해서 처리한다. 그래서 1개 트랜잭션 = 하나의 커넥션이라고 보며, 물리 트랜잭션이라고 부른다.
+다만, 스프링 내부에서 트랜잭션 개념을 두고, 이를 하나의 논리 트랜잭션으로 보며 하나의 물리 트랜잭션 안에 여러 논리 트랜잭션이 있을 수도 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;물리 트랜잭션 : 실제 DB에 적용되는 트랜잭션, 커넥션을 통해 커밋/롤백하는 단위&lt;/li&gt;
+  &lt;li&gt;논리 트랜잭션 : 스프링이 트랜잭션 매니저를 통해서 처리하는 단위&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;그래서&quot;&gt;그래서&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;모든 논리 트랜잭션이 커밋되어야 물리 트랜잭션이 커밋됨&lt;/li&gt;
+  &lt;li&gt;하나의 논리 트랜잭션이라도 롤백되면 물리 트랜잭션은 롤백&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;종류&quot;&gt;종류&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;REQUIRED
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 없으면 새로 만들어야 함 (기본 값)&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 새로 만듦&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 기존 트랜잭션에 참여&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;REQUIRED_NEW
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 항상 새로운 트랜잭션이 필요함&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 새로운 트랜잭션 생성&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 기존 트랜잭션 보류하고 새로운 트랜잭션 생성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SUPPORTS
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 트랜잭션이 있으면 지원&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 트랜잭션이 없이 진행함&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 기존 트랜잭션에 참여&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;NOT_SUPPORTED
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 트랜잭션 지원하지 않음&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 트랜잭션 없이 진행&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 기존 트랜잭션 보류시키고 트랜잭션 없이 진행함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;MANDATORY
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 반드시 필요함&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; throw IllegalTransactionStateException&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 기존 트랜잭션에 참여&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;NEVER
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 트랜잭션 사용하지 않음(기존 트랜잭션도 사용할 생각이 없음)&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 트랜잭션 없지 진행&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; IllegalTransactionStateException 발생&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;NESTED
+    &lt;ul&gt;
+      &lt;li&gt;의미 : 중첩 트랜잭션 생성&lt;/li&gt;
+      &lt;li&gt;없다면 -&amp;gt; 새로운 트랜잭션 생성&lt;/li&gt;
+      &lt;li&gt;있으면 -&amp;gt; 중첩 트랜잭션 생성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 22.transactional</title>
+        <link>/spring/2024/05/25/Spring-series-22.Transactional.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-22.Transactional.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/22.Transactional.md&quot;&gt;Dictionary - Transactional&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;transactional&quot;&gt;@Transactional&lt;/h1&gt;
+
+&lt;p&gt;AOP 기반으로 동작한다. 내부적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;connection&lt;/code&gt;을 가져와서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auto-commit&lt;/code&gt;을 비활성하고 트랜잭션을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;begin&lt;/code&gt;하다.
+그리고 커넥션을 한 쓰레드에서 공유할 수 있도록 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadLocal&lt;/code&gt;에 저장하는 트랜잭션 동기화&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Transaction Synchrinization&lt;/code&gt;를 진행한다. 
+이러한 이유로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parallelStream&lt;/code&gt;을 사용하면 문제가 생길 수 있다.&lt;/p&gt;
+
+&lt;p&gt;parallelStream을 사용하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ForJoinPool&lt;/code&gt;을 이용하기 떄문에 서로 다른 독립적인 작업이된다. 
+그래서 예외가 발생해도 전체 데이터가 롤백이 되지 않는다.&lt;/p&gt;
+
+&lt;p&gt;더 심각한 부분은 각 쓰레드에서 DB 커넥션을 획득하려고 시도한다는 점이다. 이는 커넥션 풀을 빠르게 갉아 먹는다.&lt;/p&gt;
+
+&lt;h2 id=&quot;우선순위&quot;&gt;우선순위&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;클래스 메소드&lt;/li&gt;
+  &lt;li&gt;클래스 선언부&lt;/li&gt;
+  &lt;li&gt;인터페이스 메소드&lt;/li&gt;
+  &lt;li&gt;인터페이스 선언부&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;모드&quot;&gt;모드&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ProxyMode
+    &lt;ul&gt;
+      &lt;li&gt;반드시 public&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;protected&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private&lt;/code&gt;에 선언된다고 하면 에러도 없고 실행도 없다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;AspectJMode&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[spring Series] 21.filterandinterceptor</title>
+        <link>/spring/2024/05/25/Spring-series-21.FilterAndInterceptor.html</link>
+        <guid isPermaLink="true">/spring/2024/05/25/Spring-series-21.FilterAndInterceptor.html</guid>
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/21.FilterAndInterceptor.md&quot;&gt;Dictionary - Filter, Interceptor&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;filter-interceptor&quot;&gt;Filter, Interceptor&lt;/h1&gt;
+
+&lt;h2 id=&quot;filter&quot;&gt;Filter&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dispatcher Servlet&lt;/code&gt;에 요청이 전달되기 전/후에 부가 작업을 할 수 있게 해주는 기능&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/스크린샷 2024-05-25 12.35.33.png&quot; alt=&quot;스크린샷 2024-05-25 12.35.33.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dispatcher Servlet&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SpringContext&lt;/code&gt;보다 전이므로 스프링 제어 범위 밖이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;in-java&quot;&gt;in java&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;javax.servlet&lt;/code&gt;의 Filter를 구현하면 필터를 추가할 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FilterConfig&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filterConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletExcpetion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 필터 객체 초기화&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilterChain&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  디스패쳐 서블릿 전달 전에 실행되는 메소드다.&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  자원 반환되기 전 실행되는 메소드다.     &lt;/span&gt;
+    
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;interceptor&quot;&gt;Interceptor&lt;/h2&gt;
+&lt;p&gt;Spring에서 제공하는 기술이다. 디스패쳐 서블릿이 컨트롤러를 호출하기 전과 후에 요청과 응답을 참조하거나 가공할 수 있는 기능을 제공한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/스크린샷 2024-05-25 12.35.42.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;in-java-1&quot;&gt;in java&lt;/h2&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HandlerInterceptor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;preHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  컨트롤러 호출되기 전에 실행.&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postHandle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Nullable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ModelAndView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modelAndView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//  컨트롤러 호출된 후에 실행.&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;afterCompletion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Nullable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;정리&quot;&gt;정리&lt;/h2&gt;
+&lt;p&gt;|            대상             |                                                Filter                                                 |                                   Interceptor                                    |
+|:————————-:|:—————————————————————————————————–:|:——————————————————————————–:|
+|         관리되는 컨테이너         |                                           Servlet Container                                           |                                 Spring Container                                 |
+|     스프링에서 예외 가능한지 여부      |                                                   X                                                   |                                        O                                         |
+| Request/Response 조작 가능 여부 |                                                   O                                                   |                                        X                                         |
+|            용도             | - 공통된 보안 및 인증/ 인가 관련 작업&lt;br /&gt; - 모든 요청에 대한 로깅 및 감사 &lt;br /&gt; - 이미지/데이터 압축 및 문자열 인코딩&lt;br /&gt; - 스프링과 분리되어야 하는 기능 | - 세부적인 보안 및 인증/인가 공통 작업&lt;br /&gt; - API 호출에 대한 로깅 및 감사&lt;br /&gt; - Controller로 넘겨주는 정보의 가공 |&lt;/p&gt;
+
+&lt;h2 id=&quot;이상한-점&quot;&gt;이상한 점?&lt;/h2&gt;
+&lt;p&gt;위의 내용을 보면 스프링에 의해서 관리 받지 않기 때문에 스프링 빈으로 등록이 불가능해 보인다. 근데? 실제로 해보면 Filter 역시 스프링 빈으로 등록이 가능하며, 
+빈을 주입받을 수도 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;delegatingfilterproxy&quot;&gt;DelegatingFilterProxy&lt;/h3&gt;
+&lt;p&gt;필터에서도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DI&lt;/code&gt;를 할 필요가 있다. 이는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;으로 가능해졌다.
+필터가 Bean으로 등록됐고, 요청이 오면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;으로 요청을 받아서 우리가 받은 필터(스프링 빈)에게 요청을 위임한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Filter 구현체가 스프링 빈으로 등록됨&lt;/li&gt;
+  &lt;li&gt;ServletContext가 Filter 구현체를 갖는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;를 생성&lt;/li&gt;
+  &lt;li&gt;ServletContext가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;를 서블릿 컨텍스트에 필터로 등록&lt;/li&gt;
+  &lt;li&gt;요청이 오면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;가 구현체에게 요청을 위임하여 필터 처리를 진행&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 25 May 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[spring Series] 20.quartz+batch</title>
@@ -1173,574 +1643,6 @@ ServletWebServerApplicationContext 기준으로&lt;/p&gt;
 &lt;p&gt;어플리케이션이 실행된 이후에 초기화하는 작업을 필요로 하는 경우에 Runner로 등록하는데, 이들을 찾아서 실행한다.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 12.initialize</title>
-        <link>/spring/2024/05/24/Spring-series-12.Initialize.html</link>
-        <guid isPermaLink="true">/spring/2024/05/24/Spring-series-12.Initialize.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/12.Initialize.md&quot;&gt;Dictionary - SpringBootInitialize&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;initialize&quot;&gt;Initialize&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;SpringApplication.run(~.class, args); 호출
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigurableApplicationContext&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primarySource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primarySource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigurableApplicationContext&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primarySources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primarySources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigurableApplicationContext&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;ApplicationContext를 리턴 받음
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ResourceLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primarySources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resourceLoader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;Assert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primarySources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PrimarySources must not be null&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;primarySources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LinkedHashSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primarySources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//applicationType 추론 {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//  1. 웹이 아니면 AnnotatoinConfigApplicationContext&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//  2. 서블릿 기반 AnnotaionConfigServletWebServerApplicationContext -&amp;gt; WebMvcAutoConfiguration 찾아다님&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//  3. 리액티브 AnnotationConfigReactiveWebServerApplication&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// 만약 servlet, webflux 둘 다 있으면 servlet이 기본&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;webApplicationType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebApplicationType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deduceFromClasspath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-     &lt;span class=&quot;c1&quot;&gt;// 26.WebfluxVs.WebMvc.md&lt;/span&gt;
-        
-
-     &lt;span class=&quot;c1&quot;&gt;//BootstrapRegistryInitializer를 불러오고 셋 {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// ApplicationContext 준비하고 Environment 후처리 동안 이용되는 임시 컨텍스트 객체&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// 이 동안 BootstrapRegistry를 사용하는데 Initializer 들을 SpringFactory에서 가져오고 객체로 만들어 세팅함&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//      private &amp;lt;T&amp;gt; Collection&amp;lt;T&amp;gt; getSpringFactoriesInstances(Class&amp;lt;T&amp;gt; type, Class&amp;lt;?&amp;gt;[] parameterTypes, Object... args) {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          ClassLoader classLoader = getClassLoader();&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          // Use names and ensure unique to protect against duplicates&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          Set&amp;lt;String&amp;gt; names = new LinkedHashSet&amp;lt;&amp;gt;(SpringFactoriesLoader.loadFactoryNames(type, classLoader));&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          List&amp;lt;T&amp;gt; instances = createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names);&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          AnnotationAwareOrderComparator.sort(instances);&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//          return instances;&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//      }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bootstrapRegistryInitializers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getSpringFactoriesInstances&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BootstrapRegistryInitializer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-
-     &lt;span class=&quot;c1&quot;&gt;//ApplicationInitializer 셋 {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//  Bootstrap 단계에서 캐싱한 값으로 부터 찾아서 실제로 Initialize 한다.&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//}&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;setInitializers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSpringFactoriesInstances&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ApplicationContextInitializer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-
-     &lt;span class=&quot;c1&quot;&gt;//ApplicationListener 셋 {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//   ApplicationListener들을 불러오고 listener 값을 세팅&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//   ApplictionListener는 옵저버 패턴으로 애플리케이션을 구독하는 리스터&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//}&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;setListeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSpringFactoriesInstances&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ApplicationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-
-     &lt;span class=&quot;c1&quot;&gt;// Main 추론{&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//        &lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//    &lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// private Class&amp;lt;?&amp;gt; deduceMainApplicationClass() {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//     try {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//         StackTraceElement[] stackTrace = new RuntimeException().getStackTrace();&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//         for (StackTraceElement stackTraceElement : stackTrace) {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//             if (&quot;main&quot;.equals(stackTraceElement.getMethodName())) {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//                 return Class.forName(stackTraceElement.getClassName());&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//             }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//         }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//     }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//     catch (ClassNotFoundException ex) {&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//         // Swallow and continue&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//     }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//     return null;&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//      &lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//  의도적으로 RuntimeException을 내서 StackTrace를 가져온다. 그리고 Main이 붙어있는 메소드를 찾으면 Main이라고 판단하고 클래스 이름을 찾느다.&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//      &lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-     &lt;span class=&quot;c1&quot;&gt;//}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainApplicationClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deduceMainApplicationClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
- &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigurableApplicationContext&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nanoTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;DefaultBootstrapContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bootstrapContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createBootstrapContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;ConfigurableApplicationContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;configureHeadlessProperty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;SpringApplicationRunListeners&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getRunListeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;starting&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bootstrapContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainApplicationClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;nc&quot;&gt;ApplicationArguments&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationArguments&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DefaultApplicationArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nc&quot;&gt;ConfigurableEnvironment&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prepareEnvironment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bootstrapContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;configureIgnoreBeanInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nc&quot;&gt;Banner&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;printedBanner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;printBanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setApplicationStartup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;applicationStartup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;prepareContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bootstrapContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;printedBanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;refreshContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;afterRefresh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeTakenToStartup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofNanos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nanoTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logStartupInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-             &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StartupInfoLogger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainApplicationClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logStarted&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationLog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeTakenToStartup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;started&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeTakenToStartup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;callRunners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationArguments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;handleRunFailure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalStateException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeTakenToReady&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofNanos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nanoTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;listeners&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeTakenToReady&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-         &lt;span class=&quot;n&quot;&gt;handleRunFailure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-         &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;IllegalStateException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;configurableapplicationcontext&quot;&gt;&lt;a href=&quot;13.ConfigurableApplicationContext.md&quot;&gt;ConfigurableApplicationContext&lt;/a&gt;&lt;/h1&gt;
-</description>
-        <pubDate>Fri, 24 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 11.spring Boot Application</title>
-        <link>/spring/2024/05/24/Spring-series-11.Spring-Boot-Application.html</link>
-        <guid isPermaLink="true">/spring/2024/05/24/Spring-series-11.Spring-Boot-Application.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/11.SpringBootApplication.md&quot;&gt;Dictionary - SpringBootApplication&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;springbootapplication&quot;&gt;@SpringBootApplication&lt;/h1&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ElementType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Retention&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RUNTIME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Documented&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Inherited&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@SpringBootConfiguration&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@EnableAutoConfiguration&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;excludeFilters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilterType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CUSTOM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TypeExcludeFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-		&lt;span class=&quot;nd&quot;&gt;@Filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilterType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CUSTOM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AutoConfigurationExcludeFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringBootApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnableAutoConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//AutoConfigure 제외 대상&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnableAutoConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;excludeName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//AutoConfigure 제외 대상 (클래스 명)&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;basePackages&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scanBasePackages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//ComponentScan Packages&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;basePackageClasses&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanBasePackageClasses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//ComponentScan classes&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ComponentScan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;nameGenerator&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanNameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;nameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanNameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//BeanNaming 담당 클래스&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;proxyBeanMethods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//@Bean을 프록시로 처리하도록 설정&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//프록시가 필요한 이유는 해당 메소드를 직접 호출하는 경우에도&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//항상 싱글톤 스코프를 강제해서 1개의 객체만 생성하기 위함&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;@SpringBootConfiguration
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Configuration&lt;/code&gt;을 담은 Annotation
-```java
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Configuration
-@Indexed
-public @interface SpringBootConfiguration {&lt;/p&gt;
-
-    &lt;p&gt;@AliasFor(annotation = Configuration.class)
- boolean proxyBeanMethods() default true;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-2. @EnableAutoConfiguration
-필요한 Spring auto configuration을 활성화하는 어노테이션 
-자동 설정할 클래스 선별은 `AutoConfigurationImportSelector`가 처리한다. 
-`@Import`를 통해서 진행한다. 
-```java
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@AutoConfigurationPackage
-@Import(AutoConfigurationImportSelector.class)
-public @interface EnableAutoConfiguration {
-
-    String ENABLED_OVERRIDE_PROPERTY= &quot;spring.boot.enableautoconfiguration&quot;;
-
-    Class&amp;lt;?&amp;gt;[] exclude() default {};
-
-    String[] excludeName() default {};
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;autoConfigure 가능 대상은 spring.factories에 있다.(spring-boot-autoconfigure)&lt;/p&gt;
-
-&lt;p&gt;auto-configuration 클래스는 아래의 어노테이션을 자주 사용한다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;@ConditionalOnClass: 해당 클래스가 클래스 패스에 존재하는 경우&lt;/li&gt;
-  &lt;li&gt;@ConditionlOnBean: 해당 클래스나 이름이 빈 팩토리에 포함되어 있는 경우&lt;/li&gt;
-  &lt;li&gt;@ConditionalOnMissingBean: 해당 빈이 등록되어있지 않은 경우 -&amp;gt; bean이 없을 경우만 올라가게 할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;@ComponentScan
-빈을 등록하기 위한 어노테이션을 탐색하는 basePackage를 지정한다.
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Retention&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RUNTIME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ElementType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Documented&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Repeatable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ComponentScans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ComponentScan&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
- &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;basePackages&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
- &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;basePackages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;basePackageClasses&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanNameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;nameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanNameGenerator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScopeMetadataResolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scopeResolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AnnotationScopeMetadataResolver&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;ScopedProxyMode&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scopedProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScopedProxyMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEFAULT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resourcePattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassPathScanningCandidateComponentProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEFAULT_RESOURCE_PATTERN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;useDefaultFilters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;Filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;includeFilters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
- &lt;span class=&quot;nc&quot;&gt;Filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;excludeFilters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
- &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lazyInit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;nd&quot;&gt;@Retention&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RetentionPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RUNTIME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- &lt;span class=&quot;nd&quot;&gt;@Target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;({})&lt;/span&gt;
- &lt;span class=&quot;nd&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Filter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-     &lt;span class=&quot;nc&quot;&gt;FilterType&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilterType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ANNOTATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-     &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;classes&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
-     &lt;span class=&quot;nd&quot;&gt;@AliasFor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-     &lt;span class=&quot;nc&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;?&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
-
-     &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pattern&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{};&lt;/span&gt;
- &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 24 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 10.required Args Constructor</title>
-        <link>/spring/2024/05/23/Spring-series-10.Required-Args-Constructor.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-10.Required-Args-Constructor.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/10.RequiredArgsConstructor.md&quot;&gt;Dictionary - Spring + Lombok-RequiredArgsConstructor&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;spring--requiredargsconstructor&quot;&gt;Spring + @RequiredArgsConstructor&lt;/h1&gt;
-
-&lt;p&gt;spring 4.3부터 생성자가 하나만 있으면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Autowire&lt;/code&gt;를 기본으로 처리한다. 
-이 부분이 Lombok의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@RequiredArgsConstructor&lt;/code&gt;와 궁합이 맞아 처리되는 것이다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 09.application Context</title>
-        <link>/spring/2024/05/23/Spring-series-09.Application-Context.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-09.Application-Context.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/09.ApplicationContext.md&quot;&gt;Dictionary - Application Context&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;applicationcontext&quot;&gt;ApplicationContext&lt;/h1&gt;
-&lt;p&gt;빈들의 생성과 의존성 주입 등의 역할을 하는 일종의 DI 컨테이너(애플리케이션을 실행하기 위한 환경)&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ListableBeanFactory&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HierarchicalBeanFactory&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MessageSource&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationEventPublisher&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ResourcePatternResolver&lt;/code&gt; 를 상속 받음&lt;/p&gt;
-
-&lt;h2 id=&quot;staticapplicationcontext&quot;&gt;StaticApplicationContext&lt;/h2&gt;
-&lt;p&gt;빈 설정 메타 정보를 담은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanDefinition&lt;/code&gt;을 직접 만들고, 코드를 통해 IOC 등록하기 위해 사용되는 구현체이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;genericapplicationcontext&quot;&gt;GenericApplicationContext&lt;/h2&gt;
-&lt;p&gt;XML 등의 외부에 있는 빈 설정 메타 정보를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanDefinitionReader&lt;/code&gt;로 읽어서 BeanDefinition을 정의하기 위해서 사용한다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanDefinitionReader&lt;/code&gt; 구현체로는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;XmlBeanDefinitionReader&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PropertiesBeanDefinitionReader&lt;/code&gt; 등이 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AbstractApplicationContext&lt;/code&gt;를 상속받고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanDefinitionRegistry&lt;/code&gt;를 구현했다. 
-내부에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DefaultListableBeanFactory&lt;/code&gt;를 필드로 갖고 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;genericxmlapplicationcontext&quot;&gt;GenericXMLApplicationContext&lt;/h2&gt;
-&lt;p&gt;XML 파일로 설정을 만들고 컨텍스트에서 XML 을 읽어서 사용하는 코드를 만들 때 사용한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;webapplicationcontext&quot;&gt;WebApplicationContext&lt;/h2&gt;
-
-&lt;h2 id=&quot;annotationconfigapplicationcontext&quot;&gt;AnnotationConfigApplicationContext&lt;/h2&gt;
-&lt;p&gt;-&amp;gt; 일반 애플리케이션&lt;/p&gt;
-&lt;h2 id=&quot;annotationconfigservletwebserverapplicationcontext&quot;&gt;AnnotationConfigServletWebServerApplicationContext&lt;/h2&gt;
-&lt;p&gt;-&amp;gt; 서블릿 기반 웹 (Tomcat)&lt;/p&gt;
-&lt;h2 id=&quot;annotationconfigreactivewebserverapplicationcontext&quot;&gt;AnnotationConfigReactiveWebServerApplicationContext&lt;/h2&gt;
-&lt;p&gt;-&amp;gt; 리액터 Netty&lt;/p&gt;
-
-&lt;h2 id=&quot;configurableapplicationcontext&quot;&gt;ConfigurableApplicationContext&lt;/h2&gt;
-&lt;p&gt;거의 모든 애플리케이션 컨텍스트가 갖는 공통 애플리케이션 컨텍스트 인터페이스다. 
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ApplicationContext&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LifeCycle&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Closable&lt;/code&gt;를 상속받는다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 08.autowired</title>
-        <link>/spring/2024/05/23/Spring-series-08.Autowired.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-08.Autowired.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/08.Autowired.md&quot;&gt;Dictionary - Bean&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;abstractautowirecapablebeanfactory&quot;&gt;AbstractAutowireCapableBeanFactory&lt;/h1&gt;
-&lt;p&gt;기본 빈 생성을 구현하는 추상 BeanFactory 상위 클래스. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RootBeanDefinition&lt;/code&gt; 클래스에서 지정한 모든 기능을 사용할 수 있다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AutowireCapableBeanFactory&lt;/code&gt; 인터페이스를 구현하며 빈 생성을 담당하는 createBean 메소드가 있다.&lt;/p&gt;
-
-&lt;p&gt;Autowire 및 초기화를 제공하는 추상 beanFactory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Autowire&lt;/code&gt; 시 의존관계 주입이 필요한 Bean에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Autowire&lt;/code&gt; 처리를 한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;autowiredannotationbeanpostprocessor&quot;&gt;AutowiredAnnotationBeanPostProcessor&lt;/h1&gt;
-&lt;p&gt;BeanPostProcessor를 상속 받고 있다. 내부 inject 메소드로 객체를 주입한다. 
-&lt;a href=&quot;https://newkayak12.github.io/java/2024/05/23/07.Utils.md&quot;&gt;ReflectionUtils&lt;/a&gt;를 내부에서 사용하고 있다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 07.utils</title>
-        <link>/spring/2024/05/23/Spring-series-07.Utils.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-07.Utils.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/07.Utils.md&quot;&gt;Dictionary - Spring Utils&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;beanutils&quot;&gt;BeanUtils&lt;/h1&gt;
-&lt;p&gt;빈으로 만들 클래스 또는 객체에 대해 처리를 위한 Util을 제공한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;findMethod&lt;/li&gt;
-  &lt;li&gt;findDeclaredMethod&lt;/li&gt;
-  &lt;li&gt;getParameterNames&lt;/li&gt;
-  &lt;li&gt;getResolvableConstructor&lt;/li&gt;
-  &lt;li&gt;instantiateClass&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;reflectionutils&quot;&gt;ReflectionUtils&lt;/h1&gt;
-&lt;p&gt;리플렉션 API를 편리하게 사용할 수 있도록 해준다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;accessibleConstructor&lt;/li&gt;
-  &lt;li&gt;declaresException&lt;/li&gt;
-  &lt;li&gt;findField&lt;/li&gt;
-  &lt;li&gt;findMethod&lt;/li&gt;
-  &lt;li&gt;getDeclaredMethods&lt;/li&gt;
-  &lt;li&gt;getAllDeclaredMethods&lt;/li&gt;
-  &lt;li&gt;getField&lt;/li&gt;
-  &lt;li&gt;setField&lt;/li&gt;
-  &lt;li&gt;invokeMethod&lt;/li&gt;
-  &lt;li&gt;makeAccessible&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;filecopyutils&quot;&gt;FileCopyUtils&lt;/h1&gt;
-&lt;p&gt;파일 복사를 위한 유틸, 파일을 바이트 배열로 복사하거나 문자열로 복사한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;copy&lt;/li&gt;
-  &lt;li&gt;copyToByteArray&lt;/li&gt;
-  &lt;li&gt;copyToString&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;systempropertyutils&quot;&gt;SystemPropertyUtils&lt;/h1&gt;
-&lt;p&gt;시스템 property를 처리하기 위한 유틸&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;resolvePlaceholders&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;inputoutputstreamutils&quot;&gt;Input/OutputStreamUtils&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;copy&lt;/li&gt;
-  &lt;li&gt;copyRange&lt;/li&gt;
-  &lt;li&gt;copyToByteArray&lt;/li&gt;
-  &lt;li&gt;copyToString&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;annotationutils&quot;&gt;AnnotationUtils&lt;/h1&gt;
-&lt;p&gt;어노테이션, 메타 어노테이션을 핸들링하게 편하게 해주는 유틸&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;findAnnotation(Class&amp;lt;?&amp;gt; clazz, Class&lt;a&gt; annotationType) : 특정 clazz에서 annotationType으로 찾는다.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;findAnnotation(Method method, Class&lt;a&gt; annotationType) : Method로 순회하면서 annotationType으로 찾는다.&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/annotation/AnnotationUtils.html&quot;&gt;참고&lt;/a&gt;
-기본적으로 어노테이션을 찾는데 주력으로 한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;annotatedelementutils&quot;&gt;AnnotatedElementUtils&lt;/h1&gt;
-&lt;p&gt;어노테이션 내용을 오버라이딩할 때 사용한다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[spring Series] 06.bean</title>
-        <link>/spring/2024/05/23/Spring-series-06.Bean.html</link>
-        <guid isPermaLink="true">/spring/2024/05/23/Spring-series-06.Bean.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/spring/06.Bean.md&quot;&gt;Dictionary - Bean&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;bean&quot;&gt;Bean&lt;/h1&gt;
-
-&lt;h2 id=&quot;aware&quot;&gt;~Aware&lt;/h2&gt;
-&lt;p&gt;콜백, 리스너, 옵저버 디자인 패넡이 혼합되어 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;beannameaware&quot;&gt;BeanNameAware&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;객체가 컨테이너에 정의된 빈 이름을 인식하게 한다.&lt;/li&gt;
-  &lt;li&gt;빈을 생성하는 시점에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setBeanName&lt;/code&gt;으로 이름을 얻어올 수 있다. (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Bean(name=&quot;&quot;)&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;beanfactoryaware&quot;&gt;BeanFactoryAware&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;BeanFactory 객체를 주입하는데 사용된다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setBeanFactory&lt;/code&gt;를 통해서 beanFactory를 주입받을 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;beanfactory&quot;&gt;BeanFactory&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;빈을 생성하고 의존관계를 설정하는 기능을 담당하는 IOC 컨테이너&lt;/li&gt;
-  &lt;li&gt;스프링 빈을 관리하고 조회하는 역할을 담당&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getBean()&lt;/code&gt;을 제공&lt;/li&gt;
-  &lt;li&gt;Lazy-loading 을 사용&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;beandefinition&quot;&gt;BeanDefinition&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;스프링 컨테이너는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanDefinition&lt;/code&gt;을 기반으로 Bean을 생성한다.&lt;/li&gt;
-  &lt;li&gt;상세
-    &lt;ol&gt;
-      &lt;li&gt;BeanClassName: 생성할 빈의 클래스 명&lt;/li&gt;
-      &lt;li&gt;factoryBeanName: 팩토리 빈을 사용할 경우&lt;/li&gt;
-      &lt;li&gt;factoryMethodName: 빈을 생성할 때 팩토리 메소드 이름&lt;/li&gt;
-      &lt;li&gt;Scope: 싱글톤이 기본 값이다.&lt;/li&gt;
-      &lt;li&gt;lazyInit: 스프링 컨테이너 생성시 Bean을 주입하는 것이 아니라 Proxy로 지연시켜서 생성할지 여부&lt;/li&gt;
-      &lt;li&gt;initMethodName: 빈을 생성하고 의존 관계를 적용하고, 호출되는 초기화 메소드 명&lt;/li&gt;
-      &lt;li&gt;DestroyMethodName: 빈의 생명 주기가 끝나고 제거되기 직전에 호출되는 메소드 명&lt;/li&gt;
-      &lt;li&gt;Constructor arguments, Properties: 의존 관계 주입에서 사용&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;attributeaccessorsupport&quot;&gt;AttributeAccessorSupport&lt;/h2&gt;
-&lt;p&gt;모든 메소드의 기본 구현을 제공, 서브클래싱으로 확장됨&lt;/p&gt;
-
-&lt;h2 id=&quot;beanmetadataattributeaccessor&quot;&gt;BeanMetadataAttributeAccessor&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AttributeAccessorSupport&lt;/code&gt; 확장. 빈 메타 데이터를 정의로 담고 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;abstractbeandefinition&quot;&gt;AbstractBeanDefinition&lt;/h2&gt;
-&lt;p&gt;BeanDefinition의 추상 클래스&lt;br /&gt;
-GenericBeanDefinition, RootBeanDefinition, ChildBeanDefinition의 뼈&lt;/p&gt;
-
-&lt;h2 id=&quot;rootbeandefinition&quot;&gt;RootBeanDefinition&lt;/h2&gt;
-&lt;p&gt;Spring Beanfactory의 특정 bean을 뒷받침&lt;/p&gt;
-
-&lt;h2 id=&quot;genericbeandefinition&quot;&gt;GenericBeanDefinition&lt;/h2&gt;
-&lt;p&gt;BeanDefinition 기본 형태라고 생각하면 된다. 클래스, Optional한 생성자 파라미터, 프로퍼티 값을 사요앟ㄹ 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;bean-scope&quot;&gt;Bean Scope&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Singleton : 싱글톤&lt;/li&gt;
-  &lt;li&gt;Proto : 매번 다른 인스턴스 생성&lt;/li&gt;
-  &lt;li&gt;Request : 웹 요청이 들어오고 나갈 때까지 유지&lt;/li&gt;
-  &lt;li&gt;Session : 웹 세션이 생성되고 종료될 때까지&lt;/li&gt;
-  &lt;li&gt;Application : 서블릿 컨텍스트와 같은 범위로 유지&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;life-cycle&quot;&gt;Life cycle&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;BeanNameAware&lt;/li&gt;
-  &lt;li&gt;BeanClassLoaderAware&lt;/li&gt;
-  &lt;li&gt;BeanFactoryAware&lt;/li&gt;
-  &lt;li&gt;EnvironmentAware&lt;/li&gt;
-  &lt;li&gt;EmbeddedValueResolverAware&lt;/li&gt;
-  &lt;li&gt;ResourceLoaderAware&lt;/li&gt;
-  &lt;li&gt;MessageSourceAware&lt;/li&gt;
-  &lt;li&gt;ApplicationContextAware&lt;/li&gt;
-  &lt;li&gt;ServletContextAware&lt;/li&gt;
-  &lt;li&gt;postProcessBeforeInitialization&lt;/li&gt;
-  &lt;li&gt;Initializing Bean(afterPropertiesSet)&lt;/li&gt;
-  &lt;li&gt;initMethod&lt;/li&gt;
-  &lt;li&gt;postProcessAfterInitialization&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;beanfactorypostprocessor&quot;&gt;BeanFactoryPostProcessor&lt;/h2&gt;
-&lt;p&gt;beanDefinition을 커스터마이징하게 도와준다. 모든 definition들이 로드 된 후 스프링의 startup 프로세스에 의해서 호출된다. 
-그러나 아무런 Bean이 초기화된 상태는 아니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConfigBeanFactory&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanFactoryPostProcessor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postProcessBeanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ConfigurableListableBeanFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeansException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-
-        &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DefaultListableBeanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beanFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerBeanDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;myBeanName&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gbd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;beanpostprocessor&quot;&gt;BeanPostProcessor&lt;/h2&gt;
-&lt;p&gt;Bean을 정의하고 컨테이너에 등록하기 전에 후처리 할 수 있도록 지원한다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeanPostProcessor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;nd&quot;&gt;@Nullable&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postProcessBeforeInitialization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beanName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeansException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//생성 후 초기화 작업 이전&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;nd&quot;&gt;@Nullable&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;postProcessAfterInitialization&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beanName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeansException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//생성 후 초기화 작업 이후&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Thu, 23 May 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>

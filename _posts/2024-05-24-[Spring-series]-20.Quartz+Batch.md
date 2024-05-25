@@ -1,12 +1,12 @@
 ---
 layout: post
+
 categories: [SPRING]
 ---
 
 
 
 from [Dictionary - Quartz+Batch](https://github.com/newkayak12/Dictionary/blob/master/spring/20.Quartz%2BBatch.md)
-
 
 
 

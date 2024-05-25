@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 24.springevent | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Spring Event">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/25/Spring-series-24.SpringEvent.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 24.springevent</h1>
+    
+    <p class="meta">
+      May 25, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/24.SpringEvent.md">Dictionary - Spring Event</a></p>
+
+<h1 id="spring-event">Spring Event</h1>
+<h2 id="이벤트-등록">이벤트 등록</h2>
+<p><code class="language-plaintext highlighter-rouge">ApplicationEvent</code>를 상속해야 한다.</p>
+
+<h2 id="이벤트-팔행">이벤트 팔행</h2>
+<p><code class="language-plaintext highlighter-rouge">ApplicationEventPublisher</code>를 주입받아 사용해야 함</p>
+
+<h2 id="이벤트-구독">이벤트 구독</h2>
+<p><code class="language-plaintext highlighter-rouge">ApplicationListener</code>를 구현하거나 <code class="language-plaintext highlighter-rouge">@EventListener</code>를 사용해야 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//Publisher</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EventPublisher</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">publish</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="n">publisher</span><span class="o">.</span><span class="na">publishEvent</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomEvent</span><span class="o">(</span><span class="s">"Emitted"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="c1">//Listener</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApplicationListener</span><span class="o">&lt;</span><span class="no">E</span> <span class="kd">extends</span> <span class="nc">ApplicationEvent</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">EventListener</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="no">E</span> <span class="n">event</span><span class="o">);</span>
+
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nc">ApplicationListener</span><span class="o">&lt;</span><span class="nc">PayloadApplicationEvent</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;&gt;</span> <span class="nf">forPayload</span><span class="o">(</span><span class="nc">Consumer</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">consumer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">event</span> <span class="o">-&gt;</span> <span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getPayload</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="c1">//or </span>
+
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomEventListener</span> <span class="o">{</span>
+
+    <span class="nd">@EventListener</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">listen</span><span class="o">(</span><span class="nc">CustomEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="발행-구독">발행/ 구독</h2>
+<ul>
+  <li>멀티 캐스팅으로 동작 (다수의 수신자가 존재할 수 있다.)</li>
+  <li>동기 방식으로 동작 (트랜잭션이 하나의 범위로 묶일 수 있다.)</li>
+  <li>트랜잭션과 결합이 필요하다면 다른 리스너를 사용해야 한다.(<code class="language-plaintext highlighter-rouge">@TransactionEventListener</code>를 제공하므로 트랜잭션 단계에 관여할 수 있다.)
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">TransactionPhase.BEFORE_COMMIT</code></li>
+      <li><code class="language-plaintext highlighter-rouge">TransactionPhase.AFTER_COMPETION</code></li>
+      <li><code class="language-plaintext highlighter-rouge">TransactionPhase.AFTER_COMMIT</code></li>
+      <li><code class="language-plaintext highlighter-rouge">TransactionPhase.AFTER_ROLLBACK</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="비동기로-이벤트-처리">비동기로 이벤트 처리</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Async</code> 메소드로 비동기 구현</li>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationEventMulticaster</code>로 비동기 구현</li>
+</ul>
+
+<h2 id="장단">장/단</h2>
+<ul>
+  <li>장점
+    <ul>
+      <li>의존성을 분리하여 두 클래스를 느슨하게 결합시킬 수 있다.</li>
+      <li>클래스가 독립적이므로 재사용성을 높일 수 있다.</li>
+      <li>추후에 별도 서비스로 분리하기 용이함</li>
+      <li>메세지 구독 모듈을 추가/ 삭제할 때, 다른 모듈에 영향을 주지 않은 채로 수정할 수 있다.</li>
+      <li>단위 테스트가 용이해짐</li>
+    </ul>
+  </li>
+  <li>단점
+    <ul>
+      <li>전반적인 작업량이 많아질 수 있음</li>
+      <li>코드 흐름 파악이 어려움</li>
+      <li>메시지 구독 순서를 고려해야 하는 경우 복잡해짐</li>
+      <li>전체적인 인벤트의 구독/ 발행을 테스트하기 어려움</li>
+      <li>특정 프레임워크 API에 의존</li>
+    </ul>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/25/Spring-series-23.TransactionPropagation.html">
+        [spring Series] 23.transactionpropagation
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/05/25/Spring-series-25.HttpInterface.html">
+        [spring Series] 25.httpinterface
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

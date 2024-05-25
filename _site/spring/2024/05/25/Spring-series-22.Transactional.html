@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 22.transactional | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Transactional">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/25/Spring-series-22.Transactional.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 22.transactional</h1>
+    
+    <p class="meta">
+      May 25, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/22.Transactional.md">Dictionary - Transactional</a></p>
+
+<h1 id="transactional">@Transactional</h1>
+
+<p>AOP 기반으로 동작한다. 내부적으로 <code class="language-plaintext highlighter-rouge">connection</code>을 가져와서 <code class="language-plaintext highlighter-rouge">auto-commit</code>을 비활성하고 트랜잭션을 <code class="language-plaintext highlighter-rouge">begin</code>하다.
+그리고 커넥션을 한 쓰레드에서 공유할 수 있도록 <code class="language-plaintext highlighter-rouge">ThreadLocal</code>에 저장하는 트랜잭션 동기화<code class="language-plaintext highlighter-rouge">Transaction Synchrinization</code>를 진행한다. 
+이러한 이유로 <code class="language-plaintext highlighter-rouge">parallelStream</code>을 사용하면 문제가 생길 수 있다.</p>
+
+<p>parallelStream을 사용하면 <code class="language-plaintext highlighter-rouge">ForJoinPool</code>을 이용하기 떄문에 서로 다른 독립적인 작업이된다. 
+그래서 예외가 발생해도 전체 데이터가 롤백이 되지 않는다.</p>
+
+<p>더 심각한 부분은 각 쓰레드에서 DB 커넥션을 획득하려고 시도한다는 점이다. 이는 커넥션 풀을 빠르게 갉아 먹는다.</p>
+
+<h2 id="우선순위">우선순위</h2>
+<ol>
+  <li>클래스 메소드</li>
+  <li>클래스 선언부</li>
+  <li>인터페이스 메소드</li>
+  <li>인터페이스 선언부</li>
+</ol>
+
+<h2 id="모드">모드</h2>
+<ol>
+  <li>ProxyMode
+    <ul>
+      <li>반드시 public</li>
+      <li><code class="language-plaintext highlighter-rouge">protected</code>, <code class="language-plaintext highlighter-rouge">private</code>에 선언된다고 하면 에러도 없고 실행도 없다.</li>
+    </ul>
+  </li>
+  <li>AspectJMode</li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/05/25/Spring-series-21.FilterAndInterceptor.html">
+        [spring Series] 21.filterandinterceptor
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/25/Spring-series-23.TransactionPropagation.html">
+        [spring Series] 23.transactionpropagation
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

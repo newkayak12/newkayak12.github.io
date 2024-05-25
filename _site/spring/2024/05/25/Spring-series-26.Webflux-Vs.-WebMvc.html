@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 26.webflux Vs. Webmvc | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - Webflux vs. WebMVC">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/05/25/Spring-series-26.Webflux-Vs.-WebMvc.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 26.webflux Vs. Webmvc</h1>
+    
+    <p class="meta">
+      May 25, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/26.WebfluxVs.WebMvc.md">Dictionary - Webflux vs. WebMVC</a></p>
+
+<h1 id="webflux-vs-webmvc">Webflux vs. WebMVC</h1>
+
+<ul>
+  <li>WebMVC  : 멀티 쓰레드 기반 웹 프레임워크</li>
+  <li>WebFlux : 리액티브 스택 기반 웹 프레임워크</li>
+</ul>
+
+<h2 id="둘-다-있는-경우">둘 다 있는 경우?</h2>
+<p>애플리케이션 클래스 패스를 기반으로 애플리케이션 타입을 선택한다.</p>
+<ul>
+  <li>NONE</li>
+  <li>SERVLET</li>
+  <li>REACTIVE</li>
+</ul>
+
+<p><a href="12.Initialize.md">this.webApplicationType = WebApplicationType.deduceFromClasspath();</a></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">WebApplicationType</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">WebApplicationType</span> <span class="nf">deduceFromClasspath</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="nc">ClassUtils</span><span class="o">.</span><span class="na">isPresent</span><span class="o">(</span><span class="no">WEBFLUX_INDICATOR_CLASS</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span> 
+            <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nc">ClassUtils</span><span class="o">.</span><span class="na">isPresent</span><span class="o">(</span><span class="no">WEBMVC_INDICATOR_CLASS</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nc">ClassUtils</span><span class="o">.</span><span class="na">isPresent</span><span class="o">(</span><span class="no">JERSEY_INDICATOR_CLASS</span><span class="o">,</span> <span class="kc">null</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="nc">WebApplicationType</span><span class="o">.</span><span class="na">REACTIVE</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">className</span> <span class="o">:</span> <span class="no">SERVLET_INDICATOR_CLASSES</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="nc">ClassUtils</span><span class="o">.</span><span class="na">isPresent</span><span class="o">(</span><span class="n">className</span><span class="o">,</span> <span class="kc">null</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="nc">WebApplicationType</span><span class="o">.</span><span class="na">NONE</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">WebApplicationType</span><span class="o">.</span><span class="na">SERVLET</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="webfluxautoconfiguration이-활성화되는-조건">WebFluxAutoConfiguration이 활성화되는 조건</h2>
+<ol>
+  <li>애플리케이션이 리액티브 타입인 경우</li>
+  <li>클래스패스에 웹플럭스가 존재하는 경우</li>
+  <li>WebFluxConfigurationSupport 타입의 빈이 없는 경우</li>
+</ol>
+
+<h2 id="결론">결론</h2>
+<p>둘 다 존재하면 SERVLET이 되므로 WebFlux는 disabled 된다. <code class="language-plaintext highlighter-rouge">@EnableWebFlux</code>를 사용하면 강제로 활성화된다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/05/25/Spring-series-25.HttpInterface.html">
+        [spring Series] 25.httpinterface
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/spring/2024/05/25/Spring-series-27.AfterSpringReady.html">
+        [spring Series] 27.afterspringready
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
