@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[issue Series] Filepart | newkayak12.github.io</title>
+	<meta name="description"
+		content="from Dictionary - FilePart-ISSUE">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/issu/2024/05/27/ISSUE-series-FilePart.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[issue Series] Filepart</h1>
+    
+    <p class="meta">
+      May 27, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><p>from <a href="#">Dictionary - FilePart-ISSUE</a></p>
+
+<h1 id="filepart">FilePart</h1>
+
+<p>FilePart는 MultipartRequest에서 업로드 된 파일을 표현하는데 특화된 인터페이스다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Method</th>
+      <th style="text-align: center">Description</th>
+      <th style="text-align: left">Return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">filename()</td>
+      <td style="text-align: center">클라이언트가 업로드한 파일의 원본 명을 리턴한다.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">transferTo(File dest)</td>
+      <td style="text-align: center">파일을 주어진 목적지로 옮기는 메소드다.</td>
+      <td style="text-align: left">reactor.core.publisher.Mono<Void></Void></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="webflux에서-multipartfile">WebFlux에서 MultipartFile?</h2>
+<p>WebFlux에서 MultipartFile Converter가 없어졌다. 그도 그럴 것이 MultipartFile은 Servlet에서 파일을 다루던 형식이기 때문이다.
+FilePart에 content -&gt; <code class="language-plaintext highlighter-rouge">Flux&lt;DataBuffer&gt;</code>로 byte[]에도 접근할 수 있다.</p>
+
+<h2 id="이슈-사항">이슈 사항</h2>
+<p>dependency를 수정하던 도중</p>
+
+<ol>
+  <li>multipartFile의 <code class="language-plaintext highlighter-rouge">transferTo</code>를 리턴</li>
+  <li>이 값을 <code class="language-plaintext highlighter-rouge">map</code>,  <code class="language-plaintext highlighter-rouge">zipWith</code>, <code class="language-plaintext highlighter-rouge">zipWhen</code>으로 묶어서 로직을 수행할 수 있도록 수정</li>
+  <li>controller return 으로 이 파이프 라인을 반환하여 webflux가 subscribe 하도록 함</li>
+</ol>
+
+<p>의 순으로 했는데 문제는 로직은 정상이었는데 파일이 복사가 되지 않는 현상이 생겼다. 
+추정컨데, controller return 하면서 <code class="language-plaintext highlighter-rouge">transferTo</code>의 대상인 임시 파일이 삭제되서 생기는 현상으로 보였다.</p>
+
+<p>결국</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">flatMap</code>으로 흐름을 정리</li>
+  <li><code class="language-plaintext highlighter-rouge">thenReturn</code>으로 정리하도 다른 리턴 값을 정의</li>
+  <li><code class="language-plaintext highlighter-rouge">subscribe</code>를 호출하고 그 안에서 새로운 <code class="language-plaintext highlighter-rouge">Mono</code>를 생성하여 반환하거나</li>
+</ol>
+
+<p>하는 방식으로 해결했다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/docker/2024/05/26/Docker-series-05.docker-Private-Registry.html">
+        [docker Series] 05.docker Private Registry
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/issue/2024/05/27/ISSUE-series-FloatingPoint.html">
+        [issue Series] Floatingpoint
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
