@@ -3,15 +3,15 @@
   <channel>
     <title>newkayak12.github.io</title>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <link>http://localhost:4000/</link>
+    <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 27 May 2024 18:33:17 +0900</pubDate>
+    <pubDate>Mon, 27 May 2024 19:06:27 +0900</pubDate>
     
       <item>
         <title>[issue Series] Floatingpoint</title>
         <link>/issue/2024/05/27/ISSUE-series-FloatingPoint.html</link>
         <guid isPermaLink="true">/issue/2024/05/27/ISSUE-series-FloatingPoint.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;#&quot;&gt;Dictionary - FloatingPointIssue&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/issue/FloatingPoint.md&quot;&gt;Dictionary - FloatingPointIssue&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;부동-소수점-관련-문제&quot;&gt;부동 소수점 관련 문제&lt;/h2&gt;
 
@@ -125,8 +125,8 @@
     
       <item>
         <title>[issue Series] Filepart</title>
-        <link>/issu/2024/05/27/ISSUE-series-FilePart.html</link>
-        <guid isPermaLink="true">/issu/2024/05/27/ISSUE-series-FilePart.html</guid>
+        <link>/issue/2024/05/27/ISSUE-series-FilePart.html</link>
+        <guid isPermaLink="true">/issue/2024/05/27/ISSUE-series-FilePart.html</guid>
         <description>&lt;p&gt;from &lt;a href=&quot;#&quot;&gt;Dictionary - FilePart-ISSUE&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;filepart&quot;&gt;FilePart&lt;/h1&gt;

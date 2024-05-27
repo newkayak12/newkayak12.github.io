@@ -4,7 +4,7 @@ categories: [ISSUE]
 ---
 
 
-from [Dictionary - FloatingPointIssue](#)
+from [Dictionary - FloatingPointIssue](https://github.com/newkayak12/Dictionary/blob/master/issue/FloatingPoint.md)
 
 
 

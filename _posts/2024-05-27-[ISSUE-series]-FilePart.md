@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: [ISSU]
+categories: [ISSUE]
 ---
 
 
