@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Coke | newkayak12.github.io</title>
+	<meta name="description"
+		content="콜라 문제">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/05/28/Programmers-series-LV.-01-Coke.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Coke</h1>
+    
+    <p class="meta">
+      May 28, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="콜라-문제">콜라 문제</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/132267">programmers</a></p>
+
+<blockquote>
+  <p>정답은 아무에게도 말하지 마세요.
+콜라 빈 병 2개를 가져다주면 콜라 1병을 주는 마트가 있다.
+빈 병 20개를 가져다주면 몇 병을 받을 수 있는가?
+단, 보유 중인 빈 병이 2개 미만이면, 콜라를 받을 수 없다.</p>
+
+  <p>콜라 빈 병 20병을 가져가서 10병을 받습니다.
+받은 10병을 모두 마신 뒤, 가져가서 5병을 받습니다.
+5병 중 4병을 모두 마신 뒤 가져가서 2병을 받고,
+또 2병을 모두 마신 뒤 가져가서 1병을 받습니다.
+받은 1병과 5병을 받았을 때 남은 1병을 모두 마신 뒤 가져가면 1병을 또 받을 수 있습니다.</p>
+
+  <p>이 경우 상빈이는 총 10 + 5 + 2 + 1 + 1 = 19병의 콜라를 받을 수 있습니다.</p>
+
+  <p>콜라를 받기 위해 마트에 주어야 하는 병 수 a,
+빈 병 a개를 가져다 주면 마트가 주는 콜라 병 수 b,
+상빈이가 가지고 있는 빈 병의 개수 n이 매개변수로 주어집니다.
+상빈이가 받을 수 있는 콜라의 병 수를 return 하도록 solution 함수를 작성해주세요.</p>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>모듈러 연산</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Nested</span>
+<span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>  <span class="c1">// 가져다 주는 빈 병 수</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// 빈 병을 가져다 주면 주는 콜라 수</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span> <span class="c1">// 빈 병</span>
+        <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">19</span><span class="o">;</span>
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">n</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>  <span class="c1">// 가져다 주는 빈 병 수</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// 빈 병을 가져다 주면 주는 콜라 수</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span> <span class="c1">// 빈 병</span>
+        <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">n</span><span class="o">));</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span> <span class="kt">int</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        
+        <span class="kt">int</span> <span class="n">coke</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span> <span class="kc">true</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">coke</span> <span class="o">&lt;</span> <span class="n">a</span> <span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+            
+            <span class="kt">int</span> <span class="n">remain</span> <span class="o">=</span> <span class="n">coke</span> <span class="o">%</span> <span class="n">a</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">replace</span> <span class="o">=</span> <span class="o">(</span><span class="n">coke</span> <span class="o">/</span> <span class="n">a</span><span class="o">)</span> <span class="o">*</span> <span class="n">b</span><span class="o">;</span>
+            
+            <span class="n">answer</span> <span class="o">+=</span> <span class="n">replace</span><span class="o">;</span>
+            <span class="n">coke</span> <span class="o">=</span> <span class="n">remain</span> <span class="o">+</span> <span class="n">replace</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/05/28/Programmers-series-LV.-01-CardPile.html">
+        [programmers Series] Lv. 01 Cardpile
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/programmers/2024/05/28/Programmers-series-LV.-01-Walking-In-The-Park.html">
+        [programmers Series] Lv. 01 Walking In The Park
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

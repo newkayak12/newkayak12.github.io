@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Cardpile | newkayak12.github.io</title>
+	<meta name="description"
+		content="카드 뭉치">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/05/28/Programmers-series-LV.-01-CardPile.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Cardpile</h1>
+    
+    <p class="meta">
+      May 28, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="카드-뭉치">카드 뭉치</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/159994">Programmers</a></p>
+
+<blockquote>
+
+  <p>코니는 영어 단어가 적힌 카드 뭉치 두 개를 선물로 받았습니다. 코니는 다음과 같은 규칙으로 카드에 적힌 단어들을 사용해 원하는 순서의 단어 배열을 만들 수 있는지 알고 싶습니다.
+원하는 카드 뭉치에서 카드를 순서대로 한 장씩 사용합니다.
+한 번 사용한 카드는 다시 사용할 수 없습니다.
+카드를 사용하지 않고 다음 카드로 넘어갈 수 없습니다.
+기존에 주어진 카드 뭉치의 단어 순서는 바꿀 수 없습니다.
+예를 들어 첫 번째 카드 뭉치에 순서대로 [“i”, “drink”, “water”], 두 번째 카드 뭉치에 순서대로 [“want”, “to”]가 적혀있을 때 [“i”, “want”, “to”, “drink”, “water”] 순서의 단어 배열을 만들려고 한다면 첫 번째 카드 뭉치에서 “i”를 사용한 후 두 번째 카드 뭉치에서 “want”와 “to”를 사용하고 첫 번째 카드뭉치에 “drink”와 “water”를 차례대로 사용하면 원하는 순서의 단어 배열을 만들 수 있습니다.
+문자열로 이루어진 배열 cards1, cards2와 원하는 단어 배열 goal이 매개변수로 주어질 때, cards1과 cards2에 적힌 단어들로 goal를 만들 있다면 “Yes”를, 만들 수 없다면 “No”를 return하는 solution 함수를 완성해주세요.</p>
+
+  <p>제한사항
+1 ≤ cards1의 길이, cards2의 길이 ≤ 10
+1 ≤ cards1[i]의 길이, cards2[i]의 길이 ≤ 10
+cards1과 cards2에는 서로 다른 단어만 존재합니다.
+2 ≤ goal의 길이 ≤ cards1의 길이 + cards2의 길이
+1 ≤ goal[i]의 길이 ≤ 10
+goal의 원소는 cards1과 cards2의 원소들로만 이루어져 있습니다.
+cards1, cards2, goal의 문자열들은 모두 알파벳 소문자로만 이루어져 있습니다.</p>
+
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>굳이 따지면 Stack?</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Nested</span>
+<span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">cards1</span> <span class="o">=</span> <span class="o">{</span><span class="s">"i"</span><span class="o">,</span> <span class="s">"drink"</span><span class="o">,</span> <span class="s">"water"</span><span class="o">};</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">cards2</span> <span class="o">=</span> <span class="o">{</span><span class="s">"want"</span><span class="o">,</span> <span class="s">"to"</span><span class="o">};</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">goal</span> <span class="o">=</span> <span class="o">{</span><span class="s">"i"</span><span class="o">,</span> <span class="s">"want"</span><span class="o">,</span> <span class="s">"to"</span><span class="o">,</span> <span class="s">"drink"</span><span class="o">,</span> <span class="s">"water"</span><span class="o">};</span>
+
+        <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"Yes"</span><span class="o">;</span>
+
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expect</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">cards1</span><span class="o">,</span> <span class="n">cards2</span><span class="o">,</span> <span class="n">goal</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">cards1</span> <span class="o">=</span> <span class="o">{</span><span class="s">"i"</span><span class="o">,</span> <span class="s">"water"</span><span class="o">,</span> <span class="s">"drink"</span><span class="o">};</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">cards2</span> <span class="o">=</span> <span class="o">{</span><span class="s">"want"</span><span class="o">,</span> <span class="s">"to"</span><span class="o">};</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">goal</span> <span class="o">=</span> <span class="o">{</span><span class="s">"i"</span><span class="o">,</span> <span class="s">"want"</span><span class="o">,</span> <span class="s">"to"</span><span class="o">,</span> <span class="s">"drink"</span><span class="o">,</span> <span class="s">"water"</span><span class="o">};</span>
+
+        <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"No"</span><span class="o">;</span>
+        <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expect</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">cards1</span><span class="o">,</span> <span class="n">cards2</span><span class="o">,</span> <span class="n">goal</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">solution</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">cards1</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">cards2</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">goal</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">answer</span> <span class="o">=</span> <span class="s">"Yes"</span><span class="o">;</span>
+    <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">cardPile1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">cardPile2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+    <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">goals</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+
+    <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">card</span> <span class="o">:</span> <span class="n">cards1</span><span class="o">)</span> <span class="n">cardPile1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">card</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">card</span> <span class="o">:</span> <span class="n">cards2</span><span class="o">)</span> <span class="n">cardPile2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">card</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">word</span> <span class="o">:</span> <span class="n">goal</span><span class="o">)</span> <span class="n">goals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">word</span><span class="o">);</span>
+
+
+
+    <span class="k">while</span><span class="o">(</span> <span class="o">!</span><span class="n">goals</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">goalWord</span> <span class="o">=</span> <span class="n">goals</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+
+        <span class="k">if</span><span class="o">(</span> <span class="n">goalWord</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">cardPile1</span><span class="o">.</span><span class="na">peek</span><span class="o">())</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">cardPile1</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">goalWord</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">cardPile2</span><span class="o">.</span><span class="na">peek</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="n">cardPile2</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+
+
+        <span class="n">answer</span> <span class="o">=</span> <span class="s">"No"</span><span class="o">;</span>
+        <span class="k">break</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="o">}</span>
+
+    
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/05/28/Programmers-series-LV.-01-Babbling.html">
+        [programmers Series] Lv. 01 Babbling
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/programmers/2024/05/28/Programmers-series-LV.-01-Coke.html">
+        [programmers Series] Lv. 01 Coke
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
