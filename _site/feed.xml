@@ -5,7 +5,88 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sat, 01 Jun 2024 23:15:15 +0900</pubDate>
+    <pubDate>Sun, 02 Jun 2024 21:44:53 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 01 Smallestchar</title>
+        <link>/2024/06/02/Programmers-series-LV.-01-SmallestChar.html</link>
+        <guid isPermaLink="true">/2024/06/02/Programmers-series-LV.-01-SmallestChar.html</guid>
+        <description>&lt;h1 id=&quot;크기가-작은-부분-문자열&quot;&gt;크기가 작은 부분 문자열&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+문제 설명
+숫자로 이루어진 문자열 t와 p가 주어질 때,
+t에서 p와 길이가 같은 부분문자열 중에서,
+이 부분문자열이 나타내는 수가 p가 나타내는 수보다 작거나 같은 것이 나오는 
+횟수를 return 하는 함수 solution을 완성하세요.
+
+예를 들어, t=&quot;3141592&quot;이고 p=&quot;271&quot; 인 경우,
+t의 길이가 3인 부분 문자열은 314, 141, 415, 159, 592입니다.
+이 문자열이 나타내는 수 중 271보다 작거나 같은 수는 141, 159 2개 입니다.
+
+
+제한사항
+1 ≤ p의 길이 ≤ 18
+p의 길이 ≤ t의 길이 ≤ 10,000
+t와 p는 숫자로만 이루어진 문자열이며, 0으로 시작하지 않습니다.
+
+&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+
+&lt;h2 id=&quot;주의점&quot;&gt;주의점&lt;/h2&gt;
+&lt;p&gt;t의 길이가 10,000 이므로 자료형을 Long으로 선택&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SmallestChar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3141592&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;271&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;500220839878&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;7&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;10203&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;15&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    
+        &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+    
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pNumber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 02 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 01 Repaint</title>
@@ -1368,244 +1449,6 @@ X-Forwarded-Proto (XFP) 헤더는 클라이언트가 프록시 또는 로드 밸
 &lt;p&gt;그래서 클라이언트의 HTTP/HTTPS 정보를 프록시에서 X-Forwarded-Proto 요청 헤더를 담아 웹 서버로 전달해줘야 한다. 
 만약 설정하지 않으면 클라이언트는 HTTPS로 접속을 하지만 웹 서버(웹 어플리케이션에서)에서는 프록시에서는 HTTP로 요청하기 때문에 클라이언트의 정보와 틀릴 수 있다.&lt;/p&gt;
 
-</description>
-        <pubDate>Sun, 26 May 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[docker Series] 04.dockerdaemon</title>
-        <link>/docker/2024/05/26/Docker-series-04.dockerDaemon.html</link>
-        <guid isPermaLink="true">/docker/2024/05/26/Docker-series-04.dockerDaemon.html</guid>
-        <description>&lt;p&gt;from &lt;a href=&quot;https://github.com/newkayak12/Dictionary/blob/master/docker/04.dockerDaemon.md&quot;&gt;Dictionary - Compose&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;compose&quot;&gt;Compose&lt;/h1&gt;
-
-&lt;h2 id=&quot;사용-이유&quot;&gt;사용 이유&lt;/h2&gt;
-&lt;div class=&quot;language-docker highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    매번 run 명령어에 옵션을 설정해 CLI로 컨테이너를 생성하기보다는 여러 개의 컨테이너를 하나의 서비스로 정의해 컨테이너 묶음으로 관리하면 더 편한 것이다.
-    이를 위해서 도커 컴포즈(Oocker Compose)는 컨테이너를 이용한 서비스의 개발과 CI를 위해 여러 개의 컨테이너를 하나의 프로젝트로서 다룰 수 있는 작업 
-    환경을 제공한다.
-    
-    도커 컴포즈는 여러 개의 컨테이너의 옵션과 환경을 정의한 파일을 읽어 컨테이너를 순차적으로 생성하는 방식으로 동작한다. 도커 컴포즈의 설정 파일은 run
-    명령어의 옵션을 그대로 사용할 수 있으며, 각 컨테이너의 의존성, 네트워크 볼륨 등을 함께 정의할 수 있다. 또한 스웜 모드의 서비스와 유사하게 설정 
-    파일에 정의된 서비스의 컨테이너 수를 유동적으로 조절할수 있으며 컨테이너의 서비스 디스커버리도 자동으로 이뤄진다. 이러한 기능이 필요하지 않은 소규모
-    컨테이너 개발 환경에서는 도커 엔진의 run 명령어로 컨테이너를 생성하는 것이 더 편리할 수 있다. 그렇지만 컨테이너의 수가 많아지고 정의해야 할 옵션이
-    많아진다면 도커 컴포즈를 사용하는 것이 좋다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;## 1) 버전 정의&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## YAML 파일 포맷에는 버전 1, 2, 2.1, 3이 있다. 버전 3은 도커 스웜모드와 호환이 되는 버전이다.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## 버전 항목은 일반적으로 YAML 파일의 맨 윗부분에 명시한다. &lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.0'&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;## 2) 서비스 정의 &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## 서비스는 도커 컴포즈로 생성할 컨테이너 옵션을 정의한다. 이 항목에 쓰인 각 서비스는 컨테이너로 구현되며, 하나의 프로젝트로서 도커 컴포즈에 의해 관리된다. &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## 서비스의 이름은 services의 하위 항목으로 정의하고, 컨테이너의 옵션은 서비스 이름의 하위 항목에 정의한다.&lt;/span&gt;
-
-    &lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;my_container_1&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db:database&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;apachectl -DFOREGOURND&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;my_container_2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_ROOT_PASSWORD=mypassword&lt;/span&gt;
-          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_DATABASE_NAME=mydb&lt;/span&gt;
-          &lt;span class=&quot;c1&quot;&gt;##또는&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mypassword&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;MYSQL_DATABASE_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mydb&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;command:[apachectl, -DFOREGROUND]&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;depends_on&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;- mysql&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8080&quot;&lt;/span&gt;
-          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8081-8085&quot;&lt;/span&gt;
-          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80:80&quot;&lt;/span&gt;
-       
-&lt;span class=&quot;c1&quot;&gt;## - image: 서비스의 컨테이너를 생성할 떄 쓰일 이미지의 이름을 설정한다. 이미 지름 포맷은 docker run과 같다.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  만일 이미지가 도커에 존재하지 않으면 저장소에서 자동으로 pull한다.&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;## - links: docker run 명령어의 --link와 같으며, 다른 서비스에 서비스명만으로 접근할 수 있도록 설정한다. [SERVICE:ALIAS]의 형식을 사용하면 &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  서비스에 별칭으로도 접근할 수 있다.&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;## - environment: docker run 명령어의 --env, -e 옵션과 동일하다. 서비스의 컨테이너 내부에서 사용할 환경변수를 지정하며, 딕셔너리(Dictionary)나&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  배열 형태로 사용할 수 있다.&lt;/span&gt;
-  
-&lt;span class=&quot;c1&quot;&gt;## - command : 컨테이너가 실행될 때 수행할 명령어를 설정하며, docker run 명령어의 마지막에 붙는 커맨드와 같다. Dockerfile의 RUN 과 같은 배열&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  형태로도 사용할 수 있다.&lt;/span&gt;
-  
-&lt;span class=&quot;c1&quot;&gt;## - depends_on : 특정 컨테이너에 대한 의존 관계를 나타내며, 이 항목에 명시된 컨테이너가 먼저 생성되고 실행된다. links도 depends_on과 같이&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  컨테이너의 생서 ㅇ순서와 실행 순서를 정의하지만 depends_on은 서비스 이름으로만 접근할 수 있다는 점이 다르다.&lt;/span&gt;
-  
-  
-  &lt;span class=&quot;c1&quot;&gt;## &amp;gt; 특정 서비스의 컨테이너만 생성하되 의존성이 없는 컨테이너를 생성하려면 --no-deps 옵션을 사용한다.&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;docker-compose&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;up&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;--no-deps&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;web&quot;&lt;/span&gt;
-
-  &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;depends_on 모두 실행 순서만 설정할 뿐 컨테이너 내부의 애플리케이션이 준비된 상태인지에 대해서는 확인하지 않는다. 예를 들어서 데이터베이스&lt;/span&gt; 
-    &lt;span class=&quot;nv&quot;&gt;컨테이너와 웹 서버 컨테이너가 정해진 순서대로 실행됐더라도 데이터베이스가 초기화 중이라면 웹 서버 컨테이너가 정상적으로 동작하지 않을 수 있다. 이를&lt;/span&gt; 
-    &lt;span class=&quot;nv&quot;&gt;해결하는 방법으로 컨테이너에 셸 스크립트를 entrypoint로 지정하는 방법이 있다. YAML 파일의 entrypoint에서 지정할 수 있다.&lt;/span&gt;
-    
-      &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;entrypont&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;./sync_script.sh mysql&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;3306&lt;/span&gt;
-    
-    &lt;span class=&quot;nv&quot;&gt;entrypoint에 저장된 sync_script.sh는 until 구문의 조건 안에 다른 컨테이너의 애플리케이션이 준비됐는지 확인하는 명령어를 입력한다. 예를 들어&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;curl mysql&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;3306을 조건으로 넣는다면 mysql 데몬이 준비될 때까지 기다린다.&lt;/span&gt; 
-        
-        &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;until (상태를 확인할 수 있는 명령어); do&lt;/span&gt;
-              &lt;span class=&quot;nv&quot;&gt;echo &quot;depend container is not available yet&quot;&lt;/span&gt;
-              &lt;span class=&quot;nv&quot;&gt;sleep 1&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;done&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;echo &quot;depends_on container is ready&quot;&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;## - ports:  docker run 명령어의 -p와 같으며 서비스의 컨테이너를 개방할 포트를 설정한다. 그러나 단일 호스트 환경에서 80:80과 같이 호스트의 특정 &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##   포트를 서비스의 컨테이너에 연결하면 docker-compose scale 명령어로 서비스의 컨테이너 수를 늘릴 수 없습니다.&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;image &lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;alicek106/composetest:web&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8080&quot;&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8081-8085&quot;&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80:80&quot;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;## - build: build 항목에 정의된 Dockerfile에서 이미지를 빌드해 서비스의 컨테이너를 생성하도록 설정한다. &lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./composetest&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;alicek106/composetest:web&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##    또는 build 항목에서는 Dockerfile 사용될 컨텍스트나 Dockerfile의 이름, Dockerfile에서 사용될 인자 값을 설정할 수 있다. image 항목을 설정하지 않으면&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##    이미지의 이름은 [프로젝트 이름]:[서비스 이름]이 된다.&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
-        &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./composetest&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./composetest&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;dockerfile&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;myDockerfile&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;HOST_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;web&lt;/span&gt;  
-          &lt;span class=&quot;na&quot;&gt;HOST_CONFIG&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;self_config&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;build 항목을 YAML 파일에 정의해 프로젝트를 생성하고 난 뒤 Dokcerfile을 변경하고 다시 프로젝트를 생성해도 이미지를 새로 빌드하지 않는다.&lt;/span&gt; 
-        &lt;span class=&quot;nv&quot;&gt;'docker-compose up -d'에 '--build' 옵션을 추가하거나 docker-compose build 명령어를 사용해서 Dockerfile이 변경돼도 컨테이너를 생성할 때마다&lt;/span&gt; 
-        &lt;span class=&quot;nv&quot;&gt;빌드하도록 설정할 수 있다.&lt;/span&gt;
-        
-          &lt;span class=&quot;nv&quot;&gt;'docker-compose up -d --build'&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;'docker-compose build&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;yml 파일에서 빌드할 서비스 이름&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;
-      &lt;span class=&quot;s&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;extends:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;다른&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;파일이나&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;현재&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;파일에서&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;서비스&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;속성을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;상속받게&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설정한다.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;다음과&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;같이&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;2개의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;파일이&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;있을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;때&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;docker-compose.yml의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;서비스는&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;extend_compose.yml의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;extend_web&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;서비스의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;옵션을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;그대로&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;갖게&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;된다.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;즉,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;서비스의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;컨테이너는&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ubunutu:14.04&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;이미지의&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80:80&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;포트로&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설정된다.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;file&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;항목을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설정하지&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;않으면&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;현재&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;파일에서&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;extends할&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;서비스를&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;찾는다&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;
-
-
-&lt;span class=&quot;s&quot;&gt;####&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;설정을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;상속받을&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;docker-compose.yml&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;파일&lt;/span&gt;
-    
-  &lt;span class=&quot;s&quot;&gt;version:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;3.0'&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;extends&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;extend_compose.yml&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;extend_web&lt;/span&gt;
-          
-&lt;span class=&quot;nv&quot;&gt;#### 설정을 상속해줄 extend_compose.yml 파일&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.0'&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;extend_web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ubuntu&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;14.04&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;- &quot;80&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;80&quot;&lt;/span&gt;
-  
-&lt;span class=&quot;nv&quot;&gt;#### 그러나 depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;volumes_from 항목은 각 컨테이너 사이의 의존성을 내포하므로 extends로 상속받을 수 없다.&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;## 3) 네트워크 정의&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;## - driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;도커 컴포즈는 생성된 컨테이너를 위해 기본적으로 브릿지 타입의 네트워크를 생성한다. 그러나 YAML 파일에서 driver 항목을 정의해서 서비스의 컨테이너가&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;##  브릿지 네트워크가 아닌 다른 네트워크를 사용하도록 설정할 수 있다. 특정 드라이버에 필요한 옵션은 하위 항목인 driver_opts로 전달할 수 있다.&lt;/span&gt;
-  
-  &lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.0'&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;myservice&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;nginx&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;- mynetwork&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;mynetwork&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;overlay&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;driver_opts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;subnet&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;255.255.255.0&quot;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;IPAddress&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;10.0.0.2&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;##   위의 예시는 docker-compose up -d 명령어로 컨테이너를 생성할 때 mynetwork라는 overlay 타입의 네트워크도 함께 생성하고,  myservice 서비스의 네트워크가&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##   mynetwork 네트워크를 사용하도록 설정한다. 단, overlay 타입의 네트워크는 스웜 모드나 주키퍼를 사용하는 환경이어야만 생성할 수 있다.&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;## - ipam: IPAM( IP Address Manager )ㄹㅡㄹ 위해 사용할 수 있는 옵션으로 subnet, ip 범위 등을 설정할 수 있다. driver 항목에는 IPAM을 지원하는 드라이버의&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;##  이름을 입력한다.&lt;/span&gt;
-  
-    &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;...&lt;/span&gt;
-    
-    &lt;span class=&quot;nv&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;ipam&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mydriver&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;nv&quot;&gt;subnet&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;172.20.0.0/16&lt;/span&gt;
-            &lt;span class=&quot;nv&quot;&gt;ip_range&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;172.20.5.0/24&lt;/span&gt;
-            &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;172.20.5.1&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;## - external&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;YAML 파일을 통해 프로젝트를 생성할 때마다 네트워크를 생성하는 것이 아닌&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;기존의 네트워크를 사용하도록 설정한다. 이를 설정하려면 사용하려는 외부&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;##  네트워크의 이름을 하위 항목으로 입력한 뒤&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;external의 값을 treu로 설정한다. external 옵션은 준비된 네트워크를 사용하므로 driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;driver_opts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ipam 옵션과&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;##  함꼐 사용할 수 없다.&lt;/span&gt;
-    
-    &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;alicek106/composetest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;nv&quot;&gt;-alicek106_network&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;alicek106_network&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;##  위의 예제는 서비스의 컨테이너가 기존의 alicek106_network라는 이름의 네트워크를 사용하도록 설정한다.&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;## 4) 볼륨 정의&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;## - driver&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;볼륨을 생성할 때 사용될 드라이버를 설정한다. 어떠한 설정도 하지 않으면 local로 설정되며 사용하는 드라이버에 따라 변경해야한다. 드라이버를 사용하기 위한&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;## 추가 옵션은 하위 항목인 driver_opts를 통해 인자로 설정할 수 있다.&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.0'&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;...&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;driver&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;flocker&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;driver_opts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;opt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1&quot;&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;opt2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;2&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;## - external&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;도커 컴포즈는 YAML 파일에서 volume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;volumes-from 옵션 등을 사용하면 프로젝트마다 볼륨을 생성한다. 이때 external 옵션을 설정하면 볼륨을&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;##  프로젝트 생성할 때마다 생성하지 않고 기존 볼류믕ㄹ 사용하도록 설정한다.&lt;/span&gt; 
-
-  &lt;span class=&quot;nv&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;alicek106/composetest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;web&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;- myvolume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;/var/www/html&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;myvolume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;external&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;## 위의 예제에서 myvolmue이라는 이름의 외부 볼륨을 web 서비스의 컨테이너에 마운트 한다.&lt;/span&gt; 
-
-
-&lt;span class=&quot;nv&quot;&gt;##  5) YAML 파일 검증하기&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;##  YAML 파일을 작성할 때 오타 검사나 파일 포맷이 적절한지를 검사하려면 'docker-compose config' 명령어를 사용한다. 기본적으로 현재 디렉토리의&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;##  docker-compose.yml 파일을 검사하지만 docker-compose -f (yml 파일 경로) config와 같이 검사할 파일의 경로를 설정할 수 있다.&lt;/span&gt; 
-
-    &lt;span class=&quot;nv&quot;&gt;'docker-compose config'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 26 May 2024 00:00:00 +0900</pubDate>
       </item>
