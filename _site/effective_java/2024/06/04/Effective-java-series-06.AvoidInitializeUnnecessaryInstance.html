@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="불필요한 객체 생성 피하기">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/04/Effective-java-series-06.AvoidInitializeUnnecessaryInstance.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 4, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="불필요한-객체-생성-피하기">불필요한 객체 생성 피하기</h1>
+
+<p>똑같은 기능의 객체를 매번 생성하는 건 굉장히 비효율이다. 예를 들어서 <code class="language-plaintext highlighter-rouge">String s = new String("HELLO");</code>와 같은 경우는 <code class="language-plaintext highlighter-rouge">String s = "HELLO";</code>와
+사실 똑같다. 차이점이라면 전자는 매 번 객체를 만들고 후자는 가상 머신 안에서 같은 문자열 리터럴을 사용할 경우 모든 코드가 같은 객체를 사용할 것을 보장한다.</p>
+
+<p>다른 예로 정규표현식으로 검색하는 경우를 들 수 있는데 <code class="language-plaintext highlighter-rouge">Pattern.compile()</code>로 매 번 만들어 쓰는건 문제가 있다. 이 경우 패턴을 <code class="language-plaintext highlighter-rouge">static</code>으로 두고 사용하거나 하는
+방법이 있다. 여기에 머리를 더 쓰면 <code class="language-plaintext highlighter-rouge">lazy init</code>을 할 수도 있긴 하지만 대부분의 경우 <code class="language-plaintext highlighter-rouge">lazy initialization</code>은 성능상 크게 개선되지 않고 코드는 복잡하게
+할 가능성이 농후하므로 지양하는 것이 좋다.</p>
+
+<p>알게 모르게 객체를 재생성할 수도 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">long</span> <span class="nf">sum</span> <span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
+    
+    <span class="k">for</span> <span class="o">(</span> <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span> <span class="n">i</span> <span class="o">++</span> <span class="o">)</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="o">;</span>
+    <span class="c1">//이러면 += 1; 마다 인스턴스를 계속 생성한다.</span>
+    
+    <span class="k">return</span> <span class="n">sum</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이런 어이 없는 경우가 발생할 수도 있으니 주의하자.</p>
+
+<p>불필요하게 객체를 낭비하는 것은 좋지 않다. 그렇다고 객체 생성을 지양하는 것이 좋다는 것이 아니다. JVM 발전으로 작은 객체 생성은 크게 부담되는 작업이 아니다.
+따라서 코드 퀄리티를 높이기 위해서 하는 <code class="language-plaintext highlighter-rouge">trade-off</code>는 가치 있는 일이다.</p>
+
+<p>반대로 너무 오버해서 <code class="language-plaintext highlighter-rouge">Pool</code> 등을 구성하는 극단적인 일도 지양하자. DB 커넥션의 경우 풀로 유지하는 것이 좋은게 맞다. 생성에 리소스가 어마무시하게 드니까. 
+그러나 비용이 작은 경우는 오히려 독이 된다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/04/Effective-java-series-05.UseInjection.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/effective_java/2024/06/04/Effective-java-series-07.ClearObsoleteReference.html">
+        Effective java
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

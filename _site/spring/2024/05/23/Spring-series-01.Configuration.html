@@ -111,6 +111,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -189,6 +191,7 @@
   <section class="post-content"><p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/spring/01.Configuration.md">Dictionary - Spring Yaml settings</a></p>
 
 <h1 id="spring-configuration">Spring Configuration</h1>
+
 <h2 id="1-shutdown-gracefully">1. Shutdown Gracefully</h2>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">server</span><span class="pi">:</span>
   <span class="na">shutdown</span><span class="pi">:</span> <span class="s">graceful</span> <span class="c1">##[default immediate]</span>
@@ -198,6 +201,225 @@
 </code></pre></div></div>
 
 <p>이러면 -9로 끝내는게 아니라 할 일을 다 마치고 종료된다.</p>
+
+<h2 id="2-server-port">2. server port</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">server</span><span class="pi">:</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+  <span class="na">error</span><span class="pi">:</span>
+    <span class="na">whitelabel</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="c1">## 에러 페이지 활성화 여부</span>
+    <span class="na">include-exception</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="c1">## 에러에 Exception 포함 여부</span>
+    <span class="na">include-message</span><span class="pi">:</span> <span class="s">never</span>
+    <span class="c1">## 에러에 메시지 포함 여부</span>
+    <span class="na">include-stacktrace</span><span class="pi">:</span> <span class="s">never</span>
+    <span class="c1">## 에러에 stacktrace 포함 여부</span>
+
+
+
+</code></pre></div></div>
+
+<h2 id="3-eureka-"><a href="04.Eureka.md">3. eureka </a></h2>
+
+<h2 id="4-antpatternmatch">4. antPatternMatch</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">mvc</span><span class="pi">:</span>
+    <span class="na">pathmatch</span><span class="pi">:</span>
+      <span class="na">matching-strategy</span><span class="pi">:</span> <span class="s">ant_path_matcher</span>
+    <span class="c1">## 2.6 이상에서 path_pattern_parser로 변경됨</span>
+    <span class="c1">## legacy matching-strategy가 ant_path_matcher다.</span>
+</code></pre></div></div>
+
+<h2 id="5-applicationtype">5. applicationType</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">application</span><span class="pi">:</span>
+  <span class="na">main</span><span class="pi">:</span>
+    <span class="na">web-application-type</span><span class="pi">:</span> <span class="s">reactive</span>
+<span class="c1">## 웹 어플리케이션을 어떤 모드로 실행시킬지에 대한 설정</span>
+<span class="c1">## MVC, Webflux 둘 다 있을 경우 유효하다.</span>
+</code></pre></div></div>
+
+<h2 id="6-spring-cloud-gateway">6. Spring cloud gateway</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">cloud</span><span class="pi">:</span>
+    <span class="na">gateway</span><span class="pi">:</span>
+      <span class="na">routes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">service-id</span>
+          <span class="c1">## route의 고유 식별자</span>
+          <span class="na">uri</span><span class="pi">:</span> <span class="s">lb://eureka-id</span>
+          <span class="c1">## 보낼 원격지</span>
+          <span class="na">predicates</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">Path=/v1/**, /v2/**, /v3/api-docs</span>
+          <span class="c1">## pattern Predicate</span>
+          <span class="na">filters</span><span class="pi">:</span>
+            <span class="c1">#필터</span>
+            <span class="pi">-</span> <span class="s">RewritePath=/(?&lt;segment&gt;.*), /v1/$\{segment}</span>
+            <span class="pi">-</span> <span class="s">LoggingFilter</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Retry</span>
+              <span class="na">args</span><span class="pi">:</span>
+                <span class="na">retries</span><span class="pi">:</span> <span class="m">2</span>
+                <span class="na">statuses</span><span class="pi">:</span> <span class="s">INTERNAL_SERVER_ERROR,SERVICE_UNAVAILABLE</span>
+                <span class="na">methods</span><span class="pi">:</span> <span class="s">GET,POST,PUT,PATCH,DELETE</span>
+                <span class="na">backoff</span><span class="pi">:</span>
+                  <span class="na">firstBackoff</span><span class="pi">:</span> <span class="s">100ms</span>
+                  <span class="na">maxBackoff</span><span class="pi">:</span> <span class="s">100ms</span>
+                  <span class="na">factor</span><span class="pi">:</span> <span class="m">2</span>
+
+</code></pre></div></div>
+
+<h2 id="7-eureka-client">7. eureka client</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">eureka</span><span class="pi">:</span>
+  <span class="na">instance</span><span class="pi">:</span>
+    <span class="na">instance-id</span><span class="pi">:</span> <span class="s">${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}</span>
+    <span class="na">app-group-name</span><span class="pi">:</span> <span class="s">application-server</span>
+    <span class="na">prefer-ip-address</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">lease-renewal-interval-in-seconds</span><span class="pi">:</span> <span class="m">30</span>
+    <span class="na">metadata-map</span><span class="pi">:</span>
+      <span class="na">prometheus</span><span class="pi">:</span>
+        <span class="na">scrape</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">metrics</span><span class="pi">:</span>
+        <span class="na">path</span><span class="pi">:</span> <span class="s">/actuator/prometheus</span>
+
+  <span class="na">client</span><span class="pi">:</span>
+    <span class="na">service-url</span><span class="pi">:</span>
+      <span class="na">defaultZone</span><span class="pi">:</span> <span class="s">http://localhost:8761/eureka</span>
+    <span class="na">eureka-service-url-poll-interval-seconds</span><span class="pi">:</span> <span class="m">5</span>
+
+</code></pre></div></div>
+
+<h2 id="8-elastic-search">8. elastic search</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">elasticsearch</span><span class="pi">:</span>
+    <span class="na">connection-timeout</span><span class="pi">:</span> <span class="s">5s</span>
+    <span class="na">socket-timeout</span><span class="pi">:</span> <span class="s">30s</span>
+    <span class="c1">#uri</span>
+    <span class="na">uris</span><span class="pi">:</span> <span class="s">http://localhost:9200</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">elastic</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">elastic</span>
+
+<span class="na">logging</span><span class="pi">:</span>
+  <span class="na">level</span><span class="pi">:</span>
+    <span class="na">org</span><span class="pi">:</span>
+      <span class="na">springframework</span><span class="pi">:</span>
+        <span class="na">data</span><span class="pi">:</span>
+          <span class="na">elasticsearch</span><span class="pi">:</span>
+            <span class="na">core</span><span class="pi">:</span> <span class="s">DEBUG</span>
+            <span class="na">client</span><span class="pi">:</span> <span class="s">TRACE</span>
+</code></pre></div></div>
+
+<h3 id="9-hibernate">9. hibernate</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="c1">## oiv 활성화 여부 true -&gt; controller까지 entityManager가 살아있다.</span>
+    <span class="na">open-in-view</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">naming</span><span class="pi">:</span>
+        <span class="c1">## naming 전략</span>
+        <span class="na">physical-strategy</span><span class="pi">:</span> <span class="s">org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</span>
+      <span class="c1">## hibernate ddl 전략</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">update</span>
+    <span class="c1">## DDL을 할지 여부  </span>
+    <span class="na">generate-ddl</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">use_sql_comments</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">javax</span><span class="pi">:</span>
+          <span class="na">persistence</span><span class="pi">:</span>
+            <span class="na">sharedCache</span><span class="pi">:</span>
+              <span class="na">mode</span><span class="pi">:</span> <span class="s">ENABLE_SELECTIVE</span>
+          <span class="na">cache</span><span class="pi">:</span>
+            <span class="na">provider</span><span class="pi">:</span> <span class="s">org.ehcache.jsr107.EhcacheCachingProvider</span>
+        <span class="na">cache</span><span class="pi">:</span>
+          <span class="na">use_query_cache</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">use_second_level_cache</span><span class="pi">:</span> <span class="no">true</span>
+          <span class="na">region</span><span class="pi">:</span>
+            <span class="na">factory_class</span><span class="pi">:</span> <span class="s">org.hibernate.cache.jcache.internal.JCacheRegionFactory</span>
+        <span class="na">generate_statistics</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">logging</span><span class="pi">:</span>
+  <span class="na">level</span><span class="pi">:</span>
+    <span class="na">org</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+<span class="c1">#        SQL: debug</span>
+        <span class="c1">#        type: trace</span>
+        <span class="na">orm</span><span class="pi">:</span>
+          <span class="na">jdbc</span><span class="pi">:</span>
+            <span class="na">bind</span><span class="pi">:</span> <span class="s">trace</span>
+<span class="c1">#            extract: trace</span>
+
+
+</code></pre></div></div>
+
+<h2 id="10-mongodb">10. mongodb</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">mongodb</span><span class="pi">:</span>
+      <span class="na">host</span><span class="pi">:</span> <span class="s">192.168.0.42</span>
+      <span class="na">authentication-database</span><span class="pi">:</span> <span class="s">admin</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">27017</span>
+      <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+      <span class="na">database</span><span class="pi">:</span> <span class="s">board</span>
+
+<span class="na">logging</span><span class="pi">:</span>
+  <span class="na">level</span><span class="pi">:</span>
+    <span class="na">org</span><span class="pi">:</span>
+      <span class="na">springframework</span><span class="pi">:</span>
+        <span class="na">data</span><span class="pi">:</span>
+          <span class="na">mongodb</span><span class="pi">:</span>
+            <span class="na">core</span><span class="pi">:</span>
+              <span class="na">ReactiveMongoTemplate</span><span class="pi">:</span> <span class="s">DEBUG</span>
+              <span class="na">MongoTemplate</span><span class="pi">:</span> <span class="s">DEBUG</span>
+          <span class="na">document</span><span class="pi">:</span>
+            <span class="na">mongodb</span><span class="pi">:</span> <span class="s">DEBUG</span>
+</code></pre></div></div>
+
+<h2 id="11-r2dbc">11. r2dbc</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">data</span><span class="pi">:</span>
+    <span class="na">r2dbc</span><span class="pi">:</span>
+      <span class="na">repositories</span><span class="pi">:</span>
+        <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">r2dbc</span><span class="pi">:</span>
+    <span class="na">pool</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">root</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">r2dbc:mariadb://localhost:3307/application</span>
+</code></pre></div></div>
+
+<h2 id="12-spring-config-import">12. spring config import</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">path</span><span class="pi">:</span>
+  <span class="na">common</span><span class="pi">:</span> <span class="s">config/services/common</span>
+  <span class="na">local</span><span class="pi">:</span>  <span class="s">config/services/local</span>
+  <span class="na">test</span><span class="pi">:</span>  <span class="s">config/services/test</span>
+  <span class="na">prod</span><span class="pi">:</span>  <span class="s">config/services/prod</span>
+
+<span class="na">spring</span><span class="pi">:</span>
+  <span class="na">config</span><span class="pi">:</span>
+    <span class="na">activate</span><span class="pi">:</span>
+      <span class="na">on-profile</span><span class="pi">:</span> <span class="s">local</span>
+    <span class="na">import</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.common}/actuator.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.common}/constant.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.common}/hibernate.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.common}/pathMatcher.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.common}/server.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.local}/r2dbc.yaml</span>
+      <span class="pi">-</span> <span class="s">classpath:${path.local}/eureka.yaml</span>
+
+
+</code></pre></div></div>
 </section>
   
 

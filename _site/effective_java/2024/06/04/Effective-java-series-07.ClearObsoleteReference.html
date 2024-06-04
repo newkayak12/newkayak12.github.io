@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="다쓴 객체의 참조 해제">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/04/Effective-java-series-07.ClearObsoleteReference.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 4, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="다쓴-객체의-참조-해제">다쓴 객체의 참조 해제</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.EmptyStackException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stack</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="no">T</span><span class="o">[]</span> <span class="n">elements</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Stack</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="k">new</span> <span class="no">T</span><span class="o">[</span><span class="no">DEFAULT_INITIAL_CAPACITY</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="no">T</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ensureCapacity</span><span class="o">();</span>
+        <span class="n">elements</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">EmptyStackException</span><span class="o">();</span>
+
+
+<span class="c1">//        return elements[--size]; //이러기만 하면 OOM 발생할 수도 있다.</span>
+
+        <span class="no">T</span> <span class="n">element</span> <span class="o">=</span> <span class="n">elements</span><span class="o">[--</span><span class="n">size</span><span class="o">];</span>
+        <span class="n">element</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">//이 코드가 필요하다.</span>
+        <span class="k">return</span> <span class="n">element</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">elements</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span> <span class="n">elements</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 포인트와 같이 오래 사용하면 <code class="language-plaintext highlighter-rouge">OutOfMemoryError</code>를 피할 수 없는 경우들이 왕왕있다. 그래서 다 쓴 객체(Obsolete reference)를 참조 해제하는 것이
+필요할 떄가 있다. 물론 Java는 C++ 같이 일일이 해제할 필요는 없다만</p>
+
+<p>위의 경우와 같이 스택이 본인의 메모리를 직접 관리하는 경우 ( elements 배열로 풀을 만들어 관리 ) elements를 쓰는지 아닌지 GC는 알 길이 없다. 
+이와 같이 본인 메모리를 직접 관리하는 클래스라면 항상 <code class="language-plaintext highlighter-rouge">MemoryLeak</code>을 염두해야만 한다.</p>
+
+<p>두 번째로 캐시 메모리도 누수 주범이다. 보통 그래서 TTL을 두거나 하는 식으로 관리한다. 혹은 <code class="language-plaintext highlighter-rouge">WeakHashMap</code> 등으로 방지할 수 있다.</p>
+
+<ul>
+  <li>WeakHashMap</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Fruit</span><span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Fruit</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Fruit{"</span> <span class="o">+</span>
+                <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeakHashMapExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">WeakHashMap</span><span class="o">&lt;</span><span class="nc">Fruit</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeakHashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="nc">Fruit</span> <span class="n">apple</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"apple"</span><span class="o">);</span>
+        <span class="nc">Fruit</span> <span class="n">orange</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"orange"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">apple</span><span class="o">,</span> <span class="s">"test a"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">orange</span><span class="o">,</span> <span class="s">"test b"</span><span class="o">);</span>
+        <span class="n">apple</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span> <span class="o">);</span>
+        
+        <span class="c1">//Fruit{name='orange'}=test b</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>WeakReference</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">WeakReferenceExample</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">TestObject</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">exam</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">TestObject</span><span class="o">(</span><span class="nc">String</span> <span class="n">exam</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">exam</span> <span class="o">=</span> <span class="n">exam</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">"TestObject{"</span> <span class="o">+</span>
+                    <span class="s">"exam='"</span> <span class="o">+</span> <span class="n">exam</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                    <span class="sc">'}'</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TestObject</span> <span class="n">strong</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestObject</span><span class="o">(</span><span class="s">"Strong"</span><span class="o">);</span>
+        <span class="nc">TestObject</span> <span class="n">weak</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TestObject</span><span class="o">(</span><span class="s">"Weak"</span><span class="o">);</span>
+        
+        
+        <span class="nc">TestObject</span> <span class="n">bindStrong</span> <span class="o">=</span> <span class="n">strong</span><span class="o">;</span>
+        <span class="nc">WeakReference</span><span class="o">&lt;</span><span class="nc">TestObject</span><span class="o">&gt;</span> <span class="n">bindWeak</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">WeakReference</span><span class="o">&lt;</span><span class="nc">TestObject</span><span class="o">&gt;(</span><span class="n">weak</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bindStrong</span><span class="o">);</span> <span class="c1">//Strong</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bindWeak</span><span class="o">.</span><span class="na">get</span><span class="o">());</span><span class="c1">//Weak</span>
+
+        <span class="n">strong</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">weak</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">gc</span><span class="o">();</span>
+
+        <span class="c1">//bindStrong null을 넣어도 객체 해제 X</span>
+        <span class="c1">//bindWeak null을 넣으면 객체 해제</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bindStrong</span><span class="o">);</span> <span class="c1">//Strong</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bindWeak</span><span class="o">.</span><span class="na">get</span><span class="o">());</span><span class="c1">//null</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>마지막으로 리스너, 콜백 등이 달려 있는 경우다. (EventSource 같은)</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/04/Effective-java-series-06.AvoidInitializeUnnecessaryInstance.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/effective_java/2024/06/04/Effective-java-series-08.avoidUseFinalizerAndCleaner.html">
+        Effective java
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
