@@ -189,6 +189,72 @@
 <script>
   window.store = {
     
+      "effective-java-2024-06-05-effective-java-series-17-usecomposition-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "상속보다는 컴포지션상속은 코드 재사용의 기초지만 항상 최선은 아니다. 상위 - 하위 클래스를 모두 같은 프로그래머가 개발하면 안전하지만 다른 패키지의 구체 클래스를 상속하는 것은 위험하다. 이는 캡슐화를 무력화하는 방법 중 하나다. 또, 상위 클래스가 어떻게 구현되느냐에 따라 하위 클래스에 이상 동작을 일으킬 수 있다.  예시로 상위 클래스가 자기 사용을 할 경우내부 구현이 언제 바뀔지 몰라서를 들 수 있다.아니면 아예 재정의를 해서 상위 메소드 내용을 배제하는 방법도 있다. 이러면 상위 구현을 완전 다시 구현해야 해서 난이도가 급격하게 올라간다. 또한, 상위 메소드가상위 private 필드를 사용하면 하위에서 접근할 방법이 없다는 것도 문제다. 결국 이러면 아예 새로 만드는 게 나을 수 있다.우회로 비슷한 기능을 다른 이름 메소드로 만들었다고 쳐도 운 없에 상위에서 같은 시그니쳐로 메소드를 만들면 결국 override가 되어버린다.결국 어떻게 해도 상위 클래스를 상속 받는 것은 문제의 소지가 있다. 추가적으로 상속은 하위에서도 그 결함을 승계하는 문제도 있다.차라리 새로운 클래스를 만들고 상위 클래스를 새로 만든 클래스의 private 필드로 두는게 나을 수도 있다. 이런 클래스를 래퍼 클래스, 기능을 덧씌운다고 해서 데코레이터 패턴(DecoratorPattern), 넓게는 위임(Delegate)패턴이라고 부른다. (참고로 내부 객체에 자신의 참조를 넘기는 경우 위임에 해당한다.)래퍼클래스라고 아예 단점이 없는건 아니다 콜백 처리를 할 수 없다는 것이 문제다. 상위는 래퍼 객체의 this를 알 수 없다.",
+        "url": "//effective_java/2024/06/05/Effective-java-series-17.useComposition.html"
+      }
+      ,
+    
+      "effective-java-2024-06-05-effective-java-series-16-minimizethepossibilityofchange-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "변경 가능성을 최소화하자불변 클래스란 간단히 말해 그 인스턴스의 내부 값을 수정할 수 없는 클래스다.  객체의 상태를 변경하는 메소드를 제공하지 않는다.  클래스를 확장할 수 없도록 한다. (클래스에 final 선언 혹은 public 생성자에 exception 던지도록)  모든 필드를 final로 선언  모든 필드를 private로 선언  자신 외에는 내부 가변 컴포넌트에 접근할 수 없도록 한다.불변 객체는 근본적으로 ThreadSafe 처리할 필요는 없다. 또한 불변 클래스는 인스턴스 캐싱을 해서 같은 인스턴스를 중복 생성하지 않게 해주는 정적 팩토리를 제공할 수 있다.이렇게 하면 메모리 사용량과 GC 비용이 줄어든다. 불변 객체는 자유롭게 공유할 수 있음은 물론, 불변 객체끼리는 내부 데이터를 공유할 수 있다. 예를 들어 BigInteger의 negate 메소드는 크기가 같고 부호만 반대라면 새로운 BingInteger를 생성하는데 원본 인스턴스를 공유한 다른 인스턴스를 (리소스를 최소한으로 하는 방향으로)만들 수 있다. 또한 불변 객체는 그 자체로 실패 원자성을 제공한다. (불변이기에 실패해도 내부 값은 유효하다.)단점 역시 존재한다. 값이 다르면 반드시 다른 독립된 객체로 만들어야 한다. 이를 해소하는 방법은 미리 연산을 예측해서 기본 기능을 만들거나 예측할 수 없다면 가변 동반 클래스로 제공하는 것이다. 예를 들어 StringBuilder가 있다.  여튼 정리하면 public class - private field를 기본으로 하자.  가능하면 불변 클래스를 만들기 위해서 필드에 final을 붙이자. 그게 아니더라도 최대한 붙이자  그리고 getter/ setter를 쓰자! 무조건은 아니다.  생성자는 불변성을 띨 수 있는 초기화가 모두 완료된 완벽한 상태의 객체를 생성해야 한다.",
+        "url": "//effective_java/2024/06/05/Effective-java-series-16.MinimizeThePossibilityOfChange.html"
+      }
+      ,
+    
+      "effective-java-2024-06-05-effective-java-series-15-donotusepublicfield-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "public 클래스에서는 public 필드가 아닌 getter/setter를 쓰자class Point {    private double x;    private double y;        public double getX () {        return this.x;    }        public double getY() {        return this.y;    }        public void setX( double x ) {        this.x = x;    }    public void setY( double y ) {        this.y = y;    }}데이터 필드에 직접 접근을 막되 정해진 루트로만 접근할 수 있게 해서 캡슐화 이점을 제공하는 예시이다.물론 모든 클래스에 저런 처리가 필요한건 아니다. package-private 클래스 혹은 private 클래스라면 데이터 필드를 노출해도 전혀 문제가 없다.",
+        "url": "//effective_java/2024/06/05/Effective-java-series-15.DoNotUsePublicField.html"
+      }
+      ,
+    
+      "effective-java-2024-06-05-effective-java-series-14-minimizeaccessrights-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "클래스, 멤버의 접근 권한 최소화캡슐화, 내부 데이터, 내부 구현 정보를 외부 컴포넌트로부터 얼마나 잘 숨겼는가에 대한 내용이다.  여러 컴포넌트를 병렬로 개발할 수 있다.  시스템 관리 포인트를 줄일 수 있다. 다른 컴포넌트로 교체하는 부담도 적다.  정보 은닉 자체가 성능을 높이지는 않지만, 성능 최적화에 도움을 준다. ( 서로 간섭이 적기에 디버깅이 편하다. )  외부 의존도가 떨어지므로 라이브러리의 경우 유지보수가 용이해준다.기본 원칙은 모든 클래스와 멤버의 접근성을 가능한 한 좁혀야 한다. 그렇지 않으면 open 되므로 하위 호환을 위해서 영원히 기존 구현을 바꿀 수 없게 된다.그런데 멤버 접근성을 좁히지 방해하는 제약이 있다. 상위 클래스 메소드 보다 접근 수준을 좁게 설정할 수 없다. 이 제약은 리스코프 치환 원칙을 지키기 위해 필요하다.public 클래스 멤버를 private로 하는 것이 기본이다. package-private까지 낮추는 건 괜찮지만 pulblic은 정말 아니어야만 한다. public 가변 필드를두면 ThreadSafe하지 않다. final을 붙이면 내부 구현을 바꿀 수 없어서 리팩토링에 제약이 생긴다. 특히 배열은 public static final로 두거나 이 필드를 반환하는 접근자 메소드를 두면 배열이 변경 가능성이 있으므로 제공하지 않는 것이 좋다.추가로 두 가지 암묵적 접근 수준이 있다. 모듈은 자신에 속하는 패키지 중 공개(export)할 것들을 선언할 수 있다. 모듈 시스템을 활용하면 클래스를 외부에 공개하지않으면서도 같은 모듈을 이루는 패키지 사이에는 자유롭게 공유할 수 있다.",
+        "url": "//effective_java/2024/06/05/Effective-java-series-14.MinimizeAccessRights.html"
+      }
+      ,
+    
+      "effective-java-2024-06-05-effective-java-series-13-comparable-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "Comparable 구현 고려하기Comparable 역시 믹스인 인터페이스다. compareTo는 단순 동치성 비교에 더해서 순서까지 비교할 수 있으며, 제네릭하다.compareTo의 규격은 equals와 비슷하다.  객체 간 순서를 비교한다. 작으면 음수, 같으면 0 크면 양수  Comparable을 구현한 클래스는 모든 x, y에 대해서  Math.abs(x.compareTo(y)) == Math.abs(y.compareTo(x))  Comparable을 구현한 클래스는 추이성을 보장해야 한다. (x.compareTo(y) &gt; 0 &amp;&amp; y.compareTo(z) &gt; 0) 이면 x.comapreTo(z) &gt; 0  Comparable을 구현한 클래스는 x.compareTo(y) == 0 이면 Math.abs(x.compareTo(z)) == Math.abs(y.compareTo(z))  (x.compareTo(y) == 0) == (x.equals(y))이어야 한다. 이는 필수는 아니다.문제는 equals랑 같다. 상속 받아서 확장하면 compareTo 규약을 지키기 어렵다. 우회법도 같다. 상속 확장 대신 컴포지션으로 확장하면 된다.",
+        "url": "//effective_java/2024/06/05/Effective-java-series-13.Comparable.html"
+      }
+      ,
+    
+      "effective-java-2024-06-05-effective-java-series-12-cloneable-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 5, 2024",
+        "author": "",
+        "category": "",
+        "content": "Clone 재정의는 주의하자Cloneable은 복제해도 되는 클래스임을 명시하는 용도의 믹스인 인터페이스지만 큰 문제는 clone()이 선언된 곳이 Object에 있다는 것이다. 이는 단순Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.Cloneable은 clone의 동작 방식을 결정한다. 여기서 단순 clone 은 문제가 있다. 예를 들어 내부에 Array[]가 있다고 해보자. 이를 clone하면복사를 했더라도 같은 배열을 참조하도록 된다. 이는 곧 복제본 중 하나를 수정하면 다른 하나도 수정되어 불변성을 해친다는 뜻이다.clone은 사실상 생성자와 같이 원본 객체에 아무런 해를 끼치지 않는 동시에 복제된 객체의 불변식을 보장해야만 한다. 따라서 올바르게 clone 하려면 내부 정보를복사해야 한다. 가장 쉬운 방법은 참조형 필드는 직접 clone하는 방법 뿐이다.여기서 Cloneable 아키텍처는 ‘가변 객체를 참조하는 필드는 final로 선언’하라는 일반 용법과 충돌한다. 또, Cloneable을 구현한 클래스를 clone 할 때는 ThreadSafe를 보장해야한다.살짝 두서가 없었지만 정리하면  super.clone()을 호출하고 필드를 적절히 수정한다. 필요하면 DeepCopy를 수행한다.  접근제한자는 public으로  반환 타입은 클래스 자신으로만약 이게 녹록지 않다면 복사 생성자/복사 팩토리를 제공할 수 있다.  복사 생성자public class CloneObject {    public CloneObject(CloneObject co) {                return ....;    }}  복사 팩토리public class CloneFactory {    public static CloneFactory newInstance(CloneFactory cloneFactory) {                return .... ;    }}",
+        "url": "//effective_java/2024/06/05/Effective-java-series-12.Cloneable.html"
+      }
+      ,
+    
       "effective-java-2024-06-04-effective-java-series-11-hashcode-html": {
         "title": "Effective java",
         "tags": "",

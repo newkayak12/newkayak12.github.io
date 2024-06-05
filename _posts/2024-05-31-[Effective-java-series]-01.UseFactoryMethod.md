@@ -6,8 +6,6 @@ categories: [EFFECTIVE_JAVA]
 
 
 
-
-
 # 생성자 대신 정적 팩토리 메소드
 
 ## 정적 팩토리 메소드

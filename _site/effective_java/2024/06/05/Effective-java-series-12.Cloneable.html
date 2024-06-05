@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="Clone 재정의는 주의하자">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/05/Effective-java-series-12.Cloneable.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 5, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="clone-재정의는-주의하자">Clone 재정의는 주의하자</h1>
+
+<p><code class="language-plaintext highlighter-rouge">Cloneable</code>은 복제해도 되는 클래스임을 명시하는 용도의 믹스인 인터페이스지만 큰 문제는 <code class="language-plaintext highlighter-rouge">clone()</code>이 선언된 곳이 Object에 있다는 것이다. 이는 단순
+Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Cloneable</code>은 clone의 동작 방식을 결정한다. 여기서 단순 <code class="language-plaintext highlighter-rouge">clone</code> 은 문제가 있다. 예를 들어 내부에 <code class="language-plaintext highlighter-rouge">Array[]</code>가 있다고 해보자. 이를 clone하면
+복사를 했더라도 같은 배열을 참조하도록 된다. 이는 곧 <code class="language-plaintext highlighter-rouge">복제본 중 하나를 수정하면 다른 하나도 수정되어 불변성을 해친다는 뜻이다.</code></p>
+
+<p>clone은 사실상 생성자와 같이 원본 객체에 아무런 해를 끼치지 않는 동시에 복제된 객체의 불변식을 보장해야만 한다. 따라서 올바르게 clone 하려면 내부 정보를
+복사해야 한다. 가장 쉬운 방법은 참조형 필드는 직접 clone하는 방법 뿐이다.</p>
+
+<p>여기서 Cloneable 아키텍처는 ‘가변 객체를 참조하는 필드는 final로 선언’하라는 일반 용법과 충돌한다. 또, Cloneable을 구현한 클래스를 clone 할 때는 ThreadSafe를 보장해야한다.</p>
+
+<p>살짝 두서가 없었지만 정리하면</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">super.clone()</code>을 호출하고 필드를 적절히 수정한다. 필요하면 DeepCopy를 수행한다.</li>
+  <li>접근제한자는 <code class="language-plaintext highlighter-rouge">public</code>으로</li>
+  <li>반환 타입은 클래스 자신으로</li>
+</ol>
+
+<p>만약 이게 녹록지 않다면 <code class="language-plaintext highlighter-rouge">복사 생성자</code>/<code class="language-plaintext highlighter-rouge">복사 팩토리</code>를 제공할 수 있다.</p>
+
+<ul>
+  <li>복사 생성자</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CloneObject</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">CloneObject</span><span class="o">(</span><span class="nc">CloneObject</span> <span class="n">co</span><span class="o">)</span> <span class="o">{</span>
+        
+        <span class="k">return</span> <span class="o">....;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>복사 팩토리</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CloneFactory</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">CloneFactory</span> <span class="nf">newInstance</span><span class="o">(</span><span class="nc">CloneFactory</span> <span class="n">cloneFactory</span><span class="o">)</span> <span class="o">{</span>
+        
+        <span class="k">return</span> <span class="o">....</span> <span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/04/Effective-java-series-11.HashCode.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/effective_java/2024/06/05/Effective-java-series-13.Comparable.html">
+        Effective java
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
