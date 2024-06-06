@@ -189,6 +189,17 @@
 <script>
   window.store = {
     
+      "2024-06-06-programmers-series-lv-01-crane-html": {
+        "title": "[programmers Series] Lv. 01 Crane",
+        "tags": "",
+        "date": "June 6, 2024",
+        "author": "",
+        "category": "",
+        "content": "카카오 - 크레인 게임Programmers알고리즘단순 순회와 단순 스택 이용풀이public class Crane {    @Nested    public  class TestCases {            @Test        public void case1 () {            int[][] board = {                    {0, 0, 0, 0, 0},                    {0, 0, 1, 0, 3},                    {0, 2, 5, 0, 1},                    {4, 2, 4, 4, 2},                    {3, 5, 1, 3, 1}            };            int[] moves = {1,5,3,5,1,2,1,4};            int result = 4;                Assertions.assertEquals(solution(board, moves), result);            }    }    public  int solution( int [][] board, int[] moves) {        int answer = 0;        Stack&lt;Integer&gt; bucket = new Stack&lt;&gt;();        for( int move : moves ) {            for( int i = 0; i  &lt; board.length; i ++ ) {                int number = board[i][move - 1];                if( number != 0 ) {                    board[i][move - 1] = 0;                    if(!bucket.isEmpty() &amp;&amp;number ==  bucket.peek()) {                        bucket.pop();                        answer += 2;                    } else bucket.add(number);                                             break;                }            }        }        return answer;    }}",
+        "url": "//2024/06/06/Programmers-series-LV.-01-Crane.html"
+      }
+      ,
+    
       "effective-java-2024-06-05-effective-java-series-17-usecomposition-html": {
         "title": "Effective java",
         "tags": "",

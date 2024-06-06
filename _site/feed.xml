@@ -3,9 +3,70 @@
   <channel>
     <title>newkayak12.github.io</title>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <link>http://localhost:4000/</link>
+    <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Wed, 05 Jun 2024 23:05:52 +0900</pubDate>
+    <pubDate>Thu, 06 Jun 2024 19:22:22 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 01 Crane</title>
+        <link>/2024/06/06/Programmers-series-LV.-01-Crane.html</link>
+        <guid isPermaLink="true">/2024/06/06/Programmers-series-LV.-01-Crane.html</guid>
+        <description>&lt;h1 id=&quot;카카오---크레인-게임&quot;&gt;카카오 - 크레인 게임&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/64061?language=java&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h1&gt;
+
+&lt;p&gt;단순 순회와 단순 스택 이용&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Crane&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[][]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;},&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[][]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;move&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;moves&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;move&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;move&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;peek&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bucket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+                        
+                    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 06 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>Effective java</title>
@@ -626,162 +687,6 @@ Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.&lt;/p&g
 혹은 정말로 생성자를 사용하지 못하게 하려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AssertionError&lt;/code&gt;를 던지는 것도 방법이다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[programmers Series] Lv. 01 Ourpassword</title>
-        <link>/programmers/2024/06/03/Programmers-series-LV.-01-OurPassword.html</link>
-        <guid isPermaLink="true">/programmers/2024/06/03/Programmers-series-LV.-01-OurPassword.html</guid>
-        <description>&lt;h1 id=&quot;둘만의-암호&quot;&gt;둘만의 암호&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;pre&gt;
-문제 설명
-
-두 문자열 s와 skip, 그리고 자연수 index가 주어질 때, 다음 규칙에 따라 문자열을 만들려 합니다. 암호의 규칙은 다음과 같습니다.
-- 문자열 s의 각 알파벳을 index만큼 뒤의 알파벳으로 바꿔줍니다.
-- index만큼의 뒤의 알파벳이 z를 넘어갈 경우 다시 a로 돌아갑니다.
-- skip에 있는 알파벳은 제외하고 건너뜁니다.
-예를 들어 s = &quot;aukks&quot;, skip = &quot;wbqd&quot;, index = 5일 때, a에서 5만큼 뒤에 있는 알파벳은 f지만 [b, c, d, e, f]에서 'b'와 'd'는 skip에 포함되므로 세지 않습니다. 따라서 'b', 'd'를 제외하고 'a'에서 5만큼 뒤에 있는 알파벳은 [c, e, f, g, h] 순서에 의해 'h'가 됩니다. 나머지 &quot;ukks&quot; 또한 위 규칙대로 바꾸면 &quot;appy&quot;가 되며 결과는 &quot;happy&quot;가 됩니다.
-두 문자열 s와 skip, 그리고 자연수 index가 매개변수로 주어질 때 위 규칙대로 s를 변환한 결과를 return하도록 solution 함수를 완성해주세요.
-
-제한사항
-- 5 ≤ s의 길이 ≤ 50
-- 1 ≤ skip의 길이 ≤ 10
-- s와 skip은 알파벳 소문자로만 이루어져 있습니다.
-    -  skip에 포함되는 알파벳은 s에 포함되지 않습니다.
-- 1 ≤ index ≤ 20
-&lt;/pre&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt;로 처리&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OurPassword&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;aukks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wbqd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;happy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abcde&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abcde&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abcde&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bcdef&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abcde&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fghij&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;klmno&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ybc&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;az&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bcd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;abd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cdf&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;xyz&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;zab&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solutionBack(s, skip, index));&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ace&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;d&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fhi&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solutionBack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//            Assertions.assertEquals(result, solution(s, skip, index));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;StringBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StringBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'z'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'z'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-            &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 03 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>
