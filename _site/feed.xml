@@ -5,7 +5,85 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 06 Jun 2024 19:22:22 +0900</pubDate>
+    <pubDate>Fri, 07 Jun 2024 09:22:51 +0900</pubDate>
+    
+      <item>
+        <title>[effective Java Series] 20.considerimplementtarget</title>
+        <link>/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</link>
+        <guid isPermaLink="true">/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</guid>
+        <description>&lt;h1 id=&quot;인터페이스-작성-시-구현을-염두하고-설계하자&quot;&gt;인터페이스 작성 시 구현을 염두하고 설계하자&lt;/h1&gt;
+
+&lt;p&gt;인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 
+예를 들어 디폴트 메소드를 추후 추가하여 기존 구현에서 구현을 수정하지 않게 되면 기존 구현에 문제가 생긱는 경우들이 있다.
+(책에서는 이 예시로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apache.commons.collections4.collection.SynchronizedCollection&lt;/code&gt;를 들었다. )&lt;/p&gt;
+
+&lt;p&gt;컴파일에 성공하더라도 디폴트 메소드는 기존 구현체에 런타임 오류를 일으킬 수도 있다. 따라서 꼭 필요한 경우가 아니면 기존 인터페이스에 디폴트 메소드를 추가하는 것은
+지양하는게 좋다. 해야만 한다면 기존 구현체와 충돌할지도 고려하는게 좋다( 물론 어려워 보인다. )&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;결론적으로 인터페이스는 릴리즈 후 수정할 수 있다는 가능성을 염두하지 않는 것이 좋아 보인다.&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 07 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 19.useinterfaceratherthanabstractclass</title>
+        <link>/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</link>
+        <guid isPermaLink="true">/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</guid>
+        <description>&lt;h1 id=&quot;추상-클래스보다는-인터페이스를-우선하라&quot;&gt;추상 클래스보다는 인터페이스를 우선하라&lt;/h1&gt;
+
+&lt;p&gt;자바에서 다중 상속이 불가능하다는 한계점이 있다. 반면 인터페이스는 구현한 클래스가 규약만 잘 지킨다면 어떤 클래스를 상속했든 같은 타입으로 취급한다.
+기존 클래스에도 손쉽게 인터페이스를 구현할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이런 인터페이스는 믹스인(mixin) 정의에 안성 맞춤이다. 믹스인을 구현한 클래스에 원래 원 타입 외에도 특정 선택적 행위를 제공한다고 선언하는 효과를 준다.
+(swift의 protocol과 유사한 것 같다.) 이처럼 대상 타입의 주된 기능에 선택적 기능을 혼합 한다고 해서 믹스인이라고 부른다.&lt;/p&gt;
+
+&lt;p&gt;인터페이스로는 계층 구조가 없는 타입 프레임 워크를 만들 수 있다. 만일 상속을 이용했다면 소위 말하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;조합 폭발&lt;/code&gt;이 벌어졌을 수도 있는 상황에도 인터페이스는 유연하게
+대응할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;한 편 인터페이스와 abstract class를 함께 사용하는 추상 골격 구현(skeletal implementation)을 함께 제공하는 식으로 인터페이스와 추상 클래스의 장점을 모두 취한느 방법 도 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AbstractMapEntry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 07 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 18.considerinheritance</title>
+        <link>/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</link>
+        <guid isPermaLink="true">/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</guid>
+        <description>&lt;h1 id=&quot;상속을-고려하거나-아니면-아예-금지하라&quot;&gt;상속을 고려하거나 아니면 아예 금지하라&lt;/h1&gt;
+
+&lt;p&gt;상속용 클래서는 override 할 수 있는  메소드들은 어떻게 내부적으로 사용하는지 문서로 남겨야 한다. 그렇지 않으면 재정의로 예기치 못한 상황이 벌어질 수도 있다.
+특히 ‘Implementation Requirements’로 시작하는 절은 그 메소드의 내부 동작 방식을 설명하는 곳이다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@ImplSpec&lt;/code&gt;을 붙이면 자바독 도구가 생성한다.&lt;/p&gt;
+
+&lt;p&gt;이는 API 문서가 ‘어떻게’가 아니라 ‘무엇’을 하는지 설명해야 한다는 지향점과 대치된다. 그렇지만 클래스를 안전하게 상속할 수 있도록 하기 위해서는 위와 같은
+내부 구현 방식을 설명해야 한다.&lt;/p&gt;
+
+&lt;p&gt;물론 상속에 의한 영향도룰 줄이려면 외부 노출을 줄이는게 맞지만 너무 적게 노출하면 상속으로 얻는 이점마자 없앨 수 있다. 그러니 주의해야 한다. 
+필요하다면 직접 구현해서 영향도를 평가해보는 방법도 좋다.&lt;/p&gt;
+
+&lt;p&gt;또한, 상속용 클래스 생성자는 직/간접적으로 재정의 가능 메소드를 생성자에서 호출하면 안 된다. 추가적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clone&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readObject&lt;/code&gt;도 생성자와 비슷한 효과를 내므로
+이들 또한 재정의 가능 메소드를 호출해서는 안 된다.&lt;/p&gt;
+
+&lt;p&gt;아예 상속을 금지하는 것도 좋은 방법이다. 1) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt;로 선언하거나 2) 모든 생성자를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package-private&lt;/code&gt;로 선언하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;public 정적 팩토리&lt;/code&gt;를 
+만드는 방법도 있다. (물론 이런 문제들 때문에 상속을 허용할 클래스만을 지정하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;permit&lt;/code&gt;이 생겼다.)&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameCharacter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;permits&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Kirby&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mario&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Kirby&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameCharacter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//O&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mario&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameCharacter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//O&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Sonic&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GameCharacter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//X&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 07 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 01 Crane</title>
@@ -623,68 +701,6 @@ Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.&lt;/p&g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;마지막으로 리스너, 콜백 등이 달려 있는 경우다. (EventSource 같은)&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-06.AvoidInitializeUnnecessaryInstance.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-06.AvoidInitializeUnnecessaryInstance.html</guid>
-        <description>&lt;h1 id=&quot;불필요한-객체-생성-피하기&quot;&gt;불필요한 객체 생성 피하기&lt;/h1&gt;
-
-&lt;p&gt;똑같은 기능의 객체를 매번 생성하는 건 굉장히 비효율이다. 예를 들어서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String s = new String(&quot;HELLO&quot;);&lt;/code&gt;와 같은 경우는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String s = &quot;HELLO&quot;;&lt;/code&gt;와
-사실 똑같다. 차이점이라면 전자는 매 번 객체를 만들고 후자는 가상 머신 안에서 같은 문자열 리터럴을 사용할 경우 모든 코드가 같은 객체를 사용할 것을 보장한다.&lt;/p&gt;
-
-&lt;p&gt;다른 예로 정규표현식으로 검색하는 경우를 들 수 있는데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pattern.compile()&lt;/code&gt;로 매 번 만들어 쓰는건 문제가 있다. 이 경우 패턴을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt;으로 두고 사용하거나 하는
-방법이 있다. 여기에 머리를 더 쓰면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lazy init&lt;/code&gt;을 할 수도 있긴 하지만 대부분의 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lazy initialization&lt;/code&gt;은 성능상 크게 개선되지 않고 코드는 복잡하게
-할 가능성이 농후하므로 지양하는 것이 좋다.&lt;/p&gt;
-
-&lt;p&gt;알게 모르게 객체를 재생성할 수도 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//이러면 += 1; 마다 인스턴스를 계속 생성한다.&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이런 어이 없는 경우가 발생할 수도 있으니 주의하자.&lt;/p&gt;
-
-&lt;p&gt;불필요하게 객체를 낭비하는 것은 좋지 않다. 그렇다고 객체 생성을 지양하는 것이 좋다는 것이 아니다. JVM 발전으로 작은 객체 생성은 크게 부담되는 작업이 아니다.
-따라서 코드 퀄리티를 높이기 위해서 하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;trade-off&lt;/code&gt;는 가치 있는 일이다.&lt;/p&gt;
-
-&lt;p&gt;반대로 너무 오버해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pool&lt;/code&gt; 등을 구성하는 극단적인 일도 지양하자. DB 커넥션의 경우 풀로 유지하는 것이 좋은게 맞다. 생성에 리소스가 어마무시하게 드니까. 
-그러나 비용이 작은 경우는 오히려 독이 된다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-05.UseInjection.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-05.UseInjection.html</guid>
-        <description>&lt;h1 id=&quot;의존-관계-주입을-사용하자&quot;&gt;의존 관계 주입을 사용하자.&lt;/h1&gt;
-
-&lt;p&gt;사용하는 자원에 따라 달라지는 클래스의 경우에는 정적 유틸(이니셜라이즈 불가하며 static 메소드로 구성된) 클래스나 싱글턴은 그리 적합하지 않다.
-대신 인스턴스를 생성할 때 생성자로 필요한 자원을 넘겨줘서 유연하게 대처하는 방식을 채택할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이에 대한 쓸만한 변형으로 생성자에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;factory&lt;/code&gt;를 넘기는 방법이 있다. java 1.8 부터는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Supplier&lt;/code&gt;를 던져서 해결할 수도 있다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-04.UsePrivateConstructor.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-04.UsePrivateConstructor.html</guid>
-        <description>&lt;h1 id=&quot;인스턴스화를-막기-위해서-private-생성자를-사용한다&quot;&gt;인스턴스화를 막기 위해서 private 생성자를 사용한다.&lt;/h1&gt;
-
-&lt;p&gt;생성화를 명시하지 않으면 기본 생성자를 만든다. 따라서 이를 막으려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;private&lt;/code&gt;로 생성자를 만들어줘야 한다. 
-혹은 정말로 생성자를 사용하지 못하게 하려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AssertionError&lt;/code&gt;를 던지는 것도 방법이다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
       </item>
