@@ -191,6 +191,50 @@
 <script>
   window.store = {
     
+      "2024-06-09-effective-java-series-24-donotdefinemultipleclassinafile-html": {
+        "title": "[effective Java Series] 24.donotdefinemultipleclassinafile",
+        "tags": "",
+        "date": "June 9, 2024",
+        "author": "",
+        "category": "",
+        "content": "톱레벨 클래스는 한 파일에 하나만한 파일에 여러 개의 클래스를 담을 수 있다. ( swift가 한 파일에 여러 struct를 선언하곤 한다. ) 그러나, 이렇게 되면 컴파일 순서에 따라 동작이 달라질 수도 있다.Mango.javaclass Mango {    static final String NAME = \"mango\";}class Apple {    static final String NAME = \"apple\";}Apple.javaclass Mango {    static final String NAME = \"mango juice\";}class Apple {    static final String NAME = \"apple juice\";}Main.javaclass Main {    public static void main(String[] args) {        System.out.println(Apple.NAME + \" - \" + Mango.NAME);    }}이러면 컴파일 순서에 따라서 다르게 출력된다.",
+        "url": "//2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html"
+      }
+      ,
+    
+      "2024-06-09-effective-java-series-23-usememberclassasstatic-html": {
+        "title": "[effective Java Series] 23.usememberclassasstatic",
+        "tags": "",
+        "date": "June 9, 2024",
+        "author": "",
+        "category": "",
+        "content": "중첩 클래스는 static으로 만들길 추천한다.중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 ‘정적 멤버 클래스, ‘비정적 멤버 클래스’, ‘익명 클래스’, ‘지역 클래스’ 네 가지로 나뉜다.이 중 첫 번째 빼고는 모두 내부 클래스(inner class)에 속한다.정적 멤버 클래스는 보통 바깥에 노출하고 쓸 때 유용한 도우미 클래스로 쓰인다.비정적 멤버 클래스는 암묵적으로 바깥 클래스의 인스턴스와 암묵적으로 연결된다( 메모리 누수의 원인이 되기도 한다. ). 왜냐하면 비정적 멤버 클래스는 바깥 인스턴스 없이 생성할 수 없기 때문이다. 이런 비정적 멤버 클래스는 어댑터 정의, 다른 클래스의 인스턴스처럼 보이게하는 뷰로 주로 사용한다. 그러나 보통 위의 원인으로 바깥 인스턴스에서 접근할 일이 없다면 static을 붙이는게 메모리 누수 문제 해결에 좋다.익명 클래스는 익명 구현 객체라고 보면 된다. 쓰이는 시점에 선언과 동시에 인스턴스가 만들어진다. 익면 클래스는 instanceof, 클래스 이름이 필요한 작업 등을 수행할 수 없다.지역 클래스는 지역 변수 선언하는 곳에 클래스를 선언하는 것으로 거의 쓸 일이 없다.",
+        "url": "//2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html"
+      }
+      ,
+    
+      "2024-06-09-effective-java-series-22-usehierarchicalstructure-html": {
+        "title": "[effective Java Series] 22.usehierarchicalstructure",
+        "tags": "",
+        "date": "June 9, 2024",
+        "author": "",
+        "category": "",
+        "content": "태그 달린 클래스보다는 계층 구조 활용하기태그 값으로 두 가지 역할을 하는 클래스를 본 적 있을 것이다. 이런 클래스는 여러 구현이 혼합되어 가독성이 떨어진다. 또한 final을 필드에 선언했다면 쓰지 않더라도생성자 초기화를 진행해야 한다. 거기다 새로운 구현을 추가한다면? switch-case도 늘려야한다. 이와 같이 태그 달린 클래스는 장황하고, 오류를 내기 쉽고, 비효율적이다.이는 계층 구조를 어설프게 흉내낸 것이다.차라리 abstract class를 두고 태그 마다 새로운 클래스를 확장하는게 더 나은 선택지가 될 수 있다. 그러면 case도 추가하지 않아도 되고, 루트 클래스를직접 건들 필요도 없으며, 확장의 유연성 또한 증가한다.",
+        "url": "//2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html"
+      }
+      ,
+    
+      "2024-06-09-effective-java-series-21-useinterfaceastypesetter-html": {
+        "title": "[effective Java Series] 21.useinterfaceastypesetter",
+        "tags": "",
+        "date": "June 9, 2024",
+        "author": "",
+        "category": "",
+        "content": "인터페이스는 타입 정의 용도로 사용하자인터페이스를 구현한다는 것은 ‘자신의 인스턴스로 무엇을 할 수 있는지’를 클라이언트에게 알리는 역할을 한다. 이런 인터페이스에public interface Fruits {    static final String STRAWBERRY = \"Strawberry\";    static final String PINE_APPLE = \"Pineapple\";}와 같은 상수 인터페이스를 구현하는 것은 내부 구현을 외부에 노출하는 것과 같다. 차라리 위와 같이 사용할 거라면public class Fruits {        private Fruits(){};        public static final String STRAWBERRY = \"Strawberry\";    public static final String PINE_APPLE = \"Pineapple\";}와 같은 상수 유틸 클래스나.public enum Fruits{    STRAWBERRY(\"Strawberry\"), PINE_APPLE(\"Pineapple\");        private String name;    public Fruits (String name) {        this.name = name;    }        public String getName() { return this.name; }}와 같은 enum을 쓰는게 낫다.",
+        "url": "//2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html"
+      }
+      ,
+    
       "programmers-2024-06-08-programmers-series-lv-01-dart-html": {
         "title": "[programmers Series] Lv. 01 Dart",
         "tags": "",

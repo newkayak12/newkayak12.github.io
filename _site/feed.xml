@@ -5,7 +5,128 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sat, 08 Jun 2024 22:46:34 +0900</pubDate>
+    <pubDate>Sun, 09 Jun 2024 13:44:43 +0900</pubDate>
+    
+      <item>
+        <title>[effective Java Series] 24.donotdefinemultipleclassinafile</title>
+        <link>/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</link>
+        <guid isPermaLink="true">/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</guid>
+        <description>&lt;h1 id=&quot;톱레벨-클래스는-한-파일에-하나만&quot;&gt;톱레벨 클래스는 한 파일에 하나만&lt;/h1&gt;
+
+&lt;p&gt;한 파일에 여러 개의 클래스를 담을 수 있다. ( swift가 한 파일에 여러 struct를 선언하곤 한다. ) 그러나, 이렇게 되면 컴파일 순서에 따라 동작이 달라질 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;Mango.java&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mango&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mango&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;apple&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Apple.java&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mango&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mango juice&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;apple juice&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Main.java&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; - &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Mango&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이러면 컴파일 순서에 따라서 다르게 출력된다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 23.usememberclassasstatic</title>
+        <link>/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</link>
+        <guid isPermaLink="true">/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</guid>
+        <description>&lt;h1 id=&quot;중첩-클래스는-static으로-만들길-추천한다&quot;&gt;중첩 클래스는 static으로 만들길 추천한다.&lt;/h1&gt;
+
+&lt;p&gt;중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 ‘정적 멤버 클래스, ‘비정적 멤버 클래스’, ‘익명 클래스’, ‘지역 클래스’ 네 가지로 나뉜다.
+이 중 첫 번째 빼고는 모두 내부 클래스(inner class)에 속한다.&lt;/p&gt;
+
+&lt;p&gt;정적 멤버 클래스는 보통 바깥에 노출하고 쓸 때 유용한 도우미 클래스로 쓰인다.&lt;/p&gt;
+
+&lt;p&gt;비정적 멤버 클래스는 암묵적으로 바깥 클래스의 인스턴스와 암묵적으로 연결된다( 메모리 누수의 원인이 되기도 한다. ). 왜냐하면 비정적 멤버 클래스는 바깥 인스턴스 
+없이 생성할 수 없기 때문이다. 이런 비정적 멤버 클래스는 어댑터 정의, 다른 클래스의 인스턴스처럼 보이게하는 뷰로 주로 사용한다. 
+그러나 보통 위의 원인으로 바깥 인스턴스에서 접근할 일이 없다면 static을 붙이는게 메모리 누수 문제 해결에 좋다.&lt;/p&gt;
+
+&lt;p&gt;익명 클래스는 익명 구현 객체라고 보면 된다. 쓰이는 시점에 선언과 동시에 인스턴스가 만들어진다. 익면 클래스는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;클래스 이름이 필요한 작업&lt;/code&gt; 등을 수행할 수 없다.&lt;/p&gt;
+
+&lt;p&gt;지역 클래스는 지역 변수 선언하는 곳에 클래스를 선언하는 것으로 거의 쓸 일이 없다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 22.usehierarchicalstructure</title>
+        <link>/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</link>
+        <guid isPermaLink="true">/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</guid>
+        <description>&lt;h1 id=&quot;태그-달린-클래스보다는-계층-구조-활용하기&quot;&gt;태그 달린 클래스보다는 계층 구조 활용하기&lt;/h1&gt;
+
+&lt;p&gt;태그 값으로 두 가지 역할을 하는 클래스를 본 적 있을 것이다. 이런 클래스는 여러 구현이 혼합되어 가독성이 떨어진다. 또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt;을 필드에 선언했다면 쓰지 않더라도
+생성자 초기화를 진행해야 한다. 거기다 새로운 구현을 추가한다면? &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;switch-case&lt;/code&gt;도 늘려야한다. 이와 같이 태그 달린 클래스는 장황하고, 오류를 내기 쉽고, 비효율적이다.
+이는 계층 구조를 어설프게 흉내낸 것이다.&lt;/p&gt;
+
+&lt;p&gt;차라리 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;abstract class&lt;/code&gt;를 두고 태그 마다 새로운 클래스를 확장하는게 더 나은 선택지가 될 수 있다. 그러면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;case&lt;/code&gt;도 추가하지 않아도 되고, 루트 클래스를
+직접 건들 필요도 없으며, 확장의 유연성 또한 증가한다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 21.useinterfaceastypesetter</title>
+        <link>/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</link>
+        <guid isPermaLink="true">/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</guid>
+        <description>&lt;h1 id=&quot;인터페이스는-타입-정의-용도로-사용하자&quot;&gt;인터페이스는 타입 정의 용도로 사용하자&lt;/h1&gt;
+
+&lt;p&gt;인터페이스를 구현한다는 것은 ‘자신의 인스턴스로 무엇을 할 수 있는지’를 클라이언트에게 알리는 역할을 한다. 이런 인터페이스에&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;STRAWBERRY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Strawberry&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PINE_APPLE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Pineapple&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;와 같은 상수 인터페이스를 구현하는 것은 내부 구현을 외부에 노출하는 것과 같다. 차라리 위와 같이 사용할 거라면&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Fruits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){};&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;STRAWBERRY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Strawberry&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PINE_APPLE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Pineapple&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;와 같은 상수 유틸 클래스나.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;STRAWBERRY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Strawberry&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PINE_APPLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Pineapple&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Fruits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;와 같은 enum을 쓰는게 낫다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 09 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 01 Dart</title>
@@ -498,229 +619,6 @@ Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.&lt;/p&g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-11.HashCode.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-11.HashCode.html</guid>
-        <description>&lt;h1 id=&quot;hashcode-재정의&quot;&gt;HashCode 재정의&lt;/h1&gt;
-
-&lt;h2 id=&quot;규약&quot;&gt;규약&lt;/h2&gt;
-
-&lt;p&gt;equals를 재정의하면 hashCode도 재정의해야 한다. Object 명세에서 발췌한 규약을 보자.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;equals 비교에 사용되는 정보가 변경되지 않았다면, 애플리케이션이 실행되는 동안 그 객체의 hashCode 메소드는 몇 번을 호출해도 일관되게 같은 값을 반환해야 한다.&lt;/li&gt;
-  &lt;li&gt;equals가 두 객체가 같다고 판단한다면 hashCode도 같은 값을 반환해야 한다.&lt;/li&gt;
-  &lt;li&gt;equals가 두 객체가 다르다고 판단했더라도 hashCode가 무조건 다를 필요는 없다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;주의점&quot;&gt;주의점&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;equals에서 사용하지 않은 필드는 ‘반드시’ hashCode에서 제외해야만 한다. 성능 높인답시고 제외시키면 안된다.&lt;/li&gt;
-  &lt;li&gt;hashCode를 lazy로 설정하려면 threadSafe까지 고려해야 한다.&lt;/li&gt;
-  &lt;li&gt;hashCode 대상을 공개하지 않는 것이 좋다. 그래야 추후 계산 방식을 바꿀 수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;정의-방법&quot;&gt;정의 방법&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;int 필드(result)를 하나 생성한다.&lt;/li&gt;
-  &lt;li&gt;1에서 만든 필드에
-    &lt;ol&gt;
-      &lt;li&gt;Type.hashCode()를 할당한다.&lt;/li&gt;
-      &lt;li&gt;참조 타입이면 표준형(canonical representation)을 만들어 호출한다.&lt;/li&gt;
-      &lt;li&gt;필드가 배열이면 핵심 원소를 각각 필드처럼 다룬다. 혹은 Arrays.hashCode를 사용한다.&lt;/li&gt;
-      &lt;li&gt;result = 31 * result + Type.hashCode()를 필드마다 반복한다.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;31인 이유는 홀수이면서 소수이기 때문에 전통적으로 썻다고 한다. 위 예시를 풀어보면 아래와 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hashCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-10.Equals.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-10.Equals.html</guid>
-        <description>&lt;h1 id=&quot;equals는-일반-규약을-지켜서-재정의하라&quot;&gt;Equals는 일반 규약을 지켜서 재정의하라&lt;/h1&gt;
-
-&lt;h2 id=&quot;정의가-필요불필요한-경우&quot;&gt;정의가 필요/불필요한 경우&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;equal 재정의를 추천하지 않는 경우
-    &lt;ul&gt;
-      &lt;li&gt;인스턴스가 고유하다면 ( 값이 아닌 동작하는 클래스 -&amp;gt; ex) Thread)&lt;/li&gt;
-      &lt;li&gt;인스턴스의 논리적 동치성(logical equality)을 검사할 일이 없다면&lt;/li&gt;
-      &lt;li&gt;상위에서 정의한 equals만으로 충분하다면&lt;/li&gt;
-      &lt;li&gt;클래스가 private 혹은 package-private이고 equals를 호출할 일이 없다면&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;equals 재정의를 추천하는 경우
-    &lt;ul&gt;
-      &lt;li&gt;논리적 동치성 확인할 필요가 있을 경우&lt;/li&gt;
-      &lt;li&gt;상위 클래스의 equals로는 부족할 경우&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;일반-규약&quot;&gt;일반 규약&lt;/h2&gt;
-&lt;p&gt;그러면 equals는 어떤 규약을 따라야할까? 아래가 일반 규약이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;반사성(reflexivity) : null이 아닌 모든 값 x에 대해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(x) == true;&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;자기 자신은 같아야 한다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;대칭성(symmetry) : null이 아닌 모든 참조 값 x,y에 대해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(y) == true&lt;/code&gt; 이면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y.equals(x) == true&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;두 객체 비교 순서를 바꿔도 결과는 같아야 한다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;추이성(transitivity) : null이 아닌 x, y, z의 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(y) == true&lt;/code&gt; 이고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y.equals(z) == true&lt;/code&gt;이면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(z) == true&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;삼단 논법과 유사하다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;일관성(consistency) : null이 아닌 x,y를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(y)&lt;/code&gt;를 여러 번 실행해도 늘 같은 값이 나온다.
-    &lt;ul&gt;
-      &lt;li&gt;반복해도 같은 결과 ( 비교 요소가 불변이든 가변이든 판단에 별 중요하지 않는 요소까지 비교하면 문제가 생길 수 있다.)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;nonNull : null이닌 값에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x.equals(null) == false&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;null이 아닌 녀석은 null과 다르다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이 규약을 어기면 예상하기 어려운 결과를 초래할 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;이 규약은 equals를 override한 서브클래싱한 객체와 부모 객체를 비교했을 때 equals 비교 요소에 따라 결과가 다르게 나타날 수 있다. 그런데 이 둘은
-같으면 같은 타입이 아니어서 문제고 달라도 원하는 모습이 나오지 않아서 문제다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;이처럼 구체 클래스를 확장해서 새로운 값을 추가하면서 'equals'를 만족시킬 방법은 없다.&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;그래서 상속 대신 has-a 관계로 갖는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;composition&lt;/code&gt;으로 확장하면 해소할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;equals-구현-단계&quot;&gt;equals 구현 단계&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;==&lt;/code&gt; 로 자기 자신 참조인지 확인&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;로 입력 타입을 확인&lt;/li&gt;
-  &lt;li&gt;입력을 올바른 타임으로 형변환(공변성을 이용한다.)&lt;/li&gt;
-  &lt;li&gt;입력한 객체와 자기 자신을 핵심 필드들이 모두 일치하는지 비교
-    &lt;ul&gt;
-      &lt;li&gt;null이 정상 값이라면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Objects.equals(obj1, obj2)&lt;/code&gt;로 비교해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NPE&lt;/code&gt;를 피하자.&lt;/li&gt;
-      &lt;li&gt;비교하기 너무 복잡하면 필드의 표준형(canonical form)을 저장하고 표준형끼리 비교해보자&lt;/li&gt;
-      &lt;li&gt;필드 비교 순서가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;equals&lt;/code&gt;의 성능을 좌우하기도 한다. (확률적으로 다를 가능성이 높은 것 -&amp;gt; 낮은 것으로 비교하자.)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;equals를 재정의하면 hashcode로 같이 재정의하자&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-09.useTryWithResourceThanTryFinally.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-09.useTryWithResourceThanTryFinally.html</guid>
-        <description>&lt;h1 id=&quot;try-finally-보다는-try-with-resource&quot;&gt;try-finally 보다는 try-with-resource&lt;/h1&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.*&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Example&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tryFinally&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;InputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;OutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-            
-            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-                &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;c1&quot;&gt;//try-finally 중첩으로 hell이 시작된다.&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;tryWithResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;//AutoCloseable  구현이 전제 조건이다.&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;InputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-                &lt;span class=&quot;nc&quot;&gt;OutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-
-            &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;는&lt;/p&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/04/Effective-java-series-08.avoidUseFinalizerAndCleaner.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/04/Effective-java-series-08.avoidUseFinalizerAndCleaner.html</guid>
-        <description>&lt;h1 id=&quot;finalizer-cleaner-사용하지-않기&quot;&gt;finalizer, cleaner 사용하지 않기&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;finalizer는 실행 타이밍을 예측하기 어렵다. finalizer 실행 도중 에러가 생겨도 trace를 알 수 없다.&lt;/li&gt;
-  &lt;li&gt;cleaner는 finalizer보다 덜하긴 하지만 여전히 예측 불가에 느리다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;C++ 과 다르게 자바는  finalizer로 리소스 정리를 해줄 필요가 없다. 대신 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;try-with-resource&lt;/code&gt; 등으로 회수한다. 이는 java에서 finalizer, cleaner를 
-사용할 이유를 퇴색시킨다. 더 나아가 이 둘은 실행 될지 아닐지도 예측하기 어렵다.&lt;/p&gt;
-
-&lt;p&gt;문제는 이 둘에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FileStream&lt;/code&gt;을 회수하는 등의 동작을 넣으면 언제 회수할지 모르기 때문에 한정된 자원에 누수가 생긴다. 특히 상태를 수정하는 경우는 절대로 
-이 둘에 의존하면 안된다. 언제 실행될지도 모르기 때문이다. 그래도, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FileStream&lt;/code&gt;을 닫는 코드가 없을 때 언제 실행할지 모르지만 실행을 할 수도 있는 안전망 정도로 구현해 놓는 식으로 쓸 수도 있긴하다.&lt;/p&gt;
-
-&lt;p&gt;두 번째 문제는 finalizer 공격에 노출될 수도 있다는 것이다. 객체를 서브클래싱하고, initialize를 의도적으로 실패해서 finalizer를 유도하고 거기에 
-문제가 될 만한 코드를 심는다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IgnoreFinalizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;//Overrides method that is deprecated and marked for removal in 'java.lang.Object' &lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@SuppressWarnings&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;finalize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;AssertionError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 04 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>
