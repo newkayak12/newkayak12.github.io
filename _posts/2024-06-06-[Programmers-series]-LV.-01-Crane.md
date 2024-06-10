@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [PROGRAMMERS]
+---
+
+
 # 카카오 - 크레인 게임
 
 [Programmers](https://school.programmers.co.kr/learn/courses/30/lessons/64061?language=java)

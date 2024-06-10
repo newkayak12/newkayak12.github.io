@@ -108,6 +108,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -191,47 +193,102 @@
 <script>
   window.store = {
     
-      "2024-06-09-effective-java-series-24-donotdefinemultipleclassinafile-html": {
-        "title": "[effective Java Series] 24.donotdefinemultipleclassinafile",
+      "effective-java-2024-06-10-effective-java-series-29-usegeneric-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 10, 2024",
+        "author": "",
+        "category": "",
+        "content": "Object보다는 제네릭을 쓰자.Object를 사용하여 메소드, 클래스를 작성하면 필연적으로 형변환을 마주치게 된다. 이는 당연히 런타임 에러의 위험을 안고 있다. 그렇다면 굳이 Object로 선언하고형변환하는 불필요한 코드를 작성할 필요가 있을까?이 경우 제네릭을 사용하여, 컴파일 타임에 타입 체크를 받을 수 있으며, 형변환 하는 불필요한 코드를 줄일 수 있다. 그리고 이 편이 훨씬 type-safe하다.또한 &lt;E super Fruit&gt;나 &lt;E extends Fruit&gt; 등과 같이 범위 한정도 가능하며 &lt;E extends Comparable&lt;E&gt;&gt;와 같이 재귀적으로 타입한정도 가능하다.",
+        "url": "//effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html"
+      }
+      ,
+    
+      "effective-java-2024-06-10-effective-java-series-28-userlistratherthanarray-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 10, 2024",
+        "author": "",
+        "category": "",
+        "content": "배열보다 리스트Sub가 Super의 하위 타입이면 Sub[]는 Super[]의 하위 타입이 된다. 배열은 공변(covariant)이기 떄문이다. 그러나 제네릭은 불공변(invariant)다.보통 제네릭이 문제가 있다고 생각할 수 있다.Object[] arr = new Long[3]은 컴파일은 된다. 런타임에 ArrayStoreException을 낸다.  그러나 List&lt;Object&gt; list = new ArrayList&lt;Long&gt;()은컴파일조차 되지 않는다. 즉, 제네릭이 정상이고 배열쪽이 비정상이라는 소리다.그럼 제네릭으로 배열을 만들면 되지 않을까? 일단 정상적인 방법으로는 허용하지는 않는다.배열은 컴파일에 체크 되지만 실질적으로 런타임에 저장 가능한지를 체크한다. 그래서 위와 같은 경우가 허용되지 않는다.즉, 실체화가 된다. 그러나 제네릭은 런타임에 타입이 소거된다. 즉 컴파일 타임에만 강하게 검사한다. 이는 런타임에는 타입을 알 수 없음을 의미한다. 즉, type-safe하지 않기에 허용하지 않는다. 제네릭은 실체화 불가 타입이라고 한다.  실체화되지 않아서 오히려 런타임에는 컴파일보다 타입 정보를 적게 가진다.위에서 제네릭 배열은 ‘정상적인 방법’에서는 컴파일 타임에 에러를 낸다고 했다. 가능은 하다. 가변인자로 제네릭을 받을 수 있다. 그러나 난해한 경고 메시지를 뱉는다.물론 @SafeVarargs로 대처할 수 있다. 이는 해당 어노테이션과 함께 ‘왜 무시할 수 있는지?’ 이유를 주석으로 남겨야함을 의미한다.또한 Object[]을 만들고 제네릭으로 형변환을 할 수도 있다. 이래도 경고를 뱉는다.차라리 List&lt;E&gt;를 사용하는 편이 낫다.",
+        "url": "//effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html"
+      }
+      ,
+    
+      "effective-java-2024-06-10-effective-java-series-27-suppressuncheckedexception-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 10, 2024",
+        "author": "",
+        "category": "",
+        "content": "비검사 경고 지워나가가기Set&lt;String&gt; test = new HashSet();이런 코드를 작성하면 Set와 로타입인 HashSet 간의 타입 차이로 에러가 발생한다. 자바 7부터 다이아몬드 연산자 (&lt;&gt;)로 타입 추론이 되긴 하지만이를 작성하지 않으면 컴파일러는 경고한다.경고 자체를 제거할 수는 없지만 타입이 안전한게 확실하다면 @SuppressWarning(\"unchecked\")로 경고를 숨길 수 있다. 이 어노테이션은 너무 남발하면 좋지 않다.예상치 못한 곳에서 런타임에 에러가 발생할 수도 있기 때문이다. 때문에 최대한 좁은 범위에 적용해야한다. 또한 위 어노테이션을 사용했다면 경고를 무시해도 된다고 선언하는 것과 같으므로 꼭 주석으로 왜 무시해도 되는지?를 남기는 것이 좋다.",
+        "url": "//effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html"
+      }
+      ,
+    
+      "effective-java-2024-06-10-effective-java-series-26-donotuserawtype-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 10, 2024",
+        "author": "",
+        "category": "",
+        "content": "로 타입은 사용하지 말라로 타입이란 제네릭이 들어갈 자리에 아무 것도 지정하지 않은 타입을 일컫는다. 각가의 제네릭 타입은 일련의 매개변수화 타입(Parameterized type)을 정의한다.List&lt;String&gt;을 정의하면 String이 매개변수화 타입이 된다. 로 타입은 타입선언에서 제네릭 타입 정보가 모두 지워진 것처럼 동작하는데, 제네릭이 출시되기전 코드와 호환선을 위해서 제공되는 타입이다.제네릭을 사용하면 컴파일러는 해당 요소를 다루는 곳에서 묵시적으로 형변환을 하여 절대 실패하지 않음을 보장한다. 그러나 로 타입을 쓰면 제네릭이 주는 안정성과 표현력 둘 다잃게 된다.로 타입을 사용할 수는 있다. 동작은 한다. 그러나 type-safe 하지 않다. 따라서 비한정 와일드 카드 타입(unbounded wildcard type)을 대신 사용하는 것이 좋다.List&lt;?&gt;와 같이 물음표가 붙을 것을 왕왕 볼 수 있다. 이러면 범용적인 타입이 된다.예외적으로 로타입을 사용하는 경우가 있는데 class 리터럴이다. 예를 들어 List.cass, Map.class다. List&lt;String&gt;.class는 불가능하다.",
+        "url": "//effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html"
+      }
+      ,
+    
+      "effective-java-2024-06-10-effective-java-series-25-keyword-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 10, 2024",
+        "author": "",
+        "category": "",
+        "content": "용어 정리            한      영      예시                  매개변수화 타입      parameterized type      List              실제 타입 매개변수      actual type parameter      String              제네릭 타입      generic type      List              정규 타입 매개변수      formal type parameter      E              비한정적 와일드카드 타입      unbounded wildcard type      List&lt;?&gt;              로 타입      raw type      List              한정적 타입 매개변수      bounded type parameter                    재귀적 타입 한정      recursive type bound      &lt;T extends Comparable&gt;              한정적 와일드 카드 타입      bounded wildcard type      List&lt;? extends Number&gt;              제네릭 메소드      generic method      static List asList( E [] a ) { ... }              타입 토큰      type token      String.class      ",
+        "url": "//effective_java/2024/06/10/Effective-java-series-25.Keyword.html"
+      }
+      ,
+    
+      "effective-java-2024-06-09-effective-java-series-24-donotdefinemultipleclassinafile-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 9, 2024",
         "author": "",
         "category": "",
         "content": "톱레벨 클래스는 한 파일에 하나만한 파일에 여러 개의 클래스를 담을 수 있다. ( swift가 한 파일에 여러 struct를 선언하곤 한다. ) 그러나, 이렇게 되면 컴파일 순서에 따라 동작이 달라질 수도 있다.Mango.javaclass Mango {    static final String NAME = \"mango\";}class Apple {    static final String NAME = \"apple\";}Apple.javaclass Mango {    static final String NAME = \"mango juice\";}class Apple {    static final String NAME = \"apple juice\";}Main.javaclass Main {    public static void main(String[] args) {        System.out.println(Apple.NAME + \" - \" + Mango.NAME);    }}이러면 컴파일 순서에 따라서 다르게 출력된다.",
-        "url": "//2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html"
+        "url": "//effective_java/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html"
       }
       ,
     
-      "2024-06-09-effective-java-series-23-usememberclassasstatic-html": {
-        "title": "[effective Java Series] 23.usememberclassasstatic",
+      "effective-java-2024-06-09-effective-java-series-23-usememberclassasstatic-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 9, 2024",
         "author": "",
         "category": "",
         "content": "중첩 클래스는 static으로 만들길 추천한다.중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 ‘정적 멤버 클래스, ‘비정적 멤버 클래스’, ‘익명 클래스’, ‘지역 클래스’ 네 가지로 나뉜다.이 중 첫 번째 빼고는 모두 내부 클래스(inner class)에 속한다.정적 멤버 클래스는 보통 바깥에 노출하고 쓸 때 유용한 도우미 클래스로 쓰인다.비정적 멤버 클래스는 암묵적으로 바깥 클래스의 인스턴스와 암묵적으로 연결된다( 메모리 누수의 원인이 되기도 한다. ). 왜냐하면 비정적 멤버 클래스는 바깥 인스턴스 없이 생성할 수 없기 때문이다. 이런 비정적 멤버 클래스는 어댑터 정의, 다른 클래스의 인스턴스처럼 보이게하는 뷰로 주로 사용한다. 그러나 보통 위의 원인으로 바깥 인스턴스에서 접근할 일이 없다면 static을 붙이는게 메모리 누수 문제 해결에 좋다.익명 클래스는 익명 구현 객체라고 보면 된다. 쓰이는 시점에 선언과 동시에 인스턴스가 만들어진다. 익면 클래스는 instanceof, 클래스 이름이 필요한 작업 등을 수행할 수 없다.지역 클래스는 지역 변수 선언하는 곳에 클래스를 선언하는 것으로 거의 쓸 일이 없다.",
-        "url": "//2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html"
+        "url": "//effective_java/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html"
       }
       ,
     
-      "2024-06-09-effective-java-series-22-usehierarchicalstructure-html": {
-        "title": "[effective Java Series] 22.usehierarchicalstructure",
+      "effective-java-2024-06-09-effective-java-series-22-usehierarchicalstructure-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 9, 2024",
         "author": "",
         "category": "",
         "content": "태그 달린 클래스보다는 계층 구조 활용하기태그 값으로 두 가지 역할을 하는 클래스를 본 적 있을 것이다. 이런 클래스는 여러 구현이 혼합되어 가독성이 떨어진다. 또한 final을 필드에 선언했다면 쓰지 않더라도생성자 초기화를 진행해야 한다. 거기다 새로운 구현을 추가한다면? switch-case도 늘려야한다. 이와 같이 태그 달린 클래스는 장황하고, 오류를 내기 쉽고, 비효율적이다.이는 계층 구조를 어설프게 흉내낸 것이다.차라리 abstract class를 두고 태그 마다 새로운 클래스를 확장하는게 더 나은 선택지가 될 수 있다. 그러면 case도 추가하지 않아도 되고, 루트 클래스를직접 건들 필요도 없으며, 확장의 유연성 또한 증가한다.",
-        "url": "//2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html"
+        "url": "//effective_java/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html"
       }
       ,
     
-      "2024-06-09-effective-java-series-21-useinterfaceastypesetter-html": {
-        "title": "[effective Java Series] 21.useinterfaceastypesetter",
+      "effective-java-2024-06-09-effective-java-series-21-useinterfaceastypesetter-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 9, 2024",
         "author": "",
         "category": "",
         "content": "인터페이스는 타입 정의 용도로 사용하자인터페이스를 구현한다는 것은 ‘자신의 인스턴스로 무엇을 할 수 있는지’를 클라이언트에게 알리는 역할을 한다. 이런 인터페이스에public interface Fruits {    static final String STRAWBERRY = \"Strawberry\";    static final String PINE_APPLE = \"Pineapple\";}와 같은 상수 인터페이스를 구현하는 것은 내부 구현을 외부에 노출하는 것과 같다. 차라리 위와 같이 사용할 거라면public class Fruits {        private Fruits(){};        public static final String STRAWBERRY = \"Strawberry\";    public static final String PINE_APPLE = \"Pineapple\";}와 같은 상수 유틸 클래스나.public enum Fruits{    STRAWBERRY(\"Strawberry\"), PINE_APPLE(\"Pineapple\");        private String name;    public Fruits (String name) {        this.name = name;    }        public String getName() { return this.name; }}와 같은 enum을 쓰는게 낫다.",
-        "url": "//2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html"
+        "url": "//effective_java/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html"
       }
       ,
     
@@ -246,47 +303,47 @@
       }
       ,
     
-      "2024-06-07-effective-java-series-20-considerimplementtarget-html": {
-        "title": "[effective Java Series] 20.considerimplementtarget",
+      "effective-java-2024-06-07-effective-java-series-20-considerimplementtarget-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 7, 2024",
         "author": "",
         "category": "",
         "content": "인터페이스 작성 시 구현을 염두하고 설계하자인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 예를 들어 디폴트 메소드를 추후 추가하여 기존 구현에서 구현을 수정하지 않게 되면 기존 구현에 문제가 생긱는 경우들이 있다.(책에서는 이 예시로 apache.commons.collections4.collection.SynchronizedCollection를 들었다. )컴파일에 성공하더라도 디폴트 메소드는 기존 구현체에 런타임 오류를 일으킬 수도 있다. 따라서 꼭 필요한 경우가 아니면 기존 인터페이스에 디폴트 메소드를 추가하는 것은지양하는게 좋다. 해야만 한다면 기존 구현체와 충돌할지도 고려하는게 좋다( 물론 어려워 보인다. )결론적으로 인터페이스는 릴리즈 후 수정할 수 있다는 가능성을 염두하지 않는 것이 좋아 보인다.",
-        "url": "//2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html"
+        "url": "//effective_java/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html"
       }
       ,
     
-      "2024-06-07-effective-java-series-19-useinterfaceratherthanabstractclass-html": {
-        "title": "[effective Java Series] 19.useinterfaceratherthanabstractclass",
+      "effective-java-2024-06-07-effective-java-series-19-useinterfaceratherthanabstractclass-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 7, 2024",
         "author": "",
         "category": "",
         "content": "추상 클래스보다는 인터페이스를 우선하라자바에서 다중 상속이 불가능하다는 한계점이 있다. 반면 인터페이스는 구현한 클래스가 규약만 잘 지킨다면 어떤 클래스를 상속했든 같은 타입으로 취급한다.기존 클래스에도 손쉽게 인터페이스를 구현할 수 있다.이런 인터페이스는 믹스인(mixin) 정의에 안성 맞춤이다. 믹스인을 구현한 클래스에 원래 원 타입 외에도 특정 선택적 행위를 제공한다고 선언하는 효과를 준다.(swift의 protocol과 유사한 것 같다.) 이처럼 대상 타입의 주된 기능에 선택적 기능을 혼합 한다고 해서 믹스인이라고 부른다.인터페이스로는 계층 구조가 없는 타입 프레임 워크를 만들 수 있다. 만일 상속을 이용했다면 소위 말하는 조합 폭발이 벌어졌을 수도 있는 상황에도 인터페이스는 유연하게대응할 수 있다.한 편 인터페이스와 abstract class를 함께 사용하는 추상 골격 구현(skeletal implementation)을 함께 제공하는 식으로 인터페이스와 추상 클래스의 장점을 모두 취한느 방법 도 있다.import java.util.Map;public abstract class AbstractMapEntry&lt;K, V&gt; implements Map.Entry&lt;K, V&gt; {    }",
-        "url": "//2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html"
+        "url": "//effective_java/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html"
       }
       ,
     
-      "2024-06-07-effective-java-series-18-considerinheritance-html": {
-        "title": "[effective Java Series] 18.considerinheritance",
+      "effective-java-2024-06-07-effective-java-series-18-considerinheritance-html": {
+        "title": "Effective java",
         "tags": "",
         "date": "June 7, 2024",
         "author": "",
         "category": "",
         "content": "상속을 고려하거나 아니면 아예 금지하라상속용 클래서는 override 할 수 있는  메소드들은 어떻게 내부적으로 사용하는지 문서로 남겨야 한다. 그렇지 않으면 재정의로 예기치 못한 상황이 벌어질 수도 있다.특히 ‘Implementation Requirements’로 시작하는 절은 그 메소드의 내부 동작 방식을 설명하는 곳이다. @ImplSpec을 붙이면 자바독 도구가 생성한다.이는 API 문서가 ‘어떻게’가 아니라 ‘무엇’을 하는지 설명해야 한다는 지향점과 대치된다. 그렇지만 클래스를 안전하게 상속할 수 있도록 하기 위해서는 위와 같은내부 구현 방식을 설명해야 한다.물론 상속에 의한 영향도룰 줄이려면 외부 노출을 줄이는게 맞지만 너무 적게 노출하면 상속으로 얻는 이점마자 없앨 수 있다. 그러니 주의해야 한다. 필요하다면 직접 구현해서 영향도를 평가해보는 방법도 좋다.또한, 상속용 클래스 생성자는 직/간접적으로 재정의 가능 메소드를 생성자에서 호출하면 안 된다. 추가적으로 clone, readObject도 생성자와 비슷한 효과를 내므로이들 또한 재정의 가능 메소드를 호출해서는 안 된다.아예 상속을 금지하는 것도 좋은 방법이다. 1) final로 선언하거나 2) 모든 생성자를 private, package-private로 선언하고 public 정적 팩토리를 만드는 방법도 있다. (물론 이런 문제들 때문에 상속을 허용할 클래스만을 지정하는 permit이 생겼다.)public sealed class GameCharacter permits Kirby, Mario {}public class Kirby extends GameCharacter { } //Opublic class Mario extends GameCharacter { } //Opublic class Sonic extends GameCharacter { } //X",
-        "url": "//2024/06/07/Effective-java-series-18.ConsiderInheritance.html"
+        "url": "//effective_java/2024/06/07/Effective-java-series-18.ConsiderInheritance.html"
       }
       ,
     
-      "2024-06-06-programmers-series-lv-01-crane-html": {
+      "programmers-2024-06-06-programmers-series-lv-01-crane-html": {
         "title": "[programmers Series] Lv. 01 Crane",
         "tags": "",
         "date": "June 6, 2024",
         "author": "",
         "category": "",
         "content": "카카오 - 크레인 게임Programmers알고리즘단순 순회와 단순 스택 이용풀이public class Crane {    @Nested    public  class TestCases {            @Test        public void case1 () {            int[][] board = {                    {0, 0, 0, 0, 0},                    {0, 0, 1, 0, 3},                    {0, 2, 5, 0, 1},                    {4, 2, 4, 4, 2},                    {3, 5, 1, 3, 1}            };            int[] moves = {1,5,3,5,1,2,1,4};            int result = 4;                Assertions.assertEquals(solution(board, moves), result);            }    }    public  int solution( int [][] board, int[] moves) {        int answer = 0;        Stack&lt;Integer&gt; bucket = new Stack&lt;&gt;();        for( int move : moves ) {            for( int i = 0; i  &lt; board.length; i ++ ) {                int number = board[i][move - 1];                if( number != 0 ) {                    board[i][move - 1] = 0;                    if(!bucket.isEmpty() &amp;&amp;number ==  bucket.peek()) {                        bucket.pop();                        answer += 2;                    } else bucket.add(number);                                             break;                }            }        }        return answer;    }}",
-        "url": "//2024/06/06/Programmers-series-LV.-01-Crane.html"
+        "url": "//programmers/2024/06/06/Programmers-series-LV.-01-Crane.html"
       }
       ,
     

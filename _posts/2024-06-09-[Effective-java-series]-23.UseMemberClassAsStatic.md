@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
+
 # 중첩 클래스는 static으로 만들길 추천한다.
 
 중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 '정적 멤버 클래스, '비정적 멤버 클래스', '익명 클래스', '지역 클래스' 네 가지로 나뉜다.

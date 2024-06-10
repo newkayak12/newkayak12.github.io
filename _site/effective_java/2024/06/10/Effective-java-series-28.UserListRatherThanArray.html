@@ -2,9 +2,9 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>[effective Java Series] 20.considerimplementtarget | newkayak12.github.io</title>
+	<title>Effective java | newkayak12.github.io</title>
 	<meta name="description"
-		content="인터페이스 작성 시 구현을 염두하고 설계하자">
+		content="배열보다 리스트">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html">
+	<link rel="canonical" href="/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
@@ -67,6 +67,8 @@
 					About
 				</a>
 			</li>
+			
+			
 			
 			
 			
@@ -183,23 +185,31 @@
     <div class="content">
       <article >
   <header style="background-image: url('/')">
-    <h1 class="title">[effective Java Series] 20.considerimplementtarget</h1>
+    <h1 class="title">Effective java</h1>
     
     <p class="meta">
-      June 7, 2024
+      June 10, 2024
       
     </p>
   </header>
-  <section class="post-content"><h1 id="인터페이스-작성-시-구현을-염두하고-설계하자">인터페이스 작성 시 구현을 염두하고 설계하자</h1>
+  <section class="post-content"><h1 id="배열보다-리스트">배열보다 리스트</h1>
 
-<p>인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 
-예를 들어 디폴트 메소드를 추후 추가하여 기존 구현에서 구현을 수정하지 않게 되면 기존 구현에 문제가 생긱는 경우들이 있다.
-(책에서는 이 예시로 <code class="language-plaintext highlighter-rouge">apache.commons.collections4.collection.SynchronizedCollection</code>를 들었다. )</p>
+<p>Sub가 Super의 하위 타입이면 Sub[]는 Super[]의 하위 타입이 된다. 배열은 공변(covariant)이기 떄문이다. 그러나 제네릭은 불공변(invariant)다.
+보통 제네릭이 문제가 있다고 생각할 수 있다.</p>
 
-<p>컴파일에 성공하더라도 디폴트 메소드는 기존 구현체에 런타임 오류를 일으킬 수도 있다. 따라서 꼭 필요한 경우가 아니면 기존 인터페이스에 디폴트 메소드를 추가하는 것은
-지양하는게 좋다. 해야만 한다면 기존 구현체와 충돌할지도 고려하는게 좋다( 물론 어려워 보인다. )</p>
+<p><code class="language-plaintext highlighter-rouge">Object[] arr = new Long[3]</code>은 컴파일은 된다. 런타임에 <code class="language-plaintext highlighter-rouge">ArrayStoreException</code>을 낸다.  그러나 <code class="language-plaintext highlighter-rouge">List&lt;Object&gt; list = new ArrayList&lt;Long&gt;()</code>은
+컴파일조차 되지 않는다. 즉, 제네릭이 정상이고 배열쪽이 비정상이라는 소리다.</p>
 
-<p><strong>결론적으로 인터페이스는 릴리즈 후 수정할 수 있다는 가능성을 염두하지 않는 것이 좋아 보인다.</strong></p>
+<p>그럼 제네릭으로 배열을 만들면 되지 않을까? 일단 정상적인 방법으로는 허용하지는 않는다.
+배열은 컴파일에 체크 되지만 실질적으로 런타임에 저장 가능한지를 체크한다. 그래서 위와 같은 경우가 허용되지 않는다.
+즉, 실체화가 된다. 그러나 제네릭은 런타임에 타입이 소거된다. 즉 컴파일 타임에만 강하게 검사한다. 이는 런타임에는 타입을 알 수 없음을 의미한다. 
+즉, type-safe하지 않기에 허용하지 않는다. 제네릭은 실체화 불가 타입이라고 한다.  실체화되지 않아서 오히려 런타임에는 컴파일보다 타입 정보를 적게 가진다.</p>
+
+<p>위에서 제네릭 배열은 ‘정상적인 방법’에서는 컴파일 타임에 에러를 낸다고 했다. 가능은 하다. 가변인자로 제네릭을 받을 수 있다. 그러나 난해한 경고 메시지를 뱉는다.
+물론 <code class="language-plaintext highlighter-rouge">@SafeVarargs</code>로 대처할 수 있다. 이는 해당 어노테이션과 함께 ‘왜 무시할 수 있는지?’ 이유를 주석으로 남겨야함을 의미한다.
+또한 <code class="language-plaintext highlighter-rouge">Object[]</code>을 만들고 제네릭으로 형변환을 할 수도 있다. 이래도 경고를 뱉는다.</p>
+
+<p>차라리 <code class="language-plaintext highlighter-rouge">List&lt;E&gt;</code>를 사용하는 편이 낫다.</p>
 </section>
   
 
@@ -214,16 +224,16 @@
   
   <div id="previous-post" class="post-nav-post">
       <p>Previous post</p>
-      <a href="/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html">
-        [effective Java Series] 19.useinterfaceratherthanabstractclass
+      <a href="/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html">
+        Effective java
       </a>
   </div>
   
   
   <div id="next-post" class="post-nav-post">
       <p>Next post</p>
-      <a href="/programmers/2024/06/08/Programmers-series-LV.-01-Dart.html">
-        [programmers Series] Lv. 01 Dart
+      <a href="/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html">
+        Effective java
       </a>
   </div>
   

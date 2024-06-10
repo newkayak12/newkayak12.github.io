@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 태그 달린 클래스보다는 계층 구조 활용하기
 
 태그 값으로 두 가지 역할을 하는 클래스를 본 적 있을 것이다. 이런 클래스는 여러 구현이 혼합되어 가독성이 떨어진다. 또한 `final`을 필드에 선언했다면 쓰지 않더라도

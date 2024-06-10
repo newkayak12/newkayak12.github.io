@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 인터페이스 작성 시 구현을 염두하고 설계하자
 
 인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 

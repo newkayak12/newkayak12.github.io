@@ -5,12 +5,168 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 09 Jun 2024 13:44:43 +0900</pubDate>
+    <pubDate>Tue, 11 Jun 2024 00:07:11 +0900</pubDate>
     
       <item>
-        <title>[effective Java Series] 24.donotdefinemultipleclassinafile</title>
-        <link>/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</link>
-        <guid isPermaLink="true">/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html</guid>
+        <description>&lt;h1 id=&quot;object보다는-제네릭을-쓰자&quot;&gt;Object보다는 제네릭을 쓰자.&lt;/h1&gt;
+
+&lt;p&gt;Object를 사용하여 메소드, 클래스를 작성하면 필연적으로 형변환을 마주치게 된다. 이는 당연히 런타임 에러의 위험을 안고 있다. 그렇다면 굳이 Object로 선언하고
+형변환하는 불필요한 코드를 작성할 필요가 있을까?&lt;/p&gt;
+
+&lt;p&gt;이 경우 제네릭을 사용하여, 컴파일 타임에 타입 체크를 받을 수 있으며, 형변환 하는 불필요한 코드를 줄일 수 있다. 그리고 이 편이 훨씬 type-safe하다.
+또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E super Fruit&amp;gt;&lt;/code&gt;나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E extends Fruit&amp;gt;&lt;/code&gt; 등과 같이 범위 한정도 가능하며 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E extends Comparable&amp;lt;E&amp;gt;&amp;gt;&lt;/code&gt;와 같이 재귀적으로 타입한정도 가능하다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html</guid>
+        <description>&lt;h1 id=&quot;배열보다-리스트&quot;&gt;배열보다 리스트&lt;/h1&gt;
+
+&lt;p&gt;Sub가 Super의 하위 타입이면 Sub[]는 Super[]의 하위 타입이 된다. 배열은 공변(covariant)이기 떄문이다. 그러나 제네릭은 불공변(invariant)다.
+보통 제네릭이 문제가 있다고 생각할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Object[] arr = new Long[3]&lt;/code&gt;은 컴파일은 된다. 런타임에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayStoreException&lt;/code&gt;을 낸다.  그러나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Long&amp;gt;()&lt;/code&gt;은
+컴파일조차 되지 않는다. 즉, 제네릭이 정상이고 배열쪽이 비정상이라는 소리다.&lt;/p&gt;
+
+&lt;p&gt;그럼 제네릭으로 배열을 만들면 되지 않을까? 일단 정상적인 방법으로는 허용하지는 않는다.
+배열은 컴파일에 체크 되지만 실질적으로 런타임에 저장 가능한지를 체크한다. 그래서 위와 같은 경우가 허용되지 않는다.
+즉, 실체화가 된다. 그러나 제네릭은 런타임에 타입이 소거된다. 즉 컴파일 타임에만 강하게 검사한다. 이는 런타임에는 타입을 알 수 없음을 의미한다. 
+즉, type-safe하지 않기에 허용하지 않는다. 제네릭은 실체화 불가 타입이라고 한다.  실체화되지 않아서 오히려 런타임에는 컴파일보다 타입 정보를 적게 가진다.&lt;/p&gt;
+
+&lt;p&gt;위에서 제네릭 배열은 ‘정상적인 방법’에서는 컴파일 타임에 에러를 낸다고 했다. 가능은 하다. 가변인자로 제네릭을 받을 수 있다. 그러나 난해한 경고 메시지를 뱉는다.
+물론 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SafeVarargs&lt;/code&gt;로 대처할 수 있다. 이는 해당 어노테이션과 함께 ‘왜 무시할 수 있는지?’ 이유를 주석으로 남겨야함을 의미한다.
+또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Object[]&lt;/code&gt;을 만들고 제네릭으로 형변환을 할 수도 있다. 이래도 경고를 뱉는다.&lt;/p&gt;
+
+&lt;p&gt;차라리 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;를 사용하는 편이 낫다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html</guid>
+        <description>&lt;h1 id=&quot;비검사-경고-지워나가가기&quot;&gt;비검사 경고 지워나가가기&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Set&amp;lt;String&amp;gt; test = new HashSet();&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;이런 코드를 작성하면 Set&lt;String&gt;와 로타입인 HashSet 간의 타입 차이로 에러가 발생한다. 자바 7부터 다이아몬드 연산자 (&amp;lt;&amp;gt;)로 타입 추론이 되긴 하지만
+이를 작성하지 않으면 컴파일러는 경고한다.&lt;/String&gt;&lt;/p&gt;
+
+&lt;p&gt;경고 자체를 제거할 수는 없지만 타입이 안전한게 확실하다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SuppressWarning(&quot;unchecked&quot;)&lt;/code&gt;로 경고를 숨길 수 있다. 이 어노테이션은 너무 남발하면 좋지 않다.
+예상치 못한 곳에서 런타임에 에러가 발생할 수도 있기 때문이다. 때문에 최대한 좁은 범위에 적용해야한다. 또한 위 어노테이션을 사용했다면 경고를 무시해도 된다고 
+선언하는 것과 같으므로 꼭 주석으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;왜 무시해도 되는지?&lt;/code&gt;를 남기는 것이 좋다.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html</guid>
+        <description>&lt;h1 id=&quot;로-타입은-사용하지-말라&quot;&gt;로 타입은 사용하지 말라&lt;/h1&gt;
+
+&lt;p&gt;로 타입이란 제네릭이 들어갈 자리에 아무 것도 지정하지 않은 타입을 일컫는다. 각가의 제네릭 타입은 일련의 매개변수화 타입(Parameterized type)을 정의한다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;을 정의하면 String이 매개변수화 타입이 된다. 로 타입은 타입선언에서 제네릭 타입 정보가 모두 지워진 것처럼 동작하는데, 제네릭이 출시되기
+전 코드와 호환선을 위해서 제공되는 타입이다.
+제네릭을 사용하면 컴파일러는 해당 요소를 다루는 곳에서 묵시적으로 형변환을 하여 절대 실패하지 않음을 보장한다. 그러나 로 타입을 쓰면 제네릭이 주는 안정성과 표현력 둘 다
+잃게 된다.&lt;/p&gt;
+
+&lt;p&gt;로 타입을 사용할 수는 있다. 동작은 한다. 그러나 type-safe 하지 않다. 따라서 비한정 와일드 카드 타입(unbounded wildcard type)을 대신 사용하는 것이 좋다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;와 같이 물음표가 붙을 것을 왕왕 볼 수 있다. 이러면 범용적인 타입이 된다.&lt;/p&gt;
+
+&lt;p&gt;예외적으로 로타입을 사용하는 경우가 있는데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class 리터럴&lt;/code&gt;이다. 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List.cass&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Map.class&lt;/code&gt;다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;.class&lt;/code&gt;는 불가능하다.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/10/Effective-java-series-25.Keyword.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-25.Keyword.html</guid>
+        <description>&lt;h1 id=&quot;용어-정리&quot;&gt;용어 정리&lt;/h1&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;한&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;영&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;예시&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;매개변수화 타입&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;parameterized type&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;실제 타입 매개변수&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;actual type parameter&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;제네릭 타입&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;generic type&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;E&gt;&lt;/E&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;정규 타입 매개변수&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;formal type parameter&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;E&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;비한정적 와일드카드 타입&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;unbounded wildcard type&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&amp;lt;?&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;로 타입&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;raw type&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;한정적 타입 매개변수&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;bounded type parameter&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;E extends=&quot;&quot; Number=&quot;&quot;&gt;&lt;/E&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;재귀적 타입 한정&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;recursive type bound&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&amp;lt;T extends Comparable&lt;T&gt;&amp;gt;&lt;/T&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;한정적 와일드 카드 타입&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;bounded wildcard type&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;제네릭 메소드&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;generic method&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;static&lt;E&gt; List&lt;E&gt; asList( E [] a ) { ... }&lt;/E&gt;&lt;/E&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;타입 토큰&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;type token&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String.class&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html</guid>
         <description>&lt;h1 id=&quot;톱레벨-클래스는-한-파일에-하나만&quot;&gt;톱레벨 클래스는 한 파일에 하나만&lt;/h1&gt;
 
 &lt;p&gt;한 파일에 여러 개의 클래스를 담을 수 있다. ( swift가 한 파일에 여러 struct를 선언하곤 한다. ) 그러나, 이렇게 되면 컴파일 순서에 따라 동작이 달라질 수도 있다.&lt;/p&gt;
@@ -47,9 +203,9 @@
       </item>
     
       <item>
-        <title>[effective Java Series] 23.usememberclassasstatic</title>
-        <link>/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</link>
-        <guid isPermaLink="true">/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html</guid>
         <description>&lt;h1 id=&quot;중첩-클래스는-static으로-만들길-추천한다&quot;&gt;중첩 클래스는 static으로 만들길 추천한다.&lt;/h1&gt;
 
 &lt;p&gt;중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 ‘정적 멤버 클래스, ‘비정적 멤버 클래스’, ‘익명 클래스’, ‘지역 클래스’ 네 가지로 나뉜다.
@@ -69,9 +225,9 @@
       </item>
     
       <item>
-        <title>[effective Java Series] 22.usehierarchicalstructure</title>
-        <link>/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</link>
-        <guid isPermaLink="true">/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html</guid>
         <description>&lt;h1 id=&quot;태그-달린-클래스보다는-계층-구조-활용하기&quot;&gt;태그 달린 클래스보다는 계층 구조 활용하기&lt;/h1&gt;
 
 &lt;p&gt;태그 값으로 두 가지 역할을 하는 클래스를 본 적 있을 것이다. 이런 클래스는 여러 구현이 혼합되어 가독성이 떨어진다. 또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt;을 필드에 선언했다면 쓰지 않더라도
@@ -85,9 +241,9 @@
       </item>
     
       <item>
-        <title>[effective Java Series] 21.useinterfaceastypesetter</title>
-        <link>/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</link>
-        <guid isPermaLink="true">/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html</guid>
         <description>&lt;h1 id=&quot;인터페이스는-타입-정의-용도로-사용하자&quot;&gt;인터페이스는 타입 정의 용도로 사용하자&lt;/h1&gt;
 
 &lt;p&gt;인터페이스를 구현한다는 것은 ‘자신의 인스턴스로 무엇을 할 수 있는지’를 클라이언트에게 알리는 역할을 한다. 이런 인터페이스에&lt;/p&gt;
@@ -281,9 +437,9 @@ Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.
       </item>
     
       <item>
-        <title>[effective Java Series] 20.considerimplementtarget</title>
-        <link>/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</link>
-        <guid isPermaLink="true">/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html</guid>
         <description>&lt;h1 id=&quot;인터페이스-작성-시-구현을-염두하고-설계하자&quot;&gt;인터페이스 작성 시 구현을 염두하고 설계하자&lt;/h1&gt;
 
 &lt;p&gt;인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 
@@ -299,9 +455,9 @@ Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.
       </item>
     
       <item>
-        <title>[effective Java Series] 19.useinterfaceratherthanabstractclass</title>
-        <link>/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</link>
-        <guid isPermaLink="true">/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html</guid>
         <description>&lt;h1 id=&quot;추상-클래스보다는-인터페이스를-우선하라&quot;&gt;추상 클래스보다는 인터페이스를 우선하라&lt;/h1&gt;
 
 &lt;p&gt;자바에서 다중 상속이 불가능하다는 한계점이 있다. 반면 인터페이스는 구현한 클래스가 규약만 잘 지킨다면 어떤 클래스를 상속했든 같은 타입으로 취급한다.
@@ -326,9 +482,9 @@ Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.
       </item>
     
       <item>
-        <title>[effective Java Series] 18.considerinheritance</title>
-        <link>/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</link>
-        <guid isPermaLink="true">/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/07/Effective-java-series-18.ConsiderInheritance.html</guid>
         <description>&lt;h1 id=&quot;상속을-고려하거나-아니면-아예-금지하라&quot;&gt;상속을 고려하거나 아니면 아예 금지하라&lt;/h1&gt;
 
 &lt;p&gt;상속용 클래서는 override 할 수 있는  메소드들은 어떻게 내부적으로 사용하는지 문서로 남겨야 한다. 그렇지 않으면 재정의로 예기치 못한 상황이 벌어질 수도 있다.
@@ -360,8 +516,8 @@ Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.
     
       <item>
         <title>[programmers Series] Lv. 01 Crane</title>
-        <link>/2024/06/06/Programmers-series-LV.-01-Crane.html</link>
-        <guid isPermaLink="true">/2024/06/06/Programmers-series-LV.-01-Crane.html</guid>
+        <link>/programmers/2024/06/06/Programmers-series-LV.-01-Crane.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/06/Programmers-series-LV.-01-Crane.html</guid>
         <description>&lt;h1 id=&quot;카카오---크레인-게임&quot;&gt;카카오 - 크레인 게임&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/64061?language=java&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
@@ -439,184 +595,6 @@ Single(S), Double(D), Triple(T)은 점수마다 하나씩 존재한다.
 데코레이터 패턴(DecoratorPattern), 넓게는 위임(Delegate)패턴이라고 부른다. (참고로 내부 객체에 자신의 참조를 넘기는 경우 위임에 해당한다.)&lt;/p&gt;
 
 &lt;p&gt;래퍼클래스라고 아예 단점이 없는건 아니다 콜백 처리를 할 수 없다는 것이 문제다. 상위는 래퍼 객체의 this를 알 수 없다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/05/Effective-java-series-16.MinimizeThePossibilityOfChange.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/05/Effective-java-series-16.MinimizeThePossibilityOfChange.html</guid>
-        <description>&lt;h1 id=&quot;변경-가능성을-최소화하자&quot;&gt;변경 가능성을 최소화하자&lt;/h1&gt;
-
-&lt;p&gt;불변 클래스란 간단히 말해 그 인스턴스의 내부 값을 수정할 수 없는 클래스다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;객체의 상태를 변경하는 메소드를 제공하지 않는다.&lt;/li&gt;
-  &lt;li&gt;클래스를 확장할 수 없도록 한다. (클래스에 final 선언 혹은 public 생성자에 exception 던지도록)&lt;/li&gt;
-  &lt;li&gt;모든 필드를 final로 선언&lt;/li&gt;
-  &lt;li&gt;모든 필드를 private로 선언&lt;/li&gt;
-  &lt;li&gt;자신 외에는 내부 가변 컴포넌트에 접근할 수 없도록 한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;불변 객체는 근본적으로 ThreadSafe 처리할 필요는 없다. 또한 불변 클래스는 인스턴스 캐싱을 해서 같은 인스턴스를 중복 생성하지 않게 해주는 정적 팩토리를 제공할 수 있다.
-이렇게 하면 메모리 사용량과 GC 비용이 줄어든다. 불변 객체는 자유롭게 공유할 수 있음은 물론, 불변 객체끼리는 내부 데이터를 공유할 수 있다. 예를 들어 
-BigInteger의 negate 메소드는 크기가 같고 부호만 반대라면 새로운 BingInteger를 생성하는데 원본 인스턴스를 공유한 다른 인스턴스를 (리소스를 최소한으로 하는 방향으로)
-만들 수 있다. 또한 불변 객체는 그 자체로 실패 원자성을 제공한다. (불변이기에 실패해도 내부 값은 유효하다.)&lt;/p&gt;
-
-&lt;p&gt;단점 역시 존재한다. 값이 다르면 반드시 다른 독립된 객체로 만들어야 한다. 이를 해소하는 방법은 미리 연산을 예측해서 기본 기능을 만들거나 예측할 수 없다면 가변 동반 클래스로 
-제공하는 것이다. 예를 들어 StringBuilder가 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;여튼 정리하면 public class - private field를 기본으로 하자.&lt;/li&gt;
-  &lt;li&gt;가능하면 불변 클래스를 만들기 위해서 필드에 final을 붙이자. 그게 아니더라도 최대한 붙이자&lt;/li&gt;
-  &lt;li&gt;그리고 getter/ setter를 쓰자! 무조건은 아니다.&lt;/li&gt;
-  &lt;li&gt;생성자는 불변성을 띨 수 있는 초기화가 모두 완료된 완벽한 상태의 객체를 생성해야 한다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/05/Effective-java-series-15.DoNotUsePublicField.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/05/Effective-java-series-15.DoNotUsePublicField.html</guid>
-        <description>&lt;h1 id=&quot;public-클래스에서는-public-필드가-아닌-gettersetter를-쓰자&quot;&gt;public 클래스에서는 public 필드가 아닌 getter/setter를 쓰자&lt;/h1&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Point&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getX&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;데이터 필드에 직접 접근을 막되 정해진 루트로만 접근할 수 있게 해서 캡슐화 이점을 제공하는 예시이다.&lt;/p&gt;
-
-&lt;p&gt;물론 모든 클래스에 저런 처리가 필요한건 아니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package-private 클래스 혹은 private 클래스&lt;/code&gt;라면 데이터 필드를 노출해도 전혀 문제가 없다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/05/Effective-java-series-14.MinimizeAccessRights.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/05/Effective-java-series-14.MinimizeAccessRights.html</guid>
-        <description>&lt;h1 id=&quot;클래스-멤버의-접근-권한-최소화&quot;&gt;클래스, 멤버의 접근 권한 최소화&lt;/h1&gt;
-
-&lt;p&gt;캡슐화, 내부 데이터, 내부 구현 정보를 외부 컴포넌트로부터 얼마나 잘 숨겼는가에 대한 내용이다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;여러 컴포넌트를 병렬로 개발할 수 있다.&lt;/li&gt;
-  &lt;li&gt;시스템 관리 포인트를 줄일 수 있다. 다른 컴포넌트로 교체하는 부담도 적다.&lt;/li&gt;
-  &lt;li&gt;정보 은닉 자체가 성능을 높이지는 않지만, 성능 최적화에 도움을 준다. ( 서로 간섭이 적기에 디버깅이 편하다. )&lt;/li&gt;
-  &lt;li&gt;외부 의존도가 떨어지므로 라이브러리의 경우 유지보수가 용이해준다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;기본 원칙은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;모든 클래스와 멤버의 접근성을 가능한 한 좁혀야 한다.&lt;/code&gt; 그렇지 않으면 open 되므로 하위 호환을 위해서 영원히 기존 구현을 바꿀 수 없게 된다.&lt;/p&gt;
-
-&lt;p&gt;그런데 멤버 접근성을 좁히지 방해하는 제약이 있다. 상위 클래스 메소드 보다 접근 수준을 좁게 설정할 수 없다. 이 제약은 리스코프 치환 원칙을 지키기 위해 필요하다.
-public 클래스 멤버를 private로 하는 것이 기본이다. package-private까지 낮추는 건 괜찮지만 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pulblic&lt;/code&gt;은 정말 아니어야만 한다. public 가변 필드를
-두면 ThreadSafe하지 않다. final을 붙이면 내부 구현을 바꿀 수 없어서 리팩토링에 제약이 생긴다. 특히 배열은 public static final로 두거나 이 필드를 
-반환하는 접근자 메소드를 두면 배열이 변경 가능성이 있으므로 제공하지 않는 것이 좋다.&lt;/p&gt;
-
-&lt;p&gt;추가로 두 가지 암묵적 접근 수준이 있다. 모듈은 자신에 속하는 패키지 중 공개(export)할 것들을 선언할 수 있다. 모듈 시스템을 활용하면 클래스를 외부에 공개하지
-않으면서도 같은 모듈을 이루는 패키지 사이에는 자유롭게 공유할 수 있다.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/05/Effective-java-series-13.Comparable.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/05/Effective-java-series-13.Comparable.html</guid>
-        <description>&lt;h1 id=&quot;comparable-구현-고려하기&quot;&gt;Comparable 구현 고려하기&lt;/h1&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Comparable&lt;/code&gt; 역시 믹스인 인터페이스다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;compareTo&lt;/code&gt;는 단순 동치성 비교에 더해서 순서까지 비교할 수 있으며, 제네릭하다.&lt;/p&gt;
-
-&lt;p&gt;compareTo의 규격은 equals와 비슷하다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;객체 간 순서를 비교한다. 작으면 음수, 같으면 0 크면 양수&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Comparable을 구현한 클래스는 모든 x, y에 대해서  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Math.abs(x.compareTo(y)) == Math.abs(y.compareTo(x))&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Comparable을 구현한 클래스는 추이성을 보장해야 한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(x.compareTo(y) &amp;gt; 0 &amp;amp;&amp;amp; y.compareTo(z) &amp;gt; 0) 이면 x.comapreTo(z) &amp;gt; 0&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Comparable을 구현한 클래스는 x.compareTo(y) == 0 이면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Math.abs(x.compareTo(z)) == Math.abs(y.compareTo(z))&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(x.compareTo(y) == 0) == (x.equals(y))&lt;/code&gt;이어야 한다. 이는 필수는 아니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;문제는 equals랑 같다. 상속 받아서 확장하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;compareTo&lt;/code&gt; 규약을 지키기 어렵다. 우회법도 같다. 상속 확장 대신 컴포지션으로 확장하면 된다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/05/Effective-java-series-12.Cloneable.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/05/Effective-java-series-12.Cloneable.html</guid>
-        <description>&lt;h1 id=&quot;clone-재정의는-주의하자&quot;&gt;Clone 재정의는 주의하자&lt;/h1&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;은 복제해도 되는 클래스임을 명시하는 용도의 믹스인 인터페이스지만 큰 문제는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clone()&lt;/code&gt;이 선언된 곳이 Object에 있다는 것이다. 이는 단순
-Cloneable 구현만으로 clone을 호출할수 없다는 뜻이 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cloneable&lt;/code&gt;은 clone의 동작 방식을 결정한다. 여기서 단순 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clone&lt;/code&gt; 은 문제가 있다. 예를 들어 내부에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Array[]&lt;/code&gt;가 있다고 해보자. 이를 clone하면
-복사를 했더라도 같은 배열을 참조하도록 된다. 이는 곧 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;복제본 중 하나를 수정하면 다른 하나도 수정되어 불변성을 해친다는 뜻이다.&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;clone은 사실상 생성자와 같이 원본 객체에 아무런 해를 끼치지 않는 동시에 복제된 객체의 불변식을 보장해야만 한다. 따라서 올바르게 clone 하려면 내부 정보를
-복사해야 한다. 가장 쉬운 방법은 참조형 필드는 직접 clone하는 방법 뿐이다.&lt;/p&gt;
-
-&lt;p&gt;여기서 Cloneable 아키텍처는 ‘가변 객체를 참조하는 필드는 final로 선언’하라는 일반 용법과 충돌한다. 또, Cloneable을 구현한 클래스를 clone 할 때는 ThreadSafe를 보장해야한다.&lt;/p&gt;
-
-&lt;p&gt;살짝 두서가 없었지만 정리하면&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;super.clone()&lt;/code&gt;을 호출하고 필드를 적절히 수정한다. 필요하면 DeepCopy를 수행한다.&lt;/li&gt;
-  &lt;li&gt;접근제한자는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;public&lt;/code&gt;으로&lt;/li&gt;
-  &lt;li&gt;반환 타입은 클래스 자신으로&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;만약 이게 녹록지 않다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;복사 생성자&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;복사 팩토리&lt;/code&gt;를 제공할 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;복사 생성자&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CloneObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CloneObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;CloneObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;co&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;....;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;복사 팩토리&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CloneFactory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CloneFactory&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;newInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;CloneFactory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cloneFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;....&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 05 Jun 2024 00:00:00 +0900</pubDate>
       </item>

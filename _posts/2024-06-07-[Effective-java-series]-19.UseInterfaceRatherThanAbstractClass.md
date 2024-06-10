@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 추상 클래스보다는 인터페이스를 우선하라
 
 자바에서 다중 상속이 불가능하다는 한계점이 있다. 반면 인터페이스는 구현한 클래스가 규약만 잘 지킨다면 어떤 클래스를 상속했든 같은 타입으로 취급한다.

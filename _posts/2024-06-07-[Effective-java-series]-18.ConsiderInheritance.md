@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 상속을 고려하거나 아니면 아예 금지하라
 
 상속용 클래서는 override 할 수 있는  메소드들은 어떻게 내부적으로 사용하는지 문서로 남겨야 한다. 그렇지 않으면 재정의로 예기치 못한 상황이 벌어질 수도 있다.

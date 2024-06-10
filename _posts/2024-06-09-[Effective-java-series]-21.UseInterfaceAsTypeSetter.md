@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 인터페이스는 타입 정의 용도로 사용하자
 
 인터페이스를 구현한다는 것은 '자신의 인스턴스로 무엇을 할 수 있는지'를 클라이언트에게 알리는 역할을 한다. 이런 인터페이스에

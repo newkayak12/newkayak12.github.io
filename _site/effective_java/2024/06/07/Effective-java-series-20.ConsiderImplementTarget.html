@@ -2,9 +2,9 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>[effective Java Series] 23.usememberclassasstatic | newkayak12.github.io</title>
+	<title>Effective java | newkayak12.github.io</title>
 	<meta name="description"
-		content="중첩 클래스는 static으로 만들길 추천한다.">
+		content="인터페이스 작성 시 구현을 염두하고 설계하자">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html">
+	<link rel="canonical" href="/effective_java/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
@@ -67,6 +67,8 @@
 					About
 				</a>
 			</li>
+			
+			
 			
 			
 			
@@ -183,27 +185,23 @@
     <div class="content">
       <article >
   <header style="background-image: url('/')">
-    <h1 class="title">[effective Java Series] 23.usememberclassasstatic</h1>
+    <h1 class="title">Effective java</h1>
     
     <p class="meta">
-      June 9, 2024
+      June 7, 2024
       
     </p>
   </header>
-  <section class="post-content"><h1 id="중첩-클래스는-static으로-만들길-추천한다">중첩 클래스는 static으로 만들길 추천한다.</h1>
+  <section class="post-content"><h1 id="인터페이스-작성-시-구현을-염두하고-설계하자">인터페이스 작성 시 구현을 염두하고 설계하자</h1>
 
-<p>중첩 클래스는 다른 클래스 안에 정의된 클래스를 의미한다 종류는 ‘정적 멤버 클래스, ‘비정적 멤버 클래스’, ‘익명 클래스’, ‘지역 클래스’ 네 가지로 나뉜다.
-이 중 첫 번째 빼고는 모두 내부 클래스(inner class)에 속한다.</p>
+<p>인터페이스에도 디폴트 메소드가 추가됐다. 하지만 모든 상황을 고려하여 불변식을 해치지 않는 디폴트 메소드를 작성하는 것은 어렵다. 
+예를 들어 디폴트 메소드를 추후 추가하여 기존 구현에서 구현을 수정하지 않게 되면 기존 구현에 문제가 생긱는 경우들이 있다.
+(책에서는 이 예시로 <code class="language-plaintext highlighter-rouge">apache.commons.collections4.collection.SynchronizedCollection</code>를 들었다. )</p>
 
-<p>정적 멤버 클래스는 보통 바깥에 노출하고 쓸 때 유용한 도우미 클래스로 쓰인다.</p>
+<p>컴파일에 성공하더라도 디폴트 메소드는 기존 구현체에 런타임 오류를 일으킬 수도 있다. 따라서 꼭 필요한 경우가 아니면 기존 인터페이스에 디폴트 메소드를 추가하는 것은
+지양하는게 좋다. 해야만 한다면 기존 구현체와 충돌할지도 고려하는게 좋다( 물론 어려워 보인다. )</p>
 
-<p>비정적 멤버 클래스는 암묵적으로 바깥 클래스의 인스턴스와 암묵적으로 연결된다( 메모리 누수의 원인이 되기도 한다. ). 왜냐하면 비정적 멤버 클래스는 바깥 인스턴스 
-없이 생성할 수 없기 때문이다. 이런 비정적 멤버 클래스는 어댑터 정의, 다른 클래스의 인스턴스처럼 보이게하는 뷰로 주로 사용한다. 
-그러나 보통 위의 원인으로 바깥 인스턴스에서 접근할 일이 없다면 static을 붙이는게 메모리 누수 문제 해결에 좋다.</p>
-
-<p>익명 클래스는 익명 구현 객체라고 보면 된다. 쓰이는 시점에 선언과 동시에 인스턴스가 만들어진다. 익면 클래스는 <code class="language-plaintext highlighter-rouge">instanceof</code>, <code class="language-plaintext highlighter-rouge">클래스 이름이 필요한 작업</code> 등을 수행할 수 없다.</p>
-
-<p>지역 클래스는 지역 변수 선언하는 곳에 클래스를 선언하는 것으로 거의 쓸 일이 없다.</p>
+<p><strong>결론적으로 인터페이스는 릴리즈 후 수정할 수 있다는 가능성을 염두하지 않는 것이 좋아 보인다.</strong></p>
 </section>
   
 
@@ -218,16 +216,16 @@
   
   <div id="previous-post" class="post-nav-post">
       <p>Previous post</p>
-      <a href="/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html">
-        [effective Java Series] 22.usehierarchicalstructure
+      <a href="/effective_java/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html">
+        Effective java
       </a>
   </div>
   
   
   <div id="next-post" class="post-nav-post">
       <p>Next post</p>
-      <a href="/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html">
-        [effective Java Series] 24.donotdefinemultipleclassinafile
+      <a href="/programmers/2024/06/08/Programmers-series-LV.-01-Dart.html">
+        [programmers Series] Lv. 01 Dart
       </a>
   </div>
   

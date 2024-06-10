@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="로 타입은 사용하지 말라">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 10, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="로-타입은-사용하지-말라">로 타입은 사용하지 말라</h1>
+
+<p>로 타입이란 제네릭이 들어갈 자리에 아무 것도 지정하지 않은 타입을 일컫는다. 각가의 제네릭 타입은 일련의 매개변수화 타입(Parameterized type)을 정의한다.
+<code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code>을 정의하면 String이 매개변수화 타입이 된다. 로 타입은 타입선언에서 제네릭 타입 정보가 모두 지워진 것처럼 동작하는데, 제네릭이 출시되기
+전 코드와 호환선을 위해서 제공되는 타입이다.
+제네릭을 사용하면 컴파일러는 해당 요소를 다루는 곳에서 묵시적으로 형변환을 하여 절대 실패하지 않음을 보장한다. 그러나 로 타입을 쓰면 제네릭이 주는 안정성과 표현력 둘 다
+잃게 된다.</p>
+
+<p>로 타입을 사용할 수는 있다. 동작은 한다. 그러나 type-safe 하지 않다. 따라서 비한정 와일드 카드 타입(unbounded wildcard type)을 대신 사용하는 것이 좋다.
+<code class="language-plaintext highlighter-rouge">List&lt;?&gt;</code>와 같이 물음표가 붙을 것을 왕왕 볼 수 있다. 이러면 범용적인 타입이 된다.</p>
+
+<p>예외적으로 로타입을 사용하는 경우가 있는데 <code class="language-plaintext highlighter-rouge">class 리터럴</code>이다. 예를 들어 <code class="language-plaintext highlighter-rouge">List.cass</code>, <code class="language-plaintext highlighter-rouge">Map.class</code>다. <code class="language-plaintext highlighter-rouge">List&lt;String&gt;.class</code>는 불가능하다.</p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/10/Effective-java-series-25.Keyword.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html">
+        Effective java
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
