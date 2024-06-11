@@ -110,6 +110,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -201,6 +203,105 @@
         "category": "",
         "content": "카카오 - 실패율Programmers  슈퍼 게임 개발자 오렐리는 큰 고민에 빠졌다. 그녀가 만든 프랜즈 오천성이 대성공을 거뒀지만, 요즘 신규 사용자의 수가 급감한 것이다. 원인은 신규 사용자와 기존 사용자 사이에 스테이지 차이가 너무 큰 것이 문제였다.이 문제를 어떻게 할까 고민 한 그녀는 동적으로 게임 시간을 늘려서 난이도를 조절하기로 했다. 역시 슈퍼 개발자라 대부분의 로직은 쉽게 구현했지만, 실패율을 구하는 부분에서 위기에 빠지고 말았다. 오렐리를 위해 실패율을 구하는 코드를 완성하라.실패율은 다음과 같이 정의한다.스테이지에 도달했으나 아직 클리어하지 못한 플레이어의 수 / 스테이지에 도달한 플레이어 수전체 스테이지의 개수 N, 게임을 이용하는 사용자가 현재 멈춰있는 스테이지의 번호가 담긴 배열 stages가 매개변수로 주어질 때, 실패율이 높은 스테이지부터 내림차순으로 스테이지의 번호가 담겨있는 배열을 return 하도록 solution 함수를 완성하라.제한사항스테이지의 개수 N은 1 이상 500 이하의 자연수이다.stages의 길이는 1 이상 200,000 이하이다.stages에는 1 이상 N + 1 이하의 자연수가 담겨있다.각 자연수는 사용자가 현재 도전 중인 스테이지의 번호를 나타낸다.단, N + 1 은 마지막 스테이지(N 번째 스테이지) 까지 클리어 한 사용자를 나타낸다.만약 실패율이 같은 스테이지가 있다면 작은 번호의 스테이지가 먼저 오도록 하면 된다.스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 0 으로 정의한다.알고리즘  int, double을 잘 다루는가  자바 Comparator를 구현  자바에서 tuple 표현풀이class FailureRate {    @Nested    class TestCases {        @Test        public void case1 () {            int N = 5;            int[] stages = {2, 1, 2, 6, 2, 4, 3, 3};            int[] result = {3, 4, 2, 1, 5};            Assertions.assertArrayEquals(result, solution(N, stages));        }        @Test        public void case2 () {            int N = 4;            int[] stages = {4, 4, 4, 4, 4};            int[] result = {4, 1, 2, 3};            Assertions.assertArrayEquals(result, solution(N, stages));        }    }    public  int[] solution(int N, int[] stages) {        double[][] container = new double[N][2];        int[] answer = new int[N];        int size = stages.length;        for ( int i = 1; i &lt;= N; i ++ ) {            int count = 0;            for (int j = 0; j &lt; stages.length; j ++ ) {                if( i == stages[j] ) count++;            }            double[] element = new double[2];            element[0] = i;            if( size != 0 ) {                element[1] = count / (size * 1.0);            }            else if( size == 0 ) element[1] = 0.0;            container[i - 1] = element;            size -= count;        }        Arrays.sort(container, (o1, o2) -&gt; {            double result =  (o1[1] - o2[1]);            if (result != 0.0) return result &gt; 0 ? -1 : 1;            else {                return (int)(o1[0] - o2[0]);            }        });        for( int i = container.length - 1; i &gt;= 0; i --) answer[i] = (int) container[i][0];        return answer;    }}",
         "url": "//programmers/2024/06/11/Programmers-series-LV.-01-FailureRate.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-38-useroverrideannotation-html": {
+        "title": "[effective Java Series] 38.useroverrideannotation",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "어노테이션을 일관되게 사용하라@Override 어노테이션은 해당 메소드가 재정의했음을 알리는 수단으로, 재정의한 대상이 올바른지, 정말로 재정의 했는지 컴파일러에서 체크하는 용도로 사용된다.어노테이션을 일관되게 사용하면 다양한 버그를 예방할 수 있다.예를 들어 재정의라고 생각하고 다중정의를 하고 @Override를 안 붙였다고 해보자. 오동작할지도 모른다. 코드 자체는 컴파일에 문제가 없으므로 이상함을 못느낄지도 모른다.@Override를 붙였다면 알 수 있는 ‘버그’다. 이와 같이 대부분의 경우 어노테이션을 일관되게 사용하는 것은 굉장히 중요하다.",
+        "url": "//2024/06/11/Effective-java-series-38.UserOverrideAnnotation.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-37-userannotation-html": {
+        "title": "[effective Java Series] 37.userannotation",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "명명 패턴보다 어노테이션명명패턴은 시그니쳐 네이밍 패턴으로 구분되어야하는 부분, 아닌 부분을 나누는 패턴을 의미한다. 좋은 시도지만 몇 가지 단점이 있다.  오타가 나면 안된다.  개발자가 의도한대로 실패없이 작동할거라는 보장이 없다.어노테이션, 위 문제를 해결해주는 강력한 도구다. Annotation을 선언하고 이후 AnnotationProcessor(javax.annotation.processing)로 이를 처리한다.Junit의 @Test가 적절한 예시이다. 단순히 마커 어노테이션으로써 마킹하고 이후 프로세싱하도록 한다. 이러면 비즈니스 로직은 그대로 두고 어노테이션의 관심사면처리할 수 있다. 보통 이 처리는 리플렉션으로 진행한다.어노테이션에도 매개변수를 선언해서 이를 처리에 활용할 수도 있다.  이와같이 생각보다 어노테이션으로 할 수 있는 일들은 많다. 굳이 명명 패턴으로 처리할 명분이 없다.",
+        "url": "//2024/06/11/Effective-java-series-37.UserAnnotation.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-36-ifyouwanttoextanableenumthenuseinterface-html": {
+        "title": "[effective Java Series] 36.ifyouwanttoextanableenumthenuseinterface",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "확장 할수 있는 열거 타입이 필요하면 인터페이스를 사용해라열거는 타입 안전 열거 패턴(type safe enum pattern)보다 우수하다. 타입 안전 열거 패턴은 클래스를 이용하고, 생성자를 private로 만들어 최초 정의된 객체만 참조할 수 있게 했다.하는 것을 의미한다. 열거가 타입 안전 열거보다 뒤지는건 확장성 하나다.보통 열거를 확장할 일은 거의 없다. 사용해야 한다면 열거 타입에 임의의 인터페이스를 구현하는 아이디어다.public enum BasicOperation implements Operation {    }과 같이 말이다. implements 한 타입을 연산의 타입으로 가져가면 된다. 이렇게 인터페이스로 확장 가능한 열거를 흉내내는데도 한계가 있다. 열거끼리 상속이 불가하다는 것이다. 아무 상태에도 의존하지 않는다면 디폴트 구현을 이용해서 인터페이스에 추가할 수 있다.",
+        "url": "//2024/06/11/Effective-java-series-36.IfYouWantToExtanableEnumThenUseInterface.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-35-useenummapratherthanordinalindexing-html": {
+        "title": "[effective Java Series] 35.useenummapratherthanordinalindexing",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "ordinal 인덱싱 대신 EnumMap을 사용하자배열이나 리스트에서 원소를 꺼낼 때 ordinal로 인덱로 사용한다고 해보자. 그러면 이전부터 있던 문제점이 노출된다. ordinal을 사용해서 정확한 정수 값을 사용한다는 보장이 없다.이 경우 EnumMap을 사용하는게 나을 수도 있다. EnumMap도 내부에 배열을 사용하기 때문에 성능적으로 전혀 밀리지 않는다. 내부 구현을 숨겨서 Map의 타입 안정성,배열의 성능을 모두 얻어냈다.",
+        "url": "//2024/06/11/Effective-java-series-35.UseEnumMapRatherThanOrdinalIndexing.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-34-useenumsetratherthanbitfield-html": {
+        "title": "[effective Java Series] 34.useenumsetratherthanbitfield",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "비트 필드 대신 EnumSetpublic class Text { public static final int STYLE_BOLD = 1 &lt;&lt; 0; public static final int STYLE_ITALIC = 1 &lt;&lt; 1; public static final int STYLE_UNDERLINE = 1 &lt;&lt; 2; public static final int STYLE_STRIKE_THROUGH= 1 &lt;&lt; 3; }이러고 Text.STYLE_BOLD | Text.STYLE_ITALIC 같이 하면 집합 연산을 수행할 수 있다.  그러나 비트 필드는 정수 열거 상수의 단점을 가지고 있으며 추가로  비트 필드(합, 교집합)에 맞춰서 모든 필드를 순회하는데 까다롭다.  최대 몇 비트가 필요할지 미리 예측해서 적절한 타입을 선언해야한다.등의 이슈가 있다. 차라리 java.util.EnumSet을 사용하는 방법이 있다. 내부는 비트 벡터로 이뤄져 있다.EnumSet.of(Text.STYLE_BOLD, Text.STYLE_ITALIC) 같이 사용하면 된다.",
+        "url": "//2024/06/11/Effective-java-series-34.UseEnumSetRatherThanBitField.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-33-donotuseordinal-html": {
+        "title": "[effective Java Series] 33.donotuseordinal",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "ordinal 대신 인스턴스 필드를 사용하자일전에 enum에 인스턴스 필드를 선언할 수 있다는 걸 알았다.public enum Planet {    MERCURY(1),    VENUS(2),    EARTH(3),    MARS(4),    JUPITER(5),    SATURN(6),    URANUS(7),    NEPTUNE(8);        private final int order;    Planet(int order) {        this.order = order;    }}같이 말이다. 자바에서는 열거에 ordinal을 제공한다. 열거 순서에 대한 값이다. 열거를 정수로 변환할 필요가 있을 떄 ordinal을 쓰고 싶어지지만 참자.상수 선언을 바꾸면 오동작할 가능성이 높으며, 이미 사용 중인 정수와 같이 같은 상수는 추가할 방법이 없다. 차라리 인스턴스에 정수를 저장하는게 좋다.사실 ordinal은 Enum의 API 문서를 보면 EnumSet, EnumMap 같이 열거 타입 기반의 범용 자료 구조에 쓸 목적으로 설계됐다고 한다. 따라서 이런 용도가 아니면절대로 사용하지 말자.",
+        "url": "//2024/06/11/Effective-java-series-33.DoNotUseOrdinal.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-32-useenumeration-html": {
+        "title": "[effective Java Series] 32.useenumeration",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "int 상수 대신 열거 타입을 사용하기정수 열거 패턴(int enum pattern)은 type-safe하지도 않고 표현력도 별로고 궁극적으로 프로그램이 깨지기 쉽다. 문자열 열거 패턴(String enum pattern)은 좋을까?더 나쁘다. 문자열 상수의 이름 대신 문자열 값을 하드코딩하게 만들기 때문이다.차라리 열거를 쓰는게 낫다. 열거는 밖에서 접근할 수 있는 생성자를 제공하지 않으니 사실상 final이다. 열거로 만들어진 인스턴스는 딱 하나씩만 존재함이 보장된다.싱글톤이다. 또한 열거 타입은 각자 네임스페이스가 있어서 열거 원소 간 이름이 겹쳐도 상관 없다. 또한 필드를 선언하고 생성자를 추가하여 열거에 특정 속성들을매핑할 수도 있다.public enum Planet {    MERCURY(1),    VENUS(2),    EARTH(3),    MARS(4),    JUPITER(5),    SATURN(6),    URANUS(7),    NEPTUNE(8);        private final int order;    Planet(int order) {        this.order = order;    }}enum Operator {    ADD {public double apply(double x, double y) {return x + y;}},    SUBTRACT {public double apply(double x, double y) {return x - y;}},    MULTIPLE {public double apply(double x, double y) {return x * y;}},    DIVIDE {public double apply(double x, double y) {return x / y;}};        public abstract double apply(double x , double y);}열거를 언제 사용하면 좋을까? 필요한 원소를 컴파일 타임에 다 알 수 있는 상수 집합이라면 열거가 좋다. 열거로 정의된 상수가 영원히 고정될 필요는 없다.",
+        "url": "//2024/06/11/Effective-java-series-32.UseEnumeration.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-31-typesafecontainer-html": {
+        "title": "[effective Java Series] 31.typesafecontainer",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "타입 안전 이종 컨테이너컨테이너 키를 매개변수화한 다음, 컨테이너에 값을 넣거나 뺄 때 매개변수화한 기를 함께 제공하는 설계 방식을 타입 안전 이종 컨테이너 패턴(type safe heterogeneous container pattern)이라고 한다.각 타입의 Class 객체를 매개변수화 할 수 있는데 Class&lt;T&gt;와 같은 형태가 된다. 이런 class 리터럴을 타입 토큰이라고 한다.컨테이너에 데이터를 넣을 때 데이터, 타입을 함께 넣고, 뺄 때 (Class&lt;T&gt;) type.cast()로 타입 캐스팅하고 리턴하면 된다. cast는 형변환 연산자의 동적 버전이다.여기서 주의할 것이 있다. 악의적인 클라이언트가 Class 객체를 raw 타입으로 넘기면 type-safe하지 않아질 수 있다. 두 번째로 class 리터럴에는 실체화 불가 타입을 사용할 수 없다. 즉, List&lt;String&gt;.class같은게 불가하단 소리다. 물론 슈퍼 타입 토큰 같은 것으로 해결하려는 노력은 있다. Class.getGenericSuperclass()와 ParameterizedType.getActualTypeArguments()를 사용해서 실제 타입을 가져올 수 있다.spring에서는 ParameterziedTypeReference라는 이름으로 슈퍼 타입 토큰을 지원한다.",
+        "url": "//2024/06/11/Effective-java-series-31.TypeSafeContainer.html"
+      }
+      ,
+    
+      "2024-06-11-effective-java-series-30-becarefulusevarargswithgeneric-html": {
+        "title": "[effective Java Series] 30.becarefulusevarargswithgeneric",
+        "tags": "",
+        "date": "June 11, 2024",
+        "author": "",
+        "category": "",
+        "content": "제네릭과 가변인수를 함께 쓸 때는 신중하자가변 인수 메소드를 호출하면 가변인수를 담기 위한 배열이 자동으로 만들어진다. 메소드 선언히 실체화 불가 타입(제네릭)으로 매개 변수를 선언하면 컴파일러가 경고를보낸다. 힙 오염의 여지가 있기 때문이다. 매개변수화 타입의 변수가 타입이 다른 객체를 참조하면 힙 오염이 발생한다. 이는 컴파일러의 자동 형변환 실패할 수 있으니제네릭 의 근간이 무너진다.그런데, 왜 가변 인자를 메소드 시그니처에 선언할 수 있게 했을까? 편하니까다. 놀랍게도 말이다. 자바 7 이전까지는 호출자쪽에서 발생하는 경고를 무시할 수 없었다.@SafeVarargs이 자바7에서 추가되면서 경고를 숨길 수 있게 됐다. 당연히 @SafeVarargs를 쓸 때는 정당한 사유가 있어야 하며 어노테이션 만으로 메소드가 type-safe 함을 보장한다는 의미를 가지고 있으므로 주의해야한다. 추가로 당연히 주석도 달아야 한다.다시 돌아가서 제네릭 varargs를 안전하게 쓰려면 어떻게 하면 좋을까? readOnly로 인덱스에 접근하여 수정하지만 않으면 된다. 혹은 배열을 방어적 복사를 해서 뱉으면 된다.",
+        "url": "//2024/06/11/Effective-java-series-30.BecarefulUseVarargsWithGeneric.html"
       }
       ,
     

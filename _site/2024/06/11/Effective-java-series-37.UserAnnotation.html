@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[effective Java Series] 37.userannotation | newkayak12.github.io</title>
+	<meta name="description"
+		content="명명 패턴보다 어노테이션">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/06/11/Effective-java-series-37.UserAnnotation.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[effective Java Series] 37.userannotation</h1>
+    
+    <p class="meta">
+      June 11, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="명명-패턴보다-어노테이션">명명 패턴보다 어노테이션</h1>
+
+<p>명명패턴은 시그니쳐 네이밍 패턴으로 구분되어야하는 부분, 아닌 부분을 나누는 패턴을 의미한다. 좋은 시도지만 몇 가지 단점이 있다.</p>
+
+<ul>
+  <li>오타가 나면 안된다.</li>
+  <li>개발자가 의도한대로 실패없이 작동할거라는 보장이 없다.</li>
+</ul>
+
+<p>어노테이션, 위 문제를 해결해주는 강력한 도구다. Annotation을 선언하고 이후 AnnotationProcessor(javax.annotation.processing)로 이를 처리한다.
+Junit의 <code class="language-plaintext highlighter-rouge">@Test</code>가 적절한 예시이다. 단순히 마커 어노테이션으로써 마킹하고 이후 프로세싱하도록 한다. 이러면 비즈니스 로직은 그대로 두고 어노테이션의 관심사면
+처리할 수 있다. 보통 이 처리는 리플렉션으로 진행한다.</p>
+
+<p>어노테이션에도 매개변수를 선언해서 이를 처리에 활용할 수도 있다.  이와같이 생각보다 어노테이션으로 할 수 있는 일들은 많다. 굳이 명명 패턴으로 처리할 명분이 없다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/06/11/Effective-java-series-36.IfYouWantToExtanableEnumThenUseInterface.html">
+        [effective Java Series] 36.ifyouwanttoextanableenumthenuseinterface
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/06/11/Effective-java-series-38.UserOverrideAnnotation.html">
+        [effective Java Series] 38.useroverrideannotation
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
