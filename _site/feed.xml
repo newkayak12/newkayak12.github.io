@@ -5,7 +5,200 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 11 Jun 2024 22:33:45 +0900</pubDate>
+    <pubDate>Wed, 12 Jun 2024 23:48:25 +0900</pubDate>
+    
+      <item>
+        <title>[effective Java Series] 46.parallelstream</title>
+        <link>/2024/06/12/Effective-java-series-46.ParallelStream.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-46.ParallelStream.html</guid>
+        <description>&lt;h1 id=&quot;병렬-스트림&quot;&gt;병렬 스트림?&lt;/h1&gt;
+
+&lt;p&gt;자바 7부터 고성능 병렬 분해(Parallel decom-position) 프레임워크인 포크-조인을 추가했다. 자바 8부터는 병렬 파이프라인을 병렬 실행할 수 있는 스트림을 지원한다.
+이를 통해 동시성 프로그램을 작성하기 쉬워지고 있다. 그러나 남용하면 안된다.&lt;/p&gt;
+
+&lt;p&gt;보통 병렬 스트림을 사용하면 무조건 더 빨라질거라고 생각하지만 그렇지 않다. 예를 들어 스트림을 병렬으로 나누느라 리소스를 더 가져간다거나 혹은 실패할 수도 있다.
+또한 중간 연산으로 limit을 사용하면 병렬 연산의 의미가 퇴색된다. limit을 사용하면 CPU 코어가 남으면 원소를 더 처리하고 제한 개수 이후 결과는 버려도 된다고
+가정한다. 이는 계산 하나하나 연산이 오래걸리는 작업이라면 버릴 결과를 위해서 연산을 하는 것과 같다.&lt;/p&gt;
+
+&lt;p&gt;따라서 리소스, 병렬로 나눴을 때 효용성을 고려해야 한다. 스트림 소스가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashSet&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConcurrentHashMap&lt;/code&gt;의 인스턴스거나 배열
+int 범위, long 범위일 경우 효과가 좋다. 이들의 공통점은 순차적으로 실행할 때 참조 지역성이 뛰어다는 것이다.&lt;/p&gt;
+
+&lt;p&gt;또한 종단 연산 중 reduction에 적합하다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;min&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;max&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;count&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sum&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anyMatch&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;allMatch&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noneMatch&lt;/code&gt; 같은 연산 말이다. 가변 축소하는
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collect&lt;/code&gt;는 그다지 병렬에 적합하지 않다.&lt;/p&gt;
+
+&lt;p&gt;정리하면 스트림 병렬에는 주의해야 한다. 항상 행복한 결과가 있지는 않다. 성능이 나빠지거나 예상치 못한 동작을 발생할 수 있다. 또한 병렬화에 드는 추가 비용을 상쇄할 정도의
+결과가 나오지 않으면 단일 스트림이 낫다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 45.usepurefunction</title>
+        <link>/2024/06/12/Effective-java-series-45.UsePureFunction.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-45.UsePureFunction.html</guid>
+        <description>&lt;h1 id=&quot;스트림에서는-부작용-없는-함수를-사용하라&quot;&gt;스트림에서는 부작용 없는 함수를 사용하라&lt;/h1&gt;
+
+&lt;p&gt;스트림은 단순 API를 넘어 함수형 패러다임에 기초한 패러다임이다. 스트림 패러다임의 핵심은 일련의 변환으로 재구성하는 부분이다. 이때 각 변환 단계는 한 단계
+이전 결과를 받아 처리하는 순수 함수여야 한다. 순수 함수는 다른 가변 상태를 참조하지 않고 함수 스스로도 다른 상태를 변경하지 않는다. 모두 sideEffect가 없다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 44.becarefulusestream</title>
+        <link>/2024/06/12/Effective-java-series-44.BecarefulUseStream.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-44.BecarefulUseStream.html</guid>
+        <description>&lt;h1 id=&quot;스트림을-주의해서-사용하자&quot;&gt;스트림을 주의해서 사용하자&lt;/h1&gt;
+
+&lt;p&gt;스트림은 유한/ 무한 시퀀스를 의미하거나, 스트림 파이프라인은 이 원소들로 수행하는 연산 단계를 표현하는 개념이다.
+스트림 파이프라인은 소스 스트림에서 시작해서 종단 연산으로 끝나며 그 사이에 하나 이상의 중간 연산이 있을 수 있다. 각 중간 연산은 스트림을 어떠한 방식으로
+변환한다.&lt;/p&gt;
+
+&lt;p&gt;스트림 API는 메소드 연쇄를 지원하는 Fluent API다. 즉, 파이프 라인 하나를 구성하는 모든 호출을 연결해서 단 하나의 표현식으로 완성할 수 있다.
+스트림 API는 람다가 필수다. 람다의 부작용처럼 오히려 가독성이 떨어지기 시작한다. for로 되어 있는 기존 코드를 스트림을 사용하도록 리팩토링하는 건 좋다. 
+그러나 스트림으로 작성하는게 나아 보일 때만 반영하자. 또한 함수 객체로는 할 수 없지만 블록으로 할 수 있는 일들이 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;코드 블록에서는 지역변수를 읽고 수정할 수 있다. 그러나 람다는 final로 지역변수를 취급하기에 수정할 수 없다.&lt;/li&gt;
+  &lt;li&gt;코드 블록에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;return&lt;/code&gt;으로 흐름 제어할 수 있지만 람다, 스트림 중에는 불가능하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그러나&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;시퀀스를 일관되게 변환&lt;/li&gt;
+  &lt;li&gt;시퀀스를 필터링&lt;/li&gt;
+  &lt;li&gt;시퀀스를 하나의 연산을 사용해서 결합한다.&lt;/li&gt;
+  &lt;li&gt;시퀀스를 컬렉션에 모은다.&lt;/li&gt;
+  &lt;li&gt;시퀀스에서 특정 조건을 만족하는 원소를 찾는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;라고 하면 스트림으로 리팩토링을 할 만하다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 43.usestandardfuntionalinterface</title>
+        <link>/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html</guid>
+        <description>&lt;h1 id=&quot;표준-함수형-인터페이스-사용&quot;&gt;표준 함수형 인터페이스 사용&lt;/h1&gt;
+
+&lt;p&gt;자바 8부터 함수형 인터페이스 지원으로 다양한 일을 할 수 있게 됐다. 그 쓰임새가 늘어남에 따라 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.function&lt;/code&gt;에는 다양한 용도의 표준 함수형 인터페이스가
+담겨 있다. 필요한 용도에 맞는게 있다면, 직접 구현하지 말고 이를 사용하는 것이 좋다. 보통 이름만으로 동작을 어느 정도 예측할 수 있기 때문이다. 만약 직접 구현해야한다면
+언제 구현하는게 좋을까?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;자주 쓰이며, 이름 자체가 용도를 명확히 전달한다.&lt;/li&gt;
+  &lt;li&gt;반드시 따라야할 규약이 있다.&lt;/li&gt;
+  &lt;li&gt;유용한 디폴트 메소드를 제공할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;만일 직접 만들어 써야 한다면 네이밍 컨벤션을 잘 지키자. 그리고 표준 함수형 인터페이스에는 기본 타입만 지원하는 것을 볼 수 있는데, 직접 만들어 사용할 때도
+최대한 기본형을 사용하는 것을 추천한다. 동작은 가능하지만 박싱, 언박싱 과정이 리소스를 낭비한다. 또한 함수형 인터페이스도 인터페이스다. 배포하면 돌이킬 수 없다. 
+따라서 신중히 작성하자. 마지막으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt;를 사용하자 이 어노테이션을 붙이면 해당 인터페이스가 함수형 인터페이스 조건을 만족하는지 컴파일 타임에
+체크할 수 있다.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 42.usemethodreference</title>
+        <link>/2024/06/12/Effective-java-series-42.UseMethodReference.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-42.UseMethodReference.html</guid>
+        <description>&lt;h1 id=&quot;람다보다는-메소드-참조를-사용하라&quot;&gt;람다보다는 메소드 참조를 사용하라&lt;/h1&gt;
+
+&lt;p&gt;람다보다 더 간결하게 사용할 수 있다. 메소드 참조(Method reference)로 말이다. 매개변수 구성(수, 타입, 순서)이 같다면 람다 대신 메소드 참조를 전달하면
+같은 결과를 더 보기 좋게 얻을 수 있다. 메소드 참조가 람다를 대체하는 건 아니다. 람다로 할 수 없는 일은 메소드 참조로도 할 수 없다.&lt;/p&gt;
+
+&lt;p&gt;단순히 메소드 참조는 람다로 구현했을 경우 길고 복잡해질 때 좋은 대안이 되어준다. 메소드 참조는 기능을 잘 드러내는 이름을 지어줄 수도 있다. 메소드 참조의 유형은
+아래의 다섯 가지다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;정적 메소드를 가리키는 메소드 참조&lt;/li&gt;
+  &lt;li&gt;한정적 참조 - 수신 객체(receiving object)를 특정하는 한정적 인스턴스 메소드 참조 (함수 객체가 받는 인수와 참조되는 메소드가 받는 인수가 같다.)&lt;/li&gt;
+  &lt;li&gt;비한정적 참조 - 수신 객체를 특정하지 않는 비한정적 인스턴스 메소드 참조 (함수 객체를 적용하는 시점에 수신 객체를 알려준다.)&lt;/li&gt;
+  &lt;li&gt;클래스 생성자&lt;/li&gt;
+  &lt;li&gt;배열 생성자&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;유형&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;예시&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;람다&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;정적&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Integer::parseInt&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;str -&amp;gt; Integer.parseInt(str);&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;한정적(인스턴스)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Instant.now()::isAfter&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;t -&amp;gt;  Instant.now.isAfter(t)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;비한정적&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String::toLowerCase&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;str -&amp;gt; str.toLowerCase()&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;클래스 생성자&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Object::new&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;() -&amp;gt;     new Object();&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;배열 생성자&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Object[]::new&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;() -&amp;gt; new Object[0];&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 41.uselambda</title>
+        <link>/2024/06/12/Effective-java-series-41.UseLambda.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-41.UseLambda.html</guid>
+        <description>&lt;h1 id=&quot;익명-클래스보단-람다&quot;&gt;익명 클래스보단 람다.&lt;/h1&gt;
+
+&lt;p&gt;자바 8에 와서 추상 메소드 하나짜리 인터페이스는 특별한 의미를 인정 받게 됐다. 함수형 인터페이스로 말이다. 이 함수형 인터페이스는 자바 8에서 람다를 지원하는
+초석이 됐다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;람다는 기존 익명 구현 객체보다 훨씬 간결하고 가독성도 월등히 높다. 또한 람다를 사용하면 컴파일러가 문맥을 보고 타입을 추론해준다.
+따라서 타입을 명시해야만 되는 경우가 아니고서야 굳이 매개변수 타입을 명시할 필요는 없다.&lt;/p&gt;
+
+&lt;p&gt;그러나 람다는 이름도 없고 문서화도 하지 못한다. 따라서 코드 자체로 동작이 명확하지 않거나 너무 길어진다면 람다를 포기하는 게 좋다. 또한 람다는 자신을 참조할 수 
+없다. 람다 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this&lt;/code&gt;는 바깥 인스턴스를 가리킨다. 반대로 익명 구현 객체는 자신을 가리킨다. 상황에 따라 취사 선택하는 현명함을 보이자.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[effective Java Series] 40.usemarkerinterface</title>
+        <link>/2024/06/12/Effective-java-series-40.UseMarkerInterface.html</link>
+        <guid isPermaLink="true">/2024/06/12/Effective-java-series-40.UseMarkerInterface.html</guid>
+        <description>&lt;h1 id=&quot;정의하는게-타입이라면-마커-인터페이스를-사용하자&quot;&gt;정의하는게 타입이라면 마커 인터페이스를 사용하자.&lt;/h1&gt;
+
+&lt;p&gt;아무 메소드 없이 단지 자신을 구현하는 클래스가 특정 속성을 가진다고 표시하는 인터페이스를 마커 인터페이스(marker interface)라고 한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Serializable&lt;/code&gt;이 예다.
+마커 인터페이스는 타입으로써 역할을 하지만 마커 어노테이션은 그렇지 않다. 두 번쨰로 마커 인터페이스는 적용 대상을 더 정밀하게 지정할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;반대로 마커 어노테이션이 마커 인터페이스보다 나은 점은 어노테이션 시스템의 지원을 받는다는 점을 들 수 있다. 그러면 어노테이션, 인터페이스 언제 써야할까?
+클래스와 인터페이스 외 프로그램 요소에 마킹해야 할 때 어노테이션을 써야한다. 마킹이 된 객체를 매개변수로 받는다면 인터페이스를 쓰는 것이 좋다. 그러면
+컴파일 타임에 오류를 잡아낼 수 있다. 특히 어노테이션 적용 대상(Target)이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElementType.TYPE&lt;/code&gt;이면 다시 한 번 생각해보는게 좋다.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 01 Failurerate</title>
@@ -295,198 +488,6 @@ Junit의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Tes
 &lt;p&gt;열거를 언제 사용하면 좋을까? 필요한 원소를 컴파일 타임에 다 알 수 있는 상수 집합이라면 열거가 좋다. 열거로 정의된 상수가 영원히 고정될 필요는 없다.&lt;/p&gt;
 </description>
         <pubDate>Tue, 11 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 31.typesafecontainer</title>
-        <link>/2024/06/11/Effective-java-series-31.TypeSafeContainer.html</link>
-        <guid isPermaLink="true">/2024/06/11/Effective-java-series-31.TypeSafeContainer.html</guid>
-        <description>&lt;h1 id=&quot;타입-안전-이종-컨테이너&quot;&gt;타입 안전 이종 컨테이너&lt;/h1&gt;
-
-&lt;p&gt;컨테이너 키를 매개변수화한 다음, 컨테이너에 값을 넣거나 뺄 때 매개변수화한 기를 함께 제공하는 설계 방식을 타입 안전 이종 컨테이너 패턴(type safe heterogeneous container pattern)이라고 한다.
-각 타입의 Class 객체를 매개변수화 할 수 있는데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Class&amp;lt;T&amp;gt;&lt;/code&gt;와 같은 형태가 된다. 이런 class 리터럴을 타입 토큰이라고 한다.&lt;/p&gt;
-
-&lt;p&gt;컨테이너에 데이터를 넣을 때 데이터, 타입을 함께 넣고, 뺄 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(Class&amp;lt;T&amp;gt;) type.cast()&lt;/code&gt;로 타입 캐스팅하고 리턴하면 된다. cast는 형변환 연산자의 동적 버전이다.
-여기서 주의할 것이 있다. 악의적인 클라이언트가 Class 객체를 raw 타입으로 넘기면 type-safe하지 않아질 수 있다. 두 번째로 class 리터럴에는 실체화 불가 타입을 
-사용할 수 없다. 즉, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;.class&lt;/code&gt;같은게 불가하단 소리다. 물론 슈퍼 타입 토큰 같은 것으로 해결하려는 노력은 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Class.getGenericSuperclass()&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParameterizedType.getActualTypeArguments()&lt;/code&gt;를 사용해서 실제 타입을 가져올 수 있다.
-spring에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ParameterziedTypeReference&lt;/code&gt;라는 이름으로 슈퍼 타입 토큰을 지원한다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 11 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 30.becarefulusevarargswithgeneric</title>
-        <link>/2024/06/11/Effective-java-series-30.BecarefulUseVarargsWithGeneric.html</link>
-        <guid isPermaLink="true">/2024/06/11/Effective-java-series-30.BecarefulUseVarargsWithGeneric.html</guid>
-        <description>&lt;h1 id=&quot;제네릭과-가변인수를-함께-쓸-때는-신중하자&quot;&gt;제네릭과 가변인수를 함께 쓸 때는 신중하자&lt;/h1&gt;
-
-&lt;p&gt;가변 인수 메소드를 호출하면 가변인수를 담기 위한 배열이 자동으로 만들어진다. 메소드 선언히 실체화 불가 타입(제네릭)으로 매개 변수를 선언하면 컴파일러가 경고를
-보낸다. 힙 오염의 여지가 있기 때문이다. 매개변수화 타입의 변수가 타입이 다른 객체를 참조하면 힙 오염이 발생한다. 이는 컴파일러의 자동 형변환 실패할 수 있으니
-제네릭 의 근간이 무너진다.&lt;/p&gt;
-
-&lt;p&gt;그런데, 왜 가변 인자를 메소드 시그니처에 선언할 수 있게 했을까? 편하니까다. 놀랍게도 말이다. 자바 7 이전까지는 호출자쪽에서 발생하는 경고를 무시할 수 없었다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SafeVarargs&lt;/code&gt;이 자바7에서 추가되면서 경고를 숨길 수 있게 됐다. 당연히 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SafeVarargs&lt;/code&gt;를 쓸 때는 정당한 사유가 있어야 하며 어노테이션 만으로 메소드가 
-type-safe 함을 보장한다는 의미를 가지고 있으므로 주의해야한다. 추가로 당연히 주석도 달아야 한다.&lt;/p&gt;
-
-&lt;p&gt;다시 돌아가서 제네릭 varargs를 안전하게 쓰려면 어떻게 하면 좋을까? &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readOnly&lt;/code&gt;로 인덱스에 접근하여 수정하지만 않으면 된다. 혹은 배열을 방어적 복사를 해서 뱉으면 된다.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 11 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html</guid>
-        <description>&lt;h1 id=&quot;object보다는-제네릭을-쓰자&quot;&gt;Object보다는 제네릭을 쓰자.&lt;/h1&gt;
-
-&lt;p&gt;Object를 사용하여 메소드, 클래스를 작성하면 필연적으로 형변환을 마주치게 된다. 이는 당연히 런타임 에러의 위험을 안고 있다. 그렇다면 굳이 Object로 선언하고
-형변환하는 불필요한 코드를 작성할 필요가 있을까?&lt;/p&gt;
-
-&lt;p&gt;이 경우 제네릭을 사용하여, 컴파일 타임에 타입 체크를 받을 수 있으며, 형변환 하는 불필요한 코드를 줄일 수 있다. 그리고 이 편이 훨씬 type-safe하다.
-또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E super Fruit&amp;gt;&lt;/code&gt;나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E extends Fruit&amp;gt;&lt;/code&gt; 등과 같이 범위 한정도 가능하며 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;E extends Comparable&amp;lt;E&amp;gt;&amp;gt;&lt;/code&gt;와 같이 재귀적으로 타입한정도 가능하다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html</guid>
-        <description>&lt;h1 id=&quot;배열보다-리스트&quot;&gt;배열보다 리스트&lt;/h1&gt;
-
-&lt;p&gt;Sub가 Super의 하위 타입이면 Sub[]는 Super[]의 하위 타입이 된다. 배열은 공변(covariant)이기 떄문이다. 그러나 제네릭은 불공변(invariant)다.
-보통 제네릭이 문제가 있다고 생각할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Object[] arr = new Long[3]&lt;/code&gt;은 컴파일은 된다. 런타임에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayStoreException&lt;/code&gt;을 낸다.  그러나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;Object&amp;gt; list = new ArrayList&amp;lt;Long&amp;gt;()&lt;/code&gt;은
-컴파일조차 되지 않는다. 즉, 제네릭이 정상이고 배열쪽이 비정상이라는 소리다.&lt;/p&gt;
-
-&lt;p&gt;그럼 제네릭으로 배열을 만들면 되지 않을까? 일단 정상적인 방법으로는 허용하지는 않는다.
-배열은 컴파일에 체크 되지만 실질적으로 런타임에 저장 가능한지를 체크한다. 그래서 위와 같은 경우가 허용되지 않는다.
-즉, 실체화가 된다. 그러나 제네릭은 런타임에 타입이 소거된다. 즉 컴파일 타임에만 강하게 검사한다. 이는 런타임에는 타입을 알 수 없음을 의미한다. 
-즉, type-safe하지 않기에 허용하지 않는다. 제네릭은 실체화 불가 타입이라고 한다.  실체화되지 않아서 오히려 런타임에는 컴파일보다 타입 정보를 적게 가진다.&lt;/p&gt;
-
-&lt;p&gt;위에서 제네릭 배열은 ‘정상적인 방법’에서는 컴파일 타임에 에러를 낸다고 했다. 가능은 하다. 가변인자로 제네릭을 받을 수 있다. 그러나 난해한 경고 메시지를 뱉는다.
-물론 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SafeVarargs&lt;/code&gt;로 대처할 수 있다. 이는 해당 어노테이션과 함께 ‘왜 무시할 수 있는지?’ 이유를 주석으로 남겨야함을 의미한다.
-또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Object[]&lt;/code&gt;을 만들고 제네릭으로 형변환을 할 수도 있다. 이래도 경고를 뱉는다.&lt;/p&gt;
-
-&lt;p&gt;차라리 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;E&amp;gt;&lt;/code&gt;를 사용하는 편이 낫다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html</guid>
-        <description>&lt;h1 id=&quot;비검사-경고-지워나가가기&quot;&gt;비검사 경고 지워나가가기&lt;/h1&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Set&amp;lt;String&amp;gt; test = new HashSet();&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;이런 코드를 작성하면 Set&lt;String&gt;와 로타입인 HashSet 간의 타입 차이로 에러가 발생한다. 자바 7부터 다이아몬드 연산자 (&amp;lt;&amp;gt;)로 타입 추론이 되긴 하지만
-이를 작성하지 않으면 컴파일러는 경고한다.&lt;/String&gt;&lt;/p&gt;
-
-&lt;p&gt;경고 자체를 제거할 수는 없지만 타입이 안전한게 확실하다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@SuppressWarning(&quot;unchecked&quot;)&lt;/code&gt;로 경고를 숨길 수 있다. 이 어노테이션은 너무 남발하면 좋지 않다.
-예상치 못한 곳에서 런타임에 에러가 발생할 수도 있기 때문이다. 때문에 최대한 좁은 범위에 적용해야한다. 또한 위 어노테이션을 사용했다면 경고를 무시해도 된다고 
-선언하는 것과 같으므로 꼭 주석으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;왜 무시해도 되는지?&lt;/code&gt;를 남기는 것이 좋다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html</guid>
-        <description>&lt;h1 id=&quot;로-타입은-사용하지-말라&quot;&gt;로 타입은 사용하지 말라&lt;/h1&gt;
-
-&lt;p&gt;로 타입이란 제네릭이 들어갈 자리에 아무 것도 지정하지 않은 타입을 일컫는다. 각가의 제네릭 타입은 일련의 매개변수화 타입(Parameterized type)을 정의한다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;을 정의하면 String이 매개변수화 타입이 된다. 로 타입은 타입선언에서 제네릭 타입 정보가 모두 지워진 것처럼 동작하는데, 제네릭이 출시되기
-전 코드와 호환선을 위해서 제공되는 타입이다.
-제네릭을 사용하면 컴파일러는 해당 요소를 다루는 곳에서 묵시적으로 형변환을 하여 절대 실패하지 않음을 보장한다. 그러나 로 타입을 쓰면 제네릭이 주는 안정성과 표현력 둘 다
-잃게 된다.&lt;/p&gt;
-
-&lt;p&gt;로 타입을 사용할 수는 있다. 동작은 한다. 그러나 type-safe 하지 않다. 따라서 비한정 와일드 카드 타입(unbounded wildcard type)을 대신 사용하는 것이 좋다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;?&amp;gt;&lt;/code&gt;와 같이 물음표가 붙을 것을 왕왕 볼 수 있다. 이러면 범용적인 타입이 된다.&lt;/p&gt;
-
-&lt;p&gt;예외적으로 로타입을 사용하는 경우가 있는데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class 리터럴&lt;/code&gt;이다. 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List.cass&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Map.class&lt;/code&gt;다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;String&amp;gt;.class&lt;/code&gt;는 불가능하다.&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/10/Effective-java-series-25.Keyword.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/10/Effective-java-series-25.Keyword.html</guid>
-        <description>&lt;h1 id=&quot;용어-정리&quot;&gt;용어 정리&lt;/h1&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;한&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;영&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;예시&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;매개변수화 타입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;parameterized type&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;실제 타입 매개변수&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;actual type parameter&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;제네릭 타입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;generic type&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;E&gt;&lt;/E&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;정규 타입 매개변수&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;formal type parameter&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;E&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;비한정적 와일드카드 타입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;unbounded wildcard type&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;List&amp;lt;?&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;로 타입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;raw type&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;한정적 타입 매개변수&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;bounded type parameter&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;E extends=&quot;&quot; Number=&quot;&quot;&gt;&lt;/E&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;재귀적 타입 한정&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;recursive type bound&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&amp;lt;T extends Comparable&lt;T&gt;&amp;gt;&lt;/T&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;한정적 와일드 카드 타입&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;bounded wildcard type&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;List&amp;lt;? extends Number&amp;gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;제네릭 메소드&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;generic method&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;static&lt;E&gt; List&lt;E&gt; asList( E [] a ) { ... }&lt;/E&gt;&lt;/E&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;타입 토큰&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;type token&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;String.class&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-</description>
-        <pubDate>Mon, 10 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>

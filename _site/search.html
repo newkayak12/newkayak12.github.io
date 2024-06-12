@@ -195,6 +195,83 @@
 <script>
   window.store = {
     
+      "2024-06-12-effective-java-series-46-parallelstream-html": {
+        "title": "[effective Java Series] 46.parallelstream",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "병렬 스트림?자바 7부터 고성능 병렬 분해(Parallel decom-position) 프레임워크인 포크-조인을 추가했다. 자바 8부터는 병렬 파이프라인을 병렬 실행할 수 있는 스트림을 지원한다.이를 통해 동시성 프로그램을 작성하기 쉬워지고 있다. 그러나 남용하면 안된다.보통 병렬 스트림을 사용하면 무조건 더 빨라질거라고 생각하지만 그렇지 않다. 예를 들어 스트림을 병렬으로 나누느라 리소스를 더 가져간다거나 혹은 실패할 수도 있다.또한 중간 연산으로 limit을 사용하면 병렬 연산의 의미가 퇴색된다. limit을 사용하면 CPU 코어가 남으면 원소를 더 처리하고 제한 개수 이후 결과는 버려도 된다고가정한다. 이는 계산 하나하나 연산이 오래걸리는 작업이라면 버릴 결과를 위해서 연산을 하는 것과 같다.따라서 리소스, 병렬로 나눴을 때 효용성을 고려해야 한다. 스트림 소스가 ArrayList, HashMap, HashSet, ConcurrentHashMap의 인스턴스거나 배열int 범위, long 범위일 경우 효과가 좋다. 이들의 공통점은 순차적으로 실행할 때 참조 지역성이 뛰어다는 것이다.또한 종단 연산 중 reduction에 적합하다. min, max, count, sum, anyMatch, allMatch, noneMatch 같은 연산 말이다. 가변 축소하는collect는 그다지 병렬에 적합하지 않다.정리하면 스트림 병렬에는 주의해야 한다. 항상 행복한 결과가 있지는 않다. 성능이 나빠지거나 예상치 못한 동작을 발생할 수 있다. 또한 병렬화에 드는 추가 비용을 상쇄할 정도의결과가 나오지 않으면 단일 스트림이 낫다.",
+        "url": "//2024/06/12/Effective-java-series-46.ParallelStream.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-45-usepurefunction-html": {
+        "title": "[effective Java Series] 45.usepurefunction",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "스트림에서는 부작용 없는 함수를 사용하라스트림은 단순 API를 넘어 함수형 패러다임에 기초한 패러다임이다. 스트림 패러다임의 핵심은 일련의 변환으로 재구성하는 부분이다. 이때 각 변환 단계는 한 단계이전 결과를 받아 처리하는 순수 함수여야 한다. 순수 함수는 다른 가변 상태를 참조하지 않고 함수 스스로도 다른 상태를 변경하지 않는다. 모두 sideEffect가 없다.",
+        "url": "//2024/06/12/Effective-java-series-45.UsePureFunction.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-44-becarefulusestream-html": {
+        "title": "[effective Java Series] 44.becarefulusestream",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "스트림을 주의해서 사용하자스트림은 유한/ 무한 시퀀스를 의미하거나, 스트림 파이프라인은 이 원소들로 수행하는 연산 단계를 표현하는 개념이다.스트림 파이프라인은 소스 스트림에서 시작해서 종단 연산으로 끝나며 그 사이에 하나 이상의 중간 연산이 있을 수 있다. 각 중간 연산은 스트림을 어떠한 방식으로변환한다.스트림 API는 메소드 연쇄를 지원하는 Fluent API다. 즉, 파이프 라인 하나를 구성하는 모든 호출을 연결해서 단 하나의 표현식으로 완성할 수 있다.스트림 API는 람다가 필수다. 람다의 부작용처럼 오히려 가독성이 떨어지기 시작한다. for로 되어 있는 기존 코드를 스트림을 사용하도록 리팩토링하는 건 좋다. 그러나 스트림으로 작성하는게 나아 보일 때만 반영하자. 또한 함수 객체로는 할 수 없지만 블록으로 할 수 있는 일들이 있다.  코드 블록에서는 지역변수를 읽고 수정할 수 있다. 그러나 람다는 final로 지역변수를 취급하기에 수정할 수 없다.  코드 블록에서는 return으로 흐름 제어할 수 있지만 람다, 스트림 중에는 불가능하다.그러나  시퀀스를 일관되게 변환  시퀀스를 필터링  시퀀스를 하나의 연산을 사용해서 결합한다.  시퀀스를 컬렉션에 모은다.  시퀀스에서 특정 조건을 만족하는 원소를 찾는다.라고 하면 스트림으로 리팩토링을 할 만하다.",
+        "url": "//2024/06/12/Effective-java-series-44.BecarefulUseStream.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-43-usestandardfuntionalinterface-html": {
+        "title": "[effective Java Series] 43.usestandardfuntionalinterface",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "표준 함수형 인터페이스 사용자바 8부터 함수형 인터페이스 지원으로 다양한 일을 할 수 있게 됐다. 그 쓰임새가 늘어남에 따라 java.util.function에는 다양한 용도의 표준 함수형 인터페이스가담겨 있다. 필요한 용도에 맞는게 있다면, 직접 구현하지 말고 이를 사용하는 것이 좋다. 보통 이름만으로 동작을 어느 정도 예측할 수 있기 때문이다. 만약 직접 구현해야한다면언제 구현하는게 좋을까?  자주 쓰이며, 이름 자체가 용도를 명확히 전달한다.  반드시 따라야할 규약이 있다.  유용한 디폴트 메소드를 제공할 수 있다.만일 직접 만들어 써야 한다면 네이밍 컨벤션을 잘 지키자. 그리고 표준 함수형 인터페이스에는 기본 타입만 지원하는 것을 볼 수 있는데, 직접 만들어 사용할 때도최대한 기본형을 사용하는 것을 추천한다. 동작은 가능하지만 박싱, 언박싱 과정이 리소스를 낭비한다. 또한 함수형 인터페이스도 인터페이스다. 배포하면 돌이킬 수 없다. 따라서 신중히 작성하자. 마지막으로 @FunctionalInterface를 사용하자 이 어노테이션을 붙이면 해당 인터페이스가 함수형 인터페이스 조건을 만족하는지 컴파일 타임에체크할 수 있다.",
+        "url": "//2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-42-usemethodreference-html": {
+        "title": "[effective Java Series] 42.usemethodreference",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "람다보다는 메소드 참조를 사용하라람다보다 더 간결하게 사용할 수 있다. 메소드 참조(Method reference)로 말이다. 매개변수 구성(수, 타입, 순서)이 같다면 람다 대신 메소드 참조를 전달하면같은 결과를 더 보기 좋게 얻을 수 있다. 메소드 참조가 람다를 대체하는 건 아니다. 람다로 할 수 없는 일은 메소드 참조로도 할 수 없다.단순히 메소드 참조는 람다로 구현했을 경우 길고 복잡해질 때 좋은 대안이 되어준다. 메소드 참조는 기능을 잘 드러내는 이름을 지어줄 수도 있다. 메소드 참조의 유형은아래의 다섯 가지다.  정적 메소드를 가리키는 메소드 참조  한정적 참조 - 수신 객체(receiving object)를 특정하는 한정적 인스턴스 메소드 참조 (함수 객체가 받는 인수와 참조되는 메소드가 받는 인수가 같다.)  비한정적 참조 - 수신 객체를 특정하지 않는 비한정적 인스턴스 메소드 참조 (함수 객체를 적용하는 시점에 수신 객체를 알려준다.)  클래스 생성자  배열 생성자            유형      예시      람다                  정적      Integer::parseInt      str -&gt; Integer.parseInt(str);              한정적(인스턴스)      Instant.now()::isAfter      t -&gt;  Instant.now.isAfter(t)              비한정적      String::toLowerCase      str -&gt; str.toLowerCase()              클래스 생성자      Object::new      () -&gt;     new Object();              배열 생성자      Object[]::new      () -&gt; new Object[0];      ",
+        "url": "//2024/06/12/Effective-java-series-42.UseMethodReference.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-41-uselambda-html": {
+        "title": "[effective Java Series] 41.uselambda",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "익명 클래스보단 람다.자바 8에 와서 추상 메소드 하나짜리 인터페이스는 특별한 의미를 인정 받게 됐다. 함수형 인터페이스로 말이다. 이 함수형 인터페이스는 자바 8에서 람다를 지원하는초석이 됐다.Collections.sort(words, (s1, s2) -&gt; Integer.compare(s1.length(), s2.length()))람다는 기존 익명 구현 객체보다 훨씬 간결하고 가독성도 월등히 높다. 또한 람다를 사용하면 컴파일러가 문맥을 보고 타입을 추론해준다.따라서 타입을 명시해야만 되는 경우가 아니고서야 굳이 매개변수 타입을 명시할 필요는 없다.그러나 람다는 이름도 없고 문서화도 하지 못한다. 따라서 코드 자체로 동작이 명확하지 않거나 너무 길어진다면 람다를 포기하는 게 좋다. 또한 람다는 자신을 참조할 수 없다. 람다 내부에서 this는 바깥 인스턴스를 가리킨다. 반대로 익명 구현 객체는 자신을 가리킨다. 상황에 따라 취사 선택하는 현명함을 보이자.",
+        "url": "//2024/06/12/Effective-java-series-41.UseLambda.html"
+      }
+      ,
+    
+      "2024-06-12-effective-java-series-40-usemarkerinterface-html": {
+        "title": "[effective Java Series] 40.usemarkerinterface",
+        "tags": "",
+        "date": "June 12, 2024",
+        "author": "",
+        "category": "",
+        "content": "정의하는게 타입이라면 마커 인터페이스를 사용하자.아무 메소드 없이 단지 자신을 구현하는 클래스가 특정 속성을 가진다고 표시하는 인터페이스를 마커 인터페이스(marker interface)라고 한다. Serializable이 예다.마커 인터페이스는 타입으로써 역할을 하지만 마커 어노테이션은 그렇지 않다. 두 번쨰로 마커 인터페이스는 적용 대상을 더 정밀하게 지정할 수 있다.반대로 마커 어노테이션이 마커 인터페이스보다 나은 점은 어노테이션 시스템의 지원을 받는다는 점을 들 수 있다. 그러면 어노테이션, 인터페이스 언제 써야할까?클래스와 인터페이스 외 프로그램 요소에 마킹해야 할 때 어노테이션을 써야한다. 마킹이 된 객체를 매개변수로 받는다면 인터페이스를 쓰는 것이 좋다. 그러면컴파일 타임에 오류를 잡아낼 수 있다. 특히 어노테이션 적용 대상(Target)이 ElementType.TYPE이면 다시 한 번 생각해보는게 좋다.",
+        "url": "//2024/06/12/Effective-java-series-40.UseMarkerInterface.html"
+      }
+      ,
+    
       "programmers-2024-06-11-programmers-series-lv-01-failurerate-html": {
         "title": "[programmers Series] Lv. 01 Failurerate",
         "tags": "",
