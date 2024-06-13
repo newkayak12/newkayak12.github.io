@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[effective Java Series] 47.chechparameter | newkayak12.github.io</title>
+	<meta name="description"
+		content="매개변수가 유효한지 검사하라">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/06/13/Effective-java-series-47.ChechParameter.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[effective Java Series] 47.chechparameter</h1>
+    
+    <p class="meta">
+      June 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="매개변수가-유효한지-검사하라">매개변수가 유효한지 검사하라</h1>
+
+<p>인덱스 값은 음수이면 안되며, 객체 참조는 null이 아니어야 한다. 뭐 이런 제약은 문서화 해서 남겨야 한다. 또한 메소드 시작점에 검사해서 오류를 미리 방지해야 한다.
+이 검사를 소홀이 하면 메소드 수행 중간 에러를 던지거나, 잘 실행됐는데 잘못된 결과를 반환하거나, 메소드 결과는 정상이지만 나중에 보면 객체가 오염되어 있다던가
+결론적으로 실패 원자성을 어기는 결과를 낳을 수 있다.</p>
+
+<p>이런 검사를 위해서 자바7에서 추가된 <code class="language-plaintext highlighter-rouge">java.util.Objects.requireNonNull</code> 등의 유틸 메소드로 검사를 하는 방법이 있다. 자바9에서는 <code class="language-plaintext highlighter-rouge">checkFromIndexSize</code>,
+<code class="language-plaintext highlighter-rouge">checkFromToIndex</code>, <code class="language-plaintext highlighter-rouge">checkIndex</code> 등의 메소드가 추가됐다. 혹은 <code class="language-plaintext highlighter-rouge">assert</code>로 유효성 검증을 할 수도 있다.</p>
+
+<p>또한 생성자 매개변수 유효성 검사는 클래스 불변식을 어기는 객체가 만들어지지 않도록 하기 위해서 필요하다. 몸체 실행 전, 그러니까 시작하자마자 검사해야한다는
+규칙에도 예외는 있다. 유효성 검사 비용이 너무 높거나 실용적이지 않으면 혹은 계산 중 암묵적으로 검사가 수행될 때말이다. 그러나 암묵적 유효성 검사는 어디까지나
+암묵적이다. 실패 원자성을 해칠 여지가 여전히 존재한다.</p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/06/12/Effective-java-series-46.ParallelStream.html">
+        [effective Java Series] 46.parallelstream
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/06/13/Effective-java-series-48.DepensiveClone.html">
+        [effective Java Series] 48.depensiveclone
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

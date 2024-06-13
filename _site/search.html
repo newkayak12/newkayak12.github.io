@@ -112,6 +112,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -194,6 +196,83 @@
 
 <script>
   window.store = {
+    
+      "2024-06-13-effective-java-series-53-optional-html": {
+        "title": "[effective Java Series] 53.optional",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "옵셔널 반환은 신중히옵셔널이 나오기 전, 예외를 던지거나 null을 반환하거나 했다. 그러나 이는 에외를 예외답게 사용하지 않는다는 점과 stackTrace 캡쳐에 리소스가 크게 든다는 점NPE에 시달려야 한다는 점 불편한 점이 많았다.Optional은 자바 8에 추가 됐다. Optional은 원소 1개를 최대로 가지는 불변 컬렉션이다. Optional에서는 null이면 에러를 던질 수도, 기본 값을 할당할 수도 있다.NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸할 수 있다. 굉장히 편리하지만 무조건 좋은건 아니다.Collection, Stream, Array 같은 컨테이너 타입은 Optional로 감싸면 원타입도 무거운데 optional로 감싸서 리소스가 너무 많이 든다. 박싱 타입도 같은 이유로지양하면 좋다. 그래서 OptionalInt, OptionalLong, OptionalDouble을 제공한다. 기본 타입으로 말이다. 또한 Optional를 컬렉션 키로 하는 것도 지양하자.",
+        "url": "//2024/06/13/Effective-java-series-53.Optional.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-52-ifnullreturnarray-html": {
+        "title": "[effective Java Series] 52.ifnullreturnarray",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "null 대신 빈 컬렉션이나 배열을 반환하자컨테이너(배열, 컬렉션)이 비었을 때 선택지는 null, 빈 컨테이너 둘 중 하나다. null을 값으로 생각하면 null을 리턴할 수도 있다. 그러나 NPE 등 고려할 것들이많아진다. 혹자는 빈 컨테이너 생성도 리소스라고 할지 모른다. 그러나 오히려 방어 로직이 훨씬 골치아픈 일이 될 수도 있다. 결론적으로 말하면 그렇고 하나씩 따져보자.  빈 컨테이너 생성? 성능에 큰 영향이 가지 않는다. : 이 정도 리소스 할당은 전혀 문제가 되지 않는 정도의 컴퓨팅 성능을 보인다.  빈 컨테이너를 그냥 반환하면 된다. : 빈 컨테이너를 확인하고 null을 반환하는 것보다 훨씬 간편하고 의미적으로도 맞다.  정말로 신경쓰이면 : Collection.emptyList(), Collection.emptyMap(), Collection.emptySet()을 반환하는 방법이 있다. 배열도 new int[0]을 반환하면 된다.",
+        "url": "//2024/06/13/Effective-java-series-52.IfNullReturnArray.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-51-reallyusevarargs-html": {
+        "title": "[effective Java Series] 51.reallyusevarargs",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "가변인수는 신중히가변 인수를 호출하면 인수 개수와 길이가 같은 배열을 만들도 배열에 저장해서 가변인수 메소드에 건낸다. 인수 개수는 런타임에 알 수 있다. 이런 불확실성은 왠지 모르게불편해지는 부분이다. 더군다나 인수가 1개 이상 필요한데, 가변 인수를 안 넘기면? 원소가 0인 배열이 만들어지고 이를 위한 방어 로직을 짜야한다.이 경우 꼭 필요한 원소는 파라미터로 선언하고 그 다음부터 가변인수로 만들면?int avg( int... values) {}//이거 대신int avg( int first, int... values) {}//이렇게 바꾸면?성능적으로 보면? 권장하지 않는다. 이 비용은 감당하기 싫으면서 유연성이 필요하다면?public void Record(){}public void Record(int var1){}public void Record(int var1, int var2){}public void Record(int var1, int var2, int var3){}public void Record(int var1, int var2, int var3, int var4){}public void Record(int var1, int var2, int var3, int var4, int... var5){}스프링에 있는 Jooq가 이런식으로 구현해놓은 경우가 있다. 이러면 마지막 케이스는 정말 극소수가 될거다. 자연스레 비용이 준다.",
+        "url": "//2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-50-consideroverload-html": {
+        "title": "[effective Java Series] 50.consideroverload",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "다중 정의는 신중히다중 정의된 메소드는 컴파일 타임에 정해진다. 그런데! 매개변수가 일전의 다중 정의 매개변수들을 모두 포함할 수 있는 다중정의라면? 해당 메소드 외는 호출될 가능성이 없다.import java.util.Collections;public String overloading(Set&lt;?&gt; set) {}public String overloading(List&lt;?&gt; set) {}public String overloading(Collection&lt;?&gt; set) {}위의 파라미터가 Collection&lt;?&gt;인 메소드만 열심히 호출된다. 다중정의한 메소드는 객체 런타임 타입은 중요하지 않다. 오로지 컴파일 타임에,오직 매개변수의 컴파일 타입에 의해 결정된다. 다중 정의는 혼동을 일으킬 여지가 있는 방식이다. 안전하게 하려면 매개변수 수가 같은 다중정의는 지양하는 것이 좋다.더구나 가변인수를 사용하는 메소드는 아예 꿈도 꾸지 않는게 좋다. 차라리 이름을 다르게 짓는게 낫다.가장 좋은 방법은 위의 여지가 없는 아예 명확히 구분되는 형식으로 다중정의하는 것이 최고다. 다중 정의의 실효성이야 확실하니 말이다.예를 들어import java.util.ArrayList;List&lt;Integer&gt; list = new ArrayList&lt;&gt;();list.remove();의 경우에서 remove는 (Object o), (int index)가 있다. 여기서list.remove(1)을 던지면 둘 중 어떤걸 실행할까? Boxing된 (Object o)? (int index)?다중 정의의 최상의 결과는 언제 어떤 메소드가 불리는지는 모르는데 아주 명확히 잘 작동하는 경우다. 신경 쓸 게 없는 경우말이다.",
+        "url": "//2024/06/13/Effective-java-series-50.ConsiderOverload.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-49-methodsignature-html": {
+        "title": "[effective Java Series] 49.methodsignature",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "메소드 시그니처를 신중히 설계하자.고민할 점  메소드 이름을 신중히 짓자.  편의 메소드를 너무 많이 만들지 말자.  매개변수는 구성을 고민하자. 매개변수는 최대 4개 정도가 좋다. 특히 같은 타입이 연달아 나오면 문제가 된다.3번은 아래와 같은 기술로 헤쳐나갈 수 있다.  메소드를 쪼개거나  매개변수를 묶는 컨테이너 클래스를 만들거나  1 + 2의 빌더 패턴을 사용한다.여담으로 매개변수 타입은 클래스보다 인터페이스가 나을 수 있다. 그러면 유연성이 올라간다. 또한 단순 boolean 보다는 직관성을 위해서 Enum 두 개가 나을 수도 있다.",
+        "url": "//2024/06/13/Effective-java-series-49.MethodSignature.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-48-depensiveclone-html": {
+        "title": "[effective Java Series] 48.depensiveclone",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "방어적 복사본을 고려하자.자바는 시스템의 다른 부분과는 별개다. 그래서 불변식이 자연스레 지켜진다. 그럼에도 불변식을 지키기 위한 노력은 계속된다. 우리는 개발할 때 누군가는 이를 무너뜨리려한다고가정하고 방어적으로 프로그램을 작성해야 한다. 예를 들어 java.util.Date getter로 리턴해도 setYear같은 메소드를 콜하면 원본이 변경되므로불변식을 지킬 수 없다. 이런 경우 아예 복사본을 던질 수도 있다.매개변수 유효성 검사에서도 그 전에 방어적 복사본을 두고 복사본으로 검사하면 특히 멀티쓰레딩 환경에서 원본을 지킬 수 있다는 장점이 있다.public Period( Date start, Date end ) {    this.start = new Date(start.getTime());    this.end = new Date(end.getTime());        if( this.start.compareTo(this.end) &gt; 0 ) throw new IllegalArgumentException();}위 코드를 보면 이상하다 정상일지 아닐지 모르는 객체를 복사한다? 그러나 위에 기술한 바와 같이 멀티 쓰레딩 환경에서는 찰나에 어떤 문제가 생길지 모른다.검사시점/사용시점(time-of-check/time-of-use) 공격 혹은 TOCTOU 공격을 받을 경우 위 코드는 방어할 수 있다. 또한 clone을 사용하지 않았는데,clone 재정의로 어떻게 될지 모른다.public getDate() {    return this.date;}//...Period period = new Period();period.getDate().setYear(1);방어적 복사본을 반환해서 위의 불변식을 해치는 상황을 막을 수 있다. 방어적 복사가 불변 객체만을 위한건 아니다. 메소드든 생성자든 클라이언트가 제공한 객체의 참조를내부의 자료구조에 보관해야 한다면 그 객체가 잠재적으로 변경될 수 있는지 확인해야 한다. 확실할 수 없다면 복사본을 만들자.방어적 복사가 항상 옳은건 아니다. 성능 저하가 수반되고 항상 사용할 수 있는 건 아니다. 또한, 호출자가 컴포넌트 내부를 수정하지 않을거라는 확신이 있다면 방어적 복사를생략할 수도 있다. 또한 생략으로 영향이 클라이언트에게만 간다고 확신한다면 생략할 수도 있다.",
+        "url": "//2024/06/13/Effective-java-series-48.DepensiveClone.html"
+      }
+      ,
+    
+      "2024-06-13-effective-java-series-47-chechparameter-html": {
+        "title": "[effective Java Series] 47.chechparameter",
+        "tags": "",
+        "date": "June 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "매개변수가 유효한지 검사하라인덱스 값은 음수이면 안되며, 객체 참조는 null이 아니어야 한다. 뭐 이런 제약은 문서화 해서 남겨야 한다. 또한 메소드 시작점에 검사해서 오류를 미리 방지해야 한다.이 검사를 소홀이 하면 메소드 수행 중간 에러를 던지거나, 잘 실행됐는데 잘못된 결과를 반환하거나, 메소드 결과는 정상이지만 나중에 보면 객체가 오염되어 있다던가결론적으로 실패 원자성을 어기는 결과를 낳을 수 있다.이런 검사를 위해서 자바7에서 추가된 java.util.Objects.requireNonNull 등의 유틸 메소드로 검사를 하는 방법이 있다. 자바9에서는 checkFromIndexSize,checkFromToIndex, checkIndex 등의 메소드가 추가됐다. 혹은 assert로 유효성 검증을 할 수도 있다.또한 생성자 매개변수 유효성 검사는 클래스 불변식을 어기는 객체가 만들어지지 않도록 하기 위해서 필요하다. 몸체 실행 전, 그러니까 시작하자마자 검사해야한다는규칙에도 예외는 있다. 유효성 검사 비용이 너무 높거나 실용적이지 않으면 혹은 계산 중 암묵적으로 검사가 수행될 때말이다. 그러나 암묵적 유효성 검사는 어디까지나암묵적이다. 실패 원자성을 해칠 여지가 여전히 존재한다.",
+        "url": "//2024/06/13/Effective-java-series-47.ChechParameter.html"
+      }
+      ,
     
       "2024-06-12-effective-java-series-46-parallelstream-html": {
         "title": "[effective Java Series] 46.parallelstream",

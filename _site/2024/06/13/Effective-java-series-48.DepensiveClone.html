@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[effective Java Series] 48.depensiveclone | newkayak12.github.io</title>
+	<meta name="description"
+		content="방어적 복사본을 고려하자.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/06/13/Effective-java-series-48.DepensiveClone.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[effective Java Series] 48.depensiveclone</h1>
+    
+    <p class="meta">
+      June 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="방어적-복사본을-고려하자">방어적 복사본을 고려하자.</h1>
+
+<p>자바는 시스템의 다른 부분과는 별개다. 그래서 불변식이 자연스레 지켜진다. 그럼에도 불변식을 지키기 위한 노력은 계속된다. 우리는 개발할 때 누군가는 이를 무너뜨리려한다고
+가정하고 방어적으로 프로그램을 작성해야 한다. 예를 들어 <code class="language-plaintext highlighter-rouge">java.util.Date</code> <code class="language-plaintext highlighter-rouge">getter</code>로 리턴해도 <code class="language-plaintext highlighter-rouge">setYear</code>같은 메소드를 콜하면 원본이 변경되므로
+불변식을 지킬 수 없다. 이런 경우 아예 복사본을 던질 수도 있다.</p>
+
+<p>매개변수 유효성 검사에서도 그 전에 방어적 복사본을 두고 복사본으로 검사하면 특히 멀티쓰레딩 환경에서 원본을 지킬 수 있다는 장점이 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Period</span><span class="o">(</span> <span class="nc">Date</span> <span class="n">start</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">end</span> <span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+    
+    <span class="k">if</span><span class="o">(</span> <span class="k">this</span><span class="o">.</span><span class="na">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위 코드를 보면 이상하다 정상일지 아닐지 모르는 객체를 복사한다? 그러나 위에 기술한 바와 같이 멀티 쓰레딩 환경에서는 찰나에 어떤 문제가 생길지 모른다.
+검사시점/사용시점(time-of-check/time-of-use) 공격 혹은 TOCTOU 공격을 받을 경우 위 코드는 방어할 수 있다. 또한 <code class="language-plaintext highlighter-rouge">clone</code>을 사용하지 않았는데,
+clone 재정의로 어떻게 될지 모른다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="nf">getDate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">date</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="c1">//...</span>
+
+
+<span class="nc">Period</span> <span class="n">period</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Period</span><span class="o">();</span>
+<span class="n">period</span><span class="o">.</span><span class="na">getDate</span><span class="o">().</span><span class="na">setYear</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+</code></pre></div></div>
+<p>방어적 복사본을 반환해서 위의 불변식을 해치는 상황을 막을 수 있다. 방어적 복사가 불변 객체만을 위한건 아니다. 메소드든 생성자든 클라이언트가 제공한 객체의 참조를
+내부의 자료구조에 보관해야 한다면 그 객체가 잠재적으로 변경될 수 있는지 확인해야 한다. 확실할 수 없다면 복사본을 만들자.</p>
+
+<p>방어적 복사가 항상 옳은건 아니다. 성능 저하가 수반되고 항상 사용할 수 있는 건 아니다. 또한, 호출자가 컴포넌트 내부를 수정하지 않을거라는 확신이 있다면 방어적 복사를
+생략할 수도 있다. 또한 생략으로 영향이 클라이언트에게만 간다고 확신한다면 생략할 수도 있다.</p>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/06/13/Effective-java-series-47.ChechParameter.html">
+        [effective Java Series] 47.chechparameter
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/06/13/Effective-java-series-49.MethodSignature.html">
+        [effective Java Series] 49.methodsignature
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
