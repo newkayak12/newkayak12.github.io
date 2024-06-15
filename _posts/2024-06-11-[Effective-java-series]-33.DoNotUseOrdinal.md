@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # ordinal 대신 인스턴스 필드를 사용하자
 
 일전에 enum에 인스턴스 필드를 선언할 수 있다는 걸 알았다. 

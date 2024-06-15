@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 병렬 스트림?
 
 자바 7부터 고성능 병렬 분해(Parallel decom-position) 프레임워크인 포크-조인을 추가했다. 자바 8부터는 병렬 파이프라인을 병렬 실행할 수 있는 스트림을 지원한다.

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="스트림을 주의해서 사용하자">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/12/Effective-java-series-44.BecarefulUseStream.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 12, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="스트림을-주의해서-사용하자">스트림을 주의해서 사용하자</h1>
+
+<p>스트림은 유한/ 무한 시퀀스를 의미하거나, 스트림 파이프라인은 이 원소들로 수행하는 연산 단계를 표현하는 개념이다.
+스트림 파이프라인은 소스 스트림에서 시작해서 종단 연산으로 끝나며 그 사이에 하나 이상의 중간 연산이 있을 수 있다. 각 중간 연산은 스트림을 어떠한 방식으로
+변환한다.</p>
+
+<p>스트림 API는 메소드 연쇄를 지원하는 Fluent API다. 즉, 파이프 라인 하나를 구성하는 모든 호출을 연결해서 단 하나의 표현식으로 완성할 수 있다.
+스트림 API는 람다가 필수다. 람다의 부작용처럼 오히려 가독성이 떨어지기 시작한다. for로 되어 있는 기존 코드를 스트림을 사용하도록 리팩토링하는 건 좋다. 
+그러나 스트림으로 작성하는게 나아 보일 때만 반영하자. 또한 함수 객체로는 할 수 없지만 블록으로 할 수 있는 일들이 있다.</p>
+
+<ul>
+  <li>코드 블록에서는 지역변수를 읽고 수정할 수 있다. 그러나 람다는 final로 지역변수를 취급하기에 수정할 수 없다.</li>
+  <li>코드 블록에서는 <code class="language-plaintext highlighter-rouge">return</code>으로 흐름 제어할 수 있지만 람다, 스트림 중에는 불가능하다.</li>
+</ul>
+
+<p>그러나</p>
+
+<ul>
+  <li>시퀀스를 일관되게 변환</li>
+  <li>시퀀스를 필터링</li>
+  <li>시퀀스를 하나의 연산을 사용해서 결합한다.</li>
+  <li>시퀀스를 컬렉션에 모은다.</li>
+  <li>시퀀스에서 특정 조건을 만족하는 원소를 찾는다.</li>
+</ul>
+
+<p>라고 하면 스트림으로 리팩토링을 할 만하다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/effective_java/2024/06/12/Effective-java-series-45.UsePureFunction.html">
+        Effective java
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

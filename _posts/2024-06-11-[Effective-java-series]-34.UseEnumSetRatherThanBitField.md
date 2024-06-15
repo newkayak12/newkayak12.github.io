@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 비트 필드 대신 EnumSet
 
 ```java

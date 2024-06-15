@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 확장 할수 있는 열거 타입이 필요하면 인터페이스를 사용해라
 
 열거는 타입 안전 열거 패턴(type safe enum pattern)보다 우수하다. 타입 안전 열거 패턴은 클래스를 이용하고, 생성자를 private로 만들어 최초 정의된 객체만 참조할 수 있게 했다.

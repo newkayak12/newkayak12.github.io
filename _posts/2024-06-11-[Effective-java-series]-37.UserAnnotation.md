@@ -1,3 +1,10 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
+
 # 명명 패턴보다 어노테이션
 
 명명패턴은 시그니쳐 네이밍 패턴으로 구분되어야하는 부분, 아닌 부분을 나누는 패턴을 의미한다. 좋은 시도지만 몇 가지 단점이 있다.

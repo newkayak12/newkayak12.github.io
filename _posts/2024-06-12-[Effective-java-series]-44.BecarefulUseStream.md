@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 스트림을 주의해서 사용하자
 
 스트림은 유한/ 무한 시퀀스를 의미하거나, 스트림 파이프라인은 이 원소들로 수행하는 연산 단계를 표현하는 개념이다.

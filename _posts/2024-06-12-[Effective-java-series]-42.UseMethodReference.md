@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 람다보다는 메소드 참조를 사용하라
 
 람다보다 더 간결하게 사용할 수 있다. 메소드 참조(Method reference)로 말이다. 매개변수 구성(수, 타입, 순서)이 같다면 람다 대신 메소드 참조를 전달하면

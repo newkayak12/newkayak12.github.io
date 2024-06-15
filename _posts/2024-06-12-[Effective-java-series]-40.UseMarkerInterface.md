@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 정의하는게 타입이라면 마커 인터페이스를 사용하자.
 
 아무 메소드 없이 단지 자신을 구현하는 클래스가 특정 속성을 가진다고 표시하는 인터페이스를 마커 인터페이스(marker interface)라고 한다. `Serializable`이 예다.

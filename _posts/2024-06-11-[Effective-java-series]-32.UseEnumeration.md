@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # int 상수 대신 열거 타입을 사용하기
 
 정수 열거 패턴(int enum pattern)은 type-safe하지도 않고 표현력도 별로고 궁극적으로 프로그램이 깨지기 쉽다. 문자열 열거 패턴(String enum pattern)은 좋을까?

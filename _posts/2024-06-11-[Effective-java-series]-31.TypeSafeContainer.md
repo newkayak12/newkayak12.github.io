@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 타입 안전 이종 컨테이너
 
 컨테이너 키를 매개변수화한 다음, 컨테이너에 값을 넣거나 뺄 때 매개변수화한 기를 함께 제공하는 설계 방식을 타입 안전 이종 컨테이너 패턴(type safe heterogeneous container pattern)이라고 한다.

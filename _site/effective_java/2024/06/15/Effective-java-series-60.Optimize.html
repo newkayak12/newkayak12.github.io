@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="최적화는 신중히">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/15/Effective-java-series-60.Optimize.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 15, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="최적화는-신중히">최적화는 신중히</h1>
+
+<p>성능 떄문에 견고한 구조를 희생하지는 말자. 빠른 프로그램보다는 좋은 프로그램을 작성하라. 고민 해볼만한 문구다. 이 말은 완성하기 전에는 성능을 무시하라는 말이 아니다.
+구현상 문제는 여러 변 다듬어 최적화할 수 있지만 이키텍쳐는 수정하기가 어렵다. 따라서 설계부터 탄탄해야한다는 의미와 같다.</p>
+
+<ol>
+  <li>성능을 제한하는 설계를 피하라.</li>
+  <li>API 설계시 성능에 주는 영향을 고려하라.</li>
+</ol>
+
+<p>이 정도를 고민해보면 될 것 같다. 보통 잘 설계하면 성능이 잘 나온다. 그러니 이미 망친 설계에서 좋은 성능을 위해 노력하는 건 앞 뒤가 맞지 않는다.
+만약 해야만 한다면 프로파일링 도구에 도움을 받는 것도 좋다.</p>
+
+<h1 id="컨벤션을-다르자">컨벤션을 다르자.</h1>
+
+<p>자바는 컨벤션이 잘 정립됐다. 그리고 언어 명세에도 기술되어 있다. 이 규칙들은 특별한 이유가 없는 한 반드시 따라야 한다.</p>
+
+<ol>
+  <li>역도메인을 패키지 이름으로 하는 것</li>
+  <li>각 요소는 8자 이하의 짧은 단어로 축약 (utilities 보다는 utils)</li>
+  <li>클래스, 인터페이스 일므은 하나 이상의 단어 조합으로, upper camel case</li>
+  <li>메소드 필드명은 lower camel case</li>
+  <li>상수는 upper case</li>
+</ol>
+
+<p>그외 get, set으로 시작하는 형태는 javaBeans 명세에 뿌리를 두고 있다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/15/Effective-java-series-59.Native.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

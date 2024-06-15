@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 다중 정의는 신중히
 
 다중 정의된 메소드는 컴파일 타임에 정해진다. 그런데! 매개변수가 일전의 다중 정의 매개변수들을 모두 포함할 수 있는 

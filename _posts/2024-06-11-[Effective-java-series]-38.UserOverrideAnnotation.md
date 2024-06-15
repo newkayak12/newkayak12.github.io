@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 어노테이션을 일관되게 사용하라
 
 `@Override` 어노테이션은 해당 메소드가 재정의했음을 알리는 수단으로, 재정의한 대상이 올바른지, 정말로 재정의 했는지 컴파일러에서 체크하는 용도로 사용된다.

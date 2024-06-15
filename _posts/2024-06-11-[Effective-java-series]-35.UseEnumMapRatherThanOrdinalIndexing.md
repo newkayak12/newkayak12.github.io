@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # ordinal 인덱싱 대신 EnumMap을 사용하자
 
 배열이나 리스트에서 원소를 꺼낼 때 ordinal로 인덱로 사용한다고 해보자.

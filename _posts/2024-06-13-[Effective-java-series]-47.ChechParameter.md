@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 매개변수가 유효한지 검사하라
 
 인덱스 값은 음수이면 안되며, 객체 참조는 null이 아니어야 한다. 뭐 이런 제약은 문서화 해서 남겨야 한다. 또한 메소드 시작점에 검사해서 오류를 미리 방지해야 한다.

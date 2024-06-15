@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 스트림에서는 부작용 없는 함수를 사용하라
 
 스트림은 단순 API를 넘어 함수형 패러다임에 기초한 패러다임이다. 스트림 패러다임의 핵심은 일련의 변환으로 재구성하는 부분이다. 이때 각 변환 단계는 한 단계

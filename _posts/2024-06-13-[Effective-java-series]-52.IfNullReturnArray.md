@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # null 대신 빈 컬렉션이나 배열을 반환하자
 
 컨테이너(배열, 컬렉션)이 비었을 때 선택지는 null, 빈 컨테이너 둘 중 하나다. null을 값으로 생각하면 null을 리턴할 수도 있다. 그러나 NPE 등 고려할 것들이

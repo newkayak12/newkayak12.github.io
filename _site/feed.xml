@@ -5,12 +5,206 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 13 Jun 2024 22:26:01 +0900</pubDate>
+    <pubDate>Sat, 15 Jun 2024 23:15:35 +0900</pubDate>
     
       <item>
-        <title>[effective Java Series] 53.optional</title>
-        <link>/2024/06/13/Effective-java-series-53.Optional.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-53.Optional.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-60.Optimize.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-60.Optimize.html</guid>
+        <description>&lt;h1 id=&quot;최적화는-신중히&quot;&gt;최적화는 신중히&lt;/h1&gt;
+
+&lt;p&gt;성능 떄문에 견고한 구조를 희생하지는 말자. 빠른 프로그램보다는 좋은 프로그램을 작성하라. 고민 해볼만한 문구다. 이 말은 완성하기 전에는 성능을 무시하라는 말이 아니다.
+구현상 문제는 여러 변 다듬어 최적화할 수 있지만 이키텍쳐는 수정하기가 어렵다. 따라서 설계부터 탄탄해야한다는 의미와 같다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;성능을 제한하는 설계를 피하라.&lt;/li&gt;
+  &lt;li&gt;API 설계시 성능에 주는 영향을 고려하라.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;이 정도를 고민해보면 될 것 같다. 보통 잘 설계하면 성능이 잘 나온다. 그러니 이미 망친 설계에서 좋은 성능을 위해 노력하는 건 앞 뒤가 맞지 않는다.
+만약 해야만 한다면 프로파일링 도구에 도움을 받는 것도 좋다.&lt;/p&gt;
+
+&lt;h1 id=&quot;컨벤션을-다르자&quot;&gt;컨벤션을 다르자.&lt;/h1&gt;
+
+&lt;p&gt;자바는 컨벤션이 잘 정립됐다. 그리고 언어 명세에도 기술되어 있다. 이 규칙들은 특별한 이유가 없는 한 반드시 따라야 한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;역도메인을 패키지 이름으로 하는 것&lt;/li&gt;
+  &lt;li&gt;각 요소는 8자 이하의 짧은 단어로 축약 (utilities 보다는 utils)&lt;/li&gt;
+  &lt;li&gt;클래스, 인터페이스 일므은 하나 이상의 단어 조합으로, upper camel case&lt;/li&gt;
+  &lt;li&gt;메소드 필드명은 lower camel case&lt;/li&gt;
+  &lt;li&gt;상수는 upper case&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;그외 get, set으로 시작하는 형태는 javaBeans 명세에 뿌리를 두고 있다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-59.Native.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-59.Native.html</guid>
+        <description>&lt;h1 id=&quot;네이티브-메소드는-신중히-사용하라&quot;&gt;네이티브 메소드는 신중히 사용하라&lt;/h1&gt;
+
+&lt;p&gt;자바 네이티브 인터페이스( Java Native Interface, JNI )는 자바 프로그램이 네이티브 메소드를 호출하는 기술이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;레지스트리 같은 플랫폼 특화 기능을 사용한다.&lt;/li&gt;
+  &lt;li&gt;네이티브 코드로 작성된 기존 라이브러리를 사용한다.&lt;/li&gt;
+  &lt;li&gt;성능 개선을 목적으로 성능에 결정적인 영향을 주는 영역만 따로 네이티브 언어로 작성한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;플랫폼 특화 기능을 활용하려면 네이티브 메소드를 사용해야 한다. 자바가 성숙해지면서 점차 네이티브 메소드를 사용할 일이 줄어든다. 그 예시가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process api&lt;/code&gt;다.
+그러나 성능을 개선할 목적으로 네이티브 메서드를 사용하는 것은 거의 권장하지 않는다. 이미 자바가 성숙됐다.&lt;/p&gt;
+
+&lt;p&gt;또한 네이티브 메소드에는 심각한 단점이 있다. 네이티브 언어가 안전하지 않으므로 네이티브 메소드를 사용하는 애플리케이션도 메모리 훼손 오류로부터 더 이상 안전하지 않다.
+뿐만 아니라 CG 관장 영역이 아니므로 메모리를 자동으로 회수하거나 추적조차 불가하다. 마지막으로 네이티브 - 자바 간 접착 코드(glueCode)가 필요한데 번거로운 작업이다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-58.UseInterfaceAsType.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-58.UseInterfaceAsType.html</guid>
+        <description>&lt;h1 id=&quot;객체는-인터페이스를-사용해서-참조하자&quot;&gt;객체는 인터페이스를 사용해서 참조하자.&lt;/h1&gt;
+
+&lt;p&gt;인터페이스를 구현하고 인터페이스를 타입으로 사용할 수 있다. 이렇게 인터페이스를 타입으로 사용하면 매개변수로서, 반환 값으로서, 변수, 필드로서 유연성을 갖게 된다.
+단, 인터페이스 규약 이외 기능을 제공하고, 코드가 이에 기대서 작동한다면 일관성이 무너져 코드가 실패할 가능성이 있다. 그럴 경우 해당 기능을 인터페이스에 
+기입하여, 필수 구현 항목으로 지정하는 것이 나을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;물론 적합한 인터페이스가 없다면 당연히 클래스로 참조해야 한다. 혹은 클래스 기반으로 작성됐다면 어쩔 수 없다. 마지막으로 특정 클래스에 국한되어 특별한 기능을
+제공한다면 인터페이스 타입을 포기할 수밖에 없다. 적합한 인터페이스가 없다면 클래스 계층 구조 중 필요한 기능을 만족하는 가장 덜 구체적인 클래스를 타입으로 사용하는게 좋다.&lt;/p&gt;
+
+&lt;h1 id=&quot;리플렉션&quot;&gt;리플렉션?&lt;/h1&gt;
+
+&lt;p&gt;리플렉션을 이용하면 컴파일 당시에 존재하지 않던 클래스도 이용할 수 있는데, 물론 단점이 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;컴파일타임 타입 검사가 주는 이점을 하나도 누릴 수 없다.&lt;/li&gt;
+  &lt;li&gt;리플렉션을 이용하면 코드가 지저분하고 장황해진다.&lt;/li&gt;
+  &lt;li&gt;성능이 떨어진다. (처음에만 느리다고들 한다.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;물론 리플렉션을 아주 제한된 형태로만 사용해야 장점만 취할 수 있다. 리플렉션은 인스턴스 생성에만 쓰고, 이렇게 만든 인스턴스는 인터페이스나 상위 클래스로 참조해서 사용하자.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-57.BoxingIsHeavy.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-57.BoxingIsHeavy.html</guid>
+        <description>&lt;h1 id=&quot;박싱은-무겁다-기본-타입을-사용하자&quot;&gt;박싱은 무겁다. 기본 타입을 사용하자.&lt;/h1&gt;
+
+&lt;p&gt;기본 타입과 박싱된 타입의 차이는&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;기본 타입은 값만 가지고 있으나 박싱 타입은 식별성을 갖는다.&lt;/li&gt;
+  &lt;li&gt;기본 타입은 언제나 유효하지만 박싱 타입을 null을 가질 수 있다.&lt;/li&gt;
+  &lt;li&gt;기본 타입이 박싱 타입보다 시간, 메모리 사용면에서 더 효율적이다.&lt;/li&gt;
+  &lt;li&gt;기본 타입은 동등 연산자로 비교가 가능하지만 박싱은 기본타입으로 바꿔서 비교해야 한다. ( 기본/ 박싱을 비교하면 자동으로 박싱이 풀린다.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;이런 이유로 식별성을 갖거나 제네릭으로 사용하거나 null을 식별값으로 가져야만 한다면 사용을 고려해봄직 하다. 마지막으로 리플렉션을 통해 메소드를 호출할 때도 박싱된 타입을
+사용해야 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;충족되는-타입이-있다면-문자열은-피하자&quot;&gt;충족되는 타입이 있다면 문자열은 피하자.&lt;/h1&gt;
+
+&lt;p&gt;문자열은 문자열이다. 다른 값을 표현하기 위한 수단으로는 부적합하다. 또한 혼합 타입을 대신하기에도 적절하지 않다. 정말 해당 타입인지, 값이 맞는지 파싱하고 검증하고
+굉장히 손이 많이 간다. 당연히 오류 가능성도 커진다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문자열-연결----은-피하자&quot;&gt;문자열 연결 (“” + “”) 은 피하자.&lt;/h1&gt;
+
+&lt;p&gt;문자열 역시 + 연산자로 합칠 수 있다. 굉장히 편리하다. 문자열은 값 타입이 아니다. 문자열 연결을 본격적으로 사용하면 성능 저하를 면치 못할 것이다. 문자열 연결 
+연산자로 n개를 이으면 n^2에 비례햔다. 앞서 말한 듯 값 타입이 아니라 양 쪽 내용을 복사해서 새롭게 만들어야 한다. 차라리 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuffer&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringBuilder&lt;/code&gt;를 사용하자.&lt;/p&gt;
+
+&lt;p&gt;추가로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringTokenizer&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String.split()&lt;/code&gt;으로 문자열을 분할할 수도 있다. 이는 상황에 따라 속도가 다른데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StringTokenizer&lt;/code&gt;가 빠른 경우는&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Delimiter가 하나라면 Tokenizer&lt;/li&gt;
+  &lt;li&gt;Delimiter가 ascii 값이라면&lt;/li&gt;
+  &lt;li&gt;순회하는게 아니라면&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;의 경우가 있다. 보통 tokenizer가 빠르다. split이 내부에서 정규 표현식을 사용해서 처리하기 떄문이다. 그러나&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Delimiter가 여러 개면 내부에서 여러 번 스캐닝 작업을 한다.&lt;/li&gt;
+  &lt;li&gt;유니코드라면 색인이 느리다.&lt;/li&gt;
+  &lt;li&gt;hasMoreToken, nextToken을 호출하면 그 때마다 풀 스캔을 한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;는 특징으로 tokenizer가 빠를 때도 있다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-56.FloatingPoint.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-56.FloatingPoint.html</guid>
+        <description>&lt;h1 id=&quot;부동-소수점-이슈&quot;&gt;부동 소수점 이슈&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://newkayak12.github.io/java/2024/05/18/java-series-22-FloatingPoint.html&quot;&gt;blog&lt;/a&gt;에서 다룬 바와 같이 부동소수 계산에는 정밀도가 
+떨어진다는 문제가 있다. 그래서 소수점이 있는 금융 계산에 치명적이다. 그래서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BigDecimal&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;long&lt;/code&gt;을 사용해야 한다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-55.EnhancedFor.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-55.EnhancedFor.html</guid>
+        <description>&lt;h1 id=&quot;for-each&quot;&gt;For-Each&lt;/h1&gt;
+
+&lt;p&gt;for가 while보다 낫지만 그래도 너무 지저분하다. for-each(enhanced for statement)을 쓰면 인덱스를 위한 변수와 이를 증감 시키는 코드를 작성하지 않아도
+해당 반복자의 요소를 모두 순회할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;단, 몇 가지 상황에서 사용하지 못할 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;파괴적 필터링(destructive filtering) : 컬렉션/배열을 순회하면서 선택 원소를 제거한다면 인덱스의 변화가 생길 수 있다.&lt;/li&gt;
+  &lt;li&gt;변형(transforming) : 리스트/배열에 인덱스로 접근해서 요소를 수행해야 한다면 인덱스가 필요해서 사용하지 못할 수 있다.&lt;/li&gt;
+  &lt;li&gt;병렬 반복 : 여러 컬렉션/배열을 병렬로 순회해야 한다면 인덱스로 조절하는게 쉬울 수도 있다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/15/Effective-java-series-54.LocalVariable.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-54.LocalVariable.html</guid>
+        <description>&lt;h1 id=&quot;지역변수-범위-최소화&quot;&gt;지역변수 범위 최소화&lt;/h1&gt;
+
+&lt;p&gt;지역 변수 범위를 줄이는 기법은 ‘가장 처음에 쓸 때 선언하기’가 있다. 그러나 미리 선언하면 코드가 어수선해지 쉽상이다. 또한 너무 고민 없이 선언하면 변수가 쓰이는
+범위보다 너무 앞서 선언하게 되거나, 다 쓴 뒤에도 살아있게 될 수 있다. 또한, 지역변수는 대부분 선언과 동시에 초기화를 해야하는데 초기화 정보가 모자라도 선언을 하는
+일을 맞닥뜨리게 될 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;while-vs-for&quot;&gt;while vs for&lt;/h2&gt;
+&lt;p&gt;for가 낫다. while은 안에서 사용하는 변수를 바깥에서 선언해야할 때가 있다. 그러면 그 이름의 변수를 다른 의미로 아래에서 또 사용해야 한다면?
+실수하기 쉽다. for는 for 블록에서 선언하므로 크게 문제가 되지 않는다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{...}&lt;/span&gt;
+
+
+&lt;span class=&quot;nc&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{...}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//이러면 안돌고 지나간다.&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;메소드를-잘게-쪼개기&quot;&gt;메소드를 잘게 쪼개기&lt;/h2&gt;
+&lt;p&gt;메소드를 기능 단위로 단일 책임을 지우면 그게 최고다. 또한 이러면 메소드 단위가 작아져 지역 범위를 최소화할 수 있다.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-53.Optional.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-53.Optional.html</guid>
         <description>&lt;h1 id=&quot;옵셔널-반환은-신중히&quot;&gt;옵셔널 반환은 신중히&lt;/h1&gt;
 
 &lt;p&gt;옵셔널이 나오기 전, 예외를 던지거나 null을 반환하거나 했다. 그러나 이는 에외를 예외답게 사용하지 않는다는 점과 stackTrace 캡쳐에 리소스가 크게 든다는 점
@@ -26,9 +220,9 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
       </item>
     
       <item>
-        <title>[effective Java Series] 52.ifnullreturnarray</title>
-        <link>/2024/06/13/Effective-java-series-52.IfNullReturnArray.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-52.IfNullReturnArray.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-52.IfNullReturnArray.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-52.IfNullReturnArray.html</guid>
         <description>&lt;h1 id=&quot;null-대신-빈-컬렉션이나-배열을-반환하자&quot;&gt;null 대신 빈 컬렉션이나 배열을 반환하자&lt;/h1&gt;
 
 &lt;p&gt;컨테이너(배열, 컬렉션)이 비었을 때 선택지는 null, 빈 컨테이너 둘 중 하나다. null을 값으로 생각하면 null을 리턴할 수도 있다. 그러나 NPE 등 고려할 것들이
@@ -44,9 +238,9 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
       </item>
     
       <item>
-        <title>[effective Java Series] 51.reallyusevarargs</title>
-        <link>/2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html</guid>
         <description>&lt;h1 id=&quot;가변인수는-신중히&quot;&gt;가변인수는 신중히&lt;/h1&gt;
 
 &lt;p&gt;가변 인수를 호출하면 인수 개수와 길이가 같은 배열을 만들도 배열에 저장해서 가변인수 메소드에 건낸다. 인수 개수는 런타임에 알 수 있다. 이런 불확실성은 왠지 모르게
@@ -76,9 +270,9 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
       </item>
     
       <item>
-        <title>[effective Java Series] 50.consideroverload</title>
-        <link>/2024/06/13/Effective-java-series-50.ConsiderOverload.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-50.ConsiderOverload.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-50.ConsiderOverload.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-50.ConsiderOverload.html</guid>
         <description>&lt;h1 id=&quot;다중-정의는-신중히&quot;&gt;다중 정의는 신중히&lt;/h1&gt;
 
 &lt;p&gt;다중 정의된 메소드는 컴파일 타임에 정해진다. 그런데! 매개변수가 일전의 다중 정의 매개변수들을 모두 포함할 수 있는 
@@ -120,9 +314,9 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
       </item>
     
       <item>
-        <title>[effective Java Series] 49.methodsignature</title>
-        <link>/2024/06/13/Effective-java-series-49.MethodSignature.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-49.MethodSignature.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-49.MethodSignature.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-49.MethodSignature.html</guid>
         <description>&lt;h1 id=&quot;메소드-시그니처를-신중히-설계하자&quot;&gt;메소드 시그니처를 신중히 설계하자.&lt;/h1&gt;
 
 &lt;p&gt;고민할 점&lt;/p&gt;
@@ -146,9 +340,9 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
       </item>
     
       <item>
-        <title>[effective Java Series] 48.depensiveclone</title>
-        <link>/2024/06/13/Effective-java-series-48.DepensiveClone.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-48.DepensiveClone.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-48.DepensiveClone.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-48.DepensiveClone.html</guid>
         <description>&lt;h1 id=&quot;방어적-복사본을-고려하자&quot;&gt;방어적 복사본을 고려하자.&lt;/h1&gt;
 
 &lt;p&gt;자바는 시스템의 다른 부분과는 별개다. 그래서 불변식이 자연스레 지켜진다. 그럼에도 불변식을 지키기 위한 노력은 계속된다. 우리는 개발할 때 누군가는 이를 무너뜨리려한다고
@@ -192,9 +386,9 @@ clone 재정의로 어떻게 될지 모른다.&lt;/p&gt;
       </item>
     
       <item>
-        <title>[effective Java Series] 47.chechparameter</title>
-        <link>/2024/06/13/Effective-java-series-47.ChechParameter.html</link>
-        <guid isPermaLink="true">/2024/06/13/Effective-java-series-47.ChechParameter.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/13/Effective-java-series-47.ChechParameter.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-47.ChechParameter.html</guid>
         <description>&lt;h1 id=&quot;매개변수가-유효한지-검사하라&quot;&gt;매개변수가 유효한지 검사하라&lt;/h1&gt;
 
 &lt;p&gt;인덱스 값은 음수이면 안되며, 객체 참조는 null이 아니어야 한다. 뭐 이런 제약은 문서화 해서 남겨야 한다. 또한 메소드 시작점에 검사해서 오류를 미리 방지해야 한다.
@@ -213,9 +407,9 @@ clone 재정의로 어떻게 될지 모른다.&lt;/p&gt;
       </item>
     
       <item>
-        <title>[effective Java Series] 46.parallelstream</title>
-        <link>/2024/06/12/Effective-java-series-46.ParallelStream.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-46.ParallelStream.html</guid>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/12/Effective-java-series-46.ParallelStream.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/12/Effective-java-series-46.ParallelStream.html</guid>
         <description>&lt;h1 id=&quot;병렬-스트림&quot;&gt;병렬 스트림?&lt;/h1&gt;
 
 &lt;p&gt;자바 7부터 고성능 병렬 분해(Parallel decom-position) 프레임워크인 포크-조인을 추가했다. 자바 8부터는 병렬 파이프라인을 병렬 실행할 수 있는 스트림을 지원한다.
@@ -235,278 +429,6 @@ int 범위, long 범위일 경우 효과가 좋다. 이들의 공통점은 순�
 결과가 나오지 않으면 단일 스트림이 낫다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 45.usepurefunction</title>
-        <link>/2024/06/12/Effective-java-series-45.UsePureFunction.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-45.UsePureFunction.html</guid>
-        <description>&lt;h1 id=&quot;스트림에서는-부작용-없는-함수를-사용하라&quot;&gt;스트림에서는 부작용 없는 함수를 사용하라&lt;/h1&gt;
-
-&lt;p&gt;스트림은 단순 API를 넘어 함수형 패러다임에 기초한 패러다임이다. 스트림 패러다임의 핵심은 일련의 변환으로 재구성하는 부분이다. 이때 각 변환 단계는 한 단계
-이전 결과를 받아 처리하는 순수 함수여야 한다. 순수 함수는 다른 가변 상태를 참조하지 않고 함수 스스로도 다른 상태를 변경하지 않는다. 모두 sideEffect가 없다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 44.becarefulusestream</title>
-        <link>/2024/06/12/Effective-java-series-44.BecarefulUseStream.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-44.BecarefulUseStream.html</guid>
-        <description>&lt;h1 id=&quot;스트림을-주의해서-사용하자&quot;&gt;스트림을 주의해서 사용하자&lt;/h1&gt;
-
-&lt;p&gt;스트림은 유한/ 무한 시퀀스를 의미하거나, 스트림 파이프라인은 이 원소들로 수행하는 연산 단계를 표현하는 개념이다.
-스트림 파이프라인은 소스 스트림에서 시작해서 종단 연산으로 끝나며 그 사이에 하나 이상의 중간 연산이 있을 수 있다. 각 중간 연산은 스트림을 어떠한 방식으로
-변환한다.&lt;/p&gt;
-
-&lt;p&gt;스트림 API는 메소드 연쇄를 지원하는 Fluent API다. 즉, 파이프 라인 하나를 구성하는 모든 호출을 연결해서 단 하나의 표현식으로 완성할 수 있다.
-스트림 API는 람다가 필수다. 람다의 부작용처럼 오히려 가독성이 떨어지기 시작한다. for로 되어 있는 기존 코드를 스트림을 사용하도록 리팩토링하는 건 좋다. 
-그러나 스트림으로 작성하는게 나아 보일 때만 반영하자. 또한 함수 객체로는 할 수 없지만 블록으로 할 수 있는 일들이 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;코드 블록에서는 지역변수를 읽고 수정할 수 있다. 그러나 람다는 final로 지역변수를 취급하기에 수정할 수 없다.&lt;/li&gt;
-  &lt;li&gt;코드 블록에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;return&lt;/code&gt;으로 흐름 제어할 수 있지만 람다, 스트림 중에는 불가능하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;그러나&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;시퀀스를 일관되게 변환&lt;/li&gt;
-  &lt;li&gt;시퀀스를 필터링&lt;/li&gt;
-  &lt;li&gt;시퀀스를 하나의 연산을 사용해서 결합한다.&lt;/li&gt;
-  &lt;li&gt;시퀀스를 컬렉션에 모은다.&lt;/li&gt;
-  &lt;li&gt;시퀀스에서 특정 조건을 만족하는 원소를 찾는다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;라고 하면 스트림으로 리팩토링을 할 만하다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 43.usestandardfuntionalinterface</title>
-        <link>/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html</guid>
-        <description>&lt;h1 id=&quot;표준-함수형-인터페이스-사용&quot;&gt;표준 함수형 인터페이스 사용&lt;/h1&gt;
-
-&lt;p&gt;자바 8부터 함수형 인터페이스 지원으로 다양한 일을 할 수 있게 됐다. 그 쓰임새가 늘어남에 따라 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.function&lt;/code&gt;에는 다양한 용도의 표준 함수형 인터페이스가
-담겨 있다. 필요한 용도에 맞는게 있다면, 직접 구현하지 말고 이를 사용하는 것이 좋다. 보통 이름만으로 동작을 어느 정도 예측할 수 있기 때문이다. 만약 직접 구현해야한다면
-언제 구현하는게 좋을까?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;자주 쓰이며, 이름 자체가 용도를 명확히 전달한다.&lt;/li&gt;
-  &lt;li&gt;반드시 따라야할 규약이 있다.&lt;/li&gt;
-  &lt;li&gt;유용한 디폴트 메소드를 제공할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;만일 직접 만들어 써야 한다면 네이밍 컨벤션을 잘 지키자. 그리고 표준 함수형 인터페이스에는 기본 타입만 지원하는 것을 볼 수 있는데, 직접 만들어 사용할 때도
-최대한 기본형을 사용하는 것을 추천한다. 동작은 가능하지만 박싱, 언박싱 과정이 리소스를 낭비한다. 또한 함수형 인터페이스도 인터페이스다. 배포하면 돌이킬 수 없다. 
-따라서 신중히 작성하자. 마지막으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt;를 사용하자 이 어노테이션을 붙이면 해당 인터페이스가 함수형 인터페이스 조건을 만족하는지 컴파일 타임에
-체크할 수 있다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 42.usemethodreference</title>
-        <link>/2024/06/12/Effective-java-series-42.UseMethodReference.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-42.UseMethodReference.html</guid>
-        <description>&lt;h1 id=&quot;람다보다는-메소드-참조를-사용하라&quot;&gt;람다보다는 메소드 참조를 사용하라&lt;/h1&gt;
-
-&lt;p&gt;람다보다 더 간결하게 사용할 수 있다. 메소드 참조(Method reference)로 말이다. 매개변수 구성(수, 타입, 순서)이 같다면 람다 대신 메소드 참조를 전달하면
-같은 결과를 더 보기 좋게 얻을 수 있다. 메소드 참조가 람다를 대체하는 건 아니다. 람다로 할 수 없는 일은 메소드 참조로도 할 수 없다.&lt;/p&gt;
-
-&lt;p&gt;단순히 메소드 참조는 람다로 구현했을 경우 길고 복잡해질 때 좋은 대안이 되어준다. 메소드 참조는 기능을 잘 드러내는 이름을 지어줄 수도 있다. 메소드 참조의 유형은
-아래의 다섯 가지다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;정적 메소드를 가리키는 메소드 참조&lt;/li&gt;
-  &lt;li&gt;한정적 참조 - 수신 객체(receiving object)를 특정하는 한정적 인스턴스 메소드 참조 (함수 객체가 받는 인수와 참조되는 메소드가 받는 인수가 같다.)&lt;/li&gt;
-  &lt;li&gt;비한정적 참조 - 수신 객체를 특정하지 않는 비한정적 인스턴스 메소드 참조 (함수 객체를 적용하는 시점에 수신 객체를 알려준다.)&lt;/li&gt;
-  &lt;li&gt;클래스 생성자&lt;/li&gt;
-  &lt;li&gt;배열 생성자&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;유형&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;예시&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;람다&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;정적&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Integer::parseInt&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;str -&amp;gt; Integer.parseInt(str);&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;한정적(인스턴스)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Instant.now()::isAfter&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;t -&amp;gt;  Instant.now.isAfter(t)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;비한정적&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;String::toLowerCase&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;str -&amp;gt; str.toLowerCase()&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;클래스 생성자&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Object::new&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;() -&amp;gt;     new Object();&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;배열 생성자&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Object[]::new&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;() -&amp;gt; new Object[0];&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 41.uselambda</title>
-        <link>/2024/06/12/Effective-java-series-41.UseLambda.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-41.UseLambda.html</guid>
-        <description>&lt;h1 id=&quot;익명-클래스보단-람다&quot;&gt;익명 클래스보단 람다.&lt;/h1&gt;
-
-&lt;p&gt;자바 8에 와서 추상 메소드 하나짜리 인터페이스는 특별한 의미를 인정 받게 됐다. 함수형 인터페이스로 말이다. 이 함수형 인터페이스는 자바 8에서 람다를 지원하는
-초석이 됐다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compare&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;람다는 기존 익명 구현 객체보다 훨씬 간결하고 가독성도 월등히 높다. 또한 람다를 사용하면 컴파일러가 문맥을 보고 타입을 추론해준다.
-따라서 타입을 명시해야만 되는 경우가 아니고서야 굳이 매개변수 타입을 명시할 필요는 없다.&lt;/p&gt;
-
-&lt;p&gt;그러나 람다는 이름도 없고 문서화도 하지 못한다. 따라서 코드 자체로 동작이 명확하지 않거나 너무 길어진다면 람다를 포기하는 게 좋다. 또한 람다는 자신을 참조할 수 
-없다. 람다 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;this&lt;/code&gt;는 바깥 인스턴스를 가리킨다. 반대로 익명 구현 객체는 자신을 가리킨다. 상황에 따라 취사 선택하는 현명함을 보이자.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 40.usemarkerinterface</title>
-        <link>/2024/06/12/Effective-java-series-40.UseMarkerInterface.html</link>
-        <guid isPermaLink="true">/2024/06/12/Effective-java-series-40.UseMarkerInterface.html</guid>
-        <description>&lt;h1 id=&quot;정의하는게-타입이라면-마커-인터페이스를-사용하자&quot;&gt;정의하는게 타입이라면 마커 인터페이스를 사용하자.&lt;/h1&gt;
-
-&lt;p&gt;아무 메소드 없이 단지 자신을 구현하는 클래스가 특정 속성을 가진다고 표시하는 인터페이스를 마커 인터페이스(marker interface)라고 한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Serializable&lt;/code&gt;이 예다.
-마커 인터페이스는 타입으로써 역할을 하지만 마커 어노테이션은 그렇지 않다. 두 번쨰로 마커 인터페이스는 적용 대상을 더 정밀하게 지정할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;반대로 마커 어노테이션이 마커 인터페이스보다 나은 점은 어노테이션 시스템의 지원을 받는다는 점을 들 수 있다. 그러면 어노테이션, 인터페이스 언제 써야할까?
-클래스와 인터페이스 외 프로그램 요소에 마킹해야 할 때 어노테이션을 써야한다. 마킹이 된 객체를 매개변수로 받는다면 인터페이스를 쓰는 것이 좋다. 그러면
-컴파일 타임에 오류를 잡아낼 수 있다. 특히 어노테이션 적용 대상(Target)이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ElementType.TYPE&lt;/code&gt;이면 다시 한 번 생각해보는게 좋다.&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[programmers Series] Lv. 01 Failurerate</title>
-        <link>/programmers/2024/06/11/Programmers-series-LV.-01-FailureRate.html</link>
-        <guid isPermaLink="true">/programmers/2024/06/11/Programmers-series-LV.-01-FailureRate.html</guid>
-        <description>&lt;h1 id=&quot;카카오---실패율&quot;&gt;카카오 - 실패율&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/42889&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-
-  &lt;pre&gt;
-슈퍼 게임 개발자 오렐리는 큰 고민에 빠졌다. 그녀가 만든 프랜즈 오천성이 대성공을 거뒀지만, 요즘 신규 사용자의 수가 급감한 것이다. 원인은 신규 사용자와 기존 사용자 사이에 스테이지 차이가 너무 큰 것이 문제였다.
-이 문제를 어떻게 할까 고민 한 그녀는 동적으로 게임 시간을 늘려서 난이도를 조절하기로 했다. 역시 슈퍼 개발자라 대부분의 로직은 쉽게 구현했지만, 실패율을 구하는 부분에서 위기에 빠지고 말았다. 오렐리를 위해 실패율을 구하는 코드를 완성하라.
-실패율은 다음과 같이 정의한다.
-스테이지에 도달했으나 아직 클리어하지 못한 플레이어의 수 / 스테이지에 도달한 플레이어 수
-전체 스테이지의 개수 N, 게임을 이용하는 사용자가 현재 멈춰있는 스테이지의 번호가 담긴 배열 stages가 매개변수로 주어질 때, 실패율이 높은 스테이지부터 내림차순으로 스테이지의 번호가 담겨있는 배열을 return 하도록 solution 함수를 완성하라.
-제한사항
-스테이지의 개수 N은 1 이상 500 이하의 자연수이다.
-stages의 길이는 1 이상 200,000 이하이다.
-stages에는 1 이상 N + 1 이하의 자연수가 담겨있다.
-각 자연수는 사용자가 현재 도전 중인 스테이지의 번호를 나타낸다.
-단, N + 1 은 마지막 스테이지(N 번째 스테이지) 까지 클리어 한 사용자를 나타낸다.
-만약 실패율이 같은 스테이지가 있다면 작은 번호의 스테이지가 먼저 오도록 하면 된다.
-스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 0 으로 정의한다.
-&lt;/pre&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;int, double을 잘 다루는가&lt;/li&gt;
-  &lt;li&gt;자바 Comparator를 구현&lt;/li&gt;
-  &lt;li&gt;자바에서 tuple 표현&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FailureRate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[][]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-
-        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-            &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-
-            &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 11 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>

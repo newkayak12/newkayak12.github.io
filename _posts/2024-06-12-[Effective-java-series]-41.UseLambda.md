@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 익명 클래스보단 람다.
 
 자바 8에 와서 추상 메소드 하나짜리 인터페이스는 특별한 의미를 인정 받게 됐다. 함수형 인터페이스로 말이다. 이 함수형 인터페이스는 자바 8에서 람다를 지원하는

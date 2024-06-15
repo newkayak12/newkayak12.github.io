@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 가변인수는 신중히
 
 가변 인수를 호출하면 인수 개수와 길이가 같은 배열을 만들도 배열에 저장해서 가변인수 메소드에 건낸다. 인수 개수는 런타임에 알 수 있다. 이런 불확실성은 왠지 모르게

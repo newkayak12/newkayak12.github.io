@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 옵셔널 반환은 신중히
 
 옵셔널이 나오기 전, 예외를 던지거나 null을 반환하거나 했다. 그러나 이는 에외를 예외답게 사용하지 않는다는 점과 stackTrace 캡쳐에 리소스가 크게 든다는 점

@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 메소드 시그니처를 신중히 설계하자.
 
 고민할 점

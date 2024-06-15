@@ -1,3 +1,9 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+---
+
 # 표준 함수형 인터페이스 사용
 
 자바 8부터 함수형 인터페이스 지원으로 다양한 일을 할 수 있게 됐다. 그 쓰임새가 늘어남에 따라 `java.util.function`에는 다양한 용도의 표준 함수형 인터페이스가
