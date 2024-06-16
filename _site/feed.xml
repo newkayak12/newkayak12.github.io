@@ -5,13 +5,89 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sat, 15 Jun 2024 23:15:35 +0900</pubDate>
+    <pubDate>Sun, 16 Jun 2024 13:43:32 +0900</pubDate>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/16/Effective-java-series-63.Exception.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/16/Effective-java-series-63.Exception.html</guid>
+        <description>&lt;h1 id=&quot;되도록-표준-예외를-사용하자--추상화-수준에-맞는-예외를-던지자-예외-상세-메시지에-실패-관련-정보를-담자&quot;&gt;되도록 표준 예외를 사용하자 &amp;amp; 추상화 수준에 맞는 예외를 던지자&amp;amp; 예외 상세 메시지에 실패 관련 정보를 담자.&lt;/h1&gt;
+
+&lt;h2 id=&quot;되도록-표준-예외를-사용하자&quot;&gt;되도록 표준 예외를 사용하자&lt;/h2&gt;
+
+&lt;p&gt;표준 예외를 재사용하면 얻는게 많다. 이미 프로그래머들에게 익숙한 예외를 사용하기 떄문이다. 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IllegalArgumentException&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IllegalStateException&lt;/code&gt;,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConcurrentModificationException&lt;/code&gt; 등이 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;추상화-수준에-맞는-예외를-던지자&quot;&gt;추상화 수준에 맞는 예외를 던지자&lt;/h2&gt;
+
+&lt;p&gt;수행하려는 일과 관련이 없어 보이는 예외가 나오면 당황스러울 것이다. 저수준 예외를 처리하지 않고 바깥으로 전파하면 일어나는 일 이다.
+이는 내부 구현을 외부로 노출시키는 일이다. 또한 내부 구현과 사용을 결합시키게 되는 일이 된다. 따라서 다음 릴리즈에서 바꾸면
+다른 예외가 튀어나와 기존 클라이언트 프로그램을 깨지게 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;차라리 이 때는 예외를 번역해서 던지자 예외 번역이란 저수준 예외를 받아서 고수준 예외로 다시 던지는 것을 의미한다.
+예외를 번역할 때, 저수준 예외가 디버깅에 도움이 된다면 예외 연쇄(exceptionChaining)를 사용하는게 좋다.&lt;/p&gt;
+
+&lt;p&gt;예외 연쇄란 문제의 근본 원인 저수준 예외를 고수준 예외에 실어보내는 것이다. 무턱대로 예외를 전파하는 것보다 좋은 방법이지만 그렇다고 남용하면 안된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;예외-상세-메시지에-실패-관련-정보를-담자&quot;&gt;예외 상세 메시지에 실패 관련 정보를 담자.&lt;/h2&gt;
+
+&lt;p&gt;예외는 stack trace를 자동 캡쳐 출력한다. 예외 분석을 위한 초석이 된다. 관련 데이터를 모두 담아야 하지만 꼭 장황할 필요는 없다. 문제를 분석하는 사람은 
+소스코드도 함께 보기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;예외를 최종 클라이언트에게 보여줄 메시지로 생각하면 안 된다. 최종 사용자에게는 훨씬 더 의미있는 메시지가 중요하다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 16 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/16/Effective-java-series-62.CheckedUncheckedException.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/16/Effective-java-series-62.CheckedUncheckedException.html</guid>
+        <description>&lt;h1 id=&quot;복구할-수-있는-상황에는-검사-예외를-프로그래밍-오류에는-런타임-예외를&quot;&gt;복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를&lt;/h1&gt;
+
+&lt;p&gt;호출하는 쪽에서 복구하리라 여겨지면 checkedException 을 던져서 구현자에게 회복을 요구할 수 있다. uncheckedException은 런타임/ 에러 가 있다. 
+프로그래밍 오류는 runtimeException을 사용하면 된다. 대부분은 전제조건을 만족하지 못했을 때 사용한다. 에러는 JVM이 자원부족, 불변식 깨짐 등 더 이상 수행을
+계속할 수 없는 상황을 의미한다. 따라서 에러는 직접 구현할 일이 거의 없다. 대부분의 상황에서 개발자들은 uncheckedException으로 runtimeException을
+서브클래싱할 가능성이 높다.&lt;/p&gt;
+
+&lt;p&gt;여기서 고민이 될거다. checkedException을 자주 사용하느게 좋은가? 검사 예외는 문제를 처리하게 해서 안정성을 높이게끔 해준다. 그런데 이 오류들이 쌓이면
+피곤해진다. 다 처리해야하기 때문이다. 이를 회피하기 가장 쉬운 방법은 옵셔널을 반환하는 것이다. 차라리 빈 옵셔널을 반환하는게 좋다. 
+물론 이 방법도 왜 예외가 발생한지 모르기 때문에 구체적 예외 타입 등을 알 수 없다.&lt;/p&gt;
+
+&lt;p&gt;결론적으로 최대한 코드 내부에서 처리하되 옵셔널/ 에러 던지기를 잘 조절해서 던지는게 좋다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 16 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>Effective java</title>
+        <link>/effective_java/2024/06/16/Effective-java-series-61.ConsiderException.html</link>
+        <guid isPermaLink="true">/effective_java/2024/06/16/Effective-java-series-61.ConsiderException.html</guid>
+        <description>&lt;h1 id=&quot;예외는-진짜-예외에만-사용하자&quot;&gt;예외는 진짜 예외에만 사용하자&lt;/h1&gt;
+
+&lt;p&gt;예를 들어 for-loop을 exception으로 종료한다고 해보자. 나중에 보면 정상 종료를 위한 exception을 낸건지 진짜 에러인지 구분이 안 갈거다. 또한 
+예외는 예외 상황에 쓸 용도로 설계됐으므로 JVM에서 최적화 대상이 아니다. 코드를 try-catch 블록 안에 넣으면 JVM이 할 수 있는 최적화가 제한된다.
+이런 패널티를 받으면서 굳이 exception으로 비즈니스 로직을 사용해야 하는지는 의문이다.&lt;/p&gt;
+
+&lt;p&gt;예외는 그냥 예외로만 사용하는 게 좋다. 제어 흐름용으로 사용하는 건 넌센스다. 그럼 exception 없이 제어하려면 어떻게 하면 될까? 단순하다. 상태 검사 로직을
+넣으면 된다. 그것도 애매하면 옵셔널을 사용할 수도 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;외부 동기화 없이 멀티쓰레드를 사용한다면, 외부 요인으로 상태가 변할 수 있다면 옵셔널이나 특정 값을 사용한다.&lt;/li&gt;
+  &lt;li&gt;성능이 중요한 상황에서 메소드가 상태 의존적 메소드 작업 일부를 중복 수행하면 옵셔널, 특정 값을 사용&lt;/li&gt;
+  &lt;li&gt;이외에는 상태 검사가 나을 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 16 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>Effective java</title>
         <link>/effective_java/2024/06/15/Effective-java-series-60.Optimize.html</link>
         <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-60.Optimize.html</guid>
-        <description>&lt;h1 id=&quot;최적화는-신중히&quot;&gt;최적화는 신중히&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;최적화는-신중히--컨벤션을-따르자&quot;&gt;최적화는 신중히 &amp;amp; 컨벤션을 따르자.&lt;/h1&gt;
+
+&lt;h2 id=&quot;최적화는-신중히&quot;&gt;최적화는 신중히&lt;/h2&gt;
 
 &lt;p&gt;성능 떄문에 견고한 구조를 희생하지는 말자. 빠른 프로그램보다는 좋은 프로그램을 작성하라. 고민 해볼만한 문구다. 이 말은 완성하기 전에는 성능을 무시하라는 말이 아니다.
 구현상 문제는 여러 변 다듬어 최적화할 수 있지만 이키텍쳐는 수정하기가 어렵다. 따라서 설계부터 탄탄해야한다는 의미와 같다.&lt;/p&gt;
@@ -24,7 +100,7 @@
 &lt;p&gt;이 정도를 고민해보면 될 것 같다. 보통 잘 설계하면 성능이 잘 나온다. 그러니 이미 망친 설계에서 좋은 성능을 위해 노력하는 건 앞 뒤가 맞지 않는다.
 만약 해야만 한다면 프로파일링 도구에 도움을 받는 것도 좋다.&lt;/p&gt;
 
-&lt;h1 id=&quot;컨벤션을-다르자&quot;&gt;컨벤션을 다르자.&lt;/h1&gt;
+&lt;h2 id=&quot;컨벤션을-따르자&quot;&gt;컨벤션을 따르자.&lt;/h2&gt;
 
 &lt;p&gt;자바는 컨벤션이 잘 정립됐다. 그리고 언어 명세에도 기술되어 있다. 이 규칙들은 특별한 이유가 없는 한 반드시 따라야 한다.&lt;/p&gt;
 
@@ -68,7 +144,9 @@
         <title>Effective java</title>
         <link>/effective_java/2024/06/15/Effective-java-series-58.UseInterfaceAsType.html</link>
         <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-58.UseInterfaceAsType.html</guid>
-        <description>&lt;h1 id=&quot;객체는-인터페이스를-사용해서-참조하자&quot;&gt;객체는 인터페이스를 사용해서 참조하자.&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;객체는-인터페이스를-사용해서-참조하자--리플렉션&quot;&gt;객체는 인터페이스를 사용해서 참조하자. &amp;amp; 리플렉션?&lt;/h1&gt;
+
+&lt;h2 id=&quot;객체는-인터페이스를-사용해서-참조하자&quot;&gt;객체는 인터페이스를 사용해서 참조하자.&lt;/h2&gt;
 
 &lt;p&gt;인터페이스를 구현하고 인터페이스를 타입으로 사용할 수 있다. 이렇게 인터페이스를 타입으로 사용하면 매개변수로서, 반환 값으로서, 변수, 필드로서 유연성을 갖게 된다.
 단, 인터페이스 규약 이외 기능을 제공하고, 코드가 이에 기대서 작동한다면 일관성이 무너져 코드가 실패할 가능성이 있다. 그럴 경우 해당 기능을 인터페이스에 
@@ -77,7 +155,7 @@
 &lt;p&gt;물론 적합한 인터페이스가 없다면 당연히 클래스로 참조해야 한다. 혹은 클래스 기반으로 작성됐다면 어쩔 수 없다. 마지막으로 특정 클래스에 국한되어 특별한 기능을
 제공한다면 인터페이스 타입을 포기할 수밖에 없다. 적합한 인터페이스가 없다면 클래스 계층 구조 중 필요한 기능을 만족하는 가장 덜 구체적인 클래스를 타입으로 사용하는게 좋다.&lt;/p&gt;
 
-&lt;h1 id=&quot;리플렉션&quot;&gt;리플렉션?&lt;/h1&gt;
+&lt;h2 id=&quot;리플렉션&quot;&gt;리플렉션?&lt;/h2&gt;
 
 &lt;p&gt;리플렉션을 이용하면 컴파일 당시에 존재하지 않던 클래스도 이용할 수 있는데, 물론 단점이 있다.&lt;/p&gt;
 
@@ -96,7 +174,9 @@
         <title>Effective java</title>
         <link>/effective_java/2024/06/15/Effective-java-series-57.BoxingIsHeavy.html</link>
         <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-57.BoxingIsHeavy.html</guid>
-        <description>&lt;h1 id=&quot;박싱은-무겁다-기본-타입을-사용하자&quot;&gt;박싱은 무겁다. 기본 타입을 사용하자.&lt;/h1&gt;
+        <description>&lt;h1 id=&quot;박싱은-무겁다-기본-타입을-사용하자--충족되는-타입이-있다면-문자열은-피하자&quot;&gt;박싱은 무겁다. 기본 타입을 사용하자. &amp;amp; 충족되는 타입이 있다면 문자열은 피하자.&lt;/h1&gt;
+
+&lt;h2 id=&quot;박싱은-무겁다-기본-타입을-사용하자&quot;&gt;박싱은 무겁다. 기본 타입을 사용하자.&lt;/h2&gt;
 
 &lt;p&gt;기본 타입과 박싱된 타입의 차이는&lt;/p&gt;
 &lt;ol&gt;
@@ -109,7 +189,7 @@
 &lt;p&gt;이런 이유로 식별성을 갖거나 제네릭으로 사용하거나 null을 식별값으로 가져야만 한다면 사용을 고려해봄직 하다. 마지막으로 리플렉션을 통해 메소드를 호출할 때도 박싱된 타입을
 사용해야 한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;충족되는-타입이-있다면-문자열은-피하자&quot;&gt;충족되는 타입이 있다면 문자열은 피하자.&lt;/h1&gt;
+&lt;h2 id=&quot;충족되는-타입이-있다면-문자열은-피하자&quot;&gt;충족되는 타입이 있다면 문자열은 피하자.&lt;/h2&gt;
 
 &lt;p&gt;문자열은 문자열이다. 다른 값을 표현하기 위한 수단으로는 부적합하다. 또한 혼합 타입을 대신하기에도 적절하지 않다. 정말 해당 타입인지, 값이 맞는지 파싱하고 검증하고
 굉장히 손이 많이 간다. 당연히 오류 가능성도 커진다.&lt;/p&gt;
@@ -337,98 +417,6 @@ NPE에서 비교적 자유로워진다. 예외검사와 NullCheck를 모두 겸�
 &lt;p&gt;여담으로 매개변수 타입은 클래스보다 인터페이스가 나을 수 있다. 그러면 유연성이 올라간다. 또한 단순 boolean 보다는 직관성을 위해서 Enum 두 개가 나을 수도 있다.&lt;/p&gt;
 </description>
         <pubDate>Thu, 13 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/13/Effective-java-series-48.DepensiveClone.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-48.DepensiveClone.html</guid>
-        <description>&lt;h1 id=&quot;방어적-복사본을-고려하자&quot;&gt;방어적 복사본을 고려하자.&lt;/h1&gt;
-
-&lt;p&gt;자바는 시스템의 다른 부분과는 별개다. 그래서 불변식이 자연스레 지켜진다. 그럼에도 불변식을 지키기 위한 노력은 계속된다. 우리는 개발할 때 누군가는 이를 무너뜨리려한다고
-가정하고 방어적으로 프로그램을 작성해야 한다. 예를 들어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.Date&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getter&lt;/code&gt;로 리턴해도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setYear&lt;/code&gt;같은 메소드를 콜하면 원본이 변경되므로
-불변식을 지킬 수 없다. 이런 경우 아예 복사본을 던질 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;매개변수 유효성 검사에서도 그 전에 방어적 복사본을 두고 복사본으로 검사하면 특히 멀티쓰레딩 환경에서 원본을 지킬 수 있다는 장점이 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Period&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compareTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IllegalArgumentException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위 코드를 보면 이상하다 정상일지 아닐지 모르는 객체를 복사한다? 그러나 위에 기술한 바와 같이 멀티 쓰레딩 환경에서는 찰나에 어떤 문제가 생길지 모른다.
-검사시점/사용시점(time-of-check/time-of-use) 공격 혹은 TOCTOU 공격을 받을 경우 위 코드는 방어할 수 있다. 또한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clone&lt;/code&gt;을 사용하지 않았는데,
-clone 재정의로 어떻게 될지 모른다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getDate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-
-&lt;span class=&quot;nc&quot;&gt;Period&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;period&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Period&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;period&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setYear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;방어적 복사본을 반환해서 위의 불변식을 해치는 상황을 막을 수 있다. 방어적 복사가 불변 객체만을 위한건 아니다. 메소드든 생성자든 클라이언트가 제공한 객체의 참조를
-내부의 자료구조에 보관해야 한다면 그 객체가 잠재적으로 변경될 수 있는지 확인해야 한다. 확실할 수 없다면 복사본을 만들자.&lt;/p&gt;
-
-&lt;p&gt;방어적 복사가 항상 옳은건 아니다. 성능 저하가 수반되고 항상 사용할 수 있는 건 아니다. 또한, 호출자가 컴포넌트 내부를 수정하지 않을거라는 확신이 있다면 방어적 복사를
-생략할 수도 있다. 또한 생략으로 영향이 클라이언트에게만 간다고 확신한다면 생략할 수도 있다.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 13 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/13/Effective-java-series-47.ChechParameter.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/13/Effective-java-series-47.ChechParameter.html</guid>
-        <description>&lt;h1 id=&quot;매개변수가-유효한지-검사하라&quot;&gt;매개변수가 유효한지 검사하라&lt;/h1&gt;
-
-&lt;p&gt;인덱스 값은 음수이면 안되며, 객체 참조는 null이 아니어야 한다. 뭐 이런 제약은 문서화 해서 남겨야 한다. 또한 메소드 시작점에 검사해서 오류를 미리 방지해야 한다.
-이 검사를 소홀이 하면 메소드 수행 중간 에러를 던지거나, 잘 실행됐는데 잘못된 결과를 반환하거나, 메소드 결과는 정상이지만 나중에 보면 객체가 오염되어 있다던가
-결론적으로 실패 원자성을 어기는 결과를 낳을 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이런 검사를 위해서 자바7에서 추가된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.Objects.requireNonNull&lt;/code&gt; 등의 유틸 메소드로 검사를 하는 방법이 있다. 자바9에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkFromIndexSize&lt;/code&gt;,
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkFromToIndex&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkIndex&lt;/code&gt; 등의 메소드가 추가됐다. 혹은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assert&lt;/code&gt;로 유효성 검증을 할 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;또한 생성자 매개변수 유효성 검사는 클래스 불변식을 어기는 객체가 만들어지지 않도록 하기 위해서 필요하다. 몸체 실행 전, 그러니까 시작하자마자 검사해야한다는
-규칙에도 예외는 있다. 유효성 검사 비용이 너무 높거나 실용적이지 않으면 혹은 계산 중 암묵적으로 검사가 수행될 때말이다. 그러나 암묵적 유효성 검사는 어디까지나
-암묵적이다. 실패 원자성을 해칠 여지가 여전히 존재한다.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 13 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/12/Effective-java-series-46.ParallelStream.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/12/Effective-java-series-46.ParallelStream.html</guid>
-        <description>&lt;h1 id=&quot;병렬-스트림&quot;&gt;병렬 스트림?&lt;/h1&gt;
-
-&lt;p&gt;자바 7부터 고성능 병렬 분해(Parallel decom-position) 프레임워크인 포크-조인을 추가했다. 자바 8부터는 병렬 파이프라인을 병렬 실행할 수 있는 스트림을 지원한다.
-이를 통해 동시성 프로그램을 작성하기 쉬워지고 있다. 그러나 남용하면 안된다.&lt;/p&gt;
-
-&lt;p&gt;보통 병렬 스트림을 사용하면 무조건 더 빨라질거라고 생각하지만 그렇지 않다. 예를 들어 스트림을 병렬으로 나누느라 리소스를 더 가져간다거나 혹은 실패할 수도 있다.
-또한 중간 연산으로 limit을 사용하면 병렬 연산의 의미가 퇴색된다. limit을 사용하면 CPU 코어가 남으면 원소를 더 처리하고 제한 개수 이후 결과는 버려도 된다고
-가정한다. 이는 계산 하나하나 연산이 오래걸리는 작업이라면 버릴 결과를 위해서 연산을 하는 것과 같다.&lt;/p&gt;
-
-&lt;p&gt;따라서 리소스, 병렬로 나눴을 때 효용성을 고려해야 한다. 스트림 소스가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArrayList&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashMap&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HashSet&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ConcurrentHashMap&lt;/code&gt;의 인스턴스거나 배열
-int 범위, long 범위일 경우 효과가 좋다. 이들의 공통점은 순차적으로 실행할 때 참조 지역성이 뛰어다는 것이다.&lt;/p&gt;
-
-&lt;p&gt;또한 종단 연산 중 reduction에 적합하다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;min&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;max&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;count&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sum&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anyMatch&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;allMatch&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noneMatch&lt;/code&gt; 같은 연산 말이다. 가변 축소하는
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collect&lt;/code&gt;는 그다지 병렬에 적합하지 않다.&lt;/p&gt;
-
-&lt;p&gt;정리하면 스트림 병렬에는 주의해야 한다. 항상 행복한 결과가 있지는 않다. 성능이 나빠지거나 예상치 못한 동작을 발생할 수 있다. 또한 병렬화에 드는 추가 비용을 상쇄할 정도의
-결과가 나오지 않으면 단일 스트림이 낫다.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>
