@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[effective Java Series] 71.serializable | newkayak12.github.io</title>
+	<meta name="description"
+		content="직렬화">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/06/17/Effective-java-series-71.Serializable.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[effective Java Series] 71.serializable</h1>
+    
+    <p class="meta">
+      June 17, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="직렬화">직렬화</h1>
+
+<p>직렬화는 프로그래머가 어렵지 않게 분산 객체를 만들 수 있다는 매력이 있지만, 보이지 않는 생성자, API와 구현 사이 모호해진 경계, 잠재적 정확성 문제, 성능, 보안,
+유지보수성 등 대가가 크다는 단점이 있다.</p>
+
+<p>더 근본적으로는 공격당한 포인트가 너무 많다는 것이 있다. Object의 readObject(implement Serializable)는 classPath 안 거의 모든 타입의 객체를 만들어 
+낼 수 있는 마스터키와 같다. 바이트 스트림을 역직렬화하는 과정에서 이 메소드는 타입들 안의 모든 코드를 수행할 수 있게 된다. 실제로 신뢰할 수 없는 스트림을 역직렬화하면
+원격 코드 실행(RCE), 서비스 거부(denial-of-service, DoS) 등의 공격을 유발할 수 있다.</p>
+
+<p>직렬화 과정에서 호출되어 잠재적으로 위험한 동작을 수행하는 메소드들을 gadget이라고 부른다. gadget끼리 체이닝을 구서알 수도 있다. 이런 체이닝으로 하드웨어
+네이티브 코드를 마음대로 실행할 수 있는 강력한 취약점이 발견되고는 한다.(<code class="language-plaintext highlighter-rouge">RCE</code>)</p>
+
+<p>혹은 역직렬화에 시간이 오래 걸리게 해서 <code class="language-plaintext highlighter-rouge">deserialization bomb</code>을 투하할 수도 있다. (<code class="language-plaintext highlighter-rouge">DoS</code>) 이는 역직렬화 과정에서 그래프 탐색을 해서 계속 역직렬화 하는 것에서
+착안된 공격이다. 이를 피하기 위해서 그래프 탐색을 멈추는 방법이 있다.</p>
+
+<p>이런 단점이 있는데 굳이 (역)직렬화를 할 필요는 없다.  JSON/ protocolBuffer가 대안으로 있다. 둘의 차이는 사람이 그냥 눈으로 읽고 이해할 수 있는가 정도다.
+JSON은 사람이 읽을 수 있다. protocolBuffer는 바이너리 표현이라 어렵다. 물론 사람이 읽을 수 있도록 개선한 protocolBuffer도 있다(pbtxt)</p>
+
+<p>뭐 이래도 굳이 (역)직렬화를 해야한다면 <code class="language-plaintext highlighter-rouge">java.io.ObjectInputFilter</code>로 스트림이 역직렬화되기 전에 필터링할 수 있다. 화이트리스트 정책을 잡아서 필터링하고
+그 결과를 (역)직렬화하면 비교저거 안전하다.</p>
+
+<h1 id="serializable을-구현할지는-고민해봐라">Serializable을 구현할지는 고민해봐라</h1>
+
+<p>늘 그렇듯 인터페이스 구현 문제다. serializable을 구현하면 serialVersionUID가 생기는데 내부 구현을 바꾸면 이 값이 달라져 원래 직렬화 형태와 달라지게 된다.
+(그래서 직접 고른 값으로 명시적으로 작성하여 해당 문제를 피하기도 한다.)
+이러면 더 이상 확장을 불가능하게 한다. 물론 그대로 두고 내부 구현을 바꿀 수도 있지만 소스코드에 불필요한 혹을 남겨놓게 된다.</p>
+
+<p>또한 Serializable은 언어의 기본 생성 메커니즘을 뒤흔든다. 생성자 없이 객체 생성을 할 수 있게 하기 때문이다. 이 과정에서 일부러 생성을 실패하게 하고
+finalize를 실행시키는 공격도 가능하다.</p>
+
+<h1 id="굳이-쓴다면-커스터마이즈하자">굳이 쓴다면 커스터마이즈하자</h1>
+
+<p>고민해보고 기본 직렬화를 사용해도 될거 같으면 사용해도 된다. 직렬화하면 객체를 루트로하는 객체의 데이터와 그 객체에서부터 접근할 수 있는 모든 객체를 담아내며,
+객체들이 연결된 토폴로지까지 기술한다. 이렇게 꽤나 자세한 정보들이 기술되어 있기 때문에 불변식 보장과 보안을 위해서 <code class="language-plaintext highlighter-rouge">readObject</code>를 커스터마이징해서 제공해야
+할 때가 많다. 또한, 객체의 물리적 표현과 논리적 표현 차이가 클 때 기본 직렬화 형태를 사용하는 것이 문제가 생기는 경우가 있다.</p>
+
+<ol>
+  <li>공개 API가 내부 구현방식에 종속된다.</li>
+  <li>너무 많은 공간을 차지할 수도 있다.</li>
+  <li>시간이 오래걸릴 수도 있다.</li>
+  <li>스택오버플로의 위험에 노출된다.</li>
+</ol>
+
+<p>또한 기본 직렬화를 사용하면 <code class="language-plaintext highlighter-rouge">@Transient</code> 값이 직렬화/ 역직렬화 대상에서 제외되므로 문제가 될 수도 있다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html">
+        [effective Java Series] 70.donotdependonscheduler
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html">
+        [effective Java Series] 72.overridereadobjectdefensively
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -116,6 +116,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -988,6 +990,22 @@
     <a name="EFFECTIVE_JAVA"></a>
     
     <article class="archive-item">
+      <h4><a href="/effective_java/2024/06/16/Effective-java-series-67.AtomicExceptionAndDoNotIgnore.html">Effective java</a></h4>
+    </article>
+    
+    <article class="archive-item">
+      <h4><a href="/effective_java/2024/06/16/Effective-java-series-66.DoNotDependOnScheduler.html">Effective java</a></h4>
+    </article>
+    
+    <article class="archive-item">
+      <h4><a href="/effective_java/2024/06/16/Effective-java-series-65.ExecutorAndTaskAndStream.html">Effective java</a></h4>
+    </article>
+    
+    <article class="archive-item">
+      <h4><a href="/effective_java/2024/06/16/Effective-java-series-64.SyncSharedResources.html">Effective java</a></h4>
+    </article>
+    
+    <article class="archive-item">
       <h4><a href="/effective_java/2024/06/16/Effective-java-series-63.Exception.html">Effective java</a></h4>
     </article>
     
@@ -1244,6 +1262,198 @@
     <div class="post-teaser">
       <header>
         <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-06-Iterator.html">
+            [deisgn Pattern Series] 06 Iterator
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/06.Iterator.md">Dictionary - Iterator</a></p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-06-Iterator.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-05-Facade.html">
+            [deisgn Pattern Series] 05 Facade
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/05.Facade.md">Dictionary - Facade</a></p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-05-Facade.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-04-Builder.html">
+            [deisgn Pattern Series] 04 Builder
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/04.Builder.md">Dictionary - Builder</a></p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-04-Builder.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-03-FlyWeight.html">
+            [deisgn Pattern Series] 03 Flyweight
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/03.FlyWeight.md">Dictionary - FlyWeight</a></p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-03-FlyWeight.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-02-Composite.html">
+            [deisgn Pattern Series] 02 Composite
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/02.Composite.md">Dictionary - Composite</a></p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-02-Composite.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/design_pattern/2024/05/19/deisgn-pattern-series-01-ChainOfResponsibility.html">
+            [deisgn Pattern Series] 01 Chainofresponsibility
+          </a>
+        </h1>
+        <p class="meta">
+          May 19, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/designPattern/01.ChainOfResponsibility.md">Dictionary - Chain Of Responsibility</a></p>
+<h1 id="chain-of-responsibility">Chain Of Responsibility</h1>
+<p>책임 연쇄 패턴(Chain Of Responsibility Pattern, COR)은 클라이어트의 요청에 대한 세세한 처리를 하나의 객체가 몽땅 하는 것이 아닌,
+여러개의 처리 객체들로 나누고, 이들을 사슬(chain) 처럼 연결해 집합 안에서 연쇄적으로 처리하는 행동 패턴이다.</p>
+
+
+        <a class="button" href="/design_pattern/2024/05/19/deisgn-pattern-series-01-ChainOfResponsibility.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/java/2024/05/18/java-series-29-VirtualThread.html">
+            [java Series] 29 Virtualthread
+          </a>
+        </h1>
+        <p class="meta">
+          May 18, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/29.VirtualThread.md">Dictionary - VirtualThread</a></p>
+
+
+        <a class="button" href="/java/2024/05/18/java-series-29-VirtualThread.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/java/2024/05/18/java-series-28-Reactive.html">
+            [java Series] 28 Reactive
+          </a>
+        </h1>
+        <p class="meta">
+          May 18, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/28.Reactive.md">Dictionary - Reactive</a></p>
+
+
+        <a class="button" href="/java/2024/05/18/java-series-28-Reactive.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="/java/2024/05/18/java-series-27-Little.html">
+            [java Series] 27 Little
+          </a>
+        </h1>
+        <p class="meta">
+          May 18, 2024
+        </p>
+      </header>
+      <div class="excerpt">
+        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/27.Little.md">Dictionary - 자잘한 기록물</a></p>
+
+
+        <a class="button" href="/java/2024/05/18/java-series-27-Little.html">
+          Continue reading
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-teaser">
+      <header>
+        <h1>
           <a class="post-link" href="/java/2024/05/18/java-series-26-Set.html">
             [java Series] 26 Set
           </a>
@@ -1257,195 +1467,6 @@
 
 
         <a class="button" href="/java/2024/05/18/java-series-26-Set.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-24-Junit.html">
-            [java Series] 24 Junit
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/24.Junit.md">Dictionary - JUnit</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-24-Junit.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-23-ShellCommand.html">
-            [java Series] 23  shellcommand
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/23.%20ShellCommand.md">Dictionary - shellCommand</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-23-ShellCommand.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-22-FloatingPoint.html">
-            [java Series] 22 Floatingpoint
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/issue/FloatingPoint.md">Dictionary - Floating point issue</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-22-FloatingPoint.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-21-YAML.html">
-            [java Series] 21 Yaml
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/21.YAML.md">Dictionary - YAML</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-21-YAML.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-20-StringAndTokenizer.html">
-            [java Series] 20 Stringandtokenizer
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/20.StringAndTokenizer.md">Dictionary - Split vs StringTokenizer</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-20-StringAndTokenizer.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-19-Clone.html">
-            [java Series] 19 Clone
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/19.Clone.md">Dictionary - Clone</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-19-Clone.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-18-VariableArgument.html">
-            [java Series] 18 Variableargument
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/18.VariableArgument.md">Dictionary - 가변인자</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-18-VariableArgument.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-17-Generic.html">
-            [java Series] 17 Generic
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/17.Generic.md">Dictionary - Generic</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-17-Generic.html">
-          Continue reading
-        </a>
-      </div>
-    </div>
-    
-    <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="/java/2024/05/18/java-series-16-Enum.html">
-            [java Series] 16 Enum
-          </a>
-        </h1>
-        <p class="meta">
-          May 18, 2024
-        </p>
-      </header>
-      <div class="excerpt">
-        <p>from <a href="https://github.com/newkayak12/Dictionary/blob/master/java/16.Enum.md">Dictionary - Enumeration</a></p>
-
-
-        <a class="button" href="/java/2024/05/18/java-series-16-Enum.html">
           Continue reading
         </a>
       </div>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[effective Java Series] 72.overridereadobjectdefensively | newkayak12.github.io</title>
+	<meta name="description"
+		content="ReadObject 메소드는 방어적으로">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[effective Java Series] 72.overridereadobjectdefensively</h1>
+    
+    <p class="meta">
+      June 17, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="readobject-메소드는-방어적으로">ReadObject 메소드는 방어적으로</h1>
+
+<p>readObject는 실질적으로 public 생성자이다. deserialize 하면 객체가 생성되기 때문이다. 그래서 보통의 생성자처럼 readObject 메소드에도 인수가 유효한지
+검사하고 필요하다면 매개변수를 방어적으로 복사해야 한다. readObject를 이 작업을 제대로 수행하지 못하면 클래스 불변식이 깨는 공격을 쉬이 당할 수 있기 때문이다.
+즉, 불변식이 깨뜨릴 의도로 임의 생성한 바이트 스트림을 건네면 문제가 생긴다.</p>
+
+<p>결론적으로 객체를 역직렬화할 때는 클라이언트가 소유해서는 안되는 객체 참조를 갖는 필드를 모두 반드시 방어적으로 복사해야 한다.</p>
+
+<h1 id="인스턴스-수를-통제해야-한다면-readresolve보다는-열거-타입을-사용하자">인스턴스 수를 통제해야 한다면 readResolve보다는 열거 타입을 사용하자.</h1>
+
+<p>readResolve를 사용하면  readObject가 만들어진 인스턴스를 다른 것으로 대체할 수 있다. 역직렬화한 객체의 클래스가 readResolve 메소드를 적절히 정의해뒀다면
+역직렬화 후 새로 생성된 객체를 인수로 이 메소드가 호출되고, 이 메소드가 반환한 객체 참조가 새로 생성된 객체를 대신해 반환된다.</p>
+
+<p>이 메소드는 역직렬화한 객체는 무시하고 클래스 초기화 때 만들어진 인스턴스를 반환한다. 추가로 인스턴스 통제 목적으로 사용하면 <code class="language-plaintext highlighter-rouge">@Transient</code>로 해당 인스턴스를 제외해야
+객체 참조 공격을 방어할 수 있다. 만약 그렇지 않으면 메소드가 <code class="language-plaintext highlighter-rouge">readResolve</code> 메소드가 실행되기 전에 역직렬화된다. 그러면 참조 필드가 역직렬화되는 시점에
+그 역직렬화된 인스턴스의 참조를 훔쳐올 수 있다. 인스턴스 통제에 <code class="language-plaintext highlighter-rouge">readResolve</code>가 효과가 없는건 아니다. 컴파일 타임에 어떤 인스턴스들이 알 수 없다면 (리플렉션같은)
+직렬화 가능 인스턴스 통제 클래스를 작성해서 이를 수행할 수 있다.</p>
+
+<h1 id="직렬화된-인스턴스-대신-직렬화-프록시-사용을-검토하자">직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하자</h1>
+
+<p>serializable을 구현하면 비정상적인 방법으로 인스턴스를 생성할 수 있게 돈다. 버그와 보안 문제가 일어날 가능성이 커진다는 뜻이다. 이 위험을 크게 줄일 기법이 있다.
+직렬화 프록시 패턴(serialization proxy pattern)이다.</p>
+
+<p>바깥 클래스와 논리적 상태를 정밀하게 표현하는 중첩 클래스를 설계해서 <code class="language-plaintext highlighter-rouge">private static</code>이 중첩 클래스가 바로 바깥 클래스의 직렬화 프록시다. 중첩 클래스의
+생성자는 단 하나여야 하며, 바깥 클래스를 배개변수로 받아야 한다. 이 생성자는 단순히 인수로 넘어온 인스턴스의 데이터를 복사한다. 일관성 검사나 방어적 복사가
+필요 없다. 설계상, 직렬화 프록시의 기본 직렬화 형태는 바깥 클래스의 직렬화 형태로 쓰기에 이상적이다. 그리고 바깥 클래스와 직렬화 프록시 모두 <code class="language-plaintext highlighter-rouge">Serializable</code>을 구현한다고 선언해야 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.Period</span><span class="o">;</span>
+
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">SerializationProxy</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Date</span> <span class="n">start</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Date</span> <span class="n">end</span><span class="o">;</span>
+
+    <span class="nc">SerializationProxy</span><span class="o">(</span> <span class="nc">Period</span> <span class="n">p</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">start</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    
+    <span class="kd">private</span> <span class="nc">Object</span> <span class="nf">writeReplace</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Serializationproxy</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>writeReplace 덕에 직렬화 시스템은 바깥 클래스의 직렬화된 인스턴스를 생성해낼 수 없다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/2024/06/17/Effective-java-series-71.Serializable.html">
+        [effective Java Series] 71.serializable
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

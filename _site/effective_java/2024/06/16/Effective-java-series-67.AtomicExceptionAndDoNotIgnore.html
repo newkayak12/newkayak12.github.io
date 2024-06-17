@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Effective java | newkayak12.github.io</title>
+	<meta name="description"
+		content="가능한 한 실패 원자적으로 만들자. &amp; 예외를 무시하지 말라">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/effective_java/2024/06/16/Effective-java-series-67.AtomicExceptionAndDoNotIgnore.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Effective java</h1>
+    
+    <p class="meta">
+      June 16, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="가능한-한-실패-원자적으로-만들자--예외를-무시하지-말라">가능한 한 실패 원자적으로 만들자. &amp; 예외를 무시하지 말라</h1>
+
+<h2 id="가능한-한-실패-원자적으로-만들자">가능한 한 실패 원자적으로 만들자.</h2>
+
+<p>일반적으로 트랜잭션 같이 호출된 메소드가 실패하더라도 해당 객체는 메소드 호출 전 상태를 유지해야 한다. 이를 실패 원자적(failure-atomic)이라고 한다.
+불변 객체는 태생적으로 변경되지 않으니 실패 원자적이다.</p>
+
+<p>가변 객체는 실패 원자성을 보존해줘야 한다.</p>
+<ol>
+  <li>일반적으로 객체 내부 상태 변경 전 잠재적 예외 가능성을 유효성 검사로 걸러낸다.</li>
+  <li>실패할 가능성이 있는 모든 코드를, 객체의 상태를 바꾸는 코드보다 앞에 배치하는 방법이 있다.</li>
+  <li>객체의 임시 복사본을 두고 작업을 수행하고 성공이 되면 원래 객체와 교체하는 방법이 있다.</li>
+  <li>작업 도중 발생하는 실패를 가로채는 복구 코드를 작성해여 작업 전으로 되돌리는 방법도 있다.</li>
+</ol>
+
+<p>물론 실패 원자성을 보장하면 좋지만 항상 그럴 수는 없다. 예를 들어 비용이 너무 높을 때가 그 예다.</p>
+
+<h2 id="예외를-무시하지-말라">예외를 무시하지 말라</h2>
+
+<p>예외를 뱉는 경우 항상 이유가 있다. 그냥 뱉는 건 없다.  물론 catch를 비워 안쓰는 경우도 있다. 예를 들어 FileInpuStream을 닫을 때 그렇다. 
+파일 상태 변경이 없으니 복구할 일이 없으며, 이후 작업을 중단할 필요도 없다.  이런 경우 변수 명으로 <code class="language-plaintext highlighter-rouge">unused</code>, <code class="language-plaintext highlighter-rouge">ignored</code>등으로 명시적으로 표현해야 가독성이 높아진다</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/effective_java/2024/06/16/Effective-java-series-66.DoNotDependOnScheduler.html">
+        Effective java
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/2024/06/17/Effective-java-series-68.SyncSharedResources.html">
+        [effective Java Series] 68.syncsharedresources
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

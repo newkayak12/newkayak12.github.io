@@ -116,6 +116,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -198,6 +200,105 @@
 
 <script>
   window.store = {
+    
+      "2024-06-17-effective-java-series-72-overridereadobjectdefensively-html": {
+        "title": "[effective Java Series] 72.overridereadobjectdefensively",
+        "tags": "",
+        "date": "June 17, 2024",
+        "author": "",
+        "category": "",
+        "content": "ReadObject 메소드는 방어적으로readObject는 실질적으로 public 생성자이다. deserialize 하면 객체가 생성되기 때문이다. 그래서 보통의 생성자처럼 readObject 메소드에도 인수가 유효한지검사하고 필요하다면 매개변수를 방어적으로 복사해야 한다. readObject를 이 작업을 제대로 수행하지 못하면 클래스 불변식이 깨는 공격을 쉬이 당할 수 있기 때문이다.즉, 불변식이 깨뜨릴 의도로 임의 생성한 바이트 스트림을 건네면 문제가 생긴다.결론적으로 객체를 역직렬화할 때는 클라이언트가 소유해서는 안되는 객체 참조를 갖는 필드를 모두 반드시 방어적으로 복사해야 한다.인스턴스 수를 통제해야 한다면 readResolve보다는 열거 타입을 사용하자.readResolve를 사용하면  readObject가 만들어진 인스턴스를 다른 것으로 대체할 수 있다. 역직렬화한 객체의 클래스가 readResolve 메소드를 적절히 정의해뒀다면역직렬화 후 새로 생성된 객체를 인수로 이 메소드가 호출되고, 이 메소드가 반환한 객체 참조가 새로 생성된 객체를 대신해 반환된다.이 메소드는 역직렬화한 객체는 무시하고 클래스 초기화 때 만들어진 인스턴스를 반환한다. 추가로 인스턴스 통제 목적으로 사용하면 @Transient로 해당 인스턴스를 제외해야객체 참조 공격을 방어할 수 있다. 만약 그렇지 않으면 메소드가 readResolve 메소드가 실행되기 전에 역직렬화된다. 그러면 참조 필드가 역직렬화되는 시점에그 역직렬화된 인스턴스의 참조를 훔쳐올 수 있다. 인스턴스 통제에 readResolve가 효과가 없는건 아니다. 컴파일 타임에 어떤 인스턴스들이 알 수 없다면 (리플렉션같은)직렬화 가능 인스턴스 통제 클래스를 작성해서 이를 수행할 수 있다.직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하자serializable을 구현하면 비정상적인 방법으로 인스턴스를 생성할 수 있게 돈다. 버그와 보안 문제가 일어날 가능성이 커진다는 뜻이다. 이 위험을 크게 줄일 기법이 있다.직렬화 프록시 패턴(serialization proxy pattern)이다.바깥 클래스와 논리적 상태를 정밀하게 표현하는 중첩 클래스를 설계해서 private static이 중첩 클래스가 바로 바깥 클래스의 직렬화 프록시다. 중첩 클래스의생성자는 단 하나여야 하며, 바깥 클래스를 배개변수로 받아야 한다. 이 생성자는 단순히 인수로 넘어온 인스턴스의 데이터를 복사한다. 일관성 검사나 방어적 복사가필요 없다. 설계상, 직렬화 프록시의 기본 직렬화 형태는 바깥 클래스의 직렬화 형태로 쓰기에 이상적이다. 그리고 바깥 클래스와 직렬화 프록시 모두 Serializable을 구현한다고 선언해야 한다.import java.io.Serializable;import java.time.Period;private static class SerializationProxy implements Serializable {    private final Date start;    private final Date end;    SerializationProxy( Period p ) {        this.start = p.start;        this.end = p.end;    }    private static final long serialVersionUID = 1;        private Object writeReplace() {        return new Serializationproxy(this);    }}writeReplace 덕에 직렬화 시스템은 바깥 클래스의 직렬화된 인스턴스를 생성해낼 수 없다.",
+        "url": "//2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html"
+      }
+      ,
+    
+      "2024-06-17-effective-java-series-71-serializable-html": {
+        "title": "[effective Java Series] 71.serializable",
+        "tags": "",
+        "date": "June 17, 2024",
+        "author": "",
+        "category": "",
+        "content": "직렬화직렬화는 프로그래머가 어렵지 않게 분산 객체를 만들 수 있다는 매력이 있지만, 보이지 않는 생성자, API와 구현 사이 모호해진 경계, 잠재적 정확성 문제, 성능, 보안,유지보수성 등 대가가 크다는 단점이 있다.더 근본적으로는 공격당한 포인트가 너무 많다는 것이 있다. Object의 readObject(implement Serializable)는 classPath 안 거의 모든 타입의 객체를 만들어 낼 수 있는 마스터키와 같다. 바이트 스트림을 역직렬화하는 과정에서 이 메소드는 타입들 안의 모든 코드를 수행할 수 있게 된다. 실제로 신뢰할 수 없는 스트림을 역직렬화하면원격 코드 실행(RCE), 서비스 거부(denial-of-service, DoS) 등의 공격을 유발할 수 있다.직렬화 과정에서 호출되어 잠재적으로 위험한 동작을 수행하는 메소드들을 gadget이라고 부른다. gadget끼리 체이닝을 구서알 수도 있다. 이런 체이닝으로 하드웨어네이티브 코드를 마음대로 실행할 수 있는 강력한 취약점이 발견되고는 한다.(RCE)혹은 역직렬화에 시간이 오래 걸리게 해서 deserialization bomb을 투하할 수도 있다. (DoS) 이는 역직렬화 과정에서 그래프 탐색을 해서 계속 역직렬화 하는 것에서착안된 공격이다. 이를 피하기 위해서 그래프 탐색을 멈추는 방법이 있다.이런 단점이 있는데 굳이 (역)직렬화를 할 필요는 없다.  JSON/ protocolBuffer가 대안으로 있다. 둘의 차이는 사람이 그냥 눈으로 읽고 이해할 수 있는가 정도다.JSON은 사람이 읽을 수 있다. protocolBuffer는 바이너리 표현이라 어렵다. 물론 사람이 읽을 수 있도록 개선한 protocolBuffer도 있다(pbtxt)뭐 이래도 굳이 (역)직렬화를 해야한다면 java.io.ObjectInputFilter로 스트림이 역직렬화되기 전에 필터링할 수 있다. 화이트리스트 정책을 잡아서 필터링하고그 결과를 (역)직렬화하면 비교저거 안전하다.Serializable을 구현할지는 고민해봐라늘 그렇듯 인터페이스 구현 문제다. serializable을 구현하면 serialVersionUID가 생기는데 내부 구현을 바꾸면 이 값이 달라져 원래 직렬화 형태와 달라지게 된다.(그래서 직접 고른 값으로 명시적으로 작성하여 해당 문제를 피하기도 한다.)이러면 더 이상 확장을 불가능하게 한다. 물론 그대로 두고 내부 구현을 바꿀 수도 있지만 소스코드에 불필요한 혹을 남겨놓게 된다.또한 Serializable은 언어의 기본 생성 메커니즘을 뒤흔든다. 생성자 없이 객체 생성을 할 수 있게 하기 때문이다. 이 과정에서 일부러 생성을 실패하게 하고finalize를 실행시키는 공격도 가능하다.굳이 쓴다면 커스터마이즈하자고민해보고 기본 직렬화를 사용해도 될거 같으면 사용해도 된다. 직렬화하면 객체를 루트로하는 객체의 데이터와 그 객체에서부터 접근할 수 있는 모든 객체를 담아내며,객체들이 연결된 토폴로지까지 기술한다. 이렇게 꽤나 자세한 정보들이 기술되어 있기 때문에 불변식 보장과 보안을 위해서 readObject를 커스터마이징해서 제공해야할 때가 많다. 또한, 객체의 물리적 표현과 논리적 표현 차이가 클 때 기본 직렬화 형태를 사용하는 것이 문제가 생기는 경우가 있다.  공개 API가 내부 구현방식에 종속된다.  너무 많은 공간을 차지할 수도 있다.  시간이 오래걸릴 수도 있다.  스택오버플로의 위험에 노출된다.또한 기본 직렬화를 사용하면 @Transient 값이 직렬화/ 역직렬화 대상에서 제외되므로 문제가 될 수도 있다.",
+        "url": "//2024/06/17/Effective-java-series-71.Serializable.html"
+      }
+      ,
+    
+      "2024-06-17-effective-java-series-70-donotdependonscheduler-html": {
+        "title": "[effective Java Series] 70.donotdependonscheduler",
+        "tags": "",
+        "date": "June 17, 2024",
+        "author": "",
+        "category": "",
+        "content": "스케쥴러에 의존하지 말라보통 OS 스케쥴러에 의존해서 쓰레드를 얼마나 오래 실핼할지 정한다. 그러나 OS 별로 스케쥴링 정책은 달라진다.따라서 이에 의존하면 정확성, 성능이 스케쥴러에 따라 달라지는 일이 발생한다. 플랫폼에 의존적이게 된다는 의미다.보통 OS의 평균 쓰레드 수보다 적게 쓰레드 수를 잡으면 스케쥴링에 지장이 생기기 않게 된다. 실행 준비가 됐다면 쓰레드들이 맡은 작업을 끝낼 때까지굳이 반환할 필요가 없다.실행 가능한 쓰레드 수를 적게 유지하는 방법(가용성을 높히는 방법)은 각 쓰레드가 쉬면 대기하고 있는 다른 일을 시키면 된다. 그러면 쉬는 시간이 줄고 가용성이 높아진다.혹여, CPU 스케쥴링 타임을 제대로 할당받지 못해서 간신히 돌아가는 경우를 보더라도  Thread.yield로 쓰레드 권한 이양하는 일은 염두하지 말자.쓰레드마다 다를 수 있으므로 범용적인 방법은 아닐 수 있다.",
+        "url": "//2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html"
+      }
+      ,
+    
+      "2024-06-17-effective-java-series-69-executorandtaskandstream-html": {
+        "title": "[effective Java Series] 69.executorandtaskandstream",
+        "tags": "",
+        "date": "June 17, 2024",
+        "author": "",
+        "category": "",
+        "content": "쓰레드보다 실행자, 태스크, 스트림ExecutorService exec = Executors.newSingleThreadExecutor(); 로 실행자를 만들 수 있다. java.util.concurrent에 있다.이러고 exec.execute(runnable);로 task를 넘길 수 있다.이외도  특정 태스크가 완료되길 기다린다.  태스크 셋 중 뭐든 (invokeAny) 혹은 모두(invokeAll) 완료되길 기다린다.  실행자 서비스가 종료되길 기다릴 수 있다.  완료된 태스크들 결과를 차례로 받는다.  태스크를 특정 시간에 혹은 주기적으로 실행하게 한다.(ScheduledThreadPoolExecutor)자바 7이 되면서 fork-join이 태스크를 지원하도록 확장됐다. ForkJoinPool을 구성하는 쓰레드들이 이 태스크 들을 처리하며, 일을 먼저 끝낸 쓰레드는 다른 쓰레드의남은 태스크를 가져와서 대신 처리할 수도 있다.wait, notify 보단 동시성 유틸리티wait, notify는 까다롭다. 차라리 고수준 동시성 유틸리티를 사용하자.executorFramework, concurrent collection, synchronizer다. concurrent collection는 내부에서 동기화를 실행한다. 동시성 컬렉션에서동시성을 무력화시키는 건 불가능하며, 외부에서 락을 추가로 사용하면 오히려 속도가 느려진다. 근데, 메소드를 원자적으로 묶어서 호출하는 건 불가하다.(묶어서 하나의 덩어리로) 그래서 기본동작을 하나의 원자 단위로 묶는 상태 의존성 수정 메소드들이 추가됐다. putIfAbsent가 예시다. 컬렉션 인터페이스 중 일부는 작업 성공이 확인될 때까지 기다리도록확장된 경우도 있다. (BlockingQueue)내부 동기화 장치로는 CountDownLatch, Semaphore 등이 있다. countDownLatch는 일회성 장벽으로, 하나 이상의 쓰레드가 또 다른 쓰레드 작업이 끝날 때까지 기다리게 한다. 주의할 점은 코어 이상으로 래치를 설정하면 쓰레드 기아 교착에 빠질 수 있다.(Thread starvation deadlock)굳이 이 둘을 사용해야 한다면 wait은 synchronized 안에서 사용하고 while 내부에서 사용해서 기다리게 해야 한다. 조건이 충족되면 풀어주고 notify해야 한다.여기서 notifyAll, notify 중 고민하게 될텐데, 일반적으로 notifyAll이 나을 수 있다.  모든 쓰레드가 깨어나지만 외부 공격에 의해서 깨운 Thread를 다시 sleep되어 영원이 sleep하는 경우에서 벗어날 수 있다.문서화멀티 쓰레드 환경에서도 API를 안전하게 사용하게 하려면 클래스가 지원하는 쓰레드 안정성 수준을 명시해야 한다.  불변(immutable) : 클래스 인스턴스는 마치 상수와 같아서 외부 동기화 필요가 없다.  무조건 쓰레드 안전(unconditionally thread-safe) : 인스턴스는 수정될 수 있으나, 내부에서 충실히 동기화 해서 별도 외부 동기화가 필요 없다.  조건부 쓰레드 안전(conditionally thread-safe) : 무조건적 쓰레드 안전과 같으나 일부 메소드에는 동시에 사용하려면 외부 동기화가 필요  쓰레드 안전하지 않음(not thread-safe) : 이 클래스의 인스턴스는 수정될 수 있다. 동시에 사용하려면 각각의 메소드 호출을 클라이언트가 외부에서 동기화 해야 한다.  쓰레드 적대적(thread-hostile) : 외부 동기화를 해도 멀티쓰레드 환경에서 위험한 경우다. 예를 들어 정적 데이터를 동기화 없이 수정하는 경우다.위 기준에 맞춰서 문서화하여 적절한 처리를 할 수 있도록 유도해야 한다. 물론 메소드 시그니쳐에 명시할 수도 있다.지연 초기화는 신중히lazy initialization은 초기화 시점이 해당 값이 필요할 때까지 늦추는 방법이다. 주로 최적화에 사용하지만 클래스, 인스턴스 초기화 때 발생하는 위험한 순환문제를 해결하는 효과도 있다. 물론 접근시 비용이 늘어난다.멀티 쓰레드 환경에서는 지연초기화는 문제가 될 수 있다. 필드를 둘 이상의 쓰레드가 공유하면 동시에 여러 개를 초기화할 수 있다. 지연 초기화가 초기화 순환성(initialization circularity)를 깨뜨릴거 같으면 synchronized를 사용하면 된다.혹은 lazy initialization holder class를 사용할 수도 있다. 클래스는 클래스가 처음 쓰일 때 비로소 초기화 된다는 특성을 이용한 관용구다( 싱글톤에서도 유용하다. )혹은 이중 검사(double-check) 관용구를 사용할 수도 있다.import java.util.Objects;private volatie FieldExample field;private FieldExample getField() {    FieldExample result = field;    if (Objects.nonNull(result)) return result;        synchronized (this) {        if(Objects.isNull(field)) field = //할당                return result;    }}",
+        "url": "//2024/06/17/Effective-java-series-69.ExecutorAndTaskAndStream.html"
+      }
+      ,
+    
+      "2024-06-17-effective-java-series-68-syncsharedresources-html": {
+        "title": "[effective Java Series] 68.syncsharedresources",
+        "tags": "",
+        "date": "June 17, 2024",
+        "author": "",
+        "category": "",
+        "content": "공유 중인 가변 데이터는 동기화하자synchronized는 해당 메소드, 블록을 한 번에 한 쓰레드씩 수행하도록 보장한다. 즉, 객체를 하나의 일관된 상태에서 다른 일관된 상태로 변경시킨다. 동기화를제대로 사용하면 어떤 메소드도 이 객체의 상태가 일관되지 않은 순간을 볼 수 없다.동기화 이외에 다른 쓰레드가 만든 변화를 체크하기 위한 용도로도 사용할 수 있다. 동기화는 일관성이 꺠진 상태를 볼 수 없게 하는 것은 물론, 동기화된 메소드나 블록에 들어간쓰레드가 같은 락의 보호 하에 수행된 모든 이전 수정의 최종 결과를 보게 해준다.자바 명세는 쓰레드가 필드를 읽을 때 ‘수정이 완전히 반영된’ 값을 보장한다고 하지만, 쓰레드 간에도 보장하는가 하면 아니다. 따라서 동기화는 배타적 실행뿐만 아니라쓰레드 사이의 안정적인 통신에 꼭 필요하다. 이는 쓰레드가 만든 변화가 다른 쓰레드에 언제 어떻게 보이는지를 규정한 자바의 메모리 모델 때문이다.while( !stopRequested ) i ++;위와 같은 코드가 있다고 하자 쓰레드 동기화를 사용하지 않으면, jvm이 코드 최적화를 할 때if(!stopRequested) {    while (true) i ++;}로 바뀐다. 이는 hoisting 때문이다. 이런 잘못된 최적화로 synchronized를 사용하지 않으면  원하는대로 코드가 작동하지 않을 수 있다. 혹은 위  stopRequested 변수를 get, set으로 바꾸고 둘 다 synchronized를 붙이는 방법도 있다.private static synchronized void requestStop() { stopRequested = true; }private static synchronized boolean requestedStop() { return this.stopRequested; }if(!stopRequested()) {    while (true) i ++;}읽기 쓰기 모두 동기화해야 한다. 변경도, 읽기도 모두 동기화 해야 상태를 보장할 수 있다. 혹은 volatile을 사용하는 방법도 있다. volatile은 해당 변수를 메인 메모리에 저장하도록 하는 예약어다.물론 붙인다고 능사가 아니다. set 연산을 동기화해야 한다. 왜냐하면 쓰레드가 수정하고 반영하기 전 다른 쓰레드가 비집고 들어와 첫 번쨰와 같은 값을 반환할 수 있기 떄문이다.이런 경우를 안전 실패(Safety failure)라고 한다.다른 방법으로 java.util.concurrent.atomic을 사용해서 원자성을 지킬 수 있다. 이 패키지에는 락 없이도 thread-safe한 클래스들이 담겨 있다.과도한 동기는 피하는게 좋다.과도한 동기화는 당연히 성능 저하를 일으키고 심지어 교착상태에 빠뜨리기도 하고 결국 예측할 수 없는 동작을 낳기도 한다. 응답 불가, 안전 실패를 막으려면동기화 메소드나 동기화 블록 안에서는 제어를 절대로 클라이언트에 넘기면 안된다. 즉 재정의 메소드를 넘겨도 안되고, 함수 객체도 실행하면 안된다. 이런 alien 메소드는예외를 일으키거나, 교착상태에 빠지게 하거나 데이터를 훼손할 수도 있다.차라리 동기화 영역 바깥에서 alien 메소드를 호출(open call)하는게 좋다. 외부 메소드가 얼마나 오래 실행할지 모르기에 이는 현명한 선택이다. 즉, 실패 방지, 동시성 효율 제고를해준다. 물론 동기화를 최소한으로 하는게 최고다. 동기화는 락을 거는게 문제가 아니라 Thread 간 경쟁으로 낭비(병렬성을 잃고 모든 코어가 메모리 일관성을 위한 지연 시간) 때문에문제가 된다. 또한 JVM 최적화를 제한하기도 한다는 점이 큰 문제다. 그래서 차라리  동기화를 외부에서 하게 하거나  동기화를 아예 숨겨서 내부에서 하기라는 방법이 있다. 2번은 차선책이다.  더 심화하면 lock-splitting, lock striping, nonblocking concurrency control 등 다양한 기법을 동원해서 동시성을 높여줄 수 있다.  lock-splitting : 하나의 클래스에서 기능적으로 락을 분할( 읽기/ 쓰기락 )  lock striping : 자료 구조 관점에서 일부에만 락을 거는 것  nonblocking concurrency control :",
+        "url": "//2024/06/17/Effective-java-series-68.SyncSharedResources.html"
+      }
+      ,
+    
+      "effective-java-2024-06-16-effective-java-series-67-atomicexceptionanddonotignore-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 16, 2024",
+        "author": "",
+        "category": "",
+        "content": "가능한 한 실패 원자적으로 만들자. &amp; 예외를 무시하지 말라가능한 한 실패 원자적으로 만들자.일반적으로 트랜잭션 같이 호출된 메소드가 실패하더라도 해당 객체는 메소드 호출 전 상태를 유지해야 한다. 이를 실패 원자적(failure-atomic)이라고 한다.불변 객체는 태생적으로 변경되지 않으니 실패 원자적이다.가변 객체는 실패 원자성을 보존해줘야 한다.  일반적으로 객체 내부 상태 변경 전 잠재적 예외 가능성을 유효성 검사로 걸러낸다.  실패할 가능성이 있는 모든 코드를, 객체의 상태를 바꾸는 코드보다 앞에 배치하는 방법이 있다.  객체의 임시 복사본을 두고 작업을 수행하고 성공이 되면 원래 객체와 교체하는 방법이 있다.  작업 도중 발생하는 실패를 가로채는 복구 코드를 작성해여 작업 전으로 되돌리는 방법도 있다.물론 실패 원자성을 보장하면 좋지만 항상 그럴 수는 없다. 예를 들어 비용이 너무 높을 때가 그 예다.예외를 무시하지 말라예외를 뱉는 경우 항상 이유가 있다. 그냥 뱉는 건 없다.  물론 catch를 비워 안쓰는 경우도 있다. 예를 들어 FileInpuStream을 닫을 때 그렇다. 파일 상태 변경이 없으니 복구할 일이 없으며, 이후 작업을 중단할 필요도 없다.  이런 경우 변수 명으로 unused, ignored등으로 명시적으로 표현해야 가독성이 높아진다",
+        "url": "//effective_java/2024/06/16/Effective-java-series-67.AtomicExceptionAndDoNotIgnore.html"
+      }
+      ,
+    
+      "effective-java-2024-06-16-effective-java-series-66-donotdependonscheduler-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 16, 2024",
+        "author": "",
+        "category": "",
+        "content": "스케쥴러에 의존하지 말라보통 OS 스케쥴러에 의존해서 쓰레드를 얼마나 오래 실핼할지 정한다. 그러나 OS 별로 스케쥴링 정책은 달라진다.따라서 이에 의존하면 정확성, 성능이 스케쥴러에 따라 달라지는 일이 발생한다. 플랫폼에 의존적이게 된다는 의미다.보통 OS의 평균 쓰레드 수보다 적게 쓰레드 수를 잡으면 스케쥴링에 지장이 생기기 않게 된다. 실행 준비가 됐다면 쓰레드들이 맡은 작업을 끝낼 때까지굳이 반환할 필요가 없다.실행 가능한 쓰레드 수를 적게 유지하는 방법(가용성을 높히는 방법)은 각 쓰레드가 쉬면 대기하고 있는 다른 일을 시키면 된다. 그러면 쉬는 시간이 줄고 가용성이 높아진다.혹여, CPU 스케쥴링 타임을 제대로 할당받지 못해서 간신히 돌아가는 경우를 보더라도  Thread.yield로 쓰레드 권한 이양하는 일은 염두하지 말자.쓰레드마다 다를 수 있으므로 범용적인 방법은 아닐 수 있다.",
+        "url": "//effective_java/2024/06/16/Effective-java-series-66.DoNotDependOnScheduler.html"
+      }
+      ,
+    
+      "effective-java-2024-06-16-effective-java-series-65-executorandtaskandstream-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 16, 2024",
+        "author": "",
+        "category": "",
+        "content": "쓰레드보다 실행자, 태스크, 스트림 &amp; wait, notify 보단 동시성 유틸리티 &amp; 문서화 &amp; 지연 초기화는 신중히쓰레드보다 실행자, 태스크, 스트림ExecutorService exec = Executors.newSingleThreadExecutor(); 로 실행자를 만들 수 있다. java.util.concurrent에 있다.이러고 exec.execute(runnable);로 task를 넘길 수 있다.이외도  특정 태스크가 완료되길 기다린다.  태스크 셋 중 뭐든 (invokeAny) 혹은 모두(invokeAll) 완료되길 기다린다.  실행자 서비스가 종료되길 기다릴 수 있다.  완료된 태스크들 결과를 차례로 받는다.  태스크를 특정 시간에 혹은 주기적으로 실행하게 한다.(ScheduledThreadPoolExecutor)자바 7이 되면서 fork-join이 태스크를 지원하도록 확장됐다. ForkJoinPool을 구성하는 쓰레드들이 이 태스크 들을 처리하며, 일을 먼저 끝낸 쓰레드는 다른 쓰레드의남은 태스크를 가져와서 대신 처리할 수도 있다.wait, notify 보단 동시성 유틸리티wait, notify는 까다롭다. 차라리 고수준 동시성 유틸리티를 사용하자.executorFramework, concurrent collection, synchronizer다. concurrent collection는 내부에서 동기화를 실행한다. 동시성 컬렉션에서동시성을 무력화시키는 건 불가능하며, 외부에서 락을 추가로 사용하면 오히려 속도가 느려진다. 근데, 메소드를 원자적으로 묶어서 호출하는 건 불가하다.(묶어서 하나의 덩어리로) 그래서 기본동작을 하나의 원자 단위로 묶는 상태 의존성 수정 메소드들이 추가됐다. putIfAbsent가 예시다. 컬렉션 인터페이스 중 일부는 작업 성공이 확인될 때까지 기다리도록확장된 경우도 있다. (BlockingQueue)내부 동기화 장치로는 CountDownLatch, Semaphore 등이 있다. countDownLatch는 일회성 장벽으로, 하나 이상의 쓰레드가 또 다른 쓰레드 작업이 끝날 때까지 기다리게 한다. 주의할 점은 코어 이상으로 래치를 설정하면 쓰레드 기아 교착에 빠질 수 있다.(Thread starvation deadlock)굳이 이 둘을 사용해야 한다면 wait은 synchronized 안에서 사용하고 while 내부에서 사용해서 기다리게 해야 한다. 조건이 충족되면 풀어주고 notify해야 한다.여기서 notifyAll, notify 중 고민하게 될텐데, 일반적으로 notifyAll이 나을 수 있다.  모든 쓰레드가 깨어나지만 외부 공격에 의해서 깨운 Thread를 다시 sleep되어 영원이 sleep하는 경우에서 벗어날 수 있다.문서화멀티 쓰레드 환경에서도 API를 안전하게 사용하게 하려면 클래스가 지원하는 쓰레드 안정성 수준을 명시해야 한다.  불변(immutable) : 클래스 인스턴스는 마치 상수와 같아서 외부 동기화 필요가 없다.  무조건 쓰레드 안전(unconditionally thread-safe) : 인스턴스는 수정될 수 있으나, 내부에서 충실히 동기화 해서 별도 외부 동기화가 필요 없다.  조건부 쓰레드 안전(conditionally thread-safe) : 무조건적 쓰레드 안전과 같으나 일부 메소드에는 동시에 사용하려면 외부 동기화가 필요  쓰레드 안전하지 않음(not thread-safe) : 이 클래스의 인스턴스는 수정될 수 있다. 동시에 사용하려면 각각의 메소드 호출을 클라이언트가 외부에서 동기화 해야 한다.  쓰레드 적대적(thread-hostile) : 외부 동기화를 해도 멀티쓰레드 환경에서 위험한 경우다. 예를 들어 정적 데이터를 동기화 없이 수정하는 경우다.위 기준에 맞춰서 문서화하여 적절한 처리를 할 수 있도록 유도해야 한다. 물론 메소드 시그니쳐에 명시할 수도 있다.지연 초기화는 신중히lazy initialization은 초기화 시점이 해당 값이 필요할 때까지 늦추는 방법이다. 주로 최적화에 사용하지만 클래스, 인스턴스 초기화 때 발생하는 위험한 순환문제를 해결하는 효과도 있다. 물론 접근시 비용이 늘어난다.멀티 쓰레드 환경에서는 지연초기화는 문제가 될 수 있다. 필드를 둘 이상의 쓰레드가 공유하면 동시에 여러 개를 초기화할 수 있다. 지연 초기화가 초기화 순환성(initialization circularity)를 깨뜨릴거 같으면 synchronized를 사용하면 된다.혹은 lazy initialization holder class를 사용할 수도 있다. 클래스는 클래스가 처음 쓰일 때 비로소 초기화 된다는 특성을 이용한 관용구다( 싱글톤에서도 유용하다. )혹은 이중 검사(double-check) 관용구를 사용할 수도 있다.import java.util.Objects;private volatie FieldExample field;private FieldExample getField() {    FieldExample result = field;    if (Objects.nonNull(result)) return result;        synchronized (this) {        if(Objects.isNull(field)) field = //할당                return result;    }}",
+        "url": "//effective_java/2024/06/16/Effective-java-series-65.ExecutorAndTaskAndStream.html"
+      }
+      ,
+    
+      "effective-java-2024-06-16-effective-java-series-64-syncsharedresources-html": {
+        "title": "Effective java",
+        "tags": "",
+        "date": "June 16, 2024",
+        "author": "",
+        "category": "",
+        "content": "공유 중인 가변 데이터는 동기화하자  &amp; 과도한 동기는 피하는게 좋다.공유 중인 가변 데이터는 동기화하자synchronized는 해당 메소드, 블록을 한 번에 한 쓰레드씩 수행하도록 보장한다. 즉, 객체를 하나의 일관된 상태에서 다른 일관된 상태로 변경시킨다. 동기화를제대로 사용하면 어떤 메소드도 이 객체의 상태가 일관되지 않은 순간을 볼 수 없다.동기화 이외에 다른 쓰레드가 만든 변화를 체크하기 위한 용도로도 사용할 수 있다. 동기화는 일관성이 꺠진 상태를 볼 수 없게 하는 것은 물론, 동기화된 메소드나 블록에 들어간쓰레드가 같은 락의 보호 하에 수행된 모든 이전 수정의 최종 결과를 보게 해준다.자바 명세는 쓰레드가 필드를 읽을 때 ‘수정이 완전히 반영된’ 값을 보장한다고 하지만, 쓰레드 간에도 보장하는가 하면 아니다. 따라서 동기화는 배타적 실행뿐만 아니라쓰레드 사이의 안정적인 통신에 꼭 필요하다. 이는 쓰레드가 만든 변화가 다른 쓰레드에 언제 어떻게 보이는지를 규정한 자바의 메모리 모델 때문이다.while( !stopRequested ) i ++;위와 같은 코드가 있다고 하자 쓰레드 동기화를 사용하지 않으면, jvm이 코드 최적화를 할 때if(!stopRequested) {    while (true) i ++;}로 바뀐다. 이는 hoisting 때문이다. 이런 잘못된 최적화로 synchronized를 사용하지 않으면  원하는대로 코드가 작동하지 않을 수 있다. 혹은 위  stopRequested 변수를 get, set으로 바꾸고 둘 다 synchronized를 붙이는 방법도 있다.private static synchronized void requestStop() { stopRequested = true; }private static synchronized boolean requestedStop() { return this.stopRequested; }if(!stopRequested()) {    while (true) i ++;}읽기 쓰기 모두 동기화해야 한다. 변경도, 읽기도 모두 동기화 해야 상태를 보장할 수 있다. 혹은 volatile을 사용하는 방법도 있다. volatile은 해당 변수를 메인 메모리에 저장하도록 하는 예약어다.물론 붙인다고 능사가 아니다. set 연산을 동기화해야 한다. 왜냐하면 쓰레드가 수정하고 반영하기 전 다른 쓰레드가 비집고 들어와 첫 번쨰와 같은 값을 반환할 수 있기 떄문이다.이런 경우를 안전 실패(Safety failure)라고 한다.다른 방법으로 java.util.concurrent.atomic을 사용해서 원자성을 지킬 수 있다. 이 패키지에는 락 없이도 thread-safe한 클래스들이 담겨 있다.과도한 동기는 피하는게 좋다.과도한 동기화는 당연히 성능 저하를 일으키고 심지어 교착상태에 빠뜨리기도 하고 결국 예측할 수 없는 동작을 낳기도 한다. 응답 불가, 안전 실패를 막으려면동기화 메소드나 동기화 블록 안에서는 제어를 절대로 클라이언트에 넘기면 안된다. 즉 재정의 메소드를 넘겨도 안되고, 함수 객체도 실행하면 안된다. 이런 alien 메소드는예외를 일으키거나, 교착상태에 빠지게 하거나 데이터를 훼손할 수도 있다.차라리 동기화 영역 바깥에서 alien 메소드를 호출(open call)하는게 좋다. 외부 메소드가 얼마나 오래 실행할지 모르기에 이는 현명한 선택이다. 즉, 실패 방지, 동시성 효율 제고를해준다. 물론 동기화를 최소한으로 하는게 최고다. 동기화는 락을 거는게 문제가 아니라 Thread 간 경쟁으로 낭비(병렬성을 잃고 모든 코어가 메모리 일관성을 위한 지연 시간) 때문에문제가 된다. 또한 JVM 최적화를 제한하기도 한다는 점이 큰 문제다. 그래서 차라리  동기화를 외부에서 하게 하거나  동기화를 아예 숨겨서 내부에서 하기라는 방법이 있다. 2번은 차선책이다.  더 심화하면 lock-splitting, lock striping, nonblocking concurrency control 등 다양한 기법을 동원해서 동시성을 높여줄 수 있다.  lock-splitting : 하나의 클래스에서 기능적으로 락을 분할( 읽기/ 쓰기락 )  lock striping : 자료 구조 관점에서 일부에만 락을 거는 것  nonblocking concurrency control :",
+        "url": "//effective_java/2024/06/16/Effective-java-series-64.SyncSharedResources.html"
+      }
+      ,
     
       "effective-java-2024-06-16-effective-java-series-63-exception-html": {
         "title": "Effective java",
