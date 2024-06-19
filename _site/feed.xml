@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Wed, 19 Jun 2024 22:42:39 +0900</pubDate>
+    <pubDate>Wed, 19 Jun 2024 22:43:53 +0900</pubDate>
     
       <item>
         <title>[programmers Series] Lv. 01 Gif</title>
@@ -144,6 +144,27 @@ B가 친구들에게 준 선물이 3개고 받은 선물이 2개라면 B의 선�
 
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[others Series]analytics</title>
+        <link>/2024/06/19/Others-series-Analytics.html</link>
+        <guid isPermaLink="true">/2024/06/19/Others-series-Analytics.html</guid>
+        <description>&lt;h1 id=&quot;mau-dau-mcu-acu&quot;&gt;MAU, DAU, MCU, ACU&lt;/h1&gt;
+
+&lt;h2 id=&quot;mau-monthly-activity-user-&quot;&gt;MAU( Monthly Activity User )&lt;/h2&gt;
+&lt;p&gt;월별 활동한 이용자를 의미하며, 한 달에 몇 명이나 이 서비스를 이용하는지에 대해서 구분할 때 사용한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;dau-daily-activity-user-&quot;&gt;DAU( Daily Activity User )&lt;/h2&gt;
+&lt;p&gt;일별 활동 이용자에 대한 수치. 하루에 몇 명이나 이 서비스를 이용하는지에 대해서 이야기한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;mcu-maximum-current-user-&quot;&gt;MCU( Maximum Current User )&lt;/h2&gt;
+&lt;p&gt;순간 동시 접속자를 의미하며, 보통 실시간으로 수치를 해석한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;acu-average-current-user-&quot;&gt;ACU( Average Current User )&lt;/h2&gt;
+&lt;p&gt;평균 동시 접속자를 의미한다.&lt;/p&gt;
 </description>
         <pubDate>Wed, 19 Jun 2024 00:00:00 +0900</pubDate>
       </item>
@@ -743,29 +764,6 @@ finalize를 실행시키는 공격도 가능하다.&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;그외 get, set으로 시작하는 형태는 javaBeans 명세에 뿌리를 두고 있다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/15/Effective-java-series-59.Native.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/15/Effective-java-series-59.Native.html</guid>
-        <description>&lt;h1 id=&quot;네이티브-메소드는-신중히-사용하라&quot;&gt;네이티브 메소드는 신중히 사용하라&lt;/h1&gt;
-
-&lt;p&gt;자바 네이티브 인터페이스( Java Native Interface, JNI )는 자바 프로그램이 네이티브 메소드를 호출하는 기술이다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;레지스트리 같은 플랫폼 특화 기능을 사용한다.&lt;/li&gt;
-  &lt;li&gt;네이티브 코드로 작성된 기존 라이브러리를 사용한다.&lt;/li&gt;
-  &lt;li&gt;성능 개선을 목적으로 성능에 결정적인 영향을 주는 영역만 따로 네이티브 언어로 작성한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;플랫폼 특화 기능을 활용하려면 네이티브 메소드를 사용해야 한다. 자바가 성숙해지면서 점차 네이티브 메소드를 사용할 일이 줄어든다. 그 예시가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;process api&lt;/code&gt;다.
-그러나 성능을 개선할 목적으로 네이티브 메서드를 사용하는 것은 거의 권장하지 않는다. 이미 자바가 성숙됐다.&lt;/p&gt;
-
-&lt;p&gt;또한 네이티브 메소드에는 심각한 단점이 있다. 네이티브 언어가 안전하지 않으므로 네이티브 메소드를 사용하는 애플리케이션도 메모리 훼손 오류로부터 더 이상 안전하지 않다.
-뿐만 아니라 CG 관장 영역이 아니므로 메모리를 자동으로 회수하거나 추적조차 불가하다. 마지막으로 네이티브 - 자바 간 접착 코드(glueCode)가 필요한데 번거로운 작업이다.&lt;/p&gt;
 </description>
         <pubDate>Sat, 15 Jun 2024 00:00:00 +0900</pubDate>
       </item>
