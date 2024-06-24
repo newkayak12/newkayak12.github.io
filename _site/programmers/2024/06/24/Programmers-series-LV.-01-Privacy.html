@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Privacy | newkayak12.github.io</title>
+	<meta name="description"
+		content="카카오 - 개인정보 수집 유효기간">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/06/24/Programmers-series-LV.-01-Privacy.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Privacy</h1>
+    
+    <p class="meta">
+      June 24, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="카카오---개인정보-수집-유효기간">카카오 - 개인정보 수집 유효기간</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/150370">Programmers</a></p>
+
+<blockquote>
+
+  <pre>
+고객의 약관 동의를 얻어서 수집된 1~n번으로 분류되는 개인정보 n개가 있습니다. 약관 종류는 여러 가지 있으며 각 약관마다 개인정보 보관 유효기간이 정해져 있습니다. 당신은 각 개인정보가 어떤 약관으로 수집됐는지 알고 있습니다. 수집된 개인정보는 유효기간 전까지만 보관 가능하며, 유효기간이 지났다면 반드시 파기해야 합니다.
+예를 들어, A라는 약관의 유효기간이 12 달이고, 2021년 1월 5일에 수집된 개인정보가 A약관으로 수집되었다면 해당 개인정보는 2022년 1월 4일까지 보관 가능하며 2022년 1월 5일부터 파기해야 할 개인정보입니다.
+당신은 오늘 날짜로 파기해야 할 개인정보 번호들을 구하려 합니다.
+모든 달은 28일까지 있다고 가정합니다.
+다음은 오늘 날짜가 2022.05.19일 때의 예시입니다.
+
+약관 종류	유효기간
+A  	6 달
+B  	12 달
+C  	3 달
+
+번호	개인정보 수집 일자	약관 종류
+1  	2021.05.02	  A
+2  	2021.07.01	  B
+3  	2022.02.19	  C
+4  	2022.02.20	  C
+첫 번째 개인정보는 A약관에 의해 2021년 11월 1일까지 보관 가능하며, 유효기간이 지났으므로 파기해야 할 개인정보입니다.
+두 번째 개인정보는 B약관에 의해 2022년 6월 28일까지 보관 가능하며, 유효기간이 지나지 않았으므로 아직 보관 가능합니다.
+세 번째 개인정보는 C약관에 의해 2022년 5월 18일까지 보관 가능하며, 유효기간이 지났으므로 파기해야 할 개인정보입니다.
+네 번째 개인정보는 C약관에 의해 2022년 5월 19일까지 보관 가능하며, 유효기간이 지나지 않았으므로 아직 보관 가능합니다.
+따라서 파기해야 할 개인정보 번호는 [1, 3]입니다.
+오늘 날짜를 의미하는 문자열 today, 약관의 유효기간을 담은 1차원 문자열 배열 terms와 수집된 개인정보의 정보를 담은 1차원 문자열 배열 privacies가 매개변수로 주어집니다. 이때 파기해야 할 개인정보의 번호를 오름차순으로 1차원 정수 배열에 담아 return 하도록 solution 함수를 완성해 주세요.
+
+
+
+제한사항
+- today는 "YYYY.MM.DD" 형태로 오늘 날짜를 나타냅니다.
+- 1 ≤ terms의 길이 ≤ 20
+  - terms의 원소는 "약관 종류 유효기간" 형태의 약관 종류와 유효기간을 공백 하나로 구분한 문자열입니다.
+  - 약관 종류는 A~Z중 알파벳 대문자 하나이며, terms 배열에서 약관 종류는 중복되지 않습니다.
+  - 유효기간은 개인정보를 보관할 수 있는 달 수를 나타내는 정수이며, 1 이상 100 이하입니다.
+- 1 ≤ privacies의 길이 ≤ 100
+  - privacies[i]는 i+1번 개인정보의 수집 일자와 약관 종류를 나타냅니다.
+  - privacies의 원소는 "날짜 약관 종류" 형태의 날짜와 약관 종류를 공백 하나로 구분한 문자열입니다.
+  - 날짜는 "YYYY.MM.DD" 형태의 개인정보가 수집된 날짜를 나타내며, today 이전의 날짜만 주어집니다.
+  - privacies의 약관 종류는 항상 terms에 나타난 약관 종류만 주어집니다.
+- today와 privacies에 등장하는 날짜의 YYYY는 연도, MM은 월, DD는 일을 나타내며 점(.) 하나로 구분되어 있습니다.
+  - 2000 ≤ YYYY ≤ 2022
+  - 1 ≤ MM ≤ 12
+  - MM이 한 자릿수인 경우 앞에 0이 붙습니다.
+  - 1 ≤ DD ≤ 28
+  - DD가 한 자릿수인 경우 앞에 0이 붙습니다.
+- 파기해야 할 개인정보가 하나 이상 존재하는 입력만 주어집니다.
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+
+<h2 id="풀이">풀이</h2>
+<p>28일 단위로 날이 바뀌는데 굳이 날짜 계산할 필요 없이 UnixTimeStamp 같은 느낌으로 
+숫자로 바꿔서 대소 비교를 하면 좋겠다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Privacy</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">class</span> <span class="nc">TestCase</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">today</span> <span class="o">=</span> <span class="s">"2022.05.19"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">terms</span> <span class="o">=</span> <span class="o">{</span><span class="s">"A 6"</span><span class="o">,</span> <span class="s">"B 12"</span><span class="o">,</span> <span class="s">"C 3"</span><span class="o">};</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">privacies</span> <span class="o">=</span> <span class="o">{</span><span class="s">"2021.05.02 A"</span><span class="o">,</span> <span class="s">"2021.07.01 B"</span><span class="o">,</span> <span class="s">"2022.02.19 C"</span><span class="o">,</span> <span class="s">"2022.02.20 C"</span><span class="o">};</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">expect</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">expect</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">today</span><span class="o">,</span> <span class="n">terms</span><span class="o">,</span> <span class="n">privacies</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">today</span> <span class="o">=</span> <span class="s">"2020.01.01"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">terms</span> <span class="o">=</span> <span class="o">{</span><span class="s">"Z 3"</span><span class="o">,</span> <span class="s">"D 5"</span><span class="o">};</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">privacies</span> <span class="o">=</span> <span class="o">{</span><span class="s">"2019.01.01 D"</span><span class="o">,</span> <span class="s">"2019.11.15 Z"</span><span class="o">,</span> <span class="s">"2019.08.02 D"</span><span class="o">,</span> <span class="s">"2019.07.01 D"</span><span class="o">,</span> <span class="s">"2018.12.28 Z"</span><span class="o">};</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">expect</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">expect</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">today</span><span class="o">,</span> <span class="n">terms</span><span class="o">,</span> <span class="n">privacies</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span> <span class="o">(</span><span class="nc">String</span> <span class="n">today</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">terms</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">privacies</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">todaySplit</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\."</span><span class="o">);</span>
+
+        <span class="nc">Integer</span> <span class="n">todaySum</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">todaySplit</span><span class="o">[</span><span class="mi">0</span><span class="o">])*</span><span class="mi">12</span> <span class="o">*</span><span class="mi">28</span><span class="o">)+</span>
+                <span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">todaySplit</span><span class="o">[</span><span class="mi">1</span><span class="o">])*</span><span class="mi">28</span><span class="o">)+</span>
+                <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">todaySplit</span><span class="o">[</span><span class="mi">2</span><span class="o">]);</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">indexes</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">termMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">term</span> <span class="o">:</span> <span class="n">terms</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">split</span> <span class="o">=</span> <span class="n">term</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
+            <span class="n">termMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">split</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">split</span><span class="o">[</span><span class="mi">1</span><span class="o">]));</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span><span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">privacies</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span> <span class="o">++</span>  <span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">privacy</span> <span class="o">=</span> <span class="n">privacies</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">privacySplit</span> <span class="o">=</span> <span class="n">privacy</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">);</span>
+
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">privacyCalendar</span> <span class="o">=</span> <span class="n">privacySplit</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">split</span><span class="o">(</span><span class="s">"\\."</span><span class="o">);</span>
+
+            <span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">privacyCalendar</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span> <span class="o">*</span> <span class="mi">28</span> <span class="o">*</span> <span class="mi">12</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">mon</span>  <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">privacyCalendar</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">*</span> <span class="mi">28</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">day</span>  <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">privacyCalendar</span><span class="o">[</span><span class="mi">2</span><span class="o">]);</span>
+            <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="n">termMap</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">privacySplit</span><span class="o">[</span><span class="mi">1</span><span class="o">])</span> <span class="o">*</span> <span class="mi">28</span><span class="o">;</span>
+
+            <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">year</span><span class="o">+</span><span class="n">mon</span><span class="o">+</span><span class="n">day</span><span class="o">+</span><span class="n">next</span><span class="o">;</span>
+
+            <span class="k">if</span><span class="o">(</span> <span class="n">todaySum</span> <span class="o">&gt;=</span> <span class="n">sum</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">indexes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+
+
+        <span class="k">return</span> <span class="n">indexes</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/06/19/Programmers-series-LV.-01-MBTI.html">
+        [programmers Series] Lv. 01 Mbti
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
