@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Recommendid | newkayak12.github.io</title>
+	<meta name="description"
+		content="카카오 - 신규 아이디 추천Programmers">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/06/24/Programmers-series-LV.-01-RecommendId.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Recommendid</h1>
+    
+    <p class="meta">
+      June 24, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="카카오---신규-아이디-추천">카카오 - 신규 아이디 추천</h1>
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/72410">Programmers</a></p>
+
+<blockquote>
+
+  <pre>
+
+카카오에 입사한 신입 개발자 네오는 "카카오계정개발팀"에 배치되어, 카카오 서비스에 가입하는 유저들의 아이디를 생성하는 업무를 담당하게 되었습니다. "네오"에게 주어진 첫 업무는 새로 가입하는 유저들이 카카오 아이디 규칙에 맞지 않는 아이디를 입력했을 때, 입력된 아이디와 유사하면서 규칙에 맞는 아이디를 추천해주는 프로그램을 개발하는 것입니다.
+다음은 카카오 아이디의 규칙입니다.
+아이디의 길이는 3자 이상 15자 이하여야 합니다.
+아이디는 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.) 문자만 사용할 수 있습니다.
+단, 마침표(.)는 처음과 끝에 사용할 수 없으며 또한 연속으로 사용할 수 없습니다.
+"네오"는 다음과 같이 7단계의 순차적인 처리 과정을 통해 신규 유저가 입력한 아이디가 카카오 아이디 규칙에 맞는 지 검사하고 규칙에 맞지 않은 경우 규칙에 맞는 새로운 아이디를 추천해 주려고 합니다.
+신규 유저가 입력한 아이디가 new_id 라고 한다면,
+
+
+&gt;  1단계 new_id의 모든 대문자를 대응되는 소문자로 치환합니다.
+&gt;  2단계 new_id에서 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.)를 제외한 모든 문자를 제거합니다.
+&gt;  3단계 new_id에서 마침표(.)가 2번 이상 연속된 부분을 하나의 마침표(.)로 치환합니다.
+&gt;  4단계 new_id에서 마침표(.)가 처음이나 끝에 위치한다면 제거합니다.
+&gt;  5단계 new_id가 빈 문자열이라면, new_id에 "a"를 대입합니다.
+&gt;  6단계 new_id의 길이가 16자 이상이면, new_id의 첫 15개의 문자를 제외한 나머지 문자들을 모두 제거합니다.
+&gt;       만약 제거 후 마침표(.)가 new_id의 끝에 위치한다면 끝에 위치한 마침표(.) 문자를 제거합니다.
+&gt;  7단계 new_id의 길이가 2자 이하라면, new_id의 마지막 문자를 new_id의 길이가 3이 될 때까지 반복해서 끝에 붙입니다.
+
+
+예를 들어, new_id 값이 "...!@BaT#*..y.abcdefghijklm" 라면, 위 7단계를 거치고 나면 new_id는 아래와 같이 변경됩니다.
+1단계 대문자 'B'와 'T'가 소문자 'b'와 't'로 바뀌었습니다.
+"...!@BaT#*..y.abcdefghijklm" → "...!@bat#*..y.abcdefghijklm"
+2단계 '!', '@', '#', '*' 문자가 제거되었습니다.
+"...!@bat#*..y.abcdefghijklm" → "...bat..y.abcdefghijklm"
+3단계 '...'와 '..' 가 '.'로 바뀌었습니다.
+"...bat..y.abcdefghijklm" → ".bat.y.abcdefghijklm"
+4단계 아이디의 처음에 위치한 '.'가 제거되었습니다.
+".bat.y.abcdefghijklm" → "bat.y.abcdefghijklm"
+5단계 아이디가 빈 문자열이 아니므로 변화가 없습니다.
+"bat.y.abcdefghijklm" → "bat.y.abcdefghijklm"
+6단계 아이디의 길이가 16자 이상이므로, 처음 15자를 제외한 나머지 문자들이 제거되었습니다.
+"bat.y.abcdefghijklm" → "bat.y.abcdefghi"
+7단계 아이디의 길이가 2자 이하가 아니므로 변화가 없습니다.
+"bat.y.abcdefghi" → "bat.y.abcdefghi"
+따라서 신규 유저가 입력한 new_id가 "...!@BaT#*..y.abcdefghijklm"일 때, 네오의 프로그램이 추천하는 새로운 아이디는 "bat.y.abcdefghi" 입니다.
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">RecommendId</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"...!@BaT#*..y.abcdefghijklm"</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"bat.y.abcdefghi"</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expect</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"z-+.^."</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"z--"</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expect</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"=.="</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"aaa"</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expect</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case4</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"123_.def"</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"123_.def"</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expect</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case5</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"abcdefghijklmn.p"</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">expect</span> <span class="o">=</span> <span class="s">"abcdefghijklmn"</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expect</span><span class="o">);</span>
+
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">solution</span> <span class="o">(</span><span class="nc">String</span> <span class="n">newId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//toLowercase</span>
+        <span class="nc">String</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">newId</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
+
+        <span class="nc">String</span> <span class="n">notMatch</span> <span class="o">=</span> <span class="n">lower</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"([^a-z\\-\\_\\.\\d])"</span><span class="o">,</span> <span class="s">""</span><span class="o">);</span>
+
+        <span class="nc">String</span> <span class="n">continuousDot</span> <span class="o">=</span> <span class="n">notMatch</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"[\\.]+"</span><span class="o">,</span> <span class="s">"\\."</span><span class="o">);</span>
+
+        <span class="nc">String</span> <span class="n">firstEnd</span> <span class="o">=</span> <span class="n">continuousDot</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">firstEnd</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"."</span><span class="o">))</span> <span class="n">firstEnd</span> <span class="o">=</span> <span class="n">firstEnd</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">firstEnd</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">firstEnd</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"."</span><span class="o">))</span> <span class="n">firstEnd</span> <span class="o">=</span> <span class="n">firstEnd</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">firstEnd</span><span class="o">.</span><span class="na">length</span><span class="o">()-</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="nc">String</span> <span class="n">ifEmpty</span> <span class="o">=</span> <span class="n">firstEnd</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">firstEnd</span><span class="o">))</span> <span class="n">ifEmpty</span> <span class="o">=</span> <span class="s">"a"</span><span class="o">;</span>
+
+        <span class="nc">String</span> <span class="n">fifteen</span> <span class="o">=</span> <span class="n">ifEmpty</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span> <span class="n">fifteen</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">15</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">fifteen</span> <span class="o">=</span> <span class="n">fifteen</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">15</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">fifteen</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"."</span><span class="o">))</span> <span class="n">fifteen</span> <span class="o">=</span> <span class="n">fifteen</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">14</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nc">String</span> <span class="n">lengthLowerThanTwo</span> <span class="o">=</span> <span class="n">fifteen</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span> <span class="n">lengthLowerThanTwo</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">last</span> <span class="o">=</span> <span class="o">(</span><span class="n">lengthLowerThanTwo</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">lengthLowerThanTwo</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)+</span><span class="s">""</span><span class="o">);</span>
+            <span class="n">lengthLowerThanTwo</span><span class="o">+=</span><span class="n">last</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">lengthLowerThanTwo</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/06/24/Programmers-series-LV.-01-Privacy.html">
+        [programmers Series] Lv. 01 Privacy
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
