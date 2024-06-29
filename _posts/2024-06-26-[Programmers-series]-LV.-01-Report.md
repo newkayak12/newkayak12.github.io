@@ -1,3 +1,10 @@
+---
+layout: post
+categories: [PROGRAMMERS]
+---
+
+
+
 # 카카오 - 신고 결과 받기
 
 [Programmers](https://school.programmers.co.kr/learn/courses/30/lessons/92334)
