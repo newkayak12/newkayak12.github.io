@@ -5,12 +5,113 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 27 Jun 2024 20:43:03 +0900</pubDate>
+    <pubDate>Sat, 29 Jun 2024 19:10:06 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 01 Privatemap</title>
+        <link>/programmers/2024/06/29/Programmers-series-LV.-01-PrivateMap.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/29/Programmers-series-LV.-01-PrivateMap.html</guid>
+        <description>&lt;h1 id=&quot;카카오---비밀지도&quot;&gt;카카오 - 비밀지도&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/17681&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.
+지도는 한 변의 길이가 n인 정사각형 배열 형태로, 각 칸은 &quot;공백&quot;(&quot; &quot;) 또는 &quot;벽&quot;(&quot;#&quot;) 두 종류로 이루어져 있다.
+전체 지도는 두 장의 지도를 겹쳐서 얻을 수 있다. 각각 &quot;지도 1&quot;과 &quot;지도 2&quot;라고 하자. 지도 1 또는 지도 2 중 어느 하나라도 벽인 부분은 전체 지도에서도 벽이다. 지도 1과 지도 2에서 모두 공백인 부분은 전체 지도에서도 공백이다.
+&quot;지도 1&quot;과 &quot;지도 2&quot;는 각각 정수 배열로 암호화되어 있다.
+암호화된 배열은 지도의 각 가로줄에서 벽 부분을 1, 공백 부분을 0으로 부호화했을 때 얻어지는 이진수에 해당하는 값의 배열이다.
+
+
+
+-#--# 01001
+#-#-- 10100
+###-- 11100
+#--#- 10010
+-#-## 01011
+
+ 		+
+
+####- 11110
+----# 00001
+#-#-# 10101
+#---# 10001
+###-- 11100
+
+ 	  =
+
+#####
+#-#-#
+###-#
+#--##
+#####
+
+네오가 프로도의 비상금을 손에 넣을 수 있도록, 비밀지도의 암호를 해독하는 작업을 도와줄 프로그램을 작성하라.
+입력 형식
+입력으로 지도의 한 변 크기 n 과 2개의 정수 배열 arr1, arr2가 들어온다.
+1 ≦ n ≦ 16
+arr1, arr2는 길이 n인 정수 배열로 주어진다.
+정수 배열의 각 원소 x를 이진수로 변환했을 때의 길이는 n 이하이다. 즉, 0 ≦ x ≦ 2n - 1을 만족한다.
+출력 형식
+원래의 비밀지도를 해독하여 '#', 공백으로 구성된 문자열 배열로 출력하라.
+&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+&lt;p&gt;따로 없고 비트 연산에 대한 친숙도를 보는 듯하다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PrivateMap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#####&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;# # #&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;### #&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;#  ##&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;#####&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;46&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;56&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;######&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;###  #&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;##  ##&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; #### &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; #####&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;### # &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toBinaryString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;replaceAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;#&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//1은 #으로 대체&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;replaceAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//0은 공백으로 대체&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sat, 29 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 01 Keypad</title>
-        <link>/2024/06/27/Programmers-series-LV.-01-KeyPad.html</link>
-        <guid isPermaLink="true">/2024/06/27/Programmers-series-LV.-01-KeyPad.html</guid>
+        <link>/programmers/2024/06/27/Programmers-series-LV.-01-KeyPad.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/27/Programmers-series-LV.-01-KeyPad.html</guid>
         <description>&lt;h1 id=&quot;카카오인턴---카카오-인턴-키패드-누르기&quot;&gt;카카오[인턴] - 카카오 인턴 키패드 누르기&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/67256&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
@@ -149,8 +250,8 @@ hand는 &quot;left&quot; 또는 &quot;right&quot; 입니다.
     
       <item>
         <title>[programmers Series] Lv. 01 Report</title>
-        <link>/2024/06/26/Programmers-series-LV.-01-Report.html</link>
-        <guid isPermaLink="true">/2024/06/26/Programmers-series-LV.-01-Report.html</guid>
+        <link>/programmers/2024/06/26/Programmers-series-LV.-01-Report.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/26/Programmers-series-LV.-01-Report.html</guid>
         <description>&lt;h1 id=&quot;카카오---신고-결과-받기&quot;&gt;카카오 - 신고 결과 받기&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/92334&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
@@ -653,9 +754,9 @@ C  	3 달
       </item>
     
       <item>
-        <title>[programmers Series] Lv. 01 Gif</title>
-        <link>/programmers/2024/06/19/Programmers-series-LV.-01-Gif.html</link>
-        <guid isPermaLink="true">/programmers/2024/06/19/Programmers-series-LV.-01-Gif.html</guid>
+        <title>[programmers Series] Lv. 01 Gift</title>
+        <link>/programmers/2024/06/19/Programmers-series-LV.-01-Gift.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/19/Programmers-series-LV.-01-Gift.html</guid>
         <description>&lt;h1 id=&quot;카카오---가장-많이-받은-선물&quot;&gt;카카오 - 가장 많이 받은 선물&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/258712&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
 
@@ -1141,91 +1242,6 @@ finalize를 실행시키는 공격도 가능하다.&lt;/p&gt;
 혹여, CPU 스케쥴링 타임을 제대로 할당받지 못해서 간신히 돌아가는 경우를 보더라도  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread.yield&lt;/code&gt;로 쓰레드 권한 이양하는 일은 염두하지 말자.
 쓰레드마다 다를 수 있으므로 범용적인 방법은 아닐 수 있다.&lt;/p&gt;
 
-</description>
-        <pubDate>Sun, 16 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>Effective java</title>
-        <link>/effective_java/2024/06/16/Effective-java-series-65.ExecutorAndTaskAndStream.html</link>
-        <guid isPermaLink="true">/effective_java/2024/06/16/Effective-java-series-65.ExecutorAndTaskAndStream.html</guid>
-        <description>&lt;h1 id=&quot;쓰레드보다-실행자-태스크-스트림--wait-notify-보단-동시성-유틸리티--문서화--지연-초기화는-신중히&quot;&gt;쓰레드보다 실행자, 태스크, 스트림 &amp;amp; wait, notify 보단 동시성 유틸리티 &amp;amp; 문서화 &amp;amp; 지연 초기화는 신중히&lt;/h1&gt;
-
-&lt;h2 id=&quot;쓰레드보다-실행자-태스크-스트림&quot;&gt;쓰레드보다 실행자, 태스크, 스트림&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExecutorService exec = Executors.newSingleThreadExecutor();&lt;/code&gt; 로 실행자를 만들 수 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.concurrent&lt;/code&gt;에 있다.
-이러고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exec.execute(runnable);&lt;/code&gt;로 task를 넘길 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이외도&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;특정 태스크가 완료되길 기다린다.&lt;/li&gt;
-  &lt;li&gt;태스크 셋 중 뭐든 (invokeAny) 혹은 모두(invokeAll) 완료되길 기다린다.&lt;/li&gt;
-  &lt;li&gt;실행자 서비스가 종료되길 기다릴 수 있다.&lt;/li&gt;
-  &lt;li&gt;완료된 태스크들 결과를 차례로 받는다.&lt;/li&gt;
-  &lt;li&gt;태스크를 특정 시간에 혹은 주기적으로 실행하게 한다.(ScheduledThreadPoolExecutor)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;자바 7이 되면서 fork-join이 태스크를 지원하도록 확장됐다. ForkJoinPool을 구성하는 쓰레드들이 이 태스크 들을 처리하며, 일을 먼저 끝낸 쓰레드는 다른 쓰레드의
-남은 태스크를 가져와서 대신 처리할 수도 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;wait-notify-보단-동시성-유틸리티&quot;&gt;wait, notify 보단 동시성 유틸리티&lt;/h2&gt;
-
-&lt;p&gt;wait, notify는 까다롭다. 차라리 고수준 동시성 유틸리티를 사용하자.&lt;/p&gt;
-
-&lt;p&gt;executorFramework, concurrent collection, synchronizer다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;concurrent collection&lt;/code&gt;는 내부에서 동기화를 실행한다. 동시성 컬렉션에서동시성을 무력화시키는 건 
-불가능하며, 외부에서 락을 추가로 사용하면 오히려 속도가 느려진다. 근데, 메소드를 원자적으로 묶어서 호출하는 건 불가하다.(묶어서 하나의 덩어리로) 그래서 기본
-동작을 하나의 원자 단위로 묶는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;상태 의존성 수정&lt;/code&gt; 메소드들이 추가됐다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;putIfAbsent&lt;/code&gt;가 예시다. 컬렉션 인터페이스 중 일부는 작업 성공이 확인될 때까지 기다리도록
-확장된 경우도 있다. (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BlockingQueue&lt;/code&gt;)&lt;/p&gt;
-
-&lt;p&gt;내부 동기화 장치로는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CountDownLatch&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Semaphore&lt;/code&gt; 등이 있다. countDownLatch는 일회성 장벽으로, 하나 이상의 쓰레드가 또 다른 쓰레드 작업이 끝날 때까지 
-기다리게 한다. 주의할 점은 코어 이상으로 래치를 설정하면 쓰레드 기아 교착에 빠질 수 있다.(Thread starvation deadlock)&lt;/p&gt;
-
-&lt;p&gt;굳이 이 둘을 사용해야 한다면 wait은 synchronized 안에서 사용하고 while 내부에서 사용해서 기다리게 해야 한다. 조건이 충족되면 풀어주고 notify해야 한다.
-여기서 notifyAll, notify 중 고민하게 될텐데, 일반적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;notifyAll&lt;/code&gt;이 나을 수 있다.  모든 쓰레드가 깨어나지만 외부 공격에 의해서 깨운 Thread를 다시 sleep되어 
-영원이 sleep하는 경우에서 벗어날 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문서화&quot;&gt;문서화&lt;/h2&gt;
-
-&lt;p&gt;멀티 쓰레드 환경에서도 API를 안전하게 사용하게 하려면 클래스가 지원하는 쓰레드 안정성 수준을 명시해야 한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;불변(immutable) : 클래스 인스턴스는 마치 상수와 같아서 외부 동기화 필요가 없다.&lt;/li&gt;
-  &lt;li&gt;무조건 쓰레드 안전(unconditionally thread-safe) : 인스턴스는 수정될 수 있으나, 내부에서 충실히 동기화 해서 별도 외부 동기화가 필요 없다.&lt;/li&gt;
-  &lt;li&gt;조건부 쓰레드 안전(conditionally thread-safe) : 무조건적 쓰레드 안전과 같으나 일부 메소드에는 동시에 사용하려면 외부 동기화가 필요&lt;/li&gt;
-  &lt;li&gt;쓰레드 안전하지 않음(not thread-safe) : 이 클래스의 인스턴스는 수정될 수 있다. 동시에 사용하려면 각각의 메소드 호출을 클라이언트가 외부에서 동기화 해야 한다.&lt;/li&gt;
-  &lt;li&gt;쓰레드 적대적(thread-hostile) : 외부 동기화를 해도 멀티쓰레드 환경에서 위험한 경우다. 예를 들어 정적 데이터를 동기화 없이 수정하는 경우다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;위 기준에 맞춰서 문서화하여 적절한 처리를 할 수 있도록 유도해야 한다. 물론 메소드 시그니쳐에 명시할 수도 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;지연-초기화는-신중히&quot;&gt;지연 초기화는 신중히&lt;/h2&gt;
-
-&lt;p&gt;lazy initialization은 초기화 시점이 해당 값이 필요할 때까지 늦추는 방법이다. 주로 최적화에 사용하지만 클래스, 인스턴스 초기화 때 발생하는 위험한 순환
-문제를 해결하는 효과도 있다. 물론 접근시 비용이 늘어난다.&lt;/p&gt;
-
-&lt;p&gt;멀티 쓰레드 환경에서는 지연초기화는 문제가 될 수 있다. 필드를 둘 이상의 쓰레드가 공유하면 동시에 여러 개를 초기화할 수 있다. 지연 초기화가 초기화 순환성(initialization circularity)
-를 깨뜨릴거 같으면 synchronized를 사용하면 된다.&lt;/p&gt;
-
-&lt;p&gt;혹은 lazy initialization holder class를 사용할 수도 있다. 클래스는 클래스가 처음 쓰일 때 비로소 초기화 된다는 특성을 이용한 관용구다( 싱글톤에서도 유용하다. )
-혹은 이중 검사(double-check) 관용구를 사용할 수도 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;volatie&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FieldExample&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FieldExample&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getField&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;FieldExample&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nonNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isNull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//할당&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 16 Jun 2024 00:00:00 +0900</pubDate>
       </item>

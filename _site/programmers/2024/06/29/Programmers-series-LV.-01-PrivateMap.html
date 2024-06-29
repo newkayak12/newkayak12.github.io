@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Privatemap | newkayak12.github.io</title>
+	<meta name="description"
+		content="카카오 - 비밀지도Programmers">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/06/29/Programmers-series-LV.-01-PrivateMap.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Privatemap</h1>
+    
+    <p class="meta">
+      June 29, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="카카오---비밀지도">카카오 - 비밀지도</h1>
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/17681">Programmers</a></p>
+
+<blockquote>
+  <pre>
+네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.
+지도는 한 변의 길이가 n인 정사각형 배열 형태로, 각 칸은 "공백"(" ") 또는 "벽"("#") 두 종류로 이루어져 있다.
+전체 지도는 두 장의 지도를 겹쳐서 얻을 수 있다. 각각 "지도 1"과 "지도 2"라고 하자. 지도 1 또는 지도 2 중 어느 하나라도 벽인 부분은 전체 지도에서도 벽이다. 지도 1과 지도 2에서 모두 공백인 부분은 전체 지도에서도 공백이다.
+"지도 1"과 "지도 2"는 각각 정수 배열로 암호화되어 있다.
+암호화된 배열은 지도의 각 가로줄에서 벽 부분을 1, 공백 부분을 0으로 부호화했을 때 얻어지는 이진수에 해당하는 값의 배열이다.
+
+
+
+-#--# 01001
+#-#-- 10100
+###-- 11100
+#--#- 10010
+-#-## 01011
+
+ 		+
+
+####- 11110
+----# 00001
+#-#-# 10101
+#---# 10001
+###-- 11100
+
+ 	  =
+
+#####
+#-#-#
+###-#
+#--##
+#####
+
+네오가 프로도의 비상금을 손에 넣을 수 있도록, 비밀지도의 암호를 해독하는 작업을 도와줄 프로그램을 작성하라.
+입력 형식
+입력으로 지도의 한 변 크기 n 과 2개의 정수 배열 arr1, arr2가 들어온다.
+1 ≦ n ≦ 16
+arr1, arr2는 길이 n인 정수 배열로 주어진다.
+정수 배열의 각 원소 x를 이진수로 변환했을 때의 길이는 n 이하이다. 즉, 0 ≦ x ≦ 2n - 1을 만족한다.
+출력 형식
+원래의 비밀지도를 해독하여 '#', 공백으로 구성된 문자열 배열로 출력하라.
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>따로 없고 비트 연산에 대한 친숙도를 보는 듯하다.</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">PrivateMap</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">arr1</span> <span class="o">=</span> <span class="o">{</span><span class="mi">9</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">28</span><span class="o">,</span> <span class="mi">18</span><span class="o">,</span> <span class="mi">11</span><span class="o">};</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">arr2</span> <span class="o">=</span> <span class="o">{</span><span class="mi">30</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">21</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">28</span><span class="o">};</span>
+
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">{</span><span class="s">"#####"</span><span class="o">,</span><span class="s">"# # #"</span><span class="o">,</span> <span class="s">"### #"</span><span class="o">,</span> <span class="s">"#  ##"</span><span class="o">,</span> <span class="s">"#####"</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">arr1</span><span class="o">,</span> <span class="n">arr2</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="o">;</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">arr1</span> <span class="o">=</span> <span class="o">{</span><span class="mi">46</span><span class="o">,</span> <span class="mi">33</span><span class="o">,</span> <span class="mi">33</span> <span class="o">,</span><span class="mi">22</span><span class="o">,</span> <span class="mi">31</span><span class="o">,</span> <span class="mi">50</span><span class="o">};</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">arr2</span> <span class="o">=</span> <span class="o">{</span><span class="mi">27</span> <span class="o">,</span><span class="mi">56</span><span class="o">,</span> <span class="mi">19</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">10</span><span class="o">};</span>
+
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">{</span><span class="s">"######"</span><span class="o">,</span> <span class="s">"###  #"</span><span class="o">,</span> <span class="s">"##  ##"</span><span class="o">,</span> <span class="s">" #### "</span><span class="o">,</span> <span class="s">" #####"</span><span class="o">,</span> <span class="s">"### # "</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">arr1</span><span class="o">,</span> <span class="n">arr2</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">arr1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">arr2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toBinaryString</span><span class="o">(</span><span class="n">arr1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">|</span> <span class="n">arr2</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%"</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="s">"s"</span><span class="o">,</span> <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+
+            <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"#"</span><span class="o">);</span> <span class="c1">//1은 #으로 대체</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">answer</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"0"</span><span class="o">,</span> <span class="s">" "</span><span class="o">);</span> <span class="c1">//0은 공백으로 대체</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/06/27/Programmers-series-LV.-01-KeyPad.html">
+        [programmers Series] Lv. 01 Keypad
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
