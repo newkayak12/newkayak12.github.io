@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 01 Numberandword | newkayak12.github.io</title>
+	<meta name="description"
+		content="카카오 - 숫자 문자열과 영단어">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/06/30/Programmers-series-LV.-01-NumberAndWord.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 01 Numberandword</h1>
+    
+    <p class="meta">
+      June 30, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="카카오---숫자-문자열과-영단어">카카오 - 숫자 문자열과 영단어</h1>
+
+<blockquote>
+
+  <p>네오와 프로도가 숫자놀이를 하고 있습니다. 네오가 프로도에게 숫자를 건넬 때 일부 자릿수를 영단어로 바꾼 카드를 건네주면 프로도는 원래 숫자를 찾는 게임입니다.</p>
+
+  <p>다음은 숫자의 일부 자릿수를 영단어로 바꾸는 예시입니다.
+1478 → “one4seveneight”
+234567 → “23four5six7”
+10203 → “1zerotwozero3”</p>
+
+  <p>숫자	영단어
+0 	zero
+1 	one
+2 	two
+3 	three
+4 	four
+5 	five
+6 	six
+7 	seven
+8 	eight
+9 	nine</p>
+
+  <ul>
+    <li>1 ≤ s의 길이 ≤ 50</li>
+    <li>s가 “zero” 또는 “0”으로 시작하는 경우는 주어지지 않습니다.</li>
+    <li>return 값이 1 이상 2,000,000,000 이하의 정수가 되는 올바른 입력만 s로 주어집니다.</li>
+  </ul>
+  <p>&lt;/pre&gt;</p>
+</blockquote>
+
+<h1 id="풀이">풀이</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">NumberAndWord</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"one4seveneight"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">1478</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expected</span><span class="o">);</span>
+
+
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"23four5six7"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">234567</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expected</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"2three45sixseven"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">234567</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expected</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case4</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">input</span> <span class="o">=</span> <span class="s">"123"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">123</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">solution</span><span class="o">(</span><span class="n">input</span><span class="o">),</span> <span class="n">expected</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span>  <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span> <span class="nc">String</span> <span class="n">s</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="nc">Map</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="s">"zero"</span><span class="o">,</span><span class="s">"0"</span><span class="o">,</span>
+                <span class="s">"one"</span><span class="o">,</span><span class="s">"1"</span><span class="o">,</span>
+                <span class="s">"two"</span><span class="o">,</span><span class="s">"2"</span><span class="o">,</span>
+                <span class="s">"three"</span><span class="o">,</span><span class="s">"3"</span><span class="o">,</span>
+                <span class="s">"four"</span><span class="o">,</span><span class="s">"4"</span><span class="o">,</span>
+                <span class="s">"five"</span><span class="o">,</span><span class="s">"5"</span><span class="o">,</span>
+                <span class="s">"six"</span><span class="o">,</span><span class="s">"6"</span><span class="o">,</span>
+                <span class="s">"seven"</span><span class="o">,</span><span class="s">"7"</span><span class="o">,</span>
+                <span class="s">"eight"</span><span class="o">,</span><span class="s">"8"</span><span class="o">,</span>
+                <span class="s">"nine"</span><span class="o">,</span><span class="s">"9"</span>
+        <span class="o">);</span>
+
+        <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">key</span> <span class="o">:</span> <span class="n">map</span><span class="o">.</span><span class="na">keySet</span><span class="o">()</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">replaceAll</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/06/29/Programmers-series-LV.-01-PrivateMap.html">
+        [programmers Series] Lv. 01 Privatemap
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/programmers/2024/06/30/Programmers-series-LV.-02-Bracket.html">
+        [programmers Series] Lv. 02 Bracket
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

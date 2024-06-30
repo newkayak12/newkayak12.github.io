@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [PROGRAMMERS]
+---
+
 # 카카오 - 숫자 문자열과 영단어
 
 >
