@@ -5,7 +5,230 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 30 Jun 2024 09:54:14 +0900</pubDate>
+    <pubDate>Sun, 30 Jun 2024 22:15:27 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 02 Carpet</title>
+        <link>/programmers/2024/06/30/Programmers-series-LV.-02-Carpet.html</link>
+        <guid isPermaLink="true">/programmers/2024/06/30/Programmers-series-LV.-02-Carpet.html</guid>
+        <description>&lt;h1 id=&quot;카펫&quot;&gt;카펫&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/42842&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 노란색으로 칠해져 있고
+테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.
+&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;table style=&quot; border-collapse: collapse;&quot;&gt;
+     &lt;tr&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
+     &lt;/tr&gt;
+ &lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+Leo는 집으로 돌아와서 아까 본 카펫의 노란색과 갈색으로 색칠된 격자의 개수는 기억했지만,
+전체 카펫의 크기는 기억하지 못했습니다.
+
+Leo가 본 카펫에서
+갈색 격자의 수 brown,
+노란색 격자의 수 yellow가 매개변수로 주어질 때
+카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+제한사항
+ - 갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.
+ - 노란색 격자의 수 yellow는 1 이상 2,000,000 이하인 자연수입니다.
+ - 카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.
+&lt;/pre&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Carpet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+
+        &lt;span class=&quot;cm&quot;&gt;/**
+         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
+         *     &amp;lt;tr &amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         *     &amp;lt;tr&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         *     &amp;lt;tr&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         * &amp;lt;/table&amp;gt;
+         */&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;cm&quot;&gt;/**
+         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
+         *     &amp;lt;tr &amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         *     &amp;lt;tr&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         *     &amp;lt;tr&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *     &amp;lt;/tr&amp;gt;
+         * &amp;lt;/table&amp;gt;
+         */&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+
+        &lt;span class=&quot;cm&quot;&gt;/**
+         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         *      &amp;lt;tr&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
+         *      &amp;lt;/tr&amp;gt;
+         * &amp;lt;/table&amp;gt;
+         */&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 30 Jun 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 02 Bracket</title>
@@ -1319,77 +1542,6 @@ finalize를 실행시키는 공격도 가능하다.&lt;/p&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 68.syncsharedresources</title>
-        <link>/2024/06/17/Effective-java-series-68.SyncSharedResources.html</link>
-        <guid isPermaLink="true">/2024/06/17/Effective-java-series-68.SyncSharedResources.html</guid>
-        <description>&lt;h1 id=&quot;공유-중인-가변-데이터는-동기화하자&quot;&gt;공유 중인 가변 데이터는 동기화하자&lt;/h1&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;synchronized&lt;/code&gt;는 해당 메소드, 블록을 한 번에 한 쓰레드씩 수행하도록 보장한다. 즉, 객체를 하나의 일관된 상태에서 다른 일관된 상태로 변경시킨다. 동기화를
-제대로 사용하면 어떤 메소드도 이 객체의 상태가 일관되지 않은 순간을 볼 수 없다.&lt;/p&gt;
-
-&lt;p&gt;동기화 이외에 다른 쓰레드가 만든 변화를 체크하기 위한 용도로도 사용할 수 있다. 동기화는 일관성이 꺠진 상태를 볼 수 없게 하는 것은 물론, 동기화된 메소드나 블록에 들어간
-쓰레드가 같은 락의 보호 하에 수행된 모든 이전 수정의 최종 결과를 보게 해준다.&lt;/p&gt;
-
-&lt;p&gt;자바 명세는 쓰레드가 필드를 읽을 때 ‘수정이 완전히 반영된’ 값을 보장한다고 하지만, 쓰레드 간에도 보장하는가 하면 아니다. 따라서 동기화는 배타적 실행뿐만 아니라
-쓰레드 사이의 안정적인 통신에 꼭 필요하다. 이는 쓰레드가 만든 변화가 다른 쓰레드에 언제 어떻게 보이는지를 규정한 자바의 메모리 모델 때문이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stopRequested&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위와 같은 코드가 있다고 하자 쓰레드 동기화를 사용하지 않으면, jvm이 코드 최적화를 할 때&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stopRequested&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;로 바뀐다. 이는 hoisting 때문이다. 이런 잘못된 최적화로 synchronized를 사용하지 않으면  원하는대로 코드가 작동하지 않을 수 있다. 
-혹은 위  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stopRequested&lt;/code&gt; 변수를 get, set으로 바꾸고 둘 다 synchronized를 붙이는 방법도 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;requestStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stopRequested&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;requestedStop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stopRequested&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stopRequested&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;읽기 쓰기 모두 동기화해야 한다. 변경도, 읽기도 모두 동기화 해야 상태를 보장할 수 있다. 
-혹은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt;을 사용하는 방법도 있다. volatile은 해당 변수를 메인 메모리에 저장하도록 하는 예약어다.
-물론 붙인다고 능사가 아니다. set 연산을 동기화해야 한다. 왜냐하면 쓰레드가 수정하고 반영하기 전 다른 쓰레드가 비집고 들어와 첫 번쨰와 같은 값을 반환할 수 있기 떄문이다.
-이런 경우를 안전 실패(Safety failure)라고 한다.&lt;/p&gt;
-
-&lt;p&gt;다른 방법으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.concurrent.atomic&lt;/code&gt;을 사용해서 원자성을 지킬 수 있다. 이 패키지에는 락 없이도 thread-safe한 클래스들이 담겨 있다.&lt;/p&gt;
-
-&lt;h1 id=&quot;과도한-동기는-피하는게-좋다&quot;&gt;과도한 동기는 피하는게 좋다.&lt;/h1&gt;
-
-&lt;p&gt;과도한 동기화는 당연히 성능 저하를 일으키고 심지어 교착상태에 빠뜨리기도 하고 결국 예측할 수 없는 동작을 낳기도 한다. 응답 불가, 안전 실패를 막으려면
-동기화 메소드나 동기화 블록 안에서는 제어를 절대로 클라이언트에 넘기면 안된다. 즉 재정의 메소드를 넘겨도 안되고, 함수 객체도 실행하면 안된다. 이런 alien 메소드는
-예외를 일으키거나, 교착상태에 빠지게 하거나 데이터를 훼손할 수도 있다.&lt;/p&gt;
-
-&lt;p&gt;차라리 동기화 영역 바깥에서 alien 메소드를 호출(open call)하는게 좋다. 외부 메소드가 얼마나 오래 실행할지 모르기에 이는 현명한 선택이다. 즉, 실패 방지, 동시성 효율 제고를
-해준다. 물론 동기화를 최소한으로 하는게 최고다. 동기화는 락을 거는게 문제가 아니라 Thread 간 경쟁으로 낭비(병렬성을 잃고 모든 코어가 메모리 일관성을 위한 지연 시간) 때문에
-문제가 된다. 또한 JVM 최적화를 제한하기도 한다는 점이 큰 문제다. 그래서 차라리&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;동기화를 외부에서 하게 하거나&lt;/li&gt;
-  &lt;li&gt;동기화를 아예 숨겨서 내부에서 하기&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;라는 방법이 있다. 2번은 차선책이다.  더 심화하면 lock-splitting, lock striping, nonblocking concurrency control 등 다양한 기법을 동원해서 
-동시성을 높여줄 수 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;lock-splitting : 하나의 클래스에서 기능적으로 락을 분할( 읽기/ 쓰기락 )&lt;/li&gt;
-  &lt;li&gt;lock striping : 자료 구조 관점에서 일부에만 락을 거는 것&lt;/li&gt;
-  &lt;li&gt;nonblocking concurrency control :&lt;/li&gt;
-&lt;/ol&gt;
 </description>
         <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
       </item>
