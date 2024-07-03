@@ -5,7 +5,165 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 01 Jul 2024 21:17:23 +0900</pubDate>
+    <pubDate>Wed, 03 Jul 2024 20:32:26 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 02 Convertbinary</title>
+        <link>/programmers/2024/07/02/Programmers-series-LV.-02-ConvertBinary.html</link>
+        <guid isPermaLink="true">/programmers/2024/07/02/Programmers-series-LV.-02-ConvertBinary.html</guid>
+        <description>&lt;h1 id=&quot;이진-변환-반복하기&quot;&gt;이진 변환 반복하기&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/70129&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;pre&gt;
+ 0과 1로 이루어진 어떤 문자열 x에 대한 이진 변환을 다음과 같이 정의합니다.
+ x의 모든 0을 제거합니다.
+ x의 길이를 c라고 하면, x를 &quot;c를 2진법으로 표현한 문자열&quot;로 바꿉니다.
+
+ 예를 들어,
+ x = &quot;0111010&quot;이라면,
+ x에 이진 변환을 가하면
+ x = &quot;0111010&quot; -&amp;gt; &quot;1111&quot; -&amp;gt; &quot;100&quot; 이 됩니다.
+
+
+ 0과 1로 이루어진 문자열 s가 매개변수로 주어집니다.
+ s가 &quot;1&quot;이 될 때까지 계속해서 s에 이진 변환을 가했을 때,
+ 이진 변환의 횟수와 변환 과정에서 제거된 모든 0의 개수를
+ 각각 배열에 담아 return 하도록 solution 함수를 완성해주세요.
+
+ 제한사항
+  - s의 길이는 1 이상 150,000 이하입니다.
+  - s에는 '1'이 최소 하나 이상 포함되어 있습니다.
+&lt;/pre&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+&lt;p&gt;따로 없다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Integer.toBinaryString&lt;/code&gt; 사용 정도가 특이했다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ConvertBinaryString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;110010101001&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;01110&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1111111&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zeroCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convertCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'0'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zeroCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stringCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toBinaryString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;convertCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;convertCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zeroCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 02 Jul 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[programmers Series] Lv. 02 Continuoussequential</title>
+        <link>/programmers/2024/07/02/Programmers-series-LV.-02-ContinuousSequential.html</link>
+        <guid isPermaLink="true">/programmers/2024/07/02/Programmers-series-LV.-02-ContinuousSequential.html</guid>
+        <description>&lt;h1 id=&quot;연속-부분-수열-합의-개수&quot;&gt;연속 부분 수열 합의 개수&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/131701&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+    철호는 수열을 가지고 놀기 좋아합니다.
+    어느 날 철호는 어떤 자연수로 이루어진 원형 수열의 연속하는 부분 수열의 합으로 만들 수 있는 수가
+    모두 몇 가지인지 알아보고 싶어졌습니다.
+    원형 수열이란 일반적인 수열에서 처음과 끝이 연결된 형태의 수열을 말합니다.
+
+    예를 들어 수열 [7, 9, 1, 1, 4] 로 원형 수열을 만들면 다음과 같습니다.
+    원형 수열은 처음과 끝이 연결되어 끊기는 부분이 없기 때문에
+    연속하는 부분 수열도 일반적인 수열보다 많아집니다.
+    원형 수열의 모든 원소 elements가 순서대로 주어질 때,
+    원형 수열의 연속 부분 수열 합으로 만들 수 있는 수의 개수를 return 하도록
+    solution 함수를 완성해주세요.
+
+    제한사항
+     -  3 ≤ elements의 길이 ≤ 1,000
+     -  1 ≤ elements의 원소 ≤ 1,000
+&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+&lt;p&gt;환형 리스트 구현&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ContinuousSequential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sumSet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HashSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)];&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+                &lt;span class=&quot;n&quot;&gt;sumSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sumSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 02 Jul 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 02 Clothes</title>
@@ -1531,78 +1689,6 @@ B가 친구들에게 준 선물이 3개고 받은 선물이 2개라면 B의 선�
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;writeReplace 덕에 직렬화 시스템은 바깥 클래스의 직렬화된 인스턴스를 생성해낼 수 없다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 71.serializable</title>
-        <link>/2024/06/17/Effective-java-series-71.Serializable.html</link>
-        <guid isPermaLink="true">/2024/06/17/Effective-java-series-71.Serializable.html</guid>
-        <description>&lt;h1 id=&quot;직렬화&quot;&gt;직렬화&lt;/h1&gt;
-
-&lt;p&gt;직렬화는 프로그래머가 어렵지 않게 분산 객체를 만들 수 있다는 매력이 있지만, 보이지 않는 생성자, API와 구현 사이 모호해진 경계, 잠재적 정확성 문제, 성능, 보안,
-유지보수성 등 대가가 크다는 단점이 있다.&lt;/p&gt;
-
-&lt;p&gt;더 근본적으로는 공격당한 포인트가 너무 많다는 것이 있다. Object의 readObject(implement Serializable)는 classPath 안 거의 모든 타입의 객체를 만들어 
-낼 수 있는 마스터키와 같다. 바이트 스트림을 역직렬화하는 과정에서 이 메소드는 타입들 안의 모든 코드를 수행할 수 있게 된다. 실제로 신뢰할 수 없는 스트림을 역직렬화하면
-원격 코드 실행(RCE), 서비스 거부(denial-of-service, DoS) 등의 공격을 유발할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;직렬화 과정에서 호출되어 잠재적으로 위험한 동작을 수행하는 메소드들을 gadget이라고 부른다. gadget끼리 체이닝을 구서알 수도 있다. 이런 체이닝으로 하드웨어
-네이티브 코드를 마음대로 실행할 수 있는 강력한 취약점이 발견되고는 한다.(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RCE&lt;/code&gt;)&lt;/p&gt;
-
-&lt;p&gt;혹은 역직렬화에 시간이 오래 걸리게 해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deserialization bomb&lt;/code&gt;을 투하할 수도 있다. (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DoS&lt;/code&gt;) 이는 역직렬화 과정에서 그래프 탐색을 해서 계속 역직렬화 하는 것에서
-착안된 공격이다. 이를 피하기 위해서 그래프 탐색을 멈추는 방법이 있다.&lt;/p&gt;
-
-&lt;p&gt;이런 단점이 있는데 굳이 (역)직렬화를 할 필요는 없다.  JSON/ protocolBuffer가 대안으로 있다. 둘의 차이는 사람이 그냥 눈으로 읽고 이해할 수 있는가 정도다.
-JSON은 사람이 읽을 수 있다. protocolBuffer는 바이너리 표현이라 어렵다. 물론 사람이 읽을 수 있도록 개선한 protocolBuffer도 있다(pbtxt)&lt;/p&gt;
-
-&lt;p&gt;뭐 이래도 굳이 (역)직렬화를 해야한다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.io.ObjectInputFilter&lt;/code&gt;로 스트림이 역직렬화되기 전에 필터링할 수 있다. 화이트리스트 정책을 잡아서 필터링하고
-그 결과를 (역)직렬화하면 비교저거 안전하다.&lt;/p&gt;
-
-&lt;h1 id=&quot;serializable을-구현할지는-고민해봐라&quot;&gt;Serializable을 구현할지는 고민해봐라&lt;/h1&gt;
-
-&lt;p&gt;늘 그렇듯 인터페이스 구현 문제다. serializable을 구현하면 serialVersionUID가 생기는데 내부 구현을 바꾸면 이 값이 달라져 원래 직렬화 형태와 달라지게 된다.
-(그래서 직접 고른 값으로 명시적으로 작성하여 해당 문제를 피하기도 한다.)
-이러면 더 이상 확장을 불가능하게 한다. 물론 그대로 두고 내부 구현을 바꿀 수도 있지만 소스코드에 불필요한 혹을 남겨놓게 된다.&lt;/p&gt;
-
-&lt;p&gt;또한 Serializable은 언어의 기본 생성 메커니즘을 뒤흔든다. 생성자 없이 객체 생성을 할 수 있게 하기 때문이다. 이 과정에서 일부러 생성을 실패하게 하고
-finalize를 실행시키는 공격도 가능하다.&lt;/p&gt;
-
-&lt;h1 id=&quot;굳이-쓴다면-커스터마이즈하자&quot;&gt;굳이 쓴다면 커스터마이즈하자&lt;/h1&gt;
-
-&lt;p&gt;고민해보고 기본 직렬화를 사용해도 될거 같으면 사용해도 된다. 직렬화하면 객체를 루트로하는 객체의 데이터와 그 객체에서부터 접근할 수 있는 모든 객체를 담아내며,
-객체들이 연결된 토폴로지까지 기술한다. 이렇게 꽤나 자세한 정보들이 기술되어 있기 때문에 불변식 보장과 보안을 위해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readObject&lt;/code&gt;를 커스터마이징해서 제공해야
-할 때가 많다. 또한, 객체의 물리적 표현과 논리적 표현 차이가 클 때 기본 직렬화 형태를 사용하는 것이 문제가 생기는 경우가 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;공개 API가 내부 구현방식에 종속된다.&lt;/li&gt;
-  &lt;li&gt;너무 많은 공간을 차지할 수도 있다.&lt;/li&gt;
-  &lt;li&gt;시간이 오래걸릴 수도 있다.&lt;/li&gt;
-  &lt;li&gt;스택오버플로의 위험에 노출된다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;또한 기본 직렬화를 사용하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Transient&lt;/code&gt; 값이 직렬화/ 역직렬화 대상에서 제외되므로 문제가 될 수도 있다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[effective Java Series] 70.donotdependonscheduler</title>
-        <link>/2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html</link>
-        <guid isPermaLink="true">/2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html</guid>
-        <description>&lt;h1 id=&quot;스케쥴러에-의존하지-말라&quot;&gt;스케쥴러에 의존하지 말라&lt;/h1&gt;
-
-&lt;p&gt;보통 OS 스케쥴러에 의존해서 쓰레드를 얼마나 오래 실핼할지 정한다. 그러나 OS 별로 스케쥴링 정책은 달라진다.
-따라서 이에 의존하면 정확성, 성능이 스케쥴러에 따라 달라지는 일이 발생한다. 플랫폼에 의존적이게 된다는 의미다.&lt;/p&gt;
-
-&lt;p&gt;보통 OS의 평균 쓰레드 수보다 적게 쓰레드 수를 잡으면 스케쥴링에 지장이 생기기 않게 된다. 실행 준비가 됐다면 쓰레드들이 맡은 작업을 끝낼 때까지
-굳이 반환할 필요가 없다.&lt;/p&gt;
-
-&lt;p&gt;실행 가능한 쓰레드 수를 적게 유지하는 방법(가용성을 높히는 방법)은 각 쓰레드가 쉬면 대기하고 있는 다른 일을 시키면 된다. 그러면 쉬는 시간이 줄고 가용성이 높아진다.
-혹여, CPU 스케쥴링 타임을 제대로 할당받지 못해서 간신히 돌아가는 경우를 보더라도  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread.yield&lt;/code&gt;로 쓰레드 권한 이양하는 일은 염두하지 말자.
-쓰레드마다 다를 수 있으므로 범용적인 방법은 아닐 수 있다.&lt;/p&gt;
-
 </description>
         <pubDate>Mon, 17 Jun 2024 00:00:00 +0900</pubDate>
       </item>

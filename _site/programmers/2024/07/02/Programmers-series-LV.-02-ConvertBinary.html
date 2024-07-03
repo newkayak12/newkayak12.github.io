@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 02 Convertbinary | newkayak12.github.io</title>
+	<meta name="description"
+		content="이진 변환 반복하기">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/07/02/Programmers-series-LV.-02-ConvertBinary.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 02 Convertbinary</h1>
+    
+    <p class="meta">
+      July 2, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="이진-변환-반복하기">이진 변환 반복하기</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/70129">Programmers</a></p>
+
+<blockquote>
+
+  <pre>
+ 0과 1로 이루어진 어떤 문자열 x에 대한 이진 변환을 다음과 같이 정의합니다.
+ x의 모든 0을 제거합니다.
+ x의 길이를 c라고 하면, x를 "c를 2진법으로 표현한 문자열"로 바꿉니다.
+
+ 예를 들어,
+ x = "0111010"이라면,
+ x에 이진 변환을 가하면
+ x = "0111010" -&gt; "1111" -&gt; "100" 이 됩니다.
+
+
+ 0과 1로 이루어진 문자열 s가 매개변수로 주어집니다.
+ s가 "1"이 될 때까지 계속해서 s에 이진 변환을 가했을 때,
+ 이진 변환의 횟수와 변환 과정에서 제거된 모든 0의 개수를
+ 각각 배열에 담아 return 하도록 solution 함수를 완성해주세요.
+
+ 제한사항
+  - s의 길이는 1 이상 150,000 이하입니다.
+  - s에는 '1'이 최소 하나 이상 포함되어 있습니다.
+</pre>
+
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>따로 없다. <code class="language-plaintext highlighter-rouge">Integer.toBinaryString</code> 사용 정도가 특이했다.</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ConvertBinaryString</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"110010101001"</span><span class="o">;</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">{</span><span class="mi">3</span><span class="o">,</span> <span class="mi">8</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"01110"</span><span class="o">;</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">{</span><span class="mi">3</span><span class="o">,</span> <span class="mi">3</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"1111111"</span><span class="o">;</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">,</span> <span class="mi">1</span><span class="o">};</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertArrayEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span> <span class="nc">String</span> <span class="n">s</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">zeroCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">convertCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span> <span class="o">!</span><span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"1"</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">stringCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span> <span class="o">++</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">==</span> <span class="sc">'0'</span><span class="o">)</span> <span class="n">zeroCount</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">else</span> <span class="n">stringCount</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">toBinaryString</span><span class="o">(</span><span class="n">stringCount</span><span class="o">);</span>
+            <span class="n">convertCount</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span> <span class="n">convertCount</span><span class="o">,</span> <span class="n">zeroCount</span><span class="o">};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/07/02/Programmers-series-LV.-02-ContinuousSequential.html">
+        [programmers Series] Lv. 02 Continuoussequential
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
