@@ -5,7 +5,101 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sat, 13 Jul 2024 21:52:37 +0900</pubDate>
+    <pubDate>Sun, 14 Jul 2024 20:34:11 +0900</pubDate>
+    
+      <item>
+        <title>[programmers Series] Lv. 02 Leastcommonmultiple</title>
+        <link>/programmers/2024/07/14/Programmers-series-LV.-02-LeastCommonMultiple.html</link>
+        <guid isPermaLink="true">/programmers/2024/07/14/Programmers-series-LV.-02-LeastCommonMultiple.html</guid>
+        <description>&lt;h1 id=&quot;n개의-최소공배수&quot;&gt;N개의 최소공배수&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/12953&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;pre&gt;
+두 수의 최소공배수(Least Common Multiple)란 입력된 두 수의 배수 중
+공통이 되는 가장 작은 숫자를 의미합니다.
+
+예를 들어 2와 7의 최소공배수는 14가 됩니다.
+정의를 확장해서, n개의 수의 최소공배수는 n 개의 수들의 배수 중
+공통이 되는 가장 작은 숫자가 됩니다. n개의 숫자를 담은 배열 arr이 입력되었을 때
+이 수들의 최소공배수를 반환하는 함수, solution을 완성해 주세요.
+
+제한 사항
+- arr은 길이 1이상, 15이하인 배열입니다.
+- arr의 원소는 100 이하인 자연수입니다.
+&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
+
+&lt;h3 id=&quot;최대-공약수greatest-common-divisor-gcd&quot;&gt;최대 공약수(Greatest Common Divisor: GCD)&lt;/h3&gt;
+&lt;p&gt;공약수 중 가장 큰 것&lt;/p&gt;
+
+&lt;h4 id=&quot;유클리드-호제법&quot;&gt;유클리드 호제법&lt;/h4&gt;
+&lt;p&gt;2개의 자연수의 최대 공약수를 구하는 알고리즘의 하나다. 두 수가 서로 상대방 수를 나눠서 결국 원하는 수를 얻는 알고리즘을 나타낸다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(a &amp;gt; b일 떄) a를 b로 나눈 나머지를 r이라고 하면 a, b의 최대 공약수는 b와 r의 최대 공약수와 같다&lt;/code&gt;는 성질을 이용한 방식이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;최소-공배수least-common-multiple-lcm&quot;&gt;최소 공배수(Least Common Multiple: LCM)&lt;/h3&gt;
+&lt;p&gt;두 자연수들의 배수들 중에서 공통된 가장 작은 수&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lcm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LeastCommonMultiple&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;168&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lcm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lcm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lcm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gcd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 14 Jul 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[mysql Summary Series] 05.isolation</title>
@@ -2479,229 +2573,6 @@ n은 2 이상 100,000 이하인 자연수입니다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Mon, 01 Jul 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[programmers Series] Lv. 02 Carpet</title>
-        <link>/programmers/2024/06/30/Programmers-series-LV.-02-Carpet.html</link>
-        <guid isPermaLink="true">/programmers/2024/06/30/Programmers-series-LV.-02-Carpet.html</guid>
-        <description>&lt;h1 id=&quot;카펫&quot;&gt;카펫&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/42842&quot;&gt;Programmers&lt;/a&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;pre&gt;
-Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 노란색으로 칠해져 있고
-테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.
-&lt;/pre&gt;
-&lt;/blockquote&gt;
-&lt;table style=&quot; border-collapse: collapse;&quot;&gt;
-     &lt;tr&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-     &lt;/tr&gt;
-     &lt;tr&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-     &lt;/tr&gt;
-     &lt;tr&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-         &lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&gt; &lt;/td&gt;
-     &lt;/tr&gt;
- &lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;pre&gt;
-Leo는 집으로 돌아와서 아까 본 카펫의 노란색과 갈색으로 색칠된 격자의 개수는 기억했지만,
-전체 카펫의 크기는 기억하지 못했습니다.
-
-Leo가 본 카펫에서
-갈색 격자의 수 brown,
-노란색 격자의 수 yellow가 매개변수로 주어질 때
-카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.
-
-제한사항
- - 갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.
- - 노란색 격자의 수 yellow는 1 이상 2,000,000 이하인 자연수입니다.
- - 카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.
-&lt;/pre&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;알고리즘&quot;&gt;알고리즘&lt;/h2&gt;
-
-&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Carpet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Nested&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestCases&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-
-        &lt;span class=&quot;cm&quot;&gt;/**
-         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
-         *     &amp;lt;tr &amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         *     &amp;lt;tr&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         *     &amp;lt;tr&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         * &amp;lt;/table&amp;gt;
-         */&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;cm&quot;&gt;/**
-         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
-         *     &amp;lt;tr &amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         *     &amp;lt;tr&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         *     &amp;lt;tr&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *         &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *     &amp;lt;/tr&amp;gt;
-         * &amp;lt;/table&amp;gt;
-         */&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-
-
-        &lt;span class=&quot;cm&quot;&gt;/**
-         * &amp;lt;table style=&quot; border-collapse: collapse;&quot;&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;  background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px; background-color:yellow;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         *      &amp;lt;tr&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *          &amp;lt;td style=&quot;border: green 1px solid; width:20px; height:20px;&quot;&amp;gt; &amp;lt;/td&amp;gt;
-         *      &amp;lt;/tr&amp;gt;
-         * &amp;lt;/table&amp;gt;
-         */&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-
-        &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;case4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertArrayEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yellow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yWidth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Sun, 30 Jun 2024 00:00:00 +0900</pubDate>
       </item>
     
   </channel>
