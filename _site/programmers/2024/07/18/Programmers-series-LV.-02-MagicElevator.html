@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 02 Magicelevator | newkayak12.github.io</title>
+	<meta name="description"
+		content="마법의 엘리베이터">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/07/18/Programmers-series-LV.-02-MagicElevator.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 02 Magicelevator</h1>
+    
+    <p class="meta">
+      July 18, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="마법의-엘리베이터">마법의 엘리베이터</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/148653">Programmers</a></p>
+
+<blockquote>
+  <pre>
+마법의 세계에 사는 민수는 아주 높은 탑에 살고 있습니다.
+탑이 너무 높아서 걸어 다니기 힘든 민수는 마법의 엘리베이터를 만들었습니다.
+마법의 엘리베이터의 버튼은 특별합니다.
+
+마법의 엘리베이터에는 -1, +1, -10, +10, -100, +100 등과
+같이 절댓값이 10c (c ≥ 0 인 정수) 형태인 정수들이 적힌 버튼이 있습니다.
+마법의 엘리베이터의 버튼을 누르면 현재 층 수에 버튼에 적혀 있는 값을 더한 층으로 이동하게 됩니다.
+단, 엘리베이터가 위치해 있는 층과 버튼의 값을 더한 결과가 0보다 작으면
+엘리베이터는 움직이지 않습니다. 민수의 세계에서는 0층이 가장 아래층이며 엘리베이터는
+현재 민수가 있는 층에 있습니다.
+
+마법의 엘리베이터를 움직이기 위해서 버튼 한 번당 마법의 돌 한 개를 사용하게 됩니다.
+예를 들어, 16층에 있는 민수가
+0층으로 가려면 -1이 적힌 버튼을 6번,
+-10이 적힌 버튼을 1번 눌러 마법의 돌 7개를 소모하여 0층으로 갈 수 있습니다.
+
+하지만, +1이 적힌 버튼을 4번,
+-10이 적힌 버튼 2번을 누르면 마법의 돌 6개를 소모하여 0층으로 갈 수 있습니다.
+
+마법의 돌을 아끼기 위해 민수는 항상 최소한의 버튼을 눌러서 이동하려고 합니다.
+민수가 어떤 층에서 엘리베이터를 타고 0층으로 내려가는데 필요한 마법의 돌의 최소 개수를 알고 싶습니다.
+민수와 마법의 엘리베이터가 있는 층을 나타내는 정수 storey 가 주어졌을 때,
+0층으로 가기 위해 필요한 마법의 돌의 최소값을 return 하도록 solution 함수를 완성하세요.
+
+제한사항
+1 ≤ storey ≤ 100,000,000
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>다양한 경우의 수를 나열하고 언제 어떤 연산을 해야할지 정해야할 것 같다.
+굳이 따지자면 동적계획법인가 싶기도 하다.</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">class</span> <span class="nc">MagicElevator</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case01</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">6</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case02</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">2554</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">16</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case03</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case04</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">17</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case05</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">34</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case06</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">35</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case07</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">36</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case08</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">55</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case09</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">75</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+
+            <span class="cm">/**
+             * +5 80 5
+             * +20 100 2
+             * -100 0 1
+             */</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case10</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">555</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">14</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case11</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">storey</span> <span class="o">=</span> <span class="mi">1051</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">7</span><span class="o">;</span>
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">storey</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">storey</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">target</span> <span class="o">=</span> <span class="n">storey</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="no">TEN</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">target</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="o">((</span><span class="n">target</span> <span class="o">/</span> <span class="no">TEN</span><span class="o">)</span> <span class="o">*</span> <span class="no">TEN</span><span class="o">);</span>
+
+            <span class="k">if</span><span class="o">(</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">answer</span> <span class="o">+=</span> <span class="o">(</span><span class="no">TEN</span> <span class="o">-</span> <span class="n">diff</span><span class="o">);</span>
+                <span class="n">target</span>  <span class="o">/=</span> <span class="no">TEN</span><span class="o">;</span>
+                <span class="n">target</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">){</span>
+                <span class="n">target</span> <span class="o">/=</span> <span class="no">TEN</span><span class="o">;</span>
+                <span class="n">answer</span> <span class="o">+=</span> <span class="n">diff</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">beforeNext</span> <span class="o">=</span> <span class="o">(</span><span class="n">target</span><span class="o">/</span><span class="no">TEN</span><span class="o">);</span>
+                <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="n">beforeNext</span> <span class="o">-</span> <span class="o">(</span><span class="n">beforeNext</span><span class="o">/</span><span class="no">TEN</span><span class="o">)*</span><span class="no">TEN</span><span class="o">;</span>
+
+                <span class="k">if</span><span class="o">(</span> <span class="n">next</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">answer</span> <span class="o">+=</span> <span class="mi">5</span><span class="o">;</span>
+                    <span class="n">target</span> <span class="o">/=</span> <span class="no">TEN</span><span class="o">;</span>
+                    <span class="n">target</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">answer</span> <span class="o">+=</span> <span class="mi">5</span><span class="o">;</span>
+                    <span class="n">target</span> <span class="o">/=</span> <span class="no">TEN</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="c1">//다음 숫자 고려하고 더하는게 나은지 확인</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/07/15/Programmers-series-LV.-02-LongJump.html">
+        [programmers Series] Lv. 02 Longjump
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
