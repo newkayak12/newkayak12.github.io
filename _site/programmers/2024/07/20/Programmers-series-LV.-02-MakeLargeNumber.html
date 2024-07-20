@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 02 Makelargenumber | newkayak12.github.io</title>
+	<meta name="description"
+		content="큰 수 만들기">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/07/20/Programmers-series-LV.-02-MakeLargeNumber.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 02 Makelargenumber</h1>
+    
+    <p class="meta">
+      July 20, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="큰-수-만들기">큰 수 만들기</h1>
+
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/42883">Programmers</a></p>
+
+<blockquote>
+  <pre>
+어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
+예를 들어, 숫자 1924에서 수 두 개를 제거하면
+[19, 12, 14, 92, 94, 24] 를 만들 수 있습니다.
+이 중 가장 큰 숫자는 94 입니다.
+
+문자열 형식으로 숫자 number와 제거할 수의
+개수 k가 solution 함수의 매개변수로 주어집니다.
+number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중
+가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
+
+ 제한 조건
+ - number는 2자리 이상, 1,000,000자리 이하인 숫자입니다.
+ - k는 1 이상 number의 자릿수 미만인 자연수입니다.
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>스택 사용</p>
+
+<p>쭉 순회하면서 이전의 수와 비교하는 방식으로 진행
+스택에 넣고 스택보다 이번 수가 크면 스택을 pop하고 이번 수를 스택에 넣는 방식으로 진행</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MakeLargeNumber</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">number</span> <span class="o">=</span> <span class="s">"1924"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">"94"</span><span class="o">;</span>
+            <span class="cm">/**
+             * 1924 -&gt; 2개를 지운다.
+             * 1회차-----------
+             * 가장 큰 숫자를 찾는다. 9
+             *      9 전의 숫자만큼 지운다. 924
+             *      remove Count를 지운 만큼 줄인다. 1
+             *      9 이후의 숫자를 넘긴다.
+             *      9를 저장한다.
+             *
+             * save [9] next 24
+             * 2회차-----------
+             * 가장 큰 숫자를 찾는다. 4
+             *
+             */</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">k</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">number</span> <span class="o">=</span> <span class="s">"1231234"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">"3234"</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">k</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">number</span> <span class="o">=</span> <span class="s">"4177252841"</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+            <span class="nc">String</span> <span class="n">result</span> <span class="o">=</span> <span class="s">"775841"</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">number</span><span class="o">,</span> <span class="n">k</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">solution</span><span class="o">(</span><span class="nc">String</span> <span class="n">number</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Character</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span> <span class="o">++</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">now</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+            <span class="k">while</span><span class="o">(</span> <span class="kc">true</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="k">break</span><span class="o">;</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">now</span> <span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+                <span class="k">if</span><span class="o">(</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+                <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                <span class="n">k</span> <span class="o">-=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">stack</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">now</span><span class="o">);</span>
+        <span class="o">}</span>
+
+
+        <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">map</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">).</span><span class="na">reduce</span><span class="o">((</span><span class="n">p</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">p</span><span class="o">+</span><span class="n">n</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/07/18/Programmers-series-LV.-02-MagicElevator.html">
+        [programmers Series] Lv. 02 Magicelevator
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
