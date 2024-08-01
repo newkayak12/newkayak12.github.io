@@ -12,7 +12,7 @@ categories: [MYSQL, SUMMARY]
 
 ### 테이블, 인덱스 통계 정보
 비용 기반 최적화에서 가장 중요한 것이 통계 정보다. 통계 정보가 부정확하면 쿼리가 산으로 갈 수도 있다. 5.6부터 통계정보가 메모리에서만 관리되는게 아니라 영구적으로
-저장하여 관리할 수 있게 됐다. `innodb_index_stats`, `innodb_table_stats`로 확인할 수 있다. 또한 영구적으로 보관할지도 `STATS_PERSISTENT`로 
+저장하여 관리할 수 있게 됐다. `innodb_index_stats`, `innodb_table_stats`로 확인할 수 있다. 또한 영구적으로 보관할지도 `STATS_PERSISTENT`로
 설정할 수 있다.
 
 
@@ -45,17 +45,17 @@ ALTER TABLE ~ STATS_PERSISTENT=1;
 `STATS_AUTO_RECALC`을 통해서 설정할 수도 있다. (1은 자동, 0은 `ANALYZE TABLE`에만 반응하도록, DEFAULT는 시스템 변수를 따라간다. )
 
 또한 `innodb_stats_transient_sample_pages`로 샘플링 페이지를 정해서 일부를 가지고 통계를 낼 수도 있으며, `innodb_stats_persistent_sample_pages`로
-샘플링해서 저장하는 페이지 수를 정할 수도 있다. 
+샘플링해서 저장하는 페이지 수를 정할 수도 있다.
 
 ### 히스토그램
 
-8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 `ANALYZE TABLE ... UPDATE HISTOGRAM` 명령으로 수동으로 수집, 관리된다. 
+8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 `ANALYZE TABLE ... UPDATE HISTOGRAM` 명령으로 수동으로 수집, 관리된다.
 종류는 두 가지다.
 
 1. Singleton : 컬럼 값 개별로 레코드 건수를 관리하는 히스토그램 (도수 분포라고도 불린다.)
 2. Equi-Height : 컬럼 값의 범위를 균등한 개수로 구분해서 관리하는 히스토그램 (Height-Balanced라고도 불린다.)
 
-싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다. 
+싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다.
 싱글톤 히스토그램이는 컬럼 값별로 누적된 건수의 비율을 가지고 있다. 높이-균형 히스토그램은 컬럼 값의 각 범위에 대해 레코드 건수 비율이 누적으로 표시된다. (그래프의 기울기가 의미가 있다.)
 
 - sampling-rate :  히스토그램 정보를 수집하기 위해 스캔한 페이지의 비율을 저장한다. 샘플링 비율이 높아질수록 정확한 히스토그램이 되지만 테이블 스캔으로 부하가 늘어난다.
@@ -92,7 +92,7 @@ MySQL에서는 쿼리의 실행 계획을 수립할 때 사용 가능한 인덱�
 - 메모리 임시 테이블 작업
 - 디스크 임시 테이블 작업
 
-이런 과정으로 코스트가 얼마나 되는지 예측하고 이를 바탕으로 최적의 실행 계획을 찾는다. 5.7 이전에는 서버 소스 코드에 상수화해서 사용했다. 
+이런 과정으로 코스트가 얼마나 되는지 예측하고 이를 바탕으로 최적의 실행 계획을 찾는다. 5.7 이전에는 서버 소스 코드에 상수화해서 사용했다.
 
 ```mysql
 EXPLAIN FORMAT = TREE
@@ -151,14 +151,14 @@ SELECT 쿼리가 어떤 타입의 쿼리인지 표시되는 컬럼이다.
 3. UNION   : UNION으로 결합하는 SELECT 쿼리 가운데 첫번쨰가 아닌 쿼리를 UNION으로 표시한다. 첫번째는 DERIVED가 된다.
 4. DEPENDENT UNION : UNION, UNION ALL으로 집합을 겹합하는 쿼리에 표시된다. DEPENDENT는 UNION, UNION ALL로 결합된 단위 쿼리가 외부 쿼리에 의해 영향을 받는 것을 의미한다.
 5. UNION RESULT : UNION ALL, UNION 쿼리는 UNION의 결과를 임시 테이블로 생성했는데 8.0에도 여전히 임시 테이블에 결과를 버퍼링한다.UNION RESULT에는 id가 부합되지 않는다.
-6. SUBQUERY : SUBQUERY는 FROM 절 외에 사용되는 서브쿼리만을 의미한다. FROM 절에 사용된 서브쿼리는 select_type은 DERIVED로 표시된다. 그 밖은 SUBQUERY로 표기된다. 
+6. SUBQUERY : SUBQUERY는 FROM 절 외에 사용되는 서브쿼리만을 의미한다. FROM 절에 사용된 서브쿼리는 select_type은 DERIVED로 표시된다. 그 밖은 SUBQUERY로 표기된다.
 7. DEPENDENT SUBQUERY : 서브쿼리가 바깥쪽 쿼리에서 정의된 컬럼을 사용하면 DEPENDENT SUBQUERY라고 표시된다. 외부 쿼리가 실행되고 내부를 실행하므로 일반 서브쿼리보다 처리 속도가 느리다.
 8. DERIVED : 단위 SELECT 쿼리의 실행 결과로 메모리나 디스크에 임시 테이블을 생성하는 것을 의미한다.
 9. DEPENDENT DERIVED : 8.0 이전에는 FROM  절의 서브쿼리는 외부 컬럼을 사용할 수가 없었는데 8.0부터 `LATERAL JOIN`이 추가되면서 서브쿼리에서도 외부 컬럼을 참조할 수 있게 됐다.
 10. UNCACHEABLE SUBQUERY : 하나의 쿼리 문장에 서브쿼리가 하나만 있다고 한 번만 실행되는 건 아니다. 그런데 조건이 같은 쿼리가 실행되면, 즉 이전의 결과를 재활용할 수 있다면 캐싱한다.
     - SUBQUERY : 처음 한 번만 실행하고 캐싱해서 재활용
     - DEPENDENT SUBQUERY : 컬럼 값 단위로 캐시해두고 사용
-이 경우는 캐시를 사용하지 못하는 요소가 있기 때문에 위와 같은 결과를 출력한다. 이유는 아래와 같다.
+      이 경우는 캐시를 사용하지 못하는 요소가 있기 때문에 위와 같은 결과를 출력한다. 이유는 아래와 같다.
     1. 사용자 변수가 서브쿼리에 사용된 경우
     2. NOT-DETERMINISTIC 속성의 스토어드 루틴이 서브쿼리 내에 사용된 경우
     3. UUID(), RAND()와 같이 결과 값이 호출될 때마다 달라지는 함수가 사용된 경우
@@ -167,7 +167,7 @@ SELECT 쿼리가 어떤 타입의 쿼리인지 표시되는 컬럼이다.
 
 #### table 컬럼
 SELECT 쿼리 기준이 아니라 테이블 기준으로 표시된다. `<derived N >`, `<union M, N>`과 같이 `<>`으로 둘러싸인 이름이 명시되는 경우 `임시 테이블`을 의미한다.
-N, M은 id 값을 지칭한다. 
+N, M은 id 값을 지칭한다.
 
 #### partitions 컬럼
 옵티마이저가 사용하는 파티션은 `EXPLAIN PARTITION`을 사용해서 확인할 수 있었지만 8.0부터는 EXPLAIN으로 파티션 관련 실행 계획까지 모두 확인할 수 있게 됐다.
@@ -182,9 +182,9 @@ N, M은 id 값을 지칭한다.
 1.  system : 레코드가 1건만 존재하는 테이블 또는 한 건도 존재하지 않는 테이블을 참조하는 형태의 접근 (MyISAM, MEMORY에서)
 2.  const  : 반드시 1건을 반환하는 처리방식을 의미한다. 다중 인덱스에서는 인덱스 일부 컬럼만 조건으로 던져서는 `const`로 접근할 수 없다. 옵티마이저가 쿼리를 최적화하는 단계에서 쿼리를 먼저 실행해서 통째로 상수화한다.
 3.  eq_ref : 여러 테이블이 조인되는 쿼리에서 표시된다. 조인에서 처음 읽은 컬럼 값을 그다음 읽을 때 검색조건에 사용할 때 `eq_ref`라고 한다. 그래서 두 번째
-이후 읽는 테이블의 type에 `eq_ref`가 표시된다. 
+    이후 읽는 테이블의 type에 `eq_ref`가 표시된다.
 4.  ref    : 조인 순서와 상관없다. PK, UQ도 상관 없다. 동등 검색 조건으로 접근할 때 사용된다. 레코드가 1건이라는 보장이 없으므로 const, eq_ref보다는 느리다. 동등 조건만으로 비교되므로 그래도 빠른 편이다.
-5.  fulltext : 전문 검색 인덱스를 사용해서 레코드를 읽는 접근 방법을 의미한다. 전문 검색은 통계 정보가 관리되지 않는다. 
+5.  fulltext : 전문 검색 인덱스를 사용해서 레코드를 읽는 접근 방법을 의미한다. 전문 검색은 통계 정보가 관리되지 않는다.
 6.  ref_or_null : ref와 접근 방식은 같은데 NULL 비교가 추가된 형태다. (ref 또는 IS NULL)
 7.  unique_subquery : IN(subquery) 형태의 쿼리를 위한 접근 방식이다. 서브쿼리에서 중복되지 않은 유니크한 값만 반환될 때 이 접근 방법을 사용한다. (이런 세미 조인의 경우를 최적화하는 여러 가지 방법이 있다. table_pullout 같은)
 8.  index_subquery : IN 연산자 특성상 조건은 괄호 안에 있는 값의 목록에서 중복된 값이 먼저 제거돼야 한다. 서브 쿼리 중 중복이 될 수도 있는데, 인덱스를 이용해서 제거할 수 있을 때 `index_subquery`가 사용된다.
@@ -193,12 +193,12 @@ N, M은 id 값을 지칭한다.
     1. 여러 인덱스를 읽어야 하므로 range보다 느리다.
     2. 전문 인덱스를 사용하면 index_merge가 적용되지 않는다.
     3. 항상 2개 이상의 집합이 되므로, 교집합, 합집합, 중복 제거 같은 작업이 수반된다.
-11. index : 인덱스 풀 스캔을 의미한다. 테이블 풀 스캔이랑 거의 다를 바가 없지만 레코드 통쨰로 움직이는 것보다 나으므로 빠르게 처리된다. 또한 쿼리에 따라서 정렬된 인덱스의 장점을 이용할 수도 있다. 
+11. index : 인덱스 풀 스캔을 의미한다. 테이블 풀 스캔이랑 거의 다를 바가 없지만 레코드 통쨰로 움직이는 것보다 나으므로 빠르게 처리된다. 또한 쿼리에 따라서 정렬된 인덱스의 장점을 이용할 수도 있다.
     1. range나 const, ref로 접근을 못 할 경우
     2. 인덱스에 포함된 컬럼만으로 처리할 수 있는 경우 = 커버링 인덱스
     3. 인덱스를 이용해서 정렬, 그루핑이 가능할 경우
-1 + 3 이거나 1 + 2인 경우 사용된다. 
-12.  ALL : 테이블 풀 스캔이다. 대량의 I/O를 유발한다. 리드 어헤드로 미리 읽어서 처리할 수 있다. 
+       1 + 3 이거나 1 + 2인 경우 사용된다.
+12.  ALL : 테이블 풀 스캔이다. 대량의 I/O를 유발한다. 리드 어헤드로 미리 읽어서 처리할 수 있다.
 
 #### possible_keys 컬럼
 비용이 가장 낮을 것 같은 실행 계획을 옵티아미저는 선택한다. 여기 들어간 인덱스는 그 선택지 중 고려됐던 내용들이다.
@@ -209,7 +209,7 @@ N, M은 id 값을 지칭한다.
 #### key_len
 쿼리를 처리하기 위해서 다중 컬럼으로 구성된 인덱스에서 몇 개의 컬럼까지 사용했는지를 알려준다.
 
-#### ref 
+#### ref
 접근 방법이 ref면 참조 조건으로 어떤 값이 제공됐는지를 보여준다. 상숫 값이라면 const, 다른 컬럼 값이면 테이블명, 컬럼 명이 표시된다. 참조용 값을 변환하는 과정을 거쳤다면 func으로 표시된다.
 
 #### rows
@@ -234,7 +234,7 @@ rows 컬럼의 값은 인덱스를 사용하는 조건에만 일치하는 레코
 - no table used : `FROM DUAL` 형태의 실행 계획
 - not exists : Anti-JOIN 형태는 left join에 null이 아닌 걸로 튜닝할 수 있다. OUTER JOIN으로 Anti-JOIN을 수행하는 쿼리에서 보인다.
 - plan isn't ready yet : 다른 커넥션 쿼리 실행 계획이 준비되지 않았을 경우
-- recursive : CTE(Common Table Expression)으로 재귀 쿼리를 사용할 때 
+- recursive : CTE(Common Table Expression)으로 재귀 쿼리를 사용할 때
 
 ```mysql
 WITH RECURSIVE cte ( n ) AS 
@@ -248,21 +248,21 @@ SELECT * FROM cte;
 - rematerialize : LATERAL JOIN의 경우 레코드 별로 서브쿼리를 실행해서 그 결과를 임시 테이블에 저장한다. 이 과정을 의미한다.
 - select tables optimized away : MIN, MAX만 사용되거나 GROUP BY로 MIN, MAX를 조회하는 쿼리가 인덱스를 오름, 내림차순으로 1건만 읽는 경우
 - start temporary, end temporary : duplicate weed-out이 사용되면 내부 불필요한 중복건 제거를 위해서 내부 임시 테이블을 사용하는데 이때 표시된다.
-- unique row not found : 두 개의 테이블이 각각 UQ 컬럼으로 outer 조인할 때 아우터 테이블에 일치하는 레코드가 존재하지 않을 때 
+- unique row not found : 두 개의 테이블이 각각 UQ 컬럼으로 outer 조인할 때 아우터 테이블에 일치하는 레코드가 존재하지 않을 때
 - using filesort : ORDER BY를 처리하기 위해서 인덱스를 사용하지 못 할 경우 정렬용 메모리 버퍼에 복사해서 퀵소트 혹은 힙소트를 사용해서 정렬할 때 표시된다.
 - using index :  인덱스만으로 질의를 처리할 수 있을 때 표시된다. (커버링 인덱스)
 - using index condition : ICP(인덱스 컨디션 푸시다운) 최적화를 하면 표시된다.
 - using index for group-by : group by가 인덱스를 이용하면 정렬된 인덱스 컬럼을 순서대로 읽으면서 그루핑만 수행한다. 이 경우 표시된다.
-  - 타이트 인덱스 스캔을 통한 GROUP BY 처리 : 인덱스로 group by를 할 수 있어도 AVG(), SUM(), COUNT() 같이 모든 인덱스를 다 읽어야 하는 경우 `using index fro group-by`가 표시되지 않는다.
-  - 루스 인덱스 스캔을 통한 GROUP BY 처리 : 그루핑 컬럼 말고 아무것도 조회하지 않는 쿼리에서 루스 인덱스 스캔을 사용할 수 있다. MIN(), MAX()이 조회하는 값이 인덱스 처음 혹은 마지막이여도 가능하다.
-  
+    - 타이트 인덱스 스캔을 통한 GROUP BY 처리 : 인덱스로 group by를 할 수 있어도 AVG(), SUM(), COUNT() 같이 모든 인덱스를 다 읽어야 하는 경우 `using index fro group-by`가 표시되지 않는다.
+    - 루스 인덱스 스캔을 통한 GROUP BY 처리 : 그루핑 컬럼 말고 아무것도 조회하지 않는 쿼리에서 루스 인덱스 스캔을 사용할 수 있다. MIN(), MAX()이 조회하는 값이 인덱스 처음 혹은 마지막이여도 가능하다.
+
 - using index for skip scan : 인덱스 스킵 스캔 최적화를 사용하면 `using index for skip scan` 메시지를 표시한다.
 - using join buffer(Block Nested Loop, Batched Key Access, hash join)
 - using MRR : Multi Range Read, 여러 개의 키를 한 번에 스토리지 엔진에 전달하고, 스토리지 엔진은 넘겨 받은 키 값을 정렬해서 페이지 접근을 줄일 수 있게 최적화한다.
-- using sort_union, using union, using, intersect : index_merge으로 실행되는 경우 2개 이상 인덱스가 동시 사용되는 경우 
-  - using intersect : AND로 연결된 경우 각 처리 결과에서 교집합을 추출한 경우
-  - using union : OR로 연결된 경우 합집을 추출해내는 경우
-  - using sort_union : sort해서 중복을 제거한 경우
+- using sort_union, using union, using, intersect : index_merge으로 실행되는 경우 2개 이상 인덱스가 동시 사용되는 경우
+    - using intersect : AND로 연결된 경우 각 처리 결과에서 교집합을 추출한 경우
+    - using union : OR로 연결된 경우 합집을 추출해내는 경우
+    - using sort_union : sort해서 중복을 제거한 경우
 - using temporary : 쿼리를 처리하는 동안 중간 결과를 담아 두기 위해서 임시 테이블을 사용하는 경우
 - using where     : MySQL 엔진 레이어에서 별도의 가공을 해서 필터링을 처리할 경우 표시된다.
 - zero limit      : 쿼리 결괏 값의 메타데이터만 필요한 경우 ( 테이블의 레코드를 읽지 않고 결과 값의 메타 정보만 반환한다. )

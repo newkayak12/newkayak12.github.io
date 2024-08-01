@@ -131,6 +131,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -214,7 +216,7 @@
 
 <h3 id="테이블-인덱스-통계-정보">테이블, 인덱스 통계 정보</h3>
 <p>비용 기반 최적화에서 가장 중요한 것이 통계 정보다. 통계 정보가 부정확하면 쿼리가 산으로 갈 수도 있다. 5.6부터 통계정보가 메모리에서만 관리되는게 아니라 영구적으로
-저장하여 관리할 수 있게 됐다. <code class="language-plaintext highlighter-rouge">innodb_index_stats</code>, <code class="language-plaintext highlighter-rouge">innodb_table_stats</code>로 확인할 수 있다. 또한 영구적으로 보관할지도 <code class="language-plaintext highlighter-rouge">STATS_PERSISTENT</code>로 
+저장하여 관리할 수 있게 됐다. <code class="language-plaintext highlighter-rouge">innodb_index_stats</code>, <code class="language-plaintext highlighter-rouge">innodb_table_stats</code>로 확인할 수 있다. 또한 영구적으로 보관할지도 <code class="language-plaintext highlighter-rouge">STATS_PERSISTENT</code>로
 설정할 수 있다.</p>
 
 <pre><code class="language-mysql">CREATE TABLE tableTest ( test1 INT PRIMARY KEY , test2 VARCHAR(30))
@@ -250,7 +252,7 @@ STATS_PERSISTENT = [DEFAULT | 0 | 1]
 
 <h3 id="히스토그램">히스토그램</h3>
 
-<p>8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 <code class="language-plaintext highlighter-rouge">ANALYZE TABLE ... UPDATE HISTOGRAM</code> 명령으로 수동으로 수집, 관리된다. 
+<p>8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 <code class="language-plaintext highlighter-rouge">ANALYZE TABLE ... UPDATE HISTOGRAM</code> 명령으로 수동으로 수집, 관리된다.
 종류는 두 가지다.</p>
 
 <ol>
@@ -258,7 +260,7 @@ STATS_PERSISTENT = [DEFAULT | 0 | 1]
   <li>Equi-Height : 컬럼 값의 범위를 균등한 개수로 구분해서 관리하는 히스토그램 (Height-Balanced라고도 불린다.)</li>
 </ol>
 
-<p>싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다. 
+<p>싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다.
 싱글톤 히스토그램이는 컬럼 값별로 누적된 건수의 비율을 가지고 있다. 높이-균형 히스토그램은 컬럼 값의 각 범위에 대해 레코드 건수 비율이 누적으로 표시된다. (그래프의 기울기가 의미가 있다.)</p>
 
 <ul>

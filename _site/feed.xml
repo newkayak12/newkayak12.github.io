@@ -5,7 +5,643 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 30 Jul 2024 21:54:05 +0900</pubDate>
+    <pubDate>Thu, 01 Aug 2024 21:23:30 +0900</pubDate>
+    
+      <item>
+        <title>[mysql Summary Series] 10.online_ddl</title>
+        <link>/2024/08/01/mysql-summary-series-10.ONLINE_DDL.html</link>
+        <guid isPermaLink="true">/2024/08/01/mysql-summary-series-10.ONLINE_DDL.html</guid>
+        <description>&lt;h1 id=&quot;online_ddl&quot;&gt;ONLINE_DDL&lt;/h1&gt;
+
+&lt;p&gt;온라인에서 스키마 변경은 주저할만한 일이 맞지만, 일단 ALGORITHM, LOCK 옵션으로 어떤 모드로 스키마 변경을 진행할지 결정할 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ALGORITH=INSTANT : 테이블 데이터 변경 없이 메타데이터만 변경하고 작업을 완료한다. 테이블 읽고 쓰기는 대기하지만 스키마 변경 시간이 매우 짧이서 문제가 되지 않을 수준이다.&lt;/li&gt;
+  &lt;li&gt;ALGORITH=INPLACE : 임시테이블로 데이터로 복사하고 스키마를 변경한다. 필요에 따라 테이블 리빌드가 필요할 수도 있다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ALGORITH=COPY : 변경된 스키마를 적용한 임시 테이블을 생성하고, 레코드를 모두 복사하고 임시테이블을 RENAME 해서 스키마 변경을 완료한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;LOCK=NONE   : 아무런 잠금을 걸지 않음&lt;/li&gt;
+  &lt;li&gt;LOCK=SHARED : 읽기 잠금을 건다. (읽기는 가능, 쓰기는 불가)&lt;/li&gt;
+  &lt;li&gt;EXCLUSIVE   : 쓰기 잠금을 건다. (읽기, 쓰기 불가)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;inplace&quot;&gt;INPLACE&lt;/h2&gt;
+&lt;p&gt;임시테이블로 레코드를 복사하지 않더라도 내부적으로 테이블의 모든 레코드를 리빌드해야 하는 경우가 많다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;INPLACE로 변경 지원되는 엔진인지 확인&lt;/li&gt;
+  &lt;li&gt;스키마 변경 준비 (변경 동안 데이터 추적 준비)&lt;/li&gt;
+  &lt;li&gt;변경 및 새로운 DML 로깅&lt;/li&gt;
+  &lt;li&gt;로그 적용&lt;/li&gt;
+  &lt;li&gt;INPLACE 종료&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;모니터링&quot;&gt;모니터링&lt;/h2&gt;
+&lt;p&gt;ONLINE DDL을 포함한 ALTER TABLE 명령은 모두 performance_schema를 통해서 진행 상황을 모니터링할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;데이터베이스-관련-명령어&quot;&gt;데이터베이스 관련 명령어&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;SHOW DATABASES;&lt;/li&gt;
+  &lt;li&gt;USE [dbName]&lt;/li&gt;
+  &lt;li&gt;ALTER DATABASE [dbName] CHARACTER SET=’utf8mb4’;&lt;/li&gt;
+  &lt;li&gt;DROP DATABASE [IF EXISTS] [dbName]&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;테이블-스페이스-변경&quot;&gt;테이블 스페이스 변경&lt;/h3&gt;
+&lt;p&gt;MySQL은 전통적으로 테이블별 전용 테이블 스페이스를 사용했다. InnoDB 테이블 스페이스(ibdata1)만 제너럴 테이블스페이스(여러 테이블 데이터를 한꺼번에 저장하는 테이블스페이스)를 사용했다.
+8.0부터는 제네럴테이블 스페이스로 사용자 테이블을 저장하는 기능이 추가됐다. 그러나 몇 가지 제약을 가지게 된다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;파티션 테이블은 GeneralTableSpace를 사용하지 못한다.&lt;/li&gt;
+  &lt;li&gt;복제소스, 레플리카 서버가 동일 호스트에서 실행되는 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ADD DATAFILE&lt;/code&gt; 사용 불가&lt;/li&gt;
+  &lt;li&gt;테이블 암호화는 테이블 스페이스 단위로 설정&lt;/li&gt;
+  &lt;li&gt;테이블 압축 가능 여부는 테이블스페이스의 블록 사이즈, InnoDB 페이지 사이즈에 의해서 결정됨&lt;/li&gt;
+  &lt;li&gt;특정 테이블을 삭제해도 디스크 공간이 반납되지 않음&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;그럼에도&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;제네럴 테이블스페이스를 사용하면 파일 핸들러(Open file descriptor)를 최소화&lt;/li&gt;
+  &lt;li&gt;테이블스페이스 관리에 필요한 메모리 공간을 최소화&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;테이블-구조-조회&quot;&gt;테이블 구조 조회&lt;/h3&gt;
+&lt;p&gt;테이블 구조 조회는&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW CREATE TABLE&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DESC&lt;/code&gt;
+로 두 가지가 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW CREATE TABLE&lt;/code&gt;는 최초 테이블 생성 때 사용한 내용을 그대로 보여주는 것은 아니다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW CREATE TABLE&lt;/code&gt;는 컬럼명, 인덱스, FK 등을 동시에 보여준다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DESC&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DESCRIBE&lt;/code&gt;의 약어 형태의 명령으로 둘 모두 같은 결과를 보여준다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;테이블-구조-변경&quot;&gt;테이블 구조 변경&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ALTER TABLE&lt;/code&gt;은 테이블 자체의 속성을 변경할 수 있을뿐만 아니라 인덱스의 추가/삭제 컬럼 추가/삭제 용도로 사용된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;테이블명-변경&quot;&gt;테이블명 변경&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RENAME TABLE [A] TO [B]&lt;/code&gt;로 변경할 수 있다. 다른 DB로 테이블을 이동할 때도 사용할 수 있다. 스키마를 변경하지 않는다면 메타 정보만 변경하지만
+스키마 이동을 하면 메타정보와 테이블이 저장된 파일까지 다른 디렉토리로 이동해야 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;테이블-상태-조회&quot;&gt;테이블 상태 조회&lt;/h3&gt;
+&lt;p&gt;MySQL의 테이블은 만들어진 시간, 대략의 레코드 건수, 데이터 파일의 크기 등의 정보를 가지고 있다. 파일의 버전, 레코드 포맷 등과 같은 정보도 가지고 있다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW TABEL STATUS LIKE [tableName];&lt;/code&gt;로 조회할 수 있다. 혹은&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;SELECT * FROM information_schema.TABLES
+WHERE TABLE_SCHEMA='tableName' 
+AND TABLE_NAME='tableName';
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;로 조회할 수 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;information_schema&lt;/code&gt;에 스키마들에 대한 메타 정보를 가진 딕셔너리 테이블이 관리된다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;information_schema&lt;/code&gt;는 실제 존재하는 테이블이 아니라.
+메모리에 모아두고 참조할 수 있는 테이블이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;DB 객체에 대한 메타 정보&lt;/li&gt;
+  &lt;li&gt;테이블과 컬럼에 대한 간략한 통계정보&lt;/li&gt;
+  &lt;li&gt;전문 검색 디버깅을 위한 뷰&lt;/li&gt;
+  &lt;li&gt;압축 실행과 실패 횟수에 대한 집계 정보&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;테이블-구조-복사&quot;&gt;테이블 구조 복사&lt;/h3&gt;
+&lt;p&gt;테이블 구조는 같지만 이름만 다른 테이블을 생성할 때는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW CREATE TABLE&lt;/code&gt;로 DDL을 조회하고 만들거나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CREATE TABLE ... AS SELECT ... LIMIT 0&lt;/code&gt;으로 메타데이터만 긁어서 만들 수도 있다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CREATE TABLE ... AS SELECT ... LIMIT 0&lt;/code&gt; 는 인덱스가 생성되지 않는다는 장점이 있다. 추가로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CREATE TABLE ... LIKE ~&lt;/code&gt;를 사용하면 구조만 복사할 수도 있다.
+데이터도 복사하려면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INSERT ... SELECT&lt;/code&gt; 도 실행하면 된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;테이블-삭제&quot;&gt;테이블 삭제&lt;/h3&gt;
+&lt;p&gt;테이블 삭제는 파일 삭제를 수반한다. 만약 클러스터링 되어 있다면 읽고 쓰기 작업이 필요하다. ONLINE DDL 로 DELETE를 했는데 만약 용량이 큰 테이블이라면
+쿼리 성능에 영향을 미칠 가능성이 높다. 추가로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AdaptiveHashIndex&lt;/code&gt;를 사용했다면 이 인덱스도 모두 삭제해야 한다. 그러면 이 또한 서버에 부하를 주기 때문에
+쿼리에 영향을 미친다.&lt;/p&gt;
+
+&lt;h3 id=&quot;컬럼-변경&quot;&gt;컬럼 변경&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;추가 : 대부분 INPLACE 알고리즘을 사용한다. 맨 끝에 추가하면 INSTANT 알고리즘으로 추가된다.&lt;/li&gt;
+  &lt;li&gt;삭제 : 항상 테이블 리빌드가 필요하다. INPLACE로만 가능하다.&lt;/li&gt;
+  &lt;li&gt;변경 :
+    &lt;ol&gt;
+      &lt;li&gt;이름 : INPLACE를 사용하지만 리빌드는 필요 없다.&lt;/li&gt;
+      &lt;li&gt;타입 :
+        &lt;ol&gt;
+          &lt;li&gt;타입만 변경 : COPY 알고리즘으로 진행한다.&lt;/li&gt;
+          &lt;li&gt;길이만 변경 :&lt;/li&gt;
+          &lt;li&gt;증가 : 확장하는 길이에 따라 리빌드가 필요할 수도 아닐 수도 있다.&lt;/li&gt;
+          &lt;li&gt;축소 : COPY를 사용한다. 또한 스키마 변경 중 테이블 데이터 변경은 허용되지 않으므로 LOCK은 SHARED를 사용해야 한다.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;인덱스-변경&quot;&gt;인덱스 변경&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;ALTER TABLE [tableName] ADD 
+[PRIAMRY KEY|UNIQUE INDEX|INDEX|FULLTEXT|SPATIAL]
+( columnName ) ALGORITHM=INPLACE, LOCK=NONE;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;인덱스-조회&quot;&gt;인덱스 조회&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW INDEXES&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW CREATE TABLE&lt;/code&gt;로 확인하면 된다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;show index from order;
+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| order | 0 | PRIMARY | 1 | orderNo | A | 51152 | null | null |  | BTREE |  |  |
+| order | 1 | order_tblStore_storeNo_fk | 1 | storeNo | A | 512 | null | null | YES | BTREE |  |  |
+| order | 1 | order_orderManageNumber | 1 | orderManageNo | A | 51194 | null | null | YES | BTREE |  |  |
+| order | 1 | order_userNo | 1 | userNo | A | 6071 | null | null | YES | BTREE |  |  |
+| order | 1 | order_orderState_payState_userNo | 1 | payStatus | A | 1 | null | null | YES | BTREE |  |  |
+| order | 1 | order_orderState_payState_userNo | 2 | orderState | A | 7 | null | null | YES | BTREE |  |  |
+| order | 1 | order_orderState_payState_userNo | 3 | userNo | A | 6767 | null | null | YES | BTREE |  |  |
+| order | 1 | orderState_index | 1 | orderState | A | 6 | null | null | YES | BTREE |  |  |
+| order | 1 | date_index | 1 | orderDate | A | 51194 | null | null | YES | BTREE |  |  |
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cardinality는 인덱스에서 유니크한 개수를 보여준다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인덱스-이름-변경&quot;&gt;인덱스 이름 변경&lt;/h3&gt;
+&lt;p&gt;MySQL5.7부터 변경할 수 있다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;
+ALTER TABLE A salaries RENAME INDEX ix_salary TO ix_salary2,
+ALGORITHM=INPLACE, LOCK=NONE;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;INPLACE를 사용하지만 리빌드는 필요하지 않다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인덱스-가시성-변경&quot;&gt;인덱스 가시성 변경&lt;/h3&gt;
+&lt;p&gt;인덱스 삭제는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ALTER TABLE DROP INDEX&lt;/code&gt;으로 완료된다. 그러나 인덱스 삭제, 생성은 리소스가 많이 든다.
+그래서 단순히 옵티마이저가 사용하냐 안하냐 정도의 가시성 개념이 도입되었다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;ALTER TABLE A ALTER INDEX a INVISIBLE;
+ALTER TABLE A ALTER INDEX a VISIBLE;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;인덱스-삭제&quot;&gt;인덱스 삭제&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ALTER TABLE DROP INDEX&lt;/code&gt;로 해결된다. SecondaryIndex의 삭제는 이 인덱스 들의 PK 값을 삭제해야 하기 때문에 임시테이블로 레코드를 복사해서 
+테이블을 재구축해야 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;프로세스-조회-및-강제-종료&quot;&gt;프로세스 조회 및 강제 종료&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;SHOW PROCESSLIST;
+
+| Id | User | Host | db | Command | Time | State | Info |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 80548 | rdsadmin | localhost | mysql | Sleep | 13 |  | null |
+| 80550 | rdsadmin | localhost | null | Sleep | 1 |  | null |
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Id      : MySQL 서버 쓰레드&lt;/li&gt;
+  &lt;li&gt;User    : MySQL에 접속할 때 인증한 사용자 계정&lt;/li&gt;
+  &lt;li&gt;Host    : 호스명이나 IP&lt;/li&gt;
+  &lt;li&gt;db      : 클라이언트가 기본으로 사용하는 데이터베이스 이름이 표시된다.&lt;/li&gt;
+  &lt;li&gt;Command : 처리하고 있는 작업&lt;/li&gt;
+  &lt;li&gt;Time    : 실행 시간&lt;/li&gt;
+  &lt;li&gt;State   : Command에 표시되는 내용의 큰 분류&lt;/li&gt;
+  &lt;li&gt;Info    : 쓰레드가 실행 중인 쿼리 문장르 보여준다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;활성-트랜잭션-조회&quot;&gt;활성 트랜잭션 조회&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;information_schema.innodb_trx&lt;/code&gt; 테이블을 통해 확인할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;SELECT trx_id,
+       (SELECT CONCAT(user, '@', host) FROM information_schema.processlist WHERE id = trx_mysql_thread_id) AS source_info,
+       trx_state,
+       ....,
+FROM information_schema.innodb_trx
+WHERE (unix_timestamp(now() - unix_timestamp(trx_started))) &amp;gt; 5
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;락은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;performance_schema.data._locks&lt;/code&gt; 테이블을 참조하면 된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;쿼리-성능-테스트---쿼리-성능에-영향을-미치는-요소&quot;&gt;쿼리 성능 테스트 - 쿼리 성능에 영향을 미치는 요소&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;OS 캐시 : MySQL도 OS Call로 파일을 읽어온다. 그리고는 캐싱해 놓는데 만약 MySQL이 필요한 부분이 캐싱되어 있다면 여기에서 읽어온다.&lt;/li&gt;
+  &lt;li&gt;BufferPool : MySQL도 Page 단위로 캐싱한다. 버퍼풀은 인덱스 페이지, 데이터 페이지 가릴거 없이 캐시하며, 쓰기 버퍼링도 겸한다. 한 번 시작하면 삭제 명령어가 없고, 설정에 따라 재시작하면 워밍업으로 이전의 데이터를 올리기도 한다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 01 Aug 2024 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[mysql Summary Series] 09.optimizingquery</title>
+        <link>/2024/08/01/mysql-summary-series-09.OptimizingQuery.html</link>
+        <guid isPermaLink="true">/2024/08/01/mysql-summary-series-09.OptimizingQuery.html</guid>
+        <description>&lt;h1 id=&quot;쿼리-작성-및-최적화&quot;&gt;쿼리 작성 및 최적화&lt;/h1&gt;
+
+&lt;h2 id=&quot;sql-모드&quot;&gt;SQL 모드&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;STRICT_ALL_TABLES &amp;amp; STRICT_TRANS_TABLES : INSERT, UPDATE 문장으로 데이터를 변경하는 경우 컬럼 타입과 저장되는 타입 다를 때 자동 캐스팅이 수행된다.&lt;/li&gt;
+  &lt;li&gt;ANI_QUOTES : 홑따옴표만 문자열 값 표기로 사용할 수 있게 한다.&lt;/li&gt;
+  &lt;li&gt;ONLY_FULL_GROUP_BY : GROUP BY 절에 포함되지 않은 컬럼이라도 집합함수 사용 없이 SELECT, HAVING에 사용할 수 없게 한다.&lt;/li&gt;
+  &lt;li&gt;PIPE_AS_CONCAT : 오라클 같이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;||&lt;/code&gt;를 문자열 연결 연산자로 사용할 수 있다.&lt;/li&gt;
+  &lt;li&gt;PAD_CHAR_TO_FULL_LENGTH : CHAR 타입을 가져올 때 뒤쪽에 공백이 제거되지 않고 반환돼야 한다면 설정을 하면된다.&lt;/li&gt;
+  &lt;li&gt;NO_BACKSLASH_ESCAPE : ON으로 두면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'\'&lt;/code&gt;를 이용해서 이스케이핑 할 수 없어진다.&lt;/li&gt;
+  &lt;li&gt;IGNORE_SPACE : 프로시저나 함수의 이름 뒤에 공백 구분이 되는데, 이를 무시할지를 조절한다.&lt;/li&gt;
+  &lt;li&gt;REAL_AS_FLOAT : 부동 소수점으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FLOAT&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DOULBE&lt;/code&gt;이 지원되는데 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REAL&lt;/code&gt;이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DOUBLE&lt;/code&gt;의 동의어로 간주된다. 만약 설정을 켜놓으면 FLOAT의 동의어가 된다.&lt;/li&gt;
+  &lt;li&gt;NO_ZERO_IN_DATE&amp;amp;NO_ZERO_DATE : ‘2020-00-00’ 같은 비정상적 날짜 저장이 불가능해진다.&lt;/li&gt;
+  &lt;li&gt;ANSI : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REAL_AS_FLOAT&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PIPES_AS_CONCAT&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ANSI_QUOTES&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IGNORE_SPACE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ONLY_FULL_GROUP_BY&lt;/code&gt; 조합&lt;/li&gt;
+  &lt;li&gt;TRADITIONAL : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STRICT_TRANS_TABLE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STRICT_ALL_TABLES&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NO_ZERO_IN_DATE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NO_ZERO_DATE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ERROR_FOR_DIVISION_BY_ZERO&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NO_ENGINE_SUBTITUTION&lt;/code&gt; 조합&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;연산자-내장함수&quot;&gt;연산자, 내장함수&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-연산자&quot;&gt;1. 연산자&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;REGEXP : 정규표현식 연산자다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIKE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REGEXP&lt;/code&gt;로 사용한다. 인덱스 사용 불가하다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;SELECT 'abc' REGEXP '^[x-z]';
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+  &lt;li&gt;LIKE : 문자열 패턴 비교 연산자이다. 인덱스를 이용해서 처리할 수 있다.&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE a LIKE '%~'&lt;/code&gt; 같은 좌측에 와일드카드를 사용하지 않는다면 말이다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%&lt;/code&gt; : 0 또는 1개 이상 모든 문자&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_&lt;/code&gt; : 정확히 1개 문자&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BETWEEN : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;loe&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lte&lt;/code&gt;이다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IN&lt;/code&gt;과 다르다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;IN : 여러 개의 값에 동등 비교 연산을 모아 놓은 것으로 생각하면 된다. ( &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOT IN&lt;/code&gt;은 전체를 긁고 IN에 걸리는 걸 빼내야 하기에 인덱스 풀 스캔으로 표시된다. 가끔 PK와 비교될 때는 레인지 스캔이 되는 경우도 있다.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;2-내장함수&quot;&gt;2. 내장함수&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IS NULL&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IF NULL&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOW&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYSDATE&lt;/code&gt; : NOW는 항상 같은 값을 가지지만 SYSDATE는 호출 시점에 따라 결과 값이 달라진다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DATE_FORMAT&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STR_TO_DATE&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DATE_ADD&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DATE_SUB&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNIX_TIMESTAMP&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FROM_UNIXTIME&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RPAD&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LPAD&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTRIM&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LTRIM&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TRIM&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CONCAT&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GROUP_CONCAT&lt;/code&gt; : 컬럼 연결을 위해서 메모리 버퍼 공간을 사용한다. 버퍼 크기는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group_concat_max_len&lt;/code&gt;으로 조정할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CASE WHEN ... THEN ...END&lt;/code&gt; : switch_case와 같다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CAST&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CONVERT&lt;/code&gt; : 보통 알아서 변환해주지만 명시적으로 변환할 때 사용한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SLEEP&lt;/code&gt; : 디버깅 용도로 잠시 대기하거나 쿼리 실행 시간을 오래 유지하고자 할 때 유용한 함수다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_PRETTY&lt;/code&gt; : JSON을 읽기 쉽게 출력해준다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_STORAGE_SIZE&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_EXTRACT&lt;/code&gt; : JSON의 특정 필드의 값을 가져올 수 있다. ex) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_EXTRACT(doc, &quot;$.first_name&quot;)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_CONTAINS&lt;/code&gt;: JSON에서 특정 필드 포함 여부를 확인할 수 있다. ex) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_CONTAINS(doc, '{&quot;first_name&quot;:&quot;name&quot;}')&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_OBJECTAGG&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_ARRAYAGG&lt;/code&gt; : JSON Obj, Array로 집계&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JSON_TABLE&lt;/code&gt; : JSON 데이터 값을 모아서 Table로 반환&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;조회문&quot;&gt;조회문&lt;/h2&gt;
+
+&lt;h3 id=&quot;3-select&quot;&gt;3. SELECT&lt;/h3&gt;
+&lt;p&gt;SELECT의 처리 순서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FROM&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JOIN&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GROUP BY&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SELECT&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HAVING&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ORDER BY&lt;/code&gt; -&amp;gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LIMIT&lt;/code&gt; 순으로 처리된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-where-group-by-order-by&quot;&gt;4. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WHERE&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GROUP BY&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ORDER BY&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h4 id=&quot;1-인덱스를-사용하기-위한-규칙&quot;&gt;1. 인덱스를 사용하기 위한 규칙&lt;/h4&gt;
+&lt;p&gt;기본적으로 인덱스된 컬럼 값 자체를 변환하지 않고 그래도 사용한다는 조건을 충족해야만 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-where-인덱스-사용&quot;&gt;2. WHERE 인덱스 사용&lt;/h4&gt;
+&lt;p&gt;WHERE 에서 나열된 조건 순서는 실제 인덱스 사용 여부와 무관하다. 옵티마이저가 사용할 수 있는 조건들을 뽑아서 최적화를 수행한다. 8.0 이전까지는 하나의 인덱스를
+구성하는 각 컬럼의 순서가 혼합되어 있으면 사용할 수 없었다. 이후부터는 가능해졌다. 또한 일부 조건에서 인덱스 레인지 스캔을 사용할 수 있더라도 다른 조건에서 풀스캔이 필요하면
+결국 그냥 풀스캔 한 번으로 처리하는 식으로 실행 계획을 정리하기도 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;3-group-by-인덱스-사용&quot;&gt;3. GROUP BY 인덱스 사용&lt;/h4&gt;
+&lt;p&gt;GROUP BY에 명시된 컬럼의 순서가 인덱스를 구성하는 컬럼의 순서와 같으면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GROUP BY&lt;/code&gt;에서 인덱스를 사용할 수 있다. 풀어서 기술하면&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;GROUP BY에 명시된 인덱스 컬럼 순서와 위치가 같아야 한다.&lt;/li&gt;
+  &lt;li&gt;인덱스를 구성하는 컬럼 중에서 앞 쪽에 있는 값이 GROUP BY에 명시되지 않으면 인덱스를 사용할 수 없다.&lt;/li&gt;
+  &lt;li&gt;WHERE 와 달리, GROUP BY에 명시될 컬럼이 하나라도 인덱스에 없으면 인덱스를 사용할 수 없다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;4-order-by-인덱스-사용&quot;&gt;4. ORDER BY 인덱스 사용&lt;/h4&gt;
+&lt;p&gt;GROUP BY 요건과 흡사하다.&lt;/p&gt;
+
+&lt;h4 id=&quot;5-where-조건과-order-by혹은-group-by-에서-인덱스-사용&quot;&gt;5. WHERE 조건과 ORDER BY(혹은 GROUP BY) 에서 인덱스 사용&lt;/h4&gt;
+&lt;p&gt;WHERE, ORDER BY(GROUP BY)이 같이 사용된 경우는 아래 세 가지 방법 중 한 방법으로만 인덱스를 사용한다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;WHERE, ORDER BY 절이 동시에 같은 인덱스를 사용&lt;/li&gt;
+  &lt;li&gt;WHERE에만 인덱스 사용 : 인덱스로 레코드를 뽑고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Using Filesort&lt;/code&gt;한다.&lt;/li&gt;
+  &lt;li&gt;ORDER BY에만 인덱스 사용 : &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ORDER BY&lt;/code&gt; 절 순서대로 읽고 필터링한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;6-group-by-order-by-인덱스-사용&quot;&gt;6. GROUP BY, ORDER BY 인덱스 사용&lt;/h4&gt;
+&lt;p&gt;둘 다 하나의 인덱스를 사용해서 처리되려면 ORDER BY, GROUP BY에 명시된 컬럼의 순서와 내용이 모두 같아야 한다. 그렇지 않으면 둘 중 하나는 동시에 인덱스를 사용하지 못한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-where-비교-조건-사용-시-주의사항&quot;&gt;5. WHERE 비교 조건 사용 시 주의사항&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;NULL 비교 : NULL도 인덱스로 관리된다.&lt;/li&gt;
+  &lt;li&gt;문자열 숫자 비교 : 컬럼 타입에 맞지 않은 값으로 비교 연산을 하면 인덱스를 사용하지 못한다.&lt;/li&gt;
+  &lt;li&gt;날짜 비교 :
+    &lt;ul&gt;
+      &lt;li&gt;문자열을 비교하면 자동으로 DATETIME 값으로 변환해서 비교한다.&lt;/li&gt;
+      &lt;li&gt;DATE, DATETIME 끼리 비교하면 DATETIME으로 맞춘다.&lt;/li&gt;
+      &lt;li&gt;DATETIME, TIMESTAMP의 경우(내부적으로 숫자 값이다.) DATETIME을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNIX_TIMESTAMP()&lt;/code&gt;로 변환해서 비교해야 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Short-Circuit Evaluation : WHERE 도 단축평가를 한다. 물론 인덱스를 사용할 수 있는 조건이 있다면 단축 평가 전에 인덱스를 우선적으로 사용한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;6-limit&quot;&gt;6. LIMIT&lt;/h3&gt;
+&lt;p&gt;지정된 순서에 위치한 레코드만 가져오고자 할 때 사용한다. LIMIT은 필요한 레코드 건수만 준비되면 즉시 쿼리를 종료한다.  LIMIT 0의 경우 결과값의 메타 정보만 반환한다&lt;/p&gt;
+
+&lt;h3 id=&quot;7-count&quot;&gt;7. COUNT&lt;/h3&gt;
+&lt;p&gt;COUNT(*)의  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;는 레코드 전체가 아니라 PK를 사용한다. WHERE 조건이 없다면 레코드를 하나씩 셀 필요가 없어서 바로 반환한다. 
+그러나 WHERE이 있다면 레코드를 읽어야 한다. COUNT는 테이블이 커질수록 리소스가 큰 작업이 된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;8-join&quot;&gt;8. JOIN&lt;/h3&gt;
+&lt;p&gt;Join 순서는 인덱스 여부와 테이블 크기에 영향을 받는다. 인덱스 레인지 스캔은 인덱스 탐색, 인덱스 스캔으로 구분해 볼 수 있다. 인덱스 스캔은 비교적 부하가 적지만
+인덱스 탐색은 부하가 높다. JOIN은 driven에서는 인덱스 탐색, 스캔 작업을 driving의 레코드 건수만큼 반복한다. 이런 배경 지식을 바탕으로 케이스를 정리해보자.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;둘 다 인덱스가 있다면 : 인덱스가 있기 때문에 인덱스를 태워스 탐색, 스캔이 가능하다. 통계 정보를 이용해서 레코드 건 수가 적은 테이블을 driving으로 둔다.&lt;/li&gt;
+  &lt;li&gt;한 쪽만 있는 경우 : 인덱스를 태우지 못하면 굉장히 느려진다. 그래서 인덱스가 없는 테이블을 driving으로 둔다.&lt;/li&gt;
+  &lt;li&gt;둘 다 없는 경우 : 어차피 full scan이 발생한다. 레코드 건수가 적은 테이블을 driving으로 두는 것이 그나마 효율적이다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;join-index와-관련된-주의점&quot;&gt;join, index와 관련된 주의점&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;컬럼 간에 타입이 일치하지 않으면 인덱스를 효율적으로 이용할 수 없다. 이 경우 최악으로는 두 테이블 모두 풀스캔을 하고 조인버퍼에 두고 하나씩 조립할 수도 있다.&lt;/li&gt;
+  &lt;li&gt;collation이 달라도 인덱스를 이용할 수 없다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;join-outer-join에서-주의점&quot;&gt;join, OUTER JOIN에서 주의점&lt;/h4&gt;
+&lt;p&gt;OUTER로 JOIN 되는 테이블을 driving으로 선택하지 못한다. 이러면 쿼리 성능이 떨어지는 실행 계획을 선택할 가능성이 생긴다. 당연히 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OUTER JOIN&lt;/code&gt;이 필요하면
+쓰는게 맞지만 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INNER JOIN&lt;/code&gt;을 사용할 수 있는 JOIN을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OUTER JOIN&lt;/code&gt;으로 사용하면 최적화의 기회를 배제하게 된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;join-foreign-key&quot;&gt;join, FOREIGN KEY&lt;/h4&gt;
+&lt;p&gt;외래키는 JOIN과 연관이 없다. 그저 참조 무결성을 지키기 위함이다.&lt;/p&gt;
+
+&lt;h4 id=&quot;지연된-join&quot;&gt;지연된 JOIN&lt;/h4&gt;
+&lt;p&gt;JOIN에 GROUP BY나 ORDER BY가 있고, 다 인덱스를 태울 수 있다면 그 상태만으로 최적이겠지만 그렇지 않다면 생각해보면 JOIN 후에 GROUP BY, ORDER BY를 처리할 것이다.
+이러면 처리할 일이 늘어날 것이다.  JOIN을 했으니 레코드가 늘어났을 수 있기 때문이다. 그래서 옵티마이저는 순서를 바꿔서 GROUP BY, ORDER BY를 먼저 할 수 있다면
+처리하고 이후 JOIN을 하는 식으로 최적화를 하기도 한다. 이 판단은 통계와 테이블 상황을 종합해서 내린 결과다.&lt;/p&gt;
+
+&lt;p&gt;그러나 항상 이런 최적화가 가능한건 아니다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;LEFT JOIN인 경우 driving과 driven이 1:1 혹은 M:1일 때 가능하다.&lt;/li&gt;
+  &lt;li&gt;INNER JOIN이라면 driving, driven이 1:1 혹은 M:1이고 driving 테이블에 있는 레코드는 driven에 모두 존재할 때 가능하다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;lateral-join&quot;&gt;LATERAL JOIN&lt;/h4&gt;
+&lt;p&gt;8.0부터 래터럴 조인을 이용해서 특정 그룹별로 서브쿼리를 실행해서 그 결과와 조인하는 것이 가능해졌다. 예를 들어 아래 쿼리를 보자.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;SELECT *
+FROM employee e 
+LEFT JOIN LATERAL (
+        SELECT *
+        FROM salaries s 
+        WHERE s.emp_no=e.emp_no
+        ORDER BY s.from_date DESC LIMIT 2
+    ) s2 
+ON s2.emp_no=e.emp_no
+WHERE e.first_name=`MATT`;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;이러면 서브쿼리는 JOIN 순서상 후순위로 밀리고, 외부 쿼리의 결과 레코드 단위로 임시 테이블이 생성된다. 그래서 필요한 경우에만 사용해야 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;join-정렬-흐트러짐&quot;&gt;join, 정렬 흐트러짐&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nested-loop JOIN&lt;/code&gt;은 driving 테이블따라서 순서가 유지된다. 만약 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hash JOIN&lt;/code&gt;이 사용되면 이 순서가 틀어질 수 있다. 따라서 이럴 가능성이 있으므로
+필요하다면 ORDER BY를 명시하는 것이 좋을 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;9-group-by&quot;&gt;9. GROUP BY&lt;/h3&gt;
+&lt;p&gt;특정 컬럼으로 레코드를 그루핑하고, 그룹별로 집계된 결과를 하나의 레코드로 조회할 때 사용한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;10-order-by&quot;&gt;10. ORDER BY&lt;/h3&gt;
+&lt;p&gt;어떤 순서로 정렬할지 결정한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인덱스를 사용한 SELECT라면 인덱스에 정렬된 순서대로 레코드를 가져온다.&lt;/li&gt;
+  &lt;li&gt;인덱스를 사용하지 못한다면 PK를 기준으로 정렬해서 가져온다.&lt;/li&gt;
+  &lt;li&gt;SELECT가 임시 테이블을 거치면 순서 예측이 어렵다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;인덱스-사용이-불가하다면&quot;&gt;인덱스 사용이 불가하다면&lt;/h4&gt;
+&lt;p&gt;실행 계획에 Extra에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Using filesort&lt;/code&gt;가 출력된다. MySQL 서버가 명시적으로 정렬 알고리즘을 수행했다는 의미가 된다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW STATUS LIKE 'Sort_%'&lt;/code&gt;로 조회해서
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Sort_merge_passes&lt;/code&gt; 상태를 보면 0보다 크면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sort_buffer_size&lt;/code&gt;보다 정렬할 레코드가 커서 디스크를 거쳤다는 것을 의미한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;함수-표현식을-이용한-정렬&quot;&gt;함수, 표현식을 이용한 정렬&lt;/h4&gt;
+&lt;p&gt;8.0 이후에는 함수 기반의 인덱스를 지원하기 시작했다.&lt;/p&gt;
+
+&lt;h3 id=&quot;11-subquery&quot;&gt;11. SUBQUERY&lt;/h3&gt;
+&lt;p&gt;서브쿼리는 SELECT, FROM, WHERE에 사용할 수 있다. 사용 위치에 따라 쿼리 수행에 미치는 성능 영향도, 최적화 방향이 달라진다.&lt;/p&gt;
+
+&lt;h4 id=&quot;select-절에서-서브쿼리&quot;&gt;SELECT 절에서 서브쿼리&lt;/h4&gt;
+&lt;p&gt;SELECT에서 사용한 서브쿼리는 서브쿼리가 인덱스를 적절히 사용한다면 문제는 없다. 굳이 생각할 것은 서브쿼리보다 조인이 더 빠르기 때문에 조인으로 재작성할 수 있다면
+하는 것이 좋다.&lt;/p&gt;
+
+&lt;h4 id=&quot;from-절에서-서브쿼리&quot;&gt;FROM 절에서 서브쿼리&lt;/h4&gt;
+&lt;p&gt;FROM에서 서브쿼리가 사용하면 항상 서브쿼리의 결과를 임시테이블에 저장하고 필요할 때 그 임시 테이블을 읽는 방식으로 처리된다. 이를 튜닝하면 외부로 끌어내는 방식으로 진행할 수 있다.
+다행히 5.7이후 부터는 FROM 절 서브쿼리 튜닝을 이렇게 한다. 그러나 아래의 경우는 이런식의 최적화가 불가능하기도 하다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;집합 함수 (SUM, MIN, MAX, COUNT) 사용&lt;/li&gt;
+  &lt;li&gt;DISTINCT&lt;/li&gt;
+  &lt;li&gt;GROUP BY, HAVING&lt;/li&gt;
+  &lt;li&gt;LIMIT&lt;/li&gt;
+  &lt;li&gt;UNION&lt;/li&gt;
+  &lt;li&gt;SELECT에 SUBQUERY 사용&lt;/li&gt;
+  &lt;li&gt;사용자 변수 사용&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;where-절에서-서브쿼리&quot;&gt;WHERE 절에서 서브쿼리&lt;/h4&gt;
+&lt;p&gt;WHERE 절의 서브쿼리는 SELECT, FROM 보다는 다양한 형태로 사용될 수 있다. 크게 3가지로 구분할 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;동등, 대소 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;= (SUBQUERY)&lt;/code&gt;)
+5.5 이전에는 풀스캔이 잦았다. 이후로는 서브쿼리 결과를 상수로 변환하고 실행 계획을 수립한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;IN (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IN (SUBQUERY)&lt;/code&gt;)
+테이블 레코드가 다른 레코드를 이용한 표현식과 일치하는지를 체크하는 세미 조인의 형태다. 이 경우 5개의 최적화 전략을 선택적으로 사용한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;table pull-out&lt;/strong&gt;
+   세미 조인의 서브쿼리에 사용된 테이블을 아우터 쿼리로 빼내고 조인으로 재작성하는 형태의 최적화이다. Table pullout은 Extra에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Using table pullout&lt;/code&gt;이 출력되지는 않는다.
+   대신 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EXPLAIN&lt;/code&gt; 후 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SHOW WARNINGS&lt;/code&gt;로 재작성한 쿼리를 확인하는 것으로 알 수 있다.
+    &lt;ul&gt;
+      &lt;li&gt;세미 조인 서브쿼리에만 사용 가능&lt;/li&gt;
+      &lt;li&gt;서브 쿼리 부분이 UNIQUE 인덱스, PK 룩업으로 결과가 1건인 경우에만 사용 가능&lt;/li&gt;
+      &lt;li&gt;만약 서브쿼리의 모든 테이블을 아우터로 빼낼 수 있다면 서브쿼리는 사라진다.&lt;/li&gt;
+      &lt;li&gt;table pullout은 서브쿼리는 조인으로 바꿀 수 있다면 바꾸라는 가이드를 그대로 따르는 최적화 방법이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;firstMath&lt;/strong&gt;       &lt;br /&gt;
+IN 형태의 세미 조인을 EXISTS(subquery) 형태로 튜닝한 것과 비슷한 방법으로 실행된다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FirstMatch([tableName])&lt;/code&gt;이라는 문구가 출력된다.
+    &lt;ol&gt;
+      &lt;li&gt;장점
+        &lt;ul&gt;
+          &lt;li&gt;여러 테이블이 조인되는 경우 원래 쿼리에는 없던 동등 조건을 옵티마이저가 자동으로 추가하는 형태의 최적화가 실행되기도 한다. FirstMatch는 조인 형태로 처리되기
+때문에 서브쿼리 뿐만 아니라 아우터 쿼리의 테이블까지 전파될 수 있다.&lt;/li&gt;
+          &lt;li&gt;FirstMatch는 서브 쿼리의 모든 테이블에서 FirstMatch를 수행할지 아니면 일부 테이블에 대해서만 수행할지 취사 선택할 수 있다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;제한 사항 및 특징
+        &lt;ul&gt;
+          &lt;li&gt;FirstMatch는 단축실행경로(ShortCutPath)이기 때문에 FirstMatch 최적화에서 서브 쿼리는 그 서브쿼리가 참조하는 모든 아우터 테이블이 먼저 조회된 이후에 실행된다.&lt;/li&gt;
+          &lt;li&gt;Extra에 FirstMatch(table-N)이 표시된다.&lt;/li&gt;
+          &lt;li&gt;상관 서브 쿼리(Correlated Subquery)에서도 사용될 수 있다.&lt;/li&gt;
+          &lt;li&gt;GroupBY나 집합 함수가 사용된 서브쿼리의 최적화에는 사용될 수 없다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;looseScan&lt;/strong&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Using index for group-by&lt;/code&gt;의 루스 인덱스 스캔과 비슷한 읽기 방식을 사용한다. Extra에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LooseScan&lt;/code&gt;이라는 문구가 표시된다.
+    &lt;ul&gt;
+      &lt;li&gt;LooseScan은 서브쿼리 테이블을 looseScan으로 읽고 아우터 테이블을 드리븐으로 사용해서 조인을 수행한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;materialization&lt;/strong&gt;
+세미 조인에 사용된 서브쿼리를 통쨰로 구체화해서 쿼리를 최적화한다. 즉, 내부 임시 테이블을 생성한다는 것을 의미한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select_type&lt;/code&gt;에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MATERIALIZED&lt;/code&gt;를 표기한다.
+Materialization에도 몇 가지 제한 사항과 특징이 있다.
+    &lt;ul&gt;
+      &lt;li&gt;IN(subquery)에서 서브쿼리는 상관 쿼리가 아니어야 한다. (상관 쿼리란 부모-자신 간의 일정 관계를 맺는 경우를 의미한다.)&lt;/li&gt;
+      &lt;li&gt;서브 쿼리는 GROUP BY, 집합 함수들이 사용되도 구체화가 가능하다.&lt;/li&gt;
+      &lt;li&gt;구체화가 되면 내부 임시 테이블을 사용한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;duplicated weed-out&lt;/strong&gt;
+세미조인 서브쿼리를 일반적인 INNER JOIN으로 바꾸고 마지막에 중복된 레코드를 제거하는 방법으로 처리하는 최적화 알고리즘이다. 실제로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Duplicate Weedout&lt;/code&gt;
+은 INNER JOIN + GROUP BY 절로 바꿔서 실행하는 것과 동일한 작업으로 쿼리를 처리한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Duplicate Weedout&lt;/code&gt;이라는 문구가 별도 표기되지는 않지만
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Start temporary&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;End temporary&lt;/code&gt;가 표기된다. JOIN, 저장 하는 과정에서 발생하는 일이다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;상관 서브쿼리라고 해도 할 수 있는 최적화다.&lt;/li&gt;
+      &lt;li&gt;GROUP BY나 집합 함수가 사용된 경우 불가능하다.&lt;/li&gt;
+      &lt;li&gt;Duplicate Weedout은 서브쿼리의 테이블을 조인으로 처리하기 때문에 최적화할 수 있는 방법이 많다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NOT IN (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOT IN (SUBQUERY)&lt;/code&gt;)
+이 경우를 안티 세미 조인은 최적화할 방법이 그리 많지 않다.&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;NOT EXISTS&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;materialization&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;잠금을-하는-select&quot;&gt;잠금을 하는 SELECT&lt;/h3&gt;
+&lt;p&gt;보통은 SELECT에 락을 걸지 않지만 이는 잠금 없는 읽기(Non Locking Consistent Read)라고 한다. 하지만 SELECT한 결과를 바탕으로 업데이트를 할 수도 있다. 
+이 때는 다른 트랜잭션이 이 컬럼을 수정하지 못하게 해야 할 필요가 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;SELECT … FOR SHARE ( 읽기 잠금 ) : 레코드에 공유 잠금을 건다 다른 세션 해당 레코드를 변경하지 못하게 한다.&lt;/li&gt;
+  &lt;li&gt;SELECT … FOR UPDATE ( 쓰기 잠금 ) : 배타 잠금 레코드 변경, 읽기도 수행하지 못하게 한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ShareLock&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;다른 트랜잭션이 잠긴 객체를 읽고 공유락 생성은 허용, 쓰기 및 배타락은 허용하지 않음&lt;/li&gt;
+    &lt;li&gt;다른 트랜잭션이 읽는 곳은 읽을 수 없다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;ExclusiveLock&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;동일 행에 다른 트랜잭션을 생성하지 못하게 한다.&lt;/li&gt;
+    &lt;li&gt;공유, 배타락 모두 생성 불가.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;nowait--skip-locked&quot;&gt;NOWAIT &amp;amp; SKIP LOCKED&lt;/h4&gt;
+&lt;p&gt;8.0부터 추가됐다. 누군가 레코드를 잠그면 원래는 기다렸다. 해제될 때까지 말이다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SELECT FOR UPDATE&lt;/code&gt; 마지막에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NOWAIT&lt;/code&gt;을 추가하면 잠긴 레코드에 접근하는
+쿼리를 즉시 종료시켜버린다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SKIP LOCKED&lt;/code&gt;는 다른 트랜잭션에 의해서 잠긴 레코드는 에러 없이 무시하고 다음 레코드로 넘어가게 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;삽입문&quot;&gt;삽입문&lt;/h2&gt;
+
+&lt;h3 id=&quot;insert-ignore&quot;&gt;INSERT IGNORE&lt;/h3&gt;
+&lt;p&gt;PK, UQ가 중복되거나 테이블 컬럼과 호환되지 않는 경우 모두 무시하고 다음 레코드를 처리할 수 있게 한다. Bulk로 INSERT 하는 경우 유용하다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;INSERT IGNORE INTO [table] ~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;insert--on-duplicate-key-update&quot;&gt;INSERT … ON DUPLICATE KEY UPDATE&lt;/h3&gt;
+&lt;p&gt;PK, UQ 인덱스 중복이 발생하면 UPDATE를 하게 해준다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;INSERT INTO ~
+ON DUPLICATE KEY UPDATE 
+~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;load-data&quot;&gt;LOAD DATA&lt;/h3&gt;
+&lt;p&gt;RDMBS에서 데이터 적재 방법으로 LOAD DATA가 있다. 내부적으로 MySQL 엔진, 스토리지 엔진 호출 횟수를 최소화하고 스토리지 엔진이 직접 적재하는 식으로 작동한다.
+그래서 일반 INSERT보다 빠르다. 그러나 아래의 단점이 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;단일 쓰레드로 실행&lt;/li&gt;
+  &lt;li&gt;단일 트랜잭션으로 실행&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;그래서 처리할 양이 많으면 단일 쓰레드라 느리고, 단일 트랜잭션이라 트랜잭션이 열려있는 동안 쌓이는 언두로그를 감안해야만 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;bulk-insert-성능&quot;&gt;Bulk Insert 성능&lt;/h3&gt;
+&lt;p&gt;INSERT 될 레코드들을 PK 기준으로 정렬해서 INSERT하면 성능에 도움이 될 수 있다. 정렬이 되어있지 않으면 INSERT 시마다 저장될 위치를 찾아야 한다.
+또한 SecondaryIndex를 너무 많이 잡아도 느려진다. 물론 체인지 버퍼로 버퍼링하긴 하지만 당연히 백그라운드 작업도 부하를 유발하므로 성능이 떨어진다.&lt;/p&gt;
+
+&lt;h3 id=&quot;pk-선정&quot;&gt;PK 선정&lt;/h3&gt;
+&lt;p&gt;INSERT 성능을 결정한다. InnoDB는 클러스터링 키인데 저장 위치가 정해진다. 그래서 INSERT 위주 테이블이라면 단조 증가 패턴 값(AUTO_INCREMENT)을 선택하는게
+좋고 SELECT 위주라면 클러스터링을 적극 활용할 수 있게 작성해야 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;auto_inc&quot;&gt;AUTO_INC&lt;/h3&gt;
+
+&lt;p&gt;INSERT 최적화에 적합한 PK 선정 방식이다. 아래는 오로지 INSERT를 생각하면 내릴 수 있는 결정이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;단조 증감 PK 선정(클러스터링 효과를 받지 않기 위해서)&lt;/li&gt;
+  &lt;li&gt;secondaryIndex 최소화&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;더 나아가 AUTO_INC를 할 때 잠금이 필요한데, 이를 AUTO_INC 잠금이라고 한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;innodb_autoinc_lock_mode = 0; : 항상 AUTO_INC 락을 걸고 한 번에 1씩 증가된 값을 가져온다.&lt;/li&gt;
+  &lt;li&gt;innodb_autoinc_lock_mode = 1; : 단건 INSERT 는 MUTEX를 이용해서 가볍게 처리한다.&lt;/li&gt;
+  &lt;li&gt;innodb_autoinc_lock_mode = 2; : LODA DATA, BULK INSERT에 AUTO_INC 락 사용하지 않는다. 채번이 증/감한다. 겹치지 않는다 정도만 보장한다.
+채번된 번호가 연속될지는 보장하지 않는다.(Interleaved mode) -&amp;gt; replica에 치명적일 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;수정-삭제&quot;&gt;수정/ 삭제&lt;/h2&gt;
+
+&lt;h3 id=&quot;update--order-by--limit-n&quot;&gt;UPDATE … ORDER BY … LIMIT n&lt;/h3&gt;
+&lt;p&gt;ORDER BY, LIMIT으로 특정 컬럼으로 정렬해서 상위 n 건만 수정, 삭제할 수도 있다. 그러나 바이너리 로그(STATEMENT) 기반의 레플리케이션에서는 주의해야한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;join-update&quot;&gt;JOIN UPDATE&lt;/h3&gt;
+&lt;p&gt;두 개 이상의 테이블을 JOIN해서 해당 레코드를 변경, 삭제할 수 있다. 한 테이블에 의존적으로 삭제, 수정할 때 용이하다. 변경되는 테이블은 쓰기 잠금, 참조되는 테이블은 읽기 잠금이 걸린다.
+추가적으로 JOIN UPDATE에는 GROUP BY, ORDER BY가 불가하다. 이런 경우 SUBQUERY, DERIVED TABLE을 사용하는 것이 해법이다.
+특히 JOIN 순서는 이 쿼리 속도에 영향을 미치기에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STRAIGHT_JOIN&lt;/code&gt; 등을 사용할 수도 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;여러-레코드-update&quot;&gt;여러 레코드 UPDATE&lt;/h3&gt;
+&lt;p&gt;한 번에 동일한 값으로 UPDATE 하는 건 쉽다. 그러나 각각 레코드 별로 다른 값으로 업데이트하는 건 8.0부터 가능하다. 레코드 생성(Row Constructor) 문법을 이용하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;old_u&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ROW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ROW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_u&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;old_u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userId&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;old_u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new_u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;INNER JOIN ( VALUES ROW(1, 1), ROW(2, 4) ) new_u (user_id, user_name)&lt;/code&gt; 이러면 임시테이블을 생성하는 효과를 낼 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;join-delete&quot;&gt;JOIN DELETE&lt;/h3&gt;
+&lt;p&gt;단일 DELETE와는 다른 형식의 쿼리를 작성해야 한다.&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;DELETE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;employee&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dept_emp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;departpents&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;emp_no&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;emp_no&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dept_no&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dept_no&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dept_no&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d001&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;마찬가지로 STRAIGHT_JOIN, JOIN_ORDER 힌트로 조인 순서를 옵티마이저에 일러줄 수 있다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 01 Aug 2024 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[programmers Series] Lv. 02 Nextlargenumber</title>
@@ -213,7 +849,7 @@
 
 &lt;h3 id=&quot;테이블-인덱스-통계-정보&quot;&gt;테이블, 인덱스 통계 정보&lt;/h3&gt;
 &lt;p&gt;비용 기반 최적화에서 가장 중요한 것이 통계 정보다. 통계 정보가 부정확하면 쿼리가 산으로 갈 수도 있다. 5.6부터 통계정보가 메모리에서만 관리되는게 아니라 영구적으로
-저장하여 관리할 수 있게 됐다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_index_stats&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_table_stats&lt;/code&gt;로 확인할 수 있다. 또한 영구적으로 보관할지도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STATS_PERSISTENT&lt;/code&gt;로 
+저장하여 관리할 수 있게 됐다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_index_stats&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_table_stats&lt;/code&gt;로 확인할 수 있다. 또한 영구적으로 보관할지도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STATS_PERSISTENT&lt;/code&gt;로
 설정할 수 있다.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-mysql&quot;&gt;CREATE TABLE tableTest ( test1 INT PRIMARY KEY , test2 VARCHAR(30))
@@ -249,7 +885,7 @@ STATS_PERSISTENT = [DEFAULT | 0 | 1]
 
 &lt;h3 id=&quot;히스토그램&quot;&gt;히스토그램&lt;/h3&gt;
 
-&lt;p&gt;8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ANALYZE TABLE ... UPDATE HISTOGRAM&lt;/code&gt; 명령으로 수동으로 수집, 관리된다. 
+&lt;p&gt;8.0부터 컬럼 데이터 분포도를 참조할 수 있는 히스토그램도 수집한다. 히스토그램은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ANALYZE TABLE ... UPDATE HISTOGRAM&lt;/code&gt; 명령으로 수동으로 수집, 관리된다.
 종류는 두 가지다.&lt;/p&gt;
 
 &lt;ol&gt;
@@ -257,7 +893,7 @@ STATS_PERSISTENT = [DEFAULT | 0 | 1]
   &lt;li&gt;Equi-Height : 컬럼 값의 범위를 균등한 개수로 구분해서 관리하는 히스토그램 (Height-Balanced라고도 불린다.)&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다. 
+&lt;p&gt;싱글톤 히스토그램은 컬럼이 가지는 값 별로 버킷이 할당되며, 높이-균형 히스토그램은 개수가 균등한 컬럼 값의 범위별로 하나의 버킷이 할당된다.
 싱글톤 히스토그램이는 컬럼 값별로 누적된 건수의 비율을 가지고 있다. 높이-균형 히스토그램은 컬럼 값의 각 범위에 대해 레코드 건수 비율이 누적으로 표시된다. (그래프의 기울기가 의미가 있다.)&lt;/p&gt;
 
 &lt;ul&gt;
@@ -2357,818 +2993,6 @@ where name = “KIM” and age = 10&lt;/p&gt;
 
 &lt;h2 id=&quot;주의-사항&quot;&gt;주의 사항&lt;/h2&gt;
 &lt;p&gt;트랜잭션 범위를 최소화하는 것이 좋다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 13 Jul 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Summary Series] 02.innodbengine</title>
-        <link>/mysql/summary/2024/07/13/mysql-summary-series-02.InnoDBEngine.html</link>
-        <guid isPermaLink="true">/mysql/summary/2024/07/13/mysql-summary-series-02.InnoDBEngine.html</guid>
-        <description>&lt;h1 id=&quot;innodb-engine&quot;&gt;InnoDB Engine&lt;/h1&gt;
-
-&lt;p&gt;많은 엔진 중 innoDB가 8.0 이후 메인이 된 이유는&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;거의 유일하게 레코드 기반 잠금을 제공한다.&lt;/li&gt;
-  &lt;li&gt;테이블 잠금이 아니라 높은 동시성 처리가 가능하다.
-가 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;PK에 의해서 클러스터링이 된다.(물리적 저장 공간도 가른다.)&lt;/li&gt;
-  &lt;li&gt;외래키를 지원한다.(무결성을 체크하는 과정이 들어간다.)&lt;/li&gt;
-  &lt;li&gt;MVCC(MultiVersionConcurrencyControl)으로 잠금을 사용하지 않고 일관된 읽기를 제공한다. (레코드에 대해 버전 관리를 진행한다.)&lt;/li&gt;
-  &lt;li&gt;자동 데드락 감지를 지원한다. 잠금이 교착 상태에 빠지지 않았는지 백그라운드에서 확인하고 조치한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;1-pk에-의한-클러스터링&quot;&gt;1. PK에 의한 클러스터링&lt;/h3&gt;
-&lt;p&gt;InnoDB에서는 Pk가 꼭 필요하다. 기본적으로 PK를 기준으로 클러스터링 되어 저장된다. 혹시나 PK가 없다면 사용자는 인지하지 못하는 내부에서만
-사용하는 PK를 만들어서라도 사용한다.&lt;/p&gt;
-
-&lt;p&gt;이러한 특징 때문에 PK를 이용한 레인지 스캔은 빠르게 처리될 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-외래키-지원&quot;&gt;2. 외래키 지원&lt;/h3&gt;
-&lt;p&gt;InnoDB는 부모-자식의 인덱스 설정, 무결성 체크와 이에 따른 잠금 전파가 되는 외래키 제약 조건을 지원한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-mvccmulti-version-concurrency-control&quot;&gt;3. MVCC(Multi Version Concurrency Control)&lt;/h3&gt;
-&lt;p&gt;레코드 레벨 트랙잭션을 지원하는 DBMS가 제공하는 기능이며 MVCC의 궁극적 목적은 잠금 없이 일관된 읽기를 제공하는 것에 있다.
-InnoDB는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undo log&lt;/code&gt;를 이용해서 여러 버전의 레코드를 관리하고 이를 통해서 일관된 읽기를 제공한다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어 insert를 하면 바로 디스크에 쓰는 것이 아니라. InnoDB &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bufferPool&lt;/code&gt;에 올려 둔다. backgroundThread에 의해서 지연된 쓰기가 되면
-비로소 Disk에 쓰기 작업이 진행된다. 그 전까지는 select을 하면 버퍼풀에서 읽어들인다.&lt;/p&gt;
-
-&lt;p&gt;update의 경우에는 버퍼풀은 변경된 대로 바꾸고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undoLog&lt;/code&gt;에 이전 내역을 쌓아서 커밋이 안된 작업 중이라면 undo를 읽어서, 커밋이 됐다면 버퍼풀을
-읽어서 결과를 전달한다.&lt;/p&gt;
-
-&lt;p&gt;이 항목은 격리 수준과도 연관이 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;4-자동-데드락-감지&quot;&gt;4. 자동 데드락 감지&lt;/h3&gt;
-&lt;p&gt;잠금이 교착 상태에 빠지지 않았는지 체크하기 위해서 잠금 대기 목록을 그래프 형태로 관리한다. 만약 데드락 감지 쓰레드가 주기적으로 확인 도중
-교착 상태에 빠진 트랜잭션을 찾으면 그 중 하나를 강제 종료하는 식으로 데드락을 해제한다. 둘 중 하나를 선택하는 판단 근거는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undoLog의 양&lt;/code&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;이 과정은 보통은 문제가 되지 않지만 동시 처리가 격해지거나 잠금 개수가 많아지면 문제가 생긴다. 당시 상황을 보존하기 위해서 리스트에 저장된 목록에
-새로운 잠금을 걸고 데드락 쓰레드를 찾기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_deadlock_detect&lt;/code&gt;로 조절할 수 있지만 off로 두면 단순하게 failover 할 수 있는 경우에도 시스템이 다운될 수 있으니 문제가 생길 수 있다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_lock_wait_time&lt;/code&gt;으로 일정 시간이 지나면 요청이 실패하고 에러 메시지를 반환하게 할 수도 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;구조&quot;&gt;구조&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;BufferPool&lt;/li&gt;
-  &lt;li&gt;DoubleWriteBuffer&lt;/li&gt;
-  &lt;li&gt;UndoLog&lt;/li&gt;
-  &lt;li&gt;ChangeBuffer&lt;/li&gt;
-  &lt;li&gt;RedoLog&lt;/li&gt;
-  &lt;li&gt;AdaptiveHashIndex&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;bufferpool&quot;&gt;BufferPool&lt;/h3&gt;
-&lt;p&gt;innoDB 핵심 부분으로 디스크 데이터, 파일, 인덱스 정보를 메모리에 올려두는 공간이다. 쓰기 작업에도 이 메모리에 올려두고 한 번에 디스크에 쓰기하는
-지연 일괄 처리도 가능케 하는 부분이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_buffer_pool_size&lt;/code&gt;로 설정할 수 있다. 동적으로 버퍼풀 크기를 정할 수 있다. 꽤 크리티컬한 부분이기 때문에 시스템에 맞춰서 조금씩
-변경하면서 최적점을 찾아가야 하는 튜닝 포인트다. 메모리가 8GB 미만이면 50%로, 그 이상이면 50%에서 점진적으로 늘려가는 식으로 잡으라고 가이드한다.&lt;/p&gt;
-
-&lt;p&gt;과거에는 버퍼 풀 전체를 관리하는 세마포어로 인해 내부 경합이 있었는데, 버퍼풀을 쪼개면서 개선됐다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_buffer_pool_instances&lt;/code&gt;로 수를 조정할 수 있다.&lt;/p&gt;
-
-&lt;h4 id=&quot;bufferpool-구조&quot;&gt;BufferPool 구조&lt;/h4&gt;
-&lt;p&gt;innoDB는 버퍼풀을 페이지 크기(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_page_size&lt;/code&gt;)로 조각내서 InnoDB 엔진이 필요할 때 데이터 페이지를 읽을 수 있도록 한다. 페이지 관리는
-LRU(Least Recently Used), Flush 리스트 Free 리스트라는 3가지 종류의 자료 구조로 구성된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Free : 할당 X&lt;/li&gt;
-  &lt;li&gt;LRU : 최근 사용한 순서로 정렬되어 있다. 쓰지 않을 수록 old로 빠지며 새로 읽으면 new로 올라온다. 읽은 페이지를 최대한 오랫동안 써서 DISK I/O를 줄이려는 목적이다.&lt;/li&gt;
-  &lt;li&gt;Flush : 동기화 되지 않은 데이터를 가진 데이터 페이지(더티 페이지). 등록 후 수정되면 플러시 리스트에서 관리되고 특정 시점이 되면 플러시 된다.
-InnoDB는 변경되면 리두로그에 기록하고 리두에 데이터 페이지와 연결하는 식으로 구성된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;bufferpool과-리두&quot;&gt;BufferPool과 리두&lt;/h4&gt;
-
-&lt;p&gt;버퍼풀과 리두는 연관 관계가 깊다. 버퍼 풀의 양은 쿼리 성능과 직결된다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;데이터 캐시 (읽은 데이터를 메모리에 보관)&lt;/li&gt;
-  &lt;li&gt;쓰기 버퍼링 (쓴 데이터를 메모리에 올려놓고 한 번에 디스크에 기록해서 DISK I/O를 줄인다.)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;2번에 한해서 리두와 연관이 깊은데 InnoDB는 Redo를 1개 이상의 고정 크기 파일을 연결해서 환형으로 사용한다. 즉, 데이터 변경이 반복되면 일전의
-RedoEntry를 덮어쓰는 식이다. 앞서 말한 바와 같이 Redo는 Flush리스트와 매핑된다. 이렇게 물려 있는 공간을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ActiveRedoLog&lt;/code&gt;라고 한다.&lt;/p&gt;
-
-&lt;p&gt;환형이지만 로그 포지션(LogSequenceNumber: LSN)은 증가한다. InnoDB는 주기적으로 체크포인트 이벤트를 발생시켜 리두 로그와 더티 페이지를 
-Disk에 flush 한다. 그래서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;마지막 LSN - 최근 LSN&lt;/code&gt;을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CheckPointAge&lt;/code&gt;라고 한다. 체크 포인트가 발생하면 체크포인트보다 작은 LSN을 가진
-리두, 더티 페이지는 모두 Disk에 동기화돼어야만 한다.&lt;/p&gt;
-
-&lt;p&gt;자, 버퍼풀은 큰데 리두가 작으면 리두가 금방 돌게 되므로 버퍼링 효과를 못 본다. 반대의 경우
-리두가 크고 버퍼풀이 작으면 더티 페이지가 작아지고 이것도 문제가 된다. 급작스럽게 Disk I/O를 유발할 수 있기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;비율은 버퍼풀이 리두보다 크게 잡히는게 맞다. 그러나 비대칭은 성능을 제대로 사용하지 못하는 결과를 낳을 수도 있다.&lt;/p&gt;
-
-&lt;h4 id=&quot;bufferpool-flush&quot;&gt;BufferPool Flush&lt;/h4&gt;
-&lt;p&gt;더티 페이지를 디스크로 작성하는 과정을 의미한다. 성능 저하 없이 이 작업을 수행하기 위해서 아래의 두 가지 플러시 기능을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;백그라운드&lt;/code&gt; 로 진행한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flush_list flush&lt;/li&gt;
-  &lt;li&gt;LRU flush&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;flushlist-flush&quot;&gt;FlushList Flush&lt;/h5&gt;
-
-&lt;p&gt;리두 로그 재활용을 위해서 CheckPointAge가 많은 요소들을 Disk에 동기화한다. 선행되어야 하는 것은 DirtyPage 동기화다. 주기적으로 이를 위해서
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Flush_list&lt;/code&gt; 함수를 콜해서 Disk에 쓰는 작업을 한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;innodb_page_cleaners&lt;/li&gt;
-  &lt;li&gt;innodb_max_dirty_pages_pct_lwm&lt;/li&gt;
-  &lt;li&gt;innodb_max_dirty_pages_pct&lt;/li&gt;
-  &lt;li&gt;innodb_io_capacity&lt;/li&gt;
-  &lt;li&gt;innodb_io_capacity_max&lt;/li&gt;
-  &lt;li&gt;innodb_flush_neighbors&lt;/li&gt;
-  &lt;li&gt;innodb_adaptive_flushing&lt;/li&gt;
-  &lt;li&gt;innodb_adaptive_flushing_lwm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;클리너 쓰레드의 수, 버퍼풀에서 더티 페이지의 비율 등을 조정할 수 있다. 일반적으로 더티페이지가 많을 수록 쓰기 버퍼링을 극대화할 수 있다.
-너무 많이도 문제가 된다. 많은 더티 페이지가 한 번에 기록되면 DiskBurst가 될 수 있다.&lt;/p&gt;
-
-&lt;p&gt;읽기/쓰기에 굉장히 민감하기에 adaptive_flush로 여타 설정 없이(innodb_io_capacity, innodb_io_capacity_max 의존 없이) 스토리지 엔진
-판단 하에 동작하도록 할 수 있다. (리두 로그 생성 속도를 분석한다.)&lt;/p&gt;
-
-&lt;p&gt;마지막으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_flush_neighbors&lt;/code&gt;로 쓰기 작업 때 근접한 경우 같이 들고 들어가는 식으로 I/O를 줄일 수 있다.&lt;/p&gt;
-
-&lt;h5 id=&quot;lru-flush&quot;&gt;LRU Flush&lt;/h5&gt;
-
-&lt;p&gt;사용 빈도가 낮은 데이터 페이지들을 제거해서 새로운 페이지를 읽을 공간을 만들어야 하는데, 이 때 LRU_list 플러시 함수를 사용한다. 이 과정에서 더티페이지는
-동기화, 클린 페이지는 Free로 옮긴다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h5 id=&quot;버퍼풀-웜업&quot;&gt;버퍼풀 웜업&lt;/h5&gt;
-  &lt;p&gt;MySQL 셧다운 시 innodb_buffer_pool_dump_now로 꺼지기 직전 버퍼풀 상태를 백업하고 다시 켜질 때 복원할 수 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;h5 id=&quot;버퍼풀-적재-내용-확인&quot;&gt;버퍼풀 적재 내용 확인&lt;/h5&gt;
-  &lt;p&gt;select * from
-information_schema.innodb_buffer_page;&lt;/p&gt;
-
-  &lt;table&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;POOL_ID&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;BLOCK_ID&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;SPACE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;PAGE_NUMBER&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;PAGE_TYPE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;FLUSH_TYPE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;FIX_COUNT&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;IS_HASHED&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;NEWEST_MODIFICATION&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;OLDEST_MODIFICATION&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;ACCESS_TIME&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;TABLE_NAME&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;INDEX_NAME&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;NUMBER_RECORDS&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;DATA_SIZE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;COMPRESSED_SIZE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;PAGE_STATE&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;IO_FIX&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;IS_OLD&lt;/th&gt;
-        &lt;th style=&quot;text-align: left&quot;&gt;FREE_PAGE_CLOCK&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3223&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;329&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;YES&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12569361696&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3687115098&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`UnionGlobal`.`tblProduct`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;PRIMARY&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;22&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15045&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;59217&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2969&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12842443110&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3823986346&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`Baro`.`tblDevice`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;PRIMARY&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;4&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;56&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;59224&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;UNKNOWN&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;null&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;null&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NOT_USED&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;5535&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;UNDO_LOG&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12822049215&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1103049611&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;null&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;null&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58694&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;4&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2981&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;258&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12842442406&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3709288763&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`SYS_TABLES`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;CLUST_IND&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;115&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15132&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58544&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;5&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2213&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;7&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;YES&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;4048910798&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`Homepage`.`tblPortfolio`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;PRIMARY&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;49&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15533&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;YES&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;57814&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;6&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2981&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;666&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12842440799&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3708388881&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`SYS_TABLES`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;CLUST_IND&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;110&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15081&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;YES&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58194&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;7&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2981&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;609&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12842443203&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3708253346&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`SYS_TABLES`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;CLUST_IND&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;89&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15042&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58544&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;8&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2920&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;173&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;YES&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3731384877&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`UnionGlobal`.`tblCouponBox`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;PRIMARY&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;255&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15045&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58559&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;9&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;2981&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;69&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;INDEX&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;12842443203&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;3705727334&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;`SYS_TABLES`&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;CLUST_IND&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;89&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;15047&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;FILE_PAGE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;IO_NONE&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;NO&lt;/td&gt;
-        &lt;td style=&quot;text-align: left&quot;&gt;58507&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;doublewritebuffer&quot;&gt;DoubleWriteBuffer&lt;/h3&gt;
-&lt;p&gt;리두 공간 낭비를 막기 위해서 페이지의 변경된 내용만 기록한다. 그런데 이러면 더티 페이지 플러시 때 일부만 기록될 수 있고 그러면
-유사시 해당 페이지는 복구가 불가능할 수도 있다. 이 경우를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Partial-page&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Torn-page&lt;/code&gt;라고 한다.&lt;/p&gt;
-
-&lt;p&gt;이를 막기 위해서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Double-Write&lt;/code&gt;를 사용한다. 플러시 전 한 번의 디스크 쓰기로 System-TableSpace의 DoulbeWrite 버퍼에 기록한다.
-그리고 이를 기반으로 각 더티 페이지를 기록한다.&lt;/p&gt;
-
-&lt;p&gt;DoubleWriteBuffer는 중간에 문제가 생길 때를 대비한 것이라 다른 목적으로는 사용되지 않는다. 또한 재시작 시 이 영역과 데이터 페이지를 대조해서 복원하기도 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;undo-log&quot;&gt;Undo log&lt;/h3&gt;
-&lt;p&gt;InnoDB는 MVCC를 위해서 이전 데이터를 보관한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;트랜잭션 보관 : 트랜잭션 롤백 시 변경 전 데이터로 복구해야 하는데 언두로그를 참조한다.&lt;/li&gt;
-  &lt;li&gt;격리수준 보장 : 격리 수준에 맞게 언두 로그에 백업한 데이터를 읽어서 반환하기도 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;굉장히 중요하지만 관리 비용도 만만치 않다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;show engine innodb status; 의&lt;/p&gt;
-
-  &lt;p&gt;=============&lt;/p&gt;
-
-  &lt;p&gt;TRANSACTIONS&lt;/p&gt;
-
-  &lt;p&gt;=============&lt;/p&gt;
-
-  &lt;p&gt;에서 확인할 수 있다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;언두-테이블-스페이스&quot;&gt;언두 테이블 스페이스&lt;/h4&gt;
-
-&lt;p&gt;UndoTableSpace라고 한다. undo가 저장되는 공간을 5.6 전까지는 서버가 초기화될 때 생성되서 확자엥 문제가 있었다. (ibdata.ibd에 저장됐다.)
-그러나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_undo_tablespaces&lt;/code&gt; 변수를 2보다 크게 주면 시스템 테이블 스페이스가 아닌 별도 로그 파일을 사용하는 것으로 바뀌었다.
-8.0.14부터 항상 외부에 저장되는 것으로 바뀌었다.&lt;/p&gt;
-
-&lt;p&gt;하나의 롤백 세그먼트는 InnoDB 페이지 크기를 16바이트로 나눈 값의 개수 만큼 언두 슬롯을 갖는다. 언두가 남는건 문제가 되지 않는데 언두가 부족하면
-트랜잭션을 시작할 수 없을 수 있다. 따라서 언두 관련 시스템 변수를 변경한다면 동시 트랜잭션 수에 맞게 설정해야 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;changebuffer&quot;&gt;ChangeBuffer&lt;/h3&gt;
-
-&lt;p&gt;RDBMS는 Insert, Update 시 데이터도 데이터지만 인덱스도 관리해야 한다. 인덱스 업데이트 작업은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;random disk i/o&lt;/code&gt;이므로 부담스럽다.
-만일 버퍼 풀에 있으면 바로 업데이트 하지만 그게 아니라면 (읽어서 수정해야 한다면) 임시공간에 저장하고 사용자에게 반환하는 형태로 성능을 향상 시킨다.
-이 때 사용하는게 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;체인지 버퍼&lt;/code&gt;다.&lt;/p&gt;
-
-&lt;p&gt;유니크 인덱스에는 체인지 버퍼를 사용할 수 없다. (유니크임을 증명해야하니까) 체인지 버퍼에 임시로 저장된 인덱스 레코드 조각은 백그라운드 쓰레드에
-의해서 병합되는데 이 쓰레드를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;체인지 버퍼 머지 쓰레드&lt;/code&gt;라고 한다.&lt;/p&gt;
-
-&lt;p&gt;체인지 버퍼는 기본적으로 버퍼풀로 설정된 메모리의 25%까지 사용할 수 있게 설정돼 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;리두-로그-리두-버퍼&quot;&gt;리두 로그, 리두 버퍼&lt;/h3&gt;
-
-&lt;p&gt;리두는 ACID의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Durable&lt;/code&gt;과 연관이 있다. 서버가 기록하지 못한 데이터를 비정상 종료시 보전할 수 있게 해주는 안전 장치다.
-대부분 데이터베이스는 데이터 변경 내용을 로그로 먼저 기록한다. 읽기 성능을 고려한 자료 구조를 갖고 있기 때문에 파일 쓰기는 랜덤 액세스를 필요로 한다.
-이는 비용이 크다. 따라서 리두 로그를 두고 비정상 종료가 되면 리두 로그를 바탕으로 복원한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;커밋됐지만 Disk에 쓰지 않은 것 : 리두를 보고 기록한다.&lt;/li&gt;
-  &lt;li&gt;롤백 됐지만 Disk에 쓴 것 : 리두를 확인하고 언두로 돌려놓는다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;리두를 어느 주기로 디스크에 동기화할지를 결정할 수 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_flush_log_at_trx_commit&lt;/code&gt;으로 말이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;0 이면 1초에 한 번씩 기록, 동기화한다. 1초 내의 기록은 누락될 수 있다.&lt;/li&gt;
-  &lt;li&gt;1이면 트랜잭션 커밋과 생을 같이 한다. 커밋되면 트랜잭션에서 변경한 데이터는 사라진다.&lt;/li&gt;
-  &lt;li&gt;2 트랜잭션 커밋 시 기록은 되지만 실질 동기화는 1초에 한 번씩 된다. 커밋되면 OS 메모리 버퍼로 기록되는 것이 보장된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;리두 로그 사이즈 전체 크기는 버퍼풀을 효율성을 결정한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_log_file_size&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_log_files_in_group&lt;/code&gt;으로 사이즈, 수를 결정할 수 있다.
-리두 로그 파일 크기는 두 변수의 곱으로 산정된다.&lt;/p&gt;
-
-&lt;h4 id=&quot;리두-활성-비활성&quot;&gt;리두 활성/ 비활성&lt;/h4&gt;
-&lt;p&gt;리두는 비정상 종료 시를 대비할 수 있게 해준다. 커밋돼도 데이터 파일은 디스크로 동기화되지 않는 반면 리두 로그는 항상 디스크로 기록된다.
-8.0부터는 수동으로 리두 로그를 활성/ 비활성화할 수 있게 됐다. bulk 작업을 하는 경우 유용하다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Alter instance disable innodb redo_log;
-Alter instance enable innodb redo_log;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;adaptive-hash-index&quot;&gt;Adaptive Hash Index&lt;/h3&gt;
-
-&lt;p&gt;어댑티브 해시 인덱스는 사용자가 수동으로 생성하는 것이 아니라 InnoDB Storage Engine에서 사용자가 자주 요청하는 데이터에 대해서 자동으로 생성하는 인덱스다.
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;innodb_adaptive_hash_index&lt;/code&gt;로 활성/비활성 할 수 있다. 어댑티브 해시 인덱스는 B-Tree 검색 시간을 줄이기 위해서 도입된 기능이다. 자주 읽는
-데이터 페이지의 키 값을 이용해서 해시 인덱스를 만들고, 필요할 때마다 어댑티브 해시 인덱스를 검색해서 레코드가 저장된 위치를 찾아간다.
-B-Tree 순회 과정이 없어지고 쿼리 성능을 향상된다.&lt;/p&gt;
-
-&lt;p&gt;해시 인덱스는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;인덱스 키 - 데이터 페이지 주소&lt;/code&gt;로 구성된다. (인덱스 키 - 버퍼풀 주소)&lt;/p&gt;
-
-&lt;p&gt;어댑티브 해시 인덱스를 의도적으로 비활성화 하는 경우도 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;디스크 읽기가 많은 경우&lt;/li&gt;
-  &lt;li&gt;특정 패턴의 쿼리가 많은 경우(join, like)&lt;/li&gt;
-  &lt;li&gt;매우 큰 데이터를 가진 테이블의 레코드를 폭넓게 읽는 경우&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;아래의 경우는 도움이 되는 경우다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;디스크 데이터가 innoDB 버퍼풀 크기과 비슷한 경우( 디스크 읽기가 많지 않은 경우 )&lt;/li&gt;
-  &lt;li&gt;동등 조건 검색( 동등 비교, IN )이 많은 경우&lt;/li&gt;
-  &lt;li&gt;쿼리가 데이터 중 일부에 집중되는 경우&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;어댑티브 해시 인덱스는 버퍼 풀에 접근하기 빠르게 하는 기능이기에 디스크에서 자주 읽어오는 경우는 의미가 퇴색된다. 또한 인덱스 저장 공간을 따로 사용해야 하며,
-때로는 큰 메모리 공간이 들 수 있다. 테이블 삭제 때도 어댑티브 해시 인덱스를 비워야 하기에 비용이 크다.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 13 Jul 2024 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[mysql Summary Series] 01.mysqlengine</title>
-        <link>/mysql/summary/2024/07/13/mysql-summary-series-01.MysqlEngine.html</link>
-        <guid isPermaLink="true">/mysql/summary/2024/07/13/mysql-summary-series-01.MysqlEngine.html</guid>
-        <description>&lt;h1 id=&quot;mysqlengine&quot;&gt;MysqlEngine&lt;/h1&gt;
-
-&lt;h2 id=&quot;엔진&quot;&gt;엔진&lt;/h2&gt;
-&lt;p&gt;MySQL은 크게 두 가지로 구성된다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;MySQL 엔진 : 클라이언트 접속 및 쿼리 요청을 처리한다. 또한 요청된 SQL를 분석, 최적화하는 처리를 수행한다.&lt;/li&gt;
-  &lt;li&gt;스토리지 엔진 : 실제 질의에 따른 디스크 쓰기/읽기를 전담한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;mysql-엔진&quot;&gt;MYSQL 엔진&lt;/h3&gt;
-&lt;p&gt;핸들러, SQL 파서, 전처리기, 옵티마이저로 구성된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;스토리지-엔진&quot;&gt;스토리지 엔진&lt;/h3&gt;
-&lt;p&gt;스토리지 엔진은 방식에 따라 MyISAM, Memory, InnoDB 등이 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;쓰레드&quot;&gt;쓰레드&lt;/h2&gt;
-
-&lt;p&gt;MySQL 쓰레드 기반으로 작동하며 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BACKGROUND&lt;/code&gt;/ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FOREGROUND&lt;/code&gt; 작업으로 나뉜다.
-같은 이름이 여러 개 보인다면 병렬로 처리하기 때문이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;performance_schema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;threads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;name&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;type&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/main&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/thread_timer_notifier&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_ibuf_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_log_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_read_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_read_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_read_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_read_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_write_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_write_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_write_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/io_write_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/page_cleaner_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_lock_timeout_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_error_monitor_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_monitor_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_master_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_purge_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_worker_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_worker_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/srv_worker_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/buf_dump_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/innodb/dict_stats_thread&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/signal_handler&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;BACKGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/compress_gtid_table&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;FOREGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/one_connection&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;FOREGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;thread/sql/one_connection&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;FOREGROUND&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;foregroundclientthread&quot;&gt;FOREGROUND(ClientThread)&lt;/h3&gt;
-
-&lt;p&gt;최소 서버에 접속된 클라이언트 수만큼 존재하며, 각 클라이언트 요청에 대응한다. 커넥션이 종료되면 쓰레드가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;쓰레드 캐시&lt;/code&gt;로 반환되는 식으로
-사용된다.&lt;/p&gt;
-
-&lt;p&gt;또한, 데이터 버퍼, 캐시를 가져오거나, 직접 디스크의 데이터, 인덱스를 읽어와 작업을 처리할 떄도 사용된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;background&quot;&gt;BACKGROUND&lt;/h3&gt;
-
-&lt;p&gt;보통 InnoDB는 buffer -&amp;gt; disk 과정을 백그라운드 쓰레드로 처리한다. 그 밖에도&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;insert buffer 병합하는 쓰레드&lt;/li&gt;
-  &lt;li&gt;로그를 디스크로 기록하는 쓰레드&lt;/li&gt;
-  &lt;li&gt;innoDB 버퍼풀 데이터를 디스크로 기록하는 쓰레드&lt;/li&gt;
-  &lt;li&gt;데이터를 버퍼로 읽어오는 쓰레드&lt;/li&gt;
-  &lt;li&gt;잠금, 데드락 모니터링 쓰레드&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;가 있다.&lt;/p&gt;
-
-&lt;p&gt;FOREGROUND는 지연될 수 없는 것 (요청에 대해서 읽어서 보여야하는 것)이 주로 운용되고 지연시킬 수 있는 것(쓰기, 수정, 삭제, 다음 페이지 읽어오기)
-등은 BACKGROUND로 동작한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;메모리-할당-및-구조&quot;&gt;메모리 할당 및 구조&lt;/h2&gt;
-
-&lt;p&gt;MySQL은 글로벌, 로컬 메모리로 구분된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;글로벌 : MySQL 서버가 시작되면서 OS로부터 할당받는다. 모든 쓰레드에 의해서 공유된다.
-    &lt;ul&gt;
-      &lt;li&gt;테이블 캐시&lt;/li&gt;
-      &lt;li&gt;innoDB 버퍼 풀&lt;/li&gt;
-      &lt;li&gt;innoDB 어댑티브 해시 인덱스&lt;/li&gt;
-      &lt;li&gt;innoDB 리두 로그 버퍼&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;로컬 : 세션 메모리라고도 부른다. 클라이언트 커넥션 당으로 할당된다. 쓰레드별로 독립적으로 할당된다.
-    &lt;ul&gt;
-      &lt;li&gt;커넥션 버퍼&lt;/li&gt;
-      &lt;li&gt;조인 버퍼&lt;/li&gt;
-      &lt;li&gt;바이너리 로그 캐시&lt;/li&gt;
-      &lt;li&gt;네트워크 버퍼&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;핸들러&quot;&gt;핸들러&lt;/h2&gt;
-&lt;p&gt;MySQL 엔진 -&amp;gt; 스토리지 엔진으로 요청할 때 핸들러를 통해서 진행한다.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Variable_name&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Value&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_commit&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;13475565&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_delete&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;36760&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_discover&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;81&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_external_lock&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_icp_attempts&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;121&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_icp_match&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;121&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_mrr_init&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_mrr_key_refills&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_mrr_rowid_refills&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Handler_prepare&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;이런 핸들러는 컴포넌트 형식으로 확장할 수도 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;쿼리-실행&quot;&gt;쿼리 실행&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-mermaid&quot;&gt;flowchart LR 
-    
-    Client[&quot;Client&quot;]
-    QueryParser[&quot;QueryParser&quot;]
-    PreProcessor[&quot;PreProcessor&quot;]
-    Optimizer[&quot;Optimizer
-        (쿼리 변환)
-        (비용 최적화)
-        (실행계획 수립)
-    &quot;]
-    QueryExecutor[&quot;QueryExecutor&quot;]
-
-
-    QueryExecutor --&amp;gt; Client
-    Client --&amp;gt; QueryParser
-    
-    subgraph MysqlEngine
-        QueryParser --&amp;gt; PreProcessor 
-        PreProcessor --&amp;gt; Optimizer 
-        Optimizer --&amp;gt;  QueryExecutor
-    end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;쿼리-파서&quot;&gt;쿼리 파서&lt;/h3&gt;
-&lt;p&gt;쿼리를 토큰으로 분리해 트리 구조로 만드는 과정을 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;전처리기&quot;&gt;전처리기&lt;/h3&gt;
-&lt;p&gt;파서 트리 기반으로 쿼리 문장에 구조적 문제점 있는지 확인&lt;/p&gt;
-
-&lt;h3 id=&quot;옵티마이저&quot;&gt;옵티마이저&lt;/h3&gt;
-&lt;p&gt;쿼리 문장을 저렴한 비용으로 실행하기 위한 비용 산정을 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;핸들러-1&quot;&gt;핸들러&lt;/h3&gt;
-&lt;p&gt;보통 스토리지 엔진의 영역이 된다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;tableSpace: 테이블, 인덱스, 뷰 프로시저 등을 저장해 놓은 공간(물리적)&lt;/li&gt;
-&lt;/ul&gt;
-
 </description>
         <pubDate>Sat, 13 Jul 2024 00:00:00 +0900</pubDate>
       </item>
