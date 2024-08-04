@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[spring Series] 30.restdoc | newkayak12.github.io</title>
+	<meta name="description"
+		content="Restdoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/2024/08/04/Spring-series-30.RestDoc.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[spring Series] 30.restdoc</h1>
+    
+    <p class="meta">
+      August 4, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="restdoc">Restdoc</h1>
+
+<p>spring에서 문서 자동화를 위해서 1) OpenAPI - Swagger, 2) Spring - Restdoc이 있다.</p>
+
+<p>Swagger는 보통 Swagger UI와 같이 사용하며, 소스코드에 어노테이션을 작성하여 Reflection으로 JSON을 만들고
+이를 UI로 출력하는 형태를 가진다. 추가적으로 API 호출을 해볼 수 있다는 장점이 있다. 그러나 소스코드에 불필요한 어노테이션이 늘어서
+불편하다는 단점이 있다.</p>
+
+<p>Restdoc은 테스트를 기반으로 문서를 작성한다. 테스트 코드에 문서화 코드를 삽입하고 테스트 결과를 바탕으로 asciiDoc으로 작성하며
+HTML로 변환할 수도 있다. 그러나 API 호출을 해볼 수는 없다는 단점이 존재한다.</p>
+
+<div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">dependencies</span> <span class="o">{</span>
+    <span class="n">asciidoctorExtensions</span> <span class="s1">'org.springframework.restdocs:spring-restdocs-asciidoctor'</span>
+    <span class="n">testImplementation</span> <span class="s1">'org.springframework.restdocs:spring-restdocs-mockmvc'</span>
+<span class="o">}</span>
+<span class="c1">// 디펜던시 추가</span>
+
+<span class="n">ext</span> <span class="o">{</span>
+    <span class="n">snippetsDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">'build/generated-snippets'</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="n">test</span> <span class="o">{</span>
+    <span class="n">outputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span> <span class="c1">//outputDir 작성</span>
+    <span class="n">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">// asciidoctor 설정</span>
+<span class="n">asciidoctor</span> <span class="o">{</span>
+    <span class="n">dependsOn</span> <span class="n">test</span> <span class="c1">// test 작업 이후에 작동하도록 하는 설정</span>
+    <span class="n">configurations</span> <span class="s1">'asciidoctorExtensions'</span> <span class="c1">// 위에서 작성한 configuration 적용</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span> <span class="c1">// snippetsDir 를 입력으로 구성</span>
+
+    <span class="c1">// source가 없으면 .adoc파일을 전부 html로 만들어버림</span>
+    <span class="c1">// source 지정시 특정 adoc만 HTML로 만든다.</span>
+    <span class="n">sources</span><span class="o">{</span>
+        <span class="n">include</span><span class="o">(</span><span class="s2">"**/index.adoc"</span><span class="o">,</span><span class="s2">"**/common/*.adoc"</span><span class="o">)</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 특정 .adoc에 다른 adoc 파일을 가져와서(include) 사용하고 싶을 경우 경로를 baseDir로 맞춰주는 설정입니다.</span>
+    <span class="c1">// 개별 adoc으로 운영한다면 필요 없는 옵션입니다.</span>
+    <span class="n">baseDirFollowsSourceFile</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">// asciidoctor가 실행될 때 static/docs 폴더 비우기</span>
+<span class="n">asciidoctor</span><span class="o">.</span><span class="na">doFirst</span> <span class="o">{</span>
+    <span class="n">delete</span> <span class="nf">file</span><span class="o">(</span><span class="s1">'src/main/resources/static/docs'</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// asccidoctor 작업 이후 생성된 HTML 파일을 static/docs 로 copy</span>
+<span class="n">task</span> <span class="nf">copyDocument</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">dependsOn</span> <span class="n">asciidoctor</span>
+    <span class="n">from</span> <span class="nf">file</span><span class="o">(</span><span class="s2">"build/docs/asciidoc"</span><span class="o">)</span>
+    <span class="n">into</span> <span class="nf">file</span><span class="o">(</span><span class="s2">"src/main/resources/static/docs"</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// build 시 codyDocument 실행</span>
+<span class="n">build</span> <span class="o">{</span>
+    <span class="n">dependsOn</span> <span class="n">copyDocument</span>
+<span class="o">}</span>
+
+<span class="c1">//build의 bootJar 시 asciidoctor에 의존하여 /static/docs에 index.html이 생성된다.</span>
+<span class="n">bootJar</span> <span class="o">{</span>
+    <span class="n">dependsOn</span> <span class="n">asciidoctor</span>
+    <span class="nf">from</span><span class="o">(</span><span class="s2">"${asciidoctor.outputDir}"</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">into</span> <span class="s1">'static/docs'</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@AutoConfigureRestDocs</span> <span class="c1">//추가</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">success</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">phone</span> <span class="o">=</span> <span class="n">randomPhone</span><span class="o">();</span>
+        
+        
+        
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"uuid"</span><span class="o">,</span><span class="s">"UUID"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span><span class="s">"전화번호"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">,</span><span class="s">"닉네임"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span><span class="s">"이메일"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"pushToken"</span><span class="o">,</span><span class="s">"푸시 토큰"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"tired"</span><span class="o">,</span><span class="s">"피로도"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"sendable"</span><span class="o">,</span><span class="s">"푸시 전송 가능 여부"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"joinDate"</span><span class="o">,</span><span class="s">"회원 가입일"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastModifiedDate"</span><span class="o">,</span><span class="s">"마지막 수정일"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"lastSignInDate"</span><span class="o">,</span><span class="s">"마지막 로그인 날짜"</span><span class="o">);</span>
+        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"buddies"</span><span class="o">,</span><span class="s">"버디"</span><span class="o">);</span>
+        
+        <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">get</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">url</span> <span class="o">+</span> <span class="s">"%s"</span><span class="o">,</span> <span class="n">phone</span><span class="o">)))</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span> <span class="c1">//Test의  AndDo에 document 뱉는 코드 작성</span>
+                        <span class="nc">RestDocument</span><span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="s">"회원가입"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">rqSnippet</span><span class="o">(</span><span class="n">simpleRequestFields</span><span class="o">(</span><span class="nc">Map</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                        <span class="s">"phone"</span><span class="o">,</span><span class="s">"전화번호"</span><span class="o">,</span>
+                                        <span class="s">"password"</span><span class="o">,</span><span class="s">"비밀번호"</span><span class="o">,</span>
+                                        <span class="s">"nickname"</span><span class="o">,</span><span class="s">"닉네임"</span>
+                                <span class="o">)))</span>
+                                <span class="o">.</span><span class="na">rsSnippet</span><span class="o">(</span><span class="nc">RestDocument</span><span class="o">.</span><span class="na">simpleResponseFields</span><span class="o">(</span><span class="n">map</span><span class="o">))</span>
+                                <span class="o">.</span><span class="na">build</span><span class="o">()</span>
+
+                <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//반복된 코드 정리한 class</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RestDocument</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">RequestFieldsSnippet</span> <span class="nf">simpleRequestFields</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">FieldDescriptor</span><span class="o">&gt;</span> <span class="n">linkedRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span> <span class="o">:</span> <span class="n">request</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">linkedRequest</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">PayloadDocumentation</span><span class="o">.</span><span class="na">subsectionWithPath</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)));</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span>   <span class="nf">relaxedRequestFields</span><span class="o">(</span><span class="n">linkedRequest</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="nc">FieldDescriptor</span><span class="o">[]::</span><span class="k">new</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">ResponseFieldsSnippet</span> <span class="nf">simpleResponseFields</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">FieldDescriptor</span><span class="o">&gt;</span> <span class="n">linkedResponse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span> <span class="o">:</span> <span class="n">response</span><span class="o">.</span><span class="na">keySet</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">linkedResponse</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">PayloadDocumentation</span><span class="o">.</span><span class="na">subsectionWithPath</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">)));</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nf">relaxedResponseFields</span><span class="o">(</span><span class="n">linkedResponse</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="nc">FieldDescriptor</span><span class="o">[]::</span><span class="k">new</span><span class="o">));</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Builder</span> <span class="nf">build</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Builder</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Builder</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">Builder</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">RequestFieldsSnippet</span> <span class="n">rqSnippet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">ResponseFieldsSnippet</span> <span class="n">rsSnippet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">PathParametersSnippet</span> <span class="n">pathSnippet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">RequestPartFieldsSnippet</span> <span class="n">partSnippet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">RequestHeadersSnippet</span> <span class="n">headersSnippet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">rqSnippet</span><span class="o">(</span><span class="nc">RequestFieldsSnippet</span> <span class="n">rqSnippet</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">rqSnippet</span> <span class="o">=</span> <span class="n">rqSnippet</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">rsSnippet</span><span class="o">(</span><span class="nc">ResponseFieldsSnippet</span> <span class="n">rsSnippet</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">rsSnippet</span> <span class="o">=</span> <span class="n">rsSnippet</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">pathSnippet</span><span class="o">(</span><span class="nc">PathParametersSnippet</span> <span class="n">pathSnippet</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">pathSnippet</span> <span class="o">=</span> <span class="n">pathSnippet</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">partSnippet</span><span class="o">(</span><span class="nc">RequestPartFieldsSnippet</span> <span class="n">partSnippet</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">partSnippet</span> <span class="o">=</span> <span class="n">partSnippet</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">Builder</span> <span class="nf">headersSnippet</span><span class="o">(</span><span class="nc">RequestHeadersSnippet</span> <span class="n">headersSnippet</span><span class="o">){</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">headersSnippet</span> <span class="o">=</span> <span class="n">headersSnippet</span><span class="o">;</span>
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+        <span class="o">}</span>
+
+
+        <span class="kd">private</span> <span class="nc">OperationRequestPreprocessor</span> <span class="nf">simplePreProcessRequest</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span>  <span class="nf">preprocessRequest</span><span class="o">(</span>
+                    <span class="n">modifyUris</span><span class="o">()</span> <span class="c1">// (1)</span>
+                            <span class="o">.</span><span class="na">scheme</span><span class="o">(</span><span class="s">"https"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">host</span><span class="o">(</span><span class="s">"docs.api.com"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">removePort</span><span class="o">(),</span>
+                    <span class="n">prettyPrint</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="kd">private</span> <span class="nc">OperationResponsePreprocessor</span> <span class="nf">simplePreProcessResponse</span><span class="o">(</span> <span class="o">){</span>
+            <span class="k">return</span> <span class="nf">preprocessResponse</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="kd">private</span> <span class="nc">Snippet</span><span class="o">[]</span> <span class="nf">simpleSnippets</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Snippet</span><span class="o">&gt;</span> <span class="n">snippet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+            <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">rqSnippet</span><span class="o">))</span> <span class="n">snippet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rqSnippet</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">rsSnippet</span><span class="o">))</span> <span class="n">snippet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">rsSnippet</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">pathSnippet</span><span class="o">))</span> <span class="n">snippet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pathSnippet</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">partSnippet</span><span class="o">))</span> <span class="n">snippet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">partSnippet</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span><span class="nc">Objects</span><span class="o">.</span><span class="na">nonNull</span><span class="o">(</span><span class="n">headersSnippet</span><span class="o">))</span> <span class="n">snippet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">headersSnippet</span><span class="o">);</span>
+
+            <span class="k">return</span> <span class="n">snippet</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="nc">Snippet</span><span class="o">[]::</span><span class="k">new</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="kd">public</span> <span class="nc">RestDocumentationResultHandler</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">document</span><span class="o">(</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">,</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">simplePreProcessRequest</span><span class="o">(),</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">simplePreProcessResponse</span><span class="o">(),</span>
+                    <span class="k">this</span><span class="o">.</span><span class="na">simpleSnippets</span><span class="o">()</span>
+            <span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>[참고 : 우아한 기술블로그] (https://techblog.woowahan.com/2597/)</p>
+
+<h1 id="restdoc-1">restDoc</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">requestFields</code> : 요청 값 -&gt; 필드 전체 체크
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">subsectionWithPath</code></li>
+      <li><code class="language-plaintext highlighter-rouge">fieldWithPath</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">relaxedRequestFields</code>: 요청 값 -&gt; 필드 전체 체크 없음</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">responseFields</code> : 응답 값 -&gt; 필드 전체 체크
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">subsectionWithPath</code></li>
+      <li><code class="language-plaintext highlighter-rouge">fieldWithPath</code></li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">relaxedResponseFields</code> : 응답 값 -&gt; 필드 전체 체크 없음</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">pathParameters</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pathParameters</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">requestHeaders</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">headerWithName</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://velog.io/@dhfl0710/Spring-RestDocs-문서화">참고 velog</a>
+<a href="https://jogeum.net/16">참고 blog</a></p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/08/04/Spring-series-29.Validated.html">
+        [spring Series] 29.validated
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
