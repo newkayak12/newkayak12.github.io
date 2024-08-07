@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 02 Numberconversion | newkayak12.github.io</title>
+	<meta name="description"
+		content="숫자 변환하기  문제 설명자연수 x를 y로 변환하려고 합니다. 사용할 수 있는 연산은 다음과 같습니다.x에 n을 더합니다x에 2를 곱합니다.x에 3을 곱합니다.자연수 x, y, n이 매개변수로 주어질 때, x를 y로 변환하기 위해 필요한 최소 연산 횟수를 return하도록 solu...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2024/08/07/Programmers-series-LV.-02-NumberConversion.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 02 Numberconversion</h1>
+    
+    <p class="meta">
+      August 7, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="숫자-변환하기">숫자 변환하기</h1>
+<blockquote>
+
+  <pre>
+문제 설명
+
+자연수 x를 y로 변환하려고 합니다. 사용할 수 있는 연산은 다음과 같습니다.
+x에 n을 더합니다
+x에 2를 곱합니다.
+x에 3을 곱합니다.
+자연수 x, y, n이 매개변수로 주어질 때, x를 y로 변환하기 위해 필요한 최소 연산 횟수를 return하도록 solution 함수를 완성해주세요. 이때 x를 y로 만들 수 없다면 -1을 return 해주세요.
+제한사항
+1 ≤ x ≤ y ≤ 1,000,000
+1 ≤ n &lt; y
+</pre>
+</blockquote>
+
+<h2 id="알고리즘">알고리즘</h2>
+<p>순회 -&gt; BFS? DFS?</p>
+
+<p>DFS는 모든 케이스를 다 돌 것이고( 최소 케이스를 찾아야 하기 때문에 ) 분명 느릴 것이다.
+BFS가 그나마 빠르겠다.</p>
+
+<p>막상 작성하면 같은 숫자가 나오는 경우가 중복되서 이마저 타임아웃이 난다.
+Set으로 이미 나온 숫자가 나오면 스킵하자 어차피 연산은 3중 하나도 이미 해당 숫자가 있다면 계산이 됐을 것이다.</p>
+
+<h2 id="풀이">풀이</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">NumberConversion</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">40</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">n</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">40</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">30</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">n</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">n</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">){</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">[]&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">visit</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="n">x</span><span class="o">,</span> <span class="mi">0</span><span class="o">});</span>
+
+        <span class="k">while</span><span class="o">(</span> <span class="o">!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Integer</span><span class="o">[]</span> <span class="n">tuple</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">y</span> <span class="o">)</span> <span class="k">return</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">1</span><span class="o">];</span>
+
+            <span class="k">if</span><span class="o">(</span> <span class="o">!</span><span class="n">visit</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">calculated</span> <span class="o">=</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="n">n</span><span class="o">;</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="n">calculated</span><span class="o">,</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">});</span>
+                <span class="n">visit</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">calculated</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span> <span class="o">!</span><span class="n">visit</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">calculated</span> <span class="o">=</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">2</span><span class="o">;</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="n">calculated</span><span class="o">,</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">});</span>
+                <span class="n">visit</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">calculated</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span> <span class="o">!</span><span class="n">visit</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">3</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">calculated</span> <span class="o">=</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">*</span> <span class="mi">3</span><span class="o">;</span>
+                <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{</span><span class="n">calculated</span><span class="o">,</span> <span class="n">tuple</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">});</span>
+                <span class="n">visit</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">calculated</span><span class="o">);</span>
+            <span class="o">}</span>
+
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/spring/2024/08/04/Spring-series-30.RestDoc.html">
+        [spring Series] 30.restdoc
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
