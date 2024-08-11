@@ -5,15 +5,16 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Wed, 07 Aug 2024 21:32:01 +0900</pubDate>
+    <pubDate>Sun, 11 Aug 2024 10:52:13 +0900</pubDate>
     
       <item>
         <title>[programmers Series] Lv. 02 Numberconversion</title>
         <link>/2024/08/07/Programmers-series-LV.-02-NumberConversion.html</link>
         <guid isPermaLink="true">/2024/08/07/Programmers-series-LV.-02-NumberConversion.html</guid>
         <description>&lt;h1 id=&quot;숫자-변환하기&quot;&gt;숫자 변환하기&lt;/h1&gt;
-&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://school.programmers.co.kr/learn/courses/30/lessons/154538&quot;&gt;programmers&lt;/a&gt;&lt;/p&gt;
 
+&lt;blockquote&gt;
   &lt;pre&gt;
 문제 설명
 
