@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 00.introduce | newkayak12.github.io</title>
+	<meta name="description"
+		content="MongoDB">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-00.Introduce.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 00.introduce</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="mongodb">MongoDB</h1>
+
+<p>MonoDB은 <strong>문서 지향 데이터 모델( Document DB )</strong>을 사용하는 DB다. 구조가 비교적 자유롭다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">\</th>
+      <th style="text-align: center">MONGO</th>
+      <th style="text-align: center">RDB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">용도</td>
+      <td style="text-align: center">- 정형, 비정형 데이터 저장<br /> - 초당 동시 처리가 중요한 경우 <br /> - 로그, 이력 등 단순 기록</td>
+      <td style="text-align: center">- 무결성, 일관성이 중요한 트랜잭션 베이스 작업 <br /> - 데이터 정합성이 요구되는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">모델링</td>
+      <td style="text-align: center">- 반정규화를 기본으로한다. <br /> - 비정형 구조라 미리 스키마를 선언하는 구조는 아니다.</td>
+      <td style="text-align: center">- 엔티티 간의 관계를 정의할 필요가 있음 <br /> - 정규화가 필요한 경우, 지키면서 설계하는 것이 중요할 수 있다. <br /> - 스키마에 엄격함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">성능</td>
+      <td style="text-align: center">- 클러스터 크기, 네트워크 및 애플리케이션에 의해서 성능이 결정됨</td>
+      <td style="text-align: center">- 구조, 질의 튜닝에 의해서 달라짐</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">인터페이스</td>
+      <td style="text-align: center">- 쿼리 외 다양한 API로 질의를 수행할 수 있음</td>
+      <td style="text-align: center">- SQL만 가능함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">장점</td>
+      <td style="text-align: center">- 쿼리 프로세싱이 단순화되어 대용량 처리 성능이 향상됨</td>
+      <td style="text-align: center">데이터 무결성, 정합성 등을 지킬 수 있음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">단점</td>
+      <td style="text-align: center">정합성, 무결성, 일관성이 떨어지고 용량이 큼</td>
+      <td style="text-align: center">쿼리 처리 과정이 복잡함</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="특징">특징</h2>
+<ol>
+  <li>Reliability : ReplicaSet으로 둘 경우 failOver가 가능하고, 고가용성을 지원함</li>
+  <li>Scalability : Sharding을 통한 Scale-out에 용이하다.</li>
+  <li>Flexibility : 스키마 제약이 없이 때문에 유연하기 구조를 변경할 수 있음</li>
+  <li>Index Support :
+    <ol>
+      <li>인덱스를 지원하여 다른 NoSQL보다 빠른 검색이 가능함</li>
+      <li>다양한 형태의 Index를 제공함 (Hashed, MultiKey, Partial, TTL, Geospatial)</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="구조">구조</h2>
+<p>DB 아래 Table과 유사한 컬렉션(Collection)으로 이뤄져 있다. Colelction 아래 row와 유사한 Document가 있다. 정리하면 아래와 같다.</p>
+
+<ul>
+  <li>Database : Collection의 물리적 컨테이너</li>
+  <li>Collection : RDBMS의 TABLE과 같음 스키마less</li>
+  <li>Document : key-value 이뤄진 구조</li>
+  <li>Key/Field : 컬럼 정도로 생각하면 낫지 않을까?</li>
+</ul>
+
+<h2 id="bson-json">Bson, Json</h2>
+<p>Json은 JavaScript Object Notation으로 key-value 값으로 채워져 있다.
+Bson은 Json을 Binary로 변경한 것이다.</p>
+
+<p>Json에는 아래와 같은 문제점이 있다.</p>
+<ol>
+  <li>구문 분석이 느리다.</li>
+  <li>공간 효율성이 떨어진다.</li>
+</ol>
+
+<p>그래서 이를 Binary로 변환하여 저장한다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/08/07/Programmers-series-LV.-02-NumberConversion.html">
+        [programmers Series] Lv. 02 Numberconversion
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-01-1.Atomic.html">
+        [mongo Series] 01 1.atomic
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

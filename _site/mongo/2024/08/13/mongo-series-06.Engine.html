@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 06.engine | newkayak12.github.io</title>
+	<meta name="description"
+		content="Engine">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-06.Engine.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 06.engine</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="engine">Engine</h1>
+
+<p>mongo의 스토리지 엔진은 MySQL과 같이 플러그인형이다. 3.0 이전에는 <code class="language-plaintext highlighter-rouge">MMAPv1</code>을 3.0 이후로는 <code class="language-plaintext highlighter-rouge">WireTiger</code>를 사용한다.
+<code class="language-plaintext highlighter-rouge">MMAPv1</code>는 메모리 매핑을 기반으로 한다. 또한 데이터 셋 마다 2GB 씩 예비로 블록을 할당하는 특징을 가지고 있다.</p>
+
+<p>이 두 가지 엔진은 ‘특별히 어떤 것이 좋다’라는 개념보다는 용도에 따라 다르게 세팅한다로 접근하는 것이 맞을 것으로 보인다.</p>
+
+<h2 id="wiretiger">WireTiger</h2>
+<p>멀티코어 확장성과 램 사용량 최적화에 초점을 둔 확장 가능한 오픈 소스 데이터 엔진이다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">storage</span><span class="pi">:</span>
+  <span class="na">dbPath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/data/db"</span>  <span class="c1">#저장 경로</span>
+  <span class="na">journal</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span> <span class="c1">#저널링 여부 bin로그랑 비슷한 느낌으로 보인다.</span>
+  <span class="na">engine</span><span class="pi">:</span> <span class="s2">"</span><span class="s">wireTiger"</span> 
+  <span class="na">wireTiger</span><span class="pi">:</span>
+    <span class="na">engineConfig</span><span class="pi">:</span>
+      <span class="na">cacheSizeGB</span><span class="pi">:</span> <span class="m">8</span> <span class="c1">#인메모리 데이터용으로 비축해야하는 메모리 양이다. bufferPool과 비슷한 느낌으로 보인다.</span>
+      <span class="na">journalCompressor</span><span class="pi">:</span> <span class="s">none</span>  <span class="c1">#journal의 압축기 종류다. </span>
+    <span class="na">collectionConfig</span><span class="pi">:</span>
+      <span class="na">blockCompressor</span><span class="pi">:</span> <span class="s">none</span>  <span class="c1"># 수집 데이터에 사용할 압축기 종류다. none|snappy|zlib이 있다.</span>
+    <span class="na">indexConfig</span><span class="pi">:</span>
+      <span class="na">prefixCompressor</span><span class="pi">:</span> <span class="no">false</span> <span class="c1"># 인덱스에 압축 사용여부다.</span>
+</code></pre></div></div>
+
+<h2 id="데이터-구조">데이터 구조</h2>
+<p>key-value 형태를 위한 기본 클래스가 있다. 컬렉션 키로 레코드에 대한 빠른 액세스를 보장하는 식이다. 키를 인덱싱하여 저장 공간을 희생하여 속도를 끌어올릴 수도 있다.
+보통 B-Tree로 구성되어 있다. B-Tree는 블록 단위로 구분된다. 루트노드에서 아래로 내려가면서 데이터를 가리키는 pointer를 저장한다. 또한 B-Tree는 정렬되어 있다.</p>
+
+<h2 id="잠금">잠금</h2>
+<p>Mongo 는 Mutex(상호 배제)를 사용해서 서버 수준의 락킹을 제공했다. 여러 클라이언트, 쓰레드가 같은 리소스로 접근하면 이를 비동시적으로 액세스할 수 있도록 보장한다.
+이후 서버에서 컬렉션 수준 잠금이 도입되면서 컬렉션이 다르면 쓰기 작업에 락이 영향을 미치지 않는 식으로 변경되었다.  이후 3.0 WireTiger부터는 도큐먼트 수준까지 지원한다.(MySQL record기반 잠금과 같이)</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-05.Relation.html">
+        [mongo Series] 05.relation
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

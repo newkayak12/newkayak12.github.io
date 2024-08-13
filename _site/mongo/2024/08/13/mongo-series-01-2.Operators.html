@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 01 2.operators | newkayak12.github.io</title>
+	<meta name="description"
+		content="연산자">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-01-2.Operators.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 01 2.operators</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="연산자">연산자</h1>
+
+<h2 id="1-필드-수정-연산자">1. 필드 수정 연산자.</h2>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">$inc</code> : 필드 값 증감</li>
+  <li><code class="language-plaintext highlighter-rouge">$mul</code> : 필드에 곱하는 연산자</li>
+  <li><code class="language-plaintext highlighter-rouge">$rename</code> : 필드명 변경</li>
+  <li><code class="language-plaintext highlighter-rouge">$set</code> : 필드 값을 변경</li>
+  <li><code class="language-plaintext highlighter-rouge">$setOnInsert</code> : <code class="language-plaintext highlighter-rouge">$set</code>과 유사하지만 upsert의 경우만 작동</li>
+  <li><code class="language-plaintext highlighter-rouge">$unset</code> : 필드 제거</li>
+  <li><code class="language-plaintext highlighter-rouge">$min</code> : 필드 값이 주어진 값보다 클 경우 새 값으로 교체</li>
+  <li><code class="language-plaintext highlighter-rouge">$max</code> : 필드의 값이 주어진 값보다 작을 경우 새 값으로 교체</li>
+  <li><code class="language-plaintext highlighter-rouge">$currentDate</code> : 현재 날짜로 교체 (<code class="language-plaintext highlighter-rouge">{$currentDate: {field: true}</code>)</li>
+</ol>
+
+<h2 id="2-배열">2. 배열</h2>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">$</code> : 배열의 요소를 지칭 (<code class="language-plaintext highlighter-rouge">db.target.update({list:2}, {'list.$': 5})</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">$addToSet</code> : 해당 요소가 없으면 추가(set의 add와 같음)</li>
+  <li><code class="language-plaintext highlighter-rouge">$pop</code> : 맨앞, 맨뒤 요소를 꺼낸다.(shift + pop) (<code class="language-plaintext highlighter-rouge">{$pop:{field1:1, field2:2}}</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">$pull</code> : 조건을 만족하는 특정 요소를 꺼냄 ( <code class="language-plaintext highlighter-rouge">{$pull: {조건1, 조건2}}</code> )</li>
+  <li><code class="language-plaintext highlighter-rouge">$pullAll</code> : 일치하는 값을 배열에서 꺼낸다.( <code class="language-plaintext highlighter-rouge">{$pullAll: { field: [val1, val2, ... ]}}</code> )</li>
+  <li><code class="language-plaintext highlighter-rouge">$push</code> : 배열 필드 값을 push (<code class="language-plaintext highlighter-rouge">{$push: {field1: val1, field2: val2} }</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">$each</code> : 배열을 순회한다. (<code class="language-plaintext highlighter-rouge">{$addToSet: { field: { $each: Array[] } } }</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">$position</code> : <code class="language-plaintext highlighter-rouge">$push</code>할 위치를 지정하는 역할  (<code class="language-plaintext highlighter-rouge">{ $push: { 필드: { $each: 배열, $position: 위치 } }</code>)</li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-01-1.Atomic.html">
+        [mongo Series] 01 1.atomic
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-01.CRUD.html">
+        [mongo Series] 01.crud
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

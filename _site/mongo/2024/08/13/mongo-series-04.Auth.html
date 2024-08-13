@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 04.auth | newkayak12.github.io</title>
+	<meta name="description"
+		content="Auth(계정 관리)">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-04.Auth.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 04.auth</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="auth계정-관리">Auth(계정 관리)</h1>
+
+<p>기본은 계정 default에 비밀번호가 없다. -&gt; 보안에 취약하다.
+따라서 계정 생성 및 비밀번호 지정하는 것이 좋다.</p>
+
+<p>추가로 계정 정보는 <code class="language-plaintext highlighter-rouge">db.system.users</code> 컬렉션에서 관리된다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">db.auth()</code> : db에 사용자 인증</li>
+  <li><code class="language-plaintext highlighter-rouge">db.createUser()</code> : 새 사용자 생성</li>
+  <li><code class="language-plaintext highlighter-rouge">db.updateUser()</code> : 사용자 업데이트</li>
+  <li><code class="language-plaintext highlighter-rouge">db.changeUserPassword()</code> :  사용자 비밀번호 변경</li>
+  <li><code class="language-plaintext highlighter-rouge">db.dropAllUsers()</code> : 모든 사용자 삭제</li>
+  <li><code class="language-plaintext highlighter-rouge">db.dropUser()</code> : 사용자 삭제</li>
+  <li><code class="language-plaintext highlighter-rouge">db.grantRolesToUser()</code> : 권한 부여</li>
+  <li><code class="language-plaintext highlighter-rouge">db.revokeRolesFromUser()</code> : 권한 말소</li>
+  <li><code class="language-plaintext highlighter-rouge">db.getUser()</code> : 사용자 조회</li>
+  <li><code class="language-plaintext highlighter-rouge">db.getUsers()</code> : db에 관련된 모든 사용자 반환</li>
+</ul>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-03.Optimize.html">
+        [mongo Series] 03.optimize
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-05.Relation.html">
+        [mongo Series] 05.relation
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

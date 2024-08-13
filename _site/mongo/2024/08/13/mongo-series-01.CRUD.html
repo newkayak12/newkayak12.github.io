@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 01.crud | newkayak12.github.io</title>
+	<meta name="description"
+		content="CRUD">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-01.CRUD.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 01.crud</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="crud">CRUD</h1>
+
+<h2 id="생성">생성</h2>
+<ul>
+  <li>show dbs (SHOW DATABASES;) : db list</li>
+  <li>db (SELECT DATABASE();) : 현재 사용 중인 DB 출력</li>
+  <li>db.stats() : 현재 사용하고 있는 db 정보 출력</li>
+  <li>use database (USE database) : db 선택</li>
+  <li>db.dropDatabase() (DROP database) : drop</li>
+</ul>
+
+<h2 id="컬렉션-명령어">컬렉션 명령어</h2>
+<ul>
+  <li>db.createCollection(“name”, {capped:true, size:6142800, max:10000) (create table name ();)</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">field</th>
+      <th style="text-align: center">type</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">capped</td>
+      <td style="text-align: center">boolean</td>
+      <td style="text-align: center">고정된 크기를 가진 컬렉션을 만들 것인가</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">size</td>
+      <td style="text-align: center">number</td>
+      <td style="text-align: center">컬렉션 최대 사이즈(capped=true 일 경우 필수)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">max</td>
+      <td style="text-align: center">number</td>
+      <td style="text-align: center">최대 도큐먼트 세트</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>show collections() (SHOW CREATE TABLE [tableName])</li>
+  <li>db.[collectionName].drop() (DROP TABLE [tableName])</li>
+</ul>
+
+<h3 id="projection">Projection</h3>
+<ul>
+  <li>원하는 키, 값만 가져오는 것을 의미한다.</li>
+  <li>project을 하면 용량이 준다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.[</span><span class="nx">tableName</span><span class="p">].</span><span class="nx">find</span><span class="p">({</span><span class="cm">/*조건*/</span><span class="p">},</span> <span class="p">{</span><span class="dl">"</span><span class="s2">_id</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="dl">"</span><span class="s2">hits</span><span class="dl">"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span> <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span><span class="p">:{</span><span class="na">$slice</span><span class="p">:</span> <span class="mi">1</span><span class="p">}})</span>
+</code></pre></div></div>
+
+<h3 id="_id">_id</h3>
+<p>도큐먼트의 PK다. 도큐먼트가 생성될 때 이 필드가 없으면 묵시적으로 생성해서 자동으로 추가한다.</p>
+
+<h2 id="수정">수정</h2>
+
+<ol>
+  <li>update</li>
+</ol>
+
+<ul>
+  <li>기본적으로 single 업데이트</li>
+  <li>$set으로 해야 도큐먼트롤 통으로 덮어쓰지 않고 일부 key에만 업데이트할 수 있다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">update</span> <span class="p">({</span><span class="na">hits</span><span class="p">:</span> <span class="mi">110</span><span class="p">},</span> <span class="p">{</span><span class="na">$set</span><span class="p">:</span> <span class="p">{</span><span class="na">hits</span><span class="p">:</span> <span class="mi">120</span><span class="p">}},</span> <span class="p">{</span>
+    <span class="na">usert</span><span class="p">:</span> <span class="kc">true</span> <span class="cm">/** 없으면 insert 아니면 update **/</span><span class="p">,</span> 
+    <span class="na">multi</span><span class="p">:</span> <span class="kc">true</span> <span class="cm">/** 대량 업데이트 여부 false면 최초 한 개만 업데이트 **/</span>
+<span class="p">})</span>
+
+<span class="c1">// $set 이외 $unset으로 지울 수도 있다.</span>
+
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">array</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="na">name</span><span class="p">:</span><span class="dl">"</span><span class="s2">F</span><span class="dl">"</span><span class="p">},</span> <span class="p">{</span>
+    <span class="na">$push</span><span class="p">:{</span><span class="na">category</span><span class="p">:</span> <span class="dl">"</span><span class="s2">science</span><span class="dl">"</span><span class="p">},</span> <span class="c1">//Array에 삽입 (통 업데이트 없이)</span>
+    <span class="na">$pull</span><span class="p">:{</span><span class="na">category</span><span class="p">:</span><span class="dl">"</span><span class="s2">science</span><span class="dl">"</span><span class="p">}</span><span class="c1">//Array에서 제거  (통 업데이트 없이)</span>
+    
+    <span class="c1">//$addToSet은 중복을 확인하고 Array에 삽입한다.</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<ol>
+  <li>updateOne
+    <ul>
+      <li>매칭되는 도큐먼트 중 첫 번째만 수정</li>
+    </ul>
+  </li>
+  <li>updateMany
+    <ul>
+      <li>매칭되는 모든 도큐먼트를 수정 {multi:true}</li>
+    </ul>
+  </li>
+  <li>replaceOne
+    <ul>
+      <li>도큐먼트를 통으로 교체</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>5.0이후로 Deprecated!</p>
+
+  <ol>
+    <li>FindAnyModify</li>
+  </ol>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>mongo는 여러 명령을 트랜잭션으로 묶을 수 없어서 자주 사용하지는 않지만 유용하다.</li>
+  </ul>
+
+  <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">findAndModify</span><span class="p">({</span>
+    <span class="na">query</span><span class="p">:</span> <span class="p">{},</span> <span class="c1">// 조건</span>
+    <span class="na">update</span><span class="p">:{},</span> <span class="c1">//업데이트</span>
+    <span class="na">new</span><span class="p">:</span><span class="kc">true</span> <span class="c1">//수정 이전, 이후 중 어떤 것을 반환할지 결정</span>
+<span class="p">})</span>
+</code></pre></div>  </div>
+
+</blockquote>
+
+<ol>
+  <li>FindOneAndUpdate(filter, update, options)/ FindOneAndReplace(filter, replacement, options)
+    <ul>
+      <li>findAndModify를 쪼개 놓은 메소드들 이다.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="삭제">삭제</h2>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">remove</span><span class="p">({</span><span class="cm">/** query **/</span><span class="p">})</span>
+</code></pre></div></div>
+
+<ol>
+  <li>deleteOne : 처음 매칭되는 하나의 도큐먼트만 삭제</li>
+  <li>
+    <h1 id="deletemany--매칭되는-모든-도큐먼트를-지움">deleteMany : 매칭되는 모든 도큐먼트를 지움</h1>
+    <h2 id="도큐먼트-명령어">도큐먼트 명령어</h2>
+  </li>
+</ol>
+
+<ul>
+  <li>insert : 단일, 다수의 Document 입력에 사용한다. 컬렉션이 존재하지 않으면 자동으로 생성하고 insert한다.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 단일</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">iPhone</span><span class="dl">"</span><span class="p">})</span>
+
+<span class="c1">// 다수</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">iPhone</span><span class="dl">"</span><span class="p">},</span> <span class="p">{</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">iPad</span><span class="dl">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>insertOne : 단일 Document 입력에 사용</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 단일</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">insertOne</span><span class="p">({</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">iPhone</span><span class="dl">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>insertMany : 다중 Document 입력에 사용</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 다수</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">insertMany</span><span class="p">({</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">iPhone</span><span class="dl">"</span><span class="p">},</span> <span class="p">{</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">iPad</span><span class="dl">"</span><span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="조회">조회</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">find({조건}, {projection})</code> : 리스트를 확인</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//리스트</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">appe</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">pretty</span><span class="p">();</span>
+
+<span class="c1">//조건</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">appe</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:{</span><span class="na">$eq</span><span class="p">:</span><span class="dl">"</span><span class="s2">iphone</span><span class="dl">"</span><span class="p">}}).</span><span class="nx">pretty</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="논리-연산자">논리 연산자</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$gt: value}}</code>  :  graterThan</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$lt: value}}</code>  :  lessThan</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$gte: value}}</code>  :  graterOrEqual</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$lte: value}}</code>  :  lessOrEqual</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$eq: value}}</code> : equal</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$ne: value}}</code> : not equal</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$in: [value1, value2, value3]}}</code> : in</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$nin: [value1, value2, value3]}}</code> : not</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$and: [{조건1}, {조건2}]}}</code> : and</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$or: [{조건1}, {조건2}]}}</code> : or</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$nor: [{조건1}, {조건2}]}}</code> : or</li>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$not: {조건}}}</code> : not</li>
+</ul>
+
+<h3 id="정규표현식">정규표현식</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">{key: {$regx: /[regex]/, $options:["g","i"]}}</code> : 정규표현식을 사용해서 검색</li>
+</ul>
+
+<h3 id="조건js">조건(Js)</h3>
+
+<p>자바스크립트를 사용해서 검색할 수 있다. <code class="language-plaintext highlighter-rouge">this</code>를 사용해야 한다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">{$where: "this.model === 'Iphone'}</code></li>
+</ul>
+
+<h3 id="정렬">정렬</h3>
+<p>1은 asc, -1은 desc</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sort({model: 1})</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">apple</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">({</span><span class="na">model</span><span class="p">:</span> <span class="mi">1</span><span class="p">}).</span><span class="nx">pretty</span><span class="p">()</span>
+</code></pre></div></div>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-01-2.Operators.html">
+        [mongo Series] 01 2.operators
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-02.Index.html">
+        [mongo Series] 02.index
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

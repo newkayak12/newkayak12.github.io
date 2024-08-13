@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 05.relation | newkayak12.github.io</title>
+	<meta name="description"
+		content="관계">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-05.Relation.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 05.relation</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="관계">관계</h1>
+
+<p>기본적으로 RDB과 다르게 몽고는 관계성에 중점을 두지는 않았다. 
+그렇지만 컬렉션 간 관계를 바탕으로 데이터를 조회해야할 때가 있다. 두 가지 밥법이 있다.</p>
+
+<ol>
+  <li>Embedded : 다른 도큐먼트를 포함해서 한 도큐먼트에 통째로 저장하는 방법이다.</li>
+</ol>
+
+<pre><code class="language-mongodb-json">{
+    _id: "xxxxxxx",
+    name: "newkayak",
+    address : {
+        city: "seoul",
+        gu: "sungdong-gu",
+        dong: "haengdangdong"
+    }
+}
+</code></pre>
+
+<ul>
+  <li>장점
+    <ol>
+      <li>수정이 용이하다.</li>
+      <li>한 번의 쿼리로 모두 찾아올 수 있다.</li>
+      <li>읽기 속도가 빠르다.</li>
+    </ol>
+  </li>
+  <li>단점
+    <ol>
+      <li>일관성 유지가 어렵다.</li>
+      <li>document 사이즈가 커진다.</li>
+      <li>document 사이즈 제한이 있으므로 사이즈가 커질 때마다 블록을 옮겨야 해서 단편화가 생길 수 있다.</li>
+    </ol>
+  </li>
+</ul>
+
+<ol>
+  <li>Reference : Pointer 개념으로 참조할 수 있는 아이디를 저장하는 방법이다.</li>
+</ol>
+
+<pre><code class="language-mongodb-json">//user
+{
+    _id: "xxxxxxx",
+    name: "newkayak",
+}
+//city
+{
+    _id: "SEOUL_XXX~",
+    user_id: "xxxxxxx",
+    city: "seoul",
+    gu: "sungdong-gu",
+    dong: "haengdangdong"
+}
+</code></pre>
+
+<ul>
+  <li>장점
+    <ol>
+      <li>일관성 유지가 쉽다.</li>
+    </ol>
+  </li>
+  <li>단점
+    <ol>
+      <li>외래키 같이 다른 쪽 키를 소유하고 있어야만 한다.</li>
+      <li>반복된 조회로 퍼포먼스가 떨어질 수 있다.</li>
+    </ol>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-04.Auth.html">
+        [mongo Series] 04.auth
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-06.Engine.html">
+        [mongo Series] 06.engine
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

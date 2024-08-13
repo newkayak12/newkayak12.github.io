@@ -126,6 +126,8 @@
 			
 			
 			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -209,14 +211,113 @@
 <script>
   window.store = {
     
-      "2024-08-07-programmers-series-lv-02-numberconversion-html": {
+      "mongo-2024-08-13-mongo-series-06-engine-html": {
+        "title": "[mongo Series] 06.engine",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "Enginemongo의 스토리지 엔진은 MySQL과 같이 플러그인형이다. 3.0 이전에는 MMAPv1을 3.0 이후로는 WireTiger를 사용한다.MMAPv1는 메모리 매핑을 기반으로 한다. 또한 데이터 셋 마다 2GB 씩 예비로 블록을 할당하는 특징을 가지고 있다.이 두 가지 엔진은 ‘특별히 어떤 것이 좋다’라는 개념보다는 용도에 따라 다르게 세팅한다로 접근하는 것이 맞을 것으로 보인다.WireTiger멀티코어 확장성과 램 사용량 최적화에 초점을 둔 확장 가능한 오픈 소스 데이터 엔진이다.storage:  dbPath: \"/data/db\"  #저장 경로  journal:    enabled: true #저널링 여부 bin로그랑 비슷한 느낌으로 보인다.  engine: \"wireTiger\"   wireTiger:    engineConfig:      cacheSizeGB: 8 #인메모리 데이터용으로 비축해야하는 메모리 양이다. bufferPool과 비슷한 느낌으로 보인다.      journalCompressor: none  #journal의 압축기 종류다.     collectionConfig:      blockCompressor: none  # 수집 데이터에 사용할 압축기 종류다. none|snappy|zlib이 있다.    indexConfig:      prefixCompressor: false # 인덱스에 압축 사용여부다.데이터 구조key-value 형태를 위한 기본 클래스가 있다. 컬렉션 키로 레코드에 대한 빠른 액세스를 보장하는 식이다. 키를 인덱싱하여 저장 공간을 희생하여 속도를 끌어올릴 수도 있다.보통 B-Tree로 구성되어 있다. B-Tree는 블록 단위로 구분된다. 루트노드에서 아래로 내려가면서 데이터를 가리키는 pointer를 저장한다. 또한 B-Tree는 정렬되어 있다.잠금Mongo 는 Mutex(상호 배제)를 사용해서 서버 수준의 락킹을 제공했다. 여러 클라이언트, 쓰레드가 같은 리소스로 접근하면 이를 비동시적으로 액세스할 수 있도록 보장한다.이후 서버에서 컬렉션 수준 잠금이 도입되면서 컬렉션이 다르면 쓰기 작업에 락이 영향을 미치지 않는 식으로 변경되었다.  이후 3.0 WireTiger부터는 도큐먼트 수준까지 지원한다.(MySQL record기반 잠금과 같이)",
+        "url": "//mongo/2024/08/13/mongo-series-06.Engine.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-05-relation-html": {
+        "title": "[mongo Series] 05.relation",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "관계기본적으로 RDB과 다르게 몽고는 관계성에 중점을 두지는 않았다. 그렇지만 컬렉션 간 관계를 바탕으로 데이터를 조회해야할 때가 있다. 두 가지 밥법이 있다.  Embedded : 다른 도큐먼트를 포함해서 한 도큐먼트에 통째로 저장하는 방법이다.{    _id: \"xxxxxxx\",    name: \"newkayak\",    address : {        city: \"seoul\",        gu: \"sungdong-gu\",        dong: \"haengdangdong\"    }}  장점          수정이 용이하다.      한 번의 쿼리로 모두 찾아올 수 있다.      읽기 속도가 빠르다.        단점          일관성 유지가 어렵다.      document 사이즈가 커진다.      document 사이즈 제한이 있으므로 사이즈가 커질 때마다 블록을 옮겨야 해서 단편화가 생길 수 있다.        Reference : Pointer 개념으로 참조할 수 있는 아이디를 저장하는 방법이다.//user{    _id: \"xxxxxxx\",    name: \"newkayak\",}//city{    _id: \"SEOUL_XXX~\",    user_id: \"xxxxxxx\",    city: \"seoul\",    gu: \"sungdong-gu\",    dong: \"haengdangdong\"}  장점          일관성 유지가 쉽다.        단점          외래키 같이 다른 쪽 키를 소유하고 있어야만 한다.      반복된 조회로 퍼포먼스가 떨어질 수 있다.      ",
+        "url": "//mongo/2024/08/13/mongo-series-05.Relation.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-04-auth-html": {
+        "title": "[mongo Series] 04.auth",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "Auth(계정 관리)기본은 계정 default에 비밀번호가 없다. -&gt; 보안에 취약하다.따라서 계정 생성 및 비밀번호 지정하는 것이 좋다.추가로 계정 정보는 db.system.users 컬렉션에서 관리된다.  db.auth() : db에 사용자 인증  db.createUser() : 새 사용자 생성  db.updateUser() : 사용자 업데이트  db.changeUserPassword() :  사용자 비밀번호 변경  db.dropAllUsers() : 모든 사용자 삭제  db.dropUser() : 사용자 삭제  db.grantRolesToUser() : 권한 부여  db.revokeRolesFromUser() : 권한 말소  db.getUser() : 사용자 조회  db.getUsers() : db에 관련된 모든 사용자 반환",
+        "url": "//mongo/2024/08/13/mongo-series-04.Auth.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-03-optimize-html": {
+        "title": "[mongo Series] 03.optimize",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "쿼리 최적화프로파일러use [db]db.setProfilingLevel()/** * 0. 프로파일러를 끈다. * 1. slowQuery만 남긴다. * 2. 모든 읽기, 쓰기를 로그에 기록한다. */프로파일링 결과프로파일링 결과는 system.profile이라는 capped Collection에 쌓인다. db.system.profile.find().sort({$natural:-1}_으로 확인할 수 있다.$natural로 최신순부터 확인할 수 있다.[  {    \"command\": {      \"find\": \"test\",      \"filter\": {      },      \"$db\": \"test\"    },    \"executionStats\": {      \"executionSuccess\": true,      \"nReturned\": 7,      \"executionTimeMillis\": 1,      \"totalKeysExamined\": 0,      \"totalDocsExamined\": 7,      \"executionStages\": {        \"stage\": \"scan\",        \"planNodeId\": 1,        \"nReturned\": 7,        \"executionTimeMillisEstimate\": 0,        \"opens\": 1,        \"closes\": 1,        \"saveState\": 0,        \"restoreState\": 0,        \"isEOF\": 1,        \"numReads\": 7,        \"recordSlot\": 4,        \"recordIdSlot\": 5,        \"fields\": [],        \"outputSlots\": []      },      \"allPlansExecution\": []    },    \"explainVersion\": \"2\",    \"ok\": 1,    \"queryPlanner\": {      \"namespace\": \"test.test\",      \"indexFilterSet\": false,      \"parsedQuery\": {      },      \"queryHash\": \"E475932B\",      \"planCacheKey\": \"B5EF3534\",      \"maxIndexedOrSolutionsReached\": false,      \"maxIndexedAndSolutionsReached\": false,      \"maxScansToExplodeReached\": false,      \"winningPlan\": {        \"queryPlan\": {          \"stage\": \"COLLSCAN\",          \"planNodeId\": 1,          \"filter\": {          },          \"direction\": \"forward\"        },        \"slotBasedPlan\": {          \"slots\": \"$$RESULT=s4 env: { s1 = TimeZoneDatabase(Asia/Kuala_Lumpur...Etc/GMT+4) (timeZoneDB), s2 = Nothing (SEARCH_META), s3 = 1723330456074 (NOW) }\",          \"stages\": \"[1] scan s4 s5 none none none none lowPriority [] @\\\"fc04cb0f-b6da-46ab-acca-f4ff59ebfbae\\\" true false \"        }      },      \"rejectedPlans\": []    },    \"serverInfo\": {      \"host\": \"ae2c49333eb0\",      \"port\": 27017,      \"version\": \"7.0.4\",      \"gitVersion\": \"38f3e37057a43d2e9f41a39142681a76062d582e\"    },    \"serverParameters\": {      \"internalQueryFacetBufferSizeBytes\": 104857600,      \"internalQueryFacetMaxOutputDocSizeBytes\": 104857600,      \"internalLookupStageIntermediateDocumentMaxSizeBytes\": 104857600,      \"internalDocumentSourceGroupMaxMemoryBytes\": 104857600,      \"internalQueryMaxBlockingSortMemoryUsageBytes\": 104857600,      \"internalQueryProhibitBlockingMergeOnMongoS\": 0,      \"internalQueryMaxAddToSetBytes\": 104857600,      \"internalDocumentSourceSetWindowFieldsMaxMemoryBytes\": 104857600,      \"internalQueryFrameworkControl\": \"trySbeEngine\"    }  }]nReturned, totalDocsExamined 필드로 가늠해 볼 수는 있다. 전체, 스캔된 대상이다. 또한 executionStats, queryPlanner, allPlansExecution을 보면쿼리 옵티마이저가 시도한 플랜 리스트를 포함한다. executionTimeMillis는 쿼리 시간이다.allPlansExecution는 시도한 쿼리 플랜이다.hintMySQL와 같이 hint()를 줄 수 있다. 이는 마찬가지로 쿼리 옵티마이저에게 실행 계획 작성 시 사용자가 개입할 수 있게 해준다.db.test.find().hint(~)쿼리 플랜 캐시몽고는 성공적인 쿼리 플랜이 발견되면 쿼리 패턴, nReturned, 인덱스 규격이 기록된다. MySQL이 통계 정보를 사용하는 것과 비슷하게 쿼리 결과를 캐싱해서 이를 통해서 옵티마이저의 최적화를 노리는 것으로 보인다. 옵티마이저는 아래와 같은 이벤트가 발생하면 캐싱된 플랜을 버린다.  컬렉션에 대해서 100회 쓰기가 발생  컬렉션에 인덱스가 추가되거나 삭제된다.  캐시 쿼리 플랜을 사용했을 때 훨씬 많은 작업을 수행했을 때 nReturned 값의 최소 10배를 능가하는 totalDocsExamined의 값 (다른 인덱스가 더 효율적이라면 옵티마이저는 주저 없이 플랜을 버린다.)쿼리 패턴  단일키 인덱스          완전 일치 ($eq)      정렬 (sort())      범위 쿼리 ($gt, $lt, $gte, $lte)        복합키 인덱스          완전일치 (순서까지)      범위 일치 (왼쪽부터 완전일치/ 범위일치, 뒤쪽은 없거나 범위)      커버링 인덱스(Query, Projection까지 인덱스만으로 결정되는 경우)      ",
+        "url": "//mongo/2024/08/13/mongo-series-03.Optimize.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-02-index-html": {
+        "title": "[mongo Series] 02.index",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "인덱스역시 다른 DB와 같이 인덱스를 생성하는게 보통이다. mongo에서 인덱스는 1) 단순(simple) 인덱스, 2) 복합(compound) 인덱스 가 있다.  단순 인덱스 : 단순 하나의 요소만 잡은 인덱스다.  복합 인덱스 : 여러 요소를 하나의 키로 묶은 인덱스다. 쿼리당 하나의 인덱스만 사용할 수 있기에 인덱스를 두 개 이상의 필드에 태우려면 필요하다. 또한 선언 순서가 중요하다.효율쿼리 성능을 위해서는 인덱스가 반드시 필요하지만 인덱스에는 유지 비용이 들어간다. 도큐먼트를 추가할 때마다 컬렉션에 생성된 인덱스도 새로운 도큐먼트를 포함시켜야 한다.물론 읽기 위주라면 감당할 수 있는 비용이고 상쇄할 수 있다. 문제는 인덱스가 적합하더라도 메모리에 다 올리지 못해서 페이지 폴트가 생길 때 문제다.램에 없어서 가지러 들어가고 올려놓고를 반복한다. 위와 같은 상황을 Threshing이라고 한다. 그래서 인덱스를 너무 많이 작성하는 것도 그리 바람직하지 않다.B-TreeMongo index도 B-Tree다. 트리 유사한 구조로 키의 삭제, 추가에 따라 밸런싱을 한다. 또한 일치, 범위, 정렬, 전방일치 등을 용이하게 할 수 있다.타입  unique : 인덱스의 카디널리티가 높다. 선택도가 1이다. (선택도 = 카디널리티 / 전체 레코드 수)db.users.createIndex({userName:1}, {unique:true, dropDups: true}) //삭제 명령도 내릴 수 있다.  희소 인덱스 vs. 밀집 인덱스  희소 인덱스 : 인덱스는 레코드 포인터를 갖는데 같은 인덱스를 가진 레코드들 중 첫 번째 만 갖고 있는 것을 의미한다. 클러스터링 인덱스에서 사용할 수 있다.  밀집 인덱스 : 인덱스는 레코드 포인터를 갖는데 같은 인덱스를 가진 레코드들의 레코드 포인터를 하나씩 모두 갖고 있는 경우를 밀집 인덱스라고 한다. 넌클러스터링생성db.target.createIndex({name: 1}, {background: 1}) //1 : asc, -1 : desc다중키 인덱스필드 값이 배열이고, 이를 인덱스로 잡는 경우를 다중 키 인덱스(multiKey Index)라고 한다. 이렇게 구성하면 인덱스 내의 여러 개의 엔트리가동일한 도큐먼트를 지시하게 된다. 예를 들어보자.{    name: \"Apple\",    tags: [\"iPhone\", \"iPad\", \"appleWatch\", \"visionPro\", \"macbookPro\", \"macbookAir\"]}tags에 다중키 인덱스를 잡았다면 여러 개의 인덱스 엔트리가 같은 도큐먼트를 지시하고 있다. 이와 같이 배열 내 요소는 각자 자신만의 엔트리를 가지고 있다.이렇게 인덱스를 사용할 수 있지만 역시나 비용은 만만치 않다.해시 인덱스해시 함수를 통해서 인덱스를 구성하는 경우를 해시 인덱스라고 한다.db.table.createIndex({element:'hashed'})와 같이 구성할 수 있다. 해시 인덱스는 원본을 해싱하므로 몇 가지 제약 사항이 있다.  $eq 쿼리는 동일하게 동작하지만 범위 쿼리는 지원하지 않는다.(해싱되었으므로 원본 값을 가지고 범위 쿼리는 불가능하다.)  다중 키 해시 인덱스는 허용되지 않는다.  부동소수점은 해시되기 전에 정수로 변환된다.해시 인덱스는 인덱스의 엔트리가 균등하게 분배된다는 장점이 있다.관리생성, 삭제  createIndex() 로 생성한다. (db.target.createIndex({indexName:1}))  db.system.indexes.find().pretty()로 인덱스를 검증할 수 있다.  deleteIndexes로 삭제할 수 있다. (db.runCommand({deleteIndexes: \"user\", index: \"zip\"}))  dropIndex()로 삭제할 수 있다. (db.target.dropIndex(\"indexName\"))선언인덱스 만들기가 굉장히 쉽다. 그래서 러닝 중이던 준비 중이던 인덱스를 잡아야 할 떄가 생길 수 있다. 그러나, 러닝 중이라면 더 고민해보자.인덱스 구축은 오랜시간이 걸린다. 일종의 마이그레이션으로 봐도 크게 다르지 않을 수 있다.과정 (인덱스 구축)  인덱스할 값을 정렬한다.  B-Tree에 추가된다.  정렬된 값들이 인덱스로 삽입된다.이 과정이 데이터 수가 많다면 오래 걸릴 수가 있다.백그라운드 인덱싱그래서 인덱스 구축을 백그라운드에서 할 수도 있다. 물론 쓰기 잠금은 걸리지만 중간중간 읽기, 쓰기를 허용하기 위해서 잠시간 멈추면서 진행된다.db.target.createIndex({key: 1}, {background: true})로 백그라운드에서 인덱스를 생성할 수 있다.리인덱싱기존 데이터의 업데이트, 삭제가 대량으로 발생하면 아무리 인덱스가 재구성한다고 하더라도 단편화는 피할 수 없다. 이런 경우 인덱스를 재구축할 필요가 생긴다.db.target.reIndex()",
+        "url": "//mongo/2024/08/13/mongo-series-02.Index.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-01-crud-html": {
+        "title": "[mongo Series] 01.crud",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "CRUD생성  show dbs (SHOW DATABASES;) : db list  db (SELECT DATABASE();) : 현재 사용 중인 DB 출력  db.stats() : 현재 사용하고 있는 db 정보 출력  use database (USE database) : db 선택  db.dropDatabase() (DROP database) : drop컬렉션 명령어  db.createCollection(“name”, {capped:true, size:6142800, max:10000) (create table name ();)            field      type      description                  capped      boolean      고정된 크기를 가진 컬렉션을 만들 것인가              size      number      컬렉션 최대 사이즈(capped=true 일 경우 필수)              max      number      최대 도큐먼트 세트        show collections() (SHOW CREATE TABLE [tableName])  db.[collectionName].drop() (DROP TABLE [tableName])Projection  원하는 키, 값만 가져오는 것을 의미한다.  project을 하면 용량이 준다.db.[tableName].find({/*조건*/}, {\"_id\": false, \"name\": true, \"hits\":true, \"author\":{$slice: 1}})_id도큐먼트의 PK다. 도큐먼트가 생성될 때 이 필드가 없으면 묵시적으로 생성해서 자동으로 추가한다.수정  update  기본적으로 single 업데이트  $set으로 해야 도큐먼트롤 통으로 덮어쓰지 않고 일부 key에만 업데이트할 수 있다.db.table.update ({hits: 110}, {$set: {hits: 120}}, {    usert: true /** 없으면 insert 아니면 update **/,     multi: true /** 대량 업데이트 여부 false면 최초 한 개만 업데이트 **/})// $set 이외 $unset으로 지울 수도 있다.db.array.update({name:\"F\"}, {    $push:{category: \"science\"}, //Array에 삽입 (통 업데이트 없이)    $pull:{category:\"science\"}//Array에서 제거  (통 업데이트 없이)        //$addToSet은 중복을 확인하고 Array에 삽입한다.})  updateOne          매칭되는 도큐먼트 중 첫 번째만 수정        updateMany          매칭되는 모든 도큐먼트를 수정 {multi:true}        replaceOne          도큐먼트를 통으로 교체        5.0이후로 Deprecated!      FindAnyModify        mongo는 여러 명령을 트랜잭션으로 묶을 수 없어서 자주 사용하지는 않지만 유용하다.    db.target.findAndModify({    query: {}, // 조건    update:{}, //업데이트    new:true //수정 이전, 이후 중 어떤 것을 반환할지 결정})    FindOneAndUpdate(filter, update, options)/ FindOneAndReplace(filter, replacement, options)          findAndModify를 쪼개 놓은 메소드들 이다.      삭제db.target.remove({/** query **/})  deleteOne : 처음 매칭되는 하나의 도큐먼트만 삭제      deleteMany : 매칭되는 모든 도큐먼트를 지움    도큐먼트 명령어    insert : 단일, 다수의 Document 입력에 사용한다. 컬렉션이 존재하지 않으면 자동으로 생성하고 insert한다.// 단일db.apple.insert({\"model\":\"iPhone\"})// 다수db.apple.insert({\"model\":\"iPhone\"}, {\"model\": \"iPad\"})  insertOne : 단일 Document 입력에 사용// 단일db.apple.insertOne({\"model\":\"iPhone\"})  insertMany : 다중 Document 입력에 사용// 다수db.apple.insertMany({\"model\":\"iPhone\"}, {\"model\": \"iPad\"})조회  find({조건}, {projection}) : 리스트를 확인//리스트db.appe.find().pretty();//조건db.appe.find({\"model\":{$eq:\"iphone\"}}).pretty();논리 연산자  {key: {$gt: value}}  :  graterThan  {key: {$lt: value}}  :  lessThan  {key: {$gte: value}}  :  graterOrEqual  {key: {$lte: value}}  :  lessOrEqual  {key: {$eq: value}} : equal  {key: {$ne: value}} : not equal  {key: {$in: [value1, value2, value3]}} : in  {key: {$nin: [value1, value2, value3]}} : not  {key: {$and: [{조건1}, {조건2}]}} : and  {key: {$or: [{조건1}, {조건2}]}} : or  {key: {$nor: [{조건1}, {조건2}]}} : or  {key: {$not: {조건}}} : not정규표현식  {key: {$regx: /[regex]/, $options:[\"g\",\"i\"]}} : 정규표현식을 사용해서 검색조건(Js)자바스크립트를 사용해서 검색할 수 있다. this를 사용해야 한다.  {$where: \"this.model === 'Iphone'}정렬1은 asc, -1은 desc  sort({model: 1})db.apple.find().sort({model: 1}).pretty()",
+        "url": "//mongo/2024/08/13/mongo-series-01.CRUD.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-01-2-operators-html": {
+        "title": "[mongo Series] 01 2.operators",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "연산자1. 필드 수정 연산자.  $inc : 필드 값 증감  $mul : 필드에 곱하는 연산자  $rename : 필드명 변경  $set : 필드 값을 변경  $setOnInsert : $set과 유사하지만 upsert의 경우만 작동  $unset : 필드 제거  $min : 필드 값이 주어진 값보다 클 경우 새 값으로 교체  $max : 필드의 값이 주어진 값보다 작을 경우 새 값으로 교체  $currentDate : 현재 날짜로 교체 ({$currentDate: {field: true})2. 배열  $ : 배열의 요소를 지칭 (db.target.update({list:2}, {'list.$': 5}))  $addToSet : 해당 요소가 없으면 추가(set의 add와 같음)  $pop : 맨앞, 맨뒤 요소를 꺼낸다.(shift + pop) ({$pop:{field1:1, field2:2}})  $pull : 조건을 만족하는 특정 요소를 꺼냄 ( {$pull: {조건1, 조건2}} )  $pullAll : 일치하는 값을 배열에서 꺼낸다.( {$pullAll: { field: [val1, val2, ... ]}} )  $push : 배열 필드 값을 push ({$push: {field1: val1, field2: val2} })  $each : 배열을 순회한다. ({$addToSet: { field: { $each: Array[] } } })  $position : $push할 위치를 지정하는 역할  ({ $push: { 필드: { $each: 배열, $position: 위치 } })",
+        "url": "//mongo/2024/08/13/mongo-series-01-2.Operators.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-01-1-atomic-html": {
+        "title": "[mongo Series] 01 1.atomic",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "업데이트, 원자적 연산, 삭제원자성이란 다른 작업이 방해하지 않음을 보장하면서 도큐먼트를 검색하고 업데이트하는 Mongo의 기능이다.업데이트업데이트는 이전에 봤듯이 $set이거나 replace다.대치 vs. 연산자대치는 일반적이다. update 쿼리 자체를 일반적으로 가져가려면 대치가 더 맞을 것이다. 반면에 연산자는 조금 더 성능적 우윌를 갖는다. 업데이트할 데이터를 불러올 필요가 없다.또한 원자적으로 업데이트하는 데 적합하다. 대치 방식은 일관성을 깨뜨릴 수 있다. 대치는 일반적으로 당기고 엎는다.문제는 당기고 엎는 사이에 수정이 생길 수 있다. 이를 race Condition라고 할 수 있다.그래서? findAndModfy(Deprecated)가 원자적 업데이트가 가능하게 해준다. 원자적 업데이트는 다른 연산이 interrupt하거나 interleave할 수 없는 업데이트다. findAndModify가 아니라면 변경된 후의 데이터를 보장 받을 수 없다. (update -&gt; select 하는 찰나에 다른 데이터로 엎으면?)",
+        "url": "//mongo/2024/08/13/mongo-series-01-1.Atomic.html"
+      }
+      ,
+    
+      "mongo-2024-08-13-mongo-series-00-introduce-html": {
+        "title": "[mongo Series] 00.introduce",
+        "tags": "",
+        "date": "August 13, 2024",
+        "author": "",
+        "category": "",
+        "content": "MongoDBMonoDB은 문서 지향 데이터 모델( Document DB )을 사용하는 DB다. 구조가 비교적 자유롭다.            \\      MONGO      RDB                  용도      - 정형, 비정형 데이터 저장 - 초당 동시 처리가 중요한 경우  - 로그, 이력 등 단순 기록      - 무결성, 일관성이 중요한 트랜잭션 베이스 작업  - 데이터 정합성이 요구되는 경우              모델링      - 반정규화를 기본으로한다.  - 비정형 구조라 미리 스키마를 선언하는 구조는 아니다.      - 엔티티 간의 관계를 정의할 필요가 있음  - 정규화가 필요한 경우, 지키면서 설계하는 것이 중요할 수 있다.  - 스키마에 엄격함              성능      - 클러스터 크기, 네트워크 및 애플리케이션에 의해서 성능이 결정됨      - 구조, 질의 튜닝에 의해서 달라짐              인터페이스      - 쿼리 외 다양한 API로 질의를 수행할 수 있음      - SQL만 가능함              장점      - 쿼리 프로세싱이 단순화되어 대용량 처리 성능이 향상됨      데이터 무결성, 정합성 등을 지킬 수 있음              단점      정합성, 무결성, 일관성이 떨어지고 용량이 큼      쿼리 처리 과정이 복잡함      특징  Reliability : ReplicaSet으로 둘 경우 failOver가 가능하고, 고가용성을 지원함  Scalability : Sharding을 통한 Scale-out에 용이하다.  Flexibility : 스키마 제약이 없이 때문에 유연하기 구조를 변경할 수 있음  Index Support :          인덱스를 지원하여 다른 NoSQL보다 빠른 검색이 가능함      다양한 형태의 Index를 제공함 (Hashed, MultiKey, Partial, TTL, Geospatial)      구조DB 아래 Table과 유사한 컬렉션(Collection)으로 이뤄져 있다. Colelction 아래 row와 유사한 Document가 있다. 정리하면 아래와 같다.  Database : Collection의 물리적 컨테이너  Collection : RDBMS의 TABLE과 같음 스키마less  Document : key-value 이뤄진 구조  Key/Field : 컬럼 정도로 생각하면 낫지 않을까?Bson, JsonJson은 JavaScript Object Notation으로 key-value 값으로 채워져 있다.Bson은 Json을 Binary로 변경한 것이다.Json에는 아래와 같은 문제점이 있다.  구문 분석이 느리다.  공간 효율성이 떨어진다.그래서 이를 Binary로 변환하여 저장한다.",
+        "url": "//mongo/2024/08/13/mongo-series-00.Introduce.html"
+      }
+      ,
+    
+      "programmers-2024-08-07-programmers-series-lv-02-numberconversion-html": {
         "title": "[programmers Series] Lv. 02 Numberconversion",
         "tags": "",
         "date": "August 7, 2024",
         "author": "",
         "category": "",
         "content": "숫자 변환하기programmers  문제 설명자연수 x를 y로 변환하려고 합니다. 사용할 수 있는 연산은 다음과 같습니다.x에 n을 더합니다x에 2를 곱합니다.x에 3을 곱합니다.자연수 x, y, n이 매개변수로 주어질 때, x를 y로 변환하기 위해 필요한 최소 연산 횟수를 return하도록 solution 함수를 완성해주세요. 이때 x를 y로 만들 수 없다면 -1을 return 해주세요.제한사항1 ≤ x ≤ y ≤ 1,000,0001 ≤ n &lt; y알고리즘순회 -&gt; BFS? DFS?DFS는 모든 케이스를 다 돌 것이고( 최소 케이스를 찾아야 하기 때문에 ) 분명 느릴 것이다.BFS가 그나마 빠르겠다.막상 작성하면 같은 숫자가 나오는 경우가 중복되서 이마저 타임아웃이 난다.Set으로 이미 나온 숫자가 나오면 스킵하자 어차피 연산은 3중 하나도 이미 해당 숫자가 있다면 계산이 됐을 것이다.풀이class NumberConversion {    @Nested    class TestCases {        @Test        public void case1 () {            int x = 10;            int y = 40;            int n = 5;            int result = 2;            Assertions.assertEquals(result, solution(x, y, n));        }        @Test        public void case2 () {            int x = 10;            int y = 40;            int n = 30;            int result = 1;            Assertions.assertEquals(result, solution(x, y, n));        }        @Test        public void case3 () {            int x = 2;            int y = 5;            int n = 4;            int result = -1;            Assertions.assertEquals(result, solution(x, y, n));        }    }    public int solution(int x, int y, int n){        Queue&lt;Integer[]&gt; queue = new LinkedList&lt;&gt;();        Set&lt;Integer&gt; visit = new HashSet&lt;&gt;();        queue.add(new Integer[]{x, 0});        while( !queue.isEmpty() ) {            Integer[] tuple = queue.poll();            if( tuple[0] == y ) return tuple[1];            if( !visit.contains(tuple[0] + n) &amp;&amp; tuple[0] &lt; y ) {                int calculated = tuple[0] + n;                queue.add(new Integer[]{calculated, tuple[1] + 1});                visit.add(calculated);            }            if( !visit.contains(tuple[0] * 2) &amp;&amp; tuple[0] &lt; y ) {                int calculated = tuple[0] * 2;                queue.add(new Integer[]{calculated, tuple[1] + 1});                visit.add(calculated);            }            if( !visit.contains(tuple[0] * 3) &amp;&amp; tuple[0] &lt; y ) {                int calculated = tuple[0] * 3;                queue.add(new Integer[]{calculated, tuple[1] + 1});                visit.add(calculated);            }        }        return -1;    }}",
-        "url": "//2024/08/07/Programmers-series-LV.-02-NumberConversion.html"
+        "url": "//programmers/2024/08/07/Programmers-series-LV.-02-NumberConversion.html"
       }
       ,
     

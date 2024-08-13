@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[mongo Series] 02.index | newkayak12.github.io</title>
+	<meta name="description"
+		content="인덱스">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/mongo/2024/08/13/mongo-series-02.Index.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[mongo Series] 02.index</h1>
+    
+    <p class="meta">
+      August 13, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="인덱스">인덱스</h1>
+
+<p>역시 다른 DB와 같이 인덱스를 생성하는게 보통이다. mongo에서 인덱스는 <code class="language-plaintext highlighter-rouge">1) 단순(simple) 인덱스</code>, <code class="language-plaintext highlighter-rouge">2) 복합(compound) 인덱스</code> 가 있다.</p>
+
+<ol>
+  <li>단순 인덱스 : 단순 하나의 요소만 잡은 인덱스다.</li>
+  <li>복합 인덱스 : 여러 요소를 하나의 키로 묶은 인덱스다. 쿼리당 하나의 인덱스만 사용할 수 있기에 인덱스를 두 개 이상의 필드에 태우려면 필요하다. 또한 선언 순서가 중요하다.</li>
+</ol>
+
+<h2 id="효율">효율</h2>
+<p>쿼리 성능을 위해서는 인덱스가 반드시 필요하지만 인덱스에는 유지 비용이 들어간다. 도큐먼트를 추가할 때마다 컬렉션에 생성된 인덱스도 새로운 도큐먼트를 포함시켜야 한다.
+물론 읽기 위주라면 감당할 수 있는 비용이고 상쇄할 수 있다. 문제는 인덱스가 적합하더라도 메모리에 다 올리지 못해서 페이지 폴트가 생길 때 문제다.
+램에 없어서 가지러 들어가고 올려놓고를 반복한다. 위와 같은 상황을 <code class="language-plaintext highlighter-rouge">Threshing</code>이라고 한다. 그래서 인덱스를 너무 많이 작성하는 것도 그리 바람직하지 않다.</p>
+
+<h2 id="b-tree">B-Tree</h2>
+<p>Mongo index도 B-Tree다. 트리 유사한 구조로 키의 삭제, 추가에 따라 밸런싱을 한다. 또한 일치, 범위, 정렬, 전방일치 등을 용이하게 할 수 있다.</p>
+
+<h2 id="타입">타입</h2>
+<ol>
+  <li>unique : 인덱스의 카디널리티가 높다. 선택도가 1이다. (선택도 = 카디널리티 / 전체 레코드 수)</li>
+</ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="na">userName</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="na">unique</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span> <span class="na">dropDups</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">//삭제 명령도 내릴 수 있다.</span>
+</code></pre></div></div>
+
+<ol>
+  <li>희소 인덱스 vs. 밀집 인덱스</li>
+</ol>
+
+<ul>
+  <li>희소 인덱스 : 인덱스는 레코드 포인터를 갖는데 같은 인덱스를 가진 레코드들 중 첫 번째 만 갖고 있는 것을 의미한다. 클러스터링 인덱스에서 사용할 수 있다.</li>
+  <li>밀집 인덱스 : 인덱스는 레코드 포인터를 갖는데 같은 인덱스를 가진 레코드들의 레코드 포인터를 하나씩 모두 갖고 있는 경우를 밀집 인덱스라고 한다. 넌클러스터링</li>
+</ul>
+
+<h2 id="생성">생성</h2>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">createIndex</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="na">background</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span> <span class="c1">//1 : asc, -1 : desc</span>
+
+</code></pre></div></div>
+
+<h3 id="다중키-인덱스">다중키 인덱스</h3>
+<p>필드 값이 배열이고, 이를 인덱스로 잡는 경우를 다중 키 인덱스(multiKey Index)라고 한다. 이렇게 구성하면 인덱스 내의 여러 개의 엔트리가
+동일한 도큐먼트를 지시하게 된다. 예를 들어보자.</p>
+
+<pre><code class="language-mongodb-json">{
+    name: "Apple",
+    tags: ["iPhone", "iPad", "appleWatch", "visionPro", "macbookPro", "macbookAir"]
+
+}
+</code></pre>
+
+<p>tags에 다중키 인덱스를 잡았다면 여러 개의 인덱스 엔트리가 같은 도큐먼트를 지시하고 있다. 이와 같이 배열 내 요소는 각자 자신만의 엔트리를 가지고 있다.
+이렇게 인덱스를 사용할 수 있지만 역시나 비용은 만만치 않다.</p>
+
+<h3 id="해시-인덱스">해시 인덱스</h3>
+<p>해시 함수를 통해서 인덱스를 구성하는 경우를 해시 인덱스라고 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">db.table.createIndex({element:'hashed'})</code></p>
+
+<p>와 같이 구성할 수 있다. 해시 인덱스는 원본을 해싱하므로 몇 가지 제약 사항이 있다.</p>
+
+<ol>
+  <li>$eq 쿼리는 동일하게 동작하지만 범위 쿼리는 지원하지 않는다.(해싱되었으므로 원본 값을 가지고 범위 쿼리는 불가능하다.)</li>
+  <li>다중 키 해시 인덱스는 허용되지 않는다.</li>
+  <li>부동소수점은 해시되기 전에 정수로 변환된다.</li>
+</ol>
+
+<p>해시 인덱스는 인덱스의 엔트리가 균등하게 분배된다는 장점이 있다.</p>
+
+<h2 id="관리">관리</h2>
+
+<h3 id="생성-삭제">생성, 삭제</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">createIndex()</code> 로 생성한다. (<code class="language-plaintext highlighter-rouge">db.target.createIndex({indexName:1})</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">db.system.indexes.find().pretty()</code>로 인덱스를 검증할 수 있다.</li>
+  <li>deleteIndexes로 삭제할 수 있다. (<code class="language-plaintext highlighter-rouge">db.runCommand({deleteIndexes: "user", index: "zip"})</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">dropIndex()</code>로 삭제할 수 있다. (<code class="language-plaintext highlighter-rouge">db.target.dropIndex("indexName")</code>)</li>
+</ul>
+
+<h3 id="선언">선언</h3>
+<p>인덱스 만들기가 굉장히 쉽다. 그래서 러닝 중이던 준비 중이던 인덱스를 잡아야 할 떄가 생길 수 있다. 그러나, 러닝 중이라면 더 고민해보자.
+인덱스 구축은 오랜시간이 걸린다. 일종의 마이그레이션으로 봐도 크게 다르지 않을 수 있다.</p>
+
+<h3 id="과정-인덱스-구축">과정 (인덱스 구축)</h3>
+<ol>
+  <li>인덱스할 값을 정렬한다.</li>
+  <li>B-Tree에 추가된다.</li>
+  <li>정렬된 값들이 인덱스로 삽입된다.</li>
+</ol>
+
+<p>이 과정이 데이터 수가 많다면 오래 걸릴 수가 있다.</p>
+
+<h3 id="백그라운드-인덱싱">백그라운드 인덱싱</h3>
+<p>그래서 인덱스 구축을 백그라운드에서 할 수도 있다. 물론 쓰기 잠금은 걸리지만 중간중간 읽기, 쓰기를 허용하기 위해서 잠시간 멈추면서 진행된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">db.target.createIndex({key: 1}, {background: true})</code>로 백그라운드에서 인덱스를 생성할 수 있다.</p>
+
+<h3 id="리인덱싱">리인덱싱</h3>
+
+<p>기존 데이터의 업데이트, 삭제가 대량으로 발생하면 아무리 인덱스가 재구성한다고 하더라도 단편화는 피할 수 없다. 이런 경우 인덱스를 재구축할 필요가 생긴다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">db.target.reIndex()</code></p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/mongo/2024/08/13/mongo-series-01.CRUD.html">
+        [mongo Series] 01.crud
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/mongo/2024/08/13/mongo-series-03.Optimize.html">
+        [mongo Series] 03.optimize
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
