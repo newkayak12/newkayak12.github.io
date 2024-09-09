@@ -5,12 +5,12 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>https://github.com/newkayak12/newkayak12.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 09 Sep 2024 21:23:15 +0900</pubDate>
+    <pubDate>Mon, 09 Sep 2024 21:24:56 +0900</pubDate>
     
       <item>
         <title>[others Series] 05.hls</title>
-        <link>/2024/09/09/Others-series-05.HLS.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-05.HLS.html</guid>
+        <link>/others/2024/09/09/Others-series-05.HLS.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-05.HLS.html</guid>
         <description>&lt;h1 id=&quot;hlshttp-live-streaming&quot;&gt;HLS(Http Live Streaming)&lt;/h1&gt;
 
 &lt;p&gt;가장 널리 사용되는 비디오 스트리밍 프로토콜이다. 이 프로토콜은 동영상을 여러 개의 작은 세그먼트로 부할하고, 
@@ -32,8 +32,8 @@
     
       <item>
         <title>[others Series] 04.grpc</title>
-        <link>/2024/09/09/Others-series-04.gRPC.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-04.gRPC.html</guid>
+        <link>/others/2024/09/09/Others-series-04.gRPC.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-04.gRPC.html</guid>
         <description>&lt;h1 id=&quot;grpc&quot;&gt;gRPC&lt;/h1&gt;
 
 &lt;p&gt;구글에서 개발한 어느 환경에서 실행할 수 있는 최신 오픈 소스 고성능 RPC 프레임워크다.&lt;/p&gt;
@@ -173,8 +173,8 @@ IDL(interface Definition Language)로 protocol buffer를 사용한다. protocol 
     
       <item>
         <title>[others Series] 03.serverless</title>
-        <link>/2024/09/09/Others-series-03.ServerLess.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-03.ServerLess.html</guid>
+        <link>/others/2024/09/09/Others-series-03.ServerLess.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-03.ServerLess.html</guid>
         <description>&lt;h1 id=&quot;serverless&quot;&gt;Serverless&lt;/h1&gt;
 
 &lt;h2 id=&quot;1-온프레미스&quot;&gt;1. 온프레미스&lt;/h2&gt;
@@ -306,8 +306,8 @@ BaaS는 앱 개발에 있어서 필요한 다양한 기능들(DB, 소셜 연동,
     
       <item>
         <title>[others Series] 02.3rdparty</title>
-        <link>/2024/09/09/Others-series-02.3rdParty.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-02.3rdParty.html</guid>
+        <link>/others/2024/09/09/Others-series-02.3rdParty.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-02.3rdParty.html</guid>
         <description>&lt;h1 id=&quot;3rdpartytools&quot;&gt;3rdPartyTools&lt;/h1&gt;
 
 &lt;h2 id=&quot;sentry&quot;&gt;Sentry&lt;/h2&gt;
@@ -365,8 +365,8 @@ BaaS는 앱 개발에 있어서 필요한 다양한 기능들(DB, 소셜 연동,
     
       <item>
         <title>[others Series] 01.coverage</title>
-        <link>/2024/09/09/Others-series-01.Coverage.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-01.Coverage.html</guid>
+        <link>/others/2024/09/09/Others-series-01.Coverage.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-01.Coverage.html</guid>
         <description>&lt;h1 id=&quot;커버리지&quot;&gt;커버리지&lt;/h1&gt;
 &lt;h2 id=&quot;테스트-커버리지&quot;&gt;테스트 커버리지&lt;/h2&gt;
 
@@ -406,8 +406,8 @@ BaaS는 앱 개발에 있어서 필요한 다양한 기능들(DB, 소셜 연동,
     
       <item>
         <title>[others Series] 00. oltpandolap</title>
-        <link>/2024/09/09/Others-series-00.-OLTPandOLAP.html</link>
-        <guid isPermaLink="true">/2024/09/09/Others-series-00.-OLTPandOLAP.html</guid>
+        <link>/others/2024/09/09/Others-series-00.-OLTPandOLAP.html</link>
+        <guid isPermaLink="true">/others/2024/09/09/Others-series-00.-OLTPandOLAP.html</guid>
         <description>&lt;h1 id=&quot;oltponline-transaction-processing&quot;&gt;OLTP(Online Transaction Processing)&lt;/h1&gt;
 
 &lt;ul&gt;

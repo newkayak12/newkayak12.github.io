@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [OTHERS]
+---
+
+
 # MAU, DAU, MCU, ACU
 
 ## MAU( Monthly Activity User )

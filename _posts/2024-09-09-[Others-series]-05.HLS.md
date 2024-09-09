@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [OTHERS]
+---
+
+
 # HLS(Http Live Streaming)
 
 가장 널리 사용되는 비디오 스트리밍 프로토콜이다. 이 프로토콜은 동영상을 여러 개의 작은 세그먼트로 부할하고, 

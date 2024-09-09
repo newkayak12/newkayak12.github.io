@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [OTHERS]
+---
+
+
 # gRPC
 
 구글에서 개발한 어느 환경에서 실행할 수 있는 최신 오픈 소스 고성능 RPC 프레임워크다.

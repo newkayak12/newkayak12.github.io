@@ -2,9 +2,9 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>[others Series]analytics | newkayak12.github.io</title>
+	<title>[others Series] 01.coverage | newkayak12.github.io</title>
 	<meta name="description"
-		content="MAU, DAU, MCU, ACU">
+		content="커버리지테스트 커버리지">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2024/06/19/Others-series-Analytics.html">
+	<link rel="canonical" href="/others/2024/09/09/Others-series-01.Coverage.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
@@ -205,26 +205,46 @@
     <div class="content">
       <article >
   <header style="background-image: url('/')">
-    <h1 class="title">[others Series]analytics</h1>
+    <h1 class="title">[others Series] 01.coverage</h1>
     
     <p class="meta">
-      June 19, 2024
+      September 9, 2024
       
     </p>
   </header>
-  <section class="post-content"><h1 id="mau-dau-mcu-acu">MAU, DAU, MCU, ACU</h1>
+  <section class="post-content"><h1 id="커버리지">커버리지</h1>
+<h2 id="테스트-커버리지">테스트 커버리지</h2>
 
-<h2 id="mau-monthly-activity-user-">MAU( Monthly Activity User )</h2>
-<p>월별 활동한 이용자를 의미하며, 한 달에 몇 명이나 이 서비스를 이용하는지에 대해서 구분할 때 사용한다.</p>
+<p>테스트 커버리지란 시스템 및 소프트웨어에 대해 충분히 테스트 되었는지를 나타내는 정도다.</p>
 
-<h2 id="dau-daily-activity-user-">DAU( Daily Activity User )</h2>
-<p>일별 활동 이용자에 대한 수치. 하루에 몇 명이나 이 서비스를 이용하는지에 대해서 이야기한다.</p>
+<h2 id="코드-커버리지">코드 커버리지</h2>
+<p>코드 커버리지란 테스트에 의해서 실행된 소스 코드의 양을 나타낸 것이다. 테스트로 코드가 얼마나 커버 되었는지를 나타내는 것이다. 소스 코드
+기반 테스트는 화이트 박스 테스트를 통해서 측정된다.</p>
 
-<h2 id="mcu-maximum-current-user-">MCU( Maximum Current User )</h2>
-<p>순간 동시 접속자를 의미하며, 보통 실시간으로 수치를 해석한다.</p>
+<blockquote>
+  <h3 id="화이트-박스">화이트 박스</h3>
+  <p>소브트웨어 내부 소스 코드의 논리적인 모든 경로를 테스트하여 모듈 내부의 작동을 확인하는 것이다. 모듈을 한 번 이상 실행하므로써 수행된다.</p>
+</blockquote>
 
-<h2 id="acu-average-current-user-">ACU( Average Current User )</h2>
-<p>평균 동시 접속자를 의미한다.</p>
+<blockquote>
+  <h3 id="블랙박스-테스트">블랙박스 테스트</h3>
+  <p>사용자 입장에서 구현된 기능이 완전하게 동작되는지를 확인하는 테스트이다. 소브트웨어 내부 코드 및 세부 동작을 알 필요없으며, 입력 값에 따라
+올바른 출력값이 나오는지 확인하는 테스트이다.</p>
+</blockquote>
+
+<h3 id="필요성">필요성</h3>
+<p>코드 커버리지는 테스트를 수치화 하여 놓친 부분을 보완할 수 있게 해준다.</p>
+
+<h3 id="기준">기준</h3>
+
+<h4 id="구문-커버리지statement-coverage">구문 커버리지(Statement Coverage)</h4>
+<p>라인 커버리지라고도 하며, 코드 한 줄이 한 번 이상 실행된다면 충족된다.</p>
+
+<h4 id="결정-커버리지decision-coverage">결정 커버리지(Decision Coverage)</h4>
+<p>브랜치 커버리지라고도 하며 조건식이 True/ False를 가지는 경우 충족된다.</p>
+
+<h4 id="조건-커버리지">조건 커버리지</h4>
+<p>모든 내부 조건에 대해서 True/False를 가지게 되면 충족된다.</p>
 </section>
   
 
@@ -239,16 +259,16 @@
   
   <div id="previous-post" class="post-nav-post">
       <p>Previous post</p>
-      <a href="/2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html">
-        [effective Java Series] 72.overridereadobjectdefensively
+      <a href="/others/2024/09/09/Others-series-00.-OLTPandOLAP.html">
+        [others Series] 00. oltpandolap
       </a>
   </div>
   
   
   <div id="next-post" class="post-nav-post">
       <p>Next post</p>
-      <a href="/programmers/2024/06/19/Programmers-series-LV.-01-Gift.html">
-        [programmers Series] Lv. 01 Gift
+      <a href="/others/2024/09/09/Others-series-02.3rdParty.html">
+        [others Series] 02.3rdparty
       </a>
   </div>
   

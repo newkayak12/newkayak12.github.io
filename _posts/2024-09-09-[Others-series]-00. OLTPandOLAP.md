@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [OTHERS]
+---
+
+
 # OLTP(Online Transaction Processing)
 
 - 운영에서 데이터 및 데이터를 처리하는 방법을 의미한다.

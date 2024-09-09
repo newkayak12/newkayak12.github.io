@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [OTHERS]
+---
+
+
 # Serverless
 
 ## 1. 온프레미스
