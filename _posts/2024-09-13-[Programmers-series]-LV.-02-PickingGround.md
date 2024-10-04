@@ -53,14 +53,21 @@ BFS로 최선의 선택을 해야하는가? -> 이 전의 선택을 따로 기�
     public class TestCases {
         @Test
         public void case1() {
-            int[][] land = {{1,2,3,5}, {5,6,7,8}, {4,3,2,1}};
+            int[][] land = new int[3][4];
+            
+            land[0] = new int[]{1, 2, 3, 5};
+            land[1] = new int[]{5, 6, 7, 8};
+            land[2] = new int[]{4, 3, 2, 1};
             int answer = 16;
 
             Assertions.assertEquals(answer, solution(land));
         }
         @Test
         public void case2() {
-            int[][] land = {{1,2,3,3}, {5,6,7,8}, {4,3,2,1}};
+            int[][] land = new int[3][4];
+            land[0] = new int[]{1,2,3,3};
+            land[1] = new int[]{5,6,7,8};
+            land[2] = new int[]{4,3,2,1};
             int answer = 15;
 
             Assertions.assertEquals(answer, solution(land));
