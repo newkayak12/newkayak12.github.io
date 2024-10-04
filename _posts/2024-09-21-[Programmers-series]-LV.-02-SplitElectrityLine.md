@@ -41,7 +41,15 @@ BFS
         @Test
         public void case1() {
             int n = 9;
-            int[][] wires = {{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}};
+            int[][] wires = new int[8][2];
+            wires[0] = new int[]{1, 3};
+            wires[1] = new int[]{2, 3};
+            wires[2] = new int[]{3, 4};
+            wires[3] = new int[]{4, 5};
+            wires[4] = new int[]{4, 6};
+            wires[5] = new int[]{4, 7};
+            wires[6] = new int[]{7, 8};
+            wires[7] = new int[]{7, 9};
             int result = 3;
 
             Assertions.assertEquals(result, solution(n, wires));
