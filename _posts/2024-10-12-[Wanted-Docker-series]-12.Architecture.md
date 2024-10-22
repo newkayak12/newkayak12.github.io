@@ -73,7 +73,7 @@ categories: [DOCKER, WANTED]
 
 
 ## 시스템 아키텍쳐 유형
-![System-Architectures1.png](assets/img/System-Architectures1.png)
+![System-Architectures1.png](/assets/img/System-Architectures1.png)
 
 1. Integrated
    - FitForPurpose(규모 확장에 적합): 통합형 시스템은 특정 목적을 당성하기 위해 설계된 아키텍쳐. 모든 요소가 서로 통합되어 작동하며, 각 워크로드에 맞게 개별적으로 조정됨

@@ -98,7 +98,7 @@ categories: [DOCKER, WANTED]
 - 중앙 제어 시스템으로 클러스터의 상태를 유지하고, 리소스를 배치하며, 전반적인 작업을 관리하는 역할을 한다.
 - ControlPlane은 여러 핵심 컴포넌트들로 구성되어 있으며, 이들 간의 상호 작용을 통해서 Kuberentes 클러스터를 관리
 
-![k8s.png](assets/img/k8s.png)
+![k8s.png](/assets/img/k8s.png)
 
 
 #### 1. API 서버(kube-apiserver)

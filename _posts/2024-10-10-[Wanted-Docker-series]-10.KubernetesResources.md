@@ -22,7 +22,7 @@ categories: [DOCKER, WANTED]
 
 ### Service
 
-![service.png](assets/img/service.png)
+![service.png](/assets/img/service.png)
 
 - 서비스는 Pod들의 네트워크 접근을 관리
 - Pod의 수명에 의한 가변성을 추상화

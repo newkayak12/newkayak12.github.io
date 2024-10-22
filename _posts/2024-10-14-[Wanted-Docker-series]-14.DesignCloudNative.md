@@ -111,7 +111,7 @@ categories: [DOCKER, WANTED]
      - 장점: 네트워크 분리 시에도 서비스가 계속 제공될 수 있다.
      - 단점: 일관성과 가용성 중 하나를 포기해야 한다.
 
-![cap.png](assets/img/cap.png)
+![cap.png](/assets/img/cap.png)
 
 
 - 일관성 우선: 데이터 정확성이 중요한 경우 선택. 가용성과 파티션 허용성을 어느정도 희생
