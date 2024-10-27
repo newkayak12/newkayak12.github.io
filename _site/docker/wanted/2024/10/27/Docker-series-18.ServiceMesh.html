@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[docker Series] 18.servicemesh | newkayak12.github.io</title>
+	<meta name="description"
+		content="ServiceMesh">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/docker/wanted/2024/10/27/Docker-series-18.ServiceMesh.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[docker Series] 18.servicemesh</h1>
+    
+    <p class="meta">
+      October 27, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="servicemesh">ServiceMesh</h1>
+
+<ul>
+  <li>Mesh, 서비스들이 서로 그물처럼 엮여 있다는 의미다.</li>
+  <li>MSA를 적용한 시스템의 내부 통신이 Mesh Network의 형태를 띠는 것에 빗대어 명명됐다.</li>
+  <li>Istio처럼 애플리케이션의 다양한 부분들이 서로 데이터를 공유하는 방식을 제어하는 방법</li>
+  <li>
+    <blockquote>
+      <p>Istio가 서비스 메시를 구현할 수 있는 대표적 오픈소스 솔루션이다.</p>
+    </blockquote>
+  </li>
+  <li>데이터와 일관성을 공유하며 서로 통신할 수 있도록 지원하는 사전 구성된 애플리케이션 서비스</li>
+  <li>애플리케이션에 구축된 전용 인프라 계층이다.</li>
+  <li>
+    <p>쉽게 설정하고 배포할 수 있도록 설계된 서비스 메시는 MicroService에서 새로운 서비스를 쉽게 발견하고 관리할 수 있게 되어 있다.</p>
+  </li>
+  <li>k8s에선 서비스 메시는 <code class="language-plaintext highlighter-rouge">sideCar</code>를 이용한 확장 가능한 네트워크 프록시 모듈로 구현된다.</li>
+</ul>
+
+<blockquote>
+  <p><img src="/assets/img/mesh.png" alt="mesh.png" />
+<a href="https://www.tibco.com/ko/reference-center/what-is-a-service-mesh">출처</a></p>
+</blockquote>
+
+<ul>
+  <li>MSA에서는 시간이 지나고 크기가 커지면 서비스 간 통신 복잡성이 급격하게 증가한다.</li>
+  <li>마이크로서비스의 설정, 관리, 통신 방식에 대한 제어가 필요하며, 마이크로서비스마다 추가되어야 할 공통 기능이 증가한다.</li>
+  <li>이러한 관리 포인트 증가에 대한 문제를 해결하기 위한 방법 중 하나가 <code class="language-plaintext highlighter-rouge">ServiceMesh</code></li>
+</ul>
+
+<blockquote>
+  <h2 id="사이드카-패턴">사이드카 패턴</h2>
+  <p><img src="/assets/img/sideCar.png" alt="sideCar.png" /></p>
+  <ul>
+    <li>pod 내 애플리케이션 컨테이너와 독립적으로 동작하는 컨테이너</li>
+    <li>애플리케이션을 도와주는 역할을 한다.</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>사이드카 프록시를 모아서 메시 네트워크를 형성한다.</li>
+</ul>
+
+<h2 id="주요-기능">주요 기능</h2>
+<ol>
+  <li>ServiceDiscovery
+    <ul>
+      <li>검색 계층을 통한 서비스 검색</li>
+      <li>서비스 이름만으로 다른 서비스가 참조 가능(DNS를 통해서)</li>
+    </ul>
+  </li>
+  <li>LoadBalancing
+    <ul>
+      <li>Replication 설정에서 복제본으로 부하 분산</li>
+      <li>RR(RoundRobin), WRR(Weighted Round Robin), LRR(Least Round Robin) 등과 같은 세밀한 부하 분산 기능 제공</li>
+    </ul>
+  </li>
+  <li>RequestRouting
+    <ul>
+      <li>정교한 라우팅 지원</li>
+      <li>A/B, Canary 등 구현할 때 정교한 라우팅 활용 가능</li>
+    </ul>
+  </li>
+  <li>HealthCheck/RetryPolicy
+    <ul>
+      <li>일시적 과부화, 네트워크 일시 단절 등으로 장애가 전파되는 것 방지</li>
+      <li>주기적인 HealthCheck로 서비스 가용성 및 애플리케이션 성능 향상</li>
+    </ul>
+  </li>
+  <li>CircuitBreaker
+    <ul>
+      <li>복잡한 통신 시나리오에 대한 내결함성 시나리오 처리 기능</li>
+      <li>서비스 간 호출 시 단계적 호출 시나리오에서 발생 가능한 오류에 대해서 차단할 수 있는 기능 제공</li>
+    </ul>
+  </li>
+  <li>TLS
+    <ul>
+      <li>암호화를 한 번에 관리해서 서비스 복잡도를 낮출 수 있다.</li>
+    </ul>
+  </li>
+  <li>Observability
+    <ul>
+      <li>서비스 개수가 늘어남에 따라 각 서비스에서 발생하는 각종 지표들을 수집하고 분석할 수 있음</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="장점">장점</h2>
+<ul>
+  <li>비즈니스, 내부 네트워크 컴포넌트를 분리해서 애플리케이션이 본연의 역할에 집중할 수 있도록 할 수 있다.</li>
+  <li>애플리케이션 외부에 구현하여 재사용 가능</li>
+  <li>마이크로 서비스의 런타임에 대한 복잡성 이슈를 해결할 수 있다.</li>
+  <li>애플리케이션 개발 시 미들웨어 종속성 제거</li>
+  <li>분산된 기능 관리를 중앙 집중화할 수 있다.</li>
+  <li>Proxy를 이용해서 인프라 복잡성 감소
+    <h2 id="단점">단점</h2>
+  </li>
+  <li>사이드카를 달아야 해서 인스턴스 수의 증가</li>
+  <li>서비스 통신 간 네트워크 홉이 증가해서 지연 시간이 생김</li>
+  <li>Proxy에 대한 디버깅 및 관리 이슈가 증가</li>
+</ul>
+
+<h2 id="vsgateway">vs.Gateway</h2>
+<ul>
+  <li><strong>적용되는 위치가 다르다.</strong>
+    <ul>
+      <li>API Gateway는 중앙 집중식 제어 영역으로 외부에서 들어오는 트래픽 제어를 담당한다.</li>
+      <li>Service Mesh는 애플리케이션 기능을 인프라 계층에 의해서 관리되는 MicroService로 분리하는 방법이다.</li>
+    </ul>
+  </li>
+  <li><strong>아키텍쳐가 다르다.</strong>
+    <ul>
+      <li>API Gateway는 SPOF(Single Point of Failure)를 생성한다.</li>
+      <li>Service Mesh는 SPOF를 생성하지 않는다.</li>
+    </ul>
+  </li>
+  <li><strong>패턴이 다르다.</strong>
+    <ul>
+      <li>API Gateway는 일반적으로 Gateway proxy pattern`을 사용</li>
+      <li>호출자는 구현 내용을 알 필요 없이 Gateway에 집중한다.</li>
+      <li>Service Mesh는 <code class="language-plaintext highlighter-rouge">Sidecar proxy pattern</code>을 사용</li>
+      <li>호출자 코드는 Provider의 주소를 찾는 방법, failover와 관련된 코드 등에 대한 내용이 들어간다.</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">주요 항목</th>
+      <th style="text-align: center">Service Mesh</th>
+      <th style="text-align: center">API Gateway</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">목적</td>
+      <td style="text-align: center">MSA로 이식성을 개선하도록 설계</td>
+      <td style="text-align: center">내/외부 액세스를 위한 API 호출까지도 라우팅 할 수 있도록 설계</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">복잡성</td>
+      <td style="text-align: center">서비스 확장에 따른 복잡성 가중</td>
+      <td style="text-align: center">하나의 엔드포인트로 API를 확장하여 서비스들을 관리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">기술 성숙도</td>
+      <td style="text-align: center">비교적 신기술</td>
+      <td style="text-align: center">비교적 성숙</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/docker/wanted/2024/10/17/Wanted-Docker-series-17.ScalableArchitecture.html">
+        [wanted Docker Series] 17.scalablearchitecture
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

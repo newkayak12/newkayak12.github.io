@@ -1,0 +1,2587 @@
+[
+
+{
+"title"    : "[docker Series] 18.servicemesh",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/27/Docker-series-18.ServiceMesh.html",
+"date"     : "2024-10-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 17.scalablearchitecture",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/17/Wanted-Docker-series-17.ScalableArchitecture.html",
+"date"     : "2024-10-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 16.optimizewebserver",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/16/Wanted-Docker-series-16.OptimizeWebServer.html",
+"date"     : "2024-10-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 15.deployandlogging",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/15/Wanted-Docker-series-15.DeployAndLogging.html",
+"date"     : "2024-10-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 14.designcloudnative",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/14/Wanted-Docker-series-14.DesignCloudNative.html",
+"date"     : "2024-10-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 13.operateanddeploy",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/13/Wanted-Docker-series-13.OperateAndDeploy.html",
+"date"     : "2024-10-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 12.architecture",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/12/Wanted-Docker-series-12.Architecture.html",
+"date"     : "2024-10-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 11.manifest",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/11/Wanted-Docker-series-11.Manifest.html",
+"date"     : "2024-10-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 10.kubernetesresources",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/10/Wanted-Docker-series-10.KubernetesResources.html",
+"date"     : "2024-10-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 09.kubernetes",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/09/Wanted-Docker-series-09.Kubernetes.html",
+"date"     : "2024-10-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 08.highavailbility",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/08/Wanted-Docker-series-08.HighAvailbility.html",
+"date"     : "2024-10-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 07.dockercompose",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/07/Wanted-Docker-series-07.DockerCompose.html",
+"date"     : "2024-10-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 06.githubaction",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/06/Wanted-Docker-series-06.GithubAction.html",
+"date"     : "2024-10-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 05.cloudcontainerservice",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/05/Wanted-Docker-series-05.CloudContainerService.html",
+"date"     : "2024-10-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 04.dockernetwork",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/04/Wanted-Docker-series-04.DockerNetwork.html",
+"date"     : "2024-10-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 03.dockervolume",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/03/Wanted-Docker-series-03.DockerVolume.html",
+"date"     : "2024-10-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 02.dockerconcept",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/02/Wanted-Docker-series-02.DockerConcept.html",
+"date"     : "2024-10-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 01.deploystrategy",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/10/01/Wanted-Docker-series-01.DeployStrategy.html",
+"date"     : "2024-10-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[wanted Docker Series] 00.softwaresystem",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/wanted/2024/09/30/Wanted-Docker-series-00.SoftwareSystem.html",
+"date"     : "2024-09-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Undertwobit",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/29/Programmers-series-LV.-02-UnderTwoBit.html",
+"date"     : "2024-09-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Twoonntile",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/28/Programmers-series-LV.-02-TwoOnNTile.html",
+"date"     : "2024-09-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Trianglesnail",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/27/Programmers-series-LV.-02-TriangleSnail.html",
+"date"     : "2024-09-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Tirednessrate",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/26/Programmers-series-LV.-02-TirednessRate.html",
+"date"     : "2024-09-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Threeonntile",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/25/Programmers-series-LV.-02-ThreeOnNTile.html",
+"date"     : "2024-09-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Targetnumber",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/24/Programmers-series-LV.-02-TargetNumber.html",
+"date"     : "2024-09-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Sumofcontinuousnumbers",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/23/Programmers-series-LV.-02-SumOfContinuousNumbers.html",
+"date"     : "2024-09-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Stockprice",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/22/Programmers-series-LV.-02-StockPrice.html",
+"date"     : "2024-09-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Splitelectrityline",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/21/Programmers-series-LV.-02-SplitElectrityLine.html",
+"date"     : "2024-09-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Slicearray",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/20/Programmers-series-LV.-02-SliceArray.html",
+"date"     : "2024-09-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Skilltree",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/19/Programmers-series-LV.-02-SkillTree.html",
+"date"     : "2024-09-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Seesaw",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/18/Programmers-series-LV.-02-SeeSaw.html",
+"date"     : "2024-09-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Scoville",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/17/Programmers-series-LV.-02-Scoville.html",
+"date"     : "2024-09-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Saleevent",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/16/Programmers-series-LV.-02-SaleEvent.html",
+"date"     : "2024-09-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Rollcakecutting",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/15/Programmers-series-LV.-02-RollCakeCutting.html",
+"date"     : "2024-09-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Quadcompress",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/14/Programmers-series-LV.-02-QuadCompress.html",
+"date"     : "2024-09-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Pickingground",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/13/Programmers-series-LV.-02-PickingGround.html",
+"date"     : "2024-09-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Phonebox",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/12/Programmers-series-LV.-02-PhoneBox.html",
+"date"     : "2024-09-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Packagebox",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/11/Programmers-series-LV.-02-PackageBox.html",
+"date"     : "2024-09-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Odddecimalsystem",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/09/10/Programmers-series-LV.-02-OddDecimalSystem.html",
+"date"     : "2024-09-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 05.hls",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-05.HLS.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 04.grpc",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-04.gRPC.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 03.serverless",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-03.ServerLess.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 02.3rdparty",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-02.3rdParty.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 01.coverage",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-01.Coverage.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] 00. oltpandolap",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/09/09/Others-series-00.-OLTPandOLAP.html",
+"date"     : "2024-09-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 35.sleuthandzipkin",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/09/08/Spring-series-35.SleuthAndZipkin.html",
+"date"     : "2024-09-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 34.cloudnative",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/09/08/Spring-series-34.CloudNative.html",
+"date"     : "2024-09-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 33.dispatcherservlet",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/09/08/Spring-series-33.DispatcherServlet.html",
+"date"     : "2024-09-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 32.modelattribute",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/09/08/Spring-series-32.ModelAttribute.html",
+"date"     : "2024-09-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 31.resolver",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/09/08/Spring-series-31.Resolver.html",
+"date"     : "2024-09-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 06.engine",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-06.Engine.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 05.relation",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-05.Relation.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 04.auth",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-04.Auth.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 03.optimize",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-03.Optimize.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 02.index",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-02.Index.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 01.crud",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-01.CRUD.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 01 2.operators",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-01-2.Operators.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 01 1.atomic",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-01-1.Atomic.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mongo Series] 00.introduce",
+"category" : "",
+"tags"     : "",
+"url"      : "/mongo/2024/08/13/mongo-series-00.Introduce.html",
+"date"     : "2024-08-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Numberconversion",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/08/07/Programmers-series-LV.-02-NumberConversion.html",
+"date"     : "2024-08-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 30.restdoc",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/08/04/Spring-series-30.RestDoc.html",
+"date"     : "2024-08-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 29.validated",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/08/04/Spring-series-29.Validated.html",
+"date"     : "2024-08-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 10.online_ddl",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/08/01/mysql-summary-series-10.ONLINE_DDL.html",
+"date"     : "2024-08-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 09.optimizingquery",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/08/01/mysql-summary-series-09.OptimizingQuery.html",
+"date"     : "2024-08-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Nextlargenumber",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/30/Programmers-series-LV.-02-NextLargeNumber.html",
+"date"     : "2024-07-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Minimumvalue",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/30/Programmers-series-LV.-02-MinimumValue.html",
+"date"     : "2024-07-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 08.executionplan",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/25/mysql-summary-series-08.ExecutionPlan.html",
+"date"     : "2024-07-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 07.optimizer",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/25/mysql-summary-series-07.Optimizer.html",
+"date"     : "2024-07-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 06.index",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/25/mysql-summary-series-06.Index.html",
+"date"     : "2024-07-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Matchandremove",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/24/Programmers-series-LV.-02-MatchAndRemove.html",
+"date"     : "2024-07-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Makelargenumber",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/20/Programmers-series-LV.-02-MakeLargeNumber.html",
+"date"     : "2024-07-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Magicelevator",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/18/Programmers-series-LV.-02-MagicElevator.html",
+"date"     : "2024-07-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Longjump",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/15/Programmers-series-LV.-02-LongJump.html",
+"date"     : "2024-07-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Leastcommonmultiple",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/14/Programmers-series-LV.-02-LeastCommonMultiple.html",
+"date"     : "2024-07-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 05.isolation",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/13/mysql-summary-series-05.Isolation.html",
+"date"     : "2024-07-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 04.lock",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/13/mysql-summary-series-04.Lock.html",
+"date"     : "2024-07-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 03.transaction",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/13/mysql-summary-series-03.Transaction.html",
+"date"     : "2024-07-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 02.innodbengine",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/13/mysql-summary-series-02.InnoDBEngine.html",
+"date"     : "2024-07-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Summary Series] 01.mysqlengine",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/summary/2024/07/13/mysql-summary-series-01.MysqlEngine.html",
+"date"     : "2024-07-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Largestsquare",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/06/Programmers-series-LV.-02-LargestSquare.html",
+"date"     : "2024-07-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Jumpandteleport",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/06/Programmers-series-LV.-02-JumpAndTeleport.html",
+"date"     : "2024-07-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Jadencase",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/05/Programmers-series-LV.-02-JadenCase.html",
+"date"     : "2024-07-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Gamemapshortestpath",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/05/Programmers-series-LV.-02-GameMapShortestPath.html",
+"date"     : "2024-07-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Findprime",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/04/Programmers-series-LV.-02-FindPrime.html",
+"date"     : "2024-07-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Fibonacci",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/03/Programmers-series-LV.-02-Fibonacci.html",
+"date"     : "2024-07-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Convertbinary",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/02/Programmers-series-LV.-02-ConvertBinary.html",
+"date"     : "2024-07-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Continuoussequential",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/02/Programmers-series-LV.-02-ContinuousSequential.html",
+"date"     : "2024-07-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Clothes",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/07/01/Programmers-series-LV.-02-Clothes.html",
+"date"     : "2024-07-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Carpet",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/30/Programmers-series-LV.-02-Carpet.html",
+"date"     : "2024-06-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 02 Bracket",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/30/Programmers-series-LV.-02-Bracket.html",
+"date"     : "2024-06-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Numberandword",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/30/Programmers-series-LV.-01-NumberAndWord.html",
+"date"     : "2024-06-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Privatemap",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/29/Programmers-series-LV.-01-PrivateMap.html",
+"date"     : "2024-06-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Keypad",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/27/Programmers-series-LV.-01-KeyPad.html",
+"date"     : "2024-06-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Report",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/26/Programmers-series-LV.-01-Report.html",
+"date"     : "2024-06-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Recommendid",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/24/Programmers-series-LV.-01-RecommendId.html",
+"date"     : "2024-06-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Privacy",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/24/Programmers-series-LV.-01-Privacy.html",
+"date"     : "2024-06-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Mbti",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/19/Programmers-series-LV.-01-MBTI.html",
+"date"     : "2024-06-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Gift",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/19/Programmers-series-LV.-01-Gift.html",
+"date"     : "2024-06-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series]analytics",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/06/19/Others-series-Analytics.html",
+"date"     : "2024-06-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[effective Java Series] 72.overridereadobjectdefensively",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html",
+"date"     : "2024-06-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[effective Java Series] 71.serializable",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/06/17/Effective-java-series-71.Serializable.html",
+"date"     : "2024-06-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[effective Java Series] 70.donotdependonscheduler",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html",
+"date"     : "2024-06-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[effective Java Series] 69.executorandtaskandstream",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/06/17/Effective-java-series-69.ExecutorAndTaskAndStream.html",
+"date"     : "2024-06-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[effective Java Series] 68.syncsharedresources",
+"category" : "",
+"tags"     : "",
+"url"      : "/2024/06/17/Effective-java-series-68.SyncSharedResources.html",
+"date"     : "2024-06-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-67.AtomicExceptionAndDoNotIgnore.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-66.DoNotDependOnScheduler.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-65.ExecutorAndTaskAndStream.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-64.SyncSharedResources.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-63.Exception.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-62.CheckedUncheckedException.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/16/Effective-java-series-61.ConsiderException.html",
+"date"     : "2024-06-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-60.Optimize.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-59.Native.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-58.UseInterfaceAsType.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-57.BoxingIsHeavy.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-56.FloatingPoint.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-55.EnhancedFor.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/15/Effective-java-series-54.LocalVariable.html",
+"date"     : "2024-06-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-53.Optional.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-52.IfNullReturnArray.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-51.ReallyUseVarArgs.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-50.ConsiderOverload.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-49.MethodSignature.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-48.DepensiveClone.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/13/Effective-java-series-47.ChechParameter.html",
+"date"     : "2024-06-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-46.ParallelStream.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-45.UsePureFunction.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-44.BecarefulUseStream.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-43.UseStandardFuntionalInterface.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-42.UseMethodReference.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-41.UseLambda.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/12/Effective-java-series-40.UseMarkerInterface.html",
+"date"     : "2024-06-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Failurerate",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/11/Programmers-series-LV.-01-FailureRate.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-38.UserOverrideAnnotation.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-37.UserAnnotation.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-36.IfYouWantToExtanableEnumThenUseInterface.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-35.UseEnumMapRatherThanOrdinalIndexing.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-34.UseEnumSetRatherThanBitField.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-33.DoNotUseOrdinal.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-32.UseEnumeration.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-31.TypeSafeContainer.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/11/Effective-java-series-30.BecarefulUseVarargsWithGeneric.html",
+"date"     : "2024-06-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/10/Effective-java-series-29.UseGeneric.html",
+"date"     : "2024-06-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/10/Effective-java-series-28.UserListRatherThanArray.html",
+"date"     : "2024-06-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/10/Effective-java-series-27.SuppressUncheckedException.html",
+"date"     : "2024-06-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/10/Effective-java-series-26.DoNotUseRawType.html",
+"date"     : "2024-06-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/10/Effective-java-series-25.Keyword.html",
+"date"     : "2024-06-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/09/Effective-java-series-24.DoNotDefineMultipleClassInAFile.html",
+"date"     : "2024-06-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/09/Effective-java-series-23.UseMemberClassAsStatic.html",
+"date"     : "2024-06-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/09/Effective-java-series-22.UseHierarchicalStructure.html",
+"date"     : "2024-06-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/09/Effective-java-series-21.UseInterfaceAsTypeSetter.html",
+"date"     : "2024-06-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Dart",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/08/Programmers-series-LV.-01-Dart.html",
+"date"     : "2024-06-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/07/Effective-java-series-20.ConsiderImplementTarget.html",
+"date"     : "2024-06-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/07/Effective-java-series-19.UseInterfaceRatherThanAbstractClass.html",
+"date"     : "2024-06-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/07/Effective-java-series-18.ConsiderInheritance.html",
+"date"     : "2024-06-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Crane",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/06/Programmers-series-LV.-01-Crane.html",
+"date"     : "2024-06-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-17.useComposition.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-16.MinimizeThePossibilityOfChange.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-15.DoNotUsePublicField.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-14.MinimizeAccessRights.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-13.Comparable.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/05/Effective-java-series-12.Cloneable.html",
+"date"     : "2024-06-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-11.HashCode.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-10.Equals.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-09.useTryWithResourceThanTryFinally.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-08.avoidUseFinalizerAndCleaner.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-07.ClearObsoleteReference.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-06.AvoidInitializeUnnecessaryInstance.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-05.UseInjection.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/06/04/Effective-java-series-04.UsePrivateConstructor.html",
+"date"     : "2024-06-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Ourpassword",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/03/Programmers-series-LV.-01-OurPassword.html",
+"date"     : "2024-06-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Smallestchar",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/02/Programmers-series-LV.-01-SmallestChar.html",
+"date"     : "2024-06-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Rollcake",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/02/Programmers-series-LV.-01-RollCake.html",
+"date"     : "2024-06-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Repaint",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/01/Programmers-series-LV.-01-Repaint.html",
+"date"     : "2024-06-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Numberbuddy",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/06/01/Programmers-series-LV.-01-NumberBuddy.html",
+"date"     : "2024-06-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/05/31/Effective-java-series-03.MakeSureSingtonAsEnumTypeOrPrivateConstructor.html",
+"date"     : "2024-05-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/05/31/Effective-java-series-02.ConsiderBuilderPattern.html",
+"date"     : "2024-05-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "Effective java",
+"category" : "",
+"tags"     : "",
+"url"      : "/effective_java/2024/05/31/Effective-java-series-01.UseFactoryMethod.html",
+"date"     : "2024-05-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Knight",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/05/29/Programmers-series-LV.-01-Knight.html",
+"date"     : "2024-05-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Walking In The Park",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/05/28/Programmers-series-LV.-01-Walking-In-The-Park.html",
+"date"     : "2024-05-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Coke",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/05/28/Programmers-series-LV.-01-Coke.html",
+"date"     : "2024-05-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Cardpile",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/05/28/Programmers-series-LV.-01-CardPile.html",
+"date"     : "2024-05-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[programmers Series] Lv. 01 Babbling",
+"category" : "",
+"tags"     : "",
+"url"      : "/programmers/2024/05/28/Programmers-series-LV.-01-Babbling.html",
+"date"     : "2024-05-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[issue Series] Eventsourcestream",
+"category" : "",
+"tags"     : "",
+"url"      : "/issue/2024/05/28/ISSUE-series-EventSourceStream.html",
+"date"     : "2024-05-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[issue Series] Floatingpoint",
+"category" : "",
+"tags"     : "",
+"url"      : "/issue/2024/05/27/ISSUE-series-FloatingPoint.html",
+"date"     : "2024-05-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[issue Series] Filepart",
+"category" : "",
+"tags"     : "",
+"url"      : "/issue/2024/05/27/ISSUE-series-FilePart.html",
+"date"     : "2024-05-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[docker Series] 05.docker Private Registry",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/2024/05/26/Docker-series-05.docker-Private-Registry.html",
+"date"     : "2024-05-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[docker Series] 04.dockerdaemon",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/2024/05/26/Docker-series-04.dockerDaemon.html",
+"date"     : "2024-05-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[docker Series] 03.dockerfile",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/2024/05/26/Docker-series-03.dockerfile.html",
+"date"     : "2024-05-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[docker Series] 02.command",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/2024/05/26/Docker-series-02.command.html",
+"date"     : "2024-05-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[docker Series] 01.options",
+"category" : "",
+"tags"     : "",
+"url"      : "/docker/2024/05/26/Docker-series-01.options.html",
+"date"     : "2024-05-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 27.afterspringready",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-27.AfterSpringReady.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 26.webflux Vs. Webmvc",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-26.Webflux-Vs.-WebMvc.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 25.httpinterface",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-25.HttpInterface.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 24.springevent",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-24.SpringEvent.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 23.transactionpropagation",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-23.TransactionPropagation.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 22.transactional",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-22.Transactional.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 21.filterandinterceptor",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/25/Spring-series-21.FilterAndInterceptor.html",
+"date"     : "2024-05-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 20.quartz+batch",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-20.Quartz+Batch.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 19.springquartz",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-19.SpringQuartz.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 18.springbatch",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-18.SpringBatch.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 17.jdkdynamicproxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-17.JDKDynamicProxy.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 16.dynamicproxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-16.DynamicProxy.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 15.cglib",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-15.CGLIB.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 14.refresh Context",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-14.Refresh-Context.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 13.configurable Application Context",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-13.Configurable-Application-Context.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 12.initialize",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-12.Initialize.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 11.spring Boot Application",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/24/Spring-series-11.Spring-Boot-Application.html",
+"date"     : "2024-05-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 10.required Args Constructor",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-10.Required-Args-Constructor.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 09.application Context",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-09.Application-Context.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 08.autowired",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-08.Autowired.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 07.utils",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-07.Utils.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 06.bean",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-06.Bean.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 05.bom",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-05.BOM.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 04.eureka",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-04.Eureka.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 03.webflux",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-03.Webflux.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 02.actuator",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-02.Actuator.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Series] 01.configuration",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/2024/05/23/Spring-series-01.Configuration.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Transaction",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Transaction.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Semaphore And Mutex",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Semaphore-and-Mutex.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Process, Service And Daemon",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Process,-Service-and-Daemon.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Os",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-OS.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Network",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Network.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Multiprocess And Multithread",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-MultiProcess-and-MultiThread.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Encryption",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Encryption.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Cpuschedule",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-CpuSchedule.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Compile Vs Transpile Vs Interpreter",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Compile-vs-Transpile-vs-interpreter.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Cache Strategy",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Cache-strategy.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Cicd",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-CICD.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[others Series] Authentication And Authorization",
+"category" : "",
+"tags"     : "",
+"url"      : "/others/2024/05/23/Others-series-Authentication-and-Authorization.html",
+"date"     : "2024-05-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[test Series] 02 Mockito",
+"category" : "",
+"tags"     : "",
+"url"      : "/test/2024/05/22/test-series-02-Mockito.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[test Series] 01 Bdd",
+"category" : "",
+"tags"     : "",
+"url"      : "/test/2024/05/22/test-series-01-BDD.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[nginx Series] 01 Reverseproxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/network/2024/05/22/nginx-series-01-ReverseProxy.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[network Series] 02 Tls",
+"category" : "",
+"tags"     : "",
+"url"      : "/network/2024/05/22/network-series-02-TLS.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[network Series] 01 Subnet",
+"category" : "",
+"tags"     : "",
+"url"      : "/network/2024/05/22/network-series-01-Subnet.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 12 Date",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-12-Date.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 11 Temporarytable",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-11-TemporaryTable.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 10 Cursor_record_collection",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-10-Cursor_Record_Collection.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 09 Exception_transaction",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-09-Exception_Transaction.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 08 Pl_sql",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-08-PL_SQL.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 07 Subquery",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-07-SubQuery.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 06 Join",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-06-Join.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 05 Function",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-05-Function.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 04 Operatorandexpression",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-04-OperatorAndExpression.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 03 Sql",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-03-SQL.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 02 Objects",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-02-Objects.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[mysql Series] 01 Aboutsql",
+"category" : "",
+"tags"     : "",
+"url"      : "/mysql/2024/05/22/mysql-series-01-AboutSql.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[httpd Series] 01 Reverseproxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/apache/2024/05/22/httpd-series-01-ReverseProxy.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[gradle Series] Summary",
+"category" : "",
+"tags"     : "",
+"url"      : "/gradle/2024/05/22/gradle-series-Summary.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[git Series] 03 Convention",
+"category" : "",
+"tags"     : "",
+"url"      : "/git/2024/05/22/git-series-03-Convention.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[git Series] 02 Summary",
+"category" : "",
+"tags"     : "",
+"url"      : "/git/2024/05/22/git-series-02-Summary.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[git Series] 01 Command",
+"category" : "",
+"tags"     : "",
+"url"      : "/git/2024/05/22/git-series-01-command.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[ci:cd Series] 02 Deploy",
+"category" : "",
+"tags"     : "",
+"url"      : "/ci/cd/2024/05/22/ci-cd-series-02-Deploy.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[ci:cd Series] 01 Cicd",
+"category" : "",
+"tags"     : "",
+"url"      : "/ci/cd/2024/05/22/ci-cd-series-01-CICD.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[aws Series] 01 Model",
+"category" : "",
+"tags"     : "",
+"url"      : "/aws/2024/05/22/aws-series-01-Model.html",
+"date"     : "2024-05-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 16 Xargs_vs_pipe",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-16-xargs_vs_pipe.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 15 Volume",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-15-Volume.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 14 Vieditor",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-14-ViEditor.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 13 Tree",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-13-Tree.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 12 Systeminfo",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-12-SystemInfo.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 11 Symbolic",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-11-Symbolic.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 10 Status",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-10-Status.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 09 Shellscript",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-09-ShellScript.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 08 Permission",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-08-Permission.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 07 Network",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-07-Network.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 06 Journalctl",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-06-Journalctl.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 05 Input_output",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-05-Input_Output.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 04 Grep",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-04-Grep.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 03 Environment",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-03-Environment.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 02 Compress",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-02-Compress.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[linux Series] 01 Command",
+"category" : "",
+"tags"     : "",
+"url"      : "/linux/2024/05/21/linux-series-01-Command.html",
+"date"     : "2024-05-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Others Series] 04.oop",
+"category" : "",
+"tags"     : "",
+"url"      : "/java_others/2024/05/20/java-others-series-04.OOP.html",
+"date"     : "2024-05-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Others Series] 03.coupling&amp;cohesion",
+"category" : "",
+"tags"     : "",
+"url"      : "/java_others/2024/05/20/java-others-series-03.Coupling&Cohesion.html",
+"date"     : "2024-05-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Others Series] 02.composition",
+"category" : "",
+"tags"     : "",
+"url"      : "/java_others/2024/05/20/java-others-series-02.Composition.html",
+"date"     : "2024-05-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Others Series] 01.solid",
+"category" : "",
+"tags"     : "",
+"url"      : "/java_others/2024/05/20/java-others-series-01.SOLID.html",
+"date"     : "2024-05-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 20 Enumfactorymethod",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-20-EnumFactoryMethod.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 19 Dynamicfactory",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-19-DynamicFactory.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 18 Templatecallback",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-18-TemplateCallback.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 17 Staticfactorymethod",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-17-StaticFactoryMethod.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 16 Singleton",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-16-Singleton.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 15 Stategy",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-15-Stategy.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 14 Templatemethod",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-14-TemplateMethod.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 13 State",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-13-State.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 12 Factorymethod",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-12-FactoryMethod.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 11 Abstractfactory",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-11-AbstractFactory.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 10 Proxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-10-Proxy.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 09 Adaptor",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-09-Adaptor.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 08 Decorator",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-08-Decorator.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 07 Observer",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-07-Observer.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 06 Iterator",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-06-Iterator.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 05 Facade",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-05-Facade.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 04 Builder",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-04-Builder.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 03 Flyweight",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-03-FlyWeight.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 02 Composite",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-02-Composite.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[deisgn Pattern Series] 01 Chainofresponsibility",
+"category" : "",
+"tags"     : "",
+"url"      : "/design_pattern/2024/05/19/deisgn-pattern-series-01-ChainOfResponsibility.html",
+"date"     : "2024-05-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 29 Virtualthread",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-29-VirtualThread.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 28 Reactive",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-28-Reactive.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 27 Little",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-27-Little.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 26 Set",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-26-Set.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 24 Junit",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-24-Junit.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 23  shellcommand",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-23-ShellCommand.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 22 Floatingpoint",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-22-FloatingPoint.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 21 Yaml",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-21-YAML.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 20 Stringandtokenizer",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-20-StringAndTokenizer.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 19 Clone",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-19-Clone.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 18 Variableargument",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-18-VariableArgument.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 17 Generic",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-17-Generic.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 16 Enum",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-16-Enum.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 15. Reflection",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-15.-Reflection.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 14 Dynamicproxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-14-DynamicProxy.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 13 Serialize_deserialize",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-13-Serialize_Deserialize.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 12 Brokensingleton",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-12-BrokenSingleton.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 11 Heappollution",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-11-HeapPollution.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 10 Equalsandhashcode",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-10-EqualsAndHashCode.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 09 Innerclassproblem",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-09-InnerClassProblem.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 08 Callby",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-08-CallBy.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 07 Tuning",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-07-Tuning.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 06 Gc_algorithm",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-06-GC_Algorithm.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 05 Gc",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-05-GC.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 04 Jni",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-04-JNI.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 03 Memory",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-03-Memory.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 02 Jvm",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-02-jvm.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Series] 01 Version",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/2024/05/18/java-series-01-Version.html",
+"date"     : "2024-05-18 00:00:00 +0900"
+} 
+
+]

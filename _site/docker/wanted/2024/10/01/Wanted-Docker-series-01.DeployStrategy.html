@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[wanted Docker Series] 01.deploystrategy | newkayak12.github.io</title>
+	<meta name="description"
+		content="Deploy Strategy">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/docker/wanted/2024/10/01/Wanted-Docker-series-01.DeployStrategy.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[wanted Docker Series] 01.deploystrategy</h1>
+    
+    <p class="meta">
+      October 1, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="deploy-strategy">Deploy Strategy</h1>
+
+<h2 id="기본">기본</h2>
+
+<ol>
+  <li>개발
+    <ol>
+      <li>버전관리</li>
+      <li>코드리뷰</li>
+    </ol>
+  </li>
+  <li>빌드
+    <ol>
+      <li>빌드 도구</li>
+      <li>자동화 스크립트</li>
+    </ol>
+  </li>
+  <li>테스트
+    <ol>
+      <li>단위테스트</li>
+      <li>통합테스트</li>
+      <li>성능테스트</li>
+      <li>배포 : 테스트된 애플리케이션을 운영환경에 배포</li>
+      <li>모니터링 : 애플리케이션 상태를 지속적으로 확인함</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="배포-형태">배포 형태</h2>
+<ol>
+  <li>자동 배포: CI/CD 도구를 사용해서 자동화한다.
+    <ul>
+      <li>장점: 빠르고 신뢰성이 높음, 인적 오류 감소</li>
+      <li>단점: 초기 설정 및 유지 보수 비용 발생함</li>
+    </ul>
+  </li>
+  <li>수동배포 : 사람이 직접 배포
+    <ul>
+      <li>장점 : 간단한 초기 설정</li>
+      <li>단점 : 휴먼에러 가능성 높음</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="배포-전략">배포 전략</h2>
+
+<h3 id="로컬-배포-vs-프로덕션-배포">로컬 배포 vs. 프로덕션 배포</h3>
+<ul>
+  <li>로컬, 프로덕션에서 배포는 여러 차이점이 있다.</li>
+</ul>
+
+<ol>
+  <li>목적과 사용 범위
+    <ul>
+      <li>로컬 : 개인적으로 사용하는 환경, 테스트, 디버깅 목적</li>
+      <li>프로덕션 : 실제 사용자가 사용하는 환경, 안정성, 보안, 성능이 중요하다.</li>
+    </ul>
+  </li>
+  <li>설정과 구성
+    <ul>
+      <li>로컬: 개발 편의성을 위해서 간소화</li>
+      <li>프로덕션: 보안, 데이터 무결성, 백업 등을 포함한 모든 운영 관련 최적화가 필수적</li>
+    </ul>
+  </li>
+  <li>테스트와 검증
+    <ul>
+      <li>로컬: 개발자는 주로 기능적 검증, 단위 테스트를 수행</li>
+      <li>프로덕션: 배포 전에 여러 단계의 테스팅 환경을 거침</li>
+    </ul>
+  </li>
+  <li>배포 자동화와 롤백
+    <ul>
+      <li>로컬: 대부분 수동으로 진행될 수 있으며, 스크립트를 사용할 수도 있다.</li>
+      <li>프로덕션: 여러 단계의 테스트 환경을 거치고 성능테스트, 보안테스트, 부하 테스트 등이 포함됨</li>
+    </ul>
+  </li>
+  <li>모니터링과 로깅
+    <ul>
+      <li>로컬: 기본적 로깅 도구를 사용하거나 떄로는 디버깅 출력만으로도 충분할 수 있다.</li>
+      <li>프로덕션: 고급 모니터링 및 로깅 시스템을 구축하여 시스템 모니터링하고, 장애를 신속하게 탐지하며 대응할 수 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="배포-전략-1">배포 전략</h3>
+<ul>
+  <li>배포하는 방법을 정의한다. 각 전략은 특정 목표화 환경에 적합하며, 신뢰성 있는 배포와 빠른 롤백, 사용자 중단 최소화를 위해서 사용됨</li>
+</ul>
+
+<ol>
+  <li>롤링</li>
+  <li>블루/그린</li>
+  <li>카나리</li>
+  <li>A/B</li>
+  <li></li>
+</ol>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/docker/wanted/2024/09/30/Wanted-Docker-series-00.SoftwareSystem.html">
+        [wanted Docker Series] 00.softwaresystem
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/docker/wanted/2024/10/02/Wanted-Docker-series-02.DockerConcept.html">
+        [wanted Docker Series] 02.dockerconcept
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[programmers Series] Lv. 02 Skilltree | newkayak12.github.io</title>
+	<meta name="description"
+		content="스킬트리Programmers">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/programmers/2024/09/19/Programmers-series-LV.-02-SkillTree.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[programmers Series] Lv. 02 Skilltree</h1>
+    
+    <p class="meta">
+      September 19, 2024
+      
+    </p>
+  </header>
+  <section class="post-content"><h1 id="스킬트리">스킬트리</h1>
+<p><a href="https://school.programmers.co.kr/learn/courses/30/lessons/49993">Programmers</a></p>
+
+<blockquote>
+
+  <pre>
+ 선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.
+ 예를 들어 선행 스킬 순서가
+
+          스파크 → 라이트닝 볼트 → 썬더일때,
+
+ 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고,
+ 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.
+
+ 위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다.
+
+ 따라서 스파크 → 힐링 → 라이트닝 볼트 → 썬더와 같은 스킬트리는 가능하지만,
+ 썬더 → 스파크나 라이트닝 볼트 → 스파크 → 힐링 → 썬더와 같은 스킬트리는 불가능합니다.
+
+ 선행 스킬 순서 skill과
+ 유저들이 만든 스킬트리1를 담은 배열 skill_trees가 매개변수로 주어질 때,
+ 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.
+
+ 제한 조건
+ - 스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.
+ - 스킬 순서와 스킬트리는 문자열로 표기합니다.
+      - 예를 들어, C → B → D 라면 "CBD"로 표기합니다
+ - 선행 스킬 순서 skill의 길이는 1 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.
+ - skill_trees는 길이 1 이상 20 이하인 배열입니다.
+ - skill_trees의 원소는 스킬을 나타내는 문자열입니다.
+      - skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.
+ </pre>
+
+  <p>skill 순서는 1 ~ 26개, 중복 X
+대조군 1 ~ 20
+원소 당 2 ~ 26, 중복 X</p>
+
+</blockquote>
+
+<h2 id="아이디어">아이디어</h2>
+
+<p>Queue를 이용해서 순서가 뒤집히면 실패처리를 하면 되지 않을까?</p>
+
+<h2 id="풀이">풀이</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SkillTree</span> <span class="o">{</span>
+    <span class="nd">@Nested</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCases</span> <span class="o">{</span>
+        <span class="c1">//Stack?</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case1</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BACDE"</span><span class="o">,</span> <span class="s">"CBADF"</span><span class="o">,</span> <span class="s">"AECB"</span><span class="o">,</span> <span class="s">"BDA"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case2</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BACDE"</span><span class="o">,</span> <span class="s">"DBACF"</span><span class="o">,</span> <span class="s">"AECB"</span><span class="o">,</span> <span class="s">"BDA"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case3</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CAD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"EFGHI"</span><span class="o">,</span> <span class="s">"JIKL"</span><span class="o">,</span> <span class="s">"ED"</span><span class="o">,</span> <span class="s">"FGIH"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case4</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"CED"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case5</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BACDE"</span><span class="o">,</span> <span class="s">"CBADF"</span><span class="o">,</span> <span class="s">"AECB"</span><span class="o">,</span> <span class="s">"BDA"</span><span class="o">,</span> <span class="s">"CAD"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case6</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span> <span class="s">"CXF"</span><span class="o">,</span> <span class="s">"ASF"</span><span class="o">,</span> <span class="s">"BDF"</span><span class="o">,</span> <span class="s">"CEFD"</span> <span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case7</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"C"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BC"</span><span class="o">,</span><span class="s">"AA"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case8</span> <span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BACDE"</span><span class="o">,</span> <span class="s">"CBADF"</span><span class="o">,</span> <span class="s">"AECB"</span><span class="o">,</span> <span class="s">"BDA"</span><span class="o">,</span> <span class="s">"CAD"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case9</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"AB"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"CDE"</span><span class="o">,</span> <span class="s">"DEF"</span><span class="o">,</span> <span class="s">"FGH"</span><span class="o">,</span> <span class="s">"HIJ"</span><span class="o">,</span> <span class="s">"KLMN"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case10</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBD"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"BACDE"</span><span class="o">,</span> <span class="s">"CBADF"</span><span class="o">,</span> <span class="s">"AECB"</span><span class="o">,</span> <span class="s">"BDA"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case11</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"ABC"</span><span class="o">;</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"X"</span><span class="o">,</span> <span class="s">"OP"</span><span class="o">,</span> <span class="s">"STU"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+        <span class="nd">@Test</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">case12</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">skill</span> <span class="o">=</span> <span class="s">"CBDK"</span><span class="o">;</span>
+            <span class="c1">//2</span>
+            <span class="nc">String</span><span class="o">[]</span> <span class="n">skillTrees</span> <span class="o">=</span> <span class="o">{</span><span class="s">"CB"</span><span class="o">,</span> <span class="s">"CXYB"</span><span class="o">,</span> <span class="s">"BD"</span><span class="o">,</span> <span class="s">"AECD"</span><span class="o">,</span> <span class="s">"ABC"</span><span class="o">,</span> <span class="s">"AEX"</span><span class="o">,</span> <span class="s">"CDB"</span><span class="o">,</span> <span class="s">"CBKD"</span><span class="o">,</span> <span class="s">"IJCB"</span><span class="o">,</span> <span class="s">"LMDK"</span><span class="o">};</span>
+            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+
+            <span class="nc">Assertions</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">solution</span><span class="o">(</span><span class="n">skill</span><span class="o">,</span> <span class="n">skillTrees</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">//1,3,5,8,12,13</span>
+    <span class="c1">//3,6,7,9,10,11,12,14</span>
+    <span class="c1">//3,7    ,10,11,12,14</span>
+
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="nc">String</span> <span class="n">skill</span><span class="o">,</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">skill_trees</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Character</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">for</span> <span class="o">(</span> <span class="nc">Character</span> <span class="n">element</span> <span class="o">:</span> <span class="n">skill</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">()</span> <span class="o">)</span> <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+
+
+        <span class="k">for</span><span class="o">(</span> <span class="nc">String</span> <span class="n">element</span> <span class="o">:</span> <span class="n">skill_trees</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Character</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;(</span><span class="n">list</span><span class="o">);</span>
+            <span class="kt">boolean</span> <span class="n">isPass</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+            <span class="k">while</span><span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">element</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">queue</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">queue</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="n">queue</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">==</span> <span class="n">element</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+                    <span class="n">queue</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">queue</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">element</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="n">queue</span><span class="o">.</span><span class="na">peek</span><span class="o">()</span> <span class="o">!=</span> <span class="n">element</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">isPass</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">i</span> <span class="o">++;</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span><span class="o">(</span> <span class="n">isPass</span> <span class="o">)</span> <span class="n">answer</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+
+
+<span class="o">}</span>
+</code></pre></div></div>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/programmers/2024/09/18/Programmers-series-LV.-02-SeeSaw.html">
+        [programmers Series] Lv. 02 Seesaw
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/programmers/2024/09/20/Programmers-series-LV.-02-SliceArray.html">
+        [programmers Series] Lv. 02 Slicearray
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
