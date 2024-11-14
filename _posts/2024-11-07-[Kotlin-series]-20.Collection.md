@@ -6,7 +6,7 @@
 ## 컬렉션 타입
 - 타입은 기본적으로 `Array`, `Iterable`, `Sequence`, `Map`이 있다.
 
-![diagram.png](image/diagram.png)
+![diagram.png](../assets/img/diagram.png)
 
 ## iterable
 - 일반적으로 `Iterable<T>`으로 표현되며, 일반적으로 즉시 계산되는 상태가 있는 컬렉션을 포함한다.

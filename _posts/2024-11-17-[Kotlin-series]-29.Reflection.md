@@ -1,6 +1,6 @@
 # Reflection
 
-![reflection.png](image/reflection.png)
+![reflection.png](../assets/img/reflection.png)
 
 
 ## 지정자와 타입
