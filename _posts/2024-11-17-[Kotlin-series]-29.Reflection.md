@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # Reflection
 
 ![reflection.png](../assets/img/reflection.png)

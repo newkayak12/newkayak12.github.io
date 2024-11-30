@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # 여기까지 정리 2
 
 1. 고차함수란?

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # Type Parameter
 
 ## Generic

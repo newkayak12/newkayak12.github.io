@@ -1,3 +1,10 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
+
 # java 코드를 kotlin에서 사용하기
 
 ## java 메소드와 필드

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # 추상 클래스와 인터페이스
 
 ## 추상 클래스와 추상 멤버

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # 공통 메소드
 
 - `Any`에 여러 가지가 미리 선언되어 있다.

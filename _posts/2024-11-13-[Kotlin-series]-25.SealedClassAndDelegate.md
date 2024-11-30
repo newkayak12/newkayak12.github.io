@@ -1,3 +1,10 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
+
 # 봉인된 클래스, 위임
 
 ## sealed

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # 위임 프로퍼티
 
 ## 기본 위임 프로퍼티

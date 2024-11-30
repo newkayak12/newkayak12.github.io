@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # DataClass
 
 - 데이터를 저장하기 위한 목적으로 만들어진 타입

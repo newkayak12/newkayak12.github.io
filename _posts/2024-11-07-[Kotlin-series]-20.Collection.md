@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # Collection
 
 - 컬렉션을 조작하는 모든 연산은 `inline 함수`다.

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # DSL
 
 - kotlin에서 사용하던 연산자들은 모두 오버로딩 되어 있는 경우다.

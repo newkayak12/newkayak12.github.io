@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [KOTLIN]
+---
+
+
 # kotlin 코드를 java에서 사용
 
 ## 프로퍼티 접근
