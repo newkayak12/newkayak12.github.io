@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 09.classandobject | newkayak12.github.io</title>
+	<meta name="description"
+		content="Class  java와 비슷한 형태로 class를 운용한다.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/10/30/Kotlin-series-09.ClassAndObject.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 09.classandobject</h1>
+    
+    <p class="meta">
+      October 30, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="class">Class</h1>
+<ul>
+  <li>java와 비슷한 형태로 class를 운용한다.</li>
+</ul>
+
+<h2 id="생성자">생성자</h2>
+<ul>
+  <li>kotlin의 생성자는 주 생성자와 부 생성자들로 이뤄진다.</li>
+  <li>주 생성자는 class header의 파라미터 목록을 의미한다.</li>
+  <li>또한 <code class="language-plaintext highlighter-rouge">init</code> 키워드가 붙은 초기화 블록으로 복잡한 초기화 로직을 수행할 수도 있다. init에는 return이 불가하다.</li>
+  <li><strong>주 생성자의 파라미터를 초기화나 init 블록 바깥에서 사용할 수 없다.</strong> 만약 사용하려거든 이 값을 받는 프로퍼티를 만들어야 한다.</li>
+  <li>java와 같은 형태로 생성자를 작성하는 방식은 <strong>부 생성자</strong>로 할 수 있다. <code class="language-plaintext highlighter-rouge">constructor</code> 키워드로 작성한다.</li>
+  <li>기본적으로 부 생성자는 Unit 타입을 반환하는 함수와 같다.</li>
+  <li>java와 같이 부 생성자에서 다른 생성자를 호출할 수도 있다. kotlin에서는 이를 <strong>위임 호출</strong>이라고 한다.</li>
+</ul>
+
+<h2 id="가시성">가시성</h2>
+<ul>
+  <li>public: 어디서나 볼 수 있다.</li>
+  <li>internal: 멤버가 속한 클래스가 포함된 컴파일 모듈 내에서만 볼 수 있다.</li>
+  <li>protected: 멤버가 속한 클래스, subClassing한 하위 클래스에서 볼 수 있다.</li>
+  <li>private: 클래스 내에서만 볼 수 있다.</li>
+</ul>
+
+<h2 id="내포된-클래스중첩-클래스">내포된 클래스(중첩 클래스)</h2>
+<ul>
+  <li>kotlin에서 클래스는 다른 클래스를 멤버로 가질 수도 있다. 이를 nestedClass라고 한다.</li>
+  <li>중첩 클래스는 본문 밖에서는 바깥부터 차례로 접근해야 한다. <code class="language-plaintext highlighter-rouge">Person.Id</code>같이 말이다.</li>
+  <li>당연히 내포된 클래스에도 가시성을 적용할 수 있다.</li>
+  <li>java와 달리 바깥 클래스가 private 선언한 내포된 클래스의 멤버에 접근할 수 없다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">A</span> <span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">class</span> <span class="nc">B</span> <span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">password</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+        
+    <span class="p">}</span>
+    
+    <span class="k">fun</span> <span class="nf">printIdAndPassword</span> <span class="p">():</span> <span class="nc">Unit</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"$id $password"</span><span class="p">)</span><span class="c1">//Error</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">inner</code> 키워드를 중첩 클래스 앞에 붙이면 해소할 수 있다.</li>
+  <li>추가적으로 <code class="language-plaintext highlighter-rouge">this</code> 지칭에 감싸는 클래스, 내부 클래스 지칭이 모호하다면 <code class="language-plaintext highlighter-rouge">this@A</code>와 같이 지목할 수도 있다.</li>
+</ul>
+
+<h2 id="지역-클래스">지역 클래스</h2>
+<ul>
+  <li>java와 같이 함수 본문에서 클래스를 정의할 수 있다.</li>
+  <li>지역클래스는 자신을 둘러싼 코드 블록 안에서만 사용할 수 있다.</li>
+  <li>이 지역함수는 주변의 값을 capturing(포획) 할 수 있고 또한 변경할 수도 있다.</li>
+</ul>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/10/30/Kotlin-series-08.KotlinSummary01.html">
+        [kotlin Series] 08.kotlinsummary01
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/10/31/Kotlin-series-10.Null.html">
+        [kotlin Series] 10.null
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

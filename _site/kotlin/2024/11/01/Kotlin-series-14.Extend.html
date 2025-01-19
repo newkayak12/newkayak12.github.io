@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 14.extend | newkayak12.github.io</title>
+	<meta name="description"
+		content="확장">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/01/Kotlin-series-14.Extend.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 14.extend</h1>
+    
+    <p class="meta">
+      November 1, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="확장">확장</h1>
+
+<h2 id="확장-함수">확장 함수</h2>
+
+<ul>
+  <li>언떤 클래스의 멤버인 것처럼 호출할 수 있지만 실제로는 아닌 함수를 의미한다.</li>
+  <li>해당 함수 안 에서는 this로 접근할 수 있다.</li>
+  <li>이런 사용법은 굳이 문제라면 캡슐화를 파괴할 수 있어 보이진 실제로는 비공개 멤버에 접근할 수 없으므로 <strong><em>캡슐화를 깰 수 없다</em></strong>.</li>
+  <li>만약 클래스 내부에서 확장함수를 정의한다면 멤버인 동시에 확장함수가 되며, 캡슐화를 깰 수 있다.</li>
+</ul>
+
+<blockquote>
+  <p>정리하면</p>
+  <ol>
+    <li>바깥에서 정의 -&gt; 캡슐화 못 깬다.</li>
+    <li>내부에서 정의 -&gt; 멤버이자 확장함수, 캡슐화 부술 수 있다. (이건 그냥 함수랑 비슷하잖아?)</li>
+  </ol>
+</blockquote>
+
+<ul>
+  <li>정의된 함수와 시그니쳐가 겹친다면 멤버 함수를 우선으로 선택한다. 그리고 해당 확장함수는 사용되지 않으므로 shadowing 이라는 경고를 발생시킨다.</li>
+  <li>지역 확장 함수를 정의할 수도 있다. (확장 함수 안에 확장함수)
+    <ul>
+      <li>이 경우 안에서 밖을 참조하려면 <code class="language-plaintext highlighter-rouge">this@~</code>와 같이 명시해야 한다.</li>
+    </ul>
+  </li>
+  <li>마지막으로 확장함수는 java의 클래스 내 static 메소드로 컴파일 된다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nc">String</span><span class="p">.</span><span class="nf">truncate</span><span class="p">(</span><span class="n">maxLength</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">String</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="k">this</span> <span class="p">==</span> <span class="k">null</span> <span class="p">)</span> <span class="k">return</span> <span class="k">null</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="p">&lt;=</span> <span class="n">maxLength</span> <span class="p">)</span> <span class="k">this</span> <span class="k">else</span> <span class="nf">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxLength</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="확장-프로퍼티">확장 프로퍼티</h2>
+
+<ul>
+  <li>확장함수와 비슷하게 프로퍼티도 정의할 수 있다.</li>
+  <li>멤버와 확장 프로퍼티의 가장 큰 차이는 확장 프로퍼티에는 뒷받침하는 필드를 쓸 수 없다는 점이다.</li>
+  <li>확장 프로퍼티를 초기화 할 수도 없고, 접근자 안에서 field를 쓸 수도 없다는 의미다.</li>
+  <li><code class="language-plaintext highlighter-rouge">lateinit</code>으로 확장 프로퍼티를 정의할 수도 없다.</li>
+  <li>항상 명시적 게터, 세터를 작성해야 한다. (불변/ 가변에 따라)</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">IntArray</span><span class="p">.</span><span class="n">midIndex</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">lastIndex</span> <span class="p">/</span> <span class="mi">2</span> 
+
+<span class="kd">var</span> <span class="py">intArray</span><span class="p">.</span><span class="n">midValue</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="k">this</span><span class="p">[</span><span class="n">midIndex</span><span class="p">]</span>
+    <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">this</span><span class="p">[</span><span class="n">midIndex</span><span class="p">]</span> <span class="p">=</span> <span class="n">value</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>delegate 패턴을 사용할 수 있다.</li>
+  <li>다만 위임 식이 property 수신 객체에 접근할 수 없다.</li>
+  <li>그래서 크게 쓸모가 없다.
+```kotlin
+val String.message by lazy { “String” }</li>
+</ul>
+
+<p>fun main(){
+    println(“Hello”.message) //String
+    println(“Bye”.message) //String
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- object는 살짝 논외다. 어차피 싱글톤이기 때문에
+```kotlin
+object Messages
+val Messages.HELLO by lazy { "Hello" }
+
+fun main() {
+    println(Messages.HELLO)
+}
+</code></pre></div></div>
+
+<h2 id="동반-확장">동반 확장</h2>
+
+<ul>
+  <li>동반 객체는 내포된 객체 중에서 바깥 클래스의 이름을 통해서 객체 멤버에 접근할 수 있는 특별한 객체다.</li>
+  <li>
+    <p>확장에서도 이를 응용할 수 있다.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Companion</code>을 붙여서 확장하면 된다.</li>
+  <li>단, 동반 객체가 원래부터 있어야 동반 객체에 대한 확장을 정의할 수 있다.</li>
+</ul>
+
+<h2 id="람다-수신-객체-지정-함수-타입">람다, 수신 객체 지정 함수 타입</h2>
+<ul>
+  <li>kotlin에서 람다, 익명 함수에 대해서도 확장 수신 객체를 활용할 수 있다.</li>
+  <li>수신 객체 지정 함수 타입(functional type with receiver)라고 부른다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">numbers</span><span class="p">:</span> <span class="nc">IntArray</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="nc">Int</span><span class="p">.(</span><span class="nc">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="py">result</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="nf">firstOrNull</span><span class="p">()</span> <span class="o">?:</span> <span class="k">throw</span> <span class="nc">IllegalArgumentException</span><span class="p">(</span><span class="s">"Empty"</span><span class="p">)</span>
+  
+  <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">numbers</span><span class="p">.</span><span class="n">lastIndex</span> <span class="p">)</span> <span class="n">result</span> <span class="p">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">op</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="k">return</span> <span class="n">result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">op: Int.(Int) -&gt; Int</code>와 같이 수신 객체의 타입을 지정할 수 있다.</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/10/31/Kotlin-series-13.HighOrderFunction.html">
+        [kotlin Series] 13.highorderfunction
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/02/Kotlin-series-15.MethodReference.html">
+        [kotlin Series] 15.methodreference
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

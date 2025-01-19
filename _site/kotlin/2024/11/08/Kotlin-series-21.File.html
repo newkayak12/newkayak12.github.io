@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 21.file | newkayak12.github.io</title>
+	<meta name="description"
+		content="File/Stream">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/08/Kotlin-series-21.File.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 21.file</h1>
+    
+    <p class="meta">
+      November 8, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="filestream">File/Stream</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FileReader</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FileWriter</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FileInputStream</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FileOutputStream</code></li>
+</ul>
+
+<h2 id="use">use</h2>
+<ul>
+  <li>java의 try-catch-resource와 같이 <code class="language-plaintext highlighter-rouge">use</code>는 lambda를 받으며, 리소스 사용이 끝나면 정리해준다. <code class="language-plaintext highlighter-rouge">java.io.Closeable</code>에 대해서 호출할 수 있다.</li>
+</ul>
+
+<h2 id="생성">생성</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bufferedReaders()</code>/<code class="language-plaintext highlighter-rouge">bufferedWriter()</code>: BufferedReader, BufferedWriter 객체를 만든다.</li>
+  <li><code class="language-plaintext highlighter-rouge">reader()</code>/<code class="language-plaintext highlighter-rouge">writer()</code>: FileReader,FileWriter 객체를 만든다.</li>
+  <li><code class="language-plaintext highlighter-rouge">byteInputStream()</code>: String, ByteArray에 대한 ByteArrayInputStream을 만든다.</li>
+  <li><code class="language-plaintext highlighter-rouge">InputStream</code>인스턴스를 바탕으로 Reader, BufferedReader, BufferedInputStream을 얻을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">OutputStream</code>을 바탕으로 Writer, BufferedWriter, BufferedOutputStream을 얻을 수 있다.</li>
+</ul>
+
+<h2 id="url">URL</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">URL.readText()</code>/<code class="language-plaintext highlighter-rouge">URL.readBytes()</code></li>
+</ul>
+
+<h2 id="filesystemutility">FIleSystemUtility</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">deleteRecursively()</code>를 이용하면 파일이나 디렉토리를 자신에게 포함된 자손들까지 포함해 쉽게 가져올 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">copyTo()</code>는 자신의 수신 객체를 다른 파일에 복사하고 복사본을 가리키는 파일 객체를 리턴한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">copyRecursively()</code>: 아래와 충돌 시 같은 옵션이 있다.
+    <ul>
+      <li>SKIP: 파일을 무시하고 복사를 계속 진행한다.</li>
+      <li>TERMINATE: 복사를 중단한다.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">walk()</code>: DFS로 순회한다.
+    <ul>
+      <li>TOP_DOWN</li>
+      <li>BOTTOM_UP</li>
+    </ul>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/07/Kotlin-series-20.Collection.html">
+        [kotlin Series] 20.collection
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/09/Kotlin-series-22.Inheritance.html">
+        [kotlin Series] 22.inheritance
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

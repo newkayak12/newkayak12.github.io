@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[jpa Series] 17.cache | newkayak12.github.io</title>
+	<meta name="description"
+		content="2차 캐시">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/jpa/querydsl/2024/12/18/jpa-series-17.Cache.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[jpa Series] 17.cache</h1>
+    
+    <p class="meta">
+      December 18, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="2차-캐시">2차 캐시</h1>
+
+<h2 id="1차-2차">1차, 2차</h2>
+<ul>
+  <li>영속성 컨텍스트 내부에 엔티티를 보관하는 저장소가 1차 캐시</li>
+  <li>이 1차 캐시는 트랜잭션 시작 - 종료 시에 관여를 한다.</li>
+  <li>그래서 1차 캐시 자체가 엄청난 역할을 하는 건 아니다.</li>
+  <li>JPA 구현체들은 애플리케이션 범위 캐시를 지원하는데 이를 sharedCache, secondary cache라고 한다.</li>
+  <li>2차 캐시를 이용하면 애플리케이션 조회 성능을 향상시킬 수 있다.</li>
+</ul>
+
+<h3 id="1차">1차</h3>
+<ul>
+  <li>영속성 컨텍스트 내부</li>
+  <li>엔티티 매니저를 통하는 길에 1차 캐싱한다.</li>
+  <li>끄고 켤 수 있는 것이 아니다.</li>
+  <li>영속성 컨텍스트 자체라고 보면 된다.</li>
+</ul>
+
+<h3 id="2차">2차</h3>
+<ul>
+  <li>L2Cache라고 부른다.</li>
+  <li>분산 캐시나 클러스터링 환경의 캐시는 애플리케이션보다 더 오래 유지될 수도 있다.</li>
+  <li>DB 조회 횟수를 실질적으로 줄일 수 있다.</li>
+  <li>방식은 아래와 같다.
+    <ol>
+      <li>영속성 컨텍스트는 엔티티가 필요하면 2차 캐시 조회</li>
+      <li>2차 캐시에 없으면 DB를 조회</li>
+      <li>결과를 2차에 올린다.</li>
+      <li>다음부터는 2차에서 먼저 찾고 없으면 2번을 한다.</li>
+      <li>반환 시에는 복사본을 만든다.</li>
+    </ol>
+  </li>
+  <li>특징은 아래와 같다.
+    <ol>
+      <li>2차 캐시는 영속성 유닛 범위의 캐시다.</li>
+      <li>2차 캐시는 조회한 객체를 그대로 반환하는 것이 아니라 복사본을 만들어 반환</li>
+      <li>기본키를 기준으로 캐시하지만, 영속성 컨텍스트가 다르면 동일성 보장을 하지 않는다.</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="적용">적용</h3>
+<ul>
+  <li>JPA 2.0에 와서 표준이 정해졌다. 그래서 세밀한 설정은 구현체 의존적이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Cacheable</code>을 사용한다.</li>
+  <li>캐시 모드는 아래와 같다.
+    <ol>
+      <li>ALL : 모든 엔티티</li>
+      <li>NONE: 캐시 사용 X</li>
+      <li>ENABLE_SELECTIVE: Cachable(true)로 설정된 엔티티만 캐시를 적용</li>
+      <li>DISABLE_SELECTIVE: 모든 엔티티 캐시, Cacheable(false)는 캐시 대상에서 제외</li>
+      <li>UNSPECIFIED: JPA 구현체가 정의한 설정에 따른다.</li>
+    </ol>
+  </li>
+</ul>
+
+<h4 id="적용-1">적용</h4>
+<ul>
+  <li>캐시 조회 모드, 보관 모드에 따라 사용하 프로퍼티, 옵션이 다르다.
+    <ul>
+      <li>프로퍼티
+        <ol>
+          <li>jakarta.persistence.cache.retrieveMode: 캐시 조회 모드 프로퍼티 이름</li>
+          <li>jakarta.persistence.cache.storeMode: 캐시 보관 모드 프로퍼티 이름</li>
+        </ol>
+      </li>
+      <li>옵션
+        <ol>
+          <li>jakarta.persistence.CacheRetrieveMode: 캐시 조회 모드 설정 옵션
+            <ol>
+              <li>USE: 캐시에서 조회</li>
+              <li>BYPASS: 캐시 무시</li>
+            </ol>
+          </li>
+          <li>jakarta.persistence.CacheStoreMode: 캐시 보관 모드 설정 옵션
+            <ol>
+              <li>USE: 조회 데이터 캐시에 저장, 이미 있으면 갱신하지 않는다. 트랜잭션 커밋 시 등록/ 수정한 내용 캐시에도 저장</li>
+              <li>BYPASS: 캐시 무시</li>
+              <li>REFRESH: USE 전략에 추가로 DB에서 조회한 엔티티를 최신 상태로 다시 캐시</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="관리-api">관리 API</h4>
+<ol>
+  <li>jakarta.persistence.Cache 인터페이스 제공</li>
+  <li><code class="language-plaintext highlighter-rouge">EntityManagerFactory</code>에서 <code class="language-plaintext highlighter-rouge">getCache()</code> 구할 수 있다.</li>
+</ol>
+
+<h4 id="ehcache-적용">EhCache 적용</h4>
+<ol>
+  <li>엔티티 캐시 : 엔티티 단위</li>
+  <li>컬렉션 캐시 : 엔티티와 연관된 컬렉션</li>
+  <li>쿼리 캐시  : 쿼리와 파라미터 정보를 키로 사용해서 쿼리 결과를 캐시
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">.setHint ("org.hibernate.cacheable", true)</code>로 힌트 지정</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="사용">사용</h5>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Cacheable</code>, <code class="language-plaintext highlighter-rouge">@Cache</code>를 붙인다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Cache</code>는 CacheConcurrencyStrategy로 세부 조절한다.
+    <ol>
+      <li>usage: CacheConcurrencyStrategy로 동시성 전략 설정
+        <ol>
+          <li>NONE: 설정 X</li>
+          <li>READ_ONLY: 읽기 전용. 등록, 삭제는 가능하지만 수정 불가</li>
+          <li>NONSTRICT_READ_WRITE: 엄격하지 않은 읽고 쓰기. 동시에 같은 엔티티 수정시 일관성 깨질수 있다.</li>
+          <li>READ_WRITE: 읽기 가능, 쓰기 가능 READ COMMITTED 정도의 격리 수준</li>
+          <li>TRANSACTIONAL: 컨테이너 관리 환경에서 사용 REPEATABLE READ 정도</li>
+        </ol>
+      </li>
+      <li>region: 캐시 지역 설정
+        <ol>
+          <li><code class="language-plaintext highlighter-rouge">org.hibernate.cache.internal.StandardQueryCache</code>: 쿼리 캐시를 저장하는 영역</li>
+          <li><code class="language-plaintext highlighter-rouge">org.hibernate.cahce.spi.UpdateTimestampsCache</code>: 쿼리 캐시가 유효한지 확인하기 위해서 쿼리 대상 테이블 가장 최근 변경 시간을 저장</li>
+        </ol>
+      </li>
+      <li>include: 연관 객체를 캐시에 포함할지 선택 (all, non-lazy)</li>
+    </ol>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/17/jpa-series-16.TransactionAndLock.html">
+        [jpa Series] 16.transactionandlock
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/19/jpa-series-18.MvccAndLock.html">
+        [jpa Series] 18.mvccandlock
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

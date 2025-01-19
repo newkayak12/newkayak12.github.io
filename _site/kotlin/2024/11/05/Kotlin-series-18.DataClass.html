@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 18.dataclass | newkayak12.github.io</title>
+	<meta name="description"
+		content="DataClass">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/05/Kotlin-series-18.DataClass.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 18.dataclass</h1>
+    
+    <p class="meta">
+      November 5, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="dataclass">DataClass</h1>
+
+<ul>
+  <li>데이터를 저장하기 위한 목적으로 만들어진 타입</li>
+  <li>java14의 record와 유사하다.</li>
+</ul>
+
+<h2 id="데이터-클래스와-데이터-클래스에-대한-연산">데이터 클래스와 데이터 클래스에 대한 연산</h2>
+
+<ul>
+  <li>원래 java는 클래스 간 비교로 <code class="language-plaintext highlighter-rouge">equals()</code> and <code class="language-plaintext highlighter-rouge">hashCode()</code>를 구현하면 된다.</li>
+  <li>이런 boilerplate 코드를 줄이기 위해서 java에서는 record가 도입됐다.</li>
+  <li>kotlin에서는 <code class="language-plaintext highlighter-rouge">data class</code>가 있다. 역시 boilberplate를 줄여주는 방향으로 구현됐다.</li>
+  <li>또한 property는 <code class="language-plaintext highlighter-rouge">copy()</code> 함수를 제공한다.</li>
+</ul>
+
+<h2 id="구조-분해-선언">구조 분해 선언</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">kotlin.random.Random</span>
+
+<span class="kd">data class</span> <span class="nc">Person</span><span class="p">(</span>
+    <span class="kd">val</span> <span class="py">firstName</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span>
+    <span class="kd">val</span> <span class="py">familyName</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span>
+    <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span>
+<span class="p">)</span> 
+<span class="k">fun</span> <span class="nf">newPerson</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Person</span><span class="p">(</span><span class="nf">readLine</span><span class="p">()</span><span class="o">!!</span><span class="p">,</span> <span class="nf">readLine</span><span class="p">()</span><span class="o">!!</span><span class="p">,</span> <span class="nc">Random</span><span class="p">.</span><span class="nf">nextInt</span><span class="p">())</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">person</span> <span class="p">=</span> <span class="nf">newPerson</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="p">(</span><span class="py">firstName</span><span class="p">,</span> <span class="py">familyName</span><span class="p">,</span> <span class="py">age</span><span class="p">)</span> <span class="p">=</span> <span class="n">person</span>
+    <span class="c1">//괄호로 감싼 식별자 목록으로 여러 변수로 한꺼번에 정의할 수 있게 해주는 일반화된 지역 변수 선언 구문이다.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>사용하지 않는 변수는 <code class="language-plaintext highlighter-rouge">_</code>으로 씹을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">var</code>이나 <code class="language-plaintext highlighter-rouge">val</code> 중 하나로 선언해서 사용할 수 있다.</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/04/Kotlin-series-17.Enum.html">
+        [kotlin Series] 17.enum
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/06/Kotlin-series-19.InlineClass.html">
+        [kotlin Series] 19.inlineclass
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

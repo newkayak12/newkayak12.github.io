@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[jpa Series] 00.hibernate | newkayak12.github.io</title>
+	<meta name="description"
+		content="00.Hibernate">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/jpa/querydsl/2024/12/01/jpa-series-00.Hibernate.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[jpa Series] 00.hibernate</h1>
+    
+    <p class="meta">
+      December 1, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="00hibernate">00.Hibernate</h1>
+
+<blockquote>
+  <p>다회독을 진행하면서 한 번도 정리를 한 적이 없는데,</p>
+  <p>정리를 목적으로 작성</p>
+</blockquote>
+
+<h2 id="들어가면서">들어가면서</h2>
+
+<h3 id="사용-이유">사용 이유</h3>
+<ul>
+  <li>jdbcTemplate, SQLMapper를 직접 다룰 일을 줄일 수 있다.</li>
+  <li>Query를 직접, 반복해서 작성하는 비생산적인 일을 줄일 수 있다.</li>
+  <li>더 java 스러운 객체 모델링을 진행할 수 있다.</li>
+  <li>DB vendor에 종속되지 않고 기존 구현 그대로 옮길 수 있다.</li>
+</ul>
+
+<h3 id="패러다임-불일치">패러다임 불일치</h3>
+<ul>
+  <li>애초에 RDB와 객체 지향은 패러다임이 맞지 않다.</li>
+  <li>관계형 데이터베이스는 데이터 중심으로 구조화되어 있고, 보다 집합적인 관점에서 풀이해나간다.</li>
+  <li>객체지향은 추상화, 상속, 다형성 등의 개념으로 풀이해 나간다.</li>
+  <li>애초에 서로 바라보는 목적지가 다르다.</li>
+</ul>
+
+<h3 id="jpa">JPA</h3>
+<ul>
+  <li>“서로의 종착지가 다르다”라는 간극을 원래는 개발자들이 메꾸고 있었다.</li>
+  <li>그래서 java 진영의 입장에 맞게 맞춘 것이 jpa다.</li>
+</ul>
+
+<h3 id="jpa-hibernate">JPA, Hibernate</h3>
+<ul>
+  <li>JPA는 Java Persistence API의 약자로 자바 어플리케이션에서 관계형 DB를 사용하는 방식을 정의한 <strong>인터페이스</strong>다.</li>
+  <li>JPA는 명세이기 때문에 <code class="language-plaintext highlighter-rouge">javax.persistence</code>로 이뤄진, interface, enum, exception, annotation 들로 이뤄져 있다.</li>
+  <li>Hibernate는 JPA의 구현체다. 즉, JPA를 사용하는데 꼭 <code class="language-plaintext highlighter-rouge">Hibernate</code>를 사용할 필요는 없다.</li>
+  <li><strong>그러나 보통 Hibernate를 많이 채택하고, 다른 라이브러리보다 더 성숙한 라이브러리</strong>이기 때문에 채택을 하는 것이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">SpringData JPA</code>는 JPA를 spring에서 쓰기 쉽게 해놓은 모듈이다.</li>
+</ul>
+
+<p><img src="../../image/jpa-hibernate-springdatajpa.png" alt="jpa-hibernate-springdatajpa.png" />
+<a href="https://suhwan.dev/2019/02/24/jpa-vs-hibernate-vs-spring-data-jpa/">출처</a></p>
+
+<h3 id="hibernate-dependencies">Hibernate dependencies</h3>
+
+<h4 id="hibernate-core">hibernate-core</h4>
+
+<ul>
+  <li>이름: hibernate-core</li>
+  <li>설명: Hibernate ORM의 핵심 라이브러리입니다. 이 라이브러리는 객체-관계 매핑을 처리하고, 데이터베이스와의 연결을 관리하는 기능을 제공합니다. 이 라이브러리가 없으면 Hibernate ORM을 사용할 수 없습니다.</li>
+</ul>
+
+<h4 id="hibernate-entitymanager">hibernate-entitymanager</h4>
+
+<ul>
+  <li>이름: hibernate-entitymanager</li>
+  <li>설명: JPA(Java Persistence API)와의 통합을 위한 Hibernate의 JPA 구현체입니다. hibernate-core와 함께 사용되며, EntityManager를 포함한 JPA 관련 기능들을 제공합니다</li>
+</ul>
+
+<h4 id="hibernate-annotation">hibernate-annotation</h4>
+
+<ul>
+  <li>이름: hibernate-annotations</li>
+  <li>설명: Hibernate에서 사용되는 주석 기반의 ORM 매핑을 위한 라이브러리입니다. 이 라이브러리는 Java 애노테이션을 통해 엔티티 매핑을 지원하며, 예전 Hibernate 3.x 버전에서 사용되었습니다. 현재는 hibernate-core에 포함되어 있습니다.</li>
+</ul>
+
+<h4 id="hibernate-validator">hibernate-validator</h4>
+
+<ul>
+  <li>이름: hibernate-validator</li>
+  <li>설명: Hibernate Validator는 JSR-303(Java Bean Validation) 스펙을 구현한 라이브러리입니다. 객체의 유효성을 검증하기 위해 제약 조건을 적용할 수 있도록 도와줍니다. 예를 들어, 엔티티 클래스에서 필드 값의 유효성을 체크하는 데 사용됩니다.</li>
+</ul>
+
+<h4 id="hibernate-hikari">hibernate-hikari</h4>
+
+<ul>
+  <li>이름: hibernate-hikari</li>
+  <li>설명: Hibernate에서 HikariCP 연결 풀을 사용할 수 있도록 하는 라이브러리입니다. HikariCP는 성능이 뛰어난 데이터베이스 연결 풀 라이브러리로, 대규모 애플리케이션에서 성능을 최적화하는 데 유용합니다.</li>
+</ul>
+
+<h4 id="hibernate-envers">hibernate-envers</h4>
+
+<ul>
+  <li>이름: hibernate-envers</li>
+  <li>설명: Hibernate Envers는 Hibernate의 엔티티에 대한 변경 이력을 관리하는 기능을 제공합니다. 이를 통해 엔티티 객체의 변경 이력을 추적하고, 과거 상태를 조회하는 기능을 구현할 수 있습니다.</li>
+</ul>
+
+<h4 id="hibernate-search">hibernate-search</h4>
+
+<ul>
+  <li>이름: hibernate-search</li>
+  <li>설명: Hibernate Search는 Hibernate ORM과 통합된 검색 기능을 제공합니다. 이 라이브러리는 Lucene과 같은 검색 엔진을 사용하여 엔티티에 대한 고급 검색 기능을 제공합니다.</li>
+</ul>
+
+<h4 id="hibernate-commons-annotations">hibernate-commons-annotations</h4>
+
+<ul>
+  <li>이름: hibernate-commons-annotations</li>
+  <li>설명: Hibernate에서 공통적으로 사용하는 어노테이션들을 정의하는 라이브러리입니다. Hibernate가 사용되는 여러 모듈에서 공통적으로 필요한 어노테이션들을 포함합니다.</li>
+</ul>
+
+<h4 id="hibernate-async">hibernate-async</h4>
+
+<ul>
+  <li>이름: hibernate-async</li>
+  <li>설명: Hibernate ORM에서 비동기 쿼리 실행을 지원하는 라이브러리입니다. 이 라이브러리를 사용하면, 비동기 방식으로 데이터베이스 작업을 수행할 수 있어 성능을 최적화할 수 있습니다. 예를 들어, 비동기 방식으로 쿼리를 실행하고 결과를 Future나 CompletableFuture로 반환할 수 있습니다.</li>
+</ul>
+
+<h4 id="hibernate-reactive">hibernate-reactive</h4>
+
+<ul>
+  <li>이름: hibernate-reactive</li>
+  <li>설명: Hibernate Reactive는 비동기/반응형 프로그래밍을 위한 Hibernate의 확장입니다. Java의 CompletionStage 및 Reactive Streams API를 사용하여 비동기 방식으로 데이터베이스와 상호 작용할 수 있도록 지원합니다. 이를 통해 반응형 애플리케이션을 구축할 수 있습니다.</li>
+</ul>
+
+<h4 id="hibernate-jcache">hibernate-jcache</h4>
+<ul>
+  <li>이름: hibernate-jcache</li>
+  <li>설명: Hibernate JCache는 Hibernate 2차 캐시를 JCache API (JSR-107)를 사용하여 구현할 수 있게 해주는 라이브러리입니다. 이를 통해 JCache를 활용한 효율적인 캐싱 전략을 적용할 수 있습니다.</li>
+</ul>
+
+<h4 id="hibernate-spring">hibernate-spring</h4>
+<ul>
+  <li>이름: hibernate-spring</li>
+  <li>설명: Spring 프레임워크와 Hibernate의 통합을 위한 라이브러리입니다. Spring의 트랜잭션 관리 기능과 Hibernate를 함께 사용하여, 더 나은 ORM 관리 및 트랜잭션 처리를 제공합니다.</li>
+</ul>
+
+<h4 id="hibernate-dialect">hibernate-dialect</h4>
+<ul>
+  <li>이름: hibernate-dialect</li>
+  <li>설명: Hibernate는 다양한 데이터베이스와 호환되도록 여러 데이터베이스 방언(Dialect)을 제공합니다. 이 라이브러리는 Hibernate에서 지원하는 다양한 데이터베이스 방언을 포함하고 있습니다. 예를 들어, MySQL, PostgreSQL, Oracle 등의 방언을 설정할 때 사용됩니다.</li>
+</ul>
+
+<h4 id="hibernate-spatial">hibernate-spatial</h4>
+<ul>
+  <li>이름: hibernate-spatial</li>
+  <li>설명: Hibernate Spatial은 공간 데이터(지리적 위치 및 지도 정보)를 저장하고 관리하기 위한 Hibernate 확장 모듈입니다. 이 모듈은 PostGIS, MySQL의 공간 확장 등 다양한 공간 데이터베이스와 통합될 수 있습니다.</li>
+</ul>
+
+<hr />
+<blockquote>
+  <p>ORM : Object Relational Mapping</p>
+</blockquote>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/30/Kotlin-series-38.koTest.html">
+        [kotlin Series] 38.kotest
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/02/jpa-series-01.Annotations.html">
+        [jpa Series] 01.annotations
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[jpa Series] 12.querydsl | newkayak12.github.io</title>
+	<meta name="description"
+		content="QueryDSL">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/jpa/querydsl/2024/12/13/jpa-series-12.QueryDSL.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[jpa Series] 12.querydsl</h1>
+    
+    <p class="meta">
+      December 13, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="querydsl">QueryDSL</h1>
+
+<ul>
+  <li>spring data jpa는 두 가지 방법으로 QueryDSL를 지원한다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">org.springframework.data.querydsl.QueryDslPredicateExecutor</code></li>
+      <li><code class="language-plaintext highlighter-rouge">org.springframework.data.querydsl.QueryDslRepositorySupport</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-querydslpredicateexecutor을-상속-받는-식이다">1. QueryDslPredicateExecutor을 상속 받는 식이다.</h2>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ItemRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;,</span> <span class="nc">QueryDslPredicateExecutor</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="o">{</span>
+    
+<span class="o">}</span>
+
+<span class="n">itemRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"장난감"</span><span class="o">).</span><span class="na">and</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">price</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="mi">10000</span><span class="o">,</span> <span class="mi">20000</span><span class="o">)));</span>
+</code></pre></div></div>
+<ul>
+  <li>QueryDSL를 검색 조건으로 사용할 수 있다.</li>
+  <li>그러나 한계가 있다. join, fetch를 사용할 수 없다(JPQL 묵시적 종린은 가능)</li>
+</ul>
+
+<h2 id="2-querydslrepositorysupport-사용">2. QueryDslRepositorySupport 사용</h2>
+<ul>
+  <li>JPAQuery 객체를 생성해서 사용하면 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">QueryDslRepositorySupport</code>를 상속 받으면 더 편하게 사용할 수 있다.
+```java</li>
+</ul>
+
+<p>@Repository
+public abstract class QuerydslRepositorySupport {
+    private final PathBuilder&lt;?&gt; builder;
+    @Nullable
+    private EntityManager entityManager;
+    @Nullable
+    private Querydsl querydsl;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public QuerydslRepositorySupport(Class&lt;?&gt; domainClass) {
+    Assert.notNull(domainClass, "Domain class must not be null");
+    this.builder = (new PathBuilderFactory()).create(domainClass);
+}
+
+@Autowired
+public void setEntityManager(EntityManager entityManager) {
+    Assert.notNull(entityManager, "EntityManager must not be null");
+    this.querydsl = new Querydsl(entityManager, this.builder);
+    this.entityManager = entityManager;
+}
+
+@PostConstruct
+public void validate() {
+    Assert.notNull(this.entityManager, "EntityManager must not be null");
+    Assert.notNull(this.querydsl, "Querydsl must not be null");
+}
+
+@Nullable
+protected EntityManager getEntityManager() {
+    return this.entityManager;
+}
+
+protected JPQLQuery&lt;Object&gt; from(EntityPath&lt;?&gt;... paths) {
+    return this.getRequiredQuerydsl().createQuery(paths);
+}
+
+protected &lt;T&gt; JPQLQuery&lt;T&gt; from(EntityPath&lt;T&gt; path) {
+    return this.getRequiredQuerydsl().createQuery(new EntityPath[]{path}).select(path);
+}
+
+protected DeleteClause&lt;JPADeleteClause&gt; delete(EntityPath&lt;?&gt; path) {
+    return new JPADeleteClause(this.getRequiredEntityManager(), path);
+}
+
+protected UpdateClause&lt;JPAUpdateClause&gt; update(EntityPath&lt;?&gt; path) {
+    return new JPAUpdateClause(this.getRequiredEntityManager(), path);
+}
+
+protected &lt;T&gt; PathBuilder&lt;T&gt; getBuilder() {
+    return this.builder;
+}
+
+@Nullable
+protected Querydsl getQuerydsl() {
+    return this.querydsl;
+}
+
+private Querydsl getRequiredQuerydsl() {
+    if (this.querydsl == null) {
+        throw new IllegalStateException("Querydsl is null");
+    } else {
+        return this.querydsl;
+    }
+}
+
+private EntityManager getRequiredEntityManager() {
+    if (this.entityManager == null) {
+        throw new IllegalStateException("EntityManager is null");
+    } else {
+        return this.entityManager;
+    }
+} }
+</code></pre></div></div>
+
+<p>```</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/12/jpa-series-11.SpringJPA.html">
+        [jpa Series] 11.springjpa
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/14/jpa-series-13.PersistenceContext.html">
+        [jpa Series] 13.persistencecontext
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

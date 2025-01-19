@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 33.javawithkotlin | newkayak12.github.io</title>
+	<meta name="description"
+		content="kotlin 코드를 java에서 사용">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/21/Kotlin-series-33.JavaWithKotlin.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 33.javawithkotlin</h1>
+    
+    <p class="meta">
+      November 21, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="kotlin-코드를-java에서-사용">kotlin 코드를 java에서 사용</h1>
+
+<h2 id="프로퍼티-접근">프로퍼티 접근</h2>
+<ul>
+  <li>java, JVM에는 프로퍼티 개념이 없으므로, kotlin property를 java에서 접근할 수 없다.</li>
+  <li>compile 된 JVM 바이트 코드에서는 각 프로퍼티가 접근자 메소드로 표현되기에 이 때는 접근할 수 있다.</li>
+  <li>kotlin property에서 뒷받침 필드가 필요한 경우, compiler가 접근자 메소드와 함께 필드도 만든다.</li>
+  <li>캡슐화를 위해서 기본 private이며 getter/setter만을 통해 접근할 수 있다. public으로 두려면 <code class="language-plaintext highlighter-rouge">@JvmField</code>를 넣으면 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@JvmField</code>는 추상 프로퍼티나 열린 프로퍼티에서는 오버라이드, 커스텀 접근자 등 때문에 사용할 수 없다.</li>
+  <li>이름이 붙은 객체 프로퍼티에 <code class="language-plaintext highlighter-rouge">@JvmField</code>를 붙이면 정적 필드를 만든다.
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">Application</span> <span class="p">{</span> 
+  <span class="nd">@JvmField</span> <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="s">"Application"</span>
+  <span class="c1">//const가 붙어도 마찬가지다.</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="파일-파사드와-최상위-선언">파일 파사드와 최상위 선언</h2>
+<ul>
+  <li>kotlin에서는 최상위 선언을 자주 사용한다. java, JVM에서는 없기에 <code class="language-plaintext highlighter-rouge">file facade</code>라는 클래스에 넣는다.</li>
+  <li>이렇게 만들어진 클래스의 메소드는 static이므로 initialize 할 필요가 없다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@file:JvmName</code>으로 facade class 이름을 정할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@JvmMultifilClass</code>와 <code class="language-plaintext highlighter-rouge">@JvmName</code>으로 여러 파일을 하나의 파일로 몰 수 있다.</li>
+</ul>
+
+<h2 id="객체와-정적-멤버">객체와 정적 멤버</h2>
+<ul>
+  <li>kotlin의 객체 선언은 INSTANCE 필드가 있는 일반 클래스로 컴파일 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@JavaFiled</code>를 객체 프로퍼티에 사용하면 정적 필드로 바뀐다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@JvmStatic</code>으로 객체 함수나 프로퍼티 접근자를 정적 메소드로 만들 수도 있다.</li>
+</ul>
+
+<h2 id="노출된-선언-이름-변경">노출된 선언 이름 변경</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@JvmName</code>으로 최상위 선언이 들어가는 facade 클래스 이름을 바꿀 수 있다.</li>
+  <li>추가로 <code class="language-plaintext highlighter-rouge">@JvmName</code>는 함수나 프로퍼티 접근자에도 사용할 수 있다.</li>
+  <li>이는 kotlin에서 옳지만 java에서 금지된 선언이 되는 시그니처 충돌을 막기 위해서 있다.</li>
+  <li>프로퍼티 자체에 annotation을 붙일 수도 있다. <code class="language-plaintext highlighter-rouge">@get:JvmName("getFullNameFamilyLast")</code></li>
+</ul>
+
+<h2 id="오버로딩한-메소드-생성">오버로딩한 메소드 생성</h2>
+<ul>
+  <li>kotlin 디폴트 값이 지정된 경우, 함수 인자 중 일부를 생략할 수 있기에 인자 수가 달라질 수 있다.</li>
+  <li>java에서는 <code class="language-plaintext highlighter-rouge">@JvmOverloads</code>로 오버로딩된 함수를 추가로 생성한다.</li>
+</ul>
+
+<h2 id="예외">예외</h2>
+<ul>
+  <li>kotlin은 java와 다르게 checked, unchecked가 없다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Throws</code>를 붙여서 명시할 수 있다.</li>
+</ul>
+
+<h2 id="인라인-함수">인라인 함수</h2>
+<ul>
+  <li>java에는 inline 함수가 없다. kotlin 에서 inline이 붙으면 java에서는 일반 메소드로 노출된다.</li>
+  <li>실제로 인라인이 되지는 않는다.</li>
+  <li>제네릭 인라인 함수는 인라인을 사용하지 않고 타입 구체화를 구현할 방법이 없으므로, 자바 코드에서 이런 함수를 호출하는 것이 불가하다.</li>
+</ul>
+
+<h2 id="타입-별명">타입 별명</h2>
+<ul>
+  <li>java에서는 타입 별명을 다 풀어 헤친 상태로 변환된다.</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/20/Kotlin-series-32.KotlinWithJava.html">
+        [kotlin Series] 32.kotlinwithjava
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/test/2024/11/25/test-series-04-FixtureMonkey.html">
+        [test Series] 04 Fixturemonkey
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

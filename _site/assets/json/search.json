@@ -1,6 +1,494 @@
 [
 
 {
+"title"    : "[git Series] Squashandrebase",
+"category" : "",
+"tags"     : "",
+"url"      : "/git/2024/12/20/git-series-squashAndRebase.html",
+"date"     : "2024-12-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 18.mvccandlock",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/19/jpa-series-18.MvccAndLock.html",
+"date"     : "2024-12-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 17.cache",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/18/jpa-series-17.Cache.html",
+"date"     : "2024-12-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 16.transactionandlock",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/17/jpa-series-16.TransactionAndLock.html",
+"date"     : "2024-12-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 15.optimize",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/16/jpa-series-15.Optimize.html",
+"date"     : "2024-12-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 14.additionalfeatures",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/15/jpa-series-14.AdditionalFeatures.html",
+"date"     : "2024-12-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 13.persistencecontext",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/14/jpa-series-13.PersistenceContext.html",
+"date"     : "2024-12-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 12.querydsl",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/13/jpa-series-12.QueryDSL.html",
+"date"     : "2024-12-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 11.springjpa",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/12/jpa-series-11.SpringJPA.html",
+"date"     : "2024-12-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 10.objectorientedquery",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/11/jpa-series-10.ObjectOrientedQuery.html",
+"date"     : "2024-12-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 09.querydsl",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/10/jpa-series-09.QueryDSL.html",
+"date"     : "2024-12-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 08.jpql",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/09/jpa-series-08.JPQL.html",
+"date"     : "2024-12-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 07.valuetype",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/08/jpa-series-07.ValueType.html",
+"date"     : "2024-12-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 06.cascade",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/07/jpa-series-06.Cascade.html",
+"date"     : "2024-12-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 05.proxy",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/06/jpa-series-05.Proxy.html",
+"date"     : "2024-12-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 04.advancedmapping",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/05/jpa-series-04.AdvancedMapping.html",
+"date"     : "2024-12-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 03.relationmapping",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/04/jpa-series-03.RelationMapping.html",
+"date"     : "2024-12-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 02.entitymanager",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/03/jpa-series-02.EntityManager.html",
+"date"     : "2024-12-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 01.annotations",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/02/jpa-series-01.Annotations.html",
+"date"     : "2024-12-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[jpa Series] 00.hibernate",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/jpa/querydsl/2024/12/01/jpa-series-00.Hibernate.html",
+"date"     : "2024-12-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 38.kotest",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/30/Kotlin-series-38.koTest.html",
+"date"     : "2024-11-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 37.javaconcurrency",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/29/Kotlin-series-37.JavaConcurrency.html",
+"date"     : "2024-11-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 36.coroutinechannel",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/28/Kotlin-series-36.coroutineChannel.html",
+"date"     : "2024-11-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[cs Series] Restful",
+"category" : "",
+"tags"     : "",
+"url"      : "/cs/2024/11/28/CS-series-RESTful.html",
+"date"     : "2024-11-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 35.coroutineflowcontrolandjoblifecycle",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/27/Kotlin-series-35.coroutineFlowControlAndJobLifeCycle.html",
+"date"     : "2024-11-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 34.coroutinebuilder",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/26/Kotlin-series-34.coroutineBuilder.html",
+"date"     : "2024-11-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[test Series] 04 Fixturemonkey",
+"category" : "",
+"tags"     : "",
+"url"      : "/test/2024/11/25/test-series-04-FixtureMonkey.html",
+"date"     : "2024-11-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 33.javawithkotlin",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/21/Kotlin-series-33.JavaWithKotlin.html",
+"date"     : "2024-11-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 32.kotlinwithjava",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/20/Kotlin-series-32.KotlinWithJava.html",
+"date"     : "2024-11-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 31.delegationproperty",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/19/Kotlin-series-31.DelegationProperty.html",
+"date"     : "2024-11-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 30.dsl",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/18/Kotlin-series-30.DSL.html",
+"date"     : "2024-11-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 29.reflection",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/17/Kotlin-series-29.Reflection.html",
+"date"     : "2024-11-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 28.annotation",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/16/Kotlin-series-28.Annotation.html",
+"date"     : "2024-11-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 27.typealias",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/15/Kotlin-series-27.TypeAlias.html",
+"date"     : "2024-11-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 26.typeproperty",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/14/Kotlin-series-26.TypeProperty.html",
+"date"     : "2024-11-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 25.sealedclassanddelegate",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/13/Kotlin-series-25.SealedClassAndDelegate.html",
+"date"     : "2024-11-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 25.abstractclassandinterface",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/12/Kotlin-series-25.AbstractClassAndInterface.html",
+"date"     : "2024-11-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 24.commonmethod",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/11/Kotlin-series-24.CommonMethod.html",
+"date"     : "2024-11-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 23.typecheckandcasting",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/10/Kotlin-series-23.TypeCheckAndCasting.html",
+"date"     : "2024-11-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 22.inheritance",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/09/Kotlin-series-22.Inheritance.html",
+"date"     : "2024-11-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 21.file",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/08/Kotlin-series-21.File.html",
+"date"     : "2024-11-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 20.collection",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/07/Kotlin-series-20.Collection.html",
+"date"     : "2024-11-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 19.inlineclass",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/06/Kotlin-series-19.InlineClass.html",
+"date"     : "2024-11-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 18.dataclass",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/05/Kotlin-series-18.DataClass.html",
+"date"     : "2024-11-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 17.enum",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/04/Kotlin-series-17.Enum.html",
+"date"     : "2024-11-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 16.kotlinsummary02",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/03/Kotlin-series-16.KotlinSummary02.html",
+"date"     : "2024-11-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 15.methodreference",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/02/Kotlin-series-15.MethodReference.html",
+"date"     : "2024-11-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 14.extend",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/11/01/Kotlin-series-14.Extend.html",
+"date"     : "2024-11-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 13.highorderfunction",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/31/Kotlin-series-13.HighOrderFunction.html",
+"date"     : "2024-10-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 12.object",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/31/Kotlin-series-12.Object.html",
+"date"     : "2024-10-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 11.property",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/31/Kotlin-series-11.Property.html",
+"date"     : "2024-10-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 10.null",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/31/Kotlin-series-10.Null.html",
+"date"     : "2024-10-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 09.classandobject",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/30/Kotlin-series-09.ClassAndObject.html",
+"date"     : "2024-10-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 08.kotlinsummary01",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/30/Kotlin-series-08.KotlinSummary01.html",
+"date"     : "2024-10-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 07.exception",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/30/Kotlin-series-07.Exception.html",
+"date"     : "2024-10-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 06. loop",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/29/Kotlin-series-06.-loop.html",
+"date"     : "2024-10-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 05.condition",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/29/Kotlin-series-05.condition.html",
+"date"     : "2024-10-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 04.packageimport",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/29/Kotlin-series-04.PackageImport.html",
+"date"     : "2024-10-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 03.function",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/28/Kotlin-series-03.Function.html",
+"date"     : "2024-10-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 02.grammar",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/28/Kotlin-series-02.Grammar.html",
+"date"     : "2024-10-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[kotlin Series] 01.kotlin",
+"category" : "",
+"tags"     : "",
+"url"      : "/kotlin/2024/10/28/Kotlin-series-01.Kotlin.html",
+"date"     : "2024-10-28 00:00:00 +0900"
+} ,
+
+{
 "title"    : "[docker Series] 18.servicemesh",
 "category" : "",
 "tags"     : "",

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 29.reflection | newkayak12.github.io</title>
+	<meta name="description"
+		content="Reflection">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/17/Kotlin-series-29.Reflection.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 29.reflection</h1>
+    
+    <p class="meta">
+      November 17, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="reflection">Reflection</h1>
+
+<p><img src="../assets/img/reflection.png" alt="reflection.png" /></p>
+
+<h2 id="지정자와-타입">지정자와 타입</h2>
+<ul>
+  <li>KClass<T>: 컴파일 시점에 T 타입인 클래스나 인터페이스, 객체 선언을 런타임에 표현
+</T>    <ol>
+      <li>isAbstract: Boolean</li>
+      <li>isCompanion: Boolean</li>
+      <li>isData: Boolean</li>
+      <li>isFinal: Boolean</li>
+      <li>isInner: Boolean</li>
+      <li>isOpen: Boolean</li>
+      <li>isSealed: Boolean</li>
+      <li>visibility
+        <ul>
+          <li>KVisibility [PUBLIC, PROTECTED, INTERNAL, PRIVATE]</li>
+        </ul>
+      </li>
+      <li>constructor: 객체 선언이라면 빈 컬렉션을 반환. 이 경우 objectInstance 프로퍼티를 사용해야 한다.</li>
+      <li>members</li>
+      <li>nestedClass</li>
+      <li>typeParameter</li>
+    </ol>
+  </li>
+  <li>KTypeParameter: 어떤 제네릭 선언의 타입 파라미터를 표현
+    <ol>
+      <li>isReified: Boolean</li>
+      <li>name: String</li>
+      <li>upperBounds: List<KType></KType></li>
+      <li>variance: KVariance : KVariance enum으로 변성을 돌러준다.
+        <ul>
+          <li>isMarkedNullable: null 가능성</li>
+          <li>classifier: 지정자. 지정자는 타입을 정의하는 클래스, 인터페이스나 객체 선언을 가리킨다.</li>
+          <li>타입 프로퍼티에 전달된 실제 타입 인자 목록</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>타입 별명을 표현하는 reflectionAPI가 없다.</li>
+  <li><code class="language-plaintext highlighter-rouge">::class</code>를 사용하면 결과 값에 대한 런타임 클래스를 얻을 수 있다.</li>
+</ul>
+
+<h2 id="호출-가능">호출 가능</h2>
+<ul>
+  <li>callable은 어떤 결과를 얻기 위해서 호출할 수 있는 함수나 프로퍼티를 함께 묶어준다.</li>
+  <li>KCallalbe<out R="">이라고 표현한다.
+</out>    <ul>
+      <li>val isAbstrasct: Boolean</li>
+      <li>val isFinal: Boolean</li>
+      <li>val isOpen: Boolean</li>
+      <li>val isSuspend: Boolean : 일시 중단 가능한 계산을 지원하는 호출 가능 객체에서 사용한다.</li>
+      <li>val visibility: KVisibility</li>
+    </ul>
+  </li>
+  <li>
+    <p>call()이라는 함수가 있어서 호출할 수 있다.</p>
+  </li>
+  <li>KParameter는 멤버 및 확장 선언의 수신 객체나 함수/생성자의 파라미터에 대한 정보를 포함한다.
+    <ul>
+      <li>val index: Int</li>
+      <li>val isOptional: Boolean
+        <ul>
+          <li>INSTANCE</li>
+          <li>EXTENSION_RECEIVER</li>
+          <li>VALUE</li>
+        </ul>
+      </li>
+      <li>val isVararg: Boolean</li>
+      <li>name: String?</li>
+      <li>type: KType</li>
+      <li>
+        <p>kind: KParamter</p>
+      </li>
+      <li>KProperty/KMutableProperty: 프로퍼티에만 있는 변경자를 검사하는 프로퍼티를 추가로 제공한다.
+        <ul>
+          <li>val isConst: Boolean</li>
+          <li>val isLateinit: Boolean</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>KFunction: 다양한 인자 개수를 지원해야 하므로 어떤 함수 타입도 상속하지 않는다.
+    <ul>
+      <li>val isInfix: Boolean</li>
+      <li>val isInline: Boolean</li>
+      <li>val isOperator: Boolean</li>
+      <li>val isSuspend: Boolean</li>
+    </ul>
+  </li>
+  <li>추가로 리플렉션을 이용하면 가시성이 제한되는 요소에도 접근할 수 있다. <code class="language-plaintext highlighter-rouge">setAccessible(true)</code>로 설정하면 말이다.</li>
+</ul>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/16/Kotlin-series-28.Annotation.html">
+        [kotlin Series] 28.annotation
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/18/Kotlin-series-30.DSL.html">
+        [kotlin Series] 30.dsl
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 16.kotlinsummary02 | newkayak12.github.io</title>
+	<meta name="description"
+		content="여기까지 정리 2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/03/Kotlin-series-16.KotlinSummary02.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 16.kotlinsummary02</h1>
+    
+    <p class="meta">
+      November 3, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="여기까지-정리-2">여기까지 정리 2</h1>
+
+<ol>
+  <li>고차함수란?
+    <ul>
+      <li>다른 함수를 파라미터로 받거나 함수를 반환하는 함수</li>
+    </ul>
+  </li>
+  <li>코틀린의 람다, 자바의 람다와의 차이?
+    <ul>
+      <li>람다가 함수 인자면 트레일링 클로저처럼 뺼 수 있다.</li>
+      <li>람다 인자가 하나면 이름 지정 없이 <code class="language-plaintext highlighter-rouge">it</code>로 뺄 수 있다.</li>
+    </ul>
+  </li>
+  <li>코틀린의 함수 타입, 자바의 함수형 인터페이스와 차이?
+    <ul>
+      <li>함수 타입은 함수처럼 쓰일 수 있는 값들을 표시하는 타입이다.</li>
+      <li>함수 타입은 SAM 인터페이스로 암시적으로 변환할 수 없다.</li>
+      <li>자바의 SAM은 람다나 메소드 참조로 인스턴스화할 수 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>SAM(Single Abstract Method)</p>
+</blockquote>
+
+<ol>
+  <li>수신 객체가 있는 함수 타입, 없는 함수 타입
+    <ul>
+      <li>수신 객체 X:  (Int) -&gt; Int</li>
+      <li>수신 객체 O: Int.(Int) -&gt; Int</li>
+    </ul>
+  </li>
+  <li>익명 함수와 람다의 차이
+    <ul>
+      <li>익명 함수는 fun(parameter)의 형태로 작성하는 이름이 없는 함수</li>
+    </ul>
+  </li>
+  <li>인라인 함수와 제약
+    <ul>
+      <li>inine함수는 컴파일 타임에 해당 선언을 인라인으로 넣어준다. 이러면 오버헤드가 줄어들게 된다.</li>
+    </ul>
+  </li>
+  <li>호출 가능 참조
+    <ul>
+      <li>람다나 익명함수로 함수 값을 만들었을 때 이미 선언되어 있고 이를 함수로 넘기려면</li>
+      <li><code class="language-plaintext highlighter-rouge">::functionName</code>으로 넘길 수 있다.</li>
+    </ul>
+  </li>
+  <li>람다와 익명 함수 안에서의 return
+    <ul>
+      <li>비지역적 반환(non-local return)이 일어난다.</li>
+      <li><strong>비지역적 반환은 특정 블록이나 람다 표현식의 스코프를 벗어나 바깥쪽 함수나 스코프로 반환하는 것을 의미한다.</strong>
+        <ul>
+          <li>이러면
+            <ol>
+              <li>흐름 제어에서 예기치 않은 반환이 일어난다.</li>
+              <li>유지보수가 어려워진다.</li>
+              <li>테스트도 어려워진다.</li>
+              <li>가독성도 떨어진다.</li>
+              <li>안정성이 떨어진다.</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>이 말은 즉, 람다나 익명함수가 컴파일되면 inline이 된다.</li>
+    </ul>
+  </li>
+  <li>inline, noinline, crossinline
+    <ul>
+      <li>inline: 컴파일 타임에 코드를 아예 해당 부분에 바로 넣는다.(원래 거기 있는 것처럼)</li>
+      <li>noinline: inline을 막는다.</li>
+      <li>crossinline: 주로 비지역적 제어흐름을 막기 위해서 사용한다.</li>
+    </ul>
+  </li>
+  <li>확장함수란?
+    <ul>
+      <li>어떤 클래스의 멤버인 것처럼 호출할 수 있는, 그러나 멤버는 아닌 함수를 의미한다.</li>
+    </ul>
+  </li>
+  <li>동반객체확장
+    <ul>
+      <li>클래스에 내포된 객체 중에서 바깥 클래스의 이름으로 객체 멤버에 접근할 수 있는 companion 레벨에서 확장하는 것을 의미한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">Companion</code> 을 명시한다.</li>
+    </ul>
+  </li>
+  <li>확장 프로퍼티와 제약
+    <ul>
+      <li>다른 일반 멤버와 마찬가지로 확장프로퍼티에 접근할 수 있다.</li>
+      <li>그러나 안정적으로 상태를 추가할 방법이 없어서 뒷받침 필드를 사용할 수 없고</li>
+      <li>lateinit 등도 불가하다.</li>
+      <li>lazy도 (delegate) 쓸 수는 있는데 의미가 없다.</li>
+      <li>명시적 get/set이 필요하다.</li>
+    </ul>
+  </li>
+  <li>클래스 내부에서 확장 함수 선언의 주의점?
+    <ul>
+      <li>캡슐화는 꺨 수 없지만 시그니쳐가 겹치면 멤버를 먼저 콜해서 원하는 대로 동작하지 않을 수 있다.</li>
+    </ul>
+  </li>
+  <li>영역 함수란?
+    <ul>
+      <li>
+        <p>apply, with, let, also, run 등이 있다.</p>
+
+        <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="nf">with</span><span class="p">(</span><span class="n">receiver</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="nc">T</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">):</span> <span class="nc">R</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">receiver</span><span class="p">.</span><span class="nf">block</span><span class="p">()</span>
+    <span class="p">}</span>
+      
+      
+    <span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">also</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">):</span> <span class="nc">T</span> <span class="p">{</span>
+    <span class="nf">block</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+      
+      
+    <span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="nc">T</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">):</span> <span class="nc">T</span> <span class="p">{</span>
+    <span class="nf">block</span><span class="p">()</span>
+    <span class="k">return</span> <span class="k">this</span>
+    <span class="p">}</span>
+      
+      
+    <span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">let</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">):</span> <span class="nc">R</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">block</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="p">}</span>
+      
+      
+    <span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="nc">T</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">):</span> <span class="nc">R</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">block</span><span class="p">()</span>
+    <span class="p">}</span>
+ 
+<span class="cm">/**
+ *   with, also, apply, let, run은 3가지 차이점 중 한 가지가 서로 다르다.
+ * 1. 범위 지정 함수 호출 시 수신 객체가 매개 변수로 명시적으로 전달되거나 수신 객체의 확장 함수 형태로 암시적 수신 객체로 전달  
+ * 2. 범위 지정 함수의 수신 객체 지정 람다에 전달되는 수신 객체가 명시적으로 매개 변수로 전달되거나 수신 객체의 확장 함수로 암시적인 수신 객체로 코드 블록 내부로 전달
+ * 3. 범위 지정 함수의 결과로 수신 객체를 그래로 반환하거나 수신 객체 지정 람다의 실행 결과 반환
+**/</span>
+</code></pre></div>        </div>
+        <ul>
+          <li>apply 사용 예시: 수신 객체 람다 내부에서 수신 객체의 함수를 사용하지 않고 수신 객체를 다시 반환하려는 경우</li>
+          <li>also 사용 예시: 수신 객체의 프로퍼티나 함수 대신에 객체 자기 자신에 대한 참조가 필요한 경우</li>
+          <li>let 사용 예시: null safety 체크에서 많이 사용</li>
+          <li>with 사용 예시: NonNull 수신객체이고 결과가 필요하지 않은 경우</li>
+          <li>run 사용 예시: 값을 계산할 필요가 있거나 여러 개의 지역 변수 범위를 제한하려고 할 떄</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/02/Kotlin-series-15.MethodReference.html">
+        [kotlin Series] 15.methodreference
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/04/Kotlin-series-17.Enum.html">
+        [kotlin Series] 17.enum
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

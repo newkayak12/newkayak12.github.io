@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 31.delegationproperty | newkayak12.github.io</title>
+	<meta name="description"
+		content="위임 프로퍼티">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/11/19/Kotlin-series-31.DelegationProperty.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 31.delegationproperty</h1>
+    
+    <p class="meta">
+      November 19, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="위임-프로퍼티">위임 프로퍼티</h1>
+
+<h2 id="기본-위임-프로퍼티">기본 위임 프로퍼티</h2>
+<ul>
+  <li>lazy 같은 것을 의미한다.</li>
+  <li>lazy는 여러 버전의 구현이 있다. <code class="language-plaintext highlighter-rouge">LazyThreadSafetyMode</code>로 이를 정할 수 있다.
+    <ol>
+      <li>SYNCHRONIZED: 프로퍼티 접근을 동기화한다. 따라서 한 번에 한 쓰레드만 프로퍼티 값을 초기화 할 수 있다.(default)</li>
+      <li>PUBLICATION: 초기화 함수가 여러 번 호출될 수 있지만 가장 처음 도착한 결과가 프로퍼티 값이 되도록 둔다.</li>
+      <li>NONE: 프로퍼티 접근을 동기화 하지 않는다. 쓰레드 safe하지 않다.</li>
+    </ol>
+  </li>
+  <li>초기화 함수가 예외를 던지면 초기화되지 않는다.</li>
+  <li><code class="language-plaintext highlighter-rouge">kotlin.properties.Delegates</code>의 멤버를 통해서 몇 가지 표준 위임을 사용할 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">NotNull</code>은 함수 프로퍼티 초기화를 미루면서 Null이 아닌 프로퍼티를 정의할 수 있게 해준다. (lateinit과 결과적으로 같다.)</li>
+  <li><code class="language-plaintext highlighter-rouge">observable</code>은 변화에 따라 통지받을 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">vetoable</code>은 observable과 비슷하지만 초깃값을 받고 boolean을 뱉는 람다를 받는 인자를 가진다. 변경 시도에 따라 변경 전 이 람다가 콜되고 true면 변경된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">beforeChange</code>, <code class="language-plaintext highlighter-rouge">afterChange</code>등도 있다.</li>
+</ul>
+
+<h2 id="커스텀-위임-프로퍼티">커스텀 위임 프로퍼티</h2>
+<ul>
+  <li>커스텀 위임을 만들고자 한다면 읽고 쓰는 방법을 구현해야 한다.</li>
+  <li>연산자 함수들을 정의하는 특별한 타입이 필요하다. 읽기 함수 이름은 <code class="language-plaintext highlighter-rouge">getValue</code>여야 하고 <code class="language-plaintext highlighter-rouge">receiver</code>, <code class="language-plaintext highlighter-rouge">property</code>를 받는다.</li>
+  <li>receiver는 수신 객체 값이 들어 있고, 위임된 프로퍼티의 수신 객체와 같은 타입이어야 한다.</li>
+  <li>property는 프로퍼티 선언을 표현하는 리플렉션이 들어 있다. <code class="language-plaintext highlighter-rouge">KProperty&lt;*&gt;</code>이거나 상위 타입이어야 한다.</li>
+  <li>이 두 파라미터는 이름보다 타입이 중요하다. <code class="language-plaintext highlighter-rouge">getValue()</code>는 반드시 위임 프로퍼티 타입과 같거나 하위 타입이어야 한다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">import</span> <span class="nn">com.sun.org.apache.xml.internal.security.Init</span>
+<span class="k">import</span> <span class="nn">kotlin.reflect.KProperty</span>
+
+<span class="kd">class</span> <span class="nc">Cachable</span><span class="p">&lt;</span><span class="k">in</span> <span class="nc">R</span><span class="p">,</span> <span class="k">out</span> <span class="nc">T</span> <span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">init</span><span class="p">:</span> <span class="nc">R</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">T</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">map</span> <span class="p">=</span> <span class="nc">HashMap</span><span class="p">&lt;</span><span class="nc">R</span><span class="p">,</span> <span class="nc">T</span><span class="p">&gt;()</span>
+
+  <span class="k">operator</span> <span class="k">fun</span> <span class="nf">getValue</span><span class="p">(</span><span class="n">receiver</span><span class="p">:</span> <span class="nc">R</span><span class="p">,</span> <span class="n">property</span><span class="p">:</span> <span class="nc">KProperty</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;):</span> <span class="nc">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">map</span><span class="p">.</span><span class="nf">getOrPut</span><span class="p">(</span><span class="n">receiver</span><span class="p">)</span> <span class="p">{</span> <span class="n">receiver</span><span class="p">.</span><span class="nf">init</span><span class="p">()</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">R</span><span class="p">,</span> <span class="nc">T</span> <span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;</span> <span class="nf">cached</span><span class="p">(</span><span class="n">init</span><span class="p">:</span> <span class="nc">R</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">T</span><span class="p">)</span> <span class="p">=</span> <span class="nc">Cachable</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">firstName</span><span class="p">:</span> <span class="nc">STring</span><span class="p">,</span> <span class="kd">val</span> <span class="py">familyName</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> 
+<span class="kd">val</span> <span class="py">Person</span><span class="p">.</span><span class="n">fullName</span><span class="p">:</span> <span class="nc">String</span> <span class="k">by</span> <span class="nf">cached</span> <span class="p">{</span> <span class="s">"$firstName $familyName"</span> <span class="p">}</span>
+
+
+<span class="c1">//여기서 읽기 전용을 만들고 싶다면 `kotlin.properties.ReadOnlyProperty`</span>
+</code></pre></div></div>
+<ul>
+  <li>읽고 쓰는 것을 정의하려면 <code class="language-plaintext highlighter-rouge">getValue()</code>, <code class="language-plaintext highlighter-rouge">setValue()</code>를 정의해야 한다.  receiver, property, newValue 세 가지 파라미터를 받는다</li>
+  <li>kotlin 1.1부터는 <code class="language-plaintext highlighter-rouge">provideDelegate()</code> 함수를 통해서 위임 인스턴스화를 제어할 수 있다. 기본적으로 프로퍼티 선언 뒤의 by 키워드 다음에 오는 식을 통해 위임 인스턴스를 정의한다.</li>
+</ul>
+
+<h2 id="위임-표현">위임 표현</h2>
+<ul>
+  <li>러타임에 위임은 별도의 필드에 저장한다. 반면 프로퍼티 자체에 대해서는 접근자가 자동으로 생성된다. 이 접근자는 위임에 있는 적절한 메소드를 호출한다.
+```kotlin
+class Person (val firstName: String, val familyName: String ) {
+  var age: Int by finalLateInit()
+}
+//이 코드는</li>
+</ul>
+
+<p>class Person (val firstName: String, val familyName: String ) {
+  private val <code class="language-plaintext highlighter-rouge">age$delegate</code> = finalLateInit&lt;Person, Int&gt;()</p>
+
+<p>var age: Int
+    get() = <code class="language-plaintext highlighter-rouge">age$delegate</code>.getValue(this, this::age)
+    set(value) {
+      <code class="language-plaintext highlighter-rouge">age$delegate</code>.setValue(this, this::age, value)
+    }
+}</p>
+
+<p>```</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/11/18/Kotlin-series-30.DSL.html">
+        [kotlin Series] 30.dsl
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/11/20/Kotlin-series-32.KotlinWithJava.html">
+        [kotlin Series] 32.kotlinwithjava
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

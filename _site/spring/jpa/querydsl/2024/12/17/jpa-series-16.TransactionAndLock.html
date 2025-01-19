@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[jpa Series] 16.transactionandlock | newkayak12.github.io</title>
+	<meta name="description"
+		content="트랜잭션, 락">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/jpa/querydsl/2024/12/17/jpa-series-16.TransactionAndLock.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[jpa Series] 16.transactionandlock</h1>
+    
+    <p class="meta">
+      December 17, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="트랜잭션-락">트랜잭션, 락</h1>
+
+<h2 id="트랜잭션-acid">트랜잭션, ACID</h2>
+<ul>
+  <li><strong>A</strong>tomicity: 트랜잭션 내 작업은 하나의 작업처럼 모두 성공하거나 실패해야만 한다.</li>
+  <li><strong>C</strong>ontitnency: 모든 트랜잭션은 일관성있는 DB 상태를 유지해야 한다.</li>
+  <li><strong>I</strong>solation: 동시에 실행되는 트랜잭션들이 서로에게 영향을 미치지 않아야 한다.</li>
+  <li><strong>D</strong>urability: 트랜잭션을 성공적으로 끝내면 항상 결과가 기록되어야 한다.</li>
+</ul>
+
+<h2 id="격리-정도">격리 정도</h2>
+<ul>
+  <li>READ UNCOMMITED ( 커밋되지 않은 읽기)</li>
+  <li>READ COMMITTED(커밋된 읽기)</li>
+  <li>REPEATABLE READ ( 반복 가능한 읽기 )</li>
+  <li>SERIALIZABLE( 직렬화 가능 )</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">격리 수준</th>
+      <th style="text-align: center">DirtyRead(ReadUncommitted)</th>
+      <th style="text-align: center">Non-RepeatableRead</th>
+      <th style="text-align: center">PhantomRead</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">READ UNCOMMITED</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">READ COMMITTED</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">o</td>
+      <td style="text-align: center">o</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">REPEATABLE READ</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">o</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">SERIALIZABLE</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>ReadUnCommitted: 커밋하지 않은 데이터를 읽을 수 있다.</li>
+  <li>ReadCommitted: 커밋한 데이터만 읽을 수 있다. 그러나 Non-RepeatableRead가 발생할 수 있다.</li>
+  <li>RepeatableRead: 한 번 조회한 데이터를 반복해서 조회해도 같은 데이터가 조회된다. PhatomRead가 발생할 수 있다.</li>
+  <li>Serializable: 가장 엄격한 격리 수준</li>
+</ul>
+
+<blockquote>
+  <p>참고 <a href="https://mangkyu.tistory.com/299">MVCC</a></p>
+</blockquote>
+
+<h2 id="낙관적-락--비관적-락">낙관적 락 , 비관적 락</h2>
+<ul>
+  <li>ReadCommitted라도 1차 캐시로 낙관적 락을 사용할 수 있다. 그러나 스칼라 값을 조회해서 영속성 컨텍스트 관리를 받지 못하면 크게 의미가 없다.</li>
+</ul>
+
+<h3 id="낙관적-락">낙관적 락</h3>
+<ul>
+  <li>트랜잭션 대부분은 충돌하지 않는다고 낙관적으로 가정하는 방법이다.</li>
+  <li>DB락을 이용하는게 아니라 JPA에서 버전관리 기능을 사용한다.</li>
+  <li>커밋하기 전까지는 충돌이 생길지 모른다.</li>
+</ul>
+
+<h3 id="비관적-락">비관적 락</h3>
+<ul>
+  <li>트랜잭션이 충돌한다고 가정하고 우선 락을 걸고 보는 방법이다.</li>
+  <li>selectForUpdate가 있다.</li>
+</ul>
+
+<h3 id="두-번-갱신-분실">두 번 갱신 분실</h3>
+<ul>
+  <li>A, B가 동시 수정하면 마지막 수정 사항만 남는다.
+    <ol>
+      <li>마지막만 인정</li>
+      <li>최초만 인정</li>
+      <li>둘의 내용 병합</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="version"><code class="language-plaintext highlighter-rouge">@Version</code></h3>
+<ul>
+  <li>적용 가능한 타입은 Long, Integer, Short, Timestamp다.</li>
+  <li>조회 시점 버전과 수정 시점의 버전이 다르면 예외를 발생시킨다.</li>
+  <li>자연스럽게 최초 커밋만 인정하는 방향으로 결정된다.</li>
+  <li>버전은 엔티티 값을 변경하면 증가한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Version</code> 값은 JPA가 직접 관리하므로 임의 수정하면 안된다.</li>
+</ul>
+
+<h3 id="jpa-락">JPA 락</h3>
+<ul>
+  <li>아래의 경우에 사용할 수 있다.
+    <ul>
+      <li>EntityManager.lock(), EntityManger.find (), EntityManager.refresh ()</li>
+      <li>Query.setLockMode()</li>
+      <li>@NamedQuery</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Board board = em. find (Board.class, id, LockModeType.OPTIMISTIC)</code> 같이 걸거나</li>
+  <li><code class="language-plaintext highlighter-rouge">em.lock(~, LockModeType.OPTIMISTIC)</code> 이렇게 후에 걸 수 도 있다.</li>
+</ul>
+
+<h4 id="lockmodetype">LockModeType</h4>
+<p>|락 |모드 타입| 설명|
+|:—-:|:—–|:—-:|
+|낙관적 락| OPTIMISTIC |낙관적 락을 사용한다.|
+|낙관적 락| OPTIMISTIC_FORCE_INCREMENT| 낙관적 락 + 버전정보를 강제로 증가한다.|
+|비관적 락| PESSIMISTIC_READ| 비관적 락 , 읽기 락을 사용한다.|
+|비관적 락| PESSIMISTIC_WRITE| 비관적 락 , 쓰기 락을 사용한다.|
+|비관적 락| PESSIMISTIC_FORCE_INCREMENT| 비관적 락 + 버전정보를 강제로 증가한다.|
+|기타 |NONE| 락을 걸지 않는다.|
+|기타 |READ |JPA1.0 호환 기능이다. OPTIMISTIC 과 같으므로 OPTIMISTIC 을 사용하면 된다.|
+|기타 |WRITE |JPA1.0 호환 기능이다. OPTIMISTIC_FORCE_IMCREMENT 와 같다.|</p>
+
+<h3 id="jpa-낙관적-락">JPA 낙관적 락</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@Version</code>을 사용한다.</li>
+  <li>Exception은 아래와 같다.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">jakarta.persistence.OptimisticLOckException</code></li>
+      <li><code class="language-plaintext highlighter-rouge">org.hibernate.StaleObjectStateException</code></li>
+      <li><code class="language-plaintext highlighter-rouge">org.springframework.orm.ObjectOptimisticLockingFailureException</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="none">None</h4>
+<ul>
+  <li>락옵션 없어도 <code class="language-plaintext highlighter-rouge">@Version</code>으로 적용한다.</li>
+  <li>조회한 엔티티를 수정할 때 다른 트랜잭션에 의해 변경(삭제)되지 않아야 할 때 사용한다. (두 번 갱신 분실 문제 예방)</li>
+</ul>
+
+<h4 id="optimistic">OPTIMISTIC</h4>
+<ul>
+  <li>엔티티 조회만 해도 버전을 체크한다.</li>
+  <li>조회한 엔티티는 트랜잭션이 끝날 때까지 다른 트랜잭션에 의해 변경되지 않아야 한다. (조회 ~ 트랜잭션 끝까지 다른 트랜잭션에 변경되지 않아야 한다. -&gt; DirtyRead, Non-RepeatableRead 방지)</li>
+</ul>
+
+<h4 id="optimistic_force_increment">OPTIMISTIC_FORCE_INCREMENT</h4>
+<ul>
+  <li>낙관적 락을 사용하면 버전 정보 강제로 증가.</li>
+  <li>논리적인 단위의 엔티티 묶을음 관리할 수 있다. (엔티티 수정이 없어도 버전을 올린다. )</li>
+</ul>
+
+<h3 id="jpa-비관적-락">JPA 비관적 락</h3>
+<ul>
+  <li>select for update 구문을 사용하면서 버전 정보는 저장하지 않는다.</li>
+  <li>주로  PESSIMISTIC_WRITE 를 사용한다.
+    <ul>
+      <li>엔티티가 아닌 스칼라로 조회할 때도 사용 가능</li>
+      <li>데이터를 수정하는 즉시 트랜잭션 충돌을 감지할 수 있다.</li>
+    </ul>
+  </li>
+  <li>예외는 아래와 같다.
+    <ul>
+      <li>jakarta.persistence.PessimisticLockException</li>
+      <li>org.springframework.dao.PessimisticLockingFailureException</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="pessimistic_write">PESSIMISTIC_WRITE</h4>
+<ul>
+  <li>비관적 락이라고 할 경우 보통 이 옵션이다. DB 쓰기 락을 건다.</li>
+  <li>select for update로 락을 건다. -&gt; Non-RepeatableRead 방지한다.</li>
+</ul>
+
+<h4 id="pessimistic_read">PESSIMISTIC_READ</h4>
+<ul>
+  <li>데이터 반복 읽기, 수정하지 않는 용도의 락이다.</li>
+  <li>vendor에 따라 PESSIMISTIC_WRITE로 걸리는 경우도 있다.</li>
+</ul>
+
+<h4 id="pessimistic_force_increment">PESSIMISTIC_FORCE_INCREMENT</h4>
+<ul>
+  <li>비관적 락 중 유일하게 버전 정볼르 사용한다.</li>
+  <li>비관적 락이지만 버전 정보를 강제로 증가시킨다.</li>
+  <li>nowait을 지원하지 않으면 for update로 동작한다.</li>
+</ul>
+
+<blockquote>
+  <p>참고 <a href="https://velog.io/@damongsanga/MySQL-읽기락과-쓰기락-REPETABLE-READ와-READ-COMMITTED">읽기락, 쓰기락</a></p>
+</blockquote>
+
+<h4 id="비관적-락-타임-아웃">비관적 락, 타임 아웃</h4>
+<ul>
+  <li>무한정 기다릴 수 없을 때 타임아웃을 줄 수 있다. <code class="language-plaintext highlighter-rouge">jakarta.persistence.LockTimeoutException</code>이 발생한다.</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/16/jpa-series-15.Optimize.html">
+        [jpa Series] 15.optimize
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/18/jpa-series-17.Cache.html">
+        [jpa Series] 17.cache
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

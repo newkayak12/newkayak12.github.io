@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[jpa Series] 14.additionalfeatures | newkayak12.github.io</title>
+	<meta name="description"
+		content="부가 기능">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/spring/jpa/querydsl/2024/12/15/jpa-series-14.AdditionalFeatures.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[jpa Series] 14.additionalfeatures</h1>
+    
+    <p class="meta">
+      December 15, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="부가-기능">부가 기능</h1>
+
+<ul>
+  <li>JPA는 자바에서 제공하는 Collection, List, Set, Map 컬렉션을 지원한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@OneToMany</code>,<code class="language-plaintext highlighter-rouge">@ManyToMany</code>를 사용해서 1:N, N:M 매핑</li>
+  <li><code class="language-plaintext highlighter-rouge">@ElementCollection</code>을 이용해서 값 타입을 하나 이상 보관</li>
+  <li>컬렉션 필드를 hibernate는 미리 준비한 컬렉션으로 감싸서 사용한다.
+    <ol>
+      <li>Collection, List는 중복을 허용하므로 <code class="language-plaintext highlighter-rouge">PersistentBag</code>을 래퍼로 사용한다. ( 엔티티를 추가해도 지연 로딩된 컬렉션을 초기화 하지 않는다. )</li>
+      <li>List + <code class="language-plaintext highlighter-rouge">@OrderColumn</code> 순서 보장을 원한다면 사용하면 된다. DB에서 순서 값도 함께 관리한다. 순서 변경시 뒤의 row의 값도 연쇄적으로 수정된다.</li>
+      <li>Set은 중복을 허용하지 않으므로 <code class="language-plaintext highlighter-rouge">PersistentSet</code>을 래퍼로 사용한다. (HibernateSet으로 초기화 + hascode도 함께 사용해야 한다.)</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="orderby-where">@OrderBy, @Where</h2>
+<ul>
+  <li>DB의 orderBy, where을 명시적으로 해당 엔티티를 제공하면 사용하도록 할 수 있다.</li>
+</ul>
+
+<h2 id="converter">@Converter</h2>
+<ul>
+  <li>엔티티의 데이터를 변환해서 DB에 저장할 수 있게 한다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AttributeConverter</span> <span class="o">&lt;</span><span class="no">X</span><span class="o">,</span> <span class="no">Y</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="no">Y</span> <span class="nf">convertToDatabaseColumn</span> <span class="o">(</span><span class="no">X</span> <span class="n">attribute</span><span class="o">);</span> <span class="c1">// 엔티티 -&gt; DB</span>
+  <span class="kd">public</span> <span class="no">X</span> <span class="nf">convertToEntityAttribute</span> <span class="o">(</span><span class="no">Y</span> <span class="n">dbData</span><span class="o">);</span><span class="c1">// DB -&gt; 엔티티</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>위의 인터페이스를 구현해서 컨버터를 작성한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">@Converter(autoApply = true)</code>로 글로벌 적용할 수 있다.</li>
+</ul>
+
+<h2 id="listener">Listener</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PrePersist</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PostLoad</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PreUpdate</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PreRemove</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PostPersist</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PostUpdate</code></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">PostRemove</code></p>
+  </li>
+  <li>직접 받거나 별도의 리스너를 등록해서 받을 수 있다.
+    <ol>
+      <li>엔티티에 직접 적용
+        <blockquote>
+          <p><code class="language-plaintext highlighter-rouge">@PrePersist</code>, <code class="language-plaintext highlighter-rouge">@PostLoad</code>, <code class="language-plaintext highlighter-rouge">@PreUpdate</code>, <code class="language-plaintext highlighter-rouge">@PreRemove</code>, 
+<code class="language-plaintext highlighter-rouge">@PostPersist</code>,<code class="language-plaintext highlighter-rouge">@PostUpdate</code>, <code class="language-plaintext highlighter-rouge">@PostRemove</code></p>
+
+          <ul>
+            <li>
+              <h2 id="위의-어노테이션을-붙여서-작동시킨다">위의 어노테이션을 붙여서 작동시킨다.</h2>
+            </li>
+          </ul>
+        </blockquote>
+      </li>
+      <li>별도 리스너 등록
+        <blockquote>
+          <h2 id="entitylistenersclass를-붙여서-한다"><code class="language-plaintext highlighter-rouge">@EntityListeners(~.class)</code>를 붙여서 한다.</h2>
+        </blockquote>
+      </li>
+      <li>기본 리스너 사용
+        <blockquote>
+
+        </blockquote>
+      </li>
+    </ol>
+  </li>
+  <li>여러 리스너를 사용하면 <code class="language-plaintext highlighter-rouge">1. 기본 리스너</code> &gt; <code class="language-plaintext highlighter-rouge">2. 부모 클래스 리스너</code> &gt; <code class="language-plaintext highlighter-rouge">3. 리스너</code> &gt;  <code class="language-plaintext highlighter-rouge">4. 엔티티</code> 순으로 적용된다.</li>
+</ul>
+
+<h2 id="엔티티-그래프">엔티티 그래프</h2>
+<ul>
+  <li>엔티티 그래프는 엔티티 조회 시점에 연관된 엔티티들을 함께 조회하는 기능이다.</li>
+</ul>
+
+<h3 id="1-namedentitygraph">1. NamedEntityGraph</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@NamedEntityGraph(name = , attributeNodes = )</code>로 사용한다.</li>
+  <li>엔티티 그래프는 JPA의 힌트 기능을 사용해서 동작한다. 힌트 키로 <code class="language-plaintext highlighter-rouge">jakarta.persistence.fetchgraph</code>를 사용하고 힌트 값으로 찾아온 엔티티 그래프를 사용하면 된다.</li>
+</ul>
+
+<h3 id="2-subgraph">2. subgraph</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@NamedEntityGraph</code>에 subgraphs로 하위 엔티티의 서브 노드들을 조회할 수도 있다. <code class="language-plaintext highlighter-rouge">@NamedSubgraph</code>로 조회할 수 있다.</li>
+</ul>
+
+<h3 id="3-jpql에서-엔티티-그래프-사용">3. JPQL에서 엔티티 그래프 사용</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">em.find()</code>에 힌트를 추가하면 된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">setHint("jakarta.persistence.fetchgraph", em.getEntityGraph())</code>로 찾는다.</li>
+</ul>
+
+<h3 id="4-동적-엔티티-그래프">4. 동적 엔티티 그래프</h3>
+<p><code class="language-plaintext highlighter-rouge">EntityGraph&lt;A&gt; graph = em.createEntityGraph(A.class)</code>로 동적으로 엔티티 그래프를 구성할 수 있다.</p>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/14/jpa-series-13.PersistenceContext.html">
+        [jpa Series] 13.persistencecontext
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/16/jpa-series-15.Optimize.html">
+        [jpa Series] 15.optimize
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

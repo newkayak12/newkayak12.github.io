@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[kotlin Series] 06. loop | newkayak12.github.io</title>
+	<meta name="description"
+		content="Loop">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/kotlin/2024/10/29/Kotlin-series-06.-loop.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[kotlin Series] 06. loop</h1>
+    
+    <p class="meta">
+      October 29, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="loop">Loop</h1>
+
+<h2 id="while-do-while">while, do-while</h2>
+
+<ul>
+  <li>java의 do-while, while과 같다.</li>
+</ul>
+
+<h2 id="for-iterable">for, iterable</h2>
+<ul>
+  <li>kotlin의 <code class="language-plaintext highlighter-rouge">for</code>는 java의 for-each와 유사하다.</li>
+  <li>kotlin은 문자열에도 루핑할 수 있다.</li>
+  <li>for 루핑을 위해서는 iterable만 구현되면 된다.</li>
+</ul>
+
+<h2 id="break-continue">break, continue</h2>
+<ul>
+  <li>break: 루프를 즉시 종료</li>
+  <li>continue: 현재 iteration을 마치고 다음 루핑을 한다.</li>
+  <li>둘 다 java와 같다.</li>
+  <li>kotlin의 break, continue는 Nothing 타입의 식으로 쓸 수 있다. return 과 마찬가지로</li>
+</ul>
+
+<h2 id="내포된-루프-테이블">내포된 루프, 테이블</h2>
+<ul>
+  <li>loop에 태그를 붙일 수 있다. java와 같다.</li>
+  <li>@으로 마킹한다.
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">loop@</span> <span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="k">break</span><span class="nd">@loop</span>
+</code></pre></div>    </div>
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nl">loop:</span> <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="k">break</span> <span class="n">loop</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="꼬리-재귀">꼬리 재귀</h2>
+<ul>
+  <li>코틀린은 꼬리 재귀함수에 대한 최적화 컴파일을 지원한다.</li>
+  <li>메소드 시그니처에 <code class="language-plaintext highlighter-rouge">tailrec</code>을 붙이면 된다.</li>
+  <li>
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">tailrec</span> <span class="k">fun</span> <span class="nf">binIndexOf</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">array</span><span class="p">:</span> <span class="nc">IntArray</span><span class="p">,</span> <span class="n">from</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">):</span> <span class="nc">Int</span> <span class="p">{</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">from</span> <span class="p">==</span> <span class="n">to</span> <span class="p">)</span> <span class="k">return</span> <span class="p">-</span><span class="mi">1</span>
+<span class="kd">val</span> <span class="py">midIndex</span> <span class="p">=</span> <span class="p">(</span><span class="n">from</span> <span class="p">+</span> <span class="n">to</span> <span class="p">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">mid</span> <span class="p">=</span> <span class="n">array</span><span class="p">[</span><span class="n">midIndex</span><span class="p">]</span>
+<span class="k">return</span> <span class="k">when</span> <span class="p">{</span>
+    <span class="n">mid</span> <span class="p">&lt;</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="nf">binIndexOf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">midIndex</span> <span class="p">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+    <span class="n">mid</span> <span class="p">&gt;</span> <span class="n">x</span> <span class="p">-&gt;</span> <span class="nf">binIndexOf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">midIndex</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">-&gt;</span> <span class="n">midIndex</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/kotlin/2024/10/29/Kotlin-series-05.condition.html">
+        [kotlin Series] 05.condition
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/kotlin/2024/10/30/Kotlin-series-07.Exception.html">
+        [kotlin Series] 07.exception
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

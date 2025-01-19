@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[git Series] Squashandrebase | newkayak12.github.io</title>
+	<meta name="description"
+		content="Squash And Rebase">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/git/2024/12/20/git-series-squashAndRebase.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[git Series] Squashandrebase</h1>
+    
+    <p class="meta">
+      December 20, 2024
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="squash-and-rebase">Squash And Rebase</h1>
+
+<h2 id="merge">Merge</h2>
+
+<div class="mermaid">
+gitGraph
+    commit id: "a commit"
+    commit id: "b commit"
+    branch develop-1
+    commit id: "develop-1 a commit"
+    checkout main
+    branch develop-2
+    commit id: "develop-2 a commit"
+    commit id: "develop-2 b commit"
+    checkout main
+    merge develop-2 id: "merge develop-2 into main"
+    checkout main
+    merge develop-1  id: "merge develop-1 into main"
+</div>
+
+<ul>
+  <li>위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것</li>
+</ul>
+
+<h2 id="squash-merge">Squash Merge</h2>
+
+<div class="mermaid">
+gitGraph
+    commit id: "a commit"
+    commit id: "b commit"
+    branch develop-1
+    commit id: "develop-1 a commit"
+    checkout main
+    branch develop-2
+    commit id: "develop-2 a commit"
+    commit id: "develop-2 b commit"
+    commit id: "develop-2 c commit"
+    commit id: "develop-2 squash (a + b + c) commit"
+    checkout main
+    merge develop-2 id: "merge develop-2 into main"
+    checkout main
+    merge develop-1  id: "merge develop-1 into main"
+</div>
+
+<ul>
+  <li>위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것</li>
+  <li><code class="language-plaintext highlighter-rouge">develop-2</code>의 commit 내역을 합쳐서 새로운 commit을 만들고 이를 merge 대상에 붓는 것을 의미한다.</li>
+  <li>commit history를 합쳐서 깔끔하게 만들 수 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">git merge --squash develop-2</code></li>
+</ul>
+
+<h2 id="rebase-merge">Rebase Merge</h2>
+
+<div class="mermaid">
+gitGraph
+    commit id: "a commit"
+    commit id: "b commit"
+    branch develop-1
+    commit id: "develop-1 a commit"
+    checkout main
+    branch develop-2
+    commit id: "develop-2 a commit x"
+    commit id: "develop-2 b commit x"
+    commit id: "develop-2 c commit x"
+    checkout main
+    merge develop-1  id: "merge develop-1 into main"
+    checkout main
+    commit id: "develop-2 a commit rebased"
+    commit id: "develop-2 b commit rebased"
+    commit id: "develop-2 cx commit rebased"
+</div>
+
+<ul>
+  <li>commit 들이 합쳐지지 않고 main에 추가된다.</li>
+  <li>commit은 모두 하나의 parent를 가진다.</li>
+  <li><code class="language-plaintext highlighter-rouge">git rebase main</code> -&gt; <code class="language-plaintext highlighter-rouge">git checkout main</code> -&gt; <code class="language-plaintext highlighter-rouge">git merge develop-2</code></li>
+  <li>base를 새롭게 설정한다는 의미다.</li>
+  <li><code class="language-plaintext highlighter-rouge">-i</code>로 <code class="language-plaintext highlighter-rouge">--interactive</code>를 주면 rebase를 유저가 상호작용할 수 있게 해준다.</li>
+  <li>커밋 메시지를 수정하거나 몇몇 커밋을 제외하거나 순서를 바꿀 수도 있다.</li>
+  <li><code class="language-plaintext highlighter-rouge">git rebase -i &lt;Commit&gt;</code> 은 Commit ~ HEAD 까지 커밋을 선택한다.
+    <ul>
+      <li>pick: 커밋 수정 없이 그대로 사용</li>
+      <li>reword: 커밋 메시지 수정</li>
+      <li>edit: 커밋 메시지, 작업 내용도 수정</li>
+      <li>squash&amp;fix: 해당 커밋을 이전 커밋과 합친다.</li>
+    </ul>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/spring/jpa/querydsl/2024/12/19/jpa-series-18.MvccAndLock.html">
+        [jpa Series] 18.mvccandlock
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
