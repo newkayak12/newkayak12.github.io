@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Unnecessary Object
 
 - 불필요한 객체 생성은 성능 문제와 메모리 소비 증가로 이어질 수 있다.

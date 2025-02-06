@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # GoldenHammer
 
 - <q>If all you have is hammer, everything looks lika a nail.</q>(망치를 들면 주변 모든 것이 못으로 보인다.) 이라는 말에서 유래

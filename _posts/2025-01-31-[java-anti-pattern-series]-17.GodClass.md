@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # God class
  - 갓 클래스는 너무 많은 책임을 맡고 지나치게 복잡해져서 이해, 테스트 및 유지가 어려운 클래스
 

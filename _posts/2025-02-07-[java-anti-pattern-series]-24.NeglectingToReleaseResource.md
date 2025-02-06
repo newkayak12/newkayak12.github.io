@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Neglecting To Release Resource
 
 - 리소스 해제하지 않는 경우 메모리 누수, 과도한 리소스 낭비, 성능 이슈가 발생할 수 있다.

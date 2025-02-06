@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # MagicNumber
 
 - 코드에 의미있는 설명이나 문맵 없이 하드코딩된 원시 숫자 값을 사용하는 것을 의미

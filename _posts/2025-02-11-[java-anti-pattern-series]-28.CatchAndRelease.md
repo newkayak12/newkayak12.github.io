@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
+
 # Catch and release
 
 - 예외를 받고 처리 없이 다시 던지거나 무시하는 경우

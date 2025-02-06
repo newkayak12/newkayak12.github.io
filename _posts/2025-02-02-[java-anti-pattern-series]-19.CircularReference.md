@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Circular reference
 
 - 두 개 이상의 클래스가 직간접적으로 서로 의존하는 경우

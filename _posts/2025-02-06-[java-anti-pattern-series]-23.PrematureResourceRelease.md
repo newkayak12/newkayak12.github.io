@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Premature Resource Release
 
 - 메모리 누수 방지, 성능 향상을 위해서 리소스를 적절히 관리하는게 중요하다.

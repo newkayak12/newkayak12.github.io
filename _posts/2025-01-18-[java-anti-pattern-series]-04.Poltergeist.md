@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Poltergeist
 
 > 독일어로 Poltern(노크하다)과 Geist(영혼)라는 말의 합성어. '시끄러운 영혼'이라는 뜻으로, ***인지할 수 없는 대상에 의해 물건이 움직이거나 소음이 발생하는 등 물리적 작용이 일어나는 일련의 현상***을 이른다.

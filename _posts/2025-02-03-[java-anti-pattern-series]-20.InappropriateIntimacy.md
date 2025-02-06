@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Inappropriate Intimacy
 
 - 두 클래스가 긴밀하게 얽혀 있어 높은 의존성을 초래하는 경우를 의미한다.

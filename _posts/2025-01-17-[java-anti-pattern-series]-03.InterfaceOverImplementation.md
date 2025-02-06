@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Interface OverImplementation
 
 - 인터페이스에서 불필요한 메소드를 구현하여 코드 중복 및 유지 관리 문제를 일으키는 상황을 말한다.

@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # HardCoding
 
 - 변수나 상수 이용 없이 상수나 매직넘버 같은 고정 값을 코드에 직접 삽입하는 방식을 의미

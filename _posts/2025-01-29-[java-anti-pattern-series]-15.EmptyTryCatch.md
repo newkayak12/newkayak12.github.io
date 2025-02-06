@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # 빈 Catch 블록
 
 - 빈 catch는 오류르 숨기고, 디버깅을 더 어렵게하고, 예기치 않은 동작을 유발하는 등 여러 가지 부정적인 결과를 초래할 수 있다.

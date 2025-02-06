@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Overcomplicated Expression
 
 - 읽기, 이해 및 유지 관리하기 어려운 지나치게 복잡한 코드를 작성하는 것을 의미한다.

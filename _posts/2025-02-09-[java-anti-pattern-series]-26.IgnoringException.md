@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Ignoring Exception
 
 - 예외를 무시하면 예측할 수 없는 동작, 버그 및 보안 취약점이 발생할 수 있으므로 예외를 무시하는 것은 나쁜 습관으로 간주된다.

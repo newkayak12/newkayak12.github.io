@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Thread starvation
 
 - 특정 쓰레드가 공유 리소스를 장시간 보유하는 다른 쓰레드로 인해 공유 리소스에 접근하지 못하고 성능이 저하되고 교착상태까지 발생할 수 있다.

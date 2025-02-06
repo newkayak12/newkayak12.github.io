@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Throws exceptions in finally block
 
 - finally는 예외 여부와 상관없이 실행되어야만 하는 경우에 사용한다.

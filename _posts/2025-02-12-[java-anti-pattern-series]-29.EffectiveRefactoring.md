@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # 효과적인 리팩토링
 
 ## 1. 부풀려진 클래스

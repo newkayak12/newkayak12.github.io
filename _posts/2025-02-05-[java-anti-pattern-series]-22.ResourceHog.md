@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Resource Hog
 
 - 메모리, CPU 또는 네트워크 대역폭과 같은 리소스를 과도하게 사용하는 경우

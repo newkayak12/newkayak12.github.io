@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Unnecessary condition
 
 - 쓸모 없는 조건을 사용하는 것을 의미한다.

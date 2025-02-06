@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Code Clones
 
 - 유사한 코드 블록이 반복되는 안티 패턴이다.

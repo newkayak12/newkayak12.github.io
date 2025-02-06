@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Singleton Abuse
 
 - 싱글톤 패턴을 잘못 사용하거나 남용하는 경우를 의미한다.

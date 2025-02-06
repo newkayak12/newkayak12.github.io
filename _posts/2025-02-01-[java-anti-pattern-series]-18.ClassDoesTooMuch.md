@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Class Does Too Much
 
 - 한 클래스가 너무 많은 일을 담당하는 것 

@@ -1,3 +1,9 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
+
 # Anti-pattern
 
 ## 01. 대표적인 안티 패턴

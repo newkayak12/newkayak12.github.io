@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Anemic Domain Model
 
 - 도메인 객체에 동작이 거의 또는 포함되지 않고 있고 대부분의 비즈니스 로직이 별도의 서비스 또는 관리자 클래스에서 구현되는 안티패턴이다.

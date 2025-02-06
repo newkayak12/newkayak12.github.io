@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Boat Anchor
 
 - 더 이상 필요하지 않거나 사용되지 않지만 계속 존재하여 시스템에 부담을 주는 코드 또는 기능

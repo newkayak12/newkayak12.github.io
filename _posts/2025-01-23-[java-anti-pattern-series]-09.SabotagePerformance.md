@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Sabotage Performance
 
 - 일반적인 성능을 저하시킬 수 있는 안티 패턴

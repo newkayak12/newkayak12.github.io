@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # Locking To Read
 
 - 공유 리소스에 대한 읽기 작업을 보호하기 위해서 잠금을 사용하는 것을 의미한다.

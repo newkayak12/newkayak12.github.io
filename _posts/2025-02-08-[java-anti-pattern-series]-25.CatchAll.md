@@ -1,3 +1,8 @@
+---
+layout: post
+categories: [JAVA, ANTI-PATTERN]
+---
+
 # CatchAll
 
 - 최상위, 추상적 에러로 에러 처리 대상을 선정하는 것은 안티패턴이다.
