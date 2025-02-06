@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[java Anti Pattern Series] 04.poltergeist | newkayak12.github.io</title>
+	<meta name="description"
+		content="Poltergeist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2025/01/18/java-anti-pattern-series-04.Poltergeist.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[java Anti Pattern Series] 04.poltergeist</h1>
+    
+    <p class="meta">
+      January 18, 2025
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="poltergeist">Poltergeist</h1>
+
+<blockquote>
+  <p>독일어로 Poltern(노크하다)과 Geist(영혼)라는 말의 합성어. ‘시끄러운 영혼’이라는 뜻으로, <strong><em>인지할 수 없는 대상에 의해 물건이 움직이거나 소음이 발생하는 등 물리적 작용이 일어나는 일련의 현상</em></strong>을 이른다.</p>
+  <ul>
+    <li>불필요한 임시 객체나 클래스를 생성해, 애플리케이션의 복잡성을 높이는 안티 패턴입니다.</li>
+    <li>이 객체는 주로 단순히 다른 객체의 메서드를 호출하거나 데이터를 전달하는 역할만 수행하며, 독립적으로 존재할 이유가 없습니다.</li>
+    <li>너무 단순해서 객체로 만들 필요가 없는 클래스나 메서드.</li>
+    <li>책임 없는 객체로, 전체 시스템에 기여하지 않음.</li>
+  </ul>
+</blockquote>
+
+<h2 id="특징">특징</h2>
+<ul>
+  <li>사용되지 않는 객체 : 생성되기는 하지만 코드에서 실제로 사용되지 않으</li>
+  <li>메모리 소비 : 가시적인 이점 없이 메모리 리소스를 차지</li>
+  <li>성능 오버헤드 : 불필요한 리소스 할당 및 살당 취소로 인해 성능이 저하될 수 있다.</li>
+  <li>코드 복잡성 : 불필요한 객체와 종속석을 도입하여 코드베이스의  복잡성을 증가시킬 수 있다.</li>
+</ul>
+
+<h2 id="원인">원인</h2>
+<ul>
+  <li>사용하지 않는 코드 : 실제로 사용하지 않는 객체나 컴포넌트를 실수로 만들 수 있다.</li>
+  <li>불완전한 리팩토링 : 리팩토링 과정에서 더 이상 필요하지 않은 객체가 폴터가이스트로 남을 수 있다.</li>
+  <li>임시 디버깅 코드 : 제거했어야 하는 임시 디버깅 코드나 로그 등</li>
+  <li>복붙 : 코드 스니펫의 목적을 이해하지 않고 그냥 복붙</li>
+</ul>
+
+<h2 id="영향">영향</h2>
+<ul>
+  <li>성능 저하</li>
+  <li>메모리 사용량 증가</li>
+  <li>코드 품질 저하</li>
+  <li>디버깅 문제</li>
+  <li>유지 보수 어려움</li>
+</ul>
+
+<h2 id="보수하기">보수하기</h2>
+<ul>
+  <li>코드 리뷰</li>
+  <li>정적 분석 도구</li>
+  <li>단위 테스트</li>
+  <li>리팩토링</li>
+  <li>문서화</li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/2025/01/17/java-anti-pattern-series-03.InterfaceOverImplementation.html">
+        [java Anti Pattern Series] 03.interfaceoverimplementation
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/2025/01/19/java-anti-pattern-series-05.BoatAnchor.html">
+        [java Anti Pattern Series] 05.boatanchor
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>[java Anti Pattern Series] 06.hardcoding | newkayak12.github.io</title>
+	<meta name="description"
+		content="HardCoding">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2025/01/20/java-anti-pattern-series-06.HardCoding.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="newkayak12.github.io"
+		href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet"
+		type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css"
+		integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"
+		integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ"
+		crossorigin="anonymous"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'G-4WXFZQCMT3', 'auto');
+		ga('send', 'pageview');
+	</script>
+	
+</head>
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="/assets/img/avatar.jpeg" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">newkayak12.github.io</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:newkayak12@gmail.com" title="Email">
+		<i class="fas fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/newkayak12" title="Follow on GitHub">
+		<i class="fab fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Search bar -->
+            
+            <li>
+            <form action="/search.html" method="get">
+                <input type="text" id="search-box" name="query" placeholder="Search" class="">
+                <button type="submit" class="">
+                    <i class="fa fa-fw fa-search"></i>
+                </button>
+            </form>
+            </li>
+            
+		</ul>
+	</nav>
+
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">[java Anti Pattern Series] 06.hardcoding</h1>
+    
+    <p class="meta">
+      January 20, 2025
+      
+    </p>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    
+  </header>
+  <section class="post-content"><h1 id="hardcoding">HardCoding</h1>
+
+<ul>
+  <li>변수나 상수 이용 없이 상수나 매직넘버 같은 고정 값을 코드에 직접 삽입하는 방식을 의미</li>
+  <li>변수나 상수를 사용하는 대신 고정 값을 코드에 직접 삽입하는 방식</li>
+  <li>유연성을 떨어뜨리고 향후 변경을 어렵게 만든다.</li>
+</ul>
+
+<h2 id="하드-코딩이-가지는-의의">하드 코딩이 가지는 의의</h2>
+<h3 id="1-유연성-부족">1. 유연성 부족</h3>
+<ul>
+  <li>코드 베이스의 유연성이 떨어진다는 점이다.
+    <h3 id="2-가독성-저하">2. 가독성 저하</h3>
+  </li>
+  <li>코드를 읽고 이해하기 어렵게 만들 수 있다.
+    <h3 id="3-오류-위험-증가">3. 오류 위험 증가</h3>
+  </li>
+  <li>여러 곳에 하드 코딩했다면 수정 중 까먹거나 해서 오류가 발생할 수 있는 잠재적 위협이 된다.
+    <h3 id="4-유지보수의-어려움">4. 유지보수의 어려움</h3>
+  </li>
+  <li>하드코딩된 곳을 고쳐야한다면 찾아가면 직접 고쳐야하므로 유지보수성을 낮춘다.</li>
+</ul>
+
+<h2 id="피하기">피하기</h2>
+<h3 id="1-상수-사용">1. 상수 사용</h3>
+<ul>
+  <li>최상위 또는 별도의 클래스에 상수로 정의
+    <h3 id="2-구성-외부화">2. 구성 외부화</h3>
+  </li>
+  <li>코드 변경 없이 쉽게 업데이트할 수 있는 구성 파일이나 속성 파일로 이동
+    <h3 id="3-값-매개변수화">3. 값 매개변수화</h3>
+  </li>
+  <li>코드 내 하드 코딩 대신 밖에서 파라미터로 전달되도록 구성
+    <h3 id="4-의존성-주입">4. 의존성 주입</h3>
+  </li>
+  <li>의존성 주입 프레임워크로 구성 가능한 값을 코드로 주입
+    <h3 id="5-디자인-패턴-사용">5. 디자인 패턴 사용</h3>
+  </li>
+</ul>
+</section>
+  
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>이전 글</p>
+      <a href="/2025/01/19/java-anti-pattern-series-05.BoatAnchor.html">
+        [java Anti Pattern Series] 05.boatanchor
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>다음 글</p>
+      <a href="/2025/01/21/java-anti-pattern-series-07.MagicNumber.html">
+        [java Anti Pattern Series] 07.magicnumber
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

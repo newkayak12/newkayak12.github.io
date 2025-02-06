@@ -164,6 +164,12 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -256,13 +262,409 @@
 <script>
   window.store = {
     
+      "2025-02-06-java-anti-pattern-series-23-prematureresourcerelease-html": {
+        "title": "[java Anti Pattern Series] 23.prematureresourcerelease",
+        "tags": "",
+        "date": "February 6, 2025",
+        "author": "",
+        "category": "",
+        "content": "Premature Resource Release  메모리 누수 방지, 성능 향상을 위해서 리소스를 적절히 관리하는게 중요하다.  적절한 타이밍에 리소스 반환을 하면 좋지만 너무 이르게 하면 문제가 될 수 있다.조기 해제란?  의도한 용도가 완료되기 전에 리소스를 닫거나 릴리즈하는 행위  로직의 오류, 잘못된 설계결과1. 리소스 유출  리소스를 제대로 닫거나 해제하지 않으면 메모리에 잔존해서 메모리 누수가 될 수 있다.  처음엔 괜찮지만 쌓여서 결국 애플리케이션 크래시가 된다.    2. 리소스 고갈    조기 종료되면 다른 부분에서 해당 리소스에 액세스할 수 없게 되어 경합 및 교착이 된다.    3. 데이터 손상    조기 해제하면 데이터가 손상될 수 있다.    4. 일관되지 않은 상태    예측할 수 없는 동작이 발생할 수 있다.해결책1. try-with-resource2. finally 사용3. 열기·닫기 원칙 따르기  리소스가 더 이상 필요하지 않을 때만 공개해야 하며, 너무 일찍 공개하면 안된다.    4. resource-pool 사용    생성, 해제에 큰 비용이 드는 경우 풀로 두고 사용하면 유리하다.    5. RC(ReferenceCounting) 사용    참조 횟수를 기록하여 수가 0이 될 떄까지 가지고 있다가 해제",
+        "url": "//2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html"
+      }
+      ,
+    
+      "2025-02-05-java-anti-pattern-series-22-resourcehog-html": {
+        "title": "[java Anti Pattern Series] 22.resourcehog",
+        "tags": "",
+        "date": "February 5, 2025",
+        "author": "",
+        "category": "",
+        "content": "Resource Hog  메모리, CPU 또는 네트워크 대역폭과 같은 리소스를 과도하게 사용하는 경우  필요 이상으로 많은 리소스를 사용하여 성능이 최적화되지 않고 잠재적인 시스템 충돌일 일으킬 때 발생  일반적으로 필요 이상의 메모리 또는 처리 능력을 필요로 하는 비효율적인 알고리즘이나 데이터 구조를 사용할 때 발생한다.  비효율적인 DB Query 또는 네트워크 호출도 리소스 호깅의 원인이 될 수 있다.증상  높은 메모리 사용량(OOM)  높은 CPU사용율  과도한 네트워크 트래픽  긴 응답 시간  시스템 충돌원인  비효율적 알고리즘  메모리 누수  장기 실행 DB Query  네트워크 비효율성  동시성 문제완화책  알고리즘 및 데이터 구조 최적화  리소스 사용량 모니터링  리소스 관리 구현  캐싱 및 버퍼링  DB Query 최적화  동시성 제한",
+        "url": "//2025/02/05/java-anti-pattern-series-22.ResourceHog.html"
+      }
+      ,
+    
+      "2025-02-04-java-anti-pattern-series-21-lockingtoread-html": {
+        "title": "[java Anti Pattern Series] 21.lockingtoread",
+        "tags": "",
+        "date": "February 4, 2025",
+        "author": "",
+        "category": "",
+        "content": "Locking To Read  공유 리소스에 대한 읽기 작업을 보호하기 위해서 잠금을 사용하는 것을 의미한다.  멀티쓰레드 환경에서 데이터 일관성르 보장하고 경쟁 조건 방지하기 위해서 사용된다.  읽기 작업에 불필요하게 잠금을 하면 병목 포인트가 된다.문제점  읽기 잠금을 획득하면 다른 쓰레드에서 해당 리소스를 읽지 못한다.  불필요한 경합으로 직렬화되면 성능이 저하되고 지연 시간이 늘어날 수 있다.  올바르게 구현하지 않으면 교착 상태가 발생할 수도 있다.      동시성 감소    잠재적 교착 상태    오버헤드    코드 복잡성  대체 접근 방식읽기·쓰기 잠금  읽기/쓰기 잠금은 여러 쓰레드가 동시에 리소스를 읽으면서 동시에 쓰기 전용 액세스를 보장하는 동기화 메커니즘  이를 통해서 작업 성능 향상을 할 수 있다.불변 데이터 사용  대안으로 불변 데이터를 사용한다.  수정할 수 없으므로 쓰레드에 안전하다.캐싱  자주 액세스하는 데이터를 메모리에 캐싱해서 공유 리소스에 대한 읽기 작업 접근 횟수를 최소화할 수 있다.      ReadWriteLock    불변 데이터 구조    휘방성 변수 : 자주 읽지만 거의 수정하지 않는 단순한 변수를 다룰 때 volatile을 사용하면 잠금 없이도 쓰레드 전체에 변경 사항을 확인할 수 있다.    더 높은 수준의 동기화 메커니즘 : 원자 변수, 동시 컬렉션, CountDownLatch, CyclicBarrier 등  개선안  세분화된 잠금 사용  읽기 최적화  중첩 잠금 피하기  잠금 경합을 모니터링      공유 데이터를 읽기 위해서 잠금이 사용되는 코드 섹션 식별    데이터 액세스 패턴을 평가하고 읽기가 쓰기보다 많은지 확인    여러 쓰레드가 동시에 공유 데이터를 읽을 수 있도록 독점 잠금을 ReadWriteLock으로 대체    공유 데이터를 변경 불가하게 만들거나 자바 동시성 유틸리티에서 제공하는 상위 수준의 동기화 메커니즘을 사용하도록 코드 리펙토링    읽기 잠금을 피하려면?      ConcurrentHashMap    CopyOnWriteArrayList  ",
+        "url": "//2025/02/04/java-anti-pattern-series-21.LockingToRead.html"
+      }
+      ,
+    
+      "2025-02-03-java-anti-pattern-series-20-inappropriateintimacy-html": {
+        "title": "[java Anti Pattern Series] 20.inappropriateintimacy",
+        "tags": "",
+        "date": "February 3, 2025",
+        "author": "",
+        "category": "",
+        "content": "Inappropriate Intimacy  두 클래스가 긴밀하게 얽혀 있어 높은 의존성을 초래하는 경우를 의미한다.  코드 재사용성 감소, 복잡성 증가, 코드 유지 관리 및 테스트의 어려움이 발생  비공개 필드 및 메소드에 대한 직접 액세스, 내부 상태 공유, 클래스 간 과도한 메소드 호출 등 다양한 형태로 발생원인  추상화 : 서로의 내부 정보에 직접 액세스 하는 것은 추상화 및 캡슐화가 부족하다는 것을 의미한다.  잘못된 디자인 결정 : 긴밀한 협력에 대한 영향도를 고려하지 않아서 발생  디자인 패턴에 대한 이해 부족 : 의존성 주입, 옵저버 등에 익숙하지 않을 경우 긴밀한 결합을 초래할 수 있다.  레거시영향도  코드 재사용성 감소  복잡성 증가  테스트의 어려움  제한된 확장성친밀성을 피하거나 완화하는 방법  디자인 패턴 적용 ( 파사드, 옵저버 등 )  동작을 캡슐화  인터페이스를 사용  IOC를 구현  리팩토링",
+        "url": "//2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html"
+      }
+      ,
+    
+      "2025-02-02-java-anti-pattern-series-19-circularreference-html": {
+        "title": "[java Anti Pattern Series] 19.circularreference",
+        "tags": "",
+        "date": "February 2, 2025",
+        "author": "",
+        "category": "",
+        "content": "Circular reference  두 개 이상의 클래스가 직간접적으로 서로 의존하는 경우  서로 참조 루프를 생성하는 방식  서로의 의존성이 강할 때 발생한다.문제점  긴밀한 결합  유지보수의 어려움  테스트 가능성 저하  복잡성 증가피하기 위한 전략  의존성 주입  SRP 적용  인터페이스 또는 추상 클래스 사용  코드 베이스 리팩토링해결  순환 종속성 끊기  중개자 클래스 도입  IOC 원칙 적용  클래스 분리  점진적 리팩토링",
+        "url": "//2025/02/02/java-anti-pattern-series-19.CircularReference.html"
+      }
+      ,
+    
+      "2025-02-01-java-anti-pattern-series-18-classdoestoomuch-html": {
+        "title": "[java Anti Pattern Series] 18.classdoestoomuch",
+        "tags": "",
+        "date": "February 1, 2025",
+        "author": "",
+        "category": "",
+        "content": "Class Does Too Much  한 클래스가 너무 많은 일을 담당하는 것  SRP를 위반할 때 발생결과  높은 복잡성  높은 결합도  유지 보수의 어려움  진한 코드 냄새  낮은 확장성식별하기  메소드 수가 너무 많다 : 그만큼 많은 일을 하고 있다는 의미가 된다.  높은 복잡성 : 주기적 복잡성이 높고 메소드가 길며 상속 계층 구조가 깊은 클래스  다중 책임 : 한 클래스에 서로 관련 없는 여러 작업을 담당하고 있는 경우  잘못된 캡슐화 : 너무 많은 공개 메소드와 변수를 노출하는 경우  응집성 부족 : 클래스에 서로 다른 데이터 집합에서 작동하거나 관련 없는 기능을 가진 메소드가 있다면 너무 많은 일을 하고 있는 것리팩토리 전략  책임 소재 파악하기  구성 활용 : 컴포지션으로 더 작고 집중적인 클래스를 결합하여 원하는 기능을 달성  메소드 추출 : 복잡한 메소드를 더 작고 관리하기 작은 단위로 분해  클래스 추출 : 여러 책임이 있는 경우 책임들을 별도 클래스로 추출  디자인 패턴 적용  긴메소드 리팩토링 : 긴 메소드가 있다면 SRP를 따르느 더 작은 집중적인 메소드로 제공  SOLID 원칙 적용  TDD : 리팩토링을 진행하면서 원하는 기능을 유지하는지 테스트를 작성  코드 리뷰",
+        "url": "//2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html"
+      }
+      ,
+    
+      "2025-01-31-java-anti-pattern-series-17-godclass-html": {
+        "title": "[java Anti Pattern Series] 17.godclass",
+        "tags": "",
+        "date": "January 31, 2025",
+        "author": "",
+        "category": "",
+        "content": "God class  갓 클래스는 너무 많은 책임을 맡고 지나치게 복잡해져서 이해, 테스트 및 유지가 어려운 클래스특징  높은 복잡성 : 순환 복잡성이 높은 경향이 있으며, 이는 코드를 통과하는 경로가 많다는 것을 의미  응집성 부족 : 종종 서로 관련 없는 기능을 하나의 클래스로 결합하여 응집성이 부족  비대한 크기 : 코드 줄, 메소드 및 필드 수가 많음  경직된 디자인 : 유연성이 떨어지고 수정하거나 확장하기가 어려움  테스트 가능성이 낮음 : 복잡해서 테스트 하기가 어렵다.  코드 냄새 : 긴 메소드, 과도한 주석, 중복 코드 등 악취를 풍긴다.안티 패턴인 이유  SRP 위반  낮은 응집성  유연성 저하  테스트 하기 어려움  낮은 코드 품질리팩토핑  책임 소재를 명확하게 하기 : 책임을 구분하고 이를 바탕으로 분리한다.  메소드 추출 : 복잡성을 줄이고 가독성을 향상시키는 방법  클래스 분할 : 더 작고 책임이 명확하게 분리하기  디자인 패턴 사용 : Factory, Observer 등 코드 베이스를 모듈화하고 단순화  데이터 캡슐화 : 데이터가 클래스 전반에 걸쳐 흩어져 있기에 결합이 단단하고 유연성이 떨어진다.  기능 모듈화 : 작은 단위로 모듈화하고 세분화한다.유지 보수1.TDD  변경으로 인해 퇴행이나 의도하지 않은 부작용이 발생하지 않도록 도움을 줄 수 있다.    2. 지속적인 리팩토링    변화에 따라 지속적으로 수행",
+        "url": "//2025/01/31/java-anti-pattern-series-17.GodClass.html"
+      }
+      ,
+    
+      "2025-01-30-java-anti-pattern-series-16-anemicdomainmodel-html": {
+        "title": "[java Anti Pattern Series] 16.anemicdomainmodel",
+        "tags": "",
+        "date": "January 30, 2025",
+        "author": "",
+        "category": "",
+        "content": "Anemic Domain Model  도메인 객체에 동작이 거의 또는 포함되지 않고 있고 대부분의 비즈니스 로직이 별도의 서비스 또는 관리자 클래스에서 구현되는 안티패턴이다.  도메인 객체가 수동적인 데이터 구조로, 해당 객체와 연관되어야 하는 동작이 없는 애플리케이션 아키텍쳐가 생성된다.1. 빈약한 도메인 모델  도메인 객체에 동작이 없고 대신 상태를 저장하는 단순한 데이터 구조로 사용되는 아티 패턴이다.  동작과 데이터를 객체 안에 컵슐화 해야하는 객체 지향 프로그래밍의 기본 원칙에 위배된다.  보통 이런 객체는 getter, setter만 포함한다.2. 의미  객체 지향 원칙 위반 : 동작, 데이터를 분리함으로써 객체 지향 프로그래밍 원칙을 위반한다.  코드 중복 : 비즈니스 로직이 별도의 서비스 클래스로 구현되기 때문에 여러 서비스 간의 코드가 중복될 가능성이 높다.  낮은 응집성 : 도메인 객체는 동작이 없는 단순한 데이터 컨테이너가 되어 클래스 내 응집성이 낮아진다.  제한된 캡슐화 : 동작과 데이터가 분리되어 있기에 캡슐화가 손상된다.  테스트의 어려움 : 동작이 없기에 비즈니스 로직 테스트가 어렵다.3. 의미있는 모델  리치 도메인 모델 : 도메인 객체가 동작과 데이터를 모두 캡슐화하는 풍부한 도메인 모델을 추구  DDD : 도메인 주도 설계 원칙을 채택하면 풍부한 도메인 객체를 만드는데 도움이 된다. 도메인 로직에 초점을 맞추고 도메인 객체 내에서 모델링함으로써 DDD는 소프트웨어 개발에 대한 보다 전체적인 접근 방식을 장려  디자인 패턴 : strategy, factoryMethod, command 등과 같은 디자인 패턴을 활용해서 객체 내 동작을 캡슐화  서비스 계층 리펙토링 : 상속 대신 객체 구성을 강조하여 복잡한 도메인 모델을 구축",
+        "url": "//2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html"
+      }
+      ,
+    
+      "2025-01-29-java-anti-pattern-series-15-emptytrycatch-html": {
+        "title": "[java Anti Pattern Series] 15.emptytrycatch",
+        "tags": "",
+        "date": "January 29, 2025",
+        "author": "",
+        "category": "",
+        "content": "빈 Catch 블록  빈 catch는 오류르 숨기고, 디버깅을 더 어렵게하고, 예기치 않은 동작을 유발하는 등 여러 가지 부정적인 결과를 초래할 수 있다.문제 이유1. 오류 은닉  catch는 기본적으로 오류를 기록하거나 exception 메시지를 내보이는 식으로 작동하길 예상한다.  즉 책임이 있다.    2. 디버깅의 어려움    stackTrace로 오류 이유를 알아야 하지만 빈 catch는 뭐가 잘못 됐는지 알 방법이 없어진다.    3. 자바에서 권장하는 오류 처리 미준수    결과적으로 오류 처리 모범 사례에도 위반된다.  예외 처리를 바로 하거나 빠르게 실패 처리를 하라는 원칙에 위배된다.    4. 예외 억제    5. 예측할 수 없는 동작으로 이어짐  처리 방법  예외 로그: slf4j 등으로 예외를 로깅한다.  예외 다시 던지기 : 경우에 따라 핸들링할 수 있는 에러로 다시 던지는 식으로 변경할 수도 있다.  예외 처리 : 아예 깔끔하게 그 안에서 처리하는게 가장 좋다.  checked Exception 사용 : 아니면 로직 자체적으로 예외를 명시하여 사용자로 하여금 예외 처리까지 하도록 하는 방법이 있다.",
+        "url": "//2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html"
+      }
+      ,
+    
+      "2025-01-28-java-anti-pattern-series-14-threadstarvation-html": {
+        "title": "[java Anti Pattern Series] 14.threadstarvation",
+        "tags": "",
+        "date": "January 28, 2025",
+        "author": "",
+        "category": "",
+        "content": "Thread starvation  특정 쓰레드가 공유 리소스를 장시간 보유하는 다른 쓰레드로 인해 공유 리소스에 접근하지 못하고 성능이 저하되고 교착상태까지 발생할 수 있다.원인  Blocking  Deadlock  동기화 불량: 부적절한 동기화는 동시성 제어 메커니즘을 사용해서 동기화되지 않으면 동시에 액세스해서 충돌이 일어날 수 있다.  불충분한 쓰레드 풀 구성: 쓰레드 풀을 너무 작거나 큐를 적게 잡으면 가용 쓰레드를 기다리면서 쓰레드 고갈이 생길 수 있다.감지  높은 CPU 사용량 : 쓰레드가 리소스, 컨텍스트 스위칭을 위해서 지속적으로 경쟁하기에 사용량이 비정상적으로 높아진다.  유난히 긴 응답시간 : 특히 Blocking 작업이 느려지면 쓰레드 고갈로 이어진다.  낮은 처리량 : 가용 쓰레드가 부족해서 처리량도 줄어든다.  교착상태 : 혹여 deadlock이 자주 발생하면 쓰레드 고갈이 문제일 수도 있다.해결  비동기로 구성하기 : blocking 작업을 offload하고 다른 작업을 위한 쓰레드 확보할 수 있는 비동기 작업으로 구성하면 가용 리소스의 활용을 최고로 올릴 수 있다.  잠금 컨텐션 감소 : 동기화 메커니즘을 최적화하여 잠금 경합을 줄이고 쓰레드 고갈 가능성을 줄인다.  쓰레드 풀 조정 : 적정한 쓰레드 풀, 작업 큐로 원활한 작업 환경을 구성한다.  성능 모니터링, 분석  타임아웃 메커니즘 : 일정 시간이 지나면 실패로 처리해서 순환을 문제가 생겼을 경우 failover 할 수 있도록 둘 수도 있다.  리소스 액세스 최적화 : 공유 리소스 액세스 방식을 최적화하여 경합을 줄이는 방식으로 최적화할 수도 있다.",
+        "url": "//2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html"
+      }
+      ,
+    
+      "2025-01-27-java-anti-pattern-series-13-unnecessaryobject-html": {
+        "title": "[java Anti Pattern Series] 13.unnecessaryobject",
+        "tags": "",
+        "date": "January 27, 2025",
+        "author": "",
+        "category": "",
+        "content": "Unnecessary Object  불필요한 객체 생성은 성능 문제와 메모리 소비 증가로 이어질 수 있다.원인1. new 키워드 남용  루프 또는 메소드 내 new를 남용하는 경우가 있다.2. 불변 객체의 잘못된 사용  불변 객체는 일단 생성되면 수정이 불가하다. 불변 객체를 불필요하게 생성하면 하나의 객체로 충분하지만 여러 개를 만드는 결과를 낼 수 있다.3. 래퍼 클래스 과도한 사용  Integer, Double, Boolean 등 래퍼 클래스를 불필하게 사용하면 불필요한 객체가 생성된다.4. 임시 객체 생성  문자열 연결이나 구문 분석과 같은 작업을 위해서 임시 객체를 생성하는 것도 불필요한 객체 생성의 원인이 될 수 있다.결과  메모리 사용량 증가  GC Overhead  성능 저하  리소스 경합해결1. 객체 풀링  재사용 가능한 객체 풀을 유지 관리하고 새 객체 생성 대신 필요에 따라 객체를 가져다 쓰는 식이다.    2. 불변 객체    불변객체는 여러 쓰레드에서 수정 위험 없이 공유할 수 있으므로 여러 개의 객체를 만들 필요가 없어진다.    3. 객체 재사용    최대한 이전 객체를 재사용하는 방향으로 진행할 수도 있다.    4. 원시 데이터 타입 사용    굳이 래퍼를 쓸 필요가 없으면 원시 타입을 사용한다.    5. 객체 생성 최적화    new를 최소한으로 사용한다  루프, 메소드 외부에서 객체 생성하면 재사용을 고려하자  ",
+        "url": "//2025/01/27/java-anti-pattern-series-13.UnnecessaryObject.html"
+      }
+      ,
+    
+      "2025-01-26-java-anti-pattern-series-12-unnecessarycondition-html": {
+        "title": "[java Anti Pattern Series] 12.unnecessarycondition",
+        "tags": "",
+        "date": "January 26, 2025",
+        "author": "",
+        "category": "",
+        "content": "Unnecessary condition  쓸모 없는 조건을 사용하는 것을 의미한다.  불필요한 if 문이나 검사를 포함하여 코드가 비대해지고 읽기 어렵고 잠재적으로 버그가 발생할 수 있다.  결과적으로 논리에 아무런 영향을 미치지 않는 코드를 의미한다.이해  아무 목적도 없고 프로그램 기능에 기여하지 않는 코드이기 때문이다.  중복 검사, 연결할 수 없는 코드, 항상 참 혹은 거짓인 조건 등이 있다.중복  코드 블록에서 동일한 조건을 여러 번 검사하는 것이다.연결할 수 없는 코드  조건이 결코 참이거나 해서 절대 도달할 수 없는 형태다항상 참 혹은 거짓  컨텍스트 관계없이 결과가 정해진 경우왜 문제인가?  가독성 저하  성능 저하  버그 위험 증가  개발적으로 낭비리팩토링 과정  코드 리뷰  코드 테스트  조건 단순화  죽은 코드 지우기  리팩토링 및 최적화  검토 및 테스트",
+        "url": "//2025/01/26/java-anti-pattern-series-12.UnnecessaryCondition.html"
+      }
+      ,
+    
+      "2025-01-25-java-anti-pattern-series-11-codeclones-html": {
+        "title": "[java Anti Pattern Series] 11.codeclones",
+        "tags": "",
+        "date": "January 25, 2025",
+        "author": "",
+        "category": "",
+        "content": "Code Clones  유사한 코드 블록이 반복되는 안티 패턴이다.  자바에서 코드 중복은 객체 지향적 특성과 중복 클래스 및 메소드를 생성할 수 있는 가능성으로 문제가 된다.결과  유지 보수에서 문제  가독성 저하  버그 위험 증가  확장성 저하  냄새나는 코드중복 식별  코드 리뷰  코드 분석 도구  버전 관리 시스템: git grep, git diff 등을 사용전략  중복 코드 적출  재사용 가능한 컴포넌트 만들기  상속 및 다형성  디자인 패턴 사용  리팩토링  Q. 왜 안티 패턴인가?  DRY(Do Not Repeat Yourself)를 위반하기 떄문이다.",
+        "url": "//2025/01/25/java-anti-pattern-series-11.CodeClones.html"
+      }
+      ,
+    
+      "2025-01-24-java-anti-pattern-series-10-overcomplicatedexpression-html": {
+        "title": "[java Anti Pattern Series] 10.overcomplicatedexpression",
+        "tags": "",
+        "date": "January 24, 2025",
+        "author": "",
+        "category": "",
+        "content": "Overcomplicated Expression  읽기, 이해 및 유지 관리하기 어려운 지나치게 복잡한 코드를 작성하는 것을 의미한다.1. 예시  자바에서 중첩된 조건, 삼항 연산자, 메소드 호출 및 기타 복잡한 논리가 너무 많이 포함된 경우  적절한 문서와 주석이 없는 경우          가독성 저하      유지 관리 비용 증가      버그 발생 확률 증가      2. 이유  이해 부족  촉박한 시간  코드 복붙  리팩토링에 대한 저항감3. 해결 방법  복잡한 표현식을 작은 단위로 분해하기 : 표현식에서 별도의 메소드나 변수로 추출할 수 있는 부분을 파악해서 전체 논리를 단순화 하기  설명적인 변수 이름 사용 : 변수, 메소드 이름은 설명적인, 의미있는 이름을 사용하기  중첩된 조건 피하기 : if-else, 삼항연산자, switch 등 flat하기  뚱뚱한 메소드 리팩토링 : 메소드 내에 관심사를 분리해서 내부에서 다른 메소드를 참조하도록 하세요  문서화  단위테스트 : 다양한 시나리오에서 예상대로 동작하는지 확인  코드리뷰",
+        "url": "//2025/01/24/java-anti-pattern-series-10.OvercomplicatedExpression.html"
+      }
+      ,
+    
+      "2025-01-23-java-anti-pattern-series-09-sabotageperformance-html": {
+        "title": "[java Anti Pattern Series] 09.sabotageperformance",
+        "tags": "",
+        "date": "January 23, 2025",
+        "author": "",
+        "category": "",
+        "content": "Sabotage Performance  일반적인 성능을 저하시킬 수 있는 안티 패턴1. 루프의 문자열 연결val n: IntRange = 1..10var result: String = \"\"for ( i in n ) {    result += i}val builder:StringBuilder = StringBuilder()for ( i in n ) {    builder.append(i)}  루프를 반복할 때마다 새로운 문자열 객체가 생성되어 불필요한 메모리 할당이 벌어진다.  StringBuilder를 사용하는 것이 나을 수 있다.2. 과도한 객체 인스턴스화  애플리케이션이 객체를 너무 많이 생성하면 메모리 사용량이 증가하고 CG가 자주 발생해서 애플리케이션 성능이 저하될 수 있다.  최대한 객체를 재사용하거나 Pooling을 사용하는 방법도 있다.3. 비효율적 데이터 구조  예를 들어 무작위 액세스가 필요한 경우 LinkedList를 사용한다던가 하면 성능이 저하될 수 있다.4. 비효율적 알고리즘  상황에 맞는 알고리즘을 사용하지 않으면 성능 병목이 생길 수 있다.  예를 들어 O(n)인 알고리즘인 경우 길이가 길면 성능 저하가 발생한다.5. 적절한 예외 처리 부족  부적절한 예외 처리는 성능에 영향을 미친다.  필요 이상으로 높은 수준에서 예외를 잡거나 예외를 과도하게 로깅해도 성능이 저하된다.",
+        "url": "//2025/01/23/java-anti-pattern-series-09.SabotagePerformance.html"
+      }
+      ,
+    
+      "2025-01-22-java-anti-pattern-series-08-singletonabuse-html": {
+        "title": "[java Anti Pattern Series] 08.singletonabuse",
+        "tags": "",
+        "date": "January 22, 2025",
+        "author": "",
+        "category": "",
+        "content": "Singleton Abuse  싱글톤 패턴을 잘못 사용하거나 남용하는 경우를 의미한다.  애플리케이션의 요구 사항이나 사용 사례를 고려하지 않고 무분별하게 적용하는 경우를 의미한다.  일반적으로 필요하지 않거나 적절하지 않은 상황에서 싱글톤 패턴을 사용하여 코드베이스에 불필요한 복잡성, 긴밀한 결합 및 기타 부정적인 결과를 초래하는 것을 포함특징  글로벌 상태  전역 상태를 만들어서 변경 추적을 어렵게 한다.  이 과정에서 예기치 않은 동작, 버그를 발생할 수 있다.  긴밀한 결합  싱글톤에 의존하는 클래스는 긴밀하게 결합되어 코드를 테스트하거나 리팩토링하기 어렵게 만든다.  동시성 문제  공유 인스턴스이므로 멀티쓰레드 환경에서 동시성 이슈에 자유롭지 않다.  숨겨진 종속성  종속성을 숨기므로 클래스의 동작이나 다른 컴포넌트와의 상호 작용을 이해하기 어렵다.  테스트의 어려움  mocking 하기 어렵게 한다.단점  확장성 문제  유지 관리 부담  코드 재사용의 어려움  코드 냄새예시class DatabaseConnection {    private static DatabaseConnection instance;        private DatabaseConnection () {            }        public static synchronized DatabaseConnection getInstance() {        if( instance == null ) instance = new DatabaseConnection();                return instance;    }}해결1. 의존성 중깁 사용  싱글통에 의존하는 대신 의존서 주입을 사용해서 종속성이 필요한 클래스에 명시적으로 종속성을 전달    2. 불변성 선호    변경 가능한 싱글톤보다 변경 불가능한 객체를 선호하여 공유 상태 및 동시성을 제거    3. Thread-safe를 고려    쓰레드에 안전하게 구현하거나 동기화 메커니즘을 사용    4. 종속성 캡슐화    싱글톤 인스턴스를 다른 클래스에 직접 노출하지 말고 인터페이스 뒤에 종속성을 캡슐화    5. SOLID 원칙 준수    SRP, DIP를 준수해서 응집성 있고 재사용 가능하며 느슨하게 결합된 클래스를 만들어보자",
+        "url": "//2025/01/22/java-anti-pattern-series-08.SingletonAbuse.html"
+      }
+      ,
+    
+      "2025-01-21-java-anti-pattern-series-07-magicnumber-html": {
+        "title": "[java Anti Pattern Series] 07.magicnumber",
+        "tags": "",
+        "date": "January 21, 2025",
+        "author": "",
+        "category": "",
+        "content": "MagicNumber  코드에 의미있는 설명이나 문맵 없이 하드코딩된 원시 숫자 값을 사용하는 것을 의미  개발자가 쉽게 이해하거나 인식할 수 없는 값을 나타내는 데 자주 사용한다.  설명이나 컨텍스트 없이 코드에 하드코딩된 상수 값을 의미한다.  숫자 매개변수, 오류 코드, 크기 또는 상수 등 다양한 것을 나타낼 수 있다.  명확성과 가독성이 떨어져서 무엇을 의미하는 파악하기 어려워진다.예시class Circle {    companion object {        const val PI: Double = 3.141692        //MagicNumber가 될 수 있다.    }    fun calculate(radius: Double): double {        return PI * radius * radius    }}문제점1. 가독성 부족  개발자의 코드 가독성, 이해도를 떨어뜨린다.    2. 코드 유지 관리 문제    값을 일관되게 관리하기 어려워진다.    3. 코드 중복    동일한 매직너머를 재사용하는 경우 불일치를 초래할 수도 있다.    4. 사이드 이펙트    매직넘버를 잘못 이해하면 의도하지 않은 결과가 발생할 수도 있다.대안1. 상수 사용2. 주석 제공3. Enum 사용4. 상수 추출로 중앙 집중화5. 구성 파일 사용",
+        "url": "//2025/01/21/java-anti-pattern-series-07.MagicNumber.html"
+      }
+      ,
+    
+      "2025-01-20-java-anti-pattern-series-06-hardcoding-html": {
+        "title": "[java Anti Pattern Series] 06.hardcoding",
+        "tags": "",
+        "date": "January 20, 2025",
+        "author": "",
+        "category": "",
+        "content": "HardCoding  변수나 상수 이용 없이 상수나 매직넘버 같은 고정 값을 코드에 직접 삽입하는 방식을 의미  변수나 상수를 사용하는 대신 고정 값을 코드에 직접 삽입하는 방식  유연성을 떨어뜨리고 향후 변경을 어렵게 만든다.하드 코딩이 가지는 의의1. 유연성 부족  코드 베이스의 유연성이 떨어진다는 점이다.    2. 가독성 저하    코드를 읽고 이해하기 어렵게 만들 수 있다.    3. 오류 위험 증가    여러 곳에 하드 코딩했다면 수정 중 까먹거나 해서 오류가 발생할 수 있는 잠재적 위협이 된다.    4. 유지보수의 어려움    하드코딩된 곳을 고쳐야한다면 찾아가면 직접 고쳐야하므로 유지보수성을 낮춘다.피하기1. 상수 사용  최상위 또는 별도의 클래스에 상수로 정의    2. 구성 외부화    코드 변경 없이 쉽게 업데이트할 수 있는 구성 파일이나 속성 파일로 이동    3. 값 매개변수화    코드 내 하드 코딩 대신 밖에서 파라미터로 전달되도록 구성    4. 의존성 주입    의존성 주입 프레임워크로 구성 가능한 값을 코드로 주입    5. 디자인 패턴 사용  ",
+        "url": "//2025/01/20/java-anti-pattern-series-06.HardCoding.html"
+      }
+      ,
+    
+      "2025-01-19-java-anti-pattern-series-05-boatanchor-html": {
+        "title": "[java Anti Pattern Series] 05.boatanchor",
+        "tags": "",
+        "date": "January 19, 2025",
+        "author": "",
+        "category": "",
+        "content": "Boat Anchor  더 이상 필요하지 않거나 사용되지 않지만 계속 존재하여 시스템에 부담을 주는 코드 또는 기능  비효율성, 복잡성 증가, 유지 관리의 골칫거리가 될 수 있다.  사용되지 않거나 쓸모없는 코드 또는 무의미한 코드를 프로젝트에 남겨두는 안티 패턴입니다.  원인  사용하지 않는 코드  오래된 종속성 : 프레임워크 발전에 따라 종속성이 더 이상 사용되지 않는 경우  잘못된 커뮤니케이션 : 잘못된 이해로 기능을 구현했을 경우  요구 사항의 진화 : 시간이 지남에 따라 요구 사항이 변경돼서 기능, 특징이 중복되거나 쓸모없어진 경우영향  복잡성 증가  성능 저하  버그 위험 : 예기치 않은 동작을 유발할 수 있는 오래되거나 잘못된 로직을 포함할 수 있다.  테스트의 어려움회피 및 리팩토링  코드리뷰  정적 코드 분석  자동화된 테스트  지속적 리팩토링  커뮤니케이션  문서화",
+        "url": "//2025/01/19/java-anti-pattern-series-05.BoatAnchor.html"
+      }
+      ,
+    
+      "2025-01-18-java-anti-pattern-series-04-poltergeist-html": {
+        "title": "[java Anti Pattern Series] 04.poltergeist",
+        "tags": "",
+        "date": "January 18, 2025",
+        "author": "",
+        "category": "",
+        "content": "Poltergeist  독일어로 Poltern(노크하다)과 Geist(영혼)라는 말의 합성어. ‘시끄러운 영혼’이라는 뜻으로, 인지할 수 없는 대상에 의해 물건이 움직이거나 소음이 발생하는 등 물리적 작용이 일어나는 일련의 현상을 이른다.      불필요한 임시 객체나 클래스를 생성해, 애플리케이션의 복잡성을 높이는 안티 패턴입니다.    이 객체는 주로 단순히 다른 객체의 메서드를 호출하거나 데이터를 전달하는 역할만 수행하며, 독립적으로 존재할 이유가 없습니다.    너무 단순해서 객체로 만들 필요가 없는 클래스나 메서드.    책임 없는 객체로, 전체 시스템에 기여하지 않음.  특징  사용되지 않는 객체 : 생성되기는 하지만 코드에서 실제로 사용되지 않으  메모리 소비 : 가시적인 이점 없이 메모리 리소스를 차지  성능 오버헤드 : 불필요한 리소스 할당 및 살당 취소로 인해 성능이 저하될 수 있다.  코드 복잡성 : 불필요한 객체와 종속석을 도입하여 코드베이스의  복잡성을 증가시킬 수 있다.원인  사용하지 않는 코드 : 실제로 사용하지 않는 객체나 컴포넌트를 실수로 만들 수 있다.  불완전한 리팩토링 : 리팩토링 과정에서 더 이상 필요하지 않은 객체가 폴터가이스트로 남을 수 있다.  임시 디버깅 코드 : 제거했어야 하는 임시 디버깅 코드나 로그 등  복붙 : 코드 스니펫의 목적을 이해하지 않고 그냥 복붙영향  성능 저하  메모리 사용량 증가  코드 품질 저하  디버깅 문제  유지 보수 어려움보수하기  코드 리뷰  정적 분석 도구  단위 테스트  리팩토링  문서화",
+        "url": "//2025/01/18/java-anti-pattern-series-04.Poltergeist.html"
+      }
+      ,
+    
+      "2025-01-17-java-anti-pattern-series-03-interfaceoverimplementation-html": {
+        "title": "[java Anti Pattern Series] 03.interfaceoverimplementation",
+        "tags": "",
+        "date": "January 17, 2025",
+        "author": "",
+        "category": "",
+        "content": "Interface OverImplementation  인터페이스에서 불필요한 메소드를 구현하여 코드 중복 및 유지 관리 문제를 일으키는 상황을 말한다.  이로 인해 코드가 비대해지고 유지 관리성이 저하되며 복잡성이 증가한다.특징  중복 코드: 목적에 맞지 않는 불필요한 코드 추가로 비대해지고 가독성이 떨어짐  유지보수성 저하: 유지 관리 대상이 증가  복잡성 증가: 불필요한 메소드를 구현하면 코드 베이스가 더 복잡해지고 합류한 새로운 개발자의 진입 장벽이 된다.원인  이해 부족  코드 복붙  계약 위반에 대한 두려움(정해진 계약을 준수해야한다는 압박감으로 어쩔 수 없이 구현)해결책  요구 사항 재분석  디폴트 메소드를 사용  코드 리팩토링  ",
+        "url": "//2025/01/17/java-anti-pattern-series-03.InterfaceOverImplementation.html"
+      }
+      ,
+    
+      "2025-01-16-java-anti-pattern-series-02-goldenhammer-html": {
+        "title": "[java Anti Pattern Series] 02.goldenhammer",
+        "tags": "",
+        "date": "January 16, 2025",
+        "author": "",
+        "category": "",
+        "content": "GoldenHammer  If all you have is hammer, everything looks lika a nail.(망치를 들면 주변 모든 것이 못으로 보인다.) 이라는 말에서 유래  가장 적합한지 여부와 관계 없이 모든 문제에 대해서 동일한 도구나 기술을 사용하는 것  상황에 맞는 적합한 방법이 아닌 하나에 매몰되어 부적합함에도 사용하려고 드는 것을 의미  특정 문제에 대한 최선의 해결책 여부와 상관 없이 모든 직면하는 문제에 대해서 동일한 익숙한 도구나 기술을 사용하는 경향시사점1. 부풀려진 코드  적절성을 고려하지 않아서 코드베이스가 비대해지고 유지 관리가 어려워질 수 있다.2. 유연성 감소  좁은 범위로 도구나 기술을 한정해서 변화하는 요구 사항에 적절히 대응하지 못한다.3. 성능 문제  업무에 잘못된 도구를 사용하면 느린 응답시간, 높은 리소스 소비 등의 낭비를 할 가능성이 있다.  이는 곳 성능과 직결된다.4. 유지 관리 과제  시간이 지남에 따라 유지 관리 및 확장이 어려워질 수도 있다.방지책1. 다양성 수용  모든 문제에 대해서 단일 도구나 기술에 의존하는 대신 개발 스택에 다양성을 수용하자2. 최신 정보 유지  컨퍼런스, 블로그 등으로 읽고 계속해서 새로운 기술을 익히고 학습하자3. 리팩토링 및 단순화  코드 베이스를 정기적으로 검토하여 골든 해머를 방지하자",
+        "url": "//2025/01/16/java-anti-pattern-series-02.GoldenHammer.html"
+      }
+      ,
+    
+      "2025-01-15-java-anti-pattern-series-01-basebean-html": {
+        "title": "[java Anti Pattern Series] 01.basebean",
+        "tags": "",
+        "date": "January 15, 2025",
+        "author": "",
+        "category": "",
+        "content": "BaseBean개요  다른 클래스에서 확장할 수 있는 자바빈의 기본 클래스를 만드는 것이다.  즉, 여러 하위 클래스에서 공유할 수 있는 공통 기능을 포함하는 자바빈용 기본 클래스를 생성하는 것이다.  목적은 코드 중복을 줄이고 코드 재사용성을 높이는 것이다.단점1. 긴밀한 결합  기본 클래스, 그 하위 클래스 간의 긴밀한 결합이 큰 문제다.  상위를 수저하면 하위도 수정이 된다.2. 상속 계층 구조 문제  상속 계층 구조의 확산이 문제가 된다.  더 많은 클래스가 기본 클래스를 확장함에 따라 계층 구조가 더 깊고 복잡해진다.3. 유연성 부족  baseBean은 설계의 유연성 부족으로 이어질 수도 있다.  하위 클래스는 필요하지 않거나 원하지 않더라도 기본 클래스의 기능을 강제로 상속받아야만 합니다.4. 취약한 기본 클래스  하위 클래스의 변경에 취약한 기본 클래스를 생성할 수도 있다.  하위 클래스가 기본 클래스의 기능을 덮어 쓰면 기능이 손상되고 버그로 이어질 수도 있다.5. 단일 책임 원칙 위반  여러 책임을 결합함으로써 단일 책임 원칙을 위반한다.  변경해야 할 이유가 하나만 있어야 하지만, 여러 책임이 있는 기본 클래스는 유지 관리 및 확장이 어려운 식이 될 수 있다.권장 사항1. 상속보다는 컴포지션  공통 동작을 별도의 클래스에 캡슐화해서 대상 클래스로 컴포지션하면 긴밀한 협력과 복잡한 상속을 피하는 두 마리 토끼를 다 잡을 수 있다.2. 공통 기능에 인터페이스를 사용  타입 상속으로 공통기능을 적용해서 느슨한 결합을 촉진한다.3. 디자인 패턴 적용  Strategy, Decorator, FactoryMethod 등을 적용하는 것을 고려하자4. SOLID 준수  SOLID를 준수하면 BaseBean을 구성할 이유를 찾기 어려워진다.",
+        "url": "//2025/01/15/java-anti-pattern-series-01.BaseBean.html"
+      }
+      ,
+    
+      "2025-01-14-java-anti-pattern-series-00-index-html": {
+        "title": "[java Anti Pattern Series] 00.index",
+        "tags": "",
+        "date": "January 14, 2025",
+        "author": "",
+        "category": "",
+        "content": "Anti-pattern01. 대표적인 안티 패턴Singleton  클래스의 인스턴스화를 단일 인스턴스로 제한하는 디자인 패턴  구현 중 잘못 구현되는 경우가 종종 생긴다.  싱글톤 구현을 위해서 정적 메소드, 변수를 사용하는 것이 그 예다.  그러면 테스트 가능 성 및 유지 보수성 문제가 발생할 수 있다. 싱글톤 인스턴스와 구현을 긴밀하게 연결하기 때문에 만위 테스트에서 mocking 하거나 교체하기가 어렵다.  차라리 의존성주입 또는 enum을 사용하는 singleton이 낫다.God Object  책임이 너무 많거나 시스템의 다른 부분에 대해 너무 많이 알고 있는 클래스를 의미한다.  이해, 유지 관리 및 테스트하기 어려운 모놀리식 클래스가 생성된다.  갓 객체 방지 패턴을 피하려면 SRP을 따르고 코드에서 관심사를 적절하게 분리하는 것이 좋다.MagicNumber  코드에서 자명하지 않거나 쉽게 이해할 수 없는 하드 코딩된 숫자 값을 의미한다.  이러한 패턴은 혼란, 오류, 유지 관리의 어려움으로 이어질 수 있다.  차라리 명명된 상수나, enum을 사용해서 숫자 값을 표현하는 것이 중요하다.  그래야 다른 개발자들이 숫자 값의 용도를 쉽게 이해할 수 있고, 잘못 입력되거나 잘못 해석된 값으로 인한 잠재적 오류를 방지할 수 있다.ShotgunSurgery  하나의 변경으로 여러 클래스 또는 모듈에 걸쳐 여러 번의 변경이 필요할 때 발생  코드 중복, 긴밀한 결합, 일관성 유지의 어려움을 초래할 수 있다.  이는 캡슐화 부족으로 발생하는 패턴이다.  OCP를 따르고 코드가 쉽게 확장 가능하고 유지 관리가 가능한지 확인하는 것이 중요하다.Null reference  코드에서 누락된 값을 표현하기 위해서 optinal, Null 객체 패턴을 이용하는 것이 좋다.설계에서 안티 패턴  01.BaseBean.md  02.GoldenHammer.md  03.InterfaceOverImplementation.md  04.Poltergeist.md  05.BoatAnchor.md자바에서 안티 패턴  06.HardCoding.md  07.MagicNumber.md  08.SingletonAbuse.md  09.SabotagePerformance.md  10.OvercomplicatedExpression.md안티 코드 패턴  11.CodeClones.md  12.UnnecessaryCondition.md  13.UnnecessaryObject.md  14.ThreadStarvation.md  15.EmptyTryCatch.mdOOP와 반하는 패턴  16.AnemicDomainModel.md  17.GodClass.md  18.ClassDoesTooMuch.md  19.CircularReference.md  20.InappropriateIntimacy.md동시성 방해 패턴21.LockingToRead.md22.ResourceHog.md23.PrematureResourceRelease.md24.NeglectingToReleaseResource.md예외 처리에서 안티 패턴  25.CatchAll.md  26.IgnoringException.md  27.ThrowsExceptionsInFinallyBlock.md  28.CatchAndRelease.md리팩토링과 예방  29.EffectiveRefactoring.md  30.EvadeAntiPattern.md  31.Tools.md",
+        "url": "//2025/01/14/java-anti-pattern-series-00.Index.html"
+      }
+      ,
+    
+      "cs-os-2025-01-13-os-series-13-unix-html": {
+        "title": "[os Series] 13.unix",
+        "tags": "",
+        "date": "January 13, 2025",
+        "author": "",
+        "category": "",
+        "content": "Unixunix",
+        "url": "//cs/os/2025/01/13/os-series-13.Unix.html"
+      }
+      ,
+    
+      "cs-os-2025-01-12-os-series-12-secureos-html": {
+        "title": "[os Series] 12.secureos",
+        "tags": "",
+        "date": "January 12, 2025",
+        "author": "",
+        "category": "",
+        "content": "Secure OS",
+        "url": "//cs/os/2025/01/12/os-series-12.SecureOS.html"
+      }
+      ,
+    
+      "cs-os-2025-01-11-os-series-11-distributedandmultiprocessingsystem-html": {
+        "title": "[os Series] 11. distributedandmultiprocessingsystem",
+        "tags": "",
+        "date": "January 11, 2025",
+        "author": "",
+        "category": "",
+        "content": "분산 시스템, 멀티 프로세스 시스템",
+        "url": "//cs/os/2025/01/11/os-series-11.-DistributedAndMultiProcessingSystem.html"
+      }
+      ,
+    
+      "cs-os-2025-01-09-os-series-09-disk-i-o-html": {
+        "title": "[os Series] 09.disk i O",
+        "tags": "",
+        "date": "January 9, 2025",
+        "author": "",
+        "category": "",
+        "content": "Disk I/Odisk i/o",
+        "url": "//cs/os/2025/01/09/os-series-09.Disk-I-O.html"
+      }
+      ,
+    
+      "cs-os-2025-01-08-os-series-08-virtualmemory-html": {
+        "title": "[os Series] 08.virtualmemory",
+        "tags": "",
+        "date": "January 8, 2025",
+        "author": "",
+        "category": "",
+        "content": "가상메모리",
+        "url": "//cs/os/2025/01/08/os-series-08.virtualMemory.html"
+      }
+      ,
+    
+      "cs-os-2025-01-07-os-series-07-memorymanagement-html": {
+        "title": "[os Series] 07.memorymanagement",
+        "tags": "",
+        "date": "January 7, 2025",
+        "author": "",
+        "category": "",
+        "content": "메모리 관리",
+        "url": "//cs/os/2025/01/07/os-series-07.MemoryManagement.html"
+      }
+      ,
+    
+      "cs-os-2025-01-06-os-series-06-processscheduling-html": {
+        "title": "[os Series] 06.processscheduling",
+        "tags": "",
+        "date": "January 6, 2025",
+        "author": "",
+        "category": "",
+        "content": "프로세서와 스케쥴링",
+        "url": "//cs/os/2025/01/06/os-series-06.ProcessScheduling.html"
+      }
+      ,
+    
+      "cs-os-2025-01-05-os-series-05-deadlockandstarvation-html": {
+        "title": "[os Series] 05.deadlockandstarvation",
+        "tags": "",
+        "date": "January 5, 2025",
+        "author": "",
+        "category": "",
+        "content": "데드락, 기아",
+        "url": "//cs/os/2025/01/05/os-series-05.DeadLockAndStarvation.html"
+      }
+      ,
+    
+      "cs-os-2025-01-04-os-series-04-concurrentprocessandmutualexclusion-html": {
+        "title": "[os Series] 04.concurrentprocessandmutualexclusion",
+        "tags": "",
+        "date": "January 4, 2025",
+        "author": "",
+        "category": "",
+        "content": "병령 프로세스와 상호 배제",
+        "url": "//cs/os/2025/01/04/os-series-04.ConcurrentProcessAndMutualExclusion.html"
+      }
+      ,
+    
+      "cs-os-2025-01-03-os-series-03-processandthread-html": {
+        "title": "[os Series] 03.processandthread",
+        "tags": "",
+        "date": "January 3, 2025",
+        "author": "",
+        "category": "",
+        "content": "프로세스와 쓰레드process and thread",
+        "url": "//cs/os/2025/01/03/os-series-03.ProcessAndThread.html"
+      }
+      ,
+    
+      "cs-os-2025-01-02-os-series-02-os-html": {
+        "title": "[os Series] 02.os",
+        "tags": "",
+        "date": "January 2, 2025",
+        "author": "",
+        "category": "",
+        "content": "02. OS",
+        "url": "//cs/os/2025/01/02/os-series-02.OS.html"
+      }
+      ,
+    
+      "cs-os-2025-01-01-os-series-01-hw-html": {
+        "title": "[os Series] 01.hw",
+        "tags": "",
+        "date": "January 1, 2025",
+        "author": "",
+        "category": "",
+        "content": "HW 구성",
+        "url": "//cs/os/2025/01/01/os-series-01.HW.html"
+      }
+      ,
+    
       "git-2024-12-20-git-series-squashandrebase-html": {
         "title": "[git Series] Squashandrebase",
         "tags": "",
         "date": "December 20, 2024",
         "author": "",
         "category": "",
-        "content": "Squash And RebaseMergegraph TD;    A--&gt;B;    A--&gt;C;    B--&gt;D;    C--&gt;D;gitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit\"    commit id: \"develop-2 b commit\"    checkout main    merge develop-2 id: \"merge develop-2 into main\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"  위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것Squash MergegitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit\"    commit id: \"develop-2 b commit\"    commit id: \"develop-2 c commit\"    commit id: \"develop-2 squash (a + b + c) commit\"    checkout main    merge develop-2 id: \"merge develop-2 into main\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"  위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것  develop-2의 commit 내역을 합쳐서 새로운 commit을 만들고 이를 merge 대상에 붓는 것을 의미한다.  commit history를 합쳐서 깔끔하게 만들 수 있다.  git merge --squash develop-2Rebase MergegitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit x\"    commit id: \"develop-2 b commit x\"    commit id: \"develop-2 c commit x\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"    checkout main    commit id: \"develop-2 a commit rebased\"    commit id: \"develop-2 b commit rebased\"    commit id: \"develop-2 cx commit rebased\"  commit 들이 합쳐지지 않고 main에 추가된다.  commit은 모두 하나의 parent를 가진다.  git rebase main -&gt; git checkout main -&gt; git merge develop-2  base를 새롭게 설정한다는 의미다.  -i로 --interactive를 주면 rebase를 유저가 상호작용할 수 있게 해준다.  커밋 메시지를 수정하거나 몇몇 커밋을 제외하거나 순서를 바꿀 수도 있다.  git rebase -i &lt;Commit&gt; 은 Commit ~ HEAD 까지 커밋을 선택한다.          pick: 커밋 수정 없이 그대로 사용      reword: 커밋 메시지 수정      edit: 커밋 메시지, 작업 내용도 수정      squash&amp;fix: 해당 커밋을 이전 커밋과 합친다.      ",
+        "content": "Squash And RebaseMergegitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit\"    commit id: \"develop-2 b commit\"    checkout main    merge develop-2 id: \"merge develop-2 into main\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"  위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것Squash MergegitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit\"    commit id: \"develop-2 b commit\"    commit id: \"develop-2 c commit\"    commit id: \"develop-2 squash (a + b + c) commit\"    checkout main    merge develop-2 id: \"merge develop-2 into main\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"  위와 같이 하나의 브랜치와 다른 브랜치의 변경 이력 전체를 합치는 것  develop-2의 commit 내역을 합쳐서 새로운 commit을 만들고 이를 merge 대상에 붓는 것을 의미한다.  commit history를 합쳐서 깔끔하게 만들 수 있다.  git merge --squash develop-2Rebase MergegitGraph    commit id: \"a commit\"    commit id: \"b commit\"    branch develop-1    commit id: \"develop-1 a commit\"    checkout main    branch develop-2    commit id: \"develop-2 a commit x\"    commit id: \"develop-2 b commit x\"    commit id: \"develop-2 c commit x\"    checkout main    merge develop-1  id: \"merge develop-1 into main\"    checkout main    commit id: \"develop-2 a commit rebased\"    commit id: \"develop-2 b commit rebased\"    commit id: \"develop-2 cx commit rebased\"  commit 들이 합쳐지지 않고 main에 추가된다.  commit은 모두 하나의 parent를 가진다.  git rebase main -&gt; git checkout main -&gt; git merge develop-2  base를 새롭게 설정한다는 의미다.  -i로 --interactive를 주면 rebase를 유저가 상호작용할 수 있게 해준다.  커밋 메시지를 수정하거나 몇몇 커밋을 제외하거나 순서를 바꿀 수도 있다.  git rebase -i &lt;Commit&gt; 은 Commit ~ HEAD 까지 커밋을 선택한다.          pick: 커밋 수정 없이 그대로 사용      reword: 커밋 메시지 수정      edit: 커밋 메시지, 작업 내용도 수정      squash&amp;fix: 해당 커밋을 이전 커밋과 합친다.      ",
         "url": "//git/2024/12/20/git-series-squashAndRebase.html"
       }
       ,

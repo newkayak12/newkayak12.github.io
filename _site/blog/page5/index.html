@@ -166,6 +166,10 @@
 			
 			
 			
+			
+			
+			
+			
 			<!-- Social icons from Font Awesome, if enabled  -->
 			
 
@@ -2387,19 +2391,44 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/20/Kotlin-series-32.KotlinWithJava.html">
-            [kotlin Series] 32.kotlinwithjava
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/16/jpa-series-15.Optimize.html">
+            [jpa Series] 15.optimize
           </a>
         </h1>
         <p class="meta">
-          November 20, 2024
+          December 16, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="java-코드를-kotlin에서-사용하기">java 코드를 kotlin에서 사용하기</h1>
+        <h1 id="최적화">최적화</h1>
+<h2 id="예외-처리">예외 처리</h2>
+<ul>
+  <li>JPA 표준 예외들은 <code class="language-plaintext highlighter-rouge">jakarta.persistence.PersistenceException</code>의 자식클래스다.
+    <ol>
+      <li>트랜잭션 롤백 표시 예외
+        <ul>
+          <li>jakarta.persistence.EntityExistsException</li>
+          <li>jakarta.persistence.EntityNotFoundException</li>
+          <li>jakarta.persistence.OptimisticLockException</li>
+          <li>jakarta.persistence.PessimisticLockException</li>
+          <li>jakarta.persistence.RollbackLockException</li>
+          <li>jakarta.persistence.TransactionRequiredLockException</li>
+        </ul>
+      </li>
+      <li>트랜잭션 롤백 미표시 예외
+        <ul>
+          <li>jakarta.persistence.NoResultException</li>
+          <li>jakarta.persistence.NonUniqueResultException</li>
+          <li>jakarta.persistence.LockTimeoutException</li>
+          <li>jakarta.persistence.QueryTimeoutException</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
 
 
-        <a class="button" href="/kotlin/2024/11/20/Kotlin-series-32.KotlinWithJava.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/16/jpa-series-15.Optimize.html">
           계속 읽기
         </a>
       </div>
@@ -2408,19 +2437,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/19/Kotlin-series-31.DelegationProperty.html">
-            [kotlin Series] 31.delegationproperty
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/15/jpa-series-14.AdditionalFeatures.html">
+            [jpa Series] 14.additionalfeatures
           </a>
         </h1>
         <p class="meta">
-          November 19, 2024
+          December 15, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="위임-프로퍼티">위임 프로퍼티</h1>
+        <h1 id="부가-기능">부가 기능</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/19/Kotlin-series-31.DelegationProperty.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/15/jpa-series-14.AdditionalFeatures.html">
           계속 읽기
         </a>
       </div>
@@ -2429,19 +2458,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/18/Kotlin-series-30.DSL.html">
-            [kotlin Series] 30.dsl
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/14/jpa-series-13.PersistenceContext.html">
+            [jpa Series] 13.persistencecontext
           </a>
         </h1>
         <p class="meta">
-          November 18, 2024
+          December 14, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="dsl">DSL</h1>
+        <h1 id="트랜잭션-범위-영속성-컨텍스트">트랜잭션 범위 영속성 컨텍스트</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/18/Kotlin-series-30.DSL.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/14/jpa-series-13.PersistenceContext.html">
           계속 읽기
         </a>
       </div>
@@ -2450,19 +2479,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/17/Kotlin-series-29.Reflection.html">
-            [kotlin Series] 29.reflection
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/13/jpa-series-12.QueryDSL.html">
+            [jpa Series] 12.querydsl
           </a>
         </h1>
         <p class="meta">
-          November 17, 2024
+          December 13, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="reflection">Reflection</h1>
+        <h1 id="querydsl">QueryDSL</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/17/Kotlin-series-29.Reflection.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/13/jpa-series-12.QueryDSL.html">
           계속 읽기
         </a>
       </div>
@@ -2471,19 +2500,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/16/Kotlin-series-28.Annotation.html">
-            [kotlin Series] 28.annotation
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/12/jpa-series-11.SpringJPA.html">
+            [jpa Series] 11.springjpa
           </a>
         </h1>
         <p class="meta">
-          November 16, 2024
+          December 12, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="annotation">annotation</h1>
+        <h1 id="springjpa">SpringJPA</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/16/Kotlin-series-28.Annotation.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/12/jpa-series-11.SpringJPA.html">
           계속 읽기
         </a>
       </div>
@@ -2492,19 +2521,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/15/Kotlin-series-27.TypeAlias.html">
-            [kotlin Series] 27.typealias
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/11/jpa-series-10.ObjectOrientedQuery.html">
+            [jpa Series] 10.objectorientedquery
           </a>
         </h1>
         <p class="meta">
-          November 15, 2024
+          December 11, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="타입-별명">타입 별명</h1>
+        <h1 id="객체지향-쿼리-심화">객체지향 쿼리 심화</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/15/Kotlin-series-27.TypeAlias.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/11/jpa-series-10.ObjectOrientedQuery.html">
           계속 읽기
         </a>
       </div>
@@ -2513,19 +2542,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/14/Kotlin-series-26.TypeProperty.html">
-            [kotlin Series] 26.typeproperty
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/10/jpa-series-09.QueryDSL.html">
+            [jpa Series] 09.querydsl
           </a>
         </h1>
         <p class="meta">
-          November 14, 2024
+          December 10, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="type-parameter">Type Parameter</h1>
+        <h1 id="querydsl">QueryDSL</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/14/Kotlin-series-26.TypeProperty.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/10/jpa-series-09.QueryDSL.html">
           계속 읽기
         </a>
       </div>
@@ -2534,19 +2563,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/13/Kotlin-series-25.SealedClassAndDelegate.html">
-            [kotlin Series] 25.sealedclassanddelegate
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/09/jpa-series-08.JPQL.html">
+            [jpa Series] 08.jpql
           </a>
         </h1>
         <p class="meta">
-          November 13, 2024
+          December 9, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="봉인된-클래스-위임">봉인된 클래스, 위임</h1>
+        <h1 id="jpqljava-persistence-query-language">JPQL<sub>(java Persistence Query Language)</sub></h1>
 
 
-        <a class="button" href="/kotlin/2024/11/13/Kotlin-series-25.SealedClassAndDelegate.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/09/jpa-series-08.JPQL.html">
           계속 읽기
         </a>
       </div>
@@ -2555,19 +2584,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/12/Kotlin-series-25.AbstractClassAndInterface.html">
-            [kotlin Series] 25.abstractclassandinterface
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/08/jpa-series-07.ValueType.html">
+            [jpa Series] 07.valuetype
           </a>
         </h1>
         <p class="meta">
-          November 12, 2024
+          December 8, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="추상-클래스와-인터페이스">추상 클래스와 인터페이스</h1>
+        <h1 id="값-타입">값 타입</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/12/Kotlin-series-25.AbstractClassAndInterface.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/08/jpa-series-07.ValueType.html">
           계속 읽기
         </a>
       </div>
@@ -2576,19 +2605,19 @@
     <div class="post-teaser">
       <header>
         <h1>
-          <a class="post-link" href="/kotlin/2024/11/11/Kotlin-series-24.CommonMethod.html">
-            [kotlin Series] 24.commonmethod
+          <a class="post-link" href="/spring/jpa/querydsl/2024/12/07/jpa-series-06.Cascade.html">
+            [jpa Series] 06.cascade
           </a>
         </h1>
         <p class="meta">
-          November 11, 2024
+          December 7, 2024
         </p>
       </header>
       <div class="excerpt">
-        <h1 id="공통-메소드">공통 메소드</h1>
+        <h1 id="transitivepersistence">TransitivePersistence</h1>
 
 
-        <a class="button" href="/kotlin/2024/11/11/Kotlin-series-24.CommonMethod.html">
+        <a class="button" href="/spring/jpa/querydsl/2024/12/07/jpa-series-06.Cascade.html">
           계속 읽기
         </a>
       </div>
