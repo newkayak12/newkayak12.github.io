@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: [JAVA, ANTI-PATTERN]
+categories: [ARCHITECTURE, DDD, DOMAIN]
 ---
 
 # 도구
