@@ -5,12 +5,187 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 06 Feb 2025 19:17:53 +0900</pubDate>
+    <pubDate>Tue, 11 Feb 2025 20:07:24 +0900</pubDate>
+    
+      <item>
+        <title>[java Anti Pattern Series] 28.catchandrelease</title>
+        <link>/java/anti-pattern/2025/02/11/java-anti-pattern-series-28.CatchAndRelease.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/11/java-anti-pattern-series-28.CatchAndRelease.html</guid>
+        <description>&lt;h1 id=&quot;catch-and-release&quot;&gt;Catch and release&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;예외를 받고 처리 없이 다시 던지거나 무시하는 경우&lt;/li&gt;
+  &lt;li&gt;디버깅을 어렵게 한다.&lt;/li&gt;
+  &lt;li&gt;근본 원인을 해결하지 않고 예외 처리 방법이 생각이 나지 않는 경우에 빠지기 쉬운 길&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보 손실&lt;/li&gt;
+  &lt;li&gt;잘못된 디버깅&lt;/li&gt;
+  &lt;li&gt;실패 위험 증가&lt;/li&gt;
+  &lt;li&gt;성능 저하&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;권장&quot;&gt;권장&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;예외를 적절히 처리하기&lt;/li&gt;
+  &lt;li&gt;컨텍스트에 따라 예외 다시 던지기&lt;/li&gt;
+  &lt;li&gt;checked exception은 신중하게&lt;/li&gt;
+  &lt;li&gt;강력한 오류 처리 구현&lt;/li&gt;
+  &lt;li&gt;예외를 철저히 기록&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 11 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[java Anti Pattern Series] 27.throwsexceptionsinfinallyblock</title>
+        <link>/java/anti-pattern/2025/02/10/java-anti-pattern-series-27.ThrowsExceptionsInFinallyBlock.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/10/java-anti-pattern-series-27.ThrowsExceptionsInFinallyBlock.html</guid>
+        <description>&lt;h1 id=&quot;throws-exceptions-in-finally-block&quot;&gt;Throws exceptions in finally block&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;finally는 예외 여부와 상관없이 실행되어야만 하는 경우에 사용한다.&lt;/li&gt;
+  &lt;li&gt;예를 들어 리소스를 닫는 등의 경우에서 말이다.&lt;/li&gt;
+  &lt;li&gt;finally에서 예외를 던지만 예기치 않은 동작이 발생하고 오류 처리가 모호해질 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이유&quot;&gt;이유&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;원래 예외를 마스킹&lt;/li&gt;
+  &lt;li&gt;의도하지 않은 흐름 제어&lt;/li&gt;
+  &lt;li&gt;리소스 유출 : finally에서 처리되어야 할 리소스 정리가 되지 않아서 메모리 누수, 잠재적 성능 저하가 발생할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;권장&quot;&gt;권장&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;적절한 오류 처리 사용&lt;/li&gt;
+  &lt;li&gt;정리 로직, 예외 처리 분리&lt;/li&gt;
+  &lt;li&gt;fianlly에서는 단순하게! 리소스 정리 정도만&lt;/li&gt;
+  &lt;li&gt;try-catch 중첩 : finally에서 여러 작업을 해야 한다면 차라리 try-catch를 여러 번 쓰자&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 10 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[java Anti Pattern Series] 26.ignoringexception</title>
+        <link>/java/anti-pattern/2025/02/09/java-anti-pattern-series-26.IgnoringException.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/09/java-anti-pattern-series-26.IgnoringException.html</guid>
+        <description>&lt;h1 id=&quot;ignoring-exception&quot;&gt;Ignoring Exception&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;예외를 무시하면 예측할 수 없는 동작, 버그 및 보안 취약점이 발생할 수 있으므로 예외를 무시하는 것은 나쁜 습관으로 간주된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이유&quot;&gt;이유&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보 손실&lt;/li&gt;
+  &lt;li&gt;정의 되지 않은 동작&lt;/li&gt;
+  &lt;li&gt;리소스 유출&lt;/li&gt;
+  &lt;li&gt;사용자 경험 저하&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;예시&quot;&gt;예시&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;catch block에서 아무 것도 하지 않는 경우&lt;/li&gt;
+  &lt;li&gt;아예 예외 처리를 안 한 경우&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;처리-방안&quot;&gt;처리 방안&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;예외를 최대한 작은 범위로 특정해서 지정&lt;/li&gt;
+  &lt;li&gt;Try-Catch-Finally 사용&lt;/li&gt;
+  &lt;li&gt;Slf4j를 사용해서 로깅&lt;/li&gt;
+  &lt;li&gt;예외를 다른 예외로 변환해서 던지기&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 09 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[java Anti Pattern Series] 25.catchall</title>
+        <link>/java/anti-pattern/2025/02/08/java-anti-pattern-series-25.CatchAll.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/08/java-anti-pattern-series-25.CatchAll.html</guid>
+        <description>&lt;h1 id=&quot;catchall&quot;&gt;CatchAll&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;최상위, 추상적 에러로 에러 처리 대상을 선정하는 것은 안티패턴이다.&lt;/li&gt;
+  &lt;li&gt;특정 예외를 개별적으로 처리하지 않고 하나의 catch 블록으로 모든 예외를 잡는 방식이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;문제점&quot;&gt;문제점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;정보 손실 : 에러 타입을 특정할 수 없어진다.&lt;/li&gt;
+  &lt;li&gt;정확성 부족 : 예외를 구체적이고 타겟팅된 방식으로 처리할 기회를 박탈당한다.&lt;/li&gt;
+  &lt;li&gt;코드 복잡성 : 의미있는 에러처리가 아니게 되므로 불필요한 catch로 코드가 도배될 수 있다.&lt;/li&gt;
+  &lt;li&gt;오류 마스킹 : 에러마다 다르게 처리해야하는 경우 오류가 마스킹 될 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;특정 예외 처리하기&lt;/li&gt;
+  &lt;li&gt;catch를 세분화 해서 처리하기&lt;/li&gt;
+  &lt;li&gt;에러 변환해서 다시 던지기&lt;/li&gt;
+  &lt;li&gt;try-with-resource 사용&lt;/li&gt;
+  &lt;li&gt;예외 로깅&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 08 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[java Anti Pattern Series] 24.neglectingtoreleaseresource</title>
+        <link>/java/anti-pattern/2025/02/07/java-anti-pattern-series-24.NeglectingToReleaseResource.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/07/java-anti-pattern-series-24.NeglectingToReleaseResource.html</guid>
+        <description>&lt;h1 id=&quot;neglecting-to-release-resource&quot;&gt;Neglecting To Release Resource&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;리소스 해제하지 않는 경우 메모리 누수, 과도한 리소스 낭비, 성능 이슈가 발생할 수 있다.&lt;/li&gt;
+  &lt;li&gt;리소스 미사용 시 해제하지 않는 경우 발생한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;이해 부족&lt;/li&gt;
+  &lt;li&gt;긴밀한 결합
+    &lt;ul&gt;
+      &lt;li&gt;리소스 획득, 릴리즈 로직 간 긴밀한 결합이 이뤄진다 이러면 모든 경로에서 리소스가 릴리즈되도록 보장하기가 어려워질 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;예외 처리&lt;/li&gt;
+  &lt;li&gt;복잡한 코드
+    &lt;ul&gt;
+      &lt;li&gt;너무 복잡하면 리소스가 제대로 릴리즈 됐는지 확인하기 어려울 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;영향&quot;&gt;영향&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;메모리 누수&lt;/li&gt;
+  &lt;li&gt;리소스 고갈&lt;/li&gt;
+  &lt;li&gt;성능 저하&lt;/li&gt;
+  &lt;li&gt;보안 취약점&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;try-with-resource 사용&lt;/li&gt;
+  &lt;li&gt;리소스 획득, 릴리즈 로직을 분리&lt;/li&gt;
+  &lt;li&gt;리소스 사용량 모니터링&lt;/li&gt;
+  &lt;li&gt;finally 등을 사용해서 닫거나 권장하는 사용법을 지키기 ( 명시적으로 리소스 해제 등 )&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;finalizer를 사용해서 닫기&lt;/del&gt; -&amp;gt; GC에서 처리될 때 호출할 수 있지만 언제 호출될지는 모른다. 추가적으로 finalizer 자체가 &lt;strong&gt;객체 재생성 공격&lt;/strong&gt; 등에 취약하다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 07 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>[java Anti Pattern Series] 23.prematureresourcerelease</title>
-        <link>/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</link>
-        <guid isPermaLink="true">/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</guid>
+        <link>/java/anti-pattern/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</guid>
         <description>&lt;h1 id=&quot;premature-resource-release&quot;&gt;Premature Resource Release&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -59,8 +234,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 22.resourcehog</title>
-        <link>/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</link>
-        <guid isPermaLink="true">/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</guid>
+        <link>/java/anti-pattern/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</guid>
         <description>&lt;h1 id=&quot;resource-hog&quot;&gt;Resource Hog&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -103,8 +278,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 21.lockingtoread</title>
-        <link>/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</link>
-        <guid isPermaLink="true">/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</guid>
+        <link>/java/anti-pattern/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</guid>
         <description>&lt;h1 id=&quot;locking-to-read&quot;&gt;Locking To Read&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -186,8 +361,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 20.inappropriateintimacy</title>
-        <link>/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</link>
-        <guid isPermaLink="true">/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</guid>
+        <link>/java/anti-pattern/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</guid>
         <description>&lt;h1 id=&quot;inappropriate-intimacy&quot;&gt;Inappropriate Intimacy&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -226,8 +401,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 19.circularreference</title>
-        <link>/2025/02/02/java-anti-pattern-series-19.CircularReference.html</link>
-        <guid isPermaLink="true">/2025/02/02/java-anti-pattern-series-19.CircularReference.html</guid>
+        <link>/java/anti-pattern/2025/02/02/java-anti-pattern-series-19.CircularReference.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/02/java-anti-pattern-series-19.CircularReference.html</guid>
         <description>&lt;h1 id=&quot;circular-reference&quot;&gt;Circular reference&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -266,8 +441,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 18.classdoestoomuch</title>
-        <link>/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</link>
-        <guid isPermaLink="true">/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</guid>
+        <link>/java/anti-pattern/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</guid>
         <description>&lt;h1 id=&quot;class-does-too-much&quot;&gt;Class Does Too Much&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -311,8 +486,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 17.godclass</title>
-        <link>/2025/01/31/java-anti-pattern-series-17.GodClass.html</link>
-        <guid isPermaLink="true">/2025/01/31/java-anti-pattern-series-17.GodClass.html</guid>
+        <link>/java/anti-pattern/2025/01/31/java-anti-pattern-series-17.GodClass.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/01/31/java-anti-pattern-series-17.GodClass.html</guid>
         <description>&lt;h1 id=&quot;god-class&quot;&gt;God class&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;갓 클래스는 너무 많은 책임을 맡고 지나치게 복잡해져서 이해, 테스트 및 유지가 어려운 클래스&lt;/li&gt;
@@ -361,8 +536,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 16.anemicdomainmodel</title>
-        <link>/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</link>
-        <guid isPermaLink="true">/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</guid>
+        <link>/java/anti-pattern/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</guid>
         <description>&lt;h1 id=&quot;anemic-domain-model&quot;&gt;Anemic Domain Model&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -399,8 +574,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 15.emptytrycatch</title>
-        <link>/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</link>
-        <guid isPermaLink="true">/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</guid>
+        <link>/java/anti-pattern/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</guid>
         <description>&lt;h1 id=&quot;빈-catch-블록&quot;&gt;빈 Catch 블록&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -437,8 +612,8 @@
     
       <item>
         <title>[java Anti Pattern Series] 14.threadstarvation</title>
-        <link>/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</link>
-        <guid isPermaLink="true">/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</guid>
+        <link>/java/anti-pattern/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</link>
+        <guid isPermaLink="true">/java/anti-pattern/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</guid>
         <description>&lt;h1 id=&quot;thread-starvation&quot;&gt;Thread starvation&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -472,265 +647,6 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Tue, 28 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 13.unnecessaryobject</title>
-        <link>/2025/01/27/java-anti-pattern-series-13.UnnecessaryObject.html</link>
-        <guid isPermaLink="true">/2025/01/27/java-anti-pattern-series-13.UnnecessaryObject.html</guid>
-        <description>&lt;h1 id=&quot;unnecessary-object&quot;&gt;Unnecessary Object&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;불필요한 객체 생성은 성능 문제와 메모리 소비 증가로 이어질 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
-&lt;h3 id=&quot;1-new-키워드-남용&quot;&gt;1. new 키워드 남용&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;루프 또는 메소드 내 new를 남용하는 경우가 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;2-불변-객체의-잘못된-사용&quot;&gt;2. 불변 객체의 잘못된 사용&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;불변 객체는 일단 생성되면 수정이 불가하다. 불변 객체를 불필요하게 생성하면 하나의 객체로 충분하지만 여러 개를 만드는 결과를 낼 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3-래퍼-클래스-과도한-사용&quot;&gt;3. 래퍼 클래스 과도한 사용&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Integer, Double, Boolean 등 래퍼 클래스를 불필하게 사용하면 불필요한 객체가 생성된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;4-임시-객체-생성&quot;&gt;4. 임시 객체 생성&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;문자열 연결이나 구문 분석과 같은 작업을 위해서 임시 객체를 생성하는 것도 불필요한 객체 생성의 원인이 될 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;메모리 사용량 증가&lt;/li&gt;
-  &lt;li&gt;GC Overhead&lt;/li&gt;
-  &lt;li&gt;성능 저하&lt;/li&gt;
-  &lt;li&gt;리소스 경합&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
-&lt;h3 id=&quot;1-객체-풀링&quot;&gt;1. 객체 풀링&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;재사용 가능한 객체 풀을 유지 관리하고 새 객체 생성 대신 필요에 따라 객체를 가져다 쓰는 식이다.
-    &lt;h3 id=&quot;2-불변-객체&quot;&gt;2. 불변 객체&lt;/h3&gt;
-  &lt;/li&gt;
-  &lt;li&gt;불변객체는 여러 쓰레드에서 수정 위험 없이 공유할 수 있으므로 여러 개의 객체를 만들 필요가 없어진다.
-    &lt;h3 id=&quot;3-객체-재사용&quot;&gt;3. 객체 재사용&lt;/h3&gt;
-  &lt;/li&gt;
-  &lt;li&gt;최대한 이전 객체를 재사용하는 방향으로 진행할 수도 있다.
-    &lt;h3 id=&quot;4-원시-데이터-타입-사용&quot;&gt;4. 원시 데이터 타입 사용&lt;/h3&gt;
-  &lt;/li&gt;
-  &lt;li&gt;굳이 래퍼를 쓸 필요가 없으면 원시 타입을 사용한다.
-    &lt;h3 id=&quot;5-객체-생성-최적화&quot;&gt;5. 객체 생성 최적화&lt;/h3&gt;
-  &lt;/li&gt;
-  &lt;li&gt;new를 최소한으로 사용한다&lt;/li&gt;
-  &lt;li&gt;루프, 메소드 외부에서 객체 생성하면 재사용을 고려하자&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 27 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 12.unnecessarycondition</title>
-        <link>/2025/01/26/java-anti-pattern-series-12.UnnecessaryCondition.html</link>
-        <guid isPermaLink="true">/2025/01/26/java-anti-pattern-series-12.UnnecessaryCondition.html</guid>
-        <description>&lt;h1 id=&quot;unnecessary-condition&quot;&gt;Unnecessary condition&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;쓸모 없는 조건을 사용하는 것을 의미한다.&lt;/li&gt;
-  &lt;li&gt;불필요한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if&lt;/code&gt; 문이나 검사를 포함하여 코드가 비대해지고 읽기 어렵고 잠재적으로 버그가 발생할 수 있다.&lt;/li&gt;
-  &lt;li&gt;결과적으로 논리에 아무런 영향을 미치지 않는 코드를 의미한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;이해&quot;&gt;이해&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;아무 목적도 없고 프로그램 기능에 기여하지 않는 코드이기 때문이다.&lt;/li&gt;
-  &lt;li&gt;중복 검사, 연결할 수 없는 코드, 항상 참 혹은 거짓인 조건 등이 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;중복&quot;&gt;중복&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;코드 블록에서 동일한 조건을 여러 번 검사하는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;연결할-수-없는-코드&quot;&gt;연결할 수 없는 코드&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;조건이 결코 참이거나 해서 절대 도달할 수 없는 형태다&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;항상-참-혹은-거짓&quot;&gt;항상 참 혹은 거짓&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;컨텍스트 관계없이 결과가 정해진 경우&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;왜-문제인가&quot;&gt;왜 문제인가?&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;가독성 저하&lt;/li&gt;
-  &lt;li&gt;성능 저하&lt;/li&gt;
-  &lt;li&gt;버그 위험 증가&lt;/li&gt;
-  &lt;li&gt;개발적으로 낭비&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;리팩토링-과정&quot;&gt;리팩토링 과정&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;코드 리뷰&lt;/li&gt;
-  &lt;li&gt;코드 테스트&lt;/li&gt;
-  &lt;li&gt;조건 단순화&lt;/li&gt;
-  &lt;li&gt;죽은 코드 지우기&lt;/li&gt;
-  &lt;li&gt;리팩토링 및 최적화&lt;/li&gt;
-  &lt;li&gt;검토 및 테스트&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 26 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 11.codeclones</title>
-        <link>/2025/01/25/java-anti-pattern-series-11.CodeClones.html</link>
-        <guid isPermaLink="true">/2025/01/25/java-anti-pattern-series-11.CodeClones.html</guid>
-        <description>&lt;h1 id=&quot;code-clones&quot;&gt;Code Clones&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;유사한 코드 블록이 반복되는 안티 패턴이다.&lt;/li&gt;
-  &lt;li&gt;자바에서 코드 중복은 객체 지향적 특성과 중복 클래스 및 메소드를 생성할 수 있는 가능성으로 문제가 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;유지 보수에서 문제&lt;/li&gt;
-  &lt;li&gt;가독성 저하&lt;/li&gt;
-  &lt;li&gt;버그 위험 증가&lt;/li&gt;
-  &lt;li&gt;확장성 저하&lt;/li&gt;
-  &lt;li&gt;냄새나는 코드&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;중복-식별&quot;&gt;중복 식별&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;코드 리뷰&lt;/li&gt;
-  &lt;li&gt;코드 분석 도구&lt;/li&gt;
-  &lt;li&gt;버전 관리 시스템: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git grep&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt; 등을 사용&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;전략&quot;&gt;전략&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;중복 코드 적출&lt;/li&gt;
-  &lt;li&gt;재사용 가능한 컴포넌트 만들기&lt;/li&gt;
-  &lt;li&gt;상속 및 다형성&lt;/li&gt;
-  &lt;li&gt;디자인 패턴 사용&lt;/li&gt;
-  &lt;li&gt;리팩토링&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;q-왜-안티-패턴인가&quot;&gt;Q. 왜 안티 패턴인가?&lt;/h3&gt;
-  &lt;p&gt;DRY(Do Not Repeat Yourself)를 위반하기 떄문이다.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 25 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 10.overcomplicatedexpression</title>
-        <link>/2025/01/24/java-anti-pattern-series-10.OvercomplicatedExpression.html</link>
-        <guid isPermaLink="true">/2025/01/24/java-anti-pattern-series-10.OvercomplicatedExpression.html</guid>
-        <description>&lt;h1 id=&quot;overcomplicated-expression&quot;&gt;Overcomplicated Expression&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;읽기, 이해 및 유지 관리하기 어려운 지나치게 복잡한 코드를 작성하는 것을 의미한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;1-예시&quot;&gt;1. 예시&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;자바에서 중첩된 조건, 삼항 연산자, 메소드 호출 및 기타 복잡한 논리가 너무 많이 포함된 경우&lt;/li&gt;
-  &lt;li&gt;적절한 문서와 주석이 없는 경우
-    &lt;ul&gt;
-      &lt;li&gt;가독성 저하&lt;/li&gt;
-      &lt;li&gt;유지 관리 비용 증가&lt;/li&gt;
-      &lt;li&gt;버그 발생 확률 증가&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2-이유&quot;&gt;2. 이유&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;이해 부족&lt;/li&gt;
-  &lt;li&gt;촉박한 시간&lt;/li&gt;
-  &lt;li&gt;코드 복붙&lt;/li&gt;
-  &lt;li&gt;리팩토링에 대한 저항감&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3-해결-방법&quot;&gt;3. 해결 방법&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;복잡한 표현식을 작은 단위로 분해하기 : 표현식에서 별도의 메소드나 변수로 추출할 수 있는 부분을 파악해서 전체 논리를 단순화 하기&lt;/li&gt;
-  &lt;li&gt;설명적인 변수 이름 사용 : 변수, 메소드 이름은 설명적인, 의미있는 이름을 사용하기&lt;/li&gt;
-  &lt;li&gt;중첩된 조건 피하기 : if-else, 삼항연산자, switch 등 flat하기&lt;/li&gt;
-  &lt;li&gt;뚱뚱한 메소드 리팩토링 : 메소드 내에 관심사를 분리해서 내부에서 다른 메소드를 참조하도록 하세요&lt;/li&gt;
-  &lt;li&gt;문서화&lt;/li&gt;
-  &lt;li&gt;단위테스트 : 다양한 시나리오에서 예상대로 동작하는지 확인&lt;/li&gt;
-  &lt;li&gt;코드리뷰&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 24 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 09.sabotageperformance</title>
-        <link>/2025/01/23/java-anti-pattern-series-09.SabotagePerformance.html</link>
-        <guid isPermaLink="true">/2025/01/23/java-anti-pattern-series-09.SabotagePerformance.html</guid>
-        <description>&lt;h1 id=&quot;sabotage-performance&quot;&gt;Sabotage Performance&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;일반적인 성능을 저하시킬 수 있는 안티 패턴&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;1-루프의-문자열-연결&quot;&gt;1. 루프의 문자열 연결&lt;/h2&gt;
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IntRange&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;StringBuilder&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StringBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;루프를 반복할 때마다 새로운 문자열 객체가 생성되어 불필요한 메모리 할당이 벌어진다.&lt;/li&gt;
-  &lt;li&gt;StringBuilder를 사용하는 것이 나을 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;2-과도한-객체-인스턴스화&quot;&gt;2. 과도한 객체 인스턴스화&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;애플리케이션이 객체를 너무 많이 생성하면 메모리 사용량이 증가하고 CG가 자주 발생해서 애플리케이션 성능이 저하될 수 있다.&lt;/li&gt;
-  &lt;li&gt;최대한 객체를 재사용하거나 Pooling을 사용하는 방법도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;3-비효율적-데이터-구조&quot;&gt;3. 비효율적 데이터 구조&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;예를 들어 무작위 액세스가 필요한 경우 LinkedList를 사용한다던가 하면 성능이 저하될 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;4-비효율적-알고리즘&quot;&gt;4. 비효율적 알고리즘&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;상황에 맞는 알고리즘을 사용하지 않으면 성능 병목이 생길 수 있다.&lt;/li&gt;
-  &lt;li&gt;예를 들어 O(n)인 알고리즘인 경우 길이가 길면 성능 저하가 발생한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;5-적절한-예외-처리-부족&quot;&gt;5. 적절한 예외 처리 부족&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;부적절한 예외 처리는 성능에 영향을 미친다.&lt;/li&gt;
-  &lt;li&gt;필요 이상으로 높은 수준에서 예외를 잡거나 예외를 과도하게 로깅해도 성능이 저하된다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 23 Jan 2025 00:00:00 +0900</pubDate>
       </item>
     
   </channel>

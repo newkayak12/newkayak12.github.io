@@ -1,10 +1,50 @@
 [
 
 {
+"title"    : "[java Anti Pattern Series] 28.catchandrelease",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/11/java-anti-pattern-series-28.CatchAndRelease.html",
+"date"     : "2025-02-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 27.throwsexceptionsinfinallyblock",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/10/java-anti-pattern-series-27.ThrowsExceptionsInFinallyBlock.html",
+"date"     : "2025-02-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 26.ignoringexception",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/09/java-anti-pattern-series-26.IgnoringException.html",
+"date"     : "2025-02-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 25.catchall",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/08/java-anti-pattern-series-25.CatchAll.html",
+"date"     : "2025-02-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 24.neglectingtoreleaseresource",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/07/java-anti-pattern-series-24.NeglectingToReleaseResource.html",
+"date"     : "2025-02-07 00:00:00 +0900"
+} ,
+
+{
 "title"    : "[java Anti Pattern Series] 23.prematureresourcerelease",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html",
+"url"      : "/java/anti-pattern/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html",
 "date"     : "2025-02-06 00:00:00 +0900"
 } ,
 
@@ -12,7 +52,7 @@
 "title"    : "[java Anti Pattern Series] 22.resourcehog",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/05/java-anti-pattern-series-22.ResourceHog.html",
+"url"      : "/java/anti-pattern/2025/02/05/java-anti-pattern-series-22.ResourceHog.html",
 "date"     : "2025-02-05 00:00:00 +0900"
 } ,
 
@@ -20,7 +60,7 @@
 "title"    : "[java Anti Pattern Series] 21.lockingtoread",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/04/java-anti-pattern-series-21.LockingToRead.html",
+"url"      : "/java/anti-pattern/2025/02/04/java-anti-pattern-series-21.LockingToRead.html",
 "date"     : "2025-02-04 00:00:00 +0900"
 } ,
 
@@ -28,7 +68,7 @@
 "title"    : "[java Anti Pattern Series] 20.inappropriateintimacy",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html",
+"url"      : "/java/anti-pattern/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html",
 "date"     : "2025-02-03 00:00:00 +0900"
 } ,
 
@@ -36,7 +76,7 @@
 "title"    : "[java Anti Pattern Series] 19.circularreference",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/02/java-anti-pattern-series-19.CircularReference.html",
+"url"      : "/java/anti-pattern/2025/02/02/java-anti-pattern-series-19.CircularReference.html",
 "date"     : "2025-02-02 00:00:00 +0900"
 } ,
 
@@ -44,7 +84,7 @@
 "title"    : "[java Anti Pattern Series] 18.classdoestoomuch",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html",
+"url"      : "/java/anti-pattern/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html",
 "date"     : "2025-02-01 00:00:00 +0900"
 } ,
 
@@ -52,7 +92,7 @@
 "title"    : "[java Anti Pattern Series] 17.godclass",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/31/java-anti-pattern-series-17.GodClass.html",
+"url"      : "/java/anti-pattern/2025/01/31/java-anti-pattern-series-17.GodClass.html",
 "date"     : "2025-01-31 00:00:00 +0900"
 } ,
 
@@ -60,7 +100,7 @@
 "title"    : "[java Anti Pattern Series] 16.anemicdomainmodel",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html",
+"url"      : "/java/anti-pattern/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html",
 "date"     : "2025-01-30 00:00:00 +0900"
 } ,
 
@@ -68,7 +108,7 @@
 "title"    : "[java Anti Pattern Series] 15.emptytrycatch",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html",
+"url"      : "/java/anti-pattern/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html",
 "date"     : "2025-01-29 00:00:00 +0900"
 } ,
 
@@ -76,7 +116,7 @@
 "title"    : "[java Anti Pattern Series] 14.threadstarvation",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html",
+"url"      : "/java/anti-pattern/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html",
 "date"     : "2025-01-28 00:00:00 +0900"
 } ,
 
@@ -84,7 +124,7 @@
 "title"    : "[java Anti Pattern Series] 13.unnecessaryobject",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/27/java-anti-pattern-series-13.UnnecessaryObject.html",
+"url"      : "/java/anti-pattern/2025/01/27/java-anti-pattern-series-13.UnnecessaryObject.html",
 "date"     : "2025-01-27 00:00:00 +0900"
 } ,
 
@@ -92,7 +132,7 @@
 "title"    : "[java Anti Pattern Series] 12.unnecessarycondition",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/26/java-anti-pattern-series-12.UnnecessaryCondition.html",
+"url"      : "/java/anti-pattern/2025/01/26/java-anti-pattern-series-12.UnnecessaryCondition.html",
 "date"     : "2025-01-26 00:00:00 +0900"
 } ,
 
@@ -100,7 +140,7 @@
 "title"    : "[java Anti Pattern Series] 11.codeclones",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/25/java-anti-pattern-series-11.CodeClones.html",
+"url"      : "/java/anti-pattern/2025/01/25/java-anti-pattern-series-11.CodeClones.html",
 "date"     : "2025-01-25 00:00:00 +0900"
 } ,
 
@@ -108,7 +148,7 @@
 "title"    : "[java Anti Pattern Series] 10.overcomplicatedexpression",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/24/java-anti-pattern-series-10.OvercomplicatedExpression.html",
+"url"      : "/java/anti-pattern/2025/01/24/java-anti-pattern-series-10.OvercomplicatedExpression.html",
 "date"     : "2025-01-24 00:00:00 +0900"
 } ,
 
@@ -116,7 +156,7 @@
 "title"    : "[java Anti Pattern Series] 09.sabotageperformance",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/23/java-anti-pattern-series-09.SabotagePerformance.html",
+"url"      : "/java/anti-pattern/2025/01/23/java-anti-pattern-series-09.SabotagePerformance.html",
 "date"     : "2025-01-23 00:00:00 +0900"
 } ,
 
@@ -124,7 +164,7 @@
 "title"    : "[java Anti Pattern Series] 08.singletonabuse",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/22/java-anti-pattern-series-08.SingletonAbuse.html",
+"url"      : "/java/anti-pattern/2025/01/22/java-anti-pattern-series-08.SingletonAbuse.html",
 "date"     : "2025-01-22 00:00:00 +0900"
 } ,
 
@@ -132,7 +172,7 @@
 "title"    : "[java Anti Pattern Series] 07.magicnumber",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/21/java-anti-pattern-series-07.MagicNumber.html",
+"url"      : "/java/anti-pattern/2025/01/21/java-anti-pattern-series-07.MagicNumber.html",
 "date"     : "2025-01-21 00:00:00 +0900"
 } ,
 
@@ -140,7 +180,7 @@
 "title"    : "[java Anti Pattern Series] 06.hardcoding",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/20/java-anti-pattern-series-06.HardCoding.html",
+"url"      : "/java/anti-pattern/2025/01/20/java-anti-pattern-series-06.HardCoding.html",
 "date"     : "2025-01-20 00:00:00 +0900"
 } ,
 
@@ -148,7 +188,7 @@
 "title"    : "[java Anti Pattern Series] 05.boatanchor",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/19/java-anti-pattern-series-05.BoatAnchor.html",
+"url"      : "/java/anti-pattern/2025/01/19/java-anti-pattern-series-05.BoatAnchor.html",
 "date"     : "2025-01-19 00:00:00 +0900"
 } ,
 
@@ -156,7 +196,7 @@
 "title"    : "[java Anti Pattern Series] 04.poltergeist",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/18/java-anti-pattern-series-04.Poltergeist.html",
+"url"      : "/java/anti-pattern/2025/01/18/java-anti-pattern-series-04.Poltergeist.html",
 "date"     : "2025-01-18 00:00:00 +0900"
 } ,
 
@@ -164,7 +204,7 @@
 "title"    : "[java Anti Pattern Series] 03.interfaceoverimplementation",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/17/java-anti-pattern-series-03.InterfaceOverImplementation.html",
+"url"      : "/java/anti-pattern/2025/01/17/java-anti-pattern-series-03.InterfaceOverImplementation.html",
 "date"     : "2025-01-17 00:00:00 +0900"
 } ,
 
@@ -172,7 +212,7 @@
 "title"    : "[java Anti Pattern Series] 02.goldenhammer",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/16/java-anti-pattern-series-02.GoldenHammer.html",
+"url"      : "/java/anti-pattern/2025/01/16/java-anti-pattern-series-02.GoldenHammer.html",
 "date"     : "2025-01-16 00:00:00 +0900"
 } ,
 
@@ -180,7 +220,7 @@
 "title"    : "[java Anti Pattern Series] 01.basebean",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/15/java-anti-pattern-series-01.BaseBean.html",
+"url"      : "/java/anti-pattern/2025/01/15/java-anti-pattern-series-01.BaseBean.html",
 "date"     : "2025-01-15 00:00:00 +0900"
 } ,
 
@@ -188,7 +228,7 @@
 "title"    : "[java Anti Pattern Series] 00.index",
 "category" : "",
 "tags"     : "",
-"url"      : "/2025/01/14/java-anti-pattern-series-00.Index.html",
+"url"      : "/java/anti-pattern/2025/01/14/java-anti-pattern-series-00.Index.html",
 "date"     : "2025-01-14 00:00:00 +0900"
 } ,
 
