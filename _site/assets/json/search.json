@@ -1,6 +1,174 @@
 [
 
 {
+"title"    : "[architecture Series Ddd] 07.summary",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/03/10/architecture-series-DDD-07.Summary.html",
+"date"     : "2025-03-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[ci:cd Series] 03 Jib",
+"category" : "",
+"tags"     : "",
+"url"      : "/ci/cd/2025/03/03/ci-cd-series-03-Jib.html",
+"date"     : "2025-03-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 31.tools",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/03/02/java-anti-pattern-series-31.Tools.html",
+"date"     : "2025-03-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 06.01.tdd",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/03/01/architecture-series-DDD-06.01.TDD.html",
+"date"     : "2025-03-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 05.04.dddinedd",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/28/architecture-series-DDD-05.04.DDDInEDD.html",
+"date"     : "2025-02-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 05.03.dddinmonolith",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/27/architecture-series-DDD-05.03.DDDInMonolith.html",
+"date"     : "2025-02-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 05.02.dddinmicroservice",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/26/architecture-series-DDD-05.02.DDDInMicroService.html",
+"date"     : "2025-02-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 05.01.contextmapping",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/25/architecture-series-DDD-05.01.ContextMapping.html",
+"date"     : "2025-02-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 04.05.layeredarchitecture",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/24/architecture-series-DDD-04.05.LayeredArchitecture.html",
+"date"     : "2025-02-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 04.04.eventsourcing",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/23/architecture-series-DDD-04.04.EventSourcing.html",
+"date"     : "2025-02-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 04.03.cqrs",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/22/architecture-series-DDD-04.03.CQRS.html",
+"date"     : "2025-02-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 04.02.boundedcontext",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/21/architecture-series-DDD-04.02.BoundedContext.html",
+"date"     : "2025-02-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 04.01.ubiquitouslanguage",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/20/architecture-series-DDD-04.01.UbiquitousLanguage.html",
+"date"     : "2025-02-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 03.04.domainevent",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/19/architecture-series-DDD-03.04.DomainEvent.html",
+"date"     : "2025-02-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 03.03.aggregate",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/18/architecture-series-DDD-03.03.Aggregate.html",
+"date"     : "2025-02-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 03.02.value",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/17/architecture-series-DDD-03.02.Value.html",
+"date"     : "2025-02-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 03.01.entity",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/16/architecture-series-DDD-03.01.Entity.html",
+"date"     : "2025-02-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 02.origin",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/15/architecture-series-DDD-02.Origin.html",
+"date"     : "2025-02-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Ddd] 01.introduce",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/domain/2025/02/14/architecture-series-DDD-01.Introduce.html",
+"date"     : "2025-02-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 30.evadeantipattern",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/13/java-anti-pattern-series-30.EvadeAntiPattern.html",
+"date"     : "2025-02-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[java Anti Pattern Series] 29.effectiverefactoring",
+"category" : "",
+"tags"     : "",
+"url"      : "/java/anti-pattern/2025/02/12/java-anti-pattern-series-29.EffectiveRefactoring.html",
+"date"     : "2025-02-12 00:00:00 +0900"
+} ,
+
+{
 "title"    : "[java Anti Pattern Series] 28.catchandrelease",
 "category" : "",
 "tags"     : "",

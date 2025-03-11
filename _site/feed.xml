@@ -5,648 +5,1214 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 11 Feb 2025 20:07:24 +0900</pubDate>
+    <pubDate>Mon, 10 Mar 2025 21:02:56 +0900</pubDate>
     
       <item>
-        <title>[java Anti Pattern Series] 28.catchandrelease</title>
-        <link>/java/anti-pattern/2025/02/11/java-anti-pattern-series-28.CatchAndRelease.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/11/java-anti-pattern-series-28.CatchAndRelease.html</guid>
-        <description>&lt;h1 id=&quot;catch-and-release&quot;&gt;Catch and release&lt;/h1&gt;
+        <title>[architecture Series Ddd] 07.summary</title>
+        <link>/architecture/ddd/domain/2025/03/10/architecture-series-DDD-07.Summary.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/03/10/architecture-series-DDD-07.Summary.html</guid>
+        <description>&lt;h1 id=&quot;ddd-정리&quot;&gt;DDD 정리&lt;/h1&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;예외를 받고 처리 없이 다시 던지거나 무시하는 경우&lt;/li&gt;
-  &lt;li&gt;디버깅을 어렵게 한다.&lt;/li&gt;
-  &lt;li&gt;근본 원인을 해결하지 않고 예외 처리 방법이 생각이 나지 않는 경우에 빠지기 쉬운 길&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;정보 손실&lt;/li&gt;
-  &lt;li&gt;잘못된 디버깅&lt;/li&gt;
-  &lt;li&gt;실패 위험 증가&lt;/li&gt;
-  &lt;li&gt;성능 저하&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;권장&quot;&gt;권장&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;예외를 적절히 처리하기&lt;/li&gt;
-  &lt;li&gt;컨텍스트에 따라 예외 다시 던지기&lt;/li&gt;
-  &lt;li&gt;checked exception은 신중하게&lt;/li&gt;
-  &lt;li&gt;강력한 오류 처리 구현&lt;/li&gt;
-  &lt;li&gt;예외를 철저히 기록&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/ddd/1.jpeg&quot; alt=&quot;1.jpeg&quot; /&gt;
+&lt;img src=&quot;/assets/img/ddd/2.jpeg&quot; alt=&quot;2.jpeg&quot; /&gt;
+&lt;img src=&quot;/assets/img/ddd/3.jpeg&quot; alt=&quot;3.jpeg&quot; /&gt;
+&lt;img src=&quot;/assets/img/ddd/4.jpeg&quot; alt=&quot;4.jpeg&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 11 Feb 2025 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 27.throwsexceptionsinfinallyblock</title>
-        <link>/java/anti-pattern/2025/02/10/java-anti-pattern-series-27.ThrowsExceptionsInFinallyBlock.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/10/java-anti-pattern-series-27.ThrowsExceptionsInFinallyBlock.html</guid>
-        <description>&lt;h1 id=&quot;throws-exceptions-in-finally-block&quot;&gt;Throws exceptions in finally block&lt;/h1&gt;
+        <title>[ci:cd Series] 03 Jib</title>
+        <link>/ci/cd/2025/03/03/ci-cd-series-03-Jib.html</link>
+        <guid isPermaLink="true">/ci/cd/2025/03/03/ci-cd-series-03-Jib.html</guid>
+        <description>&lt;h1 id=&quot;jib&quot;&gt;Jib&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;finally는 예외 여부와 상관없이 실행되어야만 하는 경우에 사용한다.&lt;/li&gt;
-  &lt;li&gt;예를 들어 리소스를 닫는 등의 경우에서 말이다.&lt;/li&gt;
-  &lt;li&gt;finally에서 예외를 던지만 예기치 않은 동작이 발생하고 오류 처리가 모호해질 수 있다.&lt;/li&gt;
+  &lt;li&gt;애플리케이션을 컨테이너 이미지로 패키징하는 모든 단계를 빠르게 처리하는 컨테이너 이미지 빌더다.&lt;/li&gt;
+  &lt;li&gt;Dockerfile을 작성하거나 도커를 따로 설치할 필요가 없다.&lt;/li&gt;
+  &lt;li&gt;Maven, Gradle 플러그인으로 동작한다.&lt;/li&gt;
+  &lt;li&gt;플러그인 정의하고 타겟 이미지에 대한 설정, 빌드에 대한 정의를 하면 Java Application을 컨테이너화 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;이유&quot;&gt;이유&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;원래 예외를 마스킹&lt;/li&gt;
-  &lt;li&gt;의도하지 않은 흐름 제어&lt;/li&gt;
-  &lt;li&gt;리소스 유출 : finally에서 처리되어야 할 리소스 정리가 되지 않아서 메모리 누수, 잠재적 성능 저하가 발생할 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;권장&quot;&gt;권장&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;적절한 오류 처리 사용&lt;/li&gt;
-  &lt;li&gt;정리 로직, 예외 처리 분리&lt;/li&gt;
-  &lt;li&gt;fianlly에서는 단순하게! 리소스 정리 정도만&lt;/li&gt;
-  &lt;li&gt;try-catch 중첩 : finally에서 여러 작업을 해야 한다면 차라리 try-catch를 여러 번 쓰자&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 10 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 26.ignoringexception</title>
-        <link>/java/anti-pattern/2025/02/09/java-anti-pattern-series-26.IgnoringException.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/09/java-anti-pattern-series-26.IgnoringException.html</guid>
-        <description>&lt;h1 id=&quot;ignoring-exception&quot;&gt;Ignoring Exception&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;img/Screenshot%202025-02-01%20at%2016.02.02.png&quot; alt=&quot;https://cloud.google.com/java/getting-started/jib?hl=ko&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;예외를 무시하면 예측할 수 없는 동작, 버그 및 보안 취약점이 발생할 수 있으므로 예외를 무시하는 것은 나쁜 습관으로 간주된다.&lt;/li&gt;
+  &lt;li&gt;출처: https://cloud.google.com/java/getting-started/jib?hl=ko&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;이유&quot;&gt;이유&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;정보 손실&lt;/li&gt;
-  &lt;li&gt;정의 되지 않은 동작&lt;/li&gt;
-  &lt;li&gt;리소스 유출&lt;/li&gt;
-  &lt;li&gt;사용자 경험 저하&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2 id=&quot;kotlin-plugin&quot;&gt;kotlin plugin&lt;/h2&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;plugins&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.google.cloud.tools.jib' version '3.4.4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;jib-configuration&quot;&gt;jib configuration&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;필드&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;클로저 파라미터&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;변수&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;타입&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;기본 값&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;to&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;to&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;required&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;구축할 대상 이미지&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;image&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;eclipse-temurin&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;기본 이미지에 대한 참조&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;tags&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;푸시할 태그&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;credHelper&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;대상 이미지를 푸시하는 것을 인증할 수 있는 자격 증명 도우미를 지정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;auth&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;auth&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;자격 증명 직접 지정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;username&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;아이디&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;password&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;비밀번호&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;from&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;from&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;기본 이미지&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;image&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;eclipse-temurin&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;기본 이미지에 대한 참조&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;credHelper&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;대상 이미지를 푸시하는 것을 인증할 수 있는 자격 증명 도우미를 지정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;auth&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;auth&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;자격 증명 직접 지정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;username&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;아이디&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;password&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;비밀번호&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;container&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;container&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;빌드된 이미지의 도커 설정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;appRoot&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;/app&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;앱 콘텐츠가 있는 루트 디렉토리&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;args&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;컨테이너 시작하기 위해 명령에 추가된 추가 프로그램 인수   (Docker의 CMD와 유사)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;entrypoint&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;도커의 entrypoint와 유사&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;environment&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Map&amp;lt;String, String&amp;gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;컨테이너 환경 변수&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;jvmFlags&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;JVM 플래그&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;labels&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Map&amp;lt;String, String&amp;gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;이미지 메타데이터를 적용하기 위한 key-value&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ports&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;EXPOSE 될 포트&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;volumes&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;List&lt;String&gt;&lt;/String&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;컨테이너 마운트 포인트&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;workingDirectory&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;컨테이너 작업 디렉토리&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;user&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;컨테이너 운용 할 사용자 그룹&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;extraDirectories&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;extraDirectories&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;이미지에 추가할 임의의 디렉토리&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;outputPaths&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;outputPaths&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Jib에 의해서 생성된 추가 빌드 아티팩트의 위치 구성&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;containerizingMode&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;String&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;exploded&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;package&lt;/code&gt;로 설정하면 Gradle Java 플러그인에 의해 구축된 JAR 아티팩트를 최종 이미지에 넣습니다. &lt;br /&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exploded&lt;/code&gt;(기본값)로 설정하면 개별 .class 파일과 리소스 파일을 컨테이너화합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;allowInsecureRegistries&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;boolean&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;false&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;true면 https 인증서 오류를 무시합니다.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h2 id=&quot;예시&quot;&gt;예시&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;catch block에서 아무 것도 하지 않는 경우&lt;/li&gt;
-  &lt;li&gt;아예 예외 처리를 안 한 경우&lt;/li&gt;
-&lt;/ol&gt;
 
-&lt;h2 id=&quot;처리-방안&quot;&gt;처리 방안&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;예외를 최대한 작은 범위로 특정해서 지정&lt;/li&gt;
-  &lt;li&gt;Try-Catch-Finally 사용&lt;/li&gt;
-  &lt;li&gt;Slf4j를 사용해서 로깅&lt;/li&gt;
-  &lt;li&gt;예외를 다른 예외로 변환해서 던지기&lt;/li&gt;
-&lt;/ol&gt;
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;jib&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;openjdk:alpine&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;localhost:5000/my-image/built-with-jib&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;credHelper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;osxkeychain&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tag2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;latest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;jvmFlags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-Dmy.property=example.value&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-Xms512m&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-Xdebug&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mainClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;mypackage.MyApp&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;arrayOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;some&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ports&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1000&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;2000-2003/udp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mapOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;key1&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;value1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;key2&quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;value2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;OCI&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>Sun, 09 Feb 2025 00:00:00 +0900</pubDate>
+        <pubDate>Mon, 03 Mar 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 25.catchall</title>
-        <link>/java/anti-pattern/2025/02/08/java-anti-pattern-series-25.CatchAll.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/08/java-anti-pattern-series-25.CatchAll.html</guid>
-        <description>&lt;h1 id=&quot;catchall&quot;&gt;CatchAll&lt;/h1&gt;
+        <title>[java Anti Pattern Series] 31.tools</title>
+        <link>/architecture/ddd/domain/2025/03/02/java-anti-pattern-series-31.Tools.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/03/02/java-anti-pattern-series-31.Tools.html</guid>
+        <description>&lt;h1 id=&quot;도구&quot;&gt;도구&lt;/h1&gt;
 
+&lt;h2 id=&quot;정적-코드-분석-도구&quot;&gt;정적 코드 분석 도구&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;최상위, 추상적 에러로 에러 처리 대상을 선정하는 것은 안티패턴이다.&lt;/li&gt;
-  &lt;li&gt;특정 예외를 개별적으로 처리하지 않고 하나의 catch 블록으로 모든 예외를 잡는 방식이다.&lt;/li&gt;
+  &lt;li&gt;SonarQube&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;문제점&quot;&gt;문제점&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;정보 손실 : 에러 타입을 특정할 수 없어진다.&lt;/li&gt;
-  &lt;li&gt;정확성 부족 : 예외를 구체적이고 타겟팅된 방식으로 처리할 기회를 박탈당한다.&lt;/li&gt;
-  &lt;li&gt;코드 복잡성 : 의미있는 에러처리가 아니게 되므로 불필요한 catch로 코드가 도배될 수 있다.&lt;/li&gt;
-  &lt;li&gt;오류 마스킹 : 에러마다 다르게 처리해야하는 경우 오류가 마스킹 될 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;특정 예외 처리하기&lt;/li&gt;
-  &lt;li&gt;catch를 세분화 해서 처리하기&lt;/li&gt;
-  &lt;li&gt;에러 변환해서 다시 던지기&lt;/li&gt;
-  &lt;li&gt;try-with-resource 사용&lt;/li&gt;
-  &lt;li&gt;예외 로깅&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2 id=&quot;동적-분석-도구&quot;&gt;동적 분석 도구&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;JProfiler&lt;/li&gt;
+  &lt;li&gt;JavaMissionControl&lt;/li&gt;
+&lt;/ul&gt;
 </description>
-        <pubDate>Sat, 08 Feb 2025 00:00:00 +0900</pubDate>
+        <pubDate>Sun, 02 Mar 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 24.neglectingtoreleaseresource</title>
-        <link>/java/anti-pattern/2025/02/07/java-anti-pattern-series-24.NeglectingToReleaseResource.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/07/java-anti-pattern-series-24.NeglectingToReleaseResource.html</guid>
-        <description>&lt;h1 id=&quot;neglecting-to-release-resource&quot;&gt;Neglecting To Release Resource&lt;/h1&gt;
+        <title>[architecture Series Ddd] 06.01.tdd</title>
+        <link>/architecture/ddd/domain/2025/03/01/architecture-series-DDD-06.01.TDD.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/03/01/architecture-series-DDD-06.01.TDD.html</guid>
+        <description>&lt;h1 id=&quot;tdd와-관계&quot;&gt;TDD와 관계&lt;/h1&gt;
 
+&lt;h2 id=&quot;ddd&quot;&gt;DDD&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;리소스 해제하지 않는 경우 메모리 누수, 과도한 리소스 낭비, 성능 이슈가 발생할 수 있다.&lt;/li&gt;
-  &lt;li&gt;리소스 미사용 시 해제하지 않는 경우 발생한다.&lt;/li&gt;
+  &lt;li&gt;비즈니스 도메인을 깊이 이해하여 소프트웨어 시스템을 설계하는 데 중점을 두는 아키텍쳐 접근 방식&lt;/li&gt;
+  &lt;li&gt;도메인 전문가와 소프트웨어 개발자 간 협업을 강조&lt;/li&gt;
+  &lt;li&gt;복잡한 비즈니스 요구 사항에 대한 공동의 이해를 창출&lt;/li&gt;
+  &lt;li&gt;비즈니스 도메인의 개념, 언어 및 프로세스를 기반으로 소프트웨어 시스템을 모델링하는 것을 옹호&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
+&lt;h2 id=&quot;tdd&quot;&gt;TDD&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;프로덕션 코드 작성 전 자동화된 테스트를 작성하는 것을 지지하는 소프트웨어 개발 관행&lt;/li&gt;
+  &lt;li&gt;Red-Green-Refactoring 주기를 따르며, 처음에 원하는 기능을 정의하기 위해서 실패한 테스트 케이스를 작성&lt;/li&gt;
+  &lt;li&gt;그 다음 테스트를 통과할 수 있을 만큼만 구현&lt;/li&gt;
+  &lt;li&gt;마지막으로 코드, 테스트를 리팩토링해서 모든 테스트를 통과하면서 품질을 개선&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;시너지&quot;&gt;시너지&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;이해 부족&lt;/li&gt;
-  &lt;li&gt;긴밀한 결합
+  &lt;li&gt;공유된 이해
     &lt;ul&gt;
-      &lt;li&gt;리소스 획득, 릴리즈 로직 간 긴밀한 결합이 이뤄진다 이러면 모든 경로에서 리소스가 릴리즈되도록 보장하기가 어려워질 수 있다.&lt;/li&gt;
+      &lt;li&gt;둘 다 이해 관계자, 도메인 전문가, 개발자 간의 협업과 커뮤니케이션을 장려&lt;/li&gt;
+      &lt;li&gt;TDD는 개발자가 도메인 전문가가 이해할 수 있는 언어로 테스트를 작성하도록 정려&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;예외 처리&lt;/li&gt;
-  &lt;li&gt;복잡한 코드
+  &lt;li&gt;점진적 개발
     &lt;ul&gt;
-      &lt;li&gt;너무 복잡하면 리소스가 제대로 릴리즈 됐는지 확인하기 어려울 수 있다.&lt;/li&gt;
+      &lt;li&gt;개발자가 관리하기 쉬운 작은 단위로 테스트와 코드를 작성하는 점진적 개발을 장려&lt;/li&gt;
+      &lt;li&gt;이러한 흐름은 반복 개발과 도메인 전문가의 지속적인 피드백을 강조하는 DDD와 궤를 같이함&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;문서로서의 테스트
+    &lt;ul&gt;
+      &lt;li&gt;TDD에서 테스트는 실행 가능한 문서의 한 형태&lt;/li&gt;
+      &lt;li&gt;테스트는 시스템의 예상 동작과 기능을 설명&lt;/li&gt;
+      &lt;li&gt;구현 검증과 코드베이스가 도메인 모델 및 요구 사항과 일치하도록 보장하는 살아있는 문서&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;품질 보증
+    &lt;ul&gt;
+      &lt;li&gt;TDD는 초기 회귀와 버그를 잡아낼 수 있는 안전망을 제공&lt;/li&gt;
+      &lt;li&gt;이는 비즈니스 목표에 부합하는 고품질 소프트웨어를 제공한다는 DDD의 목표와 일치&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;리팩토링 및 유연성 유지
+    &lt;ul&gt;
+      &lt;li&gt;둘 다 설계와 유지보수성을 개선하기 위해서 리팩토링을 권장&lt;/li&gt;
+      &lt;li&gt;TDD의 리팩토링 단계를 통해 건설적인 방향으로 코드베이스를 발전시킬 수 있다. DDD가 도메인에 대한 진화하는 이해를 바탕으로 리팩토링하고 개선하기 위한 접근을 하는 것과 뜻을 같이한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 01 Mar 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 05.04.dddinedd</title>
+        <link>/architecture/ddd/domain/2025/02/28/architecture-series-DDD-05.04.DDDInEDD.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/28/architecture-series-DDD-05.04.DDDInEDD.html</guid>
+        <description>&lt;h1 id=&quot;eventdrivendevelop&quot;&gt;EventDrivenDevelop&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;확장성이 뛰어나고 분리되어 있으며 반응성이 뛰어난 시스템을 구축하는 것을 목표로 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;edd&quot;&gt;EDD&lt;/h2&gt;
+&lt;h3 id=&quot;edd란&quot;&gt;EDD란?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;구성 요소 간 주요 통신 수단으로 이벤트의 활용을 강조&lt;/li&gt;
+  &lt;li&gt;이벤트 중심 시스템에서 구성 요소는 이벤트를 비동기적으로 방출하고 소비&lt;/li&gt;
+  &lt;li&gt;느슨한 결합, 확장성, 실시간 응답을 가능하게 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;주요-개념&quot;&gt;주요 개념&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;이벤트:
+    &lt;ul&gt;
+      &lt;li&gt;시스템 내에서 중요한 발생 또는 변경 사항을 나타낸다.&lt;/li&gt;
+      &lt;li&gt;이벤트 관련 정보를 캡슐화하며 여러 컴포넌트나 시스템에서 사용할 수 있다.&lt;/li&gt;
+      &lt;li&gt;이벤트는 이벤트 로그에 저장되어 이벤트 재생 및 복구가 가능한 경우가 많다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 핸들러:
+    &lt;ul&gt;
+      &lt;li&gt;특정 이벤트에 반응하고 적절한 작업을 실행할 책임이 있다.&lt;/li&gt;
+      &lt;li&gt;이벤트를 구독하고 이벤트를 수신하면 필요 작업을 수행&lt;/li&gt;
+      &lt;li&gt;시스템 상태를 업데이트 하거나 다른 이벤트를 트리거하거나 다운스트림 프로세스를 호출할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 소싱:
+    &lt;ul&gt;
+      &lt;li&gt;애플리케이션의 상태가 일련의 이벤트에서 파생되는 EDD에서 일반적으로 사용하는 기술&lt;/li&gt;
+      &lt;li&gt;현재 상태 유지 대신 시스템에 대한 모든 변경 사항이 이벤트로 표시&lt;/li&gt;
+      &lt;li&gt;이벤트를 재생함으로써 시스템은 언제든지 상태를 재구축&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ddd와-결합의-이점&quot;&gt;DDD와 결합의 이점&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;느슨하게 결합된 아키텍쳐&lt;/li&gt;
+  &lt;li&gt;리액티브하고 확장 가능한 시스템&lt;/li&gt;
+  &lt;li&gt;EventDriven 도메인 모델&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 28 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 05.03.dddinmonolith</title>
+        <link>/architecture/ddd/domain/2025/02/27/architecture-series-DDD-05.03.DDDInMonolith.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/27/architecture-series-DDD-05.03.DDDInMonolith.html</guid>
+        <description>&lt;h1 id=&quot;ddd-in-monolith&quot;&gt;DDD in Monolith&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DDD는 비즈니스 또는 문제 도메인의 핷미을 이해하고 모델링하는 데 중점을 두는 접근 방식&lt;/li&gt;
+  &lt;li&gt;대규모 애플리케이션의 복잡성을 해결하기 위한 일련의 원칙과 패턴을 제공&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이점&quot;&gt;이점&lt;/h2&gt;
+&lt;h3 id=&quot;모듈화-및-관심사-분리&quot;&gt;모듈화 및 관심사 분리&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;코드 베이스 내에서 관심사의 모듈화 및 분리를 촉진한다.&lt;/li&gt;
+  &lt;li&gt;애플리케이션의 경계가 뚜렷한 컨텍스트로 구성하면 시스템의 여러 부분을 분리하여 불필요한 종속성을 피하고 전반적인 모듈성을 개선할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;공유된-이해와-커뮤니케이션&quot;&gt;공유된 이해와 커뮤니케이션&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;개발자와 도메인 전문가가 긴밀하게 협력하여 문제 도메인에 대한 공통된 이해를 구축할 수 있다.&lt;/li&gt;
+  &lt;li&gt;덕부넹 요구 사항을 명확하 하고, 숩겨진 복잡성을 발견할 수 있다.
+    &lt;h3 id=&quot;유비쿼터스-언어&quot;&gt;유비쿼터스 언어&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;개발자는 소프트웨어 모델과 도메인 전문가의 정신적 모델 간의 격차를 해소할 수 있다.
+    &lt;h3 id=&quot;확장성-및-진화-가능성&quot;&gt;확장성 및 진화 가능성&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;확장성, 진화 가능성을 향상시킬 수 있다.&lt;/li&gt;
+  &lt;li&gt;핵심 도메인을 중심으로 코드 베이스를 구성하면 시스템에서 가장 중요한 부분을 더 쉽게 식별할 수 있다.&lt;/li&gt;
+  &lt;li&gt;모듈식 특성 때문에 애플리케이션 전체에 광범위한 중단 없이 향후 변경 및 새로운 기능 추가에 용이&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 05.02.dddinmicroservice</title>
+        <link>/architecture/ddd/domain/2025/02/26/architecture-series-DDD-05.02.DDDInMicroService.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/26/architecture-series-DDD-05.02.DDDInMicroService.html</guid>
+        <description>&lt;h1 id=&quot;ddd-in-microservice&quot;&gt;DDD in MicroService&lt;/h1&gt;
+
+&lt;h2 id=&quot;마이크로서비스&quot;&gt;마이크로서비스&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;모놀리식 애플리케이션을 각각 고유한 컨텍스트가 있는 느슨하게 결합된 서비스 애그리거트로 분리하는 것을 지지&lt;/li&gt;
+  &lt;li&gt;각 마이크로서비스는 명확하게 정의된 책임이 있어야 하며 다른 마이크로서비스와 독립적으로 가능해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;마이크로서비스에-ddd-적용&quot;&gt;마이크로서비스에 DDD 적용&lt;/h2&gt;
+&lt;h3 id=&quot;바운디드-컨텍스트&quot;&gt;바운디드 컨텍스트&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;잘 정의된 유비쿼터스 언어와 일관된 도메인 모델이 설정된 시스템의 특정 영역을 나타낸다.&lt;/li&gt;
+  &lt;li&gt;마이크로서비스에서도 각 서비스에는 고유한 바운디드 컨텍스트가 있어야 한다.
+    &lt;h3 id=&quot;애그리거트&quot;&gt;애그리거트&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;엔티티 그룹을 캡슐화하는 일관성 경계이다.&lt;/li&gt;
+  &lt;li&gt;마이크로서비스에서는 각 서비스 내에서 애그리거트를 식별하는 것이 필수적&lt;/li&gt;
+  &lt;li&gt;애그리거트 경계 내에서 데이터가 일관성을 유지하고 도메인 모델과 상호 작용할 수 있는 명확한 인터페이스를 제공할 수 있다.
+    &lt;h3 id=&quot;이벤트-중심-아키텍쳐&quot;&gt;이벤트 중심 아키텍쳐&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트를 활용하면 마이크로서비스가 비동기적으로 통신하여 느슨한 결합과 확장성을 촉진할 수 있다.&lt;/li&gt;
+  &lt;li&gt;이벤트는 도메인별 발생을 나타내며 여러 마이크로서비스에서 일관성을 유지하는 데 도움이 된다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;공유-커널&quot;&gt;공유 커널&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;마이크로서비스에서는 도메인 모델의 특정 부분을 서비스 간의 공유해야하는 상황이 있을 수 있다.&lt;/li&gt;
+  &lt;li&gt;컨텍스트 간 공통 코드 또는 도메인 모델을 가리키는 개념이다.&lt;/li&gt;
+  &lt;li&gt;공유커널을 식별하고 생성하면 일관성을 유지하면서 개별 서비스를 개별적으로 발전시킬 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;컨텍스트-매핑&quot;&gt;컨텍스트 매핑&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;경계가 있는 컨텍스트 간의 관계와 상호 작용을 정의하는 데 사용하는 DDD 기술이다.&lt;/li&gt;
+  &lt;li&gt;마이크로서비스에서 컨텍스트 매핑은 서로 다른 서비스 간의 통신 패턴과 통합을 설정하는 데 도움이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;최종-일관성&quot;&gt;최종 일관성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;마이크로서비스는 아키텍쳐의 분산된 특성으로 인해서 즉각적인 일관성 대신 최종 일관성에 의존하는 경우가 많다.&lt;/li&gt;
+  &lt;li&gt;DDD는 서로 다른 컨텍스트가 자체 일관성 모델을 가질 수 있도록 허용함으로써 이를 인정한다.&lt;/li&gt;
+  &lt;li&gt;이벤트와 최종 일관성은 마이크로 서비스 간에 데이터 무결성을 동기화하고 유지하는 데 사용 가능하다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 26 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 05.01.contextmapping</title>
+        <link>/architecture/ddd/domain/2025/02/25/architecture-series-DDD-05.01.ContextMapping.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/25/architecture-series-DDD-05.01.ContextMapping.html</guid>
+        <description>&lt;h1 id=&quot;contextmapping&quot;&gt;ContextMapping&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;컨텍스트 매핑은 시스템 내에서 서로 다른 바운디드 컨텍스트 간의 관계와 경계를 식별하고 관리하는 데 사용하는 강력한 기술&lt;/li&gt;
+  &lt;li&gt;바운디드 컨텍스트는 더 큰 소프트웨어 애플리케이션의 독립적이고 자율적인 구성 요소 또는 하위 시스템으로 정의&lt;/li&gt;
+  &lt;li&gt;컨텍스트 매핑은 컨텍스트 상호 간 상호 작용이 잘 정의되어 있는지 확인하고 발생할 수 있는 잠재적인 결합 또는 충돌을 최소화하는데 도움&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;중요-이유&quot;&gt;중요 이유&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;여러 부분 간에 명확한 경계와 잘 정의된 상호 작용을 갖는 것이 주용하다.&lt;/li&gt;
+  &lt;li&gt;적절한 컨텍스트 매핑이 없으면 경계가 다른 컨텍스트에서 작업하는 팀이 의도치 않게 서로의 영역을 침범하여 출돌이 발생&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;관계-유형&quot;&gt;관계 유형&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;파트너십
+    &lt;ul&gt;
+      &lt;li&gt;서로 긴밀하게 협업하고 소통하는 관계&lt;/li&gt;
+      &lt;li&gt;팀의 공통 목표 달성을 위해서 도메인 모델, 서비스 또는 데이터 일부를 공유할 때 발생&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;공유 커널
+    &lt;ul&gt;
+      &lt;li&gt;두 개 이상의 컨텍스트가 공통 핵심 도메인 및 관련 코드를 공유&lt;/li&gt;
+      &lt;li&gt;컨텍스트가 긴밀하게 연결되어 있고 핵심 도메인에 대한 일관되고 동기화된 보기를 유지해야 하는 경우&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Client-Supplier
+    &lt;ul&gt;
+      &lt;li&gt;한 컨텍스트가 공급자 반대가 고객 역할&lt;/li&gt;
+      &lt;li&gt;공급자는 고객이 활용할 수 있는 API 또는 계약을 노출하여 관심사 분리&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;순응
+    &lt;ul&gt;
+      &lt;li&gt;두 개 이상의 컨텍스트가 모델이나 행동을 공유 언어 또는 표준에 맞춰서 조정
+        &lt;h2 id=&quot;기법&quot;&gt;기법&lt;/h2&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;컨텍스트 매핑 캔버스
+    &lt;ul&gt;
+      &lt;li&gt;팀이 시스템의 다양한 컨텍스트를 관계, 경계 및 정책과 함께 정의하고 문서화하는 데 도움이 되는 시각화 도구&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;전략적 도메인 주도 설계
+    &lt;ul&gt;
+      &lt;li&gt;높은 수준의 전략적 의사 결정에 초점을 맞춘 접근 방식&lt;/li&gt;
+      &lt;li&gt;핵심 도메인, 하위 도메인, 바운디드 컨텍스트 및 컨텍스트 매핑 관계를 식별하는 데 도움&lt;/li&gt;
+      &lt;li&gt;SDDD 기술을 통해서 전략적 결적을 조정하고 조직 전체에서 일관성 유지&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;협업 디자인 세션
+    &lt;ul&gt;
+      &lt;li&gt;팀 간의 지속적인 협업과 커뮤니케이션이 필요한 지속적인 활동&lt;/li&gt;
+      &lt;li&gt;협업 디자인 세션에서는 서로 다른 영여고가 컨텍스트의 이해 관계자가 모여 서로의 요구 사항을 이해하고 기대치를 조정하여 갈등이나 불일치 해결&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;어떻게-만들-수-있나&quot;&gt;어떻게 만들 수 있나&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;도메인 스토리텔링 : 도메인 전문가들이 스토리 텔링을 통해 지식과 경험을 공유하는 협업 기법이다.&lt;/li&gt;
+  &lt;li&gt;이벤트 스토밍: 팀이 도메인을 탐색하고 그 안에서 발생하는 이벶트를 식별할 수 있는 워크샵 형식이다. 시각화하여 서로 다른 컨텍스트 간의 경계와 상호 작용을 나타내는 컨텍스트 맵을 만들 수 있다.&lt;/li&gt;
+  &lt;li&gt;영향 매핑: 영향 매핑은 팀이 원하는 비즈니스 결과에 맞춰 개발 노력을 조정하는 데 도움이 되는 기법&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 25 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 04.05.layeredarchitecture</title>
+        <link>/architecture/ddd/domain/2025/02/24/architecture-series-DDD-04.05.LayeredArchitecture.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/24/architecture-series-DDD-04.05.LayeredArchitecture.html</guid>
+        <description>&lt;h1 id=&quot;계층화된-아키텍쳐&quot;&gt;계층화된 아키텍쳐&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;가장 널리 사용되는 아키텍쳐 패턴 중 하나다.&lt;/li&gt;
+  &lt;li&gt;소프트웨어 시스템을 각각 고유한 책임이 있는 별개의 계층으로 나누고 구조적이고 조직적으로 설계하는 방법을 제시한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;계층형-아키텍쳐의-레이어&quot;&gt;계층형 아키텍쳐의 레이어&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;PresentationLayer
+    &lt;ol&gt;
+      &lt;li&gt;외부 시스템과 상호작용을 담당한다.&lt;/li&gt;
+      &lt;li&gt;사용자 입력, 시각적 표현 및 사용자 인터페이스 구성 요소를 처리한다.&lt;/li&gt;
+      &lt;li&gt;주로 정보를 제시하고 사용자 작업을 캡쳐하는 데 중점을 둔다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ApplicationLayer
+    &lt;ol&gt;
+      &lt;li&gt;Presentation, domain 사이 중개자 역할&lt;/li&gt;
+      &lt;li&gt;사용자의 작업의 실행을 조정하고 위임&lt;/li&gt;
+      &lt;li&gt;이 계층은 사용자 입력을 의미 있는 명령 또는 쿼리로 변환하고 도메인 레이어에서 적절한 작업을 호출하는 역할을 한다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;DomainLayer
+    &lt;ol&gt;
+      &lt;li&gt;핵심 비즈니스 로직을 나타내며, 도메인에 대한 지식을 캡슐화한다.&lt;/li&gt;
+      &lt;li&gt;엔티티, 값 객체, 비즈니스 규칙 및 도메인별 로직이 포함된다.&lt;/li&gt;
+      &lt;li&gt;기술에 구애 받지 않고 외부 종속성으로부터 독립적이어야 한다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;PersistenceLayer
+    &lt;ol&gt;
+      &lt;li&gt;지속성 레이어는 관계형 데이터베이스, 문서 저장소 또는 기타 데이터 저장소와 같은 지속성 메커니즘에서 데이터를 저장하고 검색하는 역할을 담당&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;InfraLayer
+    &lt;ol&gt;
+      &lt;li&gt;다른 계층을 지원하기 위한 기술적 기능을 제공&lt;/li&gt;
+      &lt;li&gt;데이터 스토리지, 외부 서비스 및 통신 프로토콜을 처리한다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;이점&quot;&gt;이점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;모듈화 :
+    &lt;ul&gt;
+      &lt;li&gt;관심사를 계층으로 명확하게 분리&lt;/li&gt;
+      &lt;li&gt;시스템이 더욱 모듈화되는 효과가 생기고 더욱 이해하기 쉬워진다.&lt;/li&gt;
+      &lt;li&gt;독립적으로 각 계층을 개발, 테스트 및 유지 관리할 수 있어 전체 시스템 확장성과 유지 보수 용이&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;도메인 로직의 분리
+    &lt;ul&gt;
+      &lt;li&gt;외부 종속성으로부터 분리되어 도메인별 로직과 비즈니스 규칙에만 집중할 수 있다.&lt;/li&gt;
+      &lt;li&gt;도메인 코드의 테스트 가능성과 재사용성을 향상시킨다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;유연성
+    &lt;ul&gt;
+      &lt;li&gt;계층 간의 인터페이스가 그대로 유지되는 한 다른 계층에 영향을 주지 않고 한 계층을 변경할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;기술적 세부 사항의 추상화
+    &lt;ul&gt;
+      &lt;li&gt;하위 레이어는 시스템의 기술적 측면을 처리하여 상위 레이어에서 복잡성을 추상화한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;가이드라인&quot;&gt;가이드라인&lt;/h2&gt;
+&lt;h3 id=&quot;계층-간-커뮤니케이션&quot;&gt;계층 간 커뮤니케이션&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;레이어 간의 커뮤니케이션은 항상 상위 레이어에서 하위 레이어로 단일 방향으로 이뤄져야 한다.&lt;/li&gt;
+  &lt;li&gt;관심사를 적절히 분리하고 하위 계층에서 상위 계층으로 종속성을 도입하는 것을 방지할 수 있다.
+    &lt;h3 id=&quot;관심사-분리&quot;&gt;관심사 분리&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;레이어는 명확하고 뚜렷한 책임이 있어야 한다.&lt;/li&gt;
+  &lt;li&gt;비즈니스 로직은 도메인 레이어 내에 유지해야 한다.
+    &lt;h3 id=&quot;종속성-흐름&quot;&gt;종속성 흐름&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;상위에서 하위로 흐르도록 구성하는 것이 좋다.&lt;/li&gt;
+  &lt;li&gt;상위가 하위에 종속되어서는 안된다.&lt;/li&gt;
+  &lt;li&gt;의존성 주입 또는 서비스 로케이터 패턴을 사용하여 계층 간의 의존성을 관리하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 24 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 04.04.eventsourcing</title>
+        <link>/architecture/ddd/domain/2025/02/23/architecture-series-DDD-04.04.EventSourcing.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/23/architecture-series-DDD-04.04.EventSourcing.html</guid>
+        <description>&lt;h1 id=&quot;이벤트-소싱&quot;&gt;이벤트 소싱&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;애플리케이션 상태에 대한 모든 변경 사항을 일련의 이벤트로 캡쳐하는 데 중점을 두는 DDD의 중요 개념이다.&lt;/li&gt;
+  &lt;li&gt;애플리케이션 상태를 감사, 디버깅 및 재구축하는 데 많은 이점을 제공한다.&lt;/li&gt;
+  &lt;li&gt;유연하고 확장 가능한 아키텍쳐를 구현할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이벤트-소싱이란&quot;&gt;이벤트 소싱이란?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;DB 업데이트 적용 대신 일련의 이벤트를 재생하여 애플리케이션의 현재 상태를 결정하는 패턴&lt;/li&gt;
+  &lt;li&gt;기존 관계형 DB 지속성에 대한 대앙ㄴ으로 볼 수 있다.&lt;/li&gt;
+  &lt;li&gt;엔티티의 현재 상태만 저장하는 대신 발생한 이벤트의 변경 불가능한 로그를 저장한다.&lt;/li&gt;
+  &lt;li&gt;이벤트는 애플리케이션 상태 변화를 나타내며, 특정 시점에 애플리케이션 상태를 재구축하는 데 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;주요-개념&quot;&gt;주요 개념&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;이벤트
+    &lt;ul&gt;
+      &lt;li&gt;이벤트 소싱의 핵심&lt;/li&gt;
+      &lt;li&gt;과거에 어떤 일이 발생했다는 사실을 나타낸다.&lt;/li&gt;
+      &lt;li&gt;각 이벤트는 불변이므로 일단 생성되면 수정할 수 없다.&lt;/li&gt;
+      &lt;li&gt;일반적으로 고유 식별자, 타임스탬프, 발생과 관련된 관련 데이터가 포함된 페이로드로 구성된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 스토어
+    &lt;ul&gt;
+      &lt;li&gt;모든 이벤트가 지속되는 곳&lt;/li&gt;
+      &lt;li&gt;이벤트에 대한 쓰기 전용 로그 역할을 하며 데이터 내구성을 보장&lt;/li&gt;
+      &lt;li&gt;추가 전용이므로 새 이벤트는 로그 끝에만 추가할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 핸들러
+    &lt;ul&gt;
+      &lt;li&gt;이벤트를 처리하고 이벤트에 반응하는 역할을 담당&lt;/li&gt;
+      &lt;li&gt;이벤트 스토어에서 이벤트 스트림을 수신하고 그에 따라 애플리케이션의 상태를 업데이트한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애그리거트
+    &lt;ul&gt;
+      &lt;li&gt;DDD 및 이벤트 소싱의 기본 구성 요소&lt;/li&gt;
+      &lt;li&gt;애그리거트는 관련 비즈니스 엔티티의 클러스터를 나타내며 이들의 동작을 캡슐화한다.&lt;/li&gt;
+      &lt;li&gt;애그리거트는 일관성 규칙이 적용되는 경계를 정의한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;이점&quot;&gt;이점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;감사 및 규정 준수 : 현재 상태에 도달한 과정을 더 쉽게 추적하고 이해할 수 있다.&lt;/li&gt;
+  &lt;li&gt;시간적 쿼리 및 재구성 : 발생한 모든 이벤트를 캡쳐하기 때문에 특정 시점에 애플리케이션의 상태를 쿼리할 수 있다.&lt;/li&gt;
+  &lt;li&gt;확장성 및 가용성
+    &lt;ul&gt;
+      &lt;li&gt;대량의 데이터와 높은 처리량을 처리할 수 있는 이벤트 중심의 분산 아키텍쳐를 구현할 수 있다.&lt;/li&gt;
+      &lt;li&gt;이벤트 스트림, 메시지 큐를 사용하면 시스템의 여러 구성 요소가 독립적으로 비동기적으로 작동할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;도메인 모델의 진화
+    &lt;ul&gt;
+      &lt;li&gt;시간이 지남에 따라 도메인 모델의 진화를 촉진&lt;/li&gt;
+      &lt;li&gt;이벤트는 사실을 나타내므로 새로운 유형의 이벤트를 도입하거나 기존 이벤트를 수정하여 도메인 모델의 변경 사항을 쉽게 처리할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;구현-고려-사항&quot;&gt;구현 고려 사항&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;이벤트 버전 관리
+    &lt;ul&gt;
+      &lt;li&gt;도메인 모델 발전에 따라 이벤트 구조나 의미가 변경될 수 있다.&lt;/li&gt;
+      &lt;li&gt;이전 버전과 호환성을 보장하고 다양한 이벤트 스키마 버전을 처리하려면 이벤트를 버전화하는 것이 필요하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 재생 및 투영
+    &lt;ul&gt;
+      &lt;li&gt;상태 재구축에는 올바른 순서로 재생이 필요하다.&lt;/li&gt;
+      &lt;li&gt;이벤트 스트림을 유지 관리하고 애플리케이션의 상태를 나타내는 프로젝션에 재생함으로써 달성할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;외부 시스템과의 통합
+    &lt;ul&gt;
+      &lt;li&gt;이벤트 소싱을 사용할 떄는 메시지 큐나 저장소 같은 외부 시스템과 통합해야 한다.&lt;/li&gt;
+      &lt;li&gt;통합을 통해서 여러 부분 간의 통신 및 조정이 가능하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;요약&quot;&gt;요약&lt;/h2&gt;
+&lt;h3 id=&quot;이벤트-소싱에서-중요한-개념&quot;&gt;이벤트 소싱에서 중요한 개념&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;애그리거트&lt;/li&gt;
+  &lt;li&gt;이벤트&lt;/li&gt;
+  &lt;li&gt;이벤트 저장소&lt;/li&gt;
+  &lt;li&gt;명령&lt;/li&gt;
+  &lt;li&gt;이벤트 핸들러&lt;/li&gt;
+  &lt;li&gt;이벤트 재생&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;이벤트-소싱-cqrs와-연관성&quot;&gt;이벤트 소싱, CQRS와 연관성&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;CQRS는 읽기 및 쓰기 작업을 별도의 모델 또는 구성 요소로 분리하는 아키텍쳐 패턴이다.
+    &lt;ol&gt;
+      &lt;li&gt;CQRS에서 쓰기 모델은 명령을 처리하고, 이벤트를 생성하고, 이벤트를 저장소에 지속시키는 일을 담당한다.&lt;/li&gt;
+      &lt;li&gt;읽기 모델은 이벤트를 쿼리하고 읽기 작업에 최적화된 반정규화된 뷰, 테이블로 투영하는 작업을 담당&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 소싱은 CQRS의 쓰기 모델에 적합하다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 23 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 04.03.cqrs</title>
+        <link>/architecture/ddd/domain/2025/02/22/architecture-series-DDD-04.03.CQRS.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/22/architecture-series-DDD-04.03.CQRS.html</guid>
+        <description>&lt;h1 id=&quot;cqrscommand-query-responsibility-segragation&quot;&gt;CQRS(Command Query Responsibility Segragation)&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;일기와 쓰기 작업의 책임을 분리하는 아키텍쳐&lt;/li&gt;
+  &lt;li&gt;시스템 상탤르 변경하는 작업과 데이터를 검색하는 작업을 분리하는 것을 의미&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+&lt;h3 id=&quot;1-명령이란&quot;&gt;1. 명령이란?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;시스템 상태를 수정하는 작업을 수행하려는 의도를 나타낸다.&lt;/li&gt;
+  &lt;li&gt;명령은 작업을 수행하는 데 필요한 정보와 매개변수를 캡슐화 한다.&lt;/li&gt;
+  &lt;li&gt;명령은 엔티티 생성, 업데이트, 이벤트 트리거 또는 비즈니스 로직 실행과 같은 작업을 수행하는 데 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-쿼리란&quot;&gt;2. 쿼리란?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;수정하지 않고 시스템에서 데이터를 검색하려는 의도를 나타낸다.&lt;/li&gt;
+  &lt;li&gt;특정 기준에 따라 정보를 가져오거나 복잡한 데이터 조작을 수행하는데 상요된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-책임-분리&quot;&gt;3. 책임 분리&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;명령과 쿼리 간 책임 분리를 강조한다.&lt;/li&gt;
+  &lt;li&gt;읽기·쓰기를 분리하면서 각 작업을 독립적으로 최적화 할 수 있도록 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이점&quot;&gt;이점&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;확장성 : 분리하여 각 작업을 각가의 요구사항에 따라 독립적으로 확장할 수 있다.&lt;/li&gt;
+  &lt;li&gt;성능 :
+    &lt;ul&gt;
+      &lt;li&gt;데이터 저장 및 검색 메커니즘을 각 작업의 특정 요구사항에 맞춰 조정하여 성능을 최적화 한다.&lt;/li&gt;
+      &lt;li&gt;예를 들어 쿼리의 경우 읽기 모델을 별도로 생성 및 캐싱하거나 반정규화해서 최적화 할 수도 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;유연성 : 변화하는 요구사항에 따라 시스템이 독립적으로 진화할 수 있도록 한다.&lt;/li&gt;
+  &lt;li&gt;유지보수성 향상 : 쿼리에 서로 다른 책임을 할당하여 문제를 명확하게 분리한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;구현-고려-사항&quot;&gt;구현 고려 사항&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;데이터 지속성 :
+    &lt;ul&gt;
+      &lt;li&gt;다양한 데이터 지속성 메커니즘을 활용할 수 있다.&lt;/li&gt;
+      &lt;li&gt;특정 쿼리 요구 사항에 데이터 검색을 최적화하기 위해서 읽기 작업을 저장과는 전혀 다른 성격의 저장소에 넣을 수도 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 소싱:
+    &lt;ul&gt;
+      &lt;li&gt;시스템에서 발생하는 모든 도베인 이벤트를 캡쳐하고 저장한 다음 이벤트로 엔티티의 상태를 재구성하는 것을 포함한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;통합 및 커뮤니케이션
+    &lt;ul&gt;
+      &lt;li&gt;명령 측, 쿼리 측 간의 통신 및 동기화가 필요하다.&lt;/li&gt;
+      &lt;li&gt;이벤트, 메시징 시스템, Event 중심 아키텍쳐를 통해 달성할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;정리-핵심-개념&quot;&gt;정리, 핵심 개념&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;명령 : 시스템 상태를 수정하려는 의도를 나타낸다.&lt;/li&gt;
+  &lt;li&gt;쿼리 : 시스템에서 데이터를 검색하는 요청을 나타낸다.&lt;/li&gt;
+  &lt;li&gt;명령 핸들러 : 명령을 수신하고 처리하는 역할을 담당한다.&lt;/li&gt;
+  &lt;li&gt;이벤트 : 이벤트는 시스템에서 어떤  일이 발생했다는 사실에 대한 진술이다.&lt;/li&gt;
+  &lt;li&gt;이벤트 핸들러 : 이벤트를 수신하고 이벤트에 반응하는 역할을 담당한다.&lt;/li&gt;
+  &lt;li&gt;애그리거트 :
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트는 단일 단위로 취급되는 도메인 객체의 클러스터 또는 그룹&lt;/li&gt;
+      &lt;li&gt;도메인의 특정 개념과 관련된 비즈니스 규칙 및 동작을 캡슐화&lt;/li&gt;
+      &lt;li&gt;명령은 애그리거트에 적용되며, 애그리거트는 규칙의 유효성을 검사하고 명령이 유효한 경우 이벤트 생성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;명령 버스 :
+    &lt;ul&gt;
+      &lt;li&gt;명령을 각각 명령 핸들러로 라우팅하는 역할을 한다.&lt;/li&gt;
+      &lt;li&gt;클라이언트와 명령 핸들러 사이의 중재자 역할을 하며 각 명령이 적절한 핸들러에서 처리되도록 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 버스 :
+    &lt;ul&gt;
+      &lt;li&gt;이벤트 각각의 이벤트 핸들러에 배포하는 역할을 담당한다.&lt;/li&gt;
+      &lt;li&gt;이벤트 생성과 이벤트 처리를 분리하는 메커니즘으로 작동하여 이벤트 처리의 유연성과 확장성을 제공&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 22 Feb 2025 00:00:00 +0900</pubDate>
+      </item>
+    
+      <item>
+        <title>[architecture Series Ddd] 04.02.boundedcontext</title>
+        <link>/architecture/ddd/domain/2025/02/21/architecture-series-DDD-04.02.BoundedContext.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/21/architecture-series-DDD-04.02.BoundedContext.html</guid>
+        <description>&lt;h1 id=&quot;바운디드-컨텍스트&quot;&gt;바운디드 컨텍스트&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;대규모 소프트웨어 시스템의 복잡성을 관리하는 데 도움이 되는 중요한 개념이다.&lt;/li&gt;
+  &lt;li&gt;전체 시스템 내에서 명확한 경계를 정의하여 시스템의 여러 부분이 자율적으로 발전할 수 있도록 보장할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;바운디드-컨텍스트란&quot;&gt;바운디드 컨텍스트란?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;특정 도메인 모델이 정의되고 작동하는 의미론적 경계로 정의할 수 있다.&lt;/li&gt;
+  &lt;li&gt;용어, 개념 및 모델이 특정 컨텍스트와 의미를 갖는 더 큰 도메인 내에서 논리적 분리를 나타낸다.&lt;/li&gt;
+  &lt;li&gt;각 바운디드 컨텍스트는 시스템의 다른 부분과 분리하기 위해서 비즈니스의 고유한 영역을 캡슐화&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;유비쿼터스 언어
+    &lt;ul&gt;
+      &lt;li&gt;컨텍스트에는 도메인 전문가, 개발자 및 기타 이해관계자 간의 커뮤니케이션을 위한 공유 어휘를 제공하는 고유한 유비쿼터스 언어가 있다.&lt;/li&gt;
+      &lt;li&gt;도메인 모델의 의미와 의도를 상황에 맞는 방식으로 표현하는 데 도움이 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;명시적 컨텍스트 경계
+    &lt;ul&gt;
+      &lt;li&gt;경계가 있는 컨텍스트는 기술적으로나 개발 및 유지 관리를 담당하는 팀 또는 부서 관점에서 명시적으로 정의&lt;/li&gt;
+      &lt;li&gt;특정 비즈니스 목표에 집중할 수 있도록 하는 가이드 역할을 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애그리거트 및 엔티티
+    &lt;ul&gt;
+      &lt;li&gt;도메인 객체는 애그리거트와 엔티티로 구성&lt;/li&gt;
+      &lt;li&gt;애그리거트는 관련 엔티티를 구룹화하는 일관성 경계, 주어진 트랜잭션 경계 내에서 데이터 무결성이 유지되도록 보장&lt;/li&gt;
+      &lt;li&gt;엔티티는 도메인 내의 갭라 객체를 나타내며 그 동작을 캡슐화&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;컨텍스트 일관성
+    &lt;ul&gt;
+      &lt;li&gt;특정 용어나 모델이 동일한 시슽메 내의 다른 컨텍스트와 다르더라도 그 자체 내에서 개념적으로 일관성이 있어야 한다.&lt;/li&gt;
+      &lt;li&gt;컨텍스트 내의 도메인 전문가와 개발자는 비즈니스 요구 사항을 더 잘 추론하고 그에 따라 코드 베이스를 설계할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;컨텍스트 매핑
+    &lt;ul&gt;
+      &lt;li&gt;종종 서로 통신하고 통합해야 하므로 컨텍스트 매핑 기술이 필요&lt;/li&gt;
+      &lt;li&gt;서로 다른 바운디드 컨텍스트 간에 명확한 커뮤니케이션 경로와 경계를 설정하여 한 컨텍스트의 변경사항이 다른 컨텍스트에 의해 사이드 이펙트가 없는 것을 목표로 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;자율적 개발
+    &lt;ul&gt;
+      &lt;li&gt;명확한 경계와 잘 정의된 컨텍스트가 있으면 팀은 각 바운디드 컨텍스트를 자율적으로 개발하고 발전시킬 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;중요성&quot;&gt;중요성&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;관심사 분리&lt;/li&gt;
+  &lt;li&gt;협업 및 커뮤니케이션&lt;/li&gt;
+  &lt;li&gt;확장성 및 민첩성&lt;/li&gt;
+  &lt;li&gt;진화 가능성 및 복원력&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;어떻게-식별하는가&quot;&gt;어떻게 식별하는가&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;비즈니스 프로세스를 분석해서 응집성이 높고 결합력이 낮은 영역을 식별&lt;/li&gt;
+  &lt;li&gt;도메인 주도 설계 기법을 사용해서 도메인 모델링&lt;/li&gt;
+  &lt;li&gt;도메인 전문가 및 이해관계자와의 협업&lt;/li&gt;
+  &lt;li&gt;시스템의 기존 경계를 관찰&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;영향&quot;&gt;영향&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;메모리 누수&lt;/li&gt;
-  &lt;li&gt;리소스 고갈&lt;/li&gt;
-  &lt;li&gt;성능 저하&lt;/li&gt;
-  &lt;li&gt;보안 취약점&lt;/li&gt;
+  &lt;li&gt;모듈화 및 컴포넌트화&lt;/li&gt;
+  &lt;li&gt;명확한 인터페이스 및 API 설계&lt;/li&gt;
+  &lt;li&gt;이벤트 중심 아키텍쳐&lt;/li&gt;
+  &lt;li&gt;데이터베이스 및 데이터 스토리지 고려 사항 : 데이터 격리를 보장하고 컨텍스트 특정 요구 사항을 지원하기 위해 자체 전용 DB 혹은 스키마를 가질 수도 있다.&lt;/li&gt;
+  &lt;li&gt;보안 및 액세스 제어&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
+&lt;h2 id=&quot;발전을-하면&quot;&gt;발전을 하면?&lt;/h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;try-with-resource 사용&lt;/li&gt;
-  &lt;li&gt;리소스 획득, 릴리즈 로직을 분리&lt;/li&gt;
-  &lt;li&gt;리소스 사용량 모니터링&lt;/li&gt;
-  &lt;li&gt;finally 등을 사용해서 닫거나 권장하는 사용법을 지키기 ( 명시적으로 리소스 해제 등 )&lt;/li&gt;
-  &lt;li&gt;&lt;del&gt;finalizer를 사용해서 닫기&lt;/del&gt; -&amp;gt; GC에서 처리될 때 호출할 수 있지만 언제 호출될지는 모른다. 추가적으로 finalizer 자체가 &lt;strong&gt;객체 재생성 공격&lt;/strong&gt; 등에 취약하다.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 07 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 23.prematureresourcerelease</title>
-        <link>/java/anti-pattern/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/06/java-anti-pattern-series-23.PrematureResourceRelease.html</guid>
-        <description>&lt;h1 id=&quot;premature-resource-release&quot;&gt;Premature Resource Release&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;메모리 누수 방지, 성능 향상을 위해서 리소스를 적절히 관리하는게 중요하다.&lt;/li&gt;
-  &lt;li&gt;적절한 타이밍에 리소스 반환을 하면 좋지만 너무 이르게 하면 문제가 될 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;조기-해제란&quot;&gt;조기 해제란?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;의도한 용도가 완료되기 전에 리소스를 닫거나 릴리즈하는 행위&lt;/li&gt;
-  &lt;li&gt;로직의 오류, 잘못된 설계&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
-&lt;h3 id=&quot;1-리소스-유출&quot;&gt;1. 리소스 유출&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;리소스를 제대로 닫거나 해제하지 않으면 메모리에 잔존해서 메모리 누수가 될 수 있다.&lt;/li&gt;
-  &lt;li&gt;처음엔 괜찮지만 쌓여서 결국 애플리케이션 크래시가 된다.
-    &lt;h3 id=&quot;2-리소스-고갈&quot;&gt;2. 리소스 고갈&lt;/h3&gt;
+  &lt;li&gt;경계의 세분화:
+    &lt;ul&gt;
+      &lt;li&gt;바운디드 컨텍스트 경계를 세분화해야 할 수도 있다.&lt;/li&gt;
+      &lt;li&gt;도메인 동작에 더 잘 맞추고 개발 및 확장성을 최적화하기 위해서 분할하거나 병합하는 작업이 포함될 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;조기 종료되면 다른 부분에서 해당 리소스에 액세스할 수 없게 되어 경합 및 교착이 된다.
-    &lt;h3 id=&quot;3-데이터-손상&quot;&gt;3. 데이터 손상&lt;/h3&gt;
+  &lt;li&gt;모놀리식 바운디드 컨텍스트 분해
+    &lt;ul&gt;
+      &lt;li&gt;복잡성을 최소화하기 위해서 모놀리식 컴포넌트로 설계할 수 있다.&lt;/li&gt;
+      &lt;li&gt;시스템이 확장되고 확장성 또는 자율성이 필요해지면 바운디드 컨텍스트를 더 작고 세분화된 구성요소로 분해해야할 수도 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;조기 해제하면 데이터가 손상될 수 있다.
-    &lt;h3 id=&quot;4-일관되지-않은-상태&quot;&gt;4. 일관되지 않은 상태&lt;/h3&gt;
+  &lt;li&gt;새로운 개념 또는 하위 도메인 통합
+    &lt;ul&gt;
+      &lt;li&gt;새로운 개념이나 하위 도메인이 등장하면 새로운 바운디드 컨텍스트를 만들어야 할 수도 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;예측할 수 없는 동작이 발생할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;해결책&quot;&gt;해결책&lt;/h2&gt;
-&lt;h3 id=&quot;1-try-with-resource&quot;&gt;1. try-with-resource&lt;/h3&gt;
-&lt;h3 id=&quot;2-finally-사용&quot;&gt;2. finally 사용&lt;/h3&gt;
-&lt;h3 id=&quot;3-열기닫기-원칙-따르기&quot;&gt;3. 열기·닫기 원칙 따르기&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;리소스가 더 이상 필요하지 않을 때만 공개해야 하며, 너무 일찍 공개하면 안된다.
-    &lt;h3 id=&quot;4-resource-pool-사용&quot;&gt;4. resource-pool 사용&lt;/h3&gt;
+  &lt;li&gt;공유 커널 통합
+    &lt;ul&gt;
+      &lt;li&gt;공통 개념이나 작업을 정의하는 공유 커널은 시간이 지남에 따라 발전할 수 있다.&lt;/li&gt;
+      &lt;li&gt;요구 사항에 따라 개선, 확장 또는 사용 중단되어야 할 수도 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;생성, 해제에 큰 비용이 드는 경우 풀로 두고 사용하면 유리하다.
-    &lt;h3 id=&quot;5-rcreferencecounting-사용&quot;&gt;5. RC(ReferenceCounting) 사용&lt;/h3&gt;
+  &lt;li&gt;기술 스택 조성
+    &lt;ul&gt;
+      &lt;li&gt;새로운 기술이나 아키텍쳐 패턴을 사용할 수 있게 되면 이를 활용하기 위해 바운디드 컨텍스트가 발전할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;참조 횟수를 기록하여 수가 0이 될 떄까지 가지고 있다가 해제&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;li&gt;지속적인 개선 및 피드백&lt;/li&gt;
+&lt;/ol&gt;
 </description>
-        <pubDate>Thu, 06 Feb 2025 00:00:00 +0900</pubDate>
+        <pubDate>Fri, 21 Feb 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 22.resourcehog</title>
-        <link>/java/anti-pattern/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/05/java-anti-pattern-series-22.ResourceHog.html</guid>
-        <description>&lt;h1 id=&quot;resource-hog&quot;&gt;Resource Hog&lt;/h1&gt;
+        <title>[architecture Series Ddd] 04.01.ubiquitouslanguage</title>
+        <link>/architecture/ddd/domain/2025/02/20/architecture-series-DDD-04.01.UbiquitousLanguage.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/20/architecture-series-DDD-04.01.UbiquitousLanguage.html</guid>
+        <description>&lt;h1 id=&quot;유비쿼터스-언어&quot;&gt;유비쿼터스 언어&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;메모리, CPU 또는 네트워크 대역폭과 같은 리소스를 과도하게 사용하는 경우&lt;/li&gt;
-  &lt;li&gt;필요 이상으로 많은 리소스를 사용하여 성능이 최적화되지 않고 잠재적인 시스템 충돌일 일으킬 때 발생&lt;/li&gt;
-  &lt;li&gt;일반적으로 필요 이상의 메모리 또는 처리 능력을 필요로 하는 비효율적인 알고리즘이나 데이터 구조를 사용할 때 발생한다.&lt;/li&gt;
-  &lt;li&gt;비효율적인 DB Query 또는 네트워크 호출도 리소스 호깅의 원인이 될 수 있다.&lt;/li&gt;
+  &lt;li&gt;도메인 전문가, 개발자 및 기타 팀원을 포함하여 개발 프로세스에 관련된 모든 이해관계자 간에 공유되고 잘 이해되는 언어&lt;/li&gt;
+  &lt;li&gt;효과적인 커뮤니케이션을 보장하고 협업을 강화하여 도메인에 대한 사람들의 이해를 조성&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;증상&quot;&gt;증상&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;높은 메모리 사용량(OOM)&lt;/li&gt;
-  &lt;li&gt;높은 CPU사용율&lt;/li&gt;
-  &lt;li&gt;과도한 네트워크 트래픽&lt;/li&gt;
-  &lt;li&gt;긴 응답 시간&lt;/li&gt;
-  &lt;li&gt;시스템 충돌&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2 id=&quot;중요성&quot;&gt;중요성&lt;/h2&gt;
+&lt;h3 id=&quot;비즈니스-및-기술-협업&quot;&gt;비즈니스 및 기술 협업&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;비즈니스 이해와 구현 간 격차 해소&lt;/li&gt;
+  &lt;li&gt;공통 어휘를 사용함으로써 도메인 전문가와 소프트웨어 개발자는 효과적으로 소통하고 협업할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;비효율적 알고리즘&lt;/li&gt;
-  &lt;li&gt;메모리 누수&lt;/li&gt;
-  &lt;li&gt;장기 실행 DB Query&lt;/li&gt;
-  &lt;li&gt;네트워크 비효율성&lt;/li&gt;
-  &lt;li&gt;동시성 문제&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&quot;지식-통합&quot;&gt;지식 통합&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;개발 팀 내의 지식 통합을 촉진한다.&lt;/li&gt;
+  &lt;li&gt;개발자가 동일한 언어를 사용하여 비즈니스 개념, 도메인 규칙 및 요구 사항에 대해서 논의하면서 긴밀하게 협업하도록 장려&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;완화책&quot;&gt;완화책&lt;/h2&gt;
+&lt;h3 id=&quot;도메인-복잡성-관리&quot;&gt;도메인 복잡성 관리&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;도메인 정확히 표현하는 명확하고 일관된 용어를 정의하여 도메인 복잡성을 관리하는 데 도움이 된다.&lt;/li&gt;
+  &lt;li&gt;도메인 모델링을 간소화해서 비즈니스 도메인을 정확하게 반영하는 소프트웨어 구성 요소를 더 쉽게 분석, 설계 및 구현할 수 있도록 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;정리하면&quot;&gt;정리하면&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;알고리즘 및 데이터 구조 최적화&lt;/li&gt;
-  &lt;li&gt;리소스 사용량 모니터링&lt;/li&gt;
-  &lt;li&gt;리소스 관리 구현&lt;/li&gt;
-  &lt;li&gt;캐싱 및 버퍼링&lt;/li&gt;
-  &lt;li&gt;DB Query 최적화&lt;/li&gt;
-  &lt;li&gt;동시성 제한&lt;/li&gt;
+  &lt;li&gt;상호 이해와 의견 공유&lt;/li&gt;
+  &lt;li&gt;복잡성 감소&lt;/li&gt;
+  &lt;li&gt;지식 캡쳐&lt;/li&gt;
+  &lt;li&gt;협업 및 권한 부여&lt;/li&gt;
+  &lt;li&gt;격차 해소&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Wed, 05 Feb 2025 00:00:00 +0900</pubDate>
+        <pubDate>Thu, 20 Feb 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 21.lockingtoread</title>
-        <link>/java/anti-pattern/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/04/java-anti-pattern-series-21.LockingToRead.html</guid>
-        <description>&lt;h1 id=&quot;locking-to-read&quot;&gt;Locking To Read&lt;/h1&gt;
-
+        <title>[architecture Series Ddd] 03.04.domainevent</title>
+        <link>/architecture/ddd/domain/2025/02/19/architecture-series-DDD-03.04.DomainEvent.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/19/architecture-series-DDD-03.04.DomainEvent.html</guid>
+        <description>&lt;h2 id=&quot;4-도메인-이벤트&quot;&gt;4. 도메인 이벤트&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;공유 리소스에 대한 읽기 작업을 보호하기 위해서 잠금을 사용하는 것을 의미한다.&lt;/li&gt;
-  &lt;li&gt;멀티쓰레드 환경에서 데이터 일관성르 보장하고 경쟁 조건 방지하기 위해서 사용된다.&lt;/li&gt;
-  &lt;li&gt;읽기 작업에 불필요하게 잠금을 하면 병목 포인트가 된다.&lt;/li&gt;
+  &lt;li&gt;중요한 발생을 포착하고 표현할 수 있게 해주는 기본 개념&lt;/li&gt;
+  &lt;li&gt;도메인 이벤트는 도메인 모델 내에서 변경 사항을 전달하고 조정하는 매커니즘을 제공한다.&lt;/li&gt;
+  &lt;li&gt;도메인 내에서 중요한 상태 변경 또는 발생을 나타내는 DDD 접근 방식의 기본이다.&lt;/li&gt;
+  &lt;li&gt;세부 사항을 캡슐화하여 시스템 내의 이해 당사자에게 전달하는 것을 목표로 한다.&lt;/li&gt;
+  &lt;li&gt;이벤트를 사용하면 시스템의 여러 구성 요소 간의 느슨한 결합을 보장하고 도메인의 동작을 더 잘 이해할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;문제점&quot;&gt;문제점&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;읽기 잠금을 획득하면 다른 쓰레드에서 해당 리소스를 읽지 못한다.&lt;/li&gt;
-  &lt;li&gt;불필요한 경합으로 직렬화되면 성능이 저하되고 지연 시간이 늘어날 수 있다.&lt;/li&gt;
-  &lt;li&gt;올바르게 구현하지 않으면 교착 상태가 발생할 수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;동시성 감소&lt;/li&gt;
-    &lt;li&gt;잠재적 교착 상태&lt;/li&gt;
-    &lt;li&gt;오버헤드&lt;/li&gt;
-    &lt;li&gt;코드 복잡성&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;대체-접근-방식&quot;&gt;대체 접근 방식&lt;/h2&gt;
-&lt;h3 id=&quot;읽기쓰기-잠금&quot;&gt;읽기·쓰기 잠금&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;읽기/쓰기 잠금은 여러 쓰레드가 동시에 리소스를 읽으면서 동시에 쓰기 전용 액세스를 보장하는 동기화 메커니즘&lt;/li&gt;
-  &lt;li&gt;이를 통해서 작업 성능 향상을 할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;불변-데이터-사용&quot;&gt;불변 데이터 사용&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;대안으로 불변 데이터를 사용한다.&lt;/li&gt;
-  &lt;li&gt;수정할 수 없으므로 쓰레드에 안전하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;캐싱&quot;&gt;캐싱&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;자주 액세스하는 데이터를 메모리에 캐싱해서 공유 리소스에 대한 읽기 작업 접근 횟수를 최소화할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;ReadWriteLock&lt;/li&gt;
-    &lt;li&gt;불변 데이터 구조&lt;/li&gt;
-    &lt;li&gt;휘방성 변수 : 자주 읽지만 거의 수정하지 않는 단순한 변수를 다룰 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt;을 사용하면 잠금 없이도 쓰레드 전체에 변경 사항을 확인할 수 있다.&lt;/li&gt;
-    &lt;li&gt;더 높은 수준의 동기화 메커니즘 : 원자 변수, 동시 컬렉션, CountDownLatch, CyclicBarrier 등&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;개선안&quot;&gt;개선안&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;세분화된 잠금 사용&lt;/li&gt;
-  &lt;li&gt;읽기 최적화&lt;/li&gt;
-  &lt;li&gt;중첩 잠금 피하기&lt;/li&gt;
-  &lt;li&gt;잠금 경합을 모니터링&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;공유 데이터를 읽기 위해서 잠금이 사용되는 코드 섹션 식별&lt;/li&gt;
-    &lt;li&gt;데이터 액세스 패턴을 평가하고 읽기가 쓰기보다 많은지 확인&lt;/li&gt;
-    &lt;li&gt;여러 쓰레드가 동시에 공유 데이터를 읽을 수 있도록 독점 잠금을 ReadWriteLock으로 대체&lt;/li&gt;
-    &lt;li&gt;공유 데이터를 변경 불가하게 만들거나 자바 동시성 유틸리티에서 제공하는 상위 수준의 동기화 메커니즘을 사용하도록 코드 리펙토링&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;읽기-잠금을-피하려면&quot;&gt;읽기 잠금을 피하려면?&lt;/h3&gt;
-  &lt;ul&gt;
-    &lt;li&gt;ConcurrentHashMap&lt;/li&gt;
-    &lt;li&gt;CopyOnWriteArrayList&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 04 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 20.inappropriateintimacy</title>
-        <link>/java/anti-pattern/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/03/java-anti-pattern-series-20.InappropriateIntimacy.html</guid>
-        <description>&lt;h1 id=&quot;inappropriate-intimacy&quot;&gt;Inappropriate Intimacy&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;두 클래스가 긴밀하게 얽혀 있어 높은 의존성을 초래하는 경우를 의미한다.&lt;/li&gt;
-  &lt;li&gt;코드 재사용성 감소, 복잡성 증가, 코드 유지 관리 및 테스트의 어려움이 발생&lt;/li&gt;
-  &lt;li&gt;비공개 필드 및 메소드에 대한 직접 액세스, 내부 상태 공유, 클래스 간 과도한 메소드 호출 등 다양한 형태로 발생&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
+&lt;h3 id=&quot;1-구조&quot;&gt;1. 구조&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;추상화 : 서로의 내부 정보에 직접 액세스 하는 것은 추상화 및 캡슐화가 부족하다는 것을 의미한다.&lt;/li&gt;
-  &lt;li&gt;잘못된 디자인 결정 : 긴밀한 협력에 대한 영향도를 고려하지 않아서 발생&lt;/li&gt;
-  &lt;li&gt;디자인 패턴에 대한 이해 부족 : 의존성 주입, 옵저버 등에 익숙하지 않을 경우 긴밀한 결합을 초래할 수 있다.&lt;/li&gt;
-  &lt;li&gt;레거시&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;영향도&quot;&gt;영향도&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;코드 재사용성 감소&lt;/li&gt;
-  &lt;li&gt;복잡성 증가&lt;/li&gt;
-  &lt;li&gt;테스트의 어려움&lt;/li&gt;
-  &lt;li&gt;제한된 확장성&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;친밀성을-피하거나-완화하는-방법&quot;&gt;친밀성을 피하거나 완화하는 방법&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;디자인 패턴 적용 ( 파사드, 옵저버 등 )&lt;/li&gt;
-  &lt;li&gt;동작을 캡슐화&lt;/li&gt;
-  &lt;li&gt;인터페이스를 사용&lt;/li&gt;
-  &lt;li&gt;IOC를 구현&lt;/li&gt;
-  &lt;li&gt;리팩토링&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 03 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 19.circularreference</title>
-        <link>/java/anti-pattern/2025/02/02/java-anti-pattern-series-19.CircularReference.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/02/java-anti-pattern-series-19.CircularReference.html</guid>
-        <description>&lt;h1 id=&quot;circular-reference&quot;&gt;Circular reference&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;두 개 이상의 클래스가 직간접적으로 서로 의존하는 경우&lt;/li&gt;
-  &lt;li&gt;서로 참조 루프를 생성하는 방식&lt;/li&gt;
-  &lt;li&gt;서로의 의존성이 강할 때 발생한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;문제점&quot;&gt;문제점&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;긴밀한 결합&lt;/li&gt;
-  &lt;li&gt;유지보수의 어려움&lt;/li&gt;
-  &lt;li&gt;테스트 가능성 저하&lt;/li&gt;
-  &lt;li&gt;복잡성 증가&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;피하기-위한-전략&quot;&gt;피하기 위한 전략&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;의존성 주입&lt;/li&gt;
-  &lt;li&gt;SRP 적용&lt;/li&gt;
-  &lt;li&gt;인터페이스 또는 추상 클래스 사용&lt;/li&gt;
-  &lt;li&gt;코드 베이스 리팩토링&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;순환 종속성 끊기&lt;/li&gt;
-  &lt;li&gt;중개자 클래스 도입&lt;/li&gt;
-  &lt;li&gt;IOC 원칙 적용&lt;/li&gt;
-  &lt;li&gt;클래스 분리&lt;/li&gt;
-  &lt;li&gt;점진적 리팩토링&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 02 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 18.classdoestoomuch</title>
-        <link>/java/anti-pattern/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/02/01/java-anti-pattern-series-18.ClassDoesTooMuch.html</guid>
-        <description>&lt;h1 id=&quot;class-does-too-much&quot;&gt;Class Does Too Much&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;한 클래스가 너무 많은 일을 담당하는 것&lt;/li&gt;
-  &lt;li&gt;SRP를 위반할 때 발생&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;결과&quot;&gt;결과&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;높은 복잡성&lt;/li&gt;
-  &lt;li&gt;높은 결합도&lt;/li&gt;
-  &lt;li&gt;유지 보수의 어려움&lt;/li&gt;
-  &lt;li&gt;진한 코드 냄새&lt;/li&gt;
-  &lt;li&gt;낮은 확장성&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;식별하기&quot;&gt;식별하기&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;메소드 수가 너무 많다 : 그만큼 많은 일을 하고 있다는 의미가 된다.&lt;/li&gt;
-  &lt;li&gt;높은 복잡성 : 주기적 복잡성이 높고 메소드가 길며 상속 계층 구조가 깊은 클래스&lt;/li&gt;
-  &lt;li&gt;다중 책임 : 한 클래스에 서로 관련 없는 여러 작업을 담당하고 있는 경우&lt;/li&gt;
-  &lt;li&gt;잘못된 캡슐화 : 너무 많은 공개 메소드와 변수를 노출하는 경우&lt;/li&gt;
-  &lt;li&gt;응집성 부족 : 클래스에 서로 다른 데이터 집합에서 작동하거나 관련 없는 기능을 가진 메소드가 있다면 너무 많은 일을 하고 있는 것&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;리팩토리-전략&quot;&gt;리팩토리 전략&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;책임 소재 파악하기&lt;/li&gt;
-  &lt;li&gt;구성 활용 : 컴포지션으로 더 작고 집중적인 클래스를 결합하여 원하는 기능을 달성&lt;/li&gt;
-  &lt;li&gt;메소드 추출 : 복잡한 메소드를 더 작고 관리하기 작은 단위로 분해&lt;/li&gt;
-  &lt;li&gt;클래스 추출 : 여러 책임이 있는 경우 책임들을 별도 클래스로 추출&lt;/li&gt;
-  &lt;li&gt;디자인 패턴 적용&lt;/li&gt;
-  &lt;li&gt;긴메소드 리팩토링 : 긴 메소드가 있다면 SRP를 따르느 더 작은 집중적인 메소드로 제공&lt;/li&gt;
-  &lt;li&gt;SOLID 원칙 적용&lt;/li&gt;
-  &lt;li&gt;TDD : 리팩토링을 진행하면서 원하는 기능을 유지하는지 테스트를 작성&lt;/li&gt;
-  &lt;li&gt;코드 리뷰&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 01 Feb 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 17.godclass</title>
-        <link>/java/anti-pattern/2025/01/31/java-anti-pattern-series-17.GodClass.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/01/31/java-anti-pattern-series-17.GodClass.html</guid>
-        <description>&lt;h1 id=&quot;god-class&quot;&gt;God class&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;갓 클래스는 너무 많은 책임을 맡고 지나치게 복잡해져서 이해, 테스트 및 유지가 어려운 클래스&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;특징&quot;&gt;특징&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;높은 복잡성 : 순환 복잡성이 높은 경향이 있으며, 이는 코드를 통과하는 경로가 많다는 것을 의미&lt;/li&gt;
-  &lt;li&gt;응집성 부족 : 종종 서로 관련 없는 기능을 하나의 클래스로 결합하여 응집성이 부족&lt;/li&gt;
-  &lt;li&gt;비대한 크기 : 코드 줄, 메소드 및 필드 수가 많음&lt;/li&gt;
-  &lt;li&gt;경직된 디자인 : 유연성이 떨어지고 수정하거나 확장하기가 어려움&lt;/li&gt;
-  &lt;li&gt;테스트 가능성이 낮음 : 복잡해서 테스트 하기가 어렵다.&lt;/li&gt;
-  &lt;li&gt;코드 냄새 : 긴 메소드, 과도한 주석, 중복 코드 등 악취를 풍긴다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;안티-패턴인-이유&quot;&gt;안티 패턴인 이유&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;SRP 위반&lt;/li&gt;
-  &lt;li&gt;낮은 응집성&lt;/li&gt;
-  &lt;li&gt;유연성 저하&lt;/li&gt;
-  &lt;li&gt;테스트 하기 어려움&lt;/li&gt;
-  &lt;li&gt;낮은 코드 품질&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;리팩토핑&quot;&gt;리팩토핑&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;책임 소재를 명확하게 하기 : 책임을 구분하고 이를 바탕으로 분리한다.&lt;/li&gt;
-  &lt;li&gt;메소드 추출 : 복잡성을 줄이고 가독성을 향상시키는 방법&lt;/li&gt;
-  &lt;li&gt;클래스 분할 : 더 작고 책임이 명확하게 분리하기&lt;/li&gt;
-  &lt;li&gt;디자인 패턴 사용 : Factory, Observer 등 코드 베이스를 모듈화하고 단순화&lt;/li&gt;
-  &lt;li&gt;데이터 캡슐화 : 데이터가 클래스 전반에 걸쳐 흩어져 있기에 결합이 단단하고 유연성이 떨어진다.&lt;/li&gt;
-  &lt;li&gt;기능 모듈화 : 작은 단위로 모듈화하고 세분화한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;유지-보수&quot;&gt;유지 보수&lt;/h2&gt;
-&lt;h3 id=&quot;1tdd&quot;&gt;1.TDD&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;변경으로 인해 퇴행이나 의도하지 않은 부작용이 발생하지 않도록 도움을 줄 수 있다.
-    &lt;h3 id=&quot;2-지속적인-리팩토링&quot;&gt;2. 지속적인 리팩토링&lt;/h3&gt;
+  &lt;li&gt;이벤트 페이로드
+    &lt;ol&gt;
+      &lt;li&gt;이벤트에 관련된 데이터 및 정보가 포함&lt;/li&gt;
+      &lt;li&gt;컨텍스트와 특정 이벤트에 따라 달라질 수 있다.&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;변화에 따라 지속적으로 수행&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;li&gt;메타 데이터
+    &lt;ol&gt;
+      &lt;li&gt;이벤트가 발생한 시간, 이벤트를 생성한 소스 또는 기타 관련 정보 등 추가 컨텍스트를 제공&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이벤트 ID
+    &lt;ol&gt;
+      &lt;li&gt;다른 이벤트와 구별할 수 있는 고유한 ID 또는 식별자를 의미한다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;2-사용-이유&quot;&gt;2. 사용 이유&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;일관성 유지
+    &lt;ol&gt;
+      &lt;li&gt;일관성을 유지하여 복잡하고 분산된 시스템에서 일관성을 보장하는데 도움이 된다.&lt;/li&gt;
+      &lt;li&gt;즉각적 일관성 강제 대한 이벤트를 전파하고 처리하여 시스템을 일관된 상태로 되돌릴 수 있다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;루즈 커플링
+    &lt;ol&gt;
+      &lt;li&gt;서로 다른 컴포넌트 간의 통신 수단으로 사용하면 느슨한 결합을 할 수 있다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;상태 변경 추적 및 모니터링&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;3-이벤트-사용-방법&quot;&gt;3. 이벤트 사용 방법&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;이벤트 버스 또는 이벤트 디스패처와 함께 사용&lt;/li&gt;
+  &lt;li&gt;컴포넌트 내에서 이벤트가 발생하면 이벤트 버스에 게시 된다. 그러면 구독자들은 자신의 상태를 업데이트하거나 추가 작업을 트리거하여 이벤트에 반응&lt;/li&gt;
+&lt;/ol&gt;
 </description>
-        <pubDate>Fri, 31 Jan 2025 00:00:00 +0900</pubDate>
+        <pubDate>Wed, 19 Feb 2025 00:00:00 +0900</pubDate>
       </item>
     
       <item>
-        <title>[java Anti Pattern Series] 16.anemicdomainmodel</title>
-        <link>/java/anti-pattern/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/01/30/java-anti-pattern-series-16.AnemicDomainModel.html</guid>
-        <description>&lt;h1 id=&quot;anemic-domain-model&quot;&gt;Anemic Domain Model&lt;/h1&gt;
-
+        <title>[architecture Series Ddd] 03.03.aggregate</title>
+        <link>/architecture/ddd/domain/2025/02/18/architecture-series-DDD-03.03.Aggregate.html</link>
+        <guid isPermaLink="true">/architecture/ddd/domain/2025/02/18/architecture-series-DDD-03.03.Aggregate.html</guid>
+        <description>&lt;h2 id=&quot;3-애그리거트&quot;&gt;3. 애그리거트&lt;/h2&gt;
+&lt;h3 id=&quot;1-정의&quot;&gt;1. 정의&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;도메인 객체에 동작이 거의 또는 포함되지 않고 있고 대부분의 비즈니스 로직이 별도의 서비스 또는 관리자 클래스에서 구현되는 안티패턴이다.&lt;/li&gt;
-  &lt;li&gt;도메인 객체가 수동적인 데이터 구조로, 해당 객체와 연관되어야 하는 동작이 없는 애플리케이션 아키텍쳐가 생성된다.&lt;/li&gt;
+  &lt;li&gt;단일 단위로 취급되는 도메인 객체의 클러스터&lt;/li&gt;
+  &lt;li&gt;애그리거트 루트와 기타 연결된 객체로 구성된다.&lt;/li&gt;
+  &lt;li&gt;애그리거트 루트는 애그리거트의 무결성을 유지하고 연결된 객체의 동작 및 상태를 캡슐화 한다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;1-빈약한-도메인-모델&quot;&gt;1. 빈약한 도메인 모델&lt;/h2&gt;
+&lt;h3 id=&quot;2-목적&quot;&gt;2. 목적&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;도메인 객체에 동작이 없고 대신 상태를 저장하는 단순한 데이터 구조로 사용되는 아티 패턴이다.&lt;/li&gt;
-  &lt;li&gt;동작과 데이터를 객체 안에 컵슐화 해야하는 객체 지향 프로그래밍의 기본 원칙에 위배된다.&lt;/li&gt;
-  &lt;li&gt;보통 이런 객체는 getter, setter만 포함한다.&lt;/li&gt;
+  &lt;li&gt;응집성 있는 도메인 개념을 중심으로 경계와 트랜잭션을 설정하는 것이다.&lt;/li&gt;
+  &lt;li&gt;관련 객체를 애그리거트로 그룹화하고 애그리거트 루트를 지정하면 애그리거트의 대한 변경이 원자 단위로 수행되고 애그리거트 상태가 일관되게 유지할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;2-의미&quot;&gt;2. 의미&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;객체 지향 원칙 위반 : 동작, 데이터를 분리함으로써 객체 지향 프로그래밍 원칙을 위반한다.&lt;/li&gt;
-  &lt;li&gt;코드 중복 : 비즈니스 로직이 별도의 서비스 클래스로 구현되기 때문에 여러 서비스 간의 코드가 중복될 가능성이 높다.&lt;/li&gt;
-  &lt;li&gt;낮은 응집성 : 도메인 객체는 동작이 없는 단순한 데이터 컨테이너가 되어 클래스 내 응집성이 낮아진다.&lt;/li&gt;
-  &lt;li&gt;제한된 캡슐화 : 동작과 데이터가 분리되어 있기에 캡슐화가 손상된다.&lt;/li&gt;
-  &lt;li&gt;테스트의 어려움 : 동작이 없기에 비즈니스 로직 테스트가 어렵다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;3-의미있는-모델&quot;&gt;3. 의미있는 모델&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;리치 도메인 모델 : 도메인 객체가 동작과 데이터를 모두 캡슐화하는 풍부한 도메인 모델을 추구&lt;/li&gt;
-  &lt;li&gt;DDD : 도메인 주도 설계 원칙을 채택하면 풍부한 도메인 객체를 만드는데 도움이 된다. 도메인 로직에 초점을 맞추고 도메인 객체 내에서 모델링함으로써 DDD는 소프트웨어 개발에 대한 보다 전체적인 접근 방식을 장려&lt;/li&gt;
-  &lt;li&gt;디자인 패턴 : strategy, factoryMethod, command 등과 같은 디자인 패턴을 활용해서 객체 내 동작을 캡슐화&lt;/li&gt;
-  &lt;li&gt;서비스 계층 리펙토링 : 상속 대신 객체 구성을 강조하여 복잡한 도메인 모델을 구축&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 30 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 15.emptytrycatch</title>
-        <link>/java/anti-pattern/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/01/29/java-anti-pattern-series-15.EmptyTryCatch.html</guid>
-        <description>&lt;h1 id=&quot;빈-catch-블록&quot;&gt;빈 Catch 블록&lt;/h1&gt;
-
+&lt;h3 id=&quot;3-특성&quot;&gt;3. 특성&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;빈 catch는 오류르 숨기고, 디버깅을 더 어렵게하고, 예기치 않은 동작을 유발하는 등 여러 가지 부정적인 결과를 초래할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;문제-이유&quot;&gt;문제 이유&lt;/h2&gt;
-&lt;h3 id=&quot;1-오류-은닉&quot;&gt;1. 오류 은닉&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;catch는 기본적으로 오류를 기록하거나 exception 메시지를 내보이는 식으로 작동하길 예상한다.&lt;/li&gt;
-  &lt;li&gt;즉 책임이 있다.
-    &lt;h3 id=&quot;2-디버깅의-어려움&quot;&gt;2. 디버깅의 어려움&lt;/h3&gt;
+  &lt;li&gt;경계 :
+    &lt;ul&gt;
+      &lt;li&gt;관련 도메인 객체 애그리거트에 대한 명확한 경계를 정의한다.&lt;/li&gt;
+      &lt;li&gt;내부 상태와 동작을 캡슐화하여 상호 작용하는 객체의 복잡성을 외부 세계로 숨긴다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;stackTrace로 오류 이유를 알아야 하지만 빈 catch는 뭐가 잘못 됐는지 알 방법이 없어진다.
-    &lt;h3 id=&quot;3-자바에서-권장하는-오류-처리-미준수&quot;&gt;3. 자바에서 권장하는 오류 처리 미준수&lt;/h3&gt;
+  &lt;li&gt;일관성
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트 경계 내에서 불변성, 비즈니스 규칙 및 데이터 유효성을 유지하며 일관성을 보장&lt;/li&gt;
+      &lt;li&gt;애그리거트에 대한 작업은 함께 성공하거나 실패해야 하며 이를 통해서 무결성을 보장한다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;결과적으로 오류 처리 모범 사례에도 위반된다.&lt;/li&gt;
-  &lt;li&gt;예외 처리를 바로 하거나 빠르게 실패 처리를 하라는 원칙에 위배된다.
-    &lt;h3 id=&quot;4-예외-억제&quot;&gt;4. 예외 억제&lt;/h3&gt;
-    &lt;h3 id=&quot;5-예측할-수-없는-동작으로-이어짐&quot;&gt;5. 예측할 수 없는 동작으로 이어짐&lt;/h3&gt;
+  &lt;li&gt;트랜잭션성
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트는 일반적으로 트랜잭션 경계 내에서 단일 작업 단위로 취급된다.&lt;/li&gt;
+      &lt;li&gt;애그리거트 및 관련 객체에 대해 수행되는 모든 수정은 원자적이어야 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애그리거트 루트
+    &lt;ul&gt;
+      &lt;li&gt;모든 애그리거트에는 진입점으로 애그리거트 루트가 있다.&lt;/li&gt;
+      &lt;li&gt;루트는 동작을 조장하고 애그리거트의 수명 주기를 관리하는 엔티티 역할을 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;직접 액세스
+    &lt;ul&gt;
+      &lt;li&gt;경계 외부의 객체는 애그리거트 루트만 참조할 수 있으므로 내부 객체에 대한 액세스를 제어할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;처리-방법&quot;&gt;처리 방법&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;예외 로그: slf4j 등으로 예외를 로깅한다.&lt;/li&gt;
-  &lt;li&gt;예외 다시 던지기 : 경우에 따라 핸들링할 수 있는 에러로 다시 던지는 식으로 변경할 수도 있다.&lt;/li&gt;
-  &lt;li&gt;예외 처리 : 아예 깔끔하게 그 안에서 처리하는게 가장 좋다.&lt;/li&gt;
-  &lt;li&gt;checked Exception 사용 : 아니면 로직 자체적으로 예외를 명시하여 사용자로 하여금 예외 처리까지 하도록 하는 방법이 있다.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 29 Jan 2025 00:00:00 +0900</pubDate>
-      </item>
-    
-      <item>
-        <title>[java Anti Pattern Series] 14.threadstarvation</title>
-        <link>/java/anti-pattern/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</link>
-        <guid isPermaLink="true">/java/anti-pattern/2025/01/28/java-anti-pattern-series-14.ThreadStarvation.html</guid>
-        <description>&lt;h1 id=&quot;thread-starvation&quot;&gt;Thread starvation&lt;/h1&gt;
-
+&lt;h3 id=&quot;4-설계&quot;&gt;4. 설계&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;특정 쓰레드가 공유 리소스를 장시간 보유하는 다른 쓰레드로 인해 공유 리소스에 접근하지 못하고 성능이 저하되고 교착상태까지 발생할 수 있다.&lt;/li&gt;
+  &lt;li&gt;일관성
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트 내의 객체는 강력한 관계와 공유 수명 주기를 가져야 한다.&lt;/li&gt;
+      &lt;li&gt;일관성이 있으며 단일 비즈니스 개념을 나타내야 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;일관성 경계
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트 내에서 변경된 내용이 애그리거트 불변성 또는 무결성 제약조건을 위반해서는 안된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애그리거트 루트
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트에 액세스하기 위한 기본 진입점 역할을 하는 애그리거트 루트를 식별&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;애그리거트 무결성
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트 상태에 대한 모든 변경이 항상 애그리거트 루트를 통해서 이뤄지게 한다.&lt;/li&gt;
+      &lt;li&gt;비즈니스 규칙 및 일관성 검사가 적용되도록 보장할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;세분성
+    &lt;ul&gt;
+      &lt;li&gt;애그리거트는 일관성을 유지할 수 있을 만큼 충분히 크되, 병렬 개발 및 확장성이 가능하도록 충분히 작아야 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&quot;원인&quot;&gt;원인&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;Blocking&lt;/li&gt;
-  &lt;li&gt;Deadlock&lt;/li&gt;
-  &lt;li&gt;동기화 불량: 부적절한 동기화는 동시성 제어 메커니즘을 사용해서 동기화되지 않으면 동시에 액세스해서 충돌이 일어날 수 있다.&lt;/li&gt;
-  &lt;li&gt;불충분한 쓰레드 풀 구성: 쓰레드 풀을 너무 작거나 큐를 적게 잡으면 가용 쓰레드를 기다리면서 쓰레드 고갈이 생길 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;감지&quot;&gt;감지&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;높은 CPU 사용량 : 쓰레드가 리소스, 컨텍스트 스위칭을 위해서 지속적으로 경쟁하기에 사용량이 비정상적으로 높아진다.&lt;/li&gt;
-  &lt;li&gt;유난히 긴 응답시간 : 특히 Blocking 작업이 느려지면 쓰레드 고갈로 이어진다.&lt;/li&gt;
-  &lt;li&gt;낮은 처리량 : 가용 쓰레드가 부족해서 처리량도 줄어든다.&lt;/li&gt;
-  &lt;li&gt;교착상태 : 혹여 deadlock이 자주 발생하면 쓰레드 고갈이 문제일 수도 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;해결&quot;&gt;해결&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;비동기로 구성하기 : blocking 작업을 offload하고 다른 작업을 위한 쓰레드 확보할 수 있는 비동기 작업으로 구성하면 가용 리소스의 활용을 최고로 올릴 수 있다.&lt;/li&gt;
-  &lt;li&gt;잠금 컨텐션 감소 : 동기화 메커니즘을 최적화하여 잠금 경합을 줄이고 쓰레드 고갈 가능성을 줄인다.&lt;/li&gt;
-  &lt;li&gt;쓰레드 풀 조정 : 적정한 쓰레드 풀, 작업 큐로 원활한 작업 환경을 구성한다.&lt;/li&gt;
-  &lt;li&gt;성능 모니터링, 분석&lt;/li&gt;
-  &lt;li&gt;타임아웃 메커니즘 : 일정 시간이 지나면 실패로 처리해서 순환을 문제가 생겼을 경우 failover 할 수 있도록 둘 수도 있다.&lt;/li&gt;
-  &lt;li&gt;리소스 액세스 최적화 : 공유 리소스 액세스 방식을 최적화하여 경합을 줄이는 방식으로 최적화할 수도 있다.&lt;/li&gt;
-&lt;/ol&gt;
 </description>
-        <pubDate>Tue, 28 Jan 2025 00:00:00 +0900</pubDate>
+        <pubDate>Tue, 18 Feb 2025 00:00:00 +0900</pubDate>
       </item>
     
   </channel>
