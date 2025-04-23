@@ -3,7 +3,10 @@ layout: post
 categories: [ARCHITECTURE, DDD, HEXAGONAL]
 ---
 
-## 헥사고날
+## Hexagonal
+
+
+
 - 여러 가지를 고려했을 때 헥사고날 아키텍쳐가 꽤나 클린아키텍쳐에 부합한다.
 - 물론 헥사고날이 silver bullet은 아니다.
 - 앞서 본 바와 같이 `inputPort`, `ouputPort`로 관심사를 한정하고, 의존성 역전을 실행한다.

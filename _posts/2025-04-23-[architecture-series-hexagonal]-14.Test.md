@@ -5,7 +5,14 @@ categories: [ARCHITECTURE, DDD, HEXAGONAL]
 
 
 
+
+
+
+
 # Architecture Test
+
+
+
 - 기존 전제는 만드는 비용이 적고, 유지보수하기 쉽고, 빨리 실행되고, 안정적인 작은 크기의 테스트들에 대해서 높은 커버리지를 유지하는 것이다.
 > #### Test Coverage
 > - System, S/W의 테스트를 논할 때 얼마나 충분한가?를 나타낸 것, 

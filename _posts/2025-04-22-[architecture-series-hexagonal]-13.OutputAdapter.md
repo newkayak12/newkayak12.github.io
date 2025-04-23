@@ -6,6 +6,10 @@ categories: [ARCHITECTURE, DDD, HEXAGONAL]
 
 
 # OutputAdapter
+
+
+
+
 - Port interface를 구현하고 Service에서는 이를 통해서 호출한다.
 - Hexagonal에서 Driven, Outgoing adapter다.
 - 영속성 어댑터 입력 모델이 영속성 어댑터 내부가 아니라 application core에 있기에 영속성 adpater 내부를 변경하는 것이 core에 영향이 없다.
