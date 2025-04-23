@@ -5,6 +5,9 @@ categories: [ARCHITECTURE, DDD, HEXAGONAL]
 
 
 ## 계층형 아키텍쳐
+
+
+
 - 기본적으로 아는 'web-domain-persistence'다.
 - 보통 3계층 아키텍쳐라고 한다.
 - 웹 -> 도메인 -> 영속성으로 호출 순서가 잡힌다.
