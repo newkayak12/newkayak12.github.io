@@ -1,6 +1,366 @@
 [
 
 {
+"title"    : "[architecture Series Hexagonal] 14.test",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/23/architecture-series-hexagonal-14.Test.html",
+"date"     : "2025-04-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 13.outputadapter",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/22/architecture-series-hexagonal-13.OutputAdapter.html",
+"date"     : "2025-04-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 12.inputadapter",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/21/architecture-series-hexagonal-12.InputAdapter.html",
+"date"     : "2025-04-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 11.usecase",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/20/architecture-series-hexagonal-11.UseCase.html",
+"date"     : "2025-04-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 10.hexagonal",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/19/architecture-series-hexagonal-10.Hexagonal.html",
+"date"     : "2025-04-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 09.layered",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/18/architecture-series-hexagonal-09.Layered.html",
+"date"     : "2025-04-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 08.createframeworkhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/17/architecture-series-hexagonal-08.CreateFrameworkHexagon.html",
+"date"     : "2025-04-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 07.createapplicationhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/16/architecture-series-hexagonal-07.CreateApplicationHexagon.html",
+"date"     : "2025-04-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 06.createdomainhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/15/architecture-series-hexagonal-06.CreateDomainHexagon.html",
+"date"     : "2025-04-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 05.drivinganddriven",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/14/architecture-series-hexagonal-05.DrivingAndDriven.html",
+"date"     : "2025-04-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 04.frameworkhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/13/architecture-series-hexagonal-04.FrameworkHexagon.html",
+"date"     : "2025-04-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 03.applicationhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/12/architecture-series-hexagonal-03.ApplicationHexagon.html",
+"date"     : "2025-04-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 02.domainhexagon",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/11/architecture-series-hexagonal-02.DomainHexagon.html",
+"date"     : "2025-04-11 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[architecture Series Hexagonal] 01.introduce",
+"category" : "",
+"tags"     : "",
+"url"      : "/architecture/ddd/hexagonal/2025/04/10/architecture-series-hexagonal-01.Introduce.html",
+"date"     : "2025-04-10 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 15.consistentcooperation",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/09/OOP-series-15.ConsistentCooperation.html",
+"date"     : "2025-04-09 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 14.subclassingandsubtyping",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/08/OOP-series-14.SubclassingAndSubTyping.html",
+"date"     : "2025-04-08 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 13.polymorphism",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/07/OOP-series-13.Polymorphism.html",
+"date"     : "2025-04-07 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 12.composition",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/06/OOP-series-12.Composition.html",
+"date"     : "2025-04-06 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 11.inheritanceandreuse",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/05/OOP-series-11.InheritanceAndReuse.html",
+"date"     : "2025-04-05 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 10.flexibledesign",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/04/OOP-series-10.FlexibleDesign.html",
+"date"     : "2025-04-04 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 09.dependent",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/03/OOP-series-09.Dependent.html",
+"date"     : "2025-04-03 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 08.objectdecomposition",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/02/OOP-series-08.ObjectDecomposition.html",
+"date"     : "2025-04-02 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 07.messageandinterface",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/04/01/OOP-series-07.messageAndInterface.html",
+"date"     : "2025-04-01 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 05.tradeoff",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/31/OOP-series-05.TradeOff.html",
+"date"     : "2025-03-31 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 04.role_responsibility_collaboration",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/30/OOP-series-04.Role_Responsibility_Collaboration.html",
+"date"     : "2025-03-30 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 03.polymorphism",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/29/OOP-series-03.Polymorphism.html",
+"date"     : "2025-03-29 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 02.class",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/28/OOP-series-02.Class.html",
+"date"     : "2025-03-28 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 06.responsibility",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/27/OOP-series-06.Responsibility.html",
+"date"     : "2025-03-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[oop Series] 01.intro",
+"category" : "",
+"tags"     : "",
+"url"      : "/oop/2025/03/27/OOP-series-01.Intro.html",
+"date"     : "2025-03-27 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 10.transactionandrollback",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/26/Spring-batch-series-10.TransactionAndRollback.html",
+"date"     : "2025-03-26 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 09.scheduling",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/25/Spring-batch-series-09.Scheduling.html",
+"date"     : "2025-03-25 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 08.parallel",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/24/Spring-batch-series-08.Parallel.html",
+"date"     : "2025-03-24 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 07.executionandmonitoring",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/23/Spring-batch-series-07.ExecutionAndMonitoring.html",
+"date"     : "2025-03-23 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 06.springbatchtest",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/22/Spring-batch-series-06.SpringBatchTest.html",
+"date"     : "2025-03-22 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 05.retryandskip",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/21/Spring-batch-series-05.RetryAndSkip.html",
+"date"     : "2025-03-21 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 04.02.listener",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/20/Spring-batch-series-04.02.Listener.html",
+"date"     : "2025-03-20 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 04.01.process",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/19/Spring-batch-series-04.01.Process.html",
+"date"     : "2025-03-19 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.09.tasklet_vs_chunk",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/18/Spring-batch-series-03.09.Tasklet_Vs_Chunk.html",
+"date"     : "2025-03-18 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.08.jobexecution",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/17/Spring-batch-series-03.08.JobExecution.html",
+"date"     : "2025-03-17 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.07.jobrepository",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/16/Spring-batch-series-03.07.JobRepository.html",
+"date"     : "2025-03-16 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.02.step",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/15/Spring-batch-series-03.02.Step.html",
+"date"     : "2025-03-15 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.01.job",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/14/Spring-batch-series-03.01.Job.html",
+"date"     : "2025-03-14 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 03.00.components",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/13/Spring-batch-series-03.00.Components.html",
+"date"     : "2025-03-13 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 02.spec",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/12/Spring-batch-series-02.Spec.html",
+"date"     : "2025-03-12 00:00:00 +0900"
+} ,
+
+{
+"title"    : "[spring Batch Series] 01.architecture",
+"category" : "",
+"tags"     : "",
+"url"      : "/spring/batch/2025/03/11/Spring-batch-series-01.Architecture.html",
+"date"     : "2025-03-11 00:00:00 +0900"
+} ,
+
+{
 "title"    : "[architecture Series Ddd] 07.summary",
 "category" : "",
 "tags"     : "",
