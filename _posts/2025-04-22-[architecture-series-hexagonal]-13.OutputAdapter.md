@@ -3,6 +3,8 @@ layout: post
 categories: [ARCHITECTURE, DDD, HEXAGONAL]
 ---
 
+
+
 # OutputAdapter
 - Port interface를 구현하고 Service에서는 이를 통해서 호출한다.
 - Hexagonal에서 Driven, Outgoing adapter다.

@@ -3,6 +3,8 @@ layout: post
 categories: [ARCHITECTURE, DDD, HEXAGONAL]
 ---
 
+
+
 # Adapter
 - 헥사고날의 어댑터와 GOF의 어댑터는 맥락적으로 서로 다른 인터페이스, 프로토콜을 호환하게 한다는 의미에서 같다.
 - 헥사고날에서에서는 프로토콜, 다른 기술 간 호환을 목적으로 한다.
