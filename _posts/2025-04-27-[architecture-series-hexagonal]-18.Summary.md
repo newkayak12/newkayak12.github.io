@@ -1,6 +1,9 @@
 ---
 layout: post
-categories: [ARCHITECTURE, DDD, HEXAGONAL]
+categories:
+  - ARCHITECTURE
+  - DDD
+  - HEXAGONAL
 ---
 
 # 결과적으로?
