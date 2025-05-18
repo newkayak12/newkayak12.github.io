@@ -10,4 +10,4 @@ categories: [MINI_PROJECT]
 
 
 ## 2. 이벤트 스토밍 진행
-[](/assets/img/prototypeProject/eventstorming20250517.excalidraw.md)
+![](/assets/img/prototypeProject/eventStorming.excalidraw.svg)

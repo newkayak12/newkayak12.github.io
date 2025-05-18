@@ -11,10 +11,8 @@
             "id": "a20a2b45bd20ca42",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "assets/img/prototypeProject/eventstorming20250517.excalidraw.md"
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -162,6 +160,8 @@
   },
   "active": "6046634f80b78067",
   "lastOpenFiles": [
+    "_site/assets/img/prototypeProject/eventStorming.excalidraw.svg",
+    "assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "_site/mini_project/2025/05/15/mini-project-02.eventStorming.html",
     "_site/mini_project/2025/05/15/mini-project-01.request.html",
     "_site/mini_project/2025/05/15",
@@ -172,7 +172,6 @@
     "_site/2025/05/15/mini-project-01.request.html",
     "_site/2025/05/15",
     "_site/2025/05",
-    "_site/2025",
     "_posts/2025-05-15-［mini-project］-01.request.md",
     "assets/img/prototypeProject/eventstorming20250517.excalidraw.md",
     "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
