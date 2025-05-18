@@ -80,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 393.5
   },
   "right": {
     "id": "f665b400b728feff",
@@ -162,6 +162,17 @@
   },
   "active": "6046634f80b78067",
   "lastOpenFiles": [
+    "_site/mini_project/2025/05/15/mini-project-02.eventStorming.html",
+    "_site/mini_project/2025/05/15/mini-project-01.request.html",
+    "_site/mini_project/2025/05/15",
+    "_site/mini_project/2025/05",
+    "_site/mini_project/2025",
+    "_site/mini_project",
+    "_site/2025/05/15/mini-project-02.eventStorming.html",
+    "_site/2025/05/15/mini-project-01.request.html",
+    "_site/2025/05/15",
+    "_site/2025/05",
+    "_site/2025",
     "_posts/2025-05-15-［mini-project］-01.request.md",
     "assets/img/prototypeProject/eventstorming20250517.excalidraw.md",
     "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
@@ -175,7 +186,6 @@
     "_posts/2025-02-14-[architecture-series-DDD]-01.Introduce.md",
     "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
     "assets/img/prototypeProject/eventstoming.excalidraw.md",
-    "assets/img/prototypeProject",
     "assets/img/무제 파일.md",
     "_posts/2025-04-27-[architecture-series-hexagonal]-18.Summary.md",
     "_posts/2025-05-09-[rollup-2025]-01.firstHaf.md",

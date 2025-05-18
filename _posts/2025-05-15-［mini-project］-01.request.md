@@ -3,6 +3,7 @@ layout: post
 title: "[미니 프로젝트] 01.요청사항 작성"
 tags:
   - MINI_PROJECT
+categories: [MINI_PROJECT]
 ---
 > [일전의 공부한 내용](./rollup-2025-01.firstHalf.html)을 실제로 구현해보면서 공부해보고자 시작한 프로젝트다.
 
