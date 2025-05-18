@@ -11,27 +11,26 @@
             "id": "a20a2b45bd20ca42",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-01.request.md",
-                "mode": "source",
-                "source": false
+                "file": "assets/img/prototypeProject/eventstorming20250517.excalidraw.md"
               }
             }
           },
           {
-            "id": "a9260c53892c9e85",
+            "id": "6046634f80b78067",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
+                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -60,7 +59,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "assets",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -97,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-01.request.md",
+                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-01.request.md",
+                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-01.request.md"
+                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md"
               }
             }
           }
@@ -161,14 +160,23 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f85d3da7c7cf5ea1",
+  "active": "6046634f80b78067",
   "lastOpenFiles": [
-    "assets/img/prototypeProject/eventstoming20250517.excalidraw.md",
+    "_posts/2025-05-15-［mini-project］-01.request.md",
+    "assets/img/prototypeProject/eventstorming20250517.excalidraw.md",
+    "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
+    "_posts/2024-05-18-[java-series]-01-Version.md",
+    "_posts/2024-05-22-[mysql-series]-07-SubQuery.md",
+    "_posts/2024-06-04-[Effective-java-series]-06.AvoidInitializeUnnecessaryInstance.md",
+    "_posts/2024-06-15-[Effective-java-series]-58.UseInterfaceAsType.md",
+    "_posts/2024-07-02-[Programmers-series]-LV.-02-ConvertBinary.md",
+    "_posts/2024-08-13-[mongo-series]-04.Auth.md",
+    "_posts/2025-02-13-[java-anti-pattern-series]-30.EvadeAntiPattern.md",
+    "_posts/2025-02-14-[architecture-series-DDD]-01.Introduce.md",
+    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
     "assets/img/prototypeProject/eventstoming.excalidraw.md",
     "assets/img/prototypeProject",
     "assets/img/무제 파일.md",
-    "_posts/2025-05-15-［mini-project］-01.request.md",
-    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
     "_posts/2025-04-27-[architecture-series-hexagonal]-18.Summary.md",
     "_posts/2025-05-09-[rollup-2025]-01.firstHaf.md",
     "_posts/2025-05-09-[rollup-2025]-01.first.md",
