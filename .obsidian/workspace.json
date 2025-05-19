@@ -26,9 +26,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "0751615ed4c63b3c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -94,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
+                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
+                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md"
+                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md"
               }
             }
           }
@@ -158,10 +170,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6046634f80b78067",
+  "active": "0751615ed4c63b3c",
   "lastOpenFiles": [
-    "_posts/무제 파일.md",
     "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
+    "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
     "_site/assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "_site/mini_project/2025/05/15/mini-project-02.eventStorming.html",
