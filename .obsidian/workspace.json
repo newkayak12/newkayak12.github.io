@@ -4,43 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "b0c41cdbd7b0db0f",
+        "id": "eff855aae96630fa",
         "type": "tabs",
         "children": [
-          {
-            "id": "a20a2b45bd20ca42",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
-            "id": "6046634f80b78067",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
           {
             "id": "0751615ed4c63b3c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "2025-05-18-［mini-project］-03.DDD에 대한 고민"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -59,8 +40,11 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
-              }
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -75,7 +59,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -83,14 +69,17 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 393.5
+    "width": 393.5,
+    "collapsed": true
   },
   "right": {
     "id": "f665b400b728feff",
@@ -106,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +103,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2025-05-18-［mini-project］-03.DDD에 대한 고민"
             }
           },
           {
@@ -123,10 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2025-05-18-［mini-project］-03.DDD에 대한 고민"
             }
           },
           {
@@ -136,8 +129,12 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
-              }
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -146,8 +143,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md"
-              }
+                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2025-05-18-［mini-project］-03.DDD에 대한 고민"
             }
           }
         ]
@@ -159,12 +161,12 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:퀵 스위처 열기": false,
-      "graph:그래프 뷰 열기": false,
-      "canvas:새 캔버스 만들기": false,
-      "daily-notes:오늘의 데일리 노트 열기": false,
-      "templates:템플릿 삽입": false,
-      "command-palette:명령어 팔레트 열기": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false
@@ -173,7 +175,8 @@
   "active": "0751615ed4c63b3c",
   "lastOpenFiles": [
     "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
-    "_posts/2025-05-15-［mini-project］-03.DDD에 대한 고민.md",
+    "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
+    "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
     "_site/assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "_site/mini_project/2025/05/15/mini-project-02.eventStorming.html",
