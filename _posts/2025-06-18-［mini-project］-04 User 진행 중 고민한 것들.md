@@ -314,6 +314,7 @@ interface AuthenticateGeneralUser {
 	- 1차 캐시로 기존 더티 체킹과 같은 횟수의 쿼리를 호출한다.
 - 더 나아가 `~adapter`라는 곳에서 "**`load`, jpa entity의 변경을 하는 것이 맞는가?** "라는 고민이 있었다.
 - 그러나 **Adapter**가 '호환되지 않는 것을 호환하게 해주는', '인터페이스로 감싸서 사용할 수 있게 해주는' 개념이기에 문제가 없지 않을 것 같다는 생각을 했다.
+
 ```kotlin
   
 @Component  
@@ -352,6 +353,7 @@ class ChangeGeneralUserPasswordAdapter(
 	1. 아무래도 Spring을 사용하면서 Spring의 Context에서 벗어나는 방법으로 운용하는 것이 최선일까?라는 물음
 	2. 그렇지만 core-module을 Spring으로 오염시켜서는 안된다.
 	3. 명시적으로 선언하고 의존성을 주입하고 이를 Spring 내에서 DI를 통해서 주입 받을 수 있는 남은 방법은?
+
 ```kotlin
 @Configuration  
 class GeneralUserServiceFactory {  
