@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0751615ed4c63b3c",
+            "id": "092e1351f0219a62",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
+                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md"
+                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md"
               }
             }
           }
@@ -149,11 +149,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0751615ed4c63b3c",
+  "active": "f85d3da7c7cf5ea1",
   "lastOpenFiles": [
-    "_posts/2025-02-06-[java-anti-pattern-series]-23.PrematureResourceRelease.md",
-    "assets/img/jpa-ddd.jpeg",
+    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
+    "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
     "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
+    "assets/img/jpa-ddd.jpeg",
+    "_posts/2025-02-06-[java-anti-pattern-series]-23.PrematureResourceRelease.md",
     "assets/img/jpa-ddd.md",
     "assets/img/IMG_9979.jpeg",
     "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
@@ -180,7 +182,6 @@
     "_posts/2024-08-13-[mongo-series]-04.Auth.md",
     "_posts/2025-02-13-[java-anti-pattern-series]-30.EvadeAntiPattern.md",
     "_posts/2025-02-14-[architecture-series-DDD]-01.Introduce.md",
-    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
     "assets/img/prototypeProject/eventstoming.excalidraw.md",
     "assets/img/무제 파일.md",
     "_posts/2025-04-27-[architecture-series-hexagonal]-18.Summary.md",
