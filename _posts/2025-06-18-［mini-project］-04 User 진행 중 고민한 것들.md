@@ -239,6 +239,7 @@ class RestaurantOwner(
 ## 3. 매핑
 - 이미 꽤 많은 매핑 작업이 필요했다. **port and adapter**를 사용하면서 `input  -> usecase -> output` 마다 매핑을 했다.
 - 2회의 매핑과 더불어 `useCase -> domainService`의 이용을 위한 1번의 매핑이 더 추가되어 3번의 매핑이 최소 필요해졌다.
+
 ```kotlin
 //com.reservation.user.self.port.input.AuthenticateGeneralUserQuery
 @FunctionalInterface  
