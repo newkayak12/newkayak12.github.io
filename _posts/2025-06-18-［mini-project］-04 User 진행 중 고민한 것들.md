@@ -7,7 +7,7 @@ categories:
   - MINI_PROJECT
 ---
 > - [일전의 공부한 내용](./rollup-2025-01.firstHalf.html)을 실제로 구현해보면서 공부해보고자 시작한 프로젝트다.
-> - [이전 글](./2025-05-17-［mini-project］-02.eventStorming)
+> - [이전 글](https://newkayak12.github.io/mini_project/2025/05/18/mini-project-03.DDD에-대한-고민.html)
 > - 아직 공부 중인 개념입니다. 조금 틀려도 너른 이해 부탁드립니다!
 
 

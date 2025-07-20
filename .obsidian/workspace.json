@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "eff855aae96630fa",
+        "id": "f890bf0abb8ae7eb",
         "type": "tabs",
         "children": [
           {
-            "id": "092e1351f0219a62",
+            "id": "34c2e2af2aef697f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
+                "file": "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md",
                 "mode": "source",
                 "source": false
               }
@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "assets",
+                "query": "asse",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 393.5
+    "width": 393.5,
+    "collapsed": true
   },
   "right": {
     "id": "f665b400b728feff",
@@ -85,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
+                "file": "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
+                "file": "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md"
+                "file": "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md"
               }
             }
           }
@@ -149,29 +150,42 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f85d3da7c7cf5ea1",
+  "active": "34c2e2af2aef697f",
   "lastOpenFiles": [
-    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
-    "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
+    "assets/img/PR_TEMPLATE.png",
+    "PR_TEMPLATE.png",
+    "Screenshot 2025-07-20 at 15.15.11.png",
+    "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md",
+    "assets/img/PR.png",
+    "assets/PR.png",
+    "assets/Screenshot 2025-07-20 at 14.03.22.png",
+    "assets/img/Screenshot 2025-07-20 at 14.02.41.png",
+    "_posts/2025-04-25-[architecture-series-hexagonal]-16.Construct.md",
+    "_posts/assets.md",
+    "assets/img/PR_COMMENT.png",
+    "assets/img/Screenshot 2025-07-20 at 13.49.33.png",
+    "Screenshot 2025-07-20 at 13.49.33 copy.png",
+    "Screenshot 2025-07-20 at 13.49.33.png",
+    "_site/network 2",
+    "_site/git 2/2024/12/20/git-series-squashAndRebase.html",
+    "_site/git 2/2024/05/22/git-series-03-Convention.html",
+    "_site/git 2/2024/05/22/git-series-02-Summary.html",
+    "_site/git 2/2024/05/22/git-series-01-command.html",
+    "_site/git 2/2024/05/22",
+    "_site/git 2/2024/12/20",
+    "_site/git 2/2024/12",
+    "_site/git 2/2024/05",
+    "_site/git 2/2024",
+    "_posts/2025-06-27［mini-project］-05 주석과 코드 스타일, PullRequest.md",
+    "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
     "_posts/2025-05-18-［mini-project］-03.DDD에 대한 고민.md",
-    "assets/img/jpa-ddd.jpeg",
+    "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
+    "_posts/2025-06-18-［mini-project］-04 User 진행 중 고민한 것들.md",
+    "_posts/2024-11-28-[CS-series]-RESTful.md",
+    "_site/README.md",
+    "_posts/2025-05-09-[rollup-2025]-01.firstHalf.md",
     "_posts/2025-02-06-[java-anti-pattern-series]-23.PrematureResourceRelease.md",
     "assets/img/jpa-ddd.md",
-    "assets/img/IMG_9979.jpeg",
-    "_posts/2025-05-15-［mini-project］-02.eventStorming.md",
-    "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
-    "_site/assets/img/prototypeProject/eventStorming.excalidraw.svg",
-    "assets/img/prototypeProject/eventStorming.excalidraw.svg",
-    "_site/mini_project/2025/05/15/mini-project-02.eventStorming.html",
-    "_site/mini_project/2025/05/15/mini-project-01.request.html",
-    "_site/mini_project/2025/05/15",
-    "_site/mini_project/2025/05",
-    "_site/mini_project/2025",
-    "_site/mini_project",
-    "_site/2025/05/15/mini-project-02.eventStorming.html",
-    "_site/2025/05/15/mini-project-01.request.html",
-    "_site/2025/05/15",
-    "_site/2025/05",
     "_posts/2025-05-15-［mini-project］-01.request.md",
     "assets/img/prototypeProject/eventstorming20250517.excalidraw.md",
     "_posts/2024-05-18-[java-series]-01-Version.md",
@@ -183,12 +197,6 @@
     "_posts/2025-02-13-[java-anti-pattern-series]-30.EvadeAntiPattern.md",
     "_posts/2025-02-14-[architecture-series-DDD]-01.Introduce.md",
     "assets/img/prototypeProject/eventstoming.excalidraw.md",
-    "assets/img/무제 파일.md",
-    "_posts/2025-04-27-[architecture-series-hexagonal]-18.Summary.md",
-    "_posts/2025-05-09-[rollup-2025]-01.firstHaf.md",
-    "_posts/2025-05-09-[rollup-2025]-01.first.md",
-    "_posts/Untitled.md",
-    "_posts/Drawing 2025-05-12 17.17.51.excalidraw.md",
-    "무제 파일.md"
+    "assets/img/무제 파일.md"
   ]
 }

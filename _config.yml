@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 url: https://newkayak12.github.io/
-baseurl:
+baseurl: ""
 
 # future: true
 # THEME-SPECIFIC CONFIGURATION
@@ -91,3 +91,7 @@ mermaid:
 
 site:
   baseurl: https://newkayak12.github.io
+
+collections:
+  posts:
+    output: true
