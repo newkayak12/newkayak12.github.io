@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[미니 프로젝트] 05. 주석과 코드 스타일, Pull Request에 대해서  + tidyFirst!?"
+title: "[미니 프로젝트] 05. 주석, Pull Request에 대해서  + tidyFirst!?"
 tags:
   - MINI_PROJECT
   - BOOK
