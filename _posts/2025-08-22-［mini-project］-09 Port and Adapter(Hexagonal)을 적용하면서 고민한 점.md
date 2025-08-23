@@ -35,41 +35,41 @@ categories:
   
 <pre>
 adapter-module  
-	ﾤ rest
-		ﾤ {{domain}} 
-			   ﾤ request
-			   ﾤ response
-				   ﾤ {{action}}
-	    ﾤ persistence
-			   ﾤ {{domain}}  
-				   ﾤ entity
-					   ﾤ {{domainEntity}}
-				   ﾤ repository                            
-					   ﾤ dsl
-					   ﾤ jpa
-					   ﾤ adapter
+  ﾤ rest
+    ﾤ {{domain}} 
+         ﾤ request
+         ﾤ response
+         ﾤ {{action}}
+ ﾤ persistence
+    ﾤ {{domain}}  
+        ﾤ entity
+            ﾤ {{domainEntity}}
+        ﾤ repository                            
+            ﾤ dsl
+            ﾤ jpa
+            ﾤ adapter
 	    ﾤ infrastructure
 				ﾤ config
 				ﾤ redis
 application-module  
-	ﾤ {{domain}}
-		ﾤ port
-			ﾤ input
-				ﾤ query                        
-				ﾤ command
-				ﾤ {{UseCase}}  
-		    ﾤ output
-				ﾤ {{output port}}
-		ﾤ usecase                
-				ﾤ {{actionService}}
-				ﾤ exception
+    ﾤ {{domain}}
+         ﾤ port
+            ﾤ input
+                ﾤ query                        
+                ﾤ command
+                ﾤ {{UseCase}}  
+            ﾤ output
+                ﾤ {{output port}}
+         ﾤ usecase                
+             ﾤ {{actionService}}
+             ﾤ exception
 core-module  
-	ﾤ {{domain}}
-		ﾤ exception
-		ﾤ policy
-		ﾤ service
-		ﾤ vo
-		ﾤ {{entity}}
+    ﾤ {{domain}}
+        ﾤ exception
+        ﾤ policy
+        ﾤ service
+        ﾤ vo
+        ﾤ {{entity}}
 </pre>
 
 - 위와 같이 패키지 트리가 복잡하다.  
@@ -264,13 +264,13 @@ C -->|8| A
 
 <pre>
 {{example}}  
-     ﾤ port  
-	   ﾤ input 
-		  ﾤ query 
-		  ﾤ Find~ByIdsUseCase
-		  ﾤ Find~ByTitleUseCase
-	   ﾤ output
-		  ﾤ Find~  
+    ﾤ port  
+       ﾤ input 
+        ﾤ query 
+        ﾤ Find~ByIdsUseCase
+        ﾤ Find~ByTitleUseCase
+       ﾤ output
+        ﾤ Find~  
 </pre>
   
 - input port  
@@ -308,12 +308,12 @@ C -->|8| A
 
 <pre>
 application-module  
-		ﾤ {{domain}}       
-			 ﾤ port 
-				ﾤ input
-					ﾤ query
-					ﾤ command
-					ﾤ {{UseCase}}  
+    ﾤ {{domain}}       
+         ﾤ port 
+            ﾤ input
+                ﾤ query
+                ﾤ command
+                ﾤ {{UseCase}}  
 </pre>
 
 - 위와 같은 조치는 CQS(Command-Query-Segregation)을 준수한 결과다.  
@@ -383,15 +383,15 @@ interface UserRepository {  // Domain이 소유
 
 <pre>
 adapter-module  
-	ﾤ persistence   
-		 ﾤ {{domain}}
-			 ﾤ entity
-				 ﾤ category
+   ﾤ persistence   
+    ﾤ {{domain}}
+        ﾤ entity
+		ﾤ category
 core-module  
-	ﾤ category
-		ﾤ cuisine
-		ﾤ nationality
-		ﾤ tag  
+   ﾤ category
+       ﾤ cuisine
+      ﾤ nationality
+      ﾤ tag  
 </pre>
   
 - 위와 같이 JPA로 표현한 테이블 Entity와 domain에서 사용하는 개념적 Entity가 불일치 할 수 있음을 인지하고 표현했다.  
