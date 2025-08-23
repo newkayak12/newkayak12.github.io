@@ -36,14 +36,14 @@ categories:
 <pre>
 adapter-module  
   ﾤ rest
-    ﾤ {{domain}} 
+    ﾤ [domain]
          ﾤ request
          ﾤ response
          ﾤ {{action}}
  ﾤ persistence
-    ﾤ {{domain}}  
+    ﾤ [domain]
         ﾤ entity
-            ﾤ {{domainEntity}}
+            ﾤ [domainEntity]
         ﾤ repository                            
             ﾤ dsl
             ﾤ jpa
@@ -52,24 +52,24 @@ adapter-module
 				ﾤ config
 				ﾤ redis
 application-module  
-    ﾤ {{domain}}
+    ﾤ [domain]
          ﾤ port
             ﾤ input
                 ﾤ query                        
                 ﾤ command
-                ﾤ {{UseCase}}  
+                ﾤ [UseCase]
             ﾤ output
-                ﾤ {{output port}}
+                ﾤ [output port]
          ﾤ usecase                
-             ﾤ {{actionService}}
+             ﾤ [actionService]
              ﾤ exception
 core-module  
-    ﾤ {{domain}}
+    ﾤ [domain]
         ﾤ exception
         ﾤ policy
         ﾤ service
         ﾤ vo
-        ﾤ {{entity}}
+        ﾤ [entity]
 </pre>
 
 - 위와 같이 패키지 트리가 복잡하다.  
@@ -263,7 +263,7 @@ C -->|8| A
 
 
 <pre>
-{{example}}  
+[example]
     ﾤ port  
        ﾤ input 
         ﾤ query 
@@ -308,12 +308,12 @@ C -->|8| A
 
 <pre>
 application-module  
-    ﾤ {{domain}}       
+    ﾤ [domain]
          ﾤ port 
             ﾤ input
                 ﾤ query
                 ﾤ command
-                ﾤ {{UseCase}}  
+                ﾤ [UseCase]
 </pre>
 
 - 위와 같은 조치는 CQS(Command-Query-Segregation)을 준수한 결과다.  
@@ -384,12 +384,12 @@ interface UserRepository {  // Domain이 소유
 <pre>
 adapter-module  
    ﾤ persistence   
-    ﾤ {{domain}}
+    ﾤ [domain]
         ﾤ entity
 		ﾤ category
 core-module  
    ﾤ category
-       ﾤ cuisine
+      ﾤ cuisine
       ﾤ nationality
       ﾤ tag  
 </pre>

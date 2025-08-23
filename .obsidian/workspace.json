@@ -48,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "assets",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -149,7 +149,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5c6e5e6c0994df28",
+  "active": "f85d3da7c7cf5ea1",
   "lastOpenFiles": [
     "_posts/2025-08-22-［mini-project］-08 Kotlin과 JPA?.md",
     "_posts/2025-08-21-［mini-project］-07 디미터 법칙 적용 중 생긴 고민.md",
