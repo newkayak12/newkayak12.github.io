@@ -33,7 +33,7 @@ categories:
   
 ## 1. 기하급수적으로 늘어나는 보일러 플레이트 코드  
   
-```text  
+<pre>
 adapter-module  
 	ﾤ rest
 		ﾤ {{domain}} 
@@ -70,8 +70,7 @@ core-module
 		ﾤ service
 		ﾤ vo
 		ﾤ {{entity}}
-		
-```  
+</pre>
 
 - 위와 같이 패키지 트리가 복잡하다.  
   - service를 구현하기 위한 inputPort, outputPort 인터페이스  
@@ -98,21 +97,125 @@ core-module
 ## 복잡해지는 매핑  
   
 ```kotlin  
+  
 data class FindRestaurantResponse(  
-    val identifier: String,    val company: FindRestaurantCompanyResponse,    val userId: String,    val information: FindRestaurantInformationResponse,    val phone: String,    val address: FindRestaurantAddressResponse,    val workingDays: List<FindRestaurantWorkingDayResponse> = listOf(),    val photos: List<FindRestaurantPhotoResponse> = listOf(),    val tags: List<FindRestaurantTagResponse> = listOf(),    val nationalities: List<FindRestaurantTagResponse> = listOf(),    val cuisines: List<FindRestaurantTagResponse> = listOf(),) {  
-    companion object {        private fun mapCategory(            id: Long,            title: String,            categoryType: CategoryType,        ) = FindRestaurantTagResponse(id, title, categoryType)  
-        fun from(result: FindRestaurantQueryResult): FindRestaurantResponse {            val company =                FindRestaurantCompanyResponse(                    companyId = result.company.companyId,                    companyName = result.company.companyName,                )  
-            val information =                FindRestaurantInformationResponse(                    name = result.information.name,                    introduce = result.information.introduce,                )  
-            val address =                FindRestaurantAddressResponse(                    zipCode = result.address.zipCode,                    address = result.address.address,                    detail = result.address.detail,                    coordinate =                        FindRestaurantCoordinateResponse(                            latitude = result.address.coordinate.latitude,                            longitude = result.address.coordinate.longitude,                        ),                )            val workDays =                result.workingDays.map {                    FindRestaurantWorkingDayResponse(                        it.day,                        it.startTime,                        it.endTime,                    )                }  
-            val tags = result.tags.map { mapCategory(it.id, it.title, it.categoryType) }            val nationalities =                result.nationalities.map {                    mapCategory(                        it.id,                        it.title,                        it.categoryType,                    )                }            val cuisines = result.cuisines.map { mapCategory(it.id, it.title, it.categoryType) }  
-            return FindRestaurantResponse(                identifier = result.identifier,                company = company,                userId = result.userId,                information = information,                phone = result.phone,                address = address,                workingDays = workDays,                photos = result.photos.map { FindRestaurantPhotoResponse(it.url) },                tags = tags,                nationalities = nationalities,                cuisines = cuisines,            )        }    }  
-    data class FindRestaurantCompanyResponse(        val companyId: String,        val companyName: String,    )  
-    data class FindRestaurantInformationResponse(        val name: String,        val introduce: String,    )  
-    data class FindRestaurantAddressResponse(        val zipCode: String,        val address: String,        val detail: String,        val coordinate: FindRestaurantCoordinateResponse,    )  
-    data class FindRestaurantCoordinateResponse(        val latitude: BigDecimal,        val longitude: BigDecimal,    )  
-    data class FindRestaurantWorkingDayResponse(        val day: DayOfWeek,        val startTime: LocalTime,        val endTime: LocalTime,    )  
-    data class FindRestaurantPhotoResponse(        val url: String,    )  
-    data class FindRestaurantTagResponse(        val id: Long,        val title: String,        val categoryType: CategoryType,    )}  
+    val identifier: String,  
+    val company: FindRestaurantCompanyResponse,  
+    val userId: String,  
+    val information: FindRestaurantInformationResponse,  
+    val phone: String,  
+    val address: FindRestaurantAddressResponse,  
+    val workingDays: List<FindRestaurantWorkingDayResponse> = listOf(),  
+    val photos: List<FindRestaurantPhotoResponse> = listOf(),  
+    val tags: List<FindRestaurantTagResponse> = listOf(),  
+    val nationalities: List<FindRestaurantTagResponse> = listOf(),  
+    val cuisines: List<FindRestaurantTagResponse> = listOf(),  
+) {  
+    companion object {  
+        private fun mapCategory(  
+            id: Long,  
+            title: String,  
+            categoryType: CategoryType,  
+        ) = FindRestaurantTagResponse(id, title, categoryType)  
+  
+        fun from(result: FindRestaurantQueryResult): FindRestaurantResponse {  
+            val company =  
+                FindRestaurantCompanyResponse(  
+                    companyId = result.company.companyId,  
+                    companyName = result.company.companyName,  
+                )  
+  
+            val information =  
+                FindRestaurantInformationResponse(  
+                    name = result.information.name,  
+                    introduce = result.information.introduce,  
+                )  
+  
+            val address =  
+                FindRestaurantAddressResponse(  
+                    zipCode = result.address.zipCode,  
+                    address = result.address.address,  
+                    detail = result.address.detail,  
+                    coordinate =  
+                        FindRestaurantCoordinateResponse(  
+                            latitude = result.address.coordinate.latitude,  
+                            longitude = result.address.coordinate.longitude,  
+                        ),  
+                )  
+            val workDays =  
+                result.workingDays.map {  
+                    FindRestaurantWorkingDayResponse(  
+                        it.day,  
+                        it.startTime,  
+                        it.endTime,  
+                    )  
+                }  
+  
+            val tags = result.tags.map { mapCategory(it.id, it.title, it.categoryType) }  
+            val nationalities =  
+                result.nationalities.map {  
+                    mapCategory(  
+                        it.id,  
+                        it.title,  
+                        it.categoryType,  
+                    )  
+                }  
+            val cuisines = result.cuisines.map { mapCategory(it.id, it.title, it.categoryType) }  
+  
+            return FindRestaurantResponse(  
+                identifier = result.identifier,  
+                company = company,  
+                userId = result.userId,  
+                information = information,  
+                phone = result.phone,  
+                address = address,  
+                workingDays = workDays,  
+                photos = result.photos.map { FindRestaurantPhotoResponse(it.url) },  
+                tags = tags,  
+                nationalities = nationalities,  
+                cuisines = cuisines,  
+            )  
+        }  
+    }  
+  
+    data class FindRestaurantCompanyResponse(  
+        val companyId: String,  
+        val companyName: String,  
+    )  
+  
+    data class FindRestaurantInformationResponse(  
+        val name: String,  
+        val introduce: String,  
+    )  
+  
+    data class FindRestaurantAddressResponse(  
+        val zipCode: String,  
+        val address: String,  
+        val detail: String,  
+        val coordinate: FindRestaurantCoordinateResponse,  
+    )  
+  
+    data class FindRestaurantCoordinateResponse(  
+        val latitude: BigDecimal,  
+        val longitude: BigDecimal,  
+    )  
+  
+    data class FindRestaurantWorkingDayResponse(  
+        val day: DayOfWeek,  
+        val startTime: LocalTime,  
+        val endTime: LocalTime,  
+    )  
+  
+    data class FindRestaurantPhotoResponse(  
+        val url: String,  
+    )  
+  
+    data class FindRestaurantTagResponse(  
+        val id: Long,  
+        val title: String,  
+        val categoryType: CategoryType,  
+    )  
+}
 ```  
 - 위와 같이 점점 매핑이 복잡해진다. 또한 계층마다 변환을 시도하므로 오버헤드가 높아진다.  
   
@@ -156,9 +259,10 @@ C -->|8| A
   - 이 프로젝트에서는 DTO에 변환 과정을 부여했으며, 내부에 알아도 되는 계층의 DTO 타입의 형태를 제공함으로써 객체 생성 책임을 본인에게 부과한다.  
   - 혹은 크기가 작다면 각 계층의 비즈니스 로직에도 부과했다.  
   
-## 3. input port와 output port  
-  
-```text  
+## 3. input port와 output port 
+
+
+<pre>
 {{example}}  
      ﾤ port  
 	   ﾤ input 
@@ -167,7 +271,8 @@ C -->|8| A
 		  ﾤ Find~ByTitleUseCase
 	   ﾤ output
 		  ﾤ Find~  
-```  
+</pre>
+  
 - input port  
   - 배경  
     - 기존 `title`로 찾는 UseCase가 `Find~UseCase`로 구현되어 있었다.    
@@ -200,7 +305,8 @@ C -->|8| A
   
 ## 5. Query, Command 분리  
 - 현 프로젝트에서는 Query, Command를 분리했다.  
-```text  
+
+<pre>
 application-module  
 		ﾤ {{domain}}       
 			 ﾤ port 
@@ -208,7 +314,8 @@ application-module
 					ﾤ query
 					ﾤ command
 					ﾤ {{UseCase}}  
-```  
+</pre>
+
 - 위와 같은 조치는 CQS(Command-Query-Segregation)을 준수한 결과다.  
 - 이는 코드를 더 예측 가능하게 하고 안전하게 한다.   
 - Query는 SideEffect가 절대 없음을 보증한다.  
@@ -273,8 +380,8 @@ interface UserRepository {  // Domain이 소유
 ## 8. domain entity와 JPA entity  
 - [이전](https://newkayak12.github.io/mini_project/2025/05/18/mini-project-03.DDD에-대한-고민.html)에도 기술한 바가 있는 주제다.  
 - JPA, DDD의 Entity를 분리함으로써 JPA는 테이블 모델링에 집중할 수 있도록했으며, DDD Entity는 개념적인 엔티티, 풍부한 모델과 비즈니스 사항을 잘 반영할 수 있도록 했다.  
-  
-```text  
+
+<pre>
 adapter-module  
 	ﾤ persistence   
 		 ﾤ {{domain}}
@@ -285,7 +392,7 @@ core-module
 		ﾤ cuisine
 		ﾤ nationality
 		ﾤ tag  
-```  
+</pre>
   
 - 위와 같이 JPA로 표현한 테이블 Entity와 domain에서 사용하는 개념적 Entity가 불일치 할 수 있음을 인지하고 표현했다.  
 - 이전에 기술한 바와 같이 항상 정답인 것은 **아니며** 상황에 따라 **취사 선택**하는 것이 좋다.  
@@ -297,15 +404,59 @@ core-module
 ```kotlin  
 @Component  
 class ChangeRestaurantAdapter(  
-    private val jpaRepository: RestaurantJpaRepository,) : ChangeRestaurant {  
-    override fun command(inquiry: ChangeRestaurantInquiry): Boolean {        var result = false        jpaRepository.findRestaurantEntityById(inquiry.id)            .ifPresent {                it.updateDescription(inquiry.name, inquiry.introduce)                it.updateContact(inquiry.phone)                it.updateAddress(                    inquiry.zipCode,                    inquiry.address,                    inquiry.detail,                    inquiry.latitude,                    inquiry.longitude,                )  
-                RestaurantNationalitiesMutator.adjustNationalities(                    it,                    inquiry.nationalities.map { nationality -> nationality.nationalitiesId },                )  
-                RestaurantCuisinesMutator.adjustCuisines(                    it,                    inquiry.cuisines.map { cuisine -> cuisine.cuisinesId },                )  
-                RestaurantTagMutator.adjustTags(                    it,                    inquiry.tag.map { tag -> tag.tagsId },                )  
-                RestaurantPhotosMutator.adjustNationalities(                    it,                    inquiry.photos.map { photo -> photo.url },                )  
-                RestaurantWorkingDayMutator.adjustWorkingDays(                    it,                    inquiry.workingDay.map { schedule ->                        WorkingDayMutatorForm(                            schedule.day,                            schedule.startTime,                            schedule.endTime,                        )                    },                )  
-                result = true            }  
-        return result    }}  
+    private val jpaRepository: RestaurantJpaRepository,  
+) : ChangeRestaurant {  
+    override fun command(inquiry: ChangeRestaurantInquiry): Boolean {  
+        var result = false  
+        jpaRepository.findRestaurantEntityById(inquiry.id)  
+            .ifPresent {  
+                it.updateDescription(inquiry.name, inquiry.introduce)  
+                it.updateContact(inquiry.phone)  
+                it.updateAddress(  
+                    inquiry.zipCode,  
+                    inquiry.address,  
+                    inquiry.detail,  
+                    inquiry.latitude,  
+                    inquiry.longitude,  
+                )  
+  
+                RestaurantNationalitiesMutator.adjustNationalities(  
+                    it,  
+                    inquiry.nationalities.map { nationality -> nationality.nationalitiesId },  
+                )  
+  
+                RestaurantCuisinesMutator.adjustCuisines(  
+                    it,  
+                    inquiry.cuisines.map { cuisine -> cuisine.cuisinesId },  
+                )  
+  
+                RestaurantTagMutator.adjustTags(  
+                    it,  
+                    inquiry.tag.map { tag -> tag.tagsId },  
+                )  
+  
+                RestaurantPhotosMutator.adjustNationalities(  
+                    it,  
+                    inquiry.photos.map { photo -> photo.url },  
+                )  
+  
+                RestaurantWorkingDayMutator.adjustWorkingDays(  
+                    it,  
+                    inquiry.workingDay.map { schedule ->  
+                        WorkingDayMutatorForm(  
+                            schedule.day,  
+                            schedule.startTime,  
+                            schedule.endTime,  
+                        )  
+                    },  
+                )  
+  
+                result = true  
+            }  
+  
+        return result  
+    }  
+}
 ```  
   
 - 다소 복잡할 수 있지만 위와 같이 매핑을 진행하는 등의 JPA에 관련된 작업을 특화해서 진행하거나 Query에 대한 복잡한 Projection을 진행하기도 한다.  
