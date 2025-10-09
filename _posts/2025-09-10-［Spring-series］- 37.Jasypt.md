@@ -76,13 +76,13 @@ public class EnableEncryptablePropertiesConfiguration {
 @Configuration  
 public class EncryptablePropertyResolverConfiguration {  
     private static final String ENCRYPTOR_BEAN_PROPERTY = "jasypt.encryptor.bean";  
-    private static final String ENCRYPTOR_BEAN_PLACEHOLDER = String.format("${%s:jasyptStringEncryptor}", "jasypt.encryptor.bean");  
+    private static final String ENCRYPTOR_BEAN_PLACEHOLDER = String.format("$\\{%s:jasyptStringEncryptor}", "jasypt.encryptor.bean");  
     private static final String DETECTOR_BEAN_PROPERTY = "jasypt.encryptor.property.detector-bean";  
-    private static final String DETECTOR_BEAN_PLACEHOLDER = String.format("${%s:encryptablePropertyDetector}", "jasypt.encryptor.property.detector-bean");  
+    private static final String DETECTOR_BEAN_PLACEHOLDER = String.format("$\\{%s:encryptablePropertyDetector}", "jasypt.encryptor.property.detector-bean");  
     private static final String RESOLVER_BEAN_PROPERTY = "jasypt.encryptor.property.resolver-bean";  
-    private static final String RESOLVER_BEAN_PLACEHOLDER = String.format("${%s:encryptablePropertyResolver}", "jasypt.encryptor.property.resolver-bean");  
+    private static final String RESOLVER_BEAN_PLACEHOLDER = String.format("$\\{%s:encryptablePropertyResolver}", "jasypt.encryptor.property.resolver-bean");  
     private static final String FILTER_BEAN_PROPERTY = "jasypt.encryptor.property.filter-bean";  
-    private static final String FILTER_BEAN_PLACEHOLDER = String.format("${%s:encryptablePropertyFilter}", "jasypt.encryptor.property.filter-bean");  
+    private static final String FILTER_BEAN_PLACEHOLDER = String.format("$\\{%s:encryptablePropertyFilter}", "jasypt.encryptor.property.filter-bean");  
     private static final String ENCRYPTOR_BEAN_NAME = "lazyJasyptStringEncryptor";  
     private static final String DETECTOR_BEAN_NAME = "lazyEncryptablePropertyDetector";  
     private static final String CONFIG_SINGLETON = "configPropsSingleton";  
