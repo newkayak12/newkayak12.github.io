@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
+                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
+                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
+                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md"
+                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md"
               }
             }
           }
@@ -164,6 +164,7 @@
   },
   "active": "85d55276f83f5b80",
   "lastOpenFiles": [
+    "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
     "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
     "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
     "img/os/13.Unix-3.jpg",
@@ -191,7 +192,6 @@
     "_posts/2025-09-22-［Spring-series］- 43.Spring, SPI(ServiceProviderInterface) 1.md",
     "_posts/2025-09-22-［Spring-series］- 42.JavaBean 규약, JavaConfig.md",
     "_posts/2025-09-21-［Spring-series］- 41.SpringBeanLifeCycle.md",
-    "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
     "_posts/2025-09-15-［Spring-series］- 39.BeanDefinition, BeanFactory, ApplicationContext의 분리와 역할.md",
     "_posts/2025-09-12-［Spring-series］- 38.HikariCP.md",
     "_posts/2025-09-08-［Spring-series］- 36.AutoConfigure.md",
