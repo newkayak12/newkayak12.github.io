@@ -319,3 +319,4 @@ public class DefaultPropertyDetector implements EncryptablePropertyDetector {
     }  
 }
 ```
+
