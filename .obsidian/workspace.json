@@ -1,0 +1,224 @@
+{
+  "main": {
+    "id": "6dd9a50bbc64995a",
+    "type": "split",
+    "children": [
+      {
+        "id": "ac1596c80eaf451c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5c6e5e6c0994df28",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c56e7dc865a58901",
+    "type": "split",
+    "children": [
+      {
+        "id": "d57328e183ea575e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f85d3da7c7cf5ea1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "792779d66b69ace7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c361b0b724114ea0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 393.5
+  },
+  "right": {
+    "id": "f665b400b728feff",
+    "type": "split",
+    "children": [
+      {
+        "id": "d17a7f785a82f171",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "242227db9232f05d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점"
+            }
+          },
+          {
+            "id": "8c7ab55b4f62d0d8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점"
+            }
+          },
+          {
+            "id": "7cb6a7e152f5c81e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "76a0467ead54b7ba",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "f85d3da7c7cf5ea1",
+  "lastOpenFiles": [
+    "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
+    "_posts/2025-10-01-［Spring-series］- 51. Outbox, Saga.md",
+    "_posts/2025-10-01-［Spring-series］- 51. 스케쥴링 전략 1.md",
+    "_posts/2025-10-01-［Spring-series］- 50. 스케쥴링 전략 1.md",
+    "_posts/2025-09-30-［Spring-series］- 50. 스케쥴링 전략 1.md",
+    "_posts/2025-09-30-［Spring-series］- 50. 스케쥴링 전략.md",
+    "_posts/2025-09-30-［Spring-series］- 50. Spring Event Listener 1.md",
+    "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener 1.md",
+    "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener.md",
+    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope 1.md",
+    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope.md",
+    "_posts/2025-09-28-［Spring-series］- 48. Java DynamicProxy⁄CGLIB Enhancer 1.md",
+    "_posts/2025-09-28-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
+    "_posts/2025-09-26-［Spring-series］- 46. Proxy 1.md",
+    "_posts/2025-09-26-［Spring-series］- 46. Proxy.md",
+    "_posts/2025-09-25-［Spring-series］- 45. Proxy.md",
+    "_posts/2025-09-25-［Spring-series］- 45. Transaction 추상화 1.md",
+    "_posts/2025-09-25-［Spring-series］- 45. Transaction 추상화.md",
+    "_posts/2025-09-25-［Spring-series］- 44. Transaction 추상화.md",
+    "_posts/2025-09-25-［Spring-series］- 44.@Component 1.md",
+    "_posts/2025-09-23-［Spring-series］- 44.@Component.md",
+    "_posts/2025-09-23-［Spring-series］- 44.Spring, SPI(ServiceProviderInterface).md",
+    "_posts/2025-09-22-［Spring-series］- 43.Spring, SPI(ServiceProviderInterface) 1.md",
+    "_posts/2025-09-22-［Spring-series］- 43.Spring, SPI(ServiceProviderInterface).md",
+    "assets/img/HikariCP-bench-2.6.0.png",
+    "_site/test/2024/05/22/test-series-01-BDD.html",
+    "_site/test/2024/11/25/test-series-04-FixtureMonkey.html",
+    "_site/test/2024/05/22/test-series-02-Mockito.html",
+    "_site/architecture/ddd/hexagonal/oop/2025/05/09/rollup-2025-01.firstHalf.html",
+    "_site/others/2024/09/09/Others-series-00.-OLTPandOLAP.html",
+    "_site/others/2024/05/23/Others-series-Authentication-and-Authorization.html",
+    "_site/others/2024/09/09/Others-series-01.Coverage.html",
+    "_site/others/2024/05/23/Others-series-Encryption.html",
+    "_site/others/2024/05/23/Others-series-Network.html",
+    "_site/others/2024/05/23/Others-series-CICD.html",
+    "assets/img/PR_TEMPLATE.png",
+    "assets/img/Screenshot 2025-07-20 at 14.02.41.png",
+    "assets/img/PR.png",
+    "assets/img/PR_COMMENT.png",
+    "_site/assets/img/os/13.Unix-2.jpg",
+    "_site/assets/img/os/13.Unix-3.jpg",
+    "_site/assets/img/os/08.virtualMemory-06.jpg",
+    "_site/assets/img/os/13.Unix-1.jpg",
+    "_site/assets/img/os/12.SecureOS-3.jpg"
+  ]
+}
