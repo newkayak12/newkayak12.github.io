@@ -2,7 +2,9 @@
 
 name: OAuth Slack Notifications
 
-on: [push, pull_request]
+on:
+  deployment_status:
+
 
 jobs:
   success-notification:
