@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "ac1596c80eaf451c",
+        "id": "ab5b1ad33a4438d3",
         "type": "tabs",
         "children": [
           {
-            "id": "5c6e5e6c0994df28",
+            "id": "0d73c695621bf95e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2024-09-08-[Spring-series]-35.SleuthAndZipkin.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "85d55276f83f5b80",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -61,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "spring-series",
+                "query": ".png",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md"
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md"
               }
             }
           }
@@ -162,13 +149,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "85d55276f83f5b80",
+  "active": "f85d3da7c7cf5ea1",
   "lastOpenFiles": [
-    "_posts/2025-09-19-［Spring-series］- 40.ApplicationContext.refersh().md",
-    "_posts/2025-09-10-［Spring-series］- 37.Jasypt.md",
-    "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
-    "img/os/13.Unix-3.jpg",
+    "_posts/2024-05-18-[java-series]-01-Version.md",
+    "_posts/2026-01-03-［mini-project］-11  Batch.md",
+    "img/ab.png",
+    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+    "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+    "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
+    "_posts/2025-08-22-［mini-project］-08 Kotlin과 JPA?.md",
+    "_posts/2026-01-03-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
+    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
+    "HELP.md",
+    "newkayak12.github.io.iml",
     "img/prototypeProject/eventStorming.excalidraw.svg",
+    "img/os/13.Unix-3.jpg",
     "img/os/13.Unix-2.jpg",
     "img/os/13.Unix-1.jpg",
     "img/os/12.SecureOS-3.jpg",
@@ -176,38 +171,31 @@
     "img/os/12.SecureOS-1.jpg",
     "img/os/11.DistributedAndMultiProcessingSystem-6.jpg",
     "img/os/11.DistributedAndMultiProcessingSystem-5.jpg",
-    "img/os/11.DistributedAndMultiProcessingSystem-4.jpg",
     "img/prototypeProject",
     "img/os",
     "img/logo",
     "img/ddd",
     "img",
+    "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
+    "_posts/2025-10-01-［Spring-series］- 51. Outbox, Saga.md",
+    "_posts/2025-10-01-［Spring-series］- 51. 스케쥴링 전략 1.md",
+    "_posts/2025-10-01-［Spring-series］- 50. 스케쥴링 전략 1.md",
+    "_posts/2025-09-30-［Spring-series］- 50. 스케쥴링 전략 1.md",
     "_posts/2025-09-30-［Spring-series］- 50. 스케쥴링 전략.md",
+    "_posts/2025-09-30-［Spring-series］- 50. Spring Event Listener 1.md",
+    "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener 1.md",
     "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener.md",
+    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope 1.md",
     "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope.md",
+    "_posts/2025-09-28-［Spring-series］- 48. Java DynamicProxy⁄CGLIB Enhancer 1.md",
+    "_posts/2025-09-28-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
+    "_posts/2025-09-26-［Spring-series］- 46. Proxy 1.md",
     "_posts/2025-09-26-［Spring-series］- 46. Proxy.md",
-    "_posts/2025-09-25-［Spring-series］- 45. Transaction 추상화.md",
-    "_posts/2025-09-23-［Spring-series］- 44.@Component.md",
-    "_posts/2025-09-22-［Spring-series］- 43.Spring, SPI(ServiceProviderInterface) 1.md",
-    "_posts/2025-09-22-［Spring-series］- 42.JavaBean 규약, JavaConfig.md",
-    "_posts/2025-09-21-［Spring-series］- 41.SpringBeanLifeCycle.md",
-    "_posts/2025-09-15-［Spring-series］- 39.BeanDefinition, BeanFactory, ApplicationContext의 분리와 역할.md",
-    "_posts/2025-09-12-［Spring-series］- 38.HikariCP.md",
-    "_posts/2025-09-08-［Spring-series］- 36.AutoConfigure.md",
-    "_posts/2024-09-08-[Spring-series]-35.SleuthAndZipkin.md",
-    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
-    "_posts/2025-08-22-［mini-project］-08 Kotlin과 JPA?.md",
-    "_posts/2025-08-21-［mini-project］-07 디미터 법칙 적용 중 생긴 고민.md",
-    "_posts/2025-08-20-［mini-project］-06 문서 작성에 대해서!.md",
-    "_posts/2025-06-27-［mini-project］-05 주석, PullRequest.md",
-    "_posts/2024-11-28-[CS-series]-RESTful.md",
     "_site/test/2024/05/22/test-series-01-BDD.html",
     "_site/test/2024/11/25/test-series-04-FixtureMonkey.html",
     "_site/test/2024/05/22/test-series-02-Mockito.html",
-    "_site/architecture/ddd/hexagonal/oop/2025/05/09/rollup-2025-01.firstHalf.html",
-    "_site/others/2024/09/09/Others-series-00.-OLTPandOLAP.html",
-    "_posts/2025-06-27-［mini-project］-05 주석과 코드 스타일, PullRequest.md",
-    "_site/README.md"
+    "_site/architecture/ddd/hexagonal/oop/2025/05/09/rollup-2025-01.firstHalf.html"
   ]
 }
