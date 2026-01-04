@@ -205,6 +205,8 @@ Spring retry의 [document](https://docs.spring.io/spring-batch/docs/4.2.x/refere
 - 또한 feature flag를 단순 기능 제어 용도가 아닌 용도로 사용해야 할 때 문제가 될 것으로 보였다.
 ### 6. 한가지 더!
 - 추가적으로 구상한 내용은 A/B 테스트 용도로 feature flag를 사용하는 것이다.
+
   ![](/assets/img/ab.png)
+
 - 사용자, 사용자 그룹 등을 추가하고 복잡하게는 A/B를 위한 Strategy를 구성하여 "단순 기능적인 목표가 아닌 **비즈니스적인 목표**를 달성하기 위한 수단으로 사용할 수 있지 않을까?" 하는 생각이 들었다.
 
