@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
+                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
+                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
+                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md"
+                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md"
               }
             }
           }
@@ -149,33 +149,34 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f85d3da7c7cf5ea1",
+  "active": "0d73c695621bf95e",
   "lastOpenFiles": [
-    "_posts/2024-05-18-[java-series]-01-Version.md",
-    "_posts/2026-01-03-［mini-project］-11  Batch.md",
-    "img/ab.png",
-    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
     "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+    "_posts/2026-01-03-［mini-project］-11  Batch.md",
+    "_posts/2024-05-18-[java-series]-01-Version.md",
+    "assets/img/ab.png",
+    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
     "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
     "_posts/2025-08-22-［mini-project］-08 Kotlin과 JPA?.md",
     "_posts/2026-01-03-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
     "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
     "HELP.md",
     "newkayak12.github.io.iml",
-    "img/prototypeProject/eventStorming.excalidraw.svg",
-    "img/os/13.Unix-3.jpg",
-    "img/os/13.Unix-2.jpg",
-    "img/os/13.Unix-1.jpg",
-    "img/os/12.SecureOS-3.jpg",
-    "img/os/12.SecureOS-2.jpg",
-    "img/os/12.SecureOS-1.jpg",
-    "img/os/11.DistributedAndMultiProcessingSystem-6.jpg",
-    "img/os/11.DistributedAndMultiProcessingSystem-5.jpg",
-    "img/prototypeProject",
-    "img/os",
-    "img/logo",
-    "img/ddd",
-    "img",
+    "assets/img/prototypeProject/eventStorming.excalidraw.svg",
+    "assets/img/os/13.Unix-3.jpg",
+    "assets/img/os/13.Unix-2.jpg",
+    "assets/img/os/13.Unix-1.jpg",
+    "assets/img/os/12.SecureOS-3.jpg",
+    "assets/img/os/12.SecureOS-2.jpg",
+    "assets/img/os/12.SecureOS-1.jpg",
+    "assets/img/os/11.DistributedAndMultiProcessingSystem-6.jpg",
+    "assets/img/os/11.DistributedAndMultiProcessingSystem-5.jpg",
+    "assets/img/prototypeProject",
+    "assets/img/os",
+    "assets/img/logo",
+    "assets/img/ddd",
+    "assets/img",
     "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
     "_posts/2025-10-01-［Spring-series］- 51. Outbox, Saga.md",
     "_posts/2025-10-01-［Spring-series］- 51. 스케쥴링 전략 1.md",
@@ -190,7 +191,6 @@
     "_posts/2025-09-28-［Spring-series］- 48. Java DynamicProxy⁄CGLIB Enhancer 1.md",
     "_posts/2025-09-28-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
-    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
     "_posts/2025-09-26-［Spring-series］- 46. Proxy 1.md",
     "_posts/2025-09-26-［Spring-series］- 46. Proxy.md",
     "_site/test/2024/05/22/test-series-01-BDD.html",

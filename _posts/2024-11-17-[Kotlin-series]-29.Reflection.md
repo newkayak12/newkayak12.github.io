@@ -6,7 +6,7 @@ categories: [KOTLIN]
 
 # Reflection
 
-![reflection.png](../assets/img/reflection.png)
+![reflection.png](_site/assets/img/reflection.png)
 
 
 ## 지정자와 타입

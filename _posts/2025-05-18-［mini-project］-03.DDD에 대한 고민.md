@@ -97,6 +97,6 @@ DDD에서는 도메인 모델링에 따라서 문제를 해결하기 위한 객�
 추가로 확인해보니 JPA도 DDD를 고려하여 설계된 것으로 보인다.
 
 
-![](assets/img/jpa-ddd.jpeg)
+![](_site/assets/img/jpa-ddd.jpeg)
 
 참조: [spring data relational - Core concepts](https://docs.spring.io/spring-data/relational/reference/repositories/core-concepts.html)
