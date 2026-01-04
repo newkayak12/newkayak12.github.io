@@ -11,7 +11,7 @@ jobs:
     steps:
       # OAuth with explicit token type
       - name: OAuth Success Notification
-        uses: newkayak12/slack-notification-action/slack-api@v1
+        uses: newkayak12/github-actions/slack-api@main
         with:
           slack-token: ${{ secrets.SLACK_OAUTH_TOKEN }}
           token-type: 'oauth'
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: OAuth Failure Notification
-        uses: newkayak12/slack-notification-action/slack-api@v1
+        uses: newkayak12/github-actions/slack-api@main
         with:
           slack-token: ${{ secrets.SLACK_OAUTH_TOKEN }}
           token-type: 'oauth'

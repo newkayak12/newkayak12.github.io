@@ -85,7 +85,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +101,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md"
+                "file": "_posts/무제 파일.md"
               }
             }
           }
@@ -149,10 +147,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0d73c695621bf95e",
+  "active": "f85d3da7c7cf5ea1",
   "lastOpenFiles": [
-    "_posts/무제 파일.md",
     "_posts/2026-01-03-［mini-project］-11  Batch.md",
+    "_posts/무제 파일.md",
     "untitled folder",
     "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
