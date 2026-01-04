@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2026-01-03-［mini-project］-10 featureFlag.md"
+                "file": "_posts/2026-01-03-［mini-project］-11  Batch.md"
               }
             }
           }
@@ -151,9 +151,11 @@
   },
   "active": "0d73c695621bf95e",
   "lastOpenFiles": [
-    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
-    "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+    "_posts/무제 파일.md",
     "_posts/2026-01-03-［mini-project］-11  Batch.md",
+    "untitled folder",
+    "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
     "_posts/2024-05-18-[java-series]-01-Version.md",
     "assets/img/ab.png",
     "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
@@ -192,10 +194,8 @@
     "_posts/2025-09-28-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer 1.md",
     "_posts/2025-09-26-［Spring-series］- 46. Proxy 1.md",
-    "_posts/2025-09-26-［Spring-series］- 46. Proxy.md",
     "_site/test/2024/05/22/test-series-01-BDD.html",
     "_site/test/2024/11/25/test-series-04-FixtureMonkey.html",
-    "_site/test/2024/05/22/test-series-02-Mockito.html",
-    "_site/architecture/ddd/hexagonal/oop/2025/05/09/rollup-2025-01.firstHalf.html"
+    "_site/test/2024/05/22/test-series-02-Mockito.html"
   ]
 }

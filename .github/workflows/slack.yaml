@@ -1,0 +1,34 @@
+# OAuth token usage examples
+
+name: OAuth Slack Notifications
+
+on: [push, pull_request]
+
+jobs:
+  success-notification:
+    if: github.event.deployment_status.state == 'success'  
+    runs-on: ubuntu-latest
+    steps:
+      # OAuth with explicit token type
+      - name: OAuth Success Notification
+        uses: newkayak12/slack-notification-action/slack-api@v1
+        with:
+          slack-token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          token-type: 'oauth'
+          channel: '#notification'
+          template: 'success'
+          title: 'Build Successful'
+          description: 'All tests passed and deployment completed'
+  failure-notification:
+    if: github.event.deployment_status.state != 'success' && github.event.deployment_status.state != 'pending'
+    runs-on: ubuntu-latest
+    steps:
+      - name: OAuth Failure Notification
+        uses: newkayak12/slack-notification-action/slack-api@v1
+        with:
+          slack-token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          token-type: 'oauth'
+          channel: '#notification'
+          template: 'failure'
+          title: 'Build Failed'
+          description: 'Tests failed and deployment failed'
