@@ -17,7 +17,7 @@ categories:
 - 동시성 이슈에 분산락을 적용하면서
 
 ---
-# 동시성 이슈에 분산락을 적용하면서
+# 동시성 이슈에 분산락을 적용하면서
 
 ## 목차
 ### 1. 동시성 이슈?
@@ -39,6 +39,7 @@ categories:
 
 ## 2. 그냥 진행하면?
 - 만약 그냥 진행한다면 **Race Condition**에 놓이며 한정된 리소스에 대한 점유가 중복으로 벌어질 것이 뻔하다.
+- 유사한 고민을 실제 일하는 부분을 한 적이 있다. 중복 출고, 그에 따른 재고가 틀어지는 상황 등 단순 예약이 아니더라도 많은 도메인에서 벌어질 수 있는 일이다.
 
 ## 3. SELECT FOR UPDATE? IsolationLevel=Serializable?
 
@@ -124,6 +125,15 @@ override fun execute(command: CreateTimeTableOccupancyCommand): Boolean {
 1. 분산락을 Annotation을 기반으로 적용하며 `Transactional` 보다 앞서 실행할 수 있게 구성한다. 내부적으로 `FairLock`을 구현하여 진입 자체를 공정하게 진행할 수 있게 한다.
 2. 내부적으로 예약 가능한 수량을 확인하고 `Semaphore`로 한정된 수만 진입할 수 있게 하여 예약 프로세스를 진행한다. 혹여 Exception이 발생하면 Semaphore를 반환하고 다음 사용자가 점유할 수 있게 한다.
 3. RateLimiter를 Annotation을 기반으로 적용하며, 절대적인 방어책은 아니지만 (물론 인프라 레벨에서 일차적으로 처리해야 한다.) `traffic spike`로부터 시스템을 보호할 수 있도록 장치를 마련한다.
+
+```mermaid
+flowchart LR
+    RL[RateLimiter<br/>permits/sec]
+    FL[FairLock<br/>FIFO]
+    SM[Semaphore<br/>N permits]
+
+    RL --> FL --> SM
+```
 
 
 ## 6. 결과적으로?
