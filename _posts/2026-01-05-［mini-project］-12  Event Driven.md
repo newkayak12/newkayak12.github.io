@@ -229,11 +229,11 @@ flowchart TD
 ### 3. ZeroPayload
 1. Payload 전략으로는 `ZeroPayload`, `MinimalPayload`, `FullPayload`, `DelataPayload`, `ReferencePayload`  등이 있다.
 
-> ZeroPayload: 메시지 본문 없이 키와 헤더만 사용한다.
-> MinimalPayload: 식별자와 최소 필수 정보만 포함
-> FullPayload: 이벤트 관련 모든 데이터를 메시지에 포함
-> DeltaPayload: 변경된 필드만 전송(before/ after 변경분)
-> ReferencePayload: 데이터 저장 위치(URL) 참조 정보만 전달
+> - ZeroPayload: 메시지 본문 없이 키와 헤더만 사용한다.
+> - MinimalPayload: 식별자와 최소 필수 정보만 포함
+> - FullPayload: 이벤트 관련 모든 데이터를 메시지에 포함
+> - DeltaPayload: 변경된 필드만 전송(before/ after 변경분)
+> - ReferencePayload: 데이터 저장 위치(URL) 참조 정보만 전달
 
 2. 이와 같은 전략 중 `ZeroPayload`를 선택한 이유는 **이벤트 코드를 최소화**하고 Consumer가 RestAPI로 조회하여 늘 항상 최신 데이터를 조회하도록 유도할 수 있습니다. 마지막으로 **Kafka의 네트워크 트래픽을 감소**시킬 수 있다는 점도 한 몫했습니다.
 3. 이러한 선택으로 스키마 변경에 유연해졌지만 RestAPI를 별도로 실행해야 한다는 단점이 생기기도 헀습니다.

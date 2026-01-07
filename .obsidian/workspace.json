@@ -4,17 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "ab5b1ad33a4438d3",
+        "id": "6b972df82b8b9d8e",
         "type": "tabs",
         "children": [
           {
-            "id": "84602d58874e3fb9",
+            "id": "04fd4a4624b253af",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -36,11 +38,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
+                "sortOrder": "alphabetical"
+              }
             }
           },
           {
@@ -49,15 +48,13 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": ".png",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              },
-              "icon": "lucide-search",
-              "title": "Search"
+              }
             }
           },
           {
@@ -65,9 +62,7 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "Bookmarks"
+              "state": {}
             }
           }
         ]
@@ -90,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,9 +93,7 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks"
+              }
             }
           },
           {
@@ -108,11 +102,10 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links"
+              }
             }
           },
           {
@@ -122,12 +115,8 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-tags",
-              "title": "Tags"
+                "useHierarchy": true
+              }
             }
           },
           {
@@ -136,12 +125,8 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline"
+                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md"
+              }
             }
           }
         ]
@@ -153,56 +138,53 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false,
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "84602d58874e3fb9",
+  "active": "04fd4a4624b253af",
   "lastOpenFiles": [
-    "_site/mini_project/book/2025/08/22/mini-project-09-Port-and-Adapter(Hexagonal)을-적용하면서-고민한-점.html",
-    "_site/mini_project/book/2026/01/04/mini-project-11-Batch.html",
-    "_site/mini_project/book/2026/01/04/mini-project-12-Concurrency.html",
-    "_site/mini_project/book/2025/08/22/mini-project-08-Kotlin과-JPA.html",
-    "_site/mini_project/book/2025/08/21/mini-project-07-디미터-법칙-적용-중-생긴-고민.html",
-    "_site/mini_project/book/2025/08/20/mini-project-06-문서-작성에-대해서!.html",
-    "_site/mini_project/book/2026/01/03/mini-project-10-featureFlag.html",
-    "_site/mini_project/book/2026/01/05/mini-project-12-Event-Driven.html",
-    "_site/mini_project/book/2025/06/27/mini-project-05-주석,-PullRequest.html",
-    "_site/spring/2025/09/08/Spring-series-36.AutoConfigure.html",
-    "_site/spring/2025/09/21/Spring-series-41.SpringBeanLifeCycle.html",
-    "_site/assets/img/PR.png",
-    "_site/assets/img/PR_COMMENT.png",
-    "_site/assets/img/Screenshot 2025-07-20 at 14.02.41.png",
+    "_posts/2026-01-04-［mini-project］-12  Concurrency.md",
+    "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+    "_site/spring/2025/09/30/Spring-series-50.-스케쥴링-전략.html",
+    "_site/spring/2025/10/01/Spring-series-51.-SpringExtension.html",
+    "_site/spring/2025/09/29/Spring-series-49.-Spring-Event-Listener.html",
+    "_site/spring/2025/09/28/Spring-series-48.-Bean-Scope.html",
+    "_site/spring/2025/09/27/Spring-series-47.-Java-DynamicProxy-CGLIB-Enhancer.html",
+    "_site/spring/2025/09/25/Spring-series-45.-Transaction-추상화.html",
+    "_site/spring/2025/09/26/Spring-series-46.-Proxy.html",
+    "_site/spring/2025/09/23/Spring-series-44.@Component.html",
+    "_site/spring/2025/09/19/Spring-series-40.ApplicationContext.refersh().html",
+    "_site/spring/2025/09/22/Spring-series-43.Spring,-SPI(ServiceProviderInterface)-1.html",
     "_site/assets/img/ab.png",
+    "_site/assets/img/Screenshot 2025-07-20 at 14.02.41.png",
     "_site/assets/img/PR_TEMPLATE.png",
+    "_site/assets/img/PR_COMMENT.png",
+    "_site/assets/img/PR.png",
     "_site/assets/img/HikariCP-bench-2.6.0.png",
     "_site/HELP.md",
-    "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
-    "_posts/2026-01-04-［mini-project］-12  Concurrency 1.md",
-    "_posts/2026-01-04-［mini-project］-12  Concurrency.md",
-    "_posts/2026-01-04-［mini-project］-11  Batch 1.md",
     "_posts/2026-01-04-［mini-project］-11  Batch.md",
+    "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
     "_posts/무제 파일.md",
+    "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
+    "_posts/2024-05-18-[java-series]-01-Version.md",
+    "assets/img/ab.png",
+    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
+    "_posts/2025-05-17-［mini-project］-02.eventStorming.md",
+    "_posts/2025-08-22-［mini-project］-08 Kotlin과 JPA?.md",
+    "_posts/2026-01-03-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
+    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
+    "HELP.md",
     "assets/img/prototypeProject/eventStorming.excalidraw.svg",
     "assets/img/os/13.Unix-3.jpg",
     "assets/img/os/13.Unix-2.jpg",
-    "assets/img/os/13.Unix-1.jpg",
-    "_posts/2026-01-03-［mini-project］-11  Batch.md",
-    "_posts/2026-01-03-［mini-project］-10 featureFlag 1.md",
-    "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
-    "_posts/2026-01-03-［mini-project］-10.md",
-    "_posts/2026-01-03-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
-    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점 1.md",
-    "_posts/2025-08-22-［mini-project］-09 Port and Adapter(Hexagonal)을 적용하면서 고민한 점.md",
-    "HELP.md",
     "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
     "_posts/2025-10-01-［Spring-series］- 51. Outbox, Saga.md",
     "_posts/2025-10-01-［Spring-series］- 51. 스케쥴링 전략 1.md",
@@ -212,6 +194,7 @@
     "_posts/2025-09-30-［Spring-series］- 50. Spring Event Listener 1.md",
     "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener 1.md",
     "_posts/2025-09-29-［Spring-series］- 49. Spring Event Listener.md",
-    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope 1.md"
+    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope 1.md",
+    "_posts/2025-09-28-［Spring-series］- 48.  Bean Scope.md"
   ]
 }
