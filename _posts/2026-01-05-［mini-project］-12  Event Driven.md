@@ -63,6 +63,7 @@ categories:
 > UseCase에서 
 
 
+
 ```mermaid
 flowchart LR
     A[TimeTable 점유 완료]
@@ -72,6 +73,8 @@ flowchart LR
 
     A --> B --> C --> D
 ```
+
+
 1. Domain Event
 	1. Domain Event의 장점
 		1.  Aggragate 간 강결합 제거
@@ -87,7 +90,9 @@ flowchart LR
 	3. Domain Event로 동작을 내부로 캡슐화가 가능하다.
 
 > 그리하여 아래와 같은 flow로 표현할 수 있다.
-> 
+
+
+
 ```mermaid
 flowchart LR
 
@@ -174,6 +179,7 @@ activate CreateTimeTableOccupancyService
     end  
     deactivate TimeTableOccupiedDomainEventListener
 ```
+
 2. 위와 같은 형태로 구현하였다.
 	1. Spring TransactionalEventListener를 사용하여 'BEFORE_COMMIT'에서 Outbox 저장, 'AFTER_COMMIT'에서 Kafka Event를 발행
 	2. 비즈니스 로직과 Kafka 발행이 전혀 다른 트랜잭션에서 실행되도록 설계됐다.
@@ -182,6 +188,7 @@ activate CreateTimeTableOccupancyService
 5. 이벤트 유실을 방지하며, 중복 사안은 체크를 사전 체크를 통해서 멱등성을 보장합니다.
 
 6. 아래와 같은 flow로 진행됩니다.
+
 ```mermaid
 flowchart TD  
     Start[Outbox 이벤트 생성] --> Published[상태: PUBLISHED]  
@@ -213,6 +220,7 @@ flowchart TD
     style Manual fill:#FF6B6B
 ```
 
+
 > 이를 통해서 아래와 같은 사실을 알 수 있다.
 	1. Outbox의 상태 관리로 실패 처리를 진행할 수 있다.
 	2. 지수 백오프와 최대 재시도 횟수를 제한하고 반복하여 재실행할 수 있다.
@@ -234,6 +242,7 @@ flowchart TD
 2. 기본 Consumer는 파티션당 1개의 쓰레드만 사용한다.
 3. Parallel Consumer는 하나의 파티션 당 여러 개의 쓰레드를 할당할 수 있게 해서 효율성을 올려준다.
 4. 이는 파티션 수 수정 없이 수직 확장을 가능케 한다. 단, 여러 가지 어려움이 있지만 특히나 offset 관리가 복잡하다는 단점이 있다.
+
 
 ```mermaid  
 sequenceDiagram  
@@ -266,6 +275,8 @@ sequenceDiagram
     W1-->>PC: A1 완료 (offset 100)  
     PC->>Kafka: ✅ 안전하게 offset 104까지 커밋  
 ```
+
+
 5. In-flight 상태, Out-of-order 현상에서 각각의 상태값을 추적하고 이전의 상태 값부터 연속하여 완료되어야만 offset을 commit 하도록 구현되어 있다.
 6. 이러한 메커니즘으로 구현되어 있어 메시지 유실 없이 offset을 commit 할 수 있다.
 
