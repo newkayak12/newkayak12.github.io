@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[미니 프로젝트] 11 동시성 이슈"
+title: "[미니 프로젝트] 12 동시성 이슈"
 tags:
   - MINI_PROJECT
   - BOOK

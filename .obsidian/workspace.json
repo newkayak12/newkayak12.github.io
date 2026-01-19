@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+                "file": "_posts/2026-01-05-［mini-project］-13  Event Driven.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+                "file": "_posts/2026-01-05-［mini-project］-13  Event Driven.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+                "file": "_posts/2026-01-05-［mini-project］-13  Event Driven.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2026-01-05-［mini-project］-12  Event Driven.md"
+                "file": "_posts/2026-01-05-［mini-project］-13  Event Driven.md"
               }
             }
           }
@@ -152,7 +152,8 @@
   "active": "04fd4a4624b253af",
   "lastOpenFiles": [
     "_posts/2026-01-04-［mini-project］-12  Concurrency.md",
-    "_posts/2026-01-05-［mini-project］-12  Event Driven.md",
+    "_posts/2026-01-04-［mini-project］-11  Batch.md",
+    "_posts/2026-01-05-［mini-project］-13  Event Driven.md",
     "_site/spring/2025/09/30/Spring-series-50.-스케쥴링-전략.html",
     "_site/spring/2025/10/01/Spring-series-51.-SpringExtension.html",
     "_site/spring/2025/09/29/Spring-series-49.-Spring-Event-Listener.html",
@@ -170,7 +171,6 @@
     "_site/assets/img/PR.png",
     "_site/assets/img/HikariCP-bench-2.6.0.png",
     "_site/HELP.md",
-    "_posts/2026-01-04-［mini-project］-11  Batch.md",
     "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
     "_posts/무제 파일.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",

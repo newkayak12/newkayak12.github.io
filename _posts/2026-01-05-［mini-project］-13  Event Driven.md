@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[미니 프로젝트] 12 이벤트 주도"
+title: "[미니 프로젝트] 13 이벤트 주도"
 tags:
   - MINI_PROJECT
   - BOOK
