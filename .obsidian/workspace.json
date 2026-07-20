@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_draft/2026-05-27-[AI]-harness-engineering.md",
+                "file": "_posts/2026-07-20-[Test]-k6이해하기.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_draft/2026-05-27-[AI]-harness-engineering.md",
+                "file": "_posts/2026-07-20-[Test]-k6이해하기.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_draft/2026-05-27-[AI]-harness-engineering.md",
+                "file": "_posts/2026-07-20-[Test]-k6이해하기.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_draft/2026-05-27-[AI]-harness-engineering.md"
+                "file": "_posts/2026-07-20-[Test]-k6이해하기.md"
               }
             }
           },
@@ -163,10 +163,12 @@
   },
   "active": "04fd4a4624b253af",
   "lastOpenFiles": [
-    "_posts/2024-05-23-[Spring-series]-03.Webflux.md",
-    "_draft/2026-05-27-[AI]-harness-engineering.md",
-    "_draft",
     "_posts/2026-02-26-[AI]-AI.md",
+    "_posts/2026-07-20-[Test]-k6이해하기.md",
+    "_posts/k6이해하기.md",
+    "_draft/2026-05-27-[AI]-harness-engineering.md",
+    "_posts/2024-05-23-[Spring-series]-03.Webflux.md",
+    "_draft",
     "_instruct/blog-post-style-guide.md",
     "_instruct",
     "_posts/2024-05-24-[Spring-series]-14.Refresh-Context.md",
@@ -191,7 +193,6 @@
     "_site/assets/img/HikariCP-bench-2.6.0.png",
     "_site/HELP.md",
     "_posts/2026-01-03-［mini-project］-10 featureFlag.md",
-    "_posts/무제 파일.md",
     "_posts/2025-09-27-［Spring-series］- 47. Java DynamicProxy⁄CGLIB Enhancer.md",
     "_posts/2024-05-18-[java-series]-01-Version.md",
     "assets/img/ab.png",
@@ -207,7 +208,6 @@
     "_posts/2025-10-01-［Spring-series］- 51. SpringExtension.md",
     "_posts/2025-10-01-［Spring-series］- 51. Outbox, Saga.md",
     "_posts/2025-10-01-［Spring-series］- 51. 스케쥴링 전략 1.md",
-    "_posts/2025-10-01-［Spring-series］- 50. 스케쥴링 전략 1.md",
-    "_posts/2025-09-30-［Spring-series］- 50. 스케쥴링 전략 1.md"
+    "_posts/2025-10-01-［Spring-series］- 50. 스케쥴링 전략 1.md"
   ]
 }
