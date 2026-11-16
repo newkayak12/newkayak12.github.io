@@ -11,3 +11,6 @@ node_modules/
 out/
 public/assets/
 next-env.d.ts
+
+# 글감 창고 (비공개, 커밋 금지)
+source/

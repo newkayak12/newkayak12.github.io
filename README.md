@@ -11,6 +11,7 @@ Next.js(App Router) 정적 export로 만든 블로그다. 2026-11 Jekyll에서 �
 - `npm run dev`: 로컬 미리보기 (http://localhost:3000)
 - `npm run build`: `out/`에 정적 사이트 생성
 - `npm run check:urls -- <urls.txt>`: 예전 주소 목록과 새 주소 비교
+- `npm run check:posts -- <_posts 파일명>`: 빌드 뒤 글 페이지·이미지·렌더 점검 (게시 절차는 `.claude/skills/publish-post`)
 
 ## 배포
 - `master`에 push하면 `.github/workflows/deploy.yaml`이 빌드해서 GitHub Pages에 올린다.

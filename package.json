@@ -8,6 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "check:urls": "node scripts/check-urls.mjs",
+    "check:posts": "node scripts/check-posts.mjs",
     "postbuild": "node scripts/legacy-paths.mjs"
   },
   "dependencies": {

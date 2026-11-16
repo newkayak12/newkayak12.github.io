@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import 'katex/dist/katex.min.css';
-import 'highlight.js/styles/github.css';
+import './code-theme.css';
 import './globals.css';
 import { site } from '../lib/site.mjs';
 
