@@ -2,10 +2,11 @@
 //   node scripts/check-posts.mjs            → 모든 글
 //   node scripts/check-posts.mjs <파일명>…  → 지정한 _posts 파일만 (예: 2026-11-16-[AI]-제목.md)
 // 1) front matter: categories 가 있는지 (title 이 없으면 파일명이 제목이 된다)  2) out/ 에 글 페이지가 생겼는지
-// 3) 페이지의 로컬 이미지가 실제로 있는지  4) 렌더 실패(원문 <pre> 대체)·깨진 mermaid 흔적이 없는지
+// 3) 페이지의 로컬 이미지가 실제로 있는지  4) 렌더 실패·깨짐 패턴(lib/lint.mjs, 옛 글은 경고만)
 import fs from 'node:fs';
 import path from 'node:path';
 import { getAllPosts } from '../lib/posts.mjs';
+import { lintHtml } from '../lib/lint.mjs';
 
 const only = process.argv.slice(2).map((f) => path.basename(f));
 const posts = getAllPosts().filter((p) => !only.length || only.includes(p.file));
@@ -33,7 +34,9 @@ for (const p of posts) {
       if (!fs.existsSync(target)) problems.push(`이미지 없음: ${dec}`);
     }
     if (/<section class="post-content"><pre>---/.test(html)) problems.push('마크다운 렌더 실패(원문으로 표시됨)');
-    if (/<pre><code[^>]*>\s*<\/code><\/pre>/.test(html)) problems.push('빈 코드 블록 (목록 안 ``` 들여쓰기 확인)');
+    const body = html.match(/<section class="post-content">([\s\S]*?)<\/section>/)?.[1] ?? '';
+    // 렌더 깨짐 패턴(lib/lint.mjs): 새 글은 실패, 옛 글은 경고 (원본 오타가 남아 있다)
+    for (const m of lintHtml(body)) (only.length ? problems : warnings).push(m);
   }
   if (problems.length) { bad++; console.log(`✗ ${p.file}  ${p.url}`); problems.forEach((m) => console.log('   -', m)); }
   else if (warnings.length) { warned++; if (process.env.VERBOSE) console.log(`! ${p.file}  ${warnings.join(', ')}`); }

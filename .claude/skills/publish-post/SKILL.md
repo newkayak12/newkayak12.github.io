@@ -43,6 +43,8 @@ python3 <source>/_tools/publish.py <초안.md> <이 저장소> --date YYYY-MM-DD
 
 ## 3. 빌드와 자동 점검
 
+글을 Write/Edit하면 훅(`scripts/lint-post.mjs --hook`)이 바로 렌더 깨짐을 알려 준다. 알림이 오면 먼저 고친다.
+
 ```bash
 npm run build
 npm run check:posts -- <_posts 파일명>
