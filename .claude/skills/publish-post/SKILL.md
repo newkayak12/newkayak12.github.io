@@ -32,6 +32,8 @@ python3 <source>/_tools/publish.py <초안.md> <이 저장소> --date YYYY-MM-DD
 
 `_posts/YYYY-MM-DD-[분류]-제목.md`로 옮긴다(`_draft/`에서라면 `git mv`). 날짜는 사용자가 말하지 않으면 오늘.
 
+**예약 게시:** 날짜를 미래로 두면 그날 00:05 KST 예약 빌드 때 공개된다. 그 전에는 빌드에서 빠지므로, 미리 볼 때는 `SHOW_FUTURE=1 npm run build`로 빌드하고 `check:posts`도 `SHOW_FUTURE=1`을 붙여 돌린다.
+
 ## 2. 형식 점검 (손으로)
 
 - **front matter**: `title`, `categories`, `tags`. `layout: post`는 있어도 되고 없어도 된다.

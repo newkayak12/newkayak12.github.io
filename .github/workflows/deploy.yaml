@@ -1,4 +1,4 @@
-# 모든 브랜치·PR에서 빌드하고 글을 점검한다(CI). master push일 때만 GitHub Pages에 배포한다.
+# 모든 브랜치·PR에서 빌드하고 글을 점검한다(CI). master(push·예약·수동 실행)일 때만 GitHub Pages에 배포한다.
 # 배포가 동작하려면 저장소 Settings → Pages → Source 를 "GitHub Actions"로 바꿔야 한다.
 name: Build & Deploy
 
@@ -6,6 +6,9 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  # 날짜가 미래인 글은 빌드에서 빠진다. 매일 00:05 KST에 다시 빌드해서 그날 글을 공개한다.
+  schedule:
+    - cron: '5 15 * * *'
 
 permissions:
   contents: read
@@ -29,13 +32,13 @@ jobs:
           NEXT_TELEMETRY_DISABLED: 1
       - name: 글 점검 (페이지·이미지·렌더)
         run: npm run check:posts
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v5
         with:
           path: out
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-24.04
     permissions:

@@ -302,7 +302,7 @@ Materialization에도 몇 가지 제한 사항과 특징이 있다.
 > SET optimizer_switch='skip_scan=on';
 > 
 > 특정 테이블에 대해서 활성화
-> SELECT /** SKIP_SCAN() */ COUNT(*)....
+> `SELECT /*+ SKIP_SCAN() */ COUNT(*)....`
 > 
 
 

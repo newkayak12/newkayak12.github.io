@@ -22,5 +22,6 @@ Next.js(App Router) 정적 export 블로그. Jekyll에서 옮겼고, 글 원본(
 ## 규칙
 - 회사 정보(회사·제품·벤더 이름, 티켓 키, 테이블명, 사업 규모 절대값)는 글에 넣지 않는다.
 - 한 번 올린 글의 파일명·categories·날짜는 바꾸지 않는다(주소가 바뀐다).
+- 파일명 날짜가 미래인 글은 빌드에서 빠진다(Jekyll `future: false`와 같다). 매일 00:05 KST 예약 빌드가 그날 글을 공개한다. 로컬에서 미리 보려면 `SHOW_FUTURE=1 npm run build`.
 - 사용자는 SSH로 접속해 있는 경우가 많다. 미리보기 링크는 `localhost` 대신 `hostname -I`의 LAN 주소로 준다.
 - `next dev`는 `/search.html`처럼 `.html` 정적 경로를 못 연다. 배포와 같은 화면은 `npm run build` 후 `out/`을 정적 서버로 띄워 본다.
