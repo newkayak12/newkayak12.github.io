@@ -16,10 +16,12 @@ if (only.length && posts.length !== only.length) {
 }
 if (!fs.existsSync('out')) { console.error('out/ 이 없다. npm run build 먼저.'); process.exit(1); }
 
-let bad = 0;
+// 문제(✗)는 실패로 끝낸다. 경고(!)는 옛 글에 이미 있는 것이라 알리기만 한다(새 글을 지정했을 때는 실패).
+let bad = 0, warned = 0;
 for (const p of posts) {
   const problems = [];
-  if (!p.categories.length) problems.push('categories 없음 (주소에 카테고리가 빠진다)');
+  const warnings = [];
+  if (!p.categories.length) (only.length ? problems : warnings).push('categories 없음 (주소에 카테고리가 빠진다)');
   const file = path.join('out', decodeURI(p.url));
   if (!fs.existsSync(file)) problems.push(`페이지 없음: ${file}`);
   else {
@@ -34,7 +36,8 @@ for (const p of posts) {
     if (/<pre><code[^>]*>\s*<\/code><\/pre>/.test(html)) problems.push('빈 코드 블록 (목록 안 ``` 들여쓰기 확인)');
   }
   if (problems.length) { bad++; console.log(`✗ ${p.file}  ${p.url}`); problems.forEach((m) => console.log('   -', m)); }
+  else if (warnings.length) { warned++; if (process.env.VERBOSE) console.log(`! ${p.file}  ${warnings.join(', ')}`); }
   else if (only.length) console.log(`✓ ${p.file}  ${p.url}`);
 }
-console.log(`\n${posts.length}개 점검, 문제 ${bad}개`);
-process.exit(bad && only.length ? 1 : 0);
+console.log(`\n${posts.length}개 점검, 문제 ${bad}개${warned ? `, 경고 ${warned}개 (VERBOSE=1 로 보기)` : ''}`);
+process.exit(bad ? 1 : 0);

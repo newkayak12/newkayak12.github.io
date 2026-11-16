@@ -14,5 +14,5 @@ Next.js(App Router) 정적 export로 만든 블로그다. 2026-11 Jekyll에서 �
 - `npm run check:posts -- <_posts 파일명>`: 빌드 뒤 글 페이지·이미지·렌더 점검 (게시 절차는 `.claude/skills/publish-post`)
 
 ## 배포
-- `master`에 push하면 `.github/workflows/deploy.yaml`이 빌드해서 GitHub Pages에 올린다.
+- 모든 브랜치 push·PR에서 `.github/workflows/deploy.yaml`이 빌드하고 `check:posts`로 글을 점검한다(CI). `master` push일 때만 GitHub Pages에 올린다.
 - 저장소 Settings → Pages → Source를 **GitHub Actions**로 바꿔야 한다.
