@@ -4,3 +4,10 @@
 .git/*
 .DS_Store
 _site/*
+
+# Next.js
+node_modules/
+.next/
+out/
+public/assets/
+next-env.d.ts
