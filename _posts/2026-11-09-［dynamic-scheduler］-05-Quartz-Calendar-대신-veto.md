@@ -146,4 +146,4 @@ categories:
 2. Quartz 테이블에 아무것도 쓰지 않는 veto 게이트로 바꾸면서 두 문제가 같이 사라졌다. 다만, 차단된 창에도 fire 기록이 생기는 단점이 있다.
 3. 게이트는 DENY 전용, 평가 불가는 통과, 예외 금지로 잡아서 고장 나도 배치가 멈추지 않는다. 다만, 잘못 쓴 차단 행이 아무것도 막지 않아도 드러나지 않는 trade-off가 있다.
 
-> 이전 글: 04 재반영 신호를 Redis Streams로 / 다음 글: 06 Boot 2와 3에서 같이 쓰는 라이브러리를 만들며
+> [이전 글: 04. Pub/Sub을 버리고 Redis Streams로](/spring/2026/11/07/dynamic-scheduler-04-PubSub을-버리고-Redis-Streams로.html) / [다음 글: 06. Boot 2와 3에서 같이 쓰는 라이브러리](/spring/2026/11/11/dynamic-scheduler-06-라이브러리로-배포할-때-조용한-실패.html)

@@ -118,4 +118,4 @@ categories:
 2. 그 빈자리는 level-triggered 신호와 수동 ack, PEL 회수로 메웠다. Redis가 초기화되는 경우 하나는 아직 열려 있다.
 3. `receive()`처럼, 버리려던 문제(소리 없는 구독 종료)가 새 도구의 기본값에 들어 있는 경우도 있었다.
 
-> 이전 글: 03 부팅 시 리더를 DB 행 락 하나로 뽑기 / 다음 글: 05 Quartz를 고른 이유였던 Calendar를 결국 쓰지 않은 이야기
+> [이전 글: 03. 리스도 하트비트도 없는 리더 선출](/spring/2026/11/05/dynamic-scheduler-03-DB-행-락-하나로-대표-뽑기.html) / [다음 글: 05. Quartz Calendar 대신 veto로 실행을 막은 이유](/spring/2026/11/09/dynamic-scheduler-05-Quartz-Calendar-대신-veto.html)

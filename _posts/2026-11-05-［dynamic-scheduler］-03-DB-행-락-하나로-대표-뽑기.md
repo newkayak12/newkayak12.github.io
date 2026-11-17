@@ -134,4 +134,4 @@ categories:
 2. 실패는 부팅 실패로 드러나거나 중복 실행으로 떨어지고, 누락은 없다. 다만 폭풍이 대기열로 바뀌는 trade-off가 있었다.
 3. 결과가 노드 메모리에만 있거나 두 번 실행하면 안 되는 작업에는 이 패턴을 쓸 수 없다.
 
-> 이전 글: 02 노드 30대의 초기 등록 폭풍 측정 / 다음 글: 04 부팅은 DB 락으로 뽑았는데, 운영 중 재반영은 왜 Redis Streams로 뽑았나
+> [이전 글: 02. 빈 테이블에서 노드 30대가 동시에 뜨면](/spring/2026/11/03/dynamic-scheduler-02-빈-테이블에서-노드-30대가-동시에-뜨면.html) / [다음 글: 04. Pub/Sub을 버리고 Redis Streams로](/spring/2026/11/07/dynamic-scheduler-04-PubSub을-버리고-Redis-Streams로.html)
