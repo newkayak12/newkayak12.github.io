@@ -38,7 +38,7 @@ python3 <source>/_tools/publish.py <초안.md> <이 저장소> --date YYYY-MM-DD
 
 - **front matter**: `title`, `categories`, `tags`. `layout: post`는 있어도 되고 없어도 된다.
   - 주소 = `/<categories 소문자, '/'는 경로 단계>/<yyyy>/<mm>/<dd>/<파일명 slug>.html` (`lib/posts.mjs`).
-  - **한 번 올린 글은 파일명·categories·날짜를 바꾸지 않는다.** 주소가 바뀌어 기존 링크가 깨진다.
+  - **한 번 올린 글은 파일명·categories·날짜를 바꾸지 않는다.** 주소가 바뀌어 기존 링크가 깨진다. 꼭 바꿔야 하면 `redirect_from:`에 옛 주소를 남긴다.
 - **회사 정보**: 회사·제품·파트너·벤더 이름, 티켓 키, 테이블명, 사업 규모 절대값이 없는지 본문을 훑는다. 의심되면 사용자에게 묻는다.
 - **이미지**: `assets/img/posts/<글이름>/`에 두고 `/assets/img/posts/<글이름>/x.png`로 참조한다. `../../image/…` 같은 상대 경로나 Obsidian 볼트 밖 경로는 빌드에 안 들어간다.
 - **도식**: mermaid는 ` ```mermaid ` 코드 블록으로 쓴다. 목록 안 코드 블록은 여는 줄과 같은 깊이로 들여 쓴다(어긋나도 렌더러가 보정하지만 원본을 맞추는 게 낫다).

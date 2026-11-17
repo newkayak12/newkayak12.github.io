@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+redirect_from:
+  - /2024/06/17/Effective-java-series-70.DoNotDependOnScheduler.html
+---
+
 # 스케쥴러에 의존하지 말라
 
 보통 OS 스케쥴러에 의존해서 쓰레드를 얼마나 오래 실핼할지 정한다. 그러나 OS 별로 스케쥴링 정책은 달라진다.

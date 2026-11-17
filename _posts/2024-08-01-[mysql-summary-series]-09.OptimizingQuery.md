@@ -1,3 +1,10 @@
+---
+layout: post
+categories: [MYSQL, SUMMARY]
+redirect_from:
+  - /2024/08/01/mysql-summary-series-09.OptimizingQuery.html
+---
+
 # 쿼리 작성 및 최적화
 
 ## SQL 모드

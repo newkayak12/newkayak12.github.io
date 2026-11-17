@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+redirect_from:
+  - /2024/06/17/Effective-java-series-72.OverrideReadObjectDefensively.html
+---
+
 # ReadObject 메소드는 방어적으로
 
 readObject는 실질적으로 public 생성자이다. deserialize 하면 객체가 생성되기 때문이다. 그래서 보통의 생성자처럼 readObject 메소드에도 인수가 유효한지

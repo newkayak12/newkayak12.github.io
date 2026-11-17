@@ -1,3 +1,10 @@
+---
+layout: post
+categories: [MYSQL, SUMMARY]
+redirect_from:
+  - /2024/08/01/mysql-summary-series-10.ONLINE_DDL.html
+---
+
 # ONLINE_DDL
 
 온라인에서 스키마 변경은 주저할만한 일이 맞지만, 일단 ALGORITHM, LOCK 옵션으로 어떤 모드로 스키마 변경을 진행할지 결정할 수 있다.

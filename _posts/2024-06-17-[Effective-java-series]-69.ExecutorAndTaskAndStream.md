@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+redirect_from:
+  - /2024/06/17/Effective-java-series-69.ExecutorAndTaskAndStream.html
+---
+
 # 쓰레드보다 실행자, 태스크, 스트림
 
 `ExecutorService exec = Executors.newSingleThreadExecutor();` 로 실행자를 만들 수 있다. `java.util.concurrent`에 있다.

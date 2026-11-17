@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+redirect_from:
+  - /2024/06/17/Effective-java-series-68.SyncSharedResources.html
+---
+
 # 공유 중인 가변 데이터는 동기화하자
 
 `synchronized`는 해당 메소드, 블록을 한 번에 한 쓰레드씩 수행하도록 보장한다. 즉, 객체를 하나의 일관된 상태에서 다른 일관된 상태로 변경시킨다. 동기화를

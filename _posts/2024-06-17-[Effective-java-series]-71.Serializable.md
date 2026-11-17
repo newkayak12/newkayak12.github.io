@@ -1,3 +1,11 @@
+---
+layout: post
+title: Effective java
+categories: [EFFECTIVE_JAVA]
+redirect_from:
+  - /2024/06/17/Effective-java-series-71.Serializable.html
+---
+
 # 직렬화
 
 직렬화는 프로그래머가 어렵지 않게 분산 객체를 만들 수 있다는 매력이 있지만, 보이지 않는 생성자, API와 구현 사이 모호해진 경계, 잠재적 정확성 문제, 성능, 보안,
