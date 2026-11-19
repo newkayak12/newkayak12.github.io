@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         </header>
         <div className="header-text" dangerouslySetInnerHTML={{ __html: site.headerHtml }} />
         <main className="wrapper">{children}</main>
-        <footer className="site-footer">Powered by Next.js</footer>
+        <footer className="site-footer">© 2024–2026 newkayak12. 글과 그림은 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko" rel="license noopener" target="_blank">CC BY-NC-ND 4.0</a>, 코드는 MIT.</footer>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.ga}`} strategy="afterInteractive" />
         <Script id="ga" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga}');`}</Script>
       </body>

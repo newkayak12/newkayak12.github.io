@@ -16,3 +16,7 @@ Next.js(App Router) 정적 export로 만든 블로그다. 2026-11 Jekyll에서 �
 ## 배포
 - 모든 브랜치 push·PR에서 `.github/workflows/deploy.yaml`이 빌드하고 `check:posts`로 글을 점검한다(CI). `master` push일 때만 GitHub Pages에 올린다.
 - 저장소 Settings → Pages → Source를 **GitHub Actions**로 바꿔야 한다.
+
+## 라이선스
+- 글과 그림(`_posts/`, `assets/img/posts/`, `about.md`): © 2024–2026 newkayak12, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko). 출처를 밝히고 수정 없이 비상업적으로 공유하는 것만 허용한다. 전문은 `LICENSE-CONTENT`.
+- 코드: MIT (`LICENSE`). 원 테마의 저작권 표시(Rohan Chandra)를 함께 남긴다.
